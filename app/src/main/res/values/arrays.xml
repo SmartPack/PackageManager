@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <!-- Smart Package Manager -->
+    <string-array name="app_options">
+        <item>@string/open</item>
+        <item>@string/app_info</item>
+        <item>@string/backup</item>
+        <item>@string/export</item>
+        <item>@string/disable</item>
+        <item>@string/playstore</item>
+        <item>@string/uninstall</item>
+    </string-array>
+    <string-array name="fab_options">
+        <item>@string/restore</item>
+    </string-array>
+</resources>

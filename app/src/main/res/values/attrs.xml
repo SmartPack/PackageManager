@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="XYGraph">
+        <attr name="linecolor" format="color" />
+        <attr name="edgecolor" format="color" />
+        <attr name="edgestrokewidth" format="dimension" />
+        <attr name="graphcolor" format="color" />
+        <attr name="graphstrokewidth" format="color" />
+        <attr name="edgevisibile" format="boolean" />
+    </declare-styleable>
+
+    <attr name="edittext_build_prop_style" format="reference" />
+    <attr name="banner_frame_drawable" format="reference" />
+    <attr name="native_express_id" format="string" />
+    <attr name="rcBackgroundColor" format="color"/>
+
+</resources>
