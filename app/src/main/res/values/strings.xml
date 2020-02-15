@@ -70,5 +70,6 @@
     <string name="user">User</string>
     <string name="version">Version</string>
     <string name="welcome_message"><b>\nWelcome to Package Manager</b>, a simple, yet powerful application to manage your apps. Most of the features available on this app should work on any device. Root Access is required for some advanced features.\n\nPlease be noted that this app is, however, too powerful to messed up your device. The developer of this app won\'t take any responsibility, if something wrong happened to your device.\n\n *** <b>USE AT YOUR OWN RISK</b>> ***\n</string>
+    <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="yes">Yes</string>
 </resources>

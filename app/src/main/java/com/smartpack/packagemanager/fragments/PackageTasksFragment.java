@@ -66,6 +66,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
     private Dialog mOptionsDialog;
 
     private String mAppName;
+    private String mPath;
 
     @Override
     protected void init() {
@@ -108,7 +109,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     return;
                 }
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/gzip");
+                intent.setType("*/*");
                 startActivityForResult(intent, 0);
             }
         }).setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -409,7 +410,15 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         if (resultCode == Activity.RESULT_OK && data != null) {
             Uri uri = data.getData();
             File file = new File(uri.getPath());
-            String mPath = Utils.getPath(file);
+            if (Utils.isDocumentsUI(uri)) {
+                mPath = Environment.getExternalStorageDirectory().toString() + "/Download" + "/" + file.getName();
+            } else {
+                mPath = Utils.getPath(file);
+            }
+            if (!mPath.endsWith(".tar.gz")) {
+                Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
+                return;
+            }
             if (!Utils.existFile(mPath)) {
                 Utils.toast(R.string.file_selection_error, getActivity());
                 return;
