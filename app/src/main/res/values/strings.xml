@@ -2,9 +2,7 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="about">About</string>
-    <string name="about_me">Package Manager, a product of SmartPack Projects, is a  highly powerful app to manage system and user apps installed on an android device.</string>
-    <string name="allow_ads">Allow Ads</string>
-    <string name="allow_ads_message">Thank you very much for supporting the developer by allowing Ads!</string>
+    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="app_info">App info</string>
@@ -13,18 +11,7 @@
     <string name="backup">Backup</string>
     <string name="backing_up">Backing up %s (data only) into Download folder!</string>
     <string name="cancel">Cancel</string>
-    <string name="change_logs">Change-logs</string>
-    <string name="change_logs_summary">View Change-logs</string>
-    <string name="credits">Credits</string>
-    <string name="dark_theme">Dark Theme</string>
-    <string name="dark_theme_message">%s theme will be applied on next app launch!</string>
-    <string name="donate_me">Donations</string>
-    <string name="donate_me_message">If you like to appreciate my work, please consider donating to me as it is helpful to continue my projects more active, although it is not at all necessary.\n</string>
-    <string name="donate_me_playstore">\nPlease note: I can accept donations either via PayPal, or through SmartPack Donation Package in PlayStore.\n</string>
-    <string name="donate_me_summary">Support developer with a Donation</string>
-    <string name="donate_nope">Not Now</string>
     <string name="disable">Turn-On/Off</string>
-    <string name="disable_ads_message">Ads will be disabled on next app launch! However, please be noted that the revenue obtained from these Ads are really helpful for the developer to continue his android development projects more active. If it doesn\'t hurt you much, please consider allowing the Ads to support the development.</string>
     <string name="disable_message">Are you sure to %s</string>
     <string name="disabled_message">%s is currently disabled! Please enable it first and try again!</string>
     <string name="disabling">Disabling %s</string>
@@ -44,11 +31,9 @@
     <string name="open_failed">%s is not designed to run in user space!</string>
     <string name="open_settings">Open Settings</string>
     <string name="options">Options</string>
-    <string name="paypal_donation">PayPal</string>
     <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
     <string name="playstore">PlayStore</string>
-    <string name="playstore_summary">Visit Package Manager on PlayStore</string>
-    <string name="purchase_app">Donation App</string>
+    <string name="report_issue">Report Issues</string>
     <string name="restore">Restore</string>
     <string name="restore_message">Are you sure to restore %s?\n\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
     <string name="restoring">Restoring %s</string>
@@ -57,10 +42,7 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
-    <string name="source_code">Source Code</string>
-    <string name="source_code_summary">View source code at GitHub</string>
     <string name="support">Support</string>
-    <string name="support_summary">Visit support group</string>
     <string name="system">System</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
@@ -68,7 +50,6 @@
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b>> ***\n</string>
     <string name="user">User</string>
-    <string name="version">Version</string>
     <string name="welcome_message"><b>\nWelcome to Package Manager</b>, a simple, yet powerful application to manage your apps. Most of the features available on this app should work on any device. Root Access is required for some advanced features.\n\nPlease be noted that this app is, however, too powerful to messed up your device. The developer of this app won\'t take any responsibility, if something wrong happened to your device.\n\n *** <b>USE AT YOUR OWN RISK</b>> ***\n</string>
     <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="yes">Yes</string>
