@@ -16,11 +16,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -411,7 +413,11 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             Uri uri = data.getData();
             File file = new File(uri.getPath());
             if (Utils.isDocumentsUI(uri)) {
-                mPath = Environment.getExternalStorageDirectory().toString() + "/Download" + "/" + file.getName();
+                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
+                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
             } else {
                 mPath = Utils.getPath(file);
             }
@@ -419,14 +425,12 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
                 return;
             }
-            if (!Utils.existFile(mPath)) {
-                Utils.toast(R.string.file_selection_error, getActivity());
-                return;
-            }
             if (requestCode == 0) {
                 Dialog restoreApp = new Dialog(getActivity());
-                restoreApp.setMessage(getString(R.string.restore_message, file.getName().replace("primary:", "").
+                restoreApp.setIcon(R.mipmap.ic_launcher);
+                restoreApp.setTitle(getString(R.string.restore_message, file.getName().replace("primary:", "").
                         replace("file%3A%2F%2F%2F", "").replace("%2F", "/")));
+                restoreApp.setMessage(getString(R.string.restore_summary));
                 restoreApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 });
                 restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {

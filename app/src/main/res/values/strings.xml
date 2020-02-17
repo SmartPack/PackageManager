@@ -35,7 +35,8 @@
     <string name="playstore">PlayStore</string>
     <string name="report_issue">Report Issues</string>
     <string name="restore">Restore</string>
-    <string name="restore_message">Are you sure to restore %s?\n\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
+    <string name="restore_message">Are you sure to restore %s?</string>
+    <string name="restore_summary">\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
     <string name="restoring">Restoring %s</string>
     <string name="settings">Settings</string>
     <string name="share">Share</string>
