@@ -196,6 +196,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
             if ((mAppName != null && (!packageInfo.packageName.contains(mAppName.toLowerCase())))) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                 continue;
             }
             boolean mAppType;
@@ -298,6 +299,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                             protected Void doInBackground(Void... voids) {
                                                                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                                                 PackageTasks.backupApp(packageInfo.packageName, path);
+                                                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                                                 return null;
                                                             }
                                                             @Override
@@ -330,6 +332,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                         PackageTasks.exportingTask(packageInfo.sourceDir, packageInfo.packageName,
                                                 getActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
+                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                         break;
                                     case 4:
                                         if (!RootUtils.rootAccess()) {
@@ -383,6 +386,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                     .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
                                                         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                                         PackageTasks.removeSystemApp(packageInfo.packageName, getActivity());
+                                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                                     })
                                                     .show();
                                         }
@@ -436,6 +440,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     PackageTasks.restoreApp(mPath, getActivity());
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 });
                 restoreApp.show();
             }
@@ -470,6 +475,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 public void afterTextChanged(Editable s) {
                     systemAppsFragment.mAppName = s.toString();
                     systemAppsFragment.reload();
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 }
             });
             if (systemAppsFragment.mAppName != null) {
