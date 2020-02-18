@@ -195,7 +195,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         final PackageManager pm = getActivity().getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
-            if ((mAppName != null && (!packageInfo.packageName.contains(mAppName)))) {
+            if ((mAppName != null && (!packageInfo.packageName.contains(mAppName.toLowerCase())))) {
                 continue;
             }
             boolean mAppType;
