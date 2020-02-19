@@ -1,5 +1,9 @@
 # Change-logs
 
+## 3. February 20, 2020
+*Release-tag: beta-0.6*<br>
+Initial Play-Store release.
+
 ## 2. February 19, 2020
 *Release-tag: beta-0.5*<br>
 Main: Converted into a simple one page App. File picking: Updated to work with Documents UI. Main: Improved app searching. Miscellaneous changes.
