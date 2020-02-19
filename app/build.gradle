@@ -18,8 +18,8 @@ android {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 4
-        versionName "beta-0.4"
+        versionCode 5
+        versionName "beta-0.5"
         vectorDrawables.useSupportLibrary = true
         archivesBaseName = "$applicationId-v$versionName"
         signingConfig signingConfigs.release
@@ -62,5 +62,4 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
-    implementation 'com.mikhaellopez:circularimageview:3.0.2'
 }
