@@ -7,9 +7,8 @@
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="app_info">App info</string>
     <string name="app_name_summary" translatable="false">An Application to Manage your Apps</string>
-    <string name="apps">Apps</string>
     <string name="backup">Backup</string>
-    <string name="backing_up">Backing up %s (data only) into Download folder!</string>
+    <string name="backing_up">Backing up %s (data only) into \'/sdcard/Package_Manager/\'</string>
     <string name="cancel">Cancel</string>
     <string name="disable">Turn-On/Off</string>
     <string name="disable_message">Are you sure to %s</string>

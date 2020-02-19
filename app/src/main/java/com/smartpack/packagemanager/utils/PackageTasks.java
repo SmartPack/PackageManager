@@ -33,7 +33,15 @@ import java.io.File;
 
 public class PackageTasks {
 
-    private static final String DOWNLOADS = Environment.getExternalStorageDirectory().toString() + "/Download";
+    private static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
+
+    public static void makePackageFolder() {
+        File file = new File(PACKAGES);
+        if (file.exists() && file.isFile()) {
+            file.delete();
+        }
+        file.mkdirs();
+    }
 
     public static void exportingTask(String apk, String name, Drawable icon, Context context) {
         new AsyncTask<Void, Void, Void>() {
@@ -48,8 +56,9 @@ public class PackageTasks {
             }
             @Override
             protected Void doInBackground(Void... voids) {
+                makePackageFolder();
                 Utils.sleep(1);
-                Utils.copy(apk, DOWNLOADS + "/" + name + ".apk");
+                Utils.copy(apk, PACKAGES + "/" + name + ".apk");
                 return null;
             }
             @Override
@@ -59,15 +68,15 @@ public class PackageTasks {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {
                 }
-                if (Utils.existFile(DOWNLOADS + "/" + name + ".apk")) {
+                if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
                     new Dialog(context)
                             .setIcon(icon)
-                            .setMessage(name + " " + context.getString(R.string.export_summary, DOWNLOADS))
+                            .setMessage(name + " " + context.getString(R.string.export_summary, PACKAGES))
                             .setNegativeButton(context.getString(R.string.cancel), (dialog, id) -> {
                             })
                             .setPositiveButton(context.getString(R.string.share), (dialog, id) -> {
                                 Uri uriFile = FileProvider.getUriForFile(context,
-                                        BuildConfig.APPLICATION_ID + ".provider", new File(DOWNLOADS + "/" + name + ".apk"));
+                                        BuildConfig.APPLICATION_ID + ".provider", new File(PACKAGES + "/" + name + ".apk"));
                                 Intent shareScript = new Intent(Intent.ACTION_SEND);
                                 shareScript.setType("application/java-archive");
                                 shareScript.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.shared_by, name));
@@ -146,8 +155,9 @@ public class PackageTasks {
     }
 
     public static void backupApp(String app, String name) {
+        makePackageFolder();
         Utils.sleep(2);
-        RootUtils.runCommand("tar -zcvf " + DOWNLOADS + "/" +
+        RootUtils.runCommand("tar -zcvf " + PACKAGES + "/" +
                 name + " /data/data/" + app);
     }
 

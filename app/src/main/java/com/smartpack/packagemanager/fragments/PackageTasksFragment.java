@@ -280,7 +280,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                         if (text.contains(" ")) {
                                                             text = text.replace(" ", "_");
                                                         }
-                                                        if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Download" + "/" + text)) {
+                                                        if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
                                                             Utils.toast(getString(R.string.already_exists, text), getActivity());
                                                             return;
                                                         }
@@ -419,7 +419,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             if (Utils.isDocumentsUI(uri)) {
                 Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
-                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
+                    mPath = Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" +
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 }
             } else {

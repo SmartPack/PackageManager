@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
         AppCompatTextView copyRightText = findViewById(R.id.copyright_Text);
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new PackageTasksFragment(), getString(R.string.apps));
+        adapter.AddFragment(new PackageTasksFragment(), "");
 
         copyRightText.setText(getString(R.string.about));
         viewPager.setAdapter(adapter);
 
         // Initialize Google Ads
-        MobileAds.initialize(this, "ca-app-pub-7791710838910455~4399535899");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7791710838910455~4399535899");
     }
 
     public void creditsDialogue(View view) {
