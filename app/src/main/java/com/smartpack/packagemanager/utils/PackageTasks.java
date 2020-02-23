@@ -69,6 +69,7 @@ public class PackageTasks {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
+                    Utils.getInstance().showInterstitialAd();
                     new Dialog(context)
                             .setIcon(icon)
                             .setMessage(name + " " + context.getString(R.string.export_summary, PACKAGES))

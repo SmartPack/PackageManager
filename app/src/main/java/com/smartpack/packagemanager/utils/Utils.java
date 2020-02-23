@@ -22,7 +22,11 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.root.RootFile;
 import com.smartpack.packagemanager.utils.root.RootUtils;
@@ -40,14 +44,32 @@ import java.io.IOException;
 
 public class Utils {
 
-    private static final String DONATION_PACKAGE = "com.smartpack.donate";
+    private static Utils sInstance;
 
-    public static boolean isDonated(Context context) {
-        try {
-            context.getPackageManager().getApplicationInfo(DONATION_PACKAGE, 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException ignored) {
-            return false;
+    public static Utils getInstance() {
+        if (sInstance == null) {
+            sInstance = new Utils();
+        }
+        return sInstance;
+    }
+
+    private InterstitialAd mInterstitialAd;
+
+    public static void initializeAppTheme() {
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_YES);
+    }
+
+    public void initializeGoogleAds(Context context) {
+        MobileAds.initialize(context, "ca-app-pub-7791710838910455~4399535899");
+        mInterstitialAd = new InterstitialAd(context);
+        mInterstitialAd.setAdUnitId("ca-app-pub-7791710838910455/7664681843");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+
+    public void showInterstitialAd() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
         }
     }
 

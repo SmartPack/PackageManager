@@ -35,8 +35,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import com.smartpack.packagemanager.BuildConfig;
@@ -88,9 +86,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
 
     @Override
     protected Drawable getBottomFabDrawable() {
-        Drawable drawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.ic_apps));
-        DrawableCompat.setTint(drawable, getResources().getColor(R.color.white));
-        return drawable;
+        return getResources().getDrawable(R.drawable.ic_apps);
     }
 
     @Override
@@ -191,12 +187,12 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         });
 
         items.add(user);
-
-        final PackageManager pm = getActivity().getPackageManager();
+        
+        final PackageManager pm = requireActivity().getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
             if ((mAppName != null && (!packageInfo.packageName.contains(mAppName.toLowerCase())))) {
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                 continue;
             }
             boolean mAppType;
@@ -215,15 +211,15 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             }
             if (mAppType) {
                 DescriptionView apps = new DescriptionView();
-                apps.setDrawable(getActivity().getPackageManager().getApplicationIcon(packageInfo));
+                apps.setDrawable(requireActivity().getPackageManager().getApplicationIcon(packageInfo));
                 apps.setTitle(pm.getApplicationLabel(packageInfo) + (PackageTasks.isEnabled(
-                        packageInfo.packageName, getActivity()) ? "" : " (Disabled)"));
+                        packageInfo.packageName, requireActivity()) ? "" : " (Disabled)"));
                 apps.setSummary(new File(packageInfo.sourceDir).length() / 1024 + " KB");
                 apps.setFullSpan(true);
                 apps.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
                     @Override
                     public void onClick(RecyclerViewItem item) {
-                        mOptionsDialog = new Dialog(getActivity()).setItems(getResources().getStringArray(
+                        mOptionsDialog = new Dialog(requireActivity()).setItems(getResources().getStringArray(
                                 R.array.app_options), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -233,11 +229,11 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             Utils.toast(R.string.open_message, getActivity());
                                             return;
                                         }
-                                        if (!PackageTasks.isEnabled(packageInfo.packageName, getActivity())) {
+                                        if (!PackageTasks.isEnabled(packageInfo.packageName, requireActivity())) {
                                             Utils.toast(getString(R.string.disabled_message, pm.getApplicationLabel(packageInfo)), getActivity());
                                             return;
                                         }
-                                        Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
+                                        Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
                                         if (launchIntent != null) {
                                             startActivity(launchIntent);
                                         } else {
@@ -256,12 +252,13 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
-                                        if (!Utils.checkWriteStoragePermission(getActivity())) {
-                                            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                                        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+                                            ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                                             Utils.toast(R.string.permission_denied_write_storage, getActivity());
                                             return;
                                         }
+                                        Utils.getInstance().showInterstitialAd();
                                         ViewUtils.dialogEditText(pm.getApplicationLabel(packageInfo).toString(),
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
@@ -323,27 +320,28 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
-                                        if (!Utils.checkWriteStoragePermission(getActivity())) {
-                                            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                                        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+                                            ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                                             Utils.toast(R.string.permission_denied_write_storage, getActivity());
                                             return;
                                         }
-                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                         PackageTasks.exportingTask(packageInfo.sourceDir, packageInfo.packageName,
-                                                getActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
-                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                                requireActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
+                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                         break;
                                     case 4:
                                         if (!RootUtils.rootAccess()) {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
-                                        new Dialog(getActivity())
-                                                .setIcon(getActivity().getPackageManager().getApplicationIcon(packageInfo))
+                                        Utils.getInstance().showInterstitialAd();
+                                        new Dialog(requireActivity())
+                                                .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
                                                 .setTitle(pm.getApplicationLabel(packageInfo))
                                                 .setMessage(getString(R.string.disable_message, PackageTasks.isEnabled(
-                                                        packageInfo.packageName, getActivity()) ? "disable " : "enable ") +
+                                                        packageInfo.packageName, requireActivity()) ? "disable " : "enable ") +
                                                         pm.getApplicationLabel(packageInfo) + "?")
                                                 .setCancelable(false)
                                                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
@@ -355,6 +353,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                 .show();
                                         break;
                                     case 5:
+                                        Utils.getInstance().showInterstitialAd();
                                         Intent ps = new Intent(Intent.ACTION_VIEW);
                                         ps.setData(Uri.parse(
                                                 "https://play.google.com/store/apps/details?id=" + packageInfo.packageName));
@@ -376,17 +375,18 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                 Utils.toast(R.string.no_root, getActivity());
                                                 return;
                                             }
-                                            new Dialog(getActivity())
-                                                    .setIcon(getActivity().getPackageManager().getApplicationIcon(packageInfo))
+                                            Utils.getInstance().showInterstitialAd();
+                                            new Dialog(requireActivity())
+                                                    .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
                                                     .setTitle(getString(R.string.uninstall_title, pm.getApplicationLabel(packageInfo)))
                                                     .setMessage(getString(R.string.uninstall_warning))
                                                     .setCancelable(false)
                                                     .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                                                     })
                                                     .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                                         PackageTasks.removeSystemApp(packageInfo.packageName, getActivity());
-                                                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                                     })
                                                     .show();
                                         }
@@ -417,7 +417,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             Uri uri = data.getData();
             File file = new File(uri.getPath());
             if (Utils.isDocumentsUI(uri)) {
-                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
                     mPath = Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" +
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
@@ -429,8 +429,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
                 return;
             }
+            Utils.getInstance().showInterstitialAd();
             if (requestCode == 0) {
-                Dialog restoreApp = new Dialog(getActivity());
+                Dialog restoreApp = new Dialog(requireActivity());
                 restoreApp.setIcon(R.mipmap.ic_launcher);
                 restoreApp.setTitle(getString(R.string.restore_message, file.getName().replace("primary:", "").
                         replace("file%3A%2F%2F%2F", "").replace("%2F", "/")));
@@ -438,9 +439,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 restoreApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 });
                 restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                     PackageTasks.restoreApp(mPath, getActivity());
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 });
                 restoreApp.show();
             }
@@ -475,7 +476,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 public void afterTextChanged(Editable s) {
                     systemAppsFragment.mAppName = s.toString();
                     systemAppsFragment.reload();
-                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 }
             });
             if (systemAppsFragment.mAppName != null) {
@@ -518,6 +519,15 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         if (Utils.getBoolean("welcomeMessage", true, getActivity())) {
             WelcomeDialog();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mLoader != null) {
+            mLoader.cancel(true);
+        }
+        mAppName = null;
     }
 
 }
