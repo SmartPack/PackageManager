@@ -5,6 +5,9 @@
 ### Package Manager is a  highly powerful app to manage both system and user apps installed on an android device.
 
 ## Download
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt=""
+     height="80">](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
 [<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
      alt=""
      height="80">](https://github.com/SmartPack/PackageManager/blob/master/release/com.smartpack.packagemanager.apk?raw=true)
