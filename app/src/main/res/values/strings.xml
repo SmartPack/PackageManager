@@ -20,6 +20,7 @@
     <string name="exporting">Exporting %s</string>
     <string name="got_it">Got it</string>
     <string name="more">More</string>
+    <string name="more_apps">More from Developer</string>
     <string name="name_empty">Name is empty! Aborting!</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
@@ -30,7 +31,7 @@
     <string name="options">Options</string>
     <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
     <string name="playstore">PlayStore</string>
-    <string name="report_issue">Report Issues</string>
+    <string name="report_issue">Report an Issue</string>
     <string name="restore">Restore</string>
     <string name="restore_message">Are you sure to restore %s?</string>
     <string name="restore_summary">\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
@@ -39,7 +40,7 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
-    <string name="support">Support</string>
+    <string name="support">Support Group</string>
     <string name="system">System</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
