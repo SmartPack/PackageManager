@@ -30,6 +30,8 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
@@ -92,6 +94,10 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         mHandler = new Handler();
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
+
+        AdView mAdView = mRootView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         if (mViewPagerFragments != null) {
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
