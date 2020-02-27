@@ -11,6 +11,7 @@ package com.smartpack.packagemanager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,9 @@ import com.smartpack.packagemanager.views.dialog.Dialog;
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean mExit;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +71,23 @@ public class MainActivity extends AppCompatActivity {
                     Utils.launchUrl("https://t.me/smartpack_kmanager", this);
                 })
                 .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mExit) {
+            mExit = false;
+            super.onBackPressed();
+        } else {
+            Utils.toast(R.string.press_back, this);
+            mExit = true;
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mExit = false;
+                }
+            }, 2000);
+        }
     }
 
 }
