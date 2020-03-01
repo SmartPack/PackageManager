@@ -1,6 +1,5 @@
 package com.smartpack.packagemanager.views.dialog;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.content.DialogInterface;
@@ -8,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Created by willi on 07.11.16.

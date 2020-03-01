@@ -496,25 +496,25 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         CheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
         checkBox.setChecked(true);
         checkBox.setText(getString(R.string.always_show));
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked)
-                -> mWelcomeDialog = isChecked);
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mWelcomeDialog = isChecked;
+        });
 
         Dialog alert = new Dialog(Objects.requireNonNull(getActivity()));
         alert.setIcon(R.mipmap.ic_launcher);
         alert.setTitle(getString(R.string.app_name));
         alert.setMessage(getText(R.string.welcome_message));
-        alert.setCancelable(false);
         alert.setView(checkBoxView);
-        alert.setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
+        alert.setCancelable(false);
+        alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+            Utils.saveBoolean("welcomeMessage", mWelcomeDialog, getActivity());
         });
-        alert.setPositiveButton(getString(R.string.got_it), (dialog, id)
-                -> Utils.saveBoolean("welcomeMessage", mWelcomeDialog, getActivity()));
 
         alert.show();
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         if (Utils.getBoolean("welcomeMessage", true, getActivity())) {
             WelcomeDialog();
