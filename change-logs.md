@@ -1,5 +1,9 @@
 # Change-logs
 
+## 5. March 01, 2020
+*Release-tag: 1.0*<br>
+Main: Fixed (hopefully) welcome dialogue not showing properly on some devices. gradle: Updated build tools. Main: Exit app only after pressing back button twice. Miscellaneous changes.
+
 ## 4. February 23, 2020
 *Release-tag: beta-0.7*<br>
 Main: Improved App UI. Main: Improved coding quality and cleaned un-resourced resources. build: gradle: Updated dependencies. Misc: Ads: Replaced Banner with a event based Interstitial Ad. Miscellaneous changes.

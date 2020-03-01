@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public void creditsDialogue(View view) {
         new Dialog(this)
                 .setIcon(R.mipmap.ic_launcher)
-                .setTitle(getString(R.string.app_name) + "\n" + BuildConfig.VERSION_NAME)
+                .setTitle(getString(R.string.app_name) + "\nv" + BuildConfig.VERSION_NAME)
                 .setMessage(getText(R.string.about_summary))
                 .setNegativeButton(getString(R.string.more_apps), (dialogInterface, i) -> {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
