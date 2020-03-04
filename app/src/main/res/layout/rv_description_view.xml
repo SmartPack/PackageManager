@@ -16,8 +16,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="16dp"
             android:layout_gravity="center"
             android:visibility="gone" />
@@ -31,20 +31,19 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:focusable="false"
+                android:layout_marginEnd="5dp"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="17sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/summary"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="?android:attr/textColorPrimary"
                 android:focusable="false" />
-
         </LinearLayout>
-
     </LinearLayout>
-
 </FrameLayout>

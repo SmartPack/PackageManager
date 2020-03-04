@@ -231,7 +231,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 apps.setDrawable(requireActivity().getPackageManager().getApplicationIcon(packageInfo));
                 apps.setTitle(pm.getApplicationLabel(packageInfo) + (PackageTasks.isEnabled(
                         packageInfo.packageName, requireActivity()) ? "" : " (Disabled)"));
-                apps.setSummary(new File(packageInfo.sourceDir).length() / 1024 + " KB");
+                apps.setSummary(packageInfo.packageName);
                 apps.setFullSpan(true);
                 apps.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
                     @Override
