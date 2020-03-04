@@ -1,5 +1,9 @@
 # Change-logs
 
+## 6. March 04, 2020
+*Release-tag: 1.1*<br>
+Main: Implemented option to install Split APK's (Root-only). Main: Fixed exporting app split APK's. gradle: Updated build tools. Misc: Slightly updated UI. Miscellaneous changes.
+
 ## 5. March 01, 2020
 *Release-tag: 1.0*<br>
 Main: Fixed (hopefully) welcome dialogue not showing properly on some devices. gradle: Updated build tools. Main: Exit app only after pressing back button twice. Miscellaneous changes.

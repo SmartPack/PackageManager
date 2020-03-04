@@ -3,25 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <FrameLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/copyright_Text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/copyright_Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:textSize="18sp"
-            android:padding="15dp"
-            android:textColor="@color/white"
-            android:background="@color/black"
-            android:clickable="true"
-            android:focusable="true"
-            android:linksClickable="true"
-            android:onClick="creditsDialogue" />
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:background="@color/black"
+        android:clickable="true"
+        android:focusable="true"
+        android:linksClickable="true"
+        android:onClick="creditsDialogue" />
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"

@@ -22,6 +22,8 @@ Package Manager is a simple, yet powerful application to manage the apps install
 * Do advanced tasks such (need Root access)
   * Uninstall system apps (de-bloating)
   * Export (to SDCard) and Share an app
+  * Export Split APK's into SDCard
+  * Install Split APK's from SDCard.
   * Disable or Enable apps
   * Back up individual app data 
   * Restore individual app data
@@ -42,3 +44,20 @@ If you like to appreciate my work, please consider donating to me (either via [P
 ## Credits
 * [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
+
+## License
+
+    Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+
+    Package Manager is a free softwares: you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or (at
+    your option) any later version.
+
+    Package Manager is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+    for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with Package Manager. If not, see <http://www.gnu.org/licenses/>.
