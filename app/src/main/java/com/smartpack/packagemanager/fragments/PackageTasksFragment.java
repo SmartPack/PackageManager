@@ -98,17 +98,34 @@ public class PackageTasksFragment extends RecyclerViewFragment {
     protected void onBottomFabClick() {
         super.onBottomFabClick();
 
+        if (!RootUtils.rootAccess()) {
+            Utils.toast(R.string.no_root, getActivity());
+            return;
+        }
+
+        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            Utils.toast(R.string.permission_denied_write_storage, getActivity());
+            return;
+        }
+
         mOptionsDialog = new Dialog(getActivity()).setItems(getResources().getStringArray(
                 R.array.fab_options), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (!RootUtils.rootAccess()) {
-                    Utils.toast(R.string.no_root, getActivity());
-                    return;
+                switch (i) {
+                    case 0:
+                        Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
+                        restore.setType("*/*");
+                        startActivityForResult(restore, 0);
+                        break;
+                    case 1:
+                        Intent install = new Intent(Intent.ACTION_GET_CONTENT);
+                        install.setType("*/*");
+                        startActivityForResult(install, 1);
+                        break;
                 }
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(intent, 0);
             }
         }).setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -327,6 +344,18 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             return;
                                         }
                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                        for (final String splitApps : PackageTasks.splitApks(packageInfo.sourceDir.replace("base.apk", ""))) {
+                                            if (splitApps.contains("split_")) {
+                                                if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" + packageInfo.packageName)) {
+                                                    Utils.toast(getString(R.string.already_exists, packageInfo.packageName), getActivity());
+                                                    return;
+                                                }
+                                                PackageTasks.exportingBundleTask(packageInfo.sourceDir.replace("base.apk", ""), packageInfo.packageName,
+                                                        requireActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
+                                                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                                return;
+                                            }
+                                        }
                                         PackageTasks.exportingTask(packageInfo.sourceDir, packageInfo.packageName,
                                                 requireActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
@@ -425,16 +454,15 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             } else {
                 mPath = Utils.getPath(file);
             }
-            if (!mPath.endsWith(".tar.gz")) {
-                Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
-                return;
-            }
-            Utils.getInstance().showInterstitialAd();
             if (requestCode == 0) {
+                if (!mPath.endsWith(".tar.gz")) {
+                    Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
+                    return;
+                }
+                Utils.getInstance().showInterstitialAd();
                 Dialog restoreApp = new Dialog(requireActivity());
                 restoreApp.setIcon(R.mipmap.ic_launcher);
-                restoreApp.setTitle(getString(R.string.restore_message, file.getName().replace("primary:", "").
-                        replace("file%3A%2F%2F%2F", "").replace("%2F", "/")));
+                restoreApp.setTitle(getString(R.string.restore_message, mPath));
                 restoreApp.setMessage(getString(R.string.restore_summary));
                 restoreApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 });
@@ -444,6 +472,25 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 });
                 restoreApp.show();
+            } else if (requestCode == 1) {
+                String fileName = new File(mPath).getName();
+                if (!mPath.endsWith(".apk")) {
+                    Utils.toast(getString(R.string.wrong_extension, ".apk"), getActivity());
+                    return;
+                }
+                Utils.getInstance().showInterstitialAd();
+                Dialog installApp = new Dialog(requireActivity());
+                installApp.setIcon(R.mipmap.ic_launcher);
+                installApp.setTitle(getString(R.string.sure_question));
+                installApp.setMessage(getString(R.string.bundle_install, mPath.replace(fileName, "")));
+                installApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                });
+                installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
+                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                    PackageTasks.installSplitAPKs(mPath.replace(fileName, ""), getActivity());
+                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                });
+                installApp.show();
             }
         }
     }

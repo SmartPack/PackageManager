@@ -20,7 +20,13 @@
 
 package com.smartpack.packagemanager.utils.root;
 
+import androidx.annotation.NonNull;
+
+import com.smartpack.packagemanager.utils.Utils;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on May 24, 2019
@@ -33,6 +39,11 @@ public class RootFile {
     private final String mFile;
     private RootUtils.SU mSU;
 
+    public RootFile(String file) {
+        mFile = file;
+        mSU = RootUtils.getSU();
+    }
+
     public RootFile(String file, RootUtils.SU su) {
         mFile = file;
         mSU = su;
@@ -42,8 +53,22 @@ public class RootFile {
         return new File(mFile).getName();
     }
 
-    public String readFile() {
-        return mSU.runCommand("cat '" + mFile + "'");
+    public void mkdir() {
+        mSU.runCommand("mkdir -p '" + mFile + "'");
+    }
+
+    public List<String> list() {
+        List<String> list = new ArrayList<>();
+        String files = mSU.runCommand("ls '" + mFile + "/'");
+        if (files != null) {
+            // Make sure the files exists
+            for (String file : files.split("\\r?\\n")) {
+                if (file != null && !file.isEmpty() && Utils.existFile(mFile + "/" + file)) {
+                    list.add(file);
+                }
+            }
+        }
+        return list;
     }
 
     public boolean exists() {
@@ -51,7 +76,12 @@ public class RootFile {
         return output != null && output.equals("true");
     }
 
+    public String readFile() {
+        return mSU.runCommand("cat '" + mFile + "'");
+    }
+
     @Override
+    @NonNull
     public String toString() {
         return mFile;
     }

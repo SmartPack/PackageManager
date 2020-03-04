@@ -9,6 +9,7 @@
     <string name="app_name_summary" translatable="false">An Application to Manage your Apps</string>
     <string name="backup">Backup</string>
     <string name="backing_up">Backing up %s (data only) into \'/sdcard/Package_Manager/\'</string>
+    <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?\n\nPlease Note: Installing split apk\'s may not always work well, especially if the apk\'s are extracted from a different device. Also, please make sure that all the necessary (only necessary) apk\'s are available in the selected folder to avoid installation failure!</string>
     <string name="cancel">Cancel</string>
     <string name="disable">Turn-On/Off</string>
     <string name="disable_message">Are you sure to %s</string>
@@ -17,8 +18,14 @@
     <string name="enabling">Enabling %s</string>
     <string name="export">Export</string>
     <string name="export_summary">is exported into %s. Do you want to share it?</string>
+    <string name="export_bundle_summary">The entire app bundle is exported into %s!</string>
     <string name="exporting">Exporting %s</string>
+    <string name="exporting_bundle">Exporting %s app bundle</string>
     <string name="got_it">Got it</string>
+    <string name="install">Install</string>
+    <string name="install_bundle">Install Split APKs</string>
+    <string name="install_success">Installation completed successfully!</string>
+    <string name="installing">Installing App Bundle!</string>
     <string name="more">More</string>
     <string name="more_apps">More from Developer</string>
     <string name="name_empty">Name is empty! Aborting!</string>
@@ -34,6 +41,7 @@
     <string name="press_back">Press back again to exit</string>
     <string name="report_issue">Report an Issue</string>
     <string name="restore">Restore</string>
+    <string name="restore_data">Restore App Data</string>
     <string name="restore_message">Are you sure to restore %s?</string>
     <string name="restore_summary">\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
     <string name="restoring">Restoring %s</string>
@@ -42,6 +50,7 @@
     <string name="share_message">Package Manager %s can be obtained from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
     <string name="support">Support Group</string>
+    <string name="sure_question">Are you sure?</string>
     <string name="system">System</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>

@@ -11,6 +11,7 @@
         <item>@string/uninstall</item>
     </string-array>
     <string-array name="fab_options">
-        <item>@string/restore</item>
+        <item>@string/restore_data</item>
+        <item>@string/install_bundle</item>
     </string-array>
 </resources>

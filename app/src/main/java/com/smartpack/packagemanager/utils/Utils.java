@@ -160,6 +160,14 @@ public class Utils {
         RootUtils.runCommand("cp -r " + source + " " + dest);
     }
 
+    public static String create(String text, String path) {
+        return RootUtils.runCommand("echo '" + text + "' > " + path);
+    }
+
+    public static String append(String text, String path) {
+        return RootUtils.runCommand("echo '" + text + "' >> " + path);
+    }
+
     public static void sleep(int sec) {
         RootUtils.runCommand("sleep " + sec);
     }
