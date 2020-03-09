@@ -454,6 +454,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             } else {
                 mPath = Utils.getPath(file);
             }
+            String fileName = new File(mPath).getName();
             if (requestCode == 0) {
                 if (!mPath.endsWith(".tar.gz")) {
                     Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
@@ -462,7 +463,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 Utils.getInstance().showInterstitialAd();
                 Dialog restoreApp = new Dialog(requireActivity());
                 restoreApp.setIcon(R.mipmap.ic_launcher);
-                restoreApp.setTitle(getString(R.string.restore_message, mPath));
+                restoreApp.setTitle(getString(R.string.restore_message, fileName));
                 restoreApp.setMessage(getString(R.string.restore_summary));
                 restoreApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 });
@@ -473,7 +474,6 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 });
                 restoreApp.show();
             } else if (requestCode == 1) {
-                String fileName = new File(mPath).getName();
                 if (!mPath.endsWith(".apk")) {
                     Utils.toast(getString(R.string.wrong_extension, ".apk"), getActivity());
                     return;
