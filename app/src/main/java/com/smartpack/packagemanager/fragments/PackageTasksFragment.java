@@ -275,7 +275,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             Utils.toast(R.string.permission_denied_write_storage, getActivity());
                                             return;
                                         }
-                                        Utils.getInstance().showInterstitialAd();
+                                        Utils.getInstance().showInterstitialAd(getActivity());
                                         ViewUtils.dialogEditText(pm.getApplicationLabel(packageInfo).toString(),
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
@@ -365,7 +365,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
-                                        Utils.getInstance().showInterstitialAd();
+                                        Utils.getInstance().showInterstitialAd(getActivity());
                                         new Dialog(requireActivity())
                                                 .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
                                                 .setTitle(pm.getApplicationLabel(packageInfo))
@@ -382,7 +382,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                 .show();
                                         break;
                                     case 5:
-                                        Utils.getInstance().showInterstitialAd();
+                                        Utils.getInstance().showInterstitialAd(getActivity());
                                         Intent ps = new Intent(Intent.ACTION_VIEW);
                                         ps.setData(Uri.parse(
                                                 "https://play.google.com/store/apps/details?id=" + packageInfo.packageName));
@@ -404,7 +404,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                 Utils.toast(R.string.no_root, getActivity());
                                                 return;
                                             }
-                                            Utils.getInstance().showInterstitialAd();
+                                            Utils.getInstance().showInterstitialAd(getActivity());
                                             new Dialog(requireActivity())
                                                     .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
                                                     .setTitle(getString(R.string.uninstall_title, pm.getApplicationLabel(packageInfo)))
@@ -460,7 +460,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
                     return;
                 }
-                Utils.getInstance().showInterstitialAd();
+                Utils.getInstance().showInterstitialAd(getActivity());
                 Dialog restoreApp = new Dialog(requireActivity());
                 restoreApp.setIcon(R.mipmap.ic_launcher);
                 restoreApp.setTitle(getString(R.string.restore_message, fileName));
@@ -478,7 +478,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     Utils.toast(getString(R.string.wrong_extension, ".apk"), getActivity());
                     return;
                 }
-                Utils.getInstance().showInterstitialAd();
+                Utils.getInstance().showInterstitialAd(getActivity());
                 Dialog installApp = new Dialog(requireActivity());
                 installApp.setIcon(R.mipmap.ic_launcher);
                 installApp.setTitle(getString(R.string.sure_question));

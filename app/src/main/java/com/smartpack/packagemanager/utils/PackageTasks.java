@@ -71,7 +71,7 @@ public class PackageTasks {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
-                    Utils.getInstance().showInterstitialAd();
+                    Utils.getInstance().showInterstitialAd(context);
                     new Dialog(context)
                             .setIcon(icon)
                             .setTitle(context.getString(R.string.share) + " " + name + "?")
@@ -122,7 +122,7 @@ public class PackageTasks {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (Utils.existFile(PACKAGES + "/" + name + "/base.apk")) {
-                    Utils.getInstance().showInterstitialAd();
+                    Utils.getInstance().showInterstitialAd(context);
                     new Dialog(context)
                             .setIcon(icon)
                             .setTitle(name)

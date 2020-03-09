@@ -55,6 +55,15 @@ public class Utils {
 
     private InterstitialAd mInterstitialAd;
 
+    public static boolean isDonated(Context context) {
+        try {
+            context.getPackageManager().getApplicationInfo("com.smartpack.donate", 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException ignored) {
+            return false;
+        }
+    }
+
     public static void initializeAppTheme() {
         AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_YES);
@@ -67,8 +76,8 @@ public class Utils {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
-    public void showInterstitialAd() {
-        if (mInterstitialAd.isLoaded()) {
+    public void showInterstitialAd(Context context) {
+        if (!Utils.isDonated(context) && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
     }
