@@ -369,9 +369,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         new Dialog(requireActivity())
                                                 .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
                                                 .setTitle(pm.getApplicationLabel(packageInfo))
-                                                .setMessage(getString(R.string.disable_message, PackageTasks.isEnabled(
-                                                        packageInfo.packageName, requireActivity()) ? "disable " : "enable ") +
-                                                        pm.getApplicationLabel(packageInfo) + "?")
+                                                .setMessage(pm.getApplicationLabel(packageInfo) + " " + getString(R.string.disable_message,
+                                                        PackageTasks.isEnabled(packageInfo.packageName, requireActivity()) ?
+                                                                getString(R.string.disabled) : getString(R.string.enabled)))
                                                 .setCancelable(false)
                                                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                                                 })

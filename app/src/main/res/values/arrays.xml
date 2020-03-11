@@ -6,7 +6,7 @@
         <item>@string/app_info</item>
         <item>@string/backup</item>
         <item>@string/export</item>
-        <item>@string/disable</item>
+        <item>@string/turn_on_off</item>
         <item>@string/playstore</item>
         <item>@string/uninstall</item>
     </string-array>

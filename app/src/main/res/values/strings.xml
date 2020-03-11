@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="about">About</string>
-    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="app_info">App info</string>
@@ -11,10 +11,11 @@
     <string name="backing_up">Backing up %s (data only) into \'/sdcard/Package_Manager/\'</string>
     <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?\n\nPlease Note: Installing split apk\'s may not always work well, especially if the apk\'s are extracted from a different device. Also, please make sure that all the necessary (only necessary) apk\'s are available in the selected folder to avoid installation failure!</string>
     <string name="cancel">Cancel</string>
-    <string name="disable">Turn-On/Off</string>
-    <string name="disable_message">Are you sure to %s</string>
+    <string name="disable_message">will be %s! Are you sure?</string>
+    <string name="disabled">disabled</string>
     <string name="disabled_message">%s is currently disabled! Please enable it first and try again!</string>
     <string name="disabling">Disabling %s</string>
+    <string name="enabled">enabled</string>
     <string name="enabling">Enabling %s</string>
     <string name="export">Export</string>
     <string name="export_summary">is exported into %s. Do you want to share it?</string>
@@ -52,6 +53,7 @@
     <string name="support">Support Group</string>
     <string name="sure_question">Are you sure?</string>
     <string name="system">System</string>
+    <string name="turn_on_off">Turn-On/Off</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
     <string name="uninstall_summary">Removing %s</string>

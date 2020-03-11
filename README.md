@@ -43,6 +43,7 @@ If you like to appreciate my work, please consider donating to me (either via [P
 
 ## Credits
 * [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
+* [SmgKhOaRn](https://github.com/SmgKhOaRn), Korean Translations
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 
 ## License
