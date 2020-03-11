@@ -1,5 +1,9 @@
 # Change-logs
 
+## 7. March 10, 2020
+*Release-tag: 1.2*<br>
+Main: Disable Ads if SmartPack Donation Package is installed. Misc: Added Korean translations (Credits: @SmgKhOaRn). gradle: Update build tools & dependencies. Miscellaneous changes.
+
 ## 6. March 04, 2020
 *Release-tag: 1.1*<br>
 Main: Implemented option to install Split APK's (Root-only). Main: Fixed exporting app split APK's. gradle: Updated build tools. Misc: Slightly updated UI. Miscellaneous changes.
