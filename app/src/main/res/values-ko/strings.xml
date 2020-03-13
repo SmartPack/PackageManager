@@ -59,7 +59,7 @@
     <string name="uninstall_title">%s을(를) 제거합니다. 계속하시겠어요?</string>
     <string name="uninstall_warning">반드시 알아두기: 시스템 앱들을 지우는 것은 가끔 위험합니다!\n\n *** <b>위험을 감수하고 사용하세요 (본인 책임입니다)</b>> ***\n</string>
     <string name="user">유저</string>
-    <string name="welcome_message"><b>Package Manager에 오신 것을 환영합니다</b>, 당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.\n\n*** <b>주의</b> ***\n이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 생기더라도 책임지지 않습니다.</string>
+    <string name="welcome_message"><b>Package Manager에 오신 것을 환영합니다</b>, 당신의 앱들을 관리하는 간단하면서도, 강력한 어플리케이션.\n\n*** <b>주의</b> ***\n이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 생기더라도 책임지지 않습니다.</string>
     <string name="wrong_extension">%s 확장이 있는 파일을 선택해주세요.</string>
     <string name="yes">예</string>
 </resources>
