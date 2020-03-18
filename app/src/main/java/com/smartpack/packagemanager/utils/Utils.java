@@ -55,12 +55,12 @@ public class Utils {
 
     private InterstitialAd mInterstitialAd;
 
-    public static boolean isDonated(Context context) {
+    public static boolean isNotDonated(Context context) {
         try {
             context.getPackageManager().getApplicationInfo("com.smartpack.donate", 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException ignored) {
             return false;
+        } catch (PackageManager.NameNotFoundException ignored) {
+            return true;
         }
     }
 
@@ -77,7 +77,7 @@ public class Utils {
     }
 
     public void showInterstitialAd(Context context) {
-        if (!Utils.isDonated(context) && mInterstitialAd.isLoaded()) {
+        if (Utils.isNotDonated(context) && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
     }
@@ -95,7 +95,7 @@ public class Utils {
         toast(context.getString(id), context);
     }
 
-    public static void toast(String message, Context context, int duration) {
+    private static void toast(String message, Context context, int duration) {
         Toast.makeText(context, message, duration).show();
     }
 
@@ -118,15 +118,15 @@ public class Utils {
                 Configuration.ORIENTATION_PORTRAIT : activity.getResources().getConfiguration().orientation;
     }
 
-    public static String readFile(String file) {
+    static String readFile(String file) {
         return readFile(file, true);
     }
 
-    public static String readFile(String file, boolean root) {
+    private static String readFile(String file, boolean root) {
         return readFile(file, root ? RootUtils.getSU() : null);
     }
 
-    public static String readFile(String file, RootUtils.SU su) {
+    private static String readFile(String file, RootUtils.SU su) {
         if (su != null) {
             return new RootFile(file, su).readFile();
         }
@@ -157,27 +157,27 @@ public class Utils {
         return existFile(file, true);
     }
 
-    public static boolean existFile(String file, boolean root) {
+    private static boolean existFile(String file, boolean root) {
         return existFile(file, root ? RootUtils.getSU() : null);
     }
 
-    public static boolean existFile(String file, RootUtils.SU su) {
+    private static boolean existFile(String file, RootUtils.SU su) {
         return su == null ? new File(file).exists() : new RootFile(file, su).exists();
     }
 
-    public static void copy(String source, String dest) {
+    static void copy(String source, String dest) {
         RootUtils.runCommand("cp -r " + source + " " + dest);
     }
 
-    public static String create(String text, String path) {
-        return RootUtils.runCommand("echo '" + text + "' > " + path);
+    static void create(String text, String path) {
+        RootUtils.runCommand("echo '" + text + "' > " + path);
     }
 
-    public static String append(String text, String path) {
-        return RootUtils.runCommand("echo '" + text + "' >> " + path);
+    static void append(String text, String path) {
+        RootUtils.runCommand("echo '" + text + "' >> " + path);
     }
 
-    public static void sleep(int sec) {
+    static void sleep(int sec) {
         RootUtils.runCommand("sleep " + sec);
     }
 
@@ -210,8 +210,9 @@ public class Utils {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
-    public static boolean isNetworkAvailable(Context context) {
+    private static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         return (cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
@@ -219,10 +220,10 @@ public class Utils {
      * Taken and used almost as such from the following stackoverflow discussion
      * Ref: https://stackoverflow.com/questions/7203668/how-permission-can-be-checked-at-runtime-without-throwing-securityexception
      */
-    public static boolean checkWriteStoragePermission(Context context) {
+    public static boolean isStorageWritePermissionDenied(Context context) {
         String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
         int res = context.checkCallingOrSelfPermission(permission);
-        return (res == PackageManager.PERMISSION_GRANTED);
+        return (res != PackageManager.PERMISSION_GRANTED);
     }
     public static boolean getBoolean(String name, boolean defaults, Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(name, defaults);
@@ -231,6 +232,5 @@ public class Utils {
     public static void saveBoolean(String name, boolean value, Context context) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(name, value).apply();
     }
-
 
 }

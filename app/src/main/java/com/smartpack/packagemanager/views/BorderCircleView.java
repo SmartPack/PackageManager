@@ -19,7 +19,6 @@ public class BorderCircleView extends FrameLayout {
 
     public static final SparseArray<String> sAccentColors = new SparseArray<>();
 
-    private final Drawable mCheck;
     private final Paint mPaint;
     private final Paint mPaintBorder;
 
@@ -37,7 +36,8 @@ public class BorderCircleView extends FrameLayout {
         if (isClickable()) {
             setForeground(ViewUtils.getSelectableBackground(context));
         }
-        mCheck = ContextCompat.getDrawable(context, R.drawable.ic_done);
+        Drawable mCheck = ContextCompat.getDrawable(context, R.drawable.ic_done);
+        assert mCheck != null;
         DrawableCompat.setTint(mCheck, Color.WHITE);
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

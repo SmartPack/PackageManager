@@ -26,10 +26,10 @@ public class RootUtils {
 
     private static SU su;
 
-    public static boolean rootAccess() {
+    public static boolean rootAccessDenied() {
         SU su = getSU();
         su.runCommand("echo /testRoot/");
-        return !su.mDenied;
+        return su.mDenied;
     }
 
     public static String runCommand(String command) {
@@ -58,14 +58,14 @@ public class RootUtils {
         private final boolean mRoot;
         private final String mTag;
         private boolean mClosed;
-        public boolean mDenied;
+        boolean mDenied;
         private boolean mFirstTry;
 
-        public SU() {
+        SU() {
             this(true, null);
         }
 
-        public SU(boolean root, String tag) {
+        SU(boolean root, String tag) {
             mRoot = root;
             mTag = tag;
             try {
@@ -85,7 +85,7 @@ public class RootUtils {
             }
         }
 
-        public synchronized String runCommand(final String command) {
+        synchronized String runCommand(final String command) {
             synchronized (this) {
                 try {
                     StringBuilder sb = new StringBuilder();
@@ -122,7 +122,7 @@ public class RootUtils {
             }
         }
 
-        public void close() {
+        void close() {
             try {
                 if (mWriter != null) {
                     mWriter.write("exit\n");

@@ -25,6 +25,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.views.dialog.Dialog;
 
+import java.util.Objects;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
  * Based on the original implementation on Kernel Adiutor by
@@ -70,9 +72,9 @@ public class ViewUtils {
         return dialogEditText(text, negativeListener, onDialogEditTextListener, -1, context);
     }
 
-    public static Dialog dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
-                                        final OnDialogEditTextListener onDialogEditTextListener, int inputType,
-                                        Context context) {
+    private static Dialog dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
+                                         final OnDialogEditTextListener onDialogEditTextListener, int inputType,
+                                         Context context) {
         LinearLayout layout = new LinearLayout(context);
         int padding = (int) context.getResources().getDimension(R.dimen.dialog_padding);
         layout.setPadding(padding, padding, padding, padding);
@@ -97,7 +99,7 @@ public class ViewUtils {
         }
         if (onDialogEditTextListener != null) {
             dialog.setPositiveButton(context.getString(R.string.ok), (dialog1, which)
-                    -> onDialogEditTextListener.onClick(editText.getText().toString()))
+                    -> onDialogEditTextListener.onClick(Objects.requireNonNull(editText.getText()).toString()))
                     .setOnDismissListener(dialog1 -> {
                         if (negativeListener != null) {
                             negativeListener.onClick(dialog1, 0);

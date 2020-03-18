@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -27,6 +28,7 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -98,41 +100,33 @@ public class PackageTasksFragment extends RecyclerViewFragment {
     protected void onBottomFabClick() {
         super.onBottomFabClick();
 
-        if (!RootUtils.rootAccess()) {
+        if (RootUtils.rootAccessDenied()) {
             Utils.toast(R.string.no_root, getActivity());
             return;
         }
 
-        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+        if (Utils.isStorageWritePermissionDenied(requireActivity())) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             Utils.toast(R.string.permission_denied_write_storage, getActivity());
             return;
         }
 
-        mOptionsDialog = new Dialog(getActivity()).setItems(getResources().getStringArray(
-                R.array.fab_options), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case 0:
-                        Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
-                        restore.setType("*/*");
-                        startActivityForResult(restore, 0);
-                        break;
-                    case 1:
-                        Intent install = new Intent(Intent.ACTION_GET_CONTENT);
-                        install.setType("*/*");
-                        startActivityForResult(install, 1);
-                        break;
-                }
-            }
-        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mOptionsDialog = null;
-            }
-        });
+        mOptionsDialog = new Dialog(requireActivity()).setItems(getResources().getStringArray(
+                R.array.fab_options), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
+                            restore.setType("*/*");
+                            startActivityForResult(restore, 0);
+                            break;
+                        case 1:
+                            Intent install = new Intent(Intent.ACTION_GET_CONTENT);
+                            install.setType("*/*");
+                            startActivityForResult(install, 1);
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> mOptionsDialog = null);
         mOptionsDialog.show();
     }
 
@@ -144,6 +138,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
     private void reload() {
         if (mLoader == null) {
             getHandler().postDelayed(new Runnable() {
+                @SuppressLint("StaticFieldLeak")
                 @Override
                 public void run() {
                     clearItems();
@@ -182,12 +177,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         SwitchView system = new SwitchView();
         system.setSummary(getString(R.string.system));
         system.setChecked(Utils.getBoolean("system_apps", true, getActivity()));
-        system.addOnSwitchListener(new SwitchView.OnSwitchListener() {
-            @Override
-            public void onChanged(SwitchView switchview, boolean isChecked) {
-                Utils.saveBoolean("system_apps", isChecked, getActivity());
-                reload();
-            }
+        system.addOnSwitchListener((switchview, isChecked) -> {
+            Utils.saveBoolean("system_apps", isChecked, getActivity());
+            reload();
         });
 
         items.add(system);
@@ -195,12 +187,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         SwitchView user = new SwitchView();
         user.setSummary(getString(R.string.user));
         user.setChecked(Utils.getBoolean("user_apps", true, getActivity()));
-        user.addOnSwitchListener(new SwitchView.OnSwitchListener() {
-            @Override
-            public void onChanged(SwitchView switchview, boolean isChecked) {
-                Utils.saveBoolean("user_apps", isChecked, getActivity());
-                reload();
-            }
+        user.addOnSwitchListener((switchview, isChecked) -> {
+            Utils.saveBoolean("user_apps", isChecked, getActivity());
+            reload();
         });
 
         items.add(user);
@@ -265,11 +254,11 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         startActivity(settings);
                                         break;
                                     case 2:
-                                        if (!RootUtils.rootAccess()) {
+                                        if (RootUtils.rootAccessDenied()) {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
-                                        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+                                        if (Utils.isStorageWritePermissionDenied(requireActivity())) {
                                             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                                             Utils.toast(R.string.permission_denied_write_storage, getActivity());
@@ -277,11 +266,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         }
                                         Utils.getInstance().showInterstitialAd(getActivity());
                                         ViewUtils.dialogEditText(pm.getApplicationLabel(packageInfo).toString(),
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                                    }
+                                                (dialogInterface1, i1) -> {
                                                 }, new ViewUtils.OnDialogEditTextListener() {
+                                                    @SuppressLint("StaticFieldLeak")
                                                     @Override
                                                     public void onClick(String text) {
                                                         if (text.isEmpty()) {
@@ -311,9 +298,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                             }
                                                             @Override
                                                             protected Void doInBackground(Void... voids) {
-                                                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                                                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                                                 PackageTasks.backupApp(packageInfo.packageName, path);
-                                                                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                                                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                                                 return null;
                                                             }
                                                             @Override
@@ -326,18 +313,15 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                             }
                                                         }.execute();
                                                     }
-                                                }, getActivity()).setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                            @Override
-                                            public void onDismiss(DialogInterface dialogInterface) {
-                                            }
-                                        }).show();
+                                                }, getActivity()).setOnDismissListener(dialogInterface12 -> {
+                                                }).show();
                                         break;
                                     case 3:
-                                        if (!RootUtils.rootAccess()) {
+                                        if (RootUtils.rootAccessDenied()) {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
-                                        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+                                        if (Utils.isStorageWritePermissionDenied(requireActivity())) {
                                             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                                             Utils.toast(R.string.permission_denied_write_storage, getActivity());
@@ -361,7 +345,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                         break;
                                     case 4:
-                                        if (!RootUtils.rootAccess()) {
+                                        if (RootUtils.rootAccessDenied()) {
                                             Utils.toast(R.string.no_root, getActivity());
                                             return;
                                         }
@@ -400,7 +384,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             remove.setData(Uri.parse("package:" + packageInfo.packageName));
                                             startActivity(remove);
                                         } else {
-                                            if (!RootUtils.rootAccess()) {
+                                            if (RootUtils.rootAccessDenied()) {
                                                 Utils.toast(R.string.no_root, getActivity());
                                                 return;
                                             }
@@ -423,12 +407,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         break;
                                 }
                             }
-                        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface) {
-                                mOptionsDialog = null;
-                            }
-                        });
+                        }).setOnDismissListener(dialogInterface -> mOptionsDialog = null);
                         mOptionsDialog.show();
                     }
                 });
@@ -444,9 +423,10 @@ public class PackageTasksFragment extends RecyclerViewFragment {
 
         if (resultCode == Activity.RESULT_OK && data != null) {
             Uri uri = data.getData();
-            File file = new File(uri.getPath());
+            assert uri != null;
+            File file = new File(Objects.requireNonNull(uri.getPath()));
             if (Utils.isDocumentsUI(uri)) {
-                Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
+                @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
                     mPath = Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" +
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
@@ -502,6 +482,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                  @Nullable Bundle savedInstanceState) {
             Fragment fragment = getParentFragment();
             if (!(fragment instanceof PackageTasksFragment)) {
+                assert fragment != null;
                 fragment = fragment.getParentFragment();
             }
             final PackageTasksFragment systemAppsFragment = (PackageTasksFragment) fragment;
@@ -521,11 +502,13 @@ public class PackageTasksFragment extends RecyclerViewFragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                    assert systemAppsFragment != null;
                     systemAppsFragment.mAppName = s.toString();
                     systemAppsFragment.reload();
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 }
             });
+            assert systemAppsFragment != null;
             if (systemAppsFragment.mAppName != null) {
                 keyEdit.append(systemAppsFragment.mAppName);
             }

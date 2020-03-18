@@ -99,12 +99,9 @@ public class Dialog extends AlertDialog.Builder {
 
     public Dialog setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         mOnDismissListener = onDismissListener;
-        setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                if (mOnDismissListener != null) {
-                    mOnDismissListener.onDismiss(dialogInterface);
-                }
+        setOnCancelListener(dialogInterface -> {
+            if (mOnDismissListener != null) {
+                mOnDismissListener.onDismiss(dialogInterface);
             }
         });
         return this;

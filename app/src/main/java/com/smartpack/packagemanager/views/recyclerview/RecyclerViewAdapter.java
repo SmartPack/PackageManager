@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
@@ -43,8 +44,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mItems.size();
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         RecyclerViewItem item = mItems.get(viewType);
         View view;
@@ -59,6 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             view = LayoutInflater.from(parent.getContext())
                     .inflate(item.getLayoutRes(), parent, false);
         }
+        assert view != null;
         ViewGroup viewGroup = (ViewGroup) view.getParent();
         if (viewGroup != null) {
             viewGroup.removeView(view);
@@ -76,8 +79,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (viewType == item.getLayoutRes()) {
             mFirstItem = view;
         }
-        item.setOnViewChangeListener(mOnViewChangedListener);
-        item.onCreateHolder(parent, view);
+        item.setOnViewChangeListener();
+        item.onCreateHolder();
 
         return new RecyclerView.ViewHolder(view) {
         };

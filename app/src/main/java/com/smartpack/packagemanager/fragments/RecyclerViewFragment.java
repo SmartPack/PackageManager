@@ -95,7 +95,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
 
-        if (!Utils.isDonated(requireActivity())) {
+        if (Utils.isNotDonated(requireActivity())) {
             AdView mAdView = mRootView.findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
