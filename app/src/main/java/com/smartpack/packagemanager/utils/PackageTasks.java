@@ -37,6 +37,8 @@ public class PackageTasks {
 
     private static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
 
+    public static StringBuilder mBatchApps = null;
+
     private static void makePackageFolder() {
         File file = new File(PACKAGES);
         if (file.exists() && file.isFile()) {
@@ -136,7 +138,7 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void disableApp(String app, Context context) {
+    public static void disableApp(String app, String name, Context context) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
@@ -144,8 +146,8 @@ public class PackageTasks {
                 super.onPreExecute();
                 mProgressDialog = new ProgressDialog(context);
                 mProgressDialog.setMessage(isEnabled(app, context) ?
-                        context.getString(R.string.disabling, app) + "..." :
-                        context.getString(R.string.enabling, app) + "...");
+                        context.getString(R.string.disabling, name) + "..." :
+                        context.getString(R.string.enabling, name) + "...");
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -170,14 +172,14 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void removeSystemApp(String app, Context context) {
+    public static void removeSystemApp(String app, String name, Context context) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
                 mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(context.getString(R.string.uninstall_summary, app));
+                mProgressDialog.setMessage(context.getString(R.string.uninstall_summary, name));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }

@@ -21,6 +21,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
+import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.PagerAdapter;
 import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.views.dialog.Dialog;
@@ -37,9 +38,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // Initialize Dark Theme & Google Ads
-        Utils.initializeAppTheme();
+        Utils.initializeAppTheme(this);
         Utils.getInstance().initializeGoogleAds(this);
+        // Set App Language
         super.onCreate(savedInstanceState);
+        Utils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
         ViewPager viewPager = findViewById(R.id.viewPagerID);
@@ -75,18 +78,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mExit) {
+        if (!PackageTasks.mBatchApps.toString().isEmpty()) {
+            new Dialog(this)
+                    .setMessage(R.string.batch_warning)
+                    .setCancelable(false)
+                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                    })
+                    .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                        super.onBackPressed();
+                    })
+                    .show();
+        } else if (mExit) {
             mExit = false;
             super.onBackPressed();
         } else {
             Utils.toast(R.string.press_back, this);
             mExit = true;
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mExit = false;
-                }
-            }, 2000);
+            mHandler.postDelayed(() -> mExit = false, 2000);
         }
     }
 

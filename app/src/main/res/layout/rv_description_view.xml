@@ -40,13 +40,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="25dp"
                     android:baselineAligned="false">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:focusable="false"
                         android:textSize="17sp"
                         android:textColor="?android:attr/textColorPrimary" />
@@ -54,7 +54,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/summary"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:focusable="false" />
                 </LinearLayout>
 

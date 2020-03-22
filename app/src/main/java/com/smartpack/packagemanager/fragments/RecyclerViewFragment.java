@@ -95,7 +95,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
 
-        if (Utils.isNotDonated(requireActivity())) {
+        if (Utils.getBoolean("allow_ads", true, getActivity())) {
             AdView mAdView = mRootView.findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
@@ -288,7 +288,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     protected void init() {
     }
 
-    protected void postInit() {
+    private void postInit() {
         if (getActivity() != null && isAdded()) {
             for (RecyclerViewItem item : mItems) {
                 item.onRecyclerViewCreate(getActivity());
@@ -296,7 +296,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         }
     }
 
-    protected void adjustScrollPosition() {
+    private void adjustScrollPosition() {
         if (mScroller != null) {
             mScroller.onScrolled(mRecyclerView, 0, 0);
         }
@@ -304,7 +304,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     protected abstract void addItems(List<RecyclerViewItem> items);
 
-    protected void addItem(RecyclerViewItem recyclerViewItem) {
+    void addItem(RecyclerViewItem recyclerViewItem) {
         mItems.add(recyclerViewItem);
         if (mRecyclerViewAdapter != null) {
             mRecyclerViewAdapter.notifyItemInserted(mItems.size() - 1);
@@ -318,7 +318,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         return new StaggeredGridLayoutManager(getSpanCount(), StaggeredGridLayoutManager.VERTICAL);
     }
 
-    protected void clearItems() {
+    void clearItems() {
         mItems.clear();
         if (mRecyclerViewAdapter != null) {
             mRecyclerViewAdapter.notifyDataSetChanged();
@@ -342,11 +342,11 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         return 1;
     }
 
-    public int itemsSize() {
+    private int itemsSize() {
         return mItems.size();
     }
 
-    protected void addViewPagerFragment(BaseFragment fragment) {
+    void addViewPagerFragment(BaseFragment fragment) {
         mViewPagerFragments.add(fragment);
         if (mViewPagerAdapter != null) {
             mViewPagerAdapter.notifyDataSetChanged();
@@ -357,11 +357,12 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
         private final List<Fragment> mFragments;
 
-        public ViewPagerAdapter(FragmentManager fragmentManager, List<Fragment> fragments) {
+        ViewPagerAdapter(FragmentManager fragmentManager, List<Fragment> fragments) {
             super(fragmentManager);
             mFragments = fragments;
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return mFragments.get(position);
@@ -376,7 +377,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     private class Scroller extends RecyclerView.OnScrollListener {
 
         @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             View firstItem = mRecyclerView.getChildAt(0);
             if (firstItem == null) {
@@ -403,7 +404,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         }
     }
 
-    protected void showProgress() {
+    void showProgress() {
         if (getActivity() != null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -420,7 +421,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         }
     }
 
-    protected void hideProgress() {
+    void hideProgress() {
         mProgress.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
         mViewPagerParent.setVisibility(View.VISIBLE);
@@ -455,7 +456,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
         if (showViewPager()) {
@@ -471,7 +472,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (showBottomFab()) {
             onBottomFabClick();
         }
@@ -493,7 +494,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     protected void onBottomFabClick() {
     }
 
-    protected boolean autoHideBottomFab() {
+    private boolean autoHideBottomFab() {
         return true;
     }
 
@@ -538,7 +539,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         }
     }
 
-    protected Handler getHandler() {
+    Handler getHandler() {
         return mHandler;
     }
 

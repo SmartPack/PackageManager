@@ -14,11 +14,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
@@ -35,6 +37,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Locale;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
@@ -64,9 +67,14 @@ public class Utils {
         }
     }
 
-    public static void initializeAppTheme() {
-        AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES);
+    public static void initializeAppTheme(Context context) {
+        if (getBoolean("dark_theme", true, context)) {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public void initializeGoogleAds(Context context) {
@@ -77,7 +85,7 @@ public class Utils {
     }
 
     public void showInterstitialAd(Context context) {
-        if (Utils.isNotDonated(context) && mInterstitialAd.isLoaded()) {
+        if (getBoolean("allow_ads", true, context) && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
     }
@@ -225,12 +233,35 @@ public class Utils {
         int res = context.checkCallingOrSelfPermission(permission);
         return (res != PackageManager.PERMISSION_GRANTED);
     }
+
     public static boolean getBoolean(String name, boolean defaults, Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(name, defaults);
     }
 
     public static void saveBoolean(String name, boolean value, Context context) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(name, value).apply();
+    }
+
+    public static boolean languageDefault(Context context) {
+        return !Utils.getBoolean("use_english", false, context)
+                && !Utils.getBoolean("use_korean", false, context);
+    }
+
+    public static void setLanguage(Context context) {
+        String lang;
+        if (getBoolean("use_english", false, context)) {
+            lang = "en_US";
+        } else if (getBoolean("use_korean", false, context)) {
+            lang = "ko";
+        } else {
+            lang = java.util.Locale.getDefault().getLanguage();
+        }
+        Locale myLocale = new Locale(lang);
+        Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
 
 }
