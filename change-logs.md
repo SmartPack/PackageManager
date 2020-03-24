@@ -1,5 +1,9 @@
 # Change-logs
 
+## 8. March 24, 2020
+*Release-tag: 1.3*<br>
+Added batch (uninstall/disable/enable/backup) options (root only). Overall improvements & code clean-ups. Added dark & light themes. Added an option to change app language. Improved Korean translations (Credits: @SmgKhOaRn). Improved split apk installation. gradle: Update build tools & dependencies. Miscellaneous changes.
+
 ## 7. March 10, 2020
 *Release-tag: 1.2*<br>
 Main: Disable Ads if SmartPack Donation Package is installed. Misc: Added Korean translations (Credits: @SmgKhOaRn). gradle: Update build tools & dependencies. Miscellaneous changes.
