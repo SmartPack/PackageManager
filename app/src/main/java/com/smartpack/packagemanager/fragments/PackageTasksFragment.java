@@ -29,7 +29,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -305,16 +304,16 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         options.setMenuIcon(getResources().getDrawable(R.drawable.ic_settings));
         options.setOnMenuListener((optionsMenu, popupMenu) -> {
             Menu menu = popupMenu.getMenu();
-            MenuItem system = menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.system)).setCheckable(true);
-            system.setChecked(Utils.getBoolean("system_apps", true, getActivity()));
-            MenuItem user = menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.user)).setCheckable(true);
-            user.setChecked(Utils.getBoolean("user_apps", true, getActivity()));
+            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.system)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("system_apps", true, getActivity()));
+            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.user)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("user_apps", true, getActivity()));
             if (!Utils.isNotDonated(requireActivity())) {
-                MenuItem allowAds = menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true);
-                allowAds.setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
+                menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
+                        .setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
             }
-            MenuItem darkTheme = menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true);
-            darkTheme.setChecked(Utils.getBoolean("dark_theme", true, getActivity()));
+            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("dark_theme", true, getActivity()));
             String lang;
             if (Utils.getBoolean("use_english", false, getActivity())) {
                 lang = "en_US";
@@ -323,10 +322,18 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             } else {
                 lang = java.util.Locale.getDefault().getLanguage();
             }
-            SubMenu subMenu = menu.addSubMenu(Menu.NONE, 4, Menu.NONE, getString(R.string.language, lang));
-            subMenu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_default));
-            subMenu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.language_en));
-            subMenu.add(Menu.NONE, 7, Menu.NONE, getString(R.string.language_ko));
+            SubMenu language = menu.addSubMenu(Menu.NONE, 4, Menu.NONE, getString(R.string.language, lang));
+            language.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
+                    .setChecked(Utils.languageDefault(getActivity()));
+            language.add(Menu.NONE, 6, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_english", false, getActivity()));
+            language.add(Menu.NONE, 7, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_korean", false, getActivity()));
+            SubMenu about = menu.addSubMenu(Menu.NONE, 4, Menu.NONE, getString(R.string.about));
+            about.add(Menu.NONE, 8, Menu.NONE, getString(R.string.support));
+            about.add(Menu.NONE, 9, Menu.NONE, getString(R.string.more_apps));
+            about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.report_issue));
+            about.add(Menu.NONE, 11, Menu.NONE, getString(R.string.about));
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case 0:
@@ -383,6 +390,21 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_korean", true, getActivity());
                             restartApp();
                         }
+                        break;
+                    case 8:
+                        Utils.launchUrl("https://t.me/smartpack_kmanager", getActivity());
+                        break;
+                    case 9:
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(
+                                "https://play.google.com/store/apps/developer?id=sunilpaulmathew"));
+                        startActivity(intent);
+                        break;
+                    case 10:
+                        Utils.launchUrl("https://github.com/SmartPack/PackageManager/issues/new", getActivity());
+                        break;
+                    case 11:
+                        aboutDialogue();
                         break;
                 }
                 return false;
@@ -614,9 +636,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 });
                 apps.setOnMenuListener((script, popupMenu) -> {
                     Menu menu = popupMenu.getMenu();
-                    MenuItem batch_add = menu.add(Menu.NONE, 0, Menu.NONE, PackageTasks.mBatchApps.toString().contains(packageInfo.packageName) ?
-                            getString(R.string.batch_remove) : getString(R.string.batch_add)).setCheckable(true);
-                    batch_add.setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
+                    menu.add(Menu.NONE, 0, Menu.NONE, PackageTasks.mBatchApps.toString().contains(packageInfo.packageName) ?
+                            getString(R.string.batch_remove) : getString(R.string.batch_add)).setCheckable(true)
+                            .setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
                     popupMenu.setOnMenuItemClickListener(item -> {
                         if (item.getItemId() == 0) {
                             if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
@@ -631,7 +653,6 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         } else {
                             apps.setMenuIcon(getResources().getDrawable(R.drawable.ic_check_box_empty));
                         }
-                        batch_add.setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
                         return false;
                     });
                 });
@@ -645,6 +666,16 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    private void aboutDialogue() {
+        new Dialog(requireActivity())
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(getString(R.string.app_name) + "\nv" + BuildConfig.VERSION_NAME)
+                .setMessage(getText(R.string.about_summary))
+                .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                })
+                .show();
     }
 
     @Override

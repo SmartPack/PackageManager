@@ -30,8 +30,6 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
@@ -95,12 +93,6 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
 
-        if (Utils.getBoolean("allow_ads", true, getActivity())) {
-            AdView mAdView = mRootView.findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
-
         if (mViewPagerFragments != null) {
             FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
             for (Fragment fragment : mViewPagerFragments) {
@@ -128,28 +120,18 @@ public abstract class RecyclerViewFragment extends BaseFragment {
             mRecyclerView.addOnScrollListener(mScroller);
         }
         mRecyclerView.setAdapter(mRecyclerViewAdapter == null ? mRecyclerViewAdapter
-                = new RecyclerViewAdapter(mItems, new RecyclerViewAdapter.OnViewChangedListener() {
-            @Override
-            public void viewChanged() {
-                getHandler().postDelayed(new Runnable() {
+                = new RecyclerViewAdapter(mItems, () -> getHandler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if (isAdded() && getActivity() != null) {
                             adjustScrollPosition();
                         }
                     }
-                }, 250);
-            }
-        }) : mRecyclerViewAdapter);
+                }, 250)) : mRecyclerViewAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager = getLayoutManager());
         mRecyclerView.setHasFixedSize(true);
 
-        mBottomFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBottomFabClick();
-            }
-        });
+        mBottomFab.setOnClickListener(v -> onBottomFabClick());
         {
             Drawable drawable = getBottomFabDrawable();
             if (drawable != null) {
@@ -161,12 +143,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         if (foregroundFragment != null) {
             mForegroundParent = mRootView.findViewById(R.id.foreground_parent);
             TextView mForegroundText = mRootView.findViewById(R.id.foreground_text);
-            mForegroundText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dismissForeground();
-                }
-            });
+            mForegroundText.setOnClickListener(v -> dismissForeground());
             getChildFragmentManager().beginTransaction().replace(R.id.foreground_content,
                     foregroundFragment).commit();
             mForegroundHeight = getResources().getDisplayMetrics().heightPixels;
@@ -406,15 +383,12 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     void showProgress() {
         if (getActivity() != null) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (isAdded()) {
-                        mProgress.setVisibility(View.VISIBLE);
-                        mRecyclerView.setVisibility(View.INVISIBLE);
-                        if (mBottomFab != null && showBottomFab()) {
-                            mBottomFab.hide();
-                        }
+            getActivity().runOnUiThread(() -> {
+                if (isAdded()) {
+                    mProgress.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    if (mBottomFab != null && showBottomFab()) {
+                        mBottomFab.hide();
                     }
                 }
             });
@@ -438,12 +412,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     private void dismissForeground() {
         float translation = mForegroundParent.getTranslationY();
         mForegroundAnimator = ValueAnimator.ofFloat(translation, mForegroundHeight);
-        mForegroundAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mForegroundParent.setTranslationY((float) animation.getAnimatedValue());
-            }
-        });
+        mForegroundAnimator.addUpdateListener(animation -> mForegroundParent.setTranslationY((float) animation.getAnimatedValue()));
         mForegroundAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {

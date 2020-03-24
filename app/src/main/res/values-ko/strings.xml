@@ -2,7 +2,7 @@
     <!--Author: SmgKhOaRn <smgkhoarn@gmail.com>-->
 
     <string name="about">정보</string>
-    <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>도움을 주신 분들</b>\n<b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
+    <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i>\n\n<b>도움을 주신 분들</b>\n<b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
     <string name="allow_ads">광고 활성화</string>
     <string name="always_show">항상 보이기</string>
     <string name="already_exists">%s은(는) 이미 존재합니다! 취소!</string>
