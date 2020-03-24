@@ -181,8 +181,10 @@ public class Utils {
         RootUtils.runCommand("echo '" + text + "' > " + path);
     }
 
-    static void append(String text, String path) {
-        RootUtils.runCommand("echo '" + text + "' >> " + path);
+    static void delete(String path) {
+        if (Utils.existFile(path)) {
+            RootUtils.runCommand("rm -r " + path);
+        }
     }
 
     static void sleep(int sec) {

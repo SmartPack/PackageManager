@@ -38,6 +38,7 @@ public class PackageTasks {
     private static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
 
     public static StringBuilder mBatchApps = null;
+    private static StringBuilder mSplitAPK = null;
 
     private static void makePackageFolder() {
         File file = new File(PACKAGES);
@@ -258,21 +259,28 @@ public class PackageTasks {
      * Ref: https://github.com/yeriomin/YalpStore/blob/master/app/src/main/java/com/github/yeriomin/yalpstore/install/InstallerRoot.java
      */
     private static String installSplitAPKs(String dir) {
-        RootUtils.runCommand("pm install-create | tee '" + PACKAGES + "'/installer_log");
+        RootUtils.runCommand("pm install-create | tee '" + PACKAGES + "'/sid");
         RootUtils.runCommand("mkdir /data/local/tmp/pm/");
         RootUtils.runCommand("cp " + dir + "/* /data/local/tmp/pm/");
-        String sid = Utils.readFile(PACKAGES + "/installer_log").replace("Success: created install session [",
+        String sid = Utils.readFile(PACKAGES + "/sid").replace("Success: created install session [",
                 "").replace("]", "");
-        Utils.create("# Split APKs Installer log\n# Created by Package Manager\n", PACKAGES + "/installer_log");
-        Utils.append("Session ID: " + sid, PACKAGES + "/installer_log");
-        Utils.append("\nBundle Path: " + dir, PACKAGES + "/installer_log");
-        Utils.append("\n# List of split APKs", PACKAGES + "/installer_log");
+        if (mSplitAPK == null) {
+            mSplitAPK = new StringBuilder();
+        } else {
+            mSplitAPK.setLength(0);
+        }
+        mSplitAPK.append("# Split APKs Installer log\n# Created by Package Manager\n\n");
+        mSplitAPK.append("** Session ID: ").append(sid);
+        mSplitAPK.append("\n\n** Bundle Path: ").append(dir);
+        mSplitAPK.append("\n\n** List of split APKs *\n");
         for (final String splitApps : splitApks("/data/local/tmp/pm")) {
             File file = new File("/data/local/tmp/pm/" + splitApps);
             RootUtils.runCommand("pm install-write -S " + file.length() + " " + sid + " " + file.getName() + " " + file.toString());
-            Utils.append(file.getName() + ": " + file.length() + " KB", PACKAGES + "/installer_log");
+            mSplitAPK.append(file.getName()).append(": ").append(file.length()).append(" KB\n");
         }
-        RootUtils.runCommand("rm -r /data/local/tmp/pm/");
+        mSplitAPK.append("\n** Cleaning temporary files...\n");
+        Utils.delete("/data/local/tmp/pm/");
+        Utils.delete(PACKAGES + "/sid");
         return RootUtils.runCommand("pm install-commit " + sid);
     }
 
@@ -301,19 +309,22 @@ public class PackageTasks {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (s != null && !s.isEmpty()) {
-                    Utils.append("\n# Result: " + s + "\n\n# The END", PACKAGES + "/installer_log");
+                    mSplitAPK.append("\n** Result: ").append(s).append(" *\n\n# The END");
                     Dialog result = new Dialog(context);
-                    if (s.equals("Success")) {
-                        result.setMessage(R.string.install_success);
-                    } else {
-                        result.setMessage(s);
-                    }
+                    result.setIcon(R.mipmap.ic_launcher);
+                    result.setTitle(R.string.app_name);
+                    result.setMessage(mSplitAPK.toString());
                     result.setCancelable(false);
-                    result.setPositiveButton("Cancel", (dialog, id) -> {
+                    result.setNeutralButton(R.string.cancel, (dialog, id) -> {
+                    });
+                    result.setPositiveButton(R.string.save_log, (dialog, id) -> {
+                        Utils.create(mSplitAPK.toString(), PACKAGES + "/installer_log_" + new File(dir).getName());
+                        Utils.toast(context.getString(R.string.save_log_message, PACKAGES + "/installer_log_" +
+                                new File(dir).getName()), context);
                     });
                     result.show();
                 } else {
-                    Utils.append("\n# Result: Installation failed\n\n# The END", PACKAGES + "/installer_log");
+                    mSplitAPK.append("\n\n** Result: Installation failed\n\n# The END");
                 }
             }
         }.execute();

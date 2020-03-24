@@ -62,6 +62,8 @@
     <string name="restore_message">Are you sure to restore %s?</string>
     <string name="restore_summary">\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
     <string name="restoring">Restoring %s</string>
+    <string name="save_log">Save Log</string>
+    <string name="save_log_message">Installer Log file is exported as %s!</string>
     <string name="share">Share</string>
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
