@@ -39,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
                     android:orientation="vertical"
                     android:layout_marginEnd="25dp"
                     android:baselineAligned="false">
@@ -60,8 +61,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/menu_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="end|center_vertical"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:tint="?android:attr/textColorSecondary"

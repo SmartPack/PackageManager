@@ -191,7 +191,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     case 0:
                         if (RootUtils.rootAccessDenied()) {
                             Utils.toast(R.string.no_root, getActivity());
-                        } else if (PackageTasks.mBatchApps.toString().isEmpty()) {
+                        } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             Dialog backup = new Dialog(requireActivity());
@@ -216,7 +216,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         @Override
                                         protected Void doInBackground(Void... voids) {
                                             requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                                            PackageTasks.backupApp(packageID, packageID + "_batch.tar.gz");
+                                            if (packageID.contains(".")) {
+                                                PackageTasks.backupApp(packageID, packageID + "_batch.tar.gz");
+                                            }
                                             requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                             return null;
                                         }
@@ -238,7 +240,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     case 1:
                         if (RootUtils.rootAccessDenied()) {
                             Utils.toast(R.string.no_root, getActivity());
-                        } else if (PackageTasks.mBatchApps.toString().isEmpty()) {
+                        } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             Dialog turnoff = new Dialog(requireActivity());
@@ -249,8 +251,10 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             turnoff.setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) -> {
                                 String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","").split(" ");
                                 for(String packageID : batchApps) {
-                                    PackageTasks.disableApp(packageID, PackageTasks.mBatchApps.toString().replaceFirst(" ",
-                                            "").replace(" ", ", "), getActivity());
+                                    if (packageID.contains(".")) {
+                                        PackageTasks.disableApp(packageID, PackageTasks.mBatchApps.toString().replaceFirst(" ",
+                                                "").replace(" ", ", "), getActivity());
+                                    }
                                 }
                                 reload();
                             });
@@ -260,7 +264,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     case 2:
                         if (RootUtils.rootAccessDenied()) {
                             Utils.toast(R.string.no_root, getActivity());
-                        } else if (PackageTasks.mBatchApps.toString().isEmpty()) {
+                        } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             Dialog uninstall = new Dialog(requireActivity());
@@ -271,8 +275,10 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) -> {
                                 String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","").split(" ");
                                 for(String packageID : batchApps) {
-                                    PackageTasks.removeSystemApp(packageID, PackageTasks.mBatchApps.toString().replaceFirst(" ",
-                                            "").replace(" ", ", "), getActivity());
+                                    if (packageID.contains(".")) {
+                                        PackageTasks.removeSystemApp(packageID, PackageTasks.mBatchApps.toString().replaceFirst(" ",
+                                                "").replace(" ", ", "), getActivity());
+                                    }
                                 }
                                 reload();
                             });
@@ -280,7 +286,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         }
                         break;
                     case 3:
-                        if (PackageTasks.mBatchApps.toString().isEmpty()) {
+                        if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             PackageTasks.mBatchApps.setLength(0);

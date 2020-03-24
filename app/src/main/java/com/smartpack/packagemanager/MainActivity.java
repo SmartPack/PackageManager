@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Dark Theme & Google Ads
         Utils.initializeAppTheme(this);
         Utils.getInstance().initializeGoogleAds(this);
-        // Set App Language
         super.onCreate(savedInstanceState);
+        // Set App Language
         Utils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!PackageTasks.mBatchApps.toString().isEmpty()) {
+        if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
             new Dialog(this)
                     .setMessage(R.string.batch_warning)
                     .setCancelable(false)
