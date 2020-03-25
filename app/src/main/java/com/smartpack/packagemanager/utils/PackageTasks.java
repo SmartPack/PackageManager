@@ -79,7 +79,7 @@ public class PackageTasks {
                             .setIcon(icon)
                             .setTitle(context.getString(R.string.share) + " " + name + "?")
                             .setMessage(name + " " + context.getString(R.string.export_summary, PACKAGES))
-                            .setNegativeButton(context.getString(R.string.cancel), (dialog, id) -> {
+                            .setNeutralButton(context.getString(R.string.cancel), (dialog, id) -> {
                             })
                             .setPositiveButton(context.getString(R.string.share), (dialog, id) -> {
                                 Uri uriFile = FileProvider.getUriForFile(context,

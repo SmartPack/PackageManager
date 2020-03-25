@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="about">About</string>
-    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="allow_ads">Allow Ads</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
@@ -41,11 +41,15 @@
     <string name="install_success">Installation completed successfully!</string>
     <string name="installing">Installing App Bundle!</string>
     <string name="language">Language (%s)</string>
+    <string name="language_am">Amharic</string>
+    <string name="language_el">Greek</string>
     <string name="language_en">English</string>
     <string name="language_default">Default</string>
     <string name="language_ko">Korean</string>
+    <string name="language_ml">Malayalam</string>
     <string name="more">More</string>
     <string name="more_apps">More from Developer</string>
+    <string name="name">Name</string>
     <string name="name_empty">Name is empty! Aborting!</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
@@ -54,6 +58,7 @@
     <string name="open_message">You\'re already running this app.</string>
     <string name="open_failed">%s is not designed to run in user space!</string>
     <string name="options">Options</string>
+    <string name="package_id">Package ID</string>
     <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
     <string name="playstore">PlayStore</string>
     <string name="press_back">Press back again to exit</string>
@@ -69,6 +74,8 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
+    <string name="sort_by">Sort Apps By</string>
+    <string name="source_code">Source Code</string>
     <string name="support">Support Group</string>
     <string name="sure_question">Are you sure?</string>
     <string name="system">Show System Apps</string>

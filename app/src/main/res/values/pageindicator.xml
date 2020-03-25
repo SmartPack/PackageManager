@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="ViewPagerIndicator">
         <!-- Style of the circle indicator. -->
         <attr name="vpiCirclePageIndicatorStyle" format="reference" />
@@ -17,7 +17,7 @@
 
     <attr name="centered" format="boolean" />
     <attr name="selectedColor" format="color" />
-    <attr name="strokeWidth" format="dimension" />
+    <attr name="strokeWidth" format="dimension" tools:ignore="PrivateResource" />
     <attr name="unselectedColor" format="color" />
 
     <declare-styleable name="CirclePageIndicator">

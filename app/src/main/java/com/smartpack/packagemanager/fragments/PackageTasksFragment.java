@@ -53,6 +53,7 @@ import com.smartpack.packagemanager.views.recyclerview.RecyclerViewItem;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -304,39 +305,59 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         options.setMenuIcon(getResources().getDrawable(R.drawable.ic_settings));
         options.setOnMenuListener((optionsMenu, popupMenu) -> {
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.system)).setCheckable(true)
+            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.system)).setCheckable(true)
                     .setChecked(Utils.getBoolean("system_apps", true, getActivity()));
-            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.user)).setCheckable(true)
+            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.user)).setCheckable(true)
                     .setChecked(Utils.getBoolean("user_apps", true, getActivity()));
-            if (!Utils.isNotDonated(requireActivity())) {
-                menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
-                        .setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
-            }
-            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("dark_theme", true, getActivity()));
+            SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
+            sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.name)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sort_name", true, getActivity()));
+            sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sort_id", false, getActivity()));
             String lang;
             if (Utils.getBoolean("use_english", false, getActivity())) {
                 lang = "en_US";
             } else if (Utils.getBoolean("use_korean", false, getActivity())) {
                 lang = "ko";
+            } else if (Utils.getBoolean("use_am", false, getActivity())) {
+                lang = "am";
+            } else if (Utils.getBoolean("use_el", false, getActivity())) {
+                lang = "el";
+            } else if (Utils.getBoolean("use_ml", false, getActivity())) {
+                lang = "ml";
             } else {
                 lang = java.util.Locale.getDefault().getLanguage();
             }
-            SubMenu language = menu.addSubMenu(Menu.NONE, 4, Menu.NONE, getString(R.string.language, lang));
-            language.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
+            SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, lang));
+            language.add(Menu.NONE, 12, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
                     .setChecked(Utils.languageDefault(getActivity()));
-            language.add(Menu.NONE, 6, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
+            language.add(Menu.NONE, 13, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
                     .setChecked(Utils.getBoolean("use_english", false, getActivity()));
-            language.add(Menu.NONE, 7, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
+            language.add(Menu.NONE, 14, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
                     .setChecked(Utils.getBoolean("use_korean", false, getActivity()));
-            SubMenu about = menu.addSubMenu(Menu.NONE, 4, Menu.NONE, getString(R.string.about));
-            about.add(Menu.NONE, 8, Menu.NONE, getString(R.string.support));
-            about.add(Menu.NONE, 9, Menu.NONE, getString(R.string.more_apps));
-            about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.report_issue));
+            language.add(Menu.NONE, 15, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_am", false, getActivity()));
+            language.add(Menu.NONE, 16, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_el", false, getActivity()));
+            language.add(Menu.NONE, 17, Menu.NONE, getString(R.string.language_ml)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_ml", false, getActivity()));
+            if (!Utils.isNotDonated(requireActivity())) {
+                menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
+                        .setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
+            }
+            menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("dark_theme", true, getActivity()));
+            SubMenu about = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.about));
+            about.add(Menu.NONE, 7, Menu.NONE, getString(R.string.support));
+            about.add(Menu.NONE, 8, Menu.NONE, getString(R.string.more_apps));
+            about.add(Menu.NONE, 9, Menu.NONE, getString(R.string.report_issue));
+            about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.source_code));
             about.add(Menu.NONE, 11, Menu.NONE, getString(R.string.about));
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case 0:
+                        break;
+                    case 1:
                         if (Utils.getBoolean("system_apps", true, getActivity())) {
                             Utils.saveBoolean("system_apps", false, getActivity());
                         } else {
@@ -344,7 +365,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         }
                         reload();
                         break;
-                    case 1:
+                    case 2:
                         if (Utils.getBoolean("user_apps", true, getActivity())) {
                             Utils.saveBoolean("user_apps", false, getActivity());
                         } else {
@@ -352,7 +373,27 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         }
                         reload();
                         break;
-                    case 2:
+                    case 3:
+                        if (Utils.getBoolean("sort_name", true, getActivity())) {
+                            Utils.saveBoolean("sort_name", false, getActivity());
+                            Utils.saveBoolean("sort_id", true, getActivity());
+                        } else {
+                            Utils.saveBoolean("sort_name", true, getActivity());
+                            Utils.saveBoolean("sort_id", false, getActivity());
+                        }
+                        reload();
+                        break;
+                    case 4:
+                        if (Utils.getBoolean("sort_id", false, getActivity())) {
+                            Utils.saveBoolean("sort_id", false, getActivity());
+                            Utils.saveBoolean("sort_name", true, getActivity());
+                        } else {
+                            Utils.saveBoolean("sort_id", true, getActivity());
+                            Utils.saveBoolean("sort_name", false, getActivity());
+                        }
+                        reload();
+                        break;
+                    case 5:
                         if (Utils.getBoolean("allow_ads", true, getActivity())) {
                             Utils.saveBoolean("allow_ads", false, getActivity());
                         } else {
@@ -360,7 +401,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         }
                         restartApp();
                         break;
-                    case 3:
+                    case 6:
                         if (Utils.getBoolean("dark_theme", true, getActivity())) {
                             Utils.saveBoolean("dark_theme", false, getActivity());
                         } else {
@@ -368,43 +409,83 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         }
                         restartApp();
                         break;
-                    case 4:
-                        break;
-                    case 5:
-                        if (!Utils.languageDefault(getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 6:
-                        if (!Utils.getBoolean("use_english", false, getActivity())) {
-                            Utils.saveBoolean("use_english", true, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            restartApp();
-                        }
-                        break;
                     case 7:
-                        if (!Utils.getBoolean("use_korean", false, getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", true, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 8:
                         Utils.launchUrl("https://t.me/smartpack_kmanager", getActivity());
                         break;
-                    case 9:
+                    case 8:
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(
                                 "https://play.google.com/store/apps/developer?id=sunilpaulmathew"));
                         startActivity(intent);
                         break;
-                    case 10:
+                    case 9:
                         Utils.launchUrl("https://github.com/SmartPack/PackageManager/issues/new", getActivity());
+                        break;
+                    case 10:
+                        Utils.launchUrl("https://github.com/SmartPack/PackageManager/", getActivity());
                         break;
                     case 11:
                         aboutDialogue();
+                        break;
+                    case 12:
+                        if (!Utils.languageDefault(getActivity())) {
+                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.saveBoolean("use_ml", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 13:
+                        if (!Utils.getBoolean("use_english", false, getActivity())) {
+                            Utils.saveBoolean("use_english", true, getActivity());
+                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.saveBoolean("use_ml", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 14:
+                        if (!Utils.getBoolean("use_korean", false, getActivity())) {
+                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.saveBoolean("use_korean", true, getActivity());
+                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.saveBoolean("use_ml", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 15:
+                        if (!Utils.getBoolean("use_am", false, getActivity())) {
+                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.saveBoolean("use_am", true, getActivity());
+                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.saveBoolean("use_ml", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 16:
+                        if (!Utils.getBoolean("use_el", false, getActivity())) {
+                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.saveBoolean("use_el", true, getActivity());
+                            Utils.saveBoolean("use_ml", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 17:
+                        if (!Utils.getBoolean("use_ml", false, getActivity())) {
+                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.saveBoolean("use_ml", true, getActivity());
+                            restartApp();
+                        }
                         break;
                 }
                 return false;
@@ -414,6 +495,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         
         final PackageManager pm = requireActivity().getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        if (Utils.getBoolean("sort_name", true, getActivity())) {
+            Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(pm));
+        }
         for (ApplicationInfo packageInfo : packages) {
             if ((mAppName != null && (!packageInfo.packageName.contains(mAppName.toLowerCase())))) {
                 requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
@@ -706,7 +790,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 restoreApp.setIcon(R.mipmap.ic_launcher);
                 restoreApp.setTitle(getString(R.string.restore_message, fileName));
                 restoreApp.setMessage(getString(R.string.restore_summary));
-                restoreApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                restoreApp.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 });
                 restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
@@ -724,7 +808,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 installApp.setIcon(R.mipmap.ic_launcher);
                 installApp.setTitle(getString(R.string.sure_question));
                 installApp.setMessage(getString(R.string.bundle_install, mPath.replace(fileName, "")));
-                installApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                installApp.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 });
                 installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);

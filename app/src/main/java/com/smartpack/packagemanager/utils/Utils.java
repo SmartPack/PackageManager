@@ -246,7 +246,10 @@ public class Utils {
 
     public static boolean languageDefault(Context context) {
         return !Utils.getBoolean("use_english", false, context)
-                && !Utils.getBoolean("use_korean", false, context);
+                && !Utils.getBoolean("use_korean", false, context)
+                && !Utils.getBoolean("use_am", false, context)
+                && !Utils.getBoolean("use_el", false, context)
+                && !Utils.getBoolean("use_ml", false, context);
     }
 
     public static void setLanguage(Context context) {
@@ -255,6 +258,12 @@ public class Utils {
             lang = "en_US";
         } else if (getBoolean("use_korean", false, context)) {
             lang = "ko";
+        } else if (getBoolean("use_am", false, context)) {
+            lang = "am";
+        } else if (getBoolean("use_el", false, context)) {
+            lang = "el";
+        } else if (getBoolean("use_ml", false, context)) {
+            lang = "ml";
         } else {
             lang = java.util.Locale.getDefault().getLanguage();
         }

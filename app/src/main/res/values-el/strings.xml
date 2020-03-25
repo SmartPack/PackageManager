@@ -2,7 +2,7 @@
     <!--Author: kopsomanas <kgstradviolin@outlook.com>-->
 
     <string name="about">Σχετικά με</string>
-    <string name="about_summary"><i>Μία απλή, αλλά πανίσχυρη εφαρμογή για να διαχειριστείτε τις εφαρμογές σας.</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>kopsomanas</i></b>: Ελληνική μετάφραση\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="about_summary"><i>Μία απλή, αλλά πανίσχυρη εφαρμογή για να διαχειριστείτε τις εφαρμογές σας.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Ελληνική μετάφραση\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="allow_ads">Επιτρέψτε τις διαφημίσεις</string>
     <string name="always_show">Εμφάνιση πάντα</string>
     <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
