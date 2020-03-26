@@ -725,11 +725,15 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             .setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
                     popupMenu.setOnMenuItemClickListener(item -> {
                         if (item.getItemId() == 0) {
-                            if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
-                                int appID = PackageTasks.mBatchApps.indexOf(packageInfo.packageName);
-                                PackageTasks.mBatchApps.delete(appID, appID + packageInfo.packageName.length());
+                            if (RootUtils.rootAccessDenied()) {
+                                Utils.toast(R.string.no_root, getActivity());
                             } else {
-                                PackageTasks.mBatchApps.append(" ").append(packageInfo.packageName);
+                                if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
+                                    int appID = PackageTasks.mBatchApps.indexOf(packageInfo.packageName);
+                                    PackageTasks.mBatchApps.delete(appID, appID + packageInfo.packageName.length());
+                                } else {
+                                    PackageTasks.mBatchApps.append(" ").append(packageInfo.packageName);
+                                }
                             }
                         }
                         if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
