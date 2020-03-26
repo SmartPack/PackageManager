@@ -1,5 +1,9 @@
 # Change-logs
 
+## 9. March 26, 2020
+*Release-tag: 1.4*<br>
+Added option to sort apps by Name (default) & Package ID. Fixed creating app folder on Android 10. Added Amharic (credits: @Mikesew1320), Greek (credits: @tsiflimagas) and Malayalam (credits: me) translations. Improved Korean translations (Credits: @SmgKhOaRn). Miscellaneous changes.
+
 ## 8. March 24, 2020
 *Release-tag: 1.3*<br>
 Added batch (uninstall/disable/enable/backup) options (root only). Overall improvements & code clean-ups. Added dark & light themes. Added an option to change app language. Improved Korean translations (Credits: @SmgKhOaRn). Improved split apk installation. gradle: Update build tools & dependencies. Miscellaneous changes.
