@@ -2,7 +2,7 @@
     <!--Author: SmgKhOaRn <smgkhoarn@gmail.com>-->
 
     <string name="about">정보</string>
-    <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i>\n\n<b>도움을 주신 분들</b>\n<b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
+    <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>도움을 주신 분들</b>\n<b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>Oktapra Amtono</i></b>: 인도네시아어 번역\n<b><i>tsiflimagas</i></b>: 그리스어 번역\n<b><i>Mikesew1320</i></b>: 에티오피아어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
     <string name="allow_ads">광고 활성화</string>
     <string name="always_show">항상 보이기</string>
     <string name="already_exists">%s은(는) 이미 존재합니다! 취소!</string>
@@ -39,11 +39,15 @@
     <string name="install_success">설치를 성공적으로 마쳤습니다!</string>
     <string name="installing">Split Apks를 설치하는 중</string>
     <string name="language">언어 (%s)</string>
+    <string name="language_el">그리스어</string>
     <string name="language_en">영어</string>
     <string name="language_default">시스템 언어</string>
     <string name="language_ko">한국어</string>
+    <string name="language_am">에티오피아어</string>
+    <string name="language_ml">말라얄람어</string>
     <string name="more">더보기</string>
     <string name="more_apps">개발자의 다른 앱들 보기</string>
+    <string name="name">이름</string>
     <string name="name_empty">이름이 비었습니다! 취소!</string>
     <string name="no_internet">인터넷 연결을 확인해주세요!</string>
     <string name="no_root">이 기능은 루트 권한 없이 작동하지 않습니다!</string>
@@ -52,6 +56,7 @@
     <string name="open_message">이미 이 앱을 실행하고 있습니다.</string>
     <string name="open_failed">%s은(는) 유저 레벨에서 실행하도록 설계되지 않았습니다!</string>
     <string name="options">설정</string>
+    <string name="package_id">패키지명</string>
     <string name="permission_denied_write_storage">저장공간 쓰기 권한이 거부되었습니다!</string>
     <string name="playstore">플레이 스토어</string>
     <string name="press_back">나가려면 뒤로가기 버튼을 다시 누르세요</string>
@@ -65,17 +70,19 @@
     <string name="shared_by">%s/Package Manager 공유</string>
     <string name="share_message">Package Manager %s은(는) 아래에서 다운받을 수 있습니다.\n플레이 스토어: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager\n깃허브: https://github.com/SmartPack/PackageManager</string>
     <string name="share_with">공유하기</string>
+    <string name="sort_by">앱 정렬</string>
+    <string name="source_code">소스 코드</string>
     <string name="support">지원 받기</string>
     <string name="sure_question">정말인가요?</string>
-    <string name="system">시스템 앱 보기</string>
+    <string name="system">시스템 앱</string>
     <string name="turn_on_off">(비)활성화</string>
     <string name="uninstall">제거</string>
     <string name="uninstall_nope">죄송합니다! 여기서 이것을 할 수 없습니다!</string>
     <string name="uninstall_summary">%s을(를) 제거하는 중</string>
     <string name="uninstall_title">%s을(를) 제거합니다. 계속하시겠어요?</string>
     <string name="uninstall_warning">반드시 알아두기: 시스템 앱들을 지우는 것은 위험합니다!\n\n *** <b>위험을 감수하고 사용하세요 (본인 책임입니다)</b>> ***\n</string>
-    <string name="user">사용자 앱 보기</string>
-    <string name="welcome_message"><b>Package Manager에 오신 것을 환영합니다</b>, 당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.\n\n*** <b>주의</b> ***\n이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 발생한 것에 대해 책임지지 않습니다.</string>
+    <string name="user">사용자 앱</string>
+    <string name="welcome_message"><b>Package Manager에 오신 것을 환영합니다.</b>, 당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.\n\n*** <b>주의</b> ***\n이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 발생한 것에 대해 책임지지 않습니다.</string>
     <string name="wrong_extension">%s 확장자를 가진 파일을 선택해주세요.</string>
     <string name="yes">예</string>
 </resources>
