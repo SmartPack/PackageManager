@@ -35,8 +35,10 @@ import com.smartpack.packagemanager.utils.root.RootUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Locale;
 
 /*
@@ -170,7 +172,17 @@ public class Utils {
     }
 
     static void create(String text, String path) {
-        RootUtils.runCommand("echo '" + text + "' > " + path);
+        try {
+            File logFile = new File(path);
+            logFile.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(logFile);
+            OutputStreamWriter myOutWriter =
+                    new OutputStreamWriter(fOut);
+            myOutWriter.append(text);
+            myOutWriter.close();
+            fOut.close();
+        } catch (Exception ignored) {
+        }
     }
 
     static void delete(String path) {
