@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.root.RootFile;
 import com.smartpack.packagemanager.utils.root.RootUtils;
@@ -61,6 +62,7 @@ public class Utils {
     private InterstitialAd mInterstitialAd;
 
     public static boolean isNotDonated(Context context) {
+        if (BuildConfig.DEBUG) return false;
         try {
             context.getPackageManager().getApplicationInfo("com.smartpack.donate", 0);
             return false;
