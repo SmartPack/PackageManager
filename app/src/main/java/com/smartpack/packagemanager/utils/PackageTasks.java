@@ -281,7 +281,7 @@ public class PackageTasks {
         mSplitAPK.append("\n** Cleaning temporary files...\n");
         Utils.delete("/data/local/tmp/pm/");
         Utils.delete(PACKAGES + "/sid");
-        return RootUtils.runCommand("pm install-commit " + sid);
+        return RootUtils.runAndGetOutput("pm install-commit " + sid);
     }
 
     public static void installSplitAPKs(String dir, Context context){

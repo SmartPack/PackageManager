@@ -66,7 +66,7 @@ public class RootFile {
 
     public List<String> list() {
         List<String> list = new ArrayList<>();
-        String files = RootUtils.runCommand("ls '" + mFile + "/'");
+        String files = RootUtils.runAndGetOutput("ls '" + mFile + "/'");
         if (!files.isEmpty()) {
             // Make sure the files exists
             for (String file : files.split("\\r?\\n")) {
@@ -79,12 +79,12 @@ public class RootFile {
     }
 
     public boolean exists() {
-        String output = RootUtils.runCommand("[ -e " + mFile + " ] && echo true");
+        String output = RootUtils.runAndGetOutput("[ -e " + mFile + " ] && echo true");
         return !output.isEmpty() && output.equals("true");
     }
 
     public String readFile() {
-        return RootUtils.runCommand("cat '" + mFile + "'");
+        return RootUtils.runAndGetOutput("cat '" + mFile + "'");
     }
 
     @NonNull
