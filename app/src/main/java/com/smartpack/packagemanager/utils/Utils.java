@@ -131,12 +131,8 @@ public class Utils {
     }
 
     private static String readFile(String file, boolean root) {
-        return readFile(file, root ? RootUtils.getSU() : null);
-    }
-
-    private static String readFile(String file, RootUtils.SU su) {
-        if (su != null) {
-            return new RootFile(file, su).readFile();
+        if (root) {
+            return new RootFile(file).readFile();
         }
 
         BufferedReader buf = null;
@@ -166,11 +162,7 @@ public class Utils {
     }
 
     private static boolean existFile(String file, boolean root) {
-        return existFile(file, root ? RootUtils.getSU() : null);
-    }
-
-    private static boolean existFile(String file, RootUtils.SU su) {
-        return su == null ? new File(file).exists() : new RootFile(file, su).exists();
+        return !root ? new File(file).exists() : new RootFile(file).exists();
     }
 
     static void copy(String source, String dest) {
