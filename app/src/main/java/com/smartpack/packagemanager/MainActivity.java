@@ -24,6 +24,8 @@ import com.smartpack.packagemanager.utils.PagerAdapter;
 import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.views.dialog.Dialog;
 
+import java.lang.ref.WeakReference;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
  */
@@ -45,7 +47,18 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager viewPager = findViewById(R.id.viewPagerID);
         AppCompatTextView copyRightText = findViewById(R.id.copyright_Text);
-        copyRightText.setText(getString(R.string.copyright));
+
+        // Allow changing Copyright Text
+        if (Utils.readFile(Utils.copyRightPath()) != null) {
+            copyRightText.setText(Utils.readFile(Utils.copyRightPath()));
+        } else {
+            copyRightText.setText(R.string.copyright);
+        }
+        copyRightText.setOnLongClickListener(item -> {
+            Utils.setCopyRightText(new WeakReference<>(this));
+            return false;
+        });
+
         if (Utils.getBoolean("allow_ads", true, this)) {
             AdView mAdView = findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder()

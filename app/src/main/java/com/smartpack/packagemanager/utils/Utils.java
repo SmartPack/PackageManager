@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -40,6 +42,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 /*
@@ -134,15 +137,7 @@ public class Utils {
                 Configuration.ORIENTATION_PORTRAIT : activity.getResources().getConfiguration().orientation;
     }
 
-    static String readFile(String file) {
-        return readFile(file, true);
-    }
-
-    private static String readFile(String file, boolean root) {
-        if (root) {
-            return new RootFile(file).readFile();
-        }
-
+    public static String readFile(String file) {
         BufferedReader buf = null;
         try {
             buf = new BufferedReader(new FileReader(file));
@@ -252,6 +247,39 @@ public class Utils {
 
     public static void saveBoolean(String name, boolean value, Context context) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(name, value).apply();
+    }
+
+    public static String copyRightPath() {
+        return Environment.getExternalStorageDirectory().toString() + "/Package_Manager/copyright";
+    }
+
+    public static void setCopyRightText(WeakReference<Activity> activityRef) {
+        if (isStorageWritePermissionDenied(activityRef.get())) {
+            ActivityCompat.requestPermissions(activityRef.get(), new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            toast(R.string.permission_denied_write_storage, activityRef.get());
+            return;
+        }
+        String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
+        File file = new File(PACKAGES);
+        if (file.exists() && file.isFile()) {
+            file.delete();
+        }
+        file.mkdirs();
+        ViewUtils.dialogEditText(readFile(copyRightPath()),
+                (dialogInterface, i) -> {
+                }, text -> {
+                    if (text.equals(readFile(copyRightPath()))) return;
+                    if (text.isEmpty()) {
+                        new File(copyRightPath()).delete();
+                        toast(activityRef.get().getString(R.string.copyright_default, activityRef.get()
+                                .getString(R.string.copyright)), activityRef.get());
+                        return;
+                    }
+                    create(text, copyRightPath());
+                    toast(activityRef.get().getString(R.string.copyright_message, text), activityRef.get());
+                }, activityRef.get()).setOnDismissListener(dialogInterface -> {
+        }).show();
     }
 
     public static boolean languageDefault(Context context) {

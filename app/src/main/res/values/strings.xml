@@ -28,6 +28,8 @@
     <string name="cancel">Cancel</string>
     <string name="cleaning_message">Cleaning temporary files</string>
     <string name="copyright">&#169;<b>SmartPack Projects</b></string>
+    <string name="copyright_default">Default copyright text, %s, will be applied on next app launch!</string>
+    <string name="copyright_message">New copyright text, %s, will be applied on next app launch!</string>
     <string name="copying_apk_message">Copying Split APKs into working directory</string>
     <string name="creating_directory_message">Creating a temporary working directory</string>
     <string name="dark_theme">Dark Theme</string>

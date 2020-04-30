@@ -6,11 +6,12 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/copyright_Text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:textSize="18sp"
-        android:padding="15dp"
+        android:padding="12dp"
+        android:longClickable="true"
         android:textColor="@color/white"
         android:background="@color/black" />
 
