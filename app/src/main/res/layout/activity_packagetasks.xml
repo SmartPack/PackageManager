@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="end|center_vertical"
+        tools:ignore="UselessParent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/package_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="start"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:background="?attr/colorAccent"
+            android:textColor="@color/black" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50sp"
+            android:scrollbars="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/result_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:gravity="top|start"
+                android:visibility="gone"
+                android:textColor="?attr/colorAccent"
+                android:padding="10dp"
+                android:textSize="15sp" />
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:background="?attr/colorAccent"
+            android:baselineAligned="false" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/cancel"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

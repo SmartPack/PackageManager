@@ -8,8 +8,6 @@
     <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
     <string name="app_info">Πληροφορίες εφαρμογής</string>
     <string name="app_settings">Ρυθμίσεις εφαρμογής</string>
-    <string name="batch_add">Προσθήκη στην Ομάδα</string>
-    <string name="batch_remove">Αφαίρεση από την Ομάδα</string>
     <string name="batch_list_clear">Διαγραφή λίστας</string>
     <string name="batch_list_disable">Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε (εάν είναι ενεργοποιημένη) ή να ενεργοποιήσετε (εάν είναι απενεργοποιημένη) την ακόλουθη εφαρμογή(ές);?</string>
     <string name="batch_list_backup">Είστε σίγουρος για τη δημιουργία αντιγράφου (δεδομένα μόνο) για την ακόλουθη εφαρμογή(ές);</string>
@@ -36,8 +34,8 @@
     <string name="got_it">Το κατάλαβα</string>
     <string name="install">Εγκατάσταση</string>
     <string name="install_bundle">Εγκατάσταση διαιρεμένων APKs</string>
-    <string name="install_success">Η εγκατάσταση ολοκληρώθηκε επιτυχώς!</string>
-    <string name="installing">Εγκατάσταση εφαρμογής δεσμίδας!</string>
+    <string name="installing_bundle">Εγκατάσταση εφαρμογής δεσμίδας!</string>
+    <string name="installing_bundle_finished">Η εγκατάσταση ολοκληρώθηκε επιτυχώς!</string>
     <string name="language">Γλώσσα (%s)</string>
     <string name="language_el">Ελληνικά</string>
     <string name="language_en">Αγγλικά</string>
@@ -62,8 +60,6 @@
     <string name="restore_message">Είστε σίγουρος ότι θέλετε να επαναφέρετε %s?</string>
     <string name="restore_summary">\nΠροειδοποίηση!\n\nΗ επαναφορά ενός λάθος αρχείου αντιγράφου ενδέχεται να προκαλέσει προβλήματα στη συσκευή. Είναι αποκλειστικά δικη σας ευθύνη να επιλέξετε ένα κατάλληλο αρχείο αντιγράφου προετοιμασμένο από αυτήν την εφαρμογή για το κινητό σας. Επίσης, παρακαλώ να σημειωθεί ότι η επαναφορά δε θα λειτουργήσει καλά για ολες τις εφαρμογές.</string>
     <string name="restoring">Επαναφορά %s</string>
-    <string name="save_log">Αποθήκευση αρχείου καταγραφής</string>
-    <string name="save_log_message">Το αρχείο καταγραφής του προγράμματος εγκατάστασης έχει εξαχθεί ως %s!</string>
     <string name="share">Κοινοποίηση</string>
     <string name="shared_by">%s/κοινοποιημένο από το Package Manager</string>
     <string name="share_message">το Package Manager %s μπορεί να αποκτηθεί από\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>

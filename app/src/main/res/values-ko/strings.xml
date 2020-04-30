@@ -8,8 +8,6 @@
     <string name="already_exists">%s은(는) 이미 존재합니다! 취소!</string>
     <string name="app_info">앱 정보</string>
     <string name="app_settings">앱 설정</string>
-    <string name="batch_add">모음집에 추가</string>
-    <string name="batch_remove">모음집에서 제거</string>
     <string name="batch_list_clear">모음집 지우기</string>
     <string name="batch_list_disable">선택된 앱들을 (비)활성화합니다. 계속하시겠어요?\n선택된 앱들은 다음과 같습니다: </string>
     <string name="batch_list_backup">선택된 앱들을 (데이터만) 백업합니다. 계속하시겠어요?\n선택된 앱들은 다음과 같습니다: </string>
@@ -36,8 +34,8 @@
     <string name="got_it">알겠습니다</string>
     <string name="install">설치</string>
     <string name="install_bundle">Split Apks 설치</string>
-    <string name="install_success">설치를 성공적으로 마쳤습니다!</string>
-    <string name="installing">Split Apks를 설치하는 중</string>
+    <string name="installing_bundle">Split Apks를 설치하는 중</string>
+    <string name="installing_bundle_finished">설치를 성공적으로 마쳤습니다!</string>
     <string name="language">언어 (%s)</string>
     <string name="language_el">그리스어</string>
     <string name="language_en">영어</string>

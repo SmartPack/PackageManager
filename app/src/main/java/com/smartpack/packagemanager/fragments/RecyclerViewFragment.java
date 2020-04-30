@@ -1,8 +1,5 @@
 package com.smartpack.packagemanager.fragments;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -16,27 +13,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.utils.ViewUtils;
+import com.smartpack.packagemanager.viewpagerindicator.CirclePageIndicator;
 import com.smartpack.packagemanager.views.recyclerview.RecyclerViewAdapter;
 import com.smartpack.packagemanager.views.recyclerview.RecyclerViewItem;
-import com.smartpack.packagemanager.viewpagerindicator.CirclePageIndicator;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -74,10 +69,6 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     private FloatingActionButton mBottomFab;
 
     private AsyncTask<Void, Void, List<RecyclerViewItem>> mLoader;
-
-    private ValueAnimator mForegroundAnimator;
-    private View mForegroundParent;
-    private float mForegroundHeight;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -137,16 +128,6 @@ public abstract class RecyclerViewFragment extends BaseFragment {
             if (drawable != null) {
                 mBottomFab.setImageDrawable(drawable);
             }
-        }
-
-        BaseFragment foregroundFragment = getForegroundFragment();
-        if (foregroundFragment != null) {
-            mForegroundParent = mRootView.findViewById(R.id.foreground_parent);
-            TextView mForegroundText = mRootView.findViewById(R.id.foreground_text);
-            mForegroundText.setOnClickListener(v -> dismissForeground());
-            getChildFragmentManager().beginTransaction().replace(R.id.foreground_content,
-                    foregroundFragment).commit();
-            mForegroundHeight = getResources().getDisplayMetrics().heightPixels;
         }
 
         if (itemsSize() == 0) {
@@ -403,25 +384,6 @@ public abstract class RecyclerViewFragment extends BaseFragment {
             mBottomFab.show();
         }
         adjustScrollPosition();
-    }
-
-    private BaseFragment getForegroundFragment() {
-        return null;
-    }
-
-    private void dismissForeground() {
-        float translation = mForegroundParent.getTranslationY();
-        mForegroundAnimator = ValueAnimator.ofFloat(translation, mForegroundHeight);
-        mForegroundAnimator.addUpdateListener(animation -> mForegroundParent.setTranslationY((float) animation.getAnimatedValue()));
-        mForegroundAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                mForegroundParent.setVisibility(View.GONE);
-                mForegroundAnimator = null;
-            }
-        });
-        mForegroundAnimator.start();
     }
 
     @Override

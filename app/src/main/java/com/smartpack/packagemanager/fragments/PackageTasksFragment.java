@@ -44,6 +44,7 @@ import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.PackageTasksActivity;
 import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.utils.ViewUtils;
 import com.smartpack.packagemanager.utils.root.RootUtils;
@@ -52,6 +53,7 @@ import com.smartpack.packagemanager.views.recyclerview.DescriptionView;
 import com.smartpack.packagemanager.views.recyclerview.RecyclerViewItem;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -191,48 +193,59 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     case 0:
                         if (RootUtils.rootAccessDenied()) {
                             Utils.toast(R.string.no_root, getActivity());
+                        } else if (Utils.isStorageWritePermissionDenied(requireActivity())) {
+                            ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                            Utils.toast(R.string.permission_denied_write_storage, getActivity());
                         } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             Dialog backup = new Dialog(requireActivity());
-                            backup.setMessage(getString(R.string.batch_list_backup) + "\n" + PackageTasks.mBatchApps.toString().replaceAll(
-                                    " ", "\n"));
+                            backup.setIcon(R.mipmap.ic_launcher);
+                            backup.setTitle(R.string.sure_question);
+                            backup.setMessage(getString(R.string.batch_list_backup) + "\n" + PackageTasks.mBatchApps.toString().replaceAll("\\s+","\n - "));
                             backup.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             });
                             backup.setPositiveButton(getString(R.string.backup), (dialogInterface, i) -> {
-                                String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","").split(" ");
-                                for(String packageID : batchApps) {
-                                    new AsyncTask<Void, Void, Void>() {
-                                        private ProgressDialog mProgressDialog;
-                                        @Override
-                                        protected void onPreExecute() {
-                                            super.onPreExecute();
-                                            mProgressDialog = new ProgressDialog(getActivity());
-                                            mProgressDialog.setMessage(getString(R.string.backing_up, PackageTasks.mBatchApps.toString().replaceFirst(" ",
-                                                    "").replace(" ", ", ")) + "...");
-                                            mProgressDialog.setCancelable(false);
-                                            mProgressDialog.show();
+                                new AsyncTask<Void, Void, Void>() {
+                                    @Override
+                                    protected void onPreExecute() {
+                                        super.onPreExecute();
+                                        PackageTasks.mRunning = true;
+                                        if (PackageTasks.mOutput == null) {
+                                            PackageTasks.mOutput = new StringBuilder();
+                                        } else {
+                                            PackageTasks.mOutput.setLength(0);
                                         }
-                                        @Override
-                                        protected Void doInBackground(Void... voids) {
-                                            requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.batch_processing_initialized)).append("...\n\n");
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.batch_list_summary)).append(PackageTasks
+                                                .mBatchApps.toString().replaceAll("\\s+", "\n - ")).append("\n\n");
+                                        Intent backupIntent = new Intent(getActivity(), PackageTasksActivity.class);
+                                        backupIntent.putExtra(PackageTasksActivity.TITLE_START, getString(R.string.batch_processing));
+                                        backupIntent.putExtra(PackageTasksActivity.TITLE_FINISH, getString(R.string.batch_processing_finished));
+                                        startActivity(backupIntent);
+                                    }
+                                    @Override
+                                    protected Void doInBackground(Void... voids) {
+                                        String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","").replaceAll("\\s+"," ").split(" ");
+                                        for(String packageID : batchApps) {
                                             if (packageID.contains(".")) {
+                                                PackageTasks.mOutput.append("** ").append(getString(R.string.backing_summary, packageID));
                                                 PackageTasks.backupApp(packageID, packageID + "_batch.tar.gz");
-                                            }
-                                            requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                                            return null;
-                                        }
-                                        @Override
-                                        protected void onPostExecute(Void aVoid) {
-                                            super.onPostExecute(aVoid);
-                                            try {
-                                                mProgressDialog.dismiss();
-                                            } catch (IllegalArgumentException ignored) {
+                                                PackageTasks.mOutput.append(": ").append(getString(R.string.done)).append(" *\n\n");
                                             }
                                         }
-                                    }.execute();
-                                }
-                                reload();
+                                        reload();
+                                        return null;
+                                    }
+                                    @Override
+                                    protected void onPostExecute(Void aVoid) {
+                                        super.onPostExecute(aVoid);
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.everything_done)).append(" ").append(getString(
+                                                R.string.batch_backup_finished, PackageTasks.PACKAGES)).append(" *");
+                                        PackageTasks.mRunning = false;
+                                    }
+                                }.execute();
                             });
                             backup.show();
                         }
@@ -244,19 +257,57 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             Dialog turnoff = new Dialog(requireActivity());
-                            turnoff.setMessage(getString(R.string.batch_list_disable) + "\n" + PackageTasks.mBatchApps.toString().replaceAll(
-                                    " ", "\n"));
+                            turnoff.setIcon(R.mipmap.ic_launcher);
+                            turnoff.setTitle(R.string.sure_question);
+                            turnoff.setMessage(getString(R.string.batch_list_disable) + "\n" + PackageTasks.mBatchApps.toString().replaceAll("\\s+","\n - "));
                             turnoff.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             });
                             turnoff.setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) -> {
-                                String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","").split(" ");
-                                for(String packageID : batchApps) {
-                                    if (packageID.contains(".")) {
-                                        PackageTasks.disableApp(packageID, PackageTasks.mBatchApps.toString().replaceFirst(" ",
-                                                "").replace(" ", ", "), getActivity());
+                                new AsyncTask<Void, Void, Void>() {
+                                    @Override
+                                    protected void onPreExecute() {
+                                        super.onPreExecute();
+                                        PackageTasks.mRunning = true;
+                                        if (PackageTasks.mOutput == null) {
+                                            PackageTasks.mOutput = new StringBuilder();
+                                        } else {
+                                            PackageTasks.mOutput.setLength(0);
+                                        }
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.batch_processing_initialized)).append("...\n\n");
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.batch_list_summary)).append(PackageTasks
+                                                .mBatchApps.toString().replaceAll("\\s+", "\n - ")).append("\n\n");
+                                        Intent turnOffIntent = new Intent(getActivity(), PackageTasksActivity.class);
+                                        turnOffIntent.putExtra(PackageTasksActivity.TITLE_START, getString(R.string.batch_processing));
+                                        turnOffIntent.putExtra(PackageTasksActivity.TITLE_FINISH, getString(R.string.batch_processing_finished));
+                                        startActivity(turnOffIntent);
                                     }
-                                }
-                                reload();
+                                    @Override
+                                    protected Void doInBackground(Void... voids) {
+                                        String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","")
+                                                .replaceAll("\\s+"," ").split(" ");
+                                        for(String packageID : batchApps) {
+                                            if (packageID.contains(".")) {
+                                                PackageTasks.mOutput.append(PackageTasks.isEnabled(packageID, new WeakReference<>(requireActivity())) ? "** " +
+                                                        getString(R.string.disabling, packageID) : "** " + getString(R.string.enabling, packageID));
+                                                if (PackageTasks.isEnabled(packageID, new WeakReference<>(requireActivity()))) {
+                                                    RootUtils.runCommand("pm disable " + packageID);
+                                                } else {
+                                                    RootUtils.runCommand("pm enable " + packageID);
+                                                }
+                                                PackageTasks.mOutput.append(": ").append(getString(R.string.done)).append(" *\n\n");
+                                                Utils.sleep(1);
+                                            }
+                                        }
+                                        reload();
+                                        return null;
+                                    }
+                                    @Override
+                                    protected void onPostExecute(Void aVoid) {
+                                        super.onPostExecute(aVoid);
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.everything_done)).append(" *");
+                                        PackageTasks.mRunning = false;
+                                    }
+                                }.execute();
                             });
                             turnoff.show();
                         }
@@ -268,19 +319,53 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.toast(getString(R.string.batch_list_empty), getActivity());
                         } else {
                             Dialog uninstall = new Dialog(requireActivity());
-                            uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageTasks.mBatchApps.toString().replaceAll(
-                                    " ", "\n"));
+                            uninstall.setIcon(R.mipmap.ic_launcher);
+                            uninstall.setTitle(R.string.sure_question);
+                            uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageTasks.mBatchApps.toString().replaceAll("\\s+","\n - "));
                             uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             });
                             uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) -> {
-                                String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","").split(" ");
-                                for(String packageID : batchApps) {
-                                    if (packageID.contains(".")) {
-                                        PackageTasks.removeSystemApp(packageID, PackageTasks.mBatchApps.toString().replaceFirst(" ",
-                                                "").replace(" ", ", "), getActivity());
+                                new AsyncTask<Void, Void, Void>() {
+                                    @Override
+                                    protected void onPreExecute() {
+                                        super.onPreExecute();
+                                        PackageTasks.mRunning = true;
+                                        if (PackageTasks.mOutput == null) {
+                                            PackageTasks.mOutput = new StringBuilder();
+                                        } else {
+                                            PackageTasks.mOutput.setLength(0);
+                                        }
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.batch_processing_initialized)).append("...\n\n");
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.batch_list_summary)).append(PackageTasks
+                                                .mBatchApps.toString().replaceAll("\\s+", "\n - ")).append("\n\n");
+                                        Intent removeIntent = new Intent(getActivity(), PackageTasksActivity.class);
+                                        removeIntent.putExtra(PackageTasksActivity.TITLE_START, getString(R.string.batch_processing));
+                                        removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, getString(R.string.batch_processing_finished));
+                                        startActivity(removeIntent);
                                     }
-                                }
-                                reload();
+                                    @Override
+                                    protected Void doInBackground(Void... voids) {
+                                        String[] batchApps = PackageTasks.mBatchApps.toString().replaceFirst(" ","")
+                                                .replaceAll("\\s+"," ").split(" ");
+                                        for(String packageID : batchApps) {
+                                            if (packageID.contains(".") && Utils.isPackageInstalled(packageID, requireActivity())) {
+                                                PackageTasks.mOutput.append("** ").append(getString(R.string.uninstall_summary, packageID));
+                                                RootUtils.runCommand("pm uninstall --user 0 " + packageID);
+                                                PackageTasks.mOutput.append(Utils.isPackageInstalled(packageID, requireActivity()) ? ": " +
+                                                        getString(R.string.failed) + " *\n\n" : ": " + getString(R.string.done) + " *\n\n");
+                                                Utils.sleep(1);
+                                            }
+                                        }
+                                        reload();
+                                        return null;
+                                    }
+                                    @Override
+                                    protected void onPostExecute(Void aVoid) {
+                                        super.onPostExecute(aVoid);
+                                        PackageTasks.mOutput.append("** ").append(getString(R.string.everything_done)).append(" *");
+                                        PackageTasks.mRunning = false;
+                                    }
+                                }.execute();
                             });
                             uninstall.show();
                         }
@@ -517,17 +602,12 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             } else {
                 mAppType = false;
             }
-            if (mAppType) {
+            if (mAppType && packageInfo.packageName.contains(".")) {
                 DescriptionView apps = new DescriptionView();
                 apps.setDrawable(requireActivity().getPackageManager().getApplicationIcon(packageInfo));
                 apps.setTitle(pm.getApplicationLabel(packageInfo) + (PackageTasks.isEnabled(
-                        packageInfo.packageName, requireActivity()) ? "" : " (Disabled)"));
+                        packageInfo.packageName, new WeakReference<>(requireActivity())) ? "" : " (Disabled)"));
                 apps.setSummary(packageInfo.packageName);
-                if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
-                    apps.setMenuIcon(getResources().getDrawable(R.drawable.ic_check_box_marked));
-                } else {
-                    apps.setMenuIcon(getResources().getDrawable(R.drawable.ic_check_box_empty));
-                }
                 apps.setFullSpan(true);
                 apps.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
                     @Override
@@ -542,7 +622,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             Utils.toast(R.string.open_message, getActivity());
                                             return;
                                         }
-                                        if (!PackageTasks.isEnabled(packageInfo.packageName, requireActivity())) {
+                                        if (!PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity()))) {
                                             Utils.toast(getString(R.string.disabled_message, pm.getApplicationLabel(packageInfo)), getActivity());
                                             return;
                                         }
@@ -642,13 +722,13 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                     return;
                                                 }
                                                 PackageTasks.exportingBundleTask(packageInfo.sourceDir.replace("base.apk", ""), packageInfo.packageName,
-                                                        requireActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
+                                                        requireActivity().getPackageManager().getApplicationIcon(packageInfo), new WeakReference<>(getActivity()));
                                                 requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                                 return;
                                             }
                                         }
                                         PackageTasks.exportingTask(packageInfo.sourceDir, packageInfo.packageName,
-                                                requireActivity().getPackageManager().getApplicationIcon(packageInfo), getActivity());
+                                                requireActivity().getPackageManager().getApplicationIcon(packageInfo), new WeakReference<>(getActivity()));
                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                         break;
                                     case 4:
@@ -661,13 +741,13 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                 .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
                                                 .setTitle(pm.getApplicationLabel(packageInfo))
                                                 .setMessage(pm.getApplicationLabel(packageInfo) + " " + getString(R.string.disable_message,
-                                                        PackageTasks.isEnabled(packageInfo.packageName, requireActivity()) ?
+                                                        PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity())) ?
                                                                 getString(R.string.disabled) : getString(R.string.enabled)))
                                                 .setCancelable(false)
                                                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                                                 })
                                                 .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                                                    PackageTasks.disableApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), getActivity());
+                                                    PackageTasks.disableApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), new WeakReference<>(getActivity()));
                                                     reload();
                                                 })
                                                 .show();
@@ -705,12 +785,12 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                     })
                                                     .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
                                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                                                        PackageTasks.removeSystemApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), getActivity());
+                                                        PackageTasks.removeSystemApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), new WeakReference<>(getActivity()));
                                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                                        reload();
                                                     })
                                                     .show();
                                         }
-                                        reload();
                                         break;
                                 }
                             }
@@ -718,31 +798,9 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         mOptionsDialog.show();
                     }
                 });
-                apps.setOnMenuListener((script, popupMenu) -> {
-                    Menu menu = popupMenu.getMenu();
-                    menu.add(Menu.NONE, 0, Menu.NONE, PackageTasks.mBatchApps.toString().contains(packageInfo.packageName) ?
-                            getString(R.string.batch_remove) : getString(R.string.batch_add)).setCheckable(true)
-                            .setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
-                    popupMenu.setOnMenuItemClickListener(item -> {
-                        if (item.getItemId() == 0) {
-                            if (RootUtils.rootAccessDenied()) {
-                                Utils.toast(R.string.no_root, getActivity());
-                            } else {
-                                if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
-                                    int appID = PackageTasks.mBatchApps.indexOf(packageInfo.packageName);
-                                    PackageTasks.mBatchApps.delete(appID, appID + packageInfo.packageName.length());
-                                } else {
-                                    PackageTasks.mBatchApps.append(" ").append(packageInfo.packageName);
-                                }
-                            }
-                        }
-                        if (PackageTasks.mBatchApps.toString().contains(packageInfo.packageName)) {
-                            apps.setMenuIcon(getResources().getDrawable(R.drawable.ic_check_box_marked));
-                        } else {
-                            apps.setMenuIcon(getResources().getDrawable(R.drawable.ic_check_box_empty));
-                        }
-                        return false;
-                    });
+                apps.setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
+                apps.setOnCheckBoxListener((descriptionView, isChecked) -> {
+                    PackageTasks.batchOption(packageInfo.packageName);
                 });
 
                 items.add(apps);
@@ -798,7 +856,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 });
                 restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                    PackageTasks.restoreApp(mPath, getActivity());
+                    PackageTasks.restoreApp(mPath, new WeakReference<>(getActivity()));
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 });
                 restoreApp.show();
@@ -816,12 +874,43 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 });
                 installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                    PackageTasks.installSplitAPKs(mPath.replace(fileName, ""), getActivity());
+                    installSplitAPKs(mPath.replace(fileName, ""));
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 });
                 installApp.show();
             }
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void installSplitAPKs(String dir){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                PackageTasks.mRunning = true;
+                if (PackageTasks.mOutput == null) {
+                    PackageTasks.mOutput = new StringBuilder();
+                } else {
+                    PackageTasks.mOutput.setLength(0);
+                }
+                PackageTasks.mOutput.append("** ").append(getString(R.string.install_bundle_initialized)).append("...\n\n");
+                Intent installIntent = new Intent(getActivity(), PackageTasksActivity.class);
+                installIntent.putExtra(PackageTasksActivity.TITLE_START, getString(R.string.installing_bundle));
+                installIntent.putExtra(PackageTasksActivity.TITLE_FINISH, getString(R.string.installing_bundle_finished));
+                startActivity(installIntent);
+            }
+            @Override
+            protected Void doInBackground(Void... voids) {
+                PackageTasks.installSplitAPKs(dir, new WeakReference<>(requireActivity()));
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                PackageTasks.mRunning = false;
+            }
+        }.execute();
     }
 
     public static class SearchFragment extends BaseFragment {

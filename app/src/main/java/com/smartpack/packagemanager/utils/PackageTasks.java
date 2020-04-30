@@ -8,8 +8,8 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -27,6 +27,7 @@ import com.smartpack.packagemanager.utils.root.RootUtils;
 import com.smartpack.packagemanager.views.dialog.Dialog;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -35,10 +36,12 @@ import java.util.List;
 
 public class PackageTasks {
 
-    private static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
+    public static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
 
     public static StringBuilder mBatchApps = null;
-    private static StringBuilder mSplitAPK = null;
+    public static StringBuilder mOutput = null;
+
+    public static boolean mRunning = false;
 
     private static void makePackageFolder() {
         File file = new File(PACKAGES);
@@ -48,14 +51,23 @@ public class PackageTasks {
         file.mkdirs();
     }
 
-    public static void exportingTask(String apk, String name, Drawable icon, Context context) {
+    public static void batchOption(String name) {
+        if (PackageTasks.mBatchApps.toString().contains(name)) {
+            int appID = PackageTasks.mBatchApps.indexOf(name);
+            PackageTasks.mBatchApps.delete(appID, appID + name.length());
+        } else {
+            PackageTasks.mBatchApps.append(" ").append(name);
+        }
+    }
+
+    public static void exportingTask(String apk, String name, Drawable icon, WeakReference<Activity> activityRef) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(context.getString(R.string.exporting, name) + "...");
+                mProgressDialog = new ProgressDialog(activityRef.get());
+                mProgressDialog.setMessage(activityRef.get().getString(R.string.exporting, name) + "...");
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -74,23 +86,23 @@ public class PackageTasks {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
-                    Utils.getInstance().showInterstitialAd(context);
-                    new Dialog(context)
+                    Utils.getInstance().showInterstitialAd(activityRef.get());
+                    new Dialog(activityRef.get())
                             .setIcon(icon)
-                            .setTitle(context.getString(R.string.share) + " " + name + "?")
-                            .setMessage(name + " " + context.getString(R.string.export_summary, PACKAGES))
-                            .setNeutralButton(context.getString(R.string.cancel), (dialog, id) -> {
+                            .setTitle(activityRef.get().getString(R.string.share) + " " + name + "?")
+                            .setMessage(name + " " + activityRef.get().getString(R.string.export_summary, PACKAGES))
+                            .setNeutralButton(activityRef.get().getString(R.string.cancel), (dialog, id) -> {
                             })
-                            .setPositiveButton(context.getString(R.string.share), (dialog, id) -> {
-                                Uri uriFile = FileProvider.getUriForFile(context,
+                            .setPositiveButton(activityRef.get().getString(R.string.share), (dialog, id) -> {
+                                Uri uriFile = FileProvider.getUriForFile(activityRef.get(),
                                         BuildConfig.APPLICATION_ID + ".provider", new File(PACKAGES + "/" + name + ".apk"));
                                 Intent shareScript = new Intent(Intent.ACTION_SEND);
                                 shareScript.setType("application/java-archive");
-                                shareScript.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.shared_by, name));
-                                shareScript.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_message, BuildConfig.VERSION_NAME));
+                                shareScript.putExtra(Intent.EXTRA_SUBJECT, activityRef.get().getString(R.string.shared_by, name));
+                                shareScript.putExtra(Intent.EXTRA_TEXT, activityRef.get().getString(R.string.share_message, BuildConfig.VERSION_NAME));
                                 shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
                                 shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                context.startActivity(Intent.createChooser(shareScript, context.getString(R.string.share_with)));
+                                activityRef.get().startActivity(Intent.createChooser(shareScript, activityRef.get().getString(R.string.share_with)));
                             })
 
                             .show();
@@ -99,14 +111,14 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void exportingBundleTask(String apk, String name, Drawable icon, Context context) {
+    public static void exportingBundleTask(String apk, String name, Drawable icon, WeakReference<Activity> activityRef) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(context.getString(R.string.exporting_bundle, name) + "...");
+                mProgressDialog = new ProgressDialog(activityRef.get());
+                mProgressDialog.setMessage(activityRef.get().getString(R.string.exporting_bundle, name) + "...");
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -125,12 +137,12 @@ public class PackageTasks {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (Utils.existFile(PACKAGES + "/" + name + "/base.apk")) {
-                    Utils.getInstance().showInterstitialAd(context);
-                    new Dialog(context)
+                    Utils.getInstance().showInterstitialAd(activityRef.get());
+                    new Dialog(activityRef.get())
                             .setIcon(icon)
                             .setTitle(name)
-                            .setMessage(context.getString(R.string.export_bundle_summary, PACKAGES))
-                            .setPositiveButton(context.getString(R.string.cancel), (dialog, id) -> {
+                            .setMessage(activityRef.get().getString(R.string.export_bundle_summary, PACKAGES))
+                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
                             })
 
                             .show();
@@ -139,23 +151,23 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void disableApp(String app, String name, Context context) {
+    public static void disableApp(String app, String name, WeakReference<Activity> activityRef) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(isEnabled(app, context) ?
-                        context.getString(R.string.disabling, name) + "..." :
-                        context.getString(R.string.enabling, name) + "...");
+                mProgressDialog = new ProgressDialog(activityRef.get());
+                mProgressDialog.setMessage(isEnabled(app, activityRef) ?
+                        activityRef.get().getString(R.string.disabling, name) + "..." :
+                        activityRef.get().getString(R.string.enabling, name) + "...");
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                if (isEnabled(app, context)) {
+                if (isEnabled(app, activityRef)) {
                     RootUtils.runCommand("pm disable " + app);
                 } else {
                     RootUtils.runCommand("pm enable " + app);
@@ -173,14 +185,14 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void removeSystemApp(String app, String name, Context context) {
+    public static void removeSystemApp(String app, String name, WeakReference<Activity> activityRef) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(context.getString(R.string.uninstall_summary, name));
+                mProgressDialog = new ProgressDialog(activityRef.get());
+                mProgressDialog.setMessage(activityRef.get().getString(R.string.uninstall_summary, name));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -197,6 +209,13 @@ public class PackageTasks {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {
                 }
+                if (Utils.isPackageInstalled(app, activityRef.get())) {
+                    new Dialog(activityRef.get())
+                            .setMessage(activityRef.get().getString(R.string.uninstall_failed, app))
+                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
+                            })
+                            .show();
+                }
             }
         }.execute();
     }
@@ -208,14 +227,14 @@ public class PackageTasks {
                 name + " /data/data/" + app);
     }
 
-    public static void restoreApp(String path, Context context) {
+    public static void restoreApp(String path, WeakReference<Activity> activityRef) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(context.getString(R.string.restoring, path) + "...");
+                mProgressDialog = new ProgressDialog(activityRef.get());
+                mProgressDialog.setMessage(activityRef.get().getString(R.string.restoring, path) + "...");
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
@@ -244,10 +263,10 @@ public class PackageTasks {
         return file.list();
     }
 
-    public static boolean isEnabled(String app, Context context) {
+    public static boolean isEnabled(String app, WeakReference<Activity> activityRef) {
         try {
             ApplicationInfo ai =
-                    context.getPackageManager().getApplicationInfo(app, 0);
+                    activityRef.get().getPackageManager().getApplicationInfo(app, 0);
             return ai.enabled;
         } catch (PackageManager.NameNotFoundException ignored) {
         }
@@ -258,76 +277,27 @@ public class PackageTasks {
      * Inspired from the original implementation of split apk installer by @yeriomin on https://github.com/yeriomin/YalpStore/
      * Ref: https://github.com/yeriomin/YalpStore/blob/master/app/src/main/java/com/github/yeriomin/yalpstore/install/InstallerRoot.java
      */
-    private static void installSplitAPKs(String dir) {
+    public static void installSplitAPKs(String dir, WeakReference<Activity> activityRef) {
         String sid = RootUtils.runAndGetOutput("pm install-create").replace(
                 "Success: created install session [","").replace("]", "");
-        if (mSplitAPK == null) {
-            mSplitAPK = new StringBuilder();
-        } else {
-            mSplitAPK.setLength(0);
-        }
-        mSplitAPK.append("** Initializing Split APKs Installation\n");
-        mSplitAPK.append(" - Session ID: ").append(sid).append("\n\n");
-        mSplitAPK.append("** Creating a temporary working directory: ");
+        mOutput.append(" - ").append(activityRef.get().getString(R.string.session_id, sid)).append("\n\n");
+        mOutput.append("** " + R.string.creating_directory_message + ": ");
         RootUtils.runCommand("mkdir /data/local/tmp/pm/");
-        mSplitAPK.append(Utils.existFile("/data/local/tmp/pm/") ? "Done *\n\n" : "Failed *\n\n");
-        mSplitAPK.append("** Copying Split APKs into working directory: ");
+        mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? R.string.done + " *\n\n" : R.string.failed + " *\n\n");
+        mOutput.append("** " + R.string.copying_apk_message + ": ");
         RootUtils.runCommand("cp " + dir + "/* /data/local/tmp/pm/");
-        mSplitAPK.append("Done *\n\n");
-        mSplitAPK.append("** Bundle Path: ").append(dir).append("\n\n");
-        mSplitAPK.append("** List of split APKs *\n");
+        mOutput.append(R.string.done + " *\n\n");
+        mOutput.append("** Bundle Path: ").append(dir).append("\n\n");
+        mOutput.append("** " + R.string.split_apk_list + " *\n");
         for (final String splitApps : splitApks("/data/local/tmp/pm")) {
             File file = new File("/data/local/tmp/pm/" + splitApps);
-            mSplitAPK.append(" - ").append(file.getName()).append(": ").append(file.length()).append(" KB\n");
+            mOutput.append(" - ").append(file.getName()).append(": ").append(file.length()).append(" KB\n");
             RootUtils.runCommand("pm install-write -S " + file.length() + " " + sid + " " + file.getName() + " " + file.toString());
         }
-        mSplitAPK.append("\n** Cleaning temporary files: ");
+        mOutput.append("\n** " + R.string.cleaning_message + ": ");
         Utils.delete("/data/local/tmp/pm/");
-        mSplitAPK.append(Utils.existFile("/data/local/tmp/pm/") ? "Failed\n\n" : "Done\n\n");
-        mSplitAPK.append("** Result: ").append(RootUtils.runAndGetError("pm install-commit " + sid));
-    }
-
-    public static void installSplitAPKs(String dir, Context context){
-        new AsyncTask<Void, Void, Void>() {
-            private ProgressDialog mProgressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setMessage(context.getString(R.string.installing) + " ...");
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-            }
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                installSplitAPKs(dir);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                try {
-                    mProgressDialog.dismiss();
-                } catch (IllegalArgumentException ignored) {
-                }
-                Dialog result = new Dialog(context);
-                result.setIcon(R.mipmap.ic_launcher);
-                result.setTitle(R.string.app_name);
-                result.setMessage(mSplitAPK.toString());
-                result.setCancelable(false);
-                result.setNeutralButton(R.string.cancel, (dialog, id) -> {
-                });
-                result.setPositiveButton(R.string.save_log, (dialog, id) -> {
-                    makePackageFolder();
-                    Utils.create("# Split APKs Installer log Created by Package Manager\n\n" + mSplitAPK.toString(), PACKAGES + "/installer_log_" + new File(dir).getName());
-                    Utils.toast(context.getString(R.string.save_log_message, PACKAGES + "/installer_log_" +
-                            new File(dir).getName()), context);
-                });
-                result.show();
-            }
-        }.execute();
+        mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? R.string.failed + " *\n\n" : ": " + R.string.done + " *\n\n");
+        mOutput.append("** ").append(activityRef.get().getString(R.string.result, RootUtils.runAndGetError("pm install-commit " + sid)));
     }
 
 }

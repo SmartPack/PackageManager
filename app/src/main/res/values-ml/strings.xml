@@ -7,8 +7,6 @@
     <string name="already_exists">%s നിലവിൽ ഉണ്ട്! നിർത്തലാക്കുന്നു!</string>
     <string name="app_info">വിശദാംശങ്ങൾ</string>
     <string name="app_settings">ക്രമീകരണങ്ങൾ</string>
-    <string name="batch_add">ബാച്ചിലേക്ക് ചേർക്കുക</string>
-    <string name="batch_remove">ബാച്ചിൽ നിന്ന് നീക്കംചെയ്യുക</string>
     <string name="batch_list_clear">മായ്‌ക്കുക</string>
     <string name="batch_list_disable">താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (കൾ) പ്രവർത്തനരഹിതമാക്കണമെന്ന് (പ്രവർത്തനക്ഷമമാണെങ്കിൽ) അല്ലെങ്കിൽ പ്രവർത്തനക്ഷമമാക്കണമെന്ന് (പ്രവർത്തനരഹിതമാണെങ്കിൽ ) നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
     <string name="batch_list_backup">താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (കൾ) ബാക്കപ്പ് ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
@@ -35,8 +33,8 @@
     <string name="got_it">മനസ്സിലായി</string>
     <string name="install">ഇൻസ്റ്റാൾ</string>
     <string name="install_bundle">Split APK ഇൻസ്റ്റാൾ</string>
-    <string name="install_success">ഇൻസ്റ്റാളേഷൻ വിജയകരമായി പൂർത്തിയാക്കി!</string>
-    <string name="installing">അപ്ലിക്കേഷൻ ബണ്ടിൽ ഇൻസ്റ്റാളുചെയ്യുന്നു!</string>
+    <string name="installing_bundle">അപ്ലിക്കേഷൻ ബണ്ടിൽ ഇൻസ്റ്റാളുചെയ്യുന്നു!</string>
+    <string name="installing_bundle_finished">ഇൻസ്റ്റാളേഷൻ വിജയകരമായി പൂർത്തിയാക്കി!</string>
     <string name="language">ഭാഷ (%s)</string>
     <string name="language_el">ഗ്രീക്ക്</string>
     <string name="language_en">ഇംഗ്ലീഷ്</string>
@@ -61,8 +59,6 @@
     <string name="restore_message">%s പുനസ്ഥാപിക്കണോ?</string>
     <string name="restore_summary">\nമുന്നറിയിപ്പ്!\n\nതെറ്റായ ബാക്കപ്പ് ഫയൽ പുനസ്ഥാപിക്കുന്നത് നിങ്ങളുടെ മൊബൈലിൽ പ്രശ്‌നങ്ങൾ സൃഷ്ടിച്ചേക്കാം. നിങ്ങളുടെ മൊബൈലിന് വേണ്ടി തയ്യാറാക്കിയ ശരിയായ ബാക്കപ്പ് ഫയൽ തിരഞ്ഞെടുക്കേണ്ടത് നിങ്ങളുടെ മാത്രം ഉത്തരവാദിത്തമാണ്. കൂടാതെ, പുനസ്ഥാപിക്കുന്നത് എല്ലാ അപ്ലിക്കേഷനുകൾക്കും നന്നായി പ്രവർത്തിക്കില്ലെന്നതും ശ്രദ്ധിക്കുക.</string>
     <string name="restoring">%s പുനസ്ഥാപിക്കുന്നു</string>
-    <string name="save_log">Log സംരക്ഷിക്കുക</string>
-    <string name="save_log_message">Installer log %s എക്ക് എക്സ്പോർട്ട് ചെയ്തിരിക്കുന്നു!</string>
     <string name="sort_by">അടുക്കുക</string>
     <string name="share_message">Package Manager %s താഴെ ലഭിക്കുന്നതിനായി കാണുന്ന എതെകിലും ലിങ്കിൽ ക്ലിക്ക് ചെയ്യ്യുക\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="support">Support Group</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -42,44 +41,33 @@
         android:layout_marginEnd="10dp"
         android:visibility="gone" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/foreground_parent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="50dp"
-        android:visibility="gone"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="16dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp" >
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingTop="15dp"
+            android:paddingBottom="5dp"
+            android:textSize="20sp"
+            android:text="@string/app_name"
+            android:textColor="?android:attr/colorAccent"
+            android:visibility="visible" />
 
-            <TextView
-                android:id="@+id/foreground_text"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
-
-            <FrameLayout
-                android:id="@+id/foreground_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingBottom="5dp"
+            android:textSize="15sp"
+            android:text="@string/app_name_summary"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+    </LinearLayout>
 </RelativeLayout>

@@ -61,14 +61,18 @@ public class Utils {
 
     private InterstitialAd mInterstitialAd;
 
+    public static boolean isPackageInstalled(String packageID, Context context) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageID, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException ignored) {
+            return false;
+        }
+    }
+
     public static boolean isNotDonated(Context context) {
         if (BuildConfig.DEBUG) return false;
-        try {
-            context.getPackageManager().getApplicationInfo("com.smartpack.donate", 0);
-            return false;
-        } catch (PackageManager.NameNotFoundException ignored) {
-            return true;
-        }
+        return !isPackageInstalled("com.smartpack.donate", context);
     }
 
     public static void initializeAppTheme(Context context) {
@@ -193,7 +197,7 @@ public class Utils {
         }
     }
 
-    static void sleep(int sec) {
+    public static void sleep(int sec) {
         RootUtils.runCommand("sleep " + sec);
     }
 
