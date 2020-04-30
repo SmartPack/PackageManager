@@ -287,7 +287,8 @@ public class Utils {
                 && !Utils.getBoolean("use_korean", false, context)
                 && !Utils.getBoolean("use_am", false, context)
                 && !Utils.getBoolean("use_el", false, context)
-                && !Utils.getBoolean("use_ml", false, context);
+                && !Utils.getBoolean("use_ml", false, context)
+                && !Utils.getBoolean("use_pt", false, context);
     }
 
     public static void setLanguage(Context context) {
@@ -302,6 +303,8 @@ public class Utils {
             lang = "el";
         } else if (getBoolean("use_ml", false, context)) {
             lang = "ml";
+        } else if (getBoolean("use_pt", false, context)) {
+            lang = "pt";
         } else {
             lang = java.util.Locale.getDefault().getLanguage();
         }

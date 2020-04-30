@@ -410,6 +410,8 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 lang = "el";
             } else if (Utils.getBoolean("use_ml", false, getActivity())) {
                 lang = "ml";
+            } else if (Utils.getBoolean("use_pt", false, getActivity())) {
+                lang = "pt";
             } else {
                 lang = java.util.Locale.getDefault().getLanguage();
             }
@@ -426,6 +428,8 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     .setChecked(Utils.getBoolean("use_el", false, getActivity()));
             language.add(Menu.NONE, 17, Menu.NONE, getString(R.string.language_ml)).setCheckable(true)
                     .setChecked(Utils.getBoolean("use_ml", false, getActivity()));
+            language.add(Menu.NONE, 18, Menu.NONE, getString(R.string.language_pt)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_pt", false, getActivity()));
             if (!Utils.isNotDonated(requireActivity())) {
                 menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
                         .setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
@@ -519,6 +523,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_am", false, getActivity());
                             Utils.saveBoolean("use_el", false, getActivity());
                             Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -529,6 +534,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_am", false, getActivity());
                             Utils.saveBoolean("use_el", false, getActivity());
                             Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -539,6 +545,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_am", false, getActivity());
                             Utils.saveBoolean("use_el", false, getActivity());
                             Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -549,6 +556,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_am", true, getActivity());
                             Utils.saveBoolean("use_el", false, getActivity());
                             Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -559,6 +567,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_am", false, getActivity());
                             Utils.saveBoolean("use_el", true, getActivity());
                             Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -569,6 +578,18 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                             Utils.saveBoolean("use_am", false, getActivity());
                             Utils.saveBoolean("use_el", false, getActivity());
                             Utils.saveBoolean("use_ml", true, getActivity());
+                            Utils.saveBoolean("use_pt", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 18:
+                        if (!Utils.getBoolean("use_pt", false, getActivity())) {
+                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.saveBoolean("use_pt", true, getActivity());
                             restartApp();
                         }
                         break;

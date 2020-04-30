@@ -46,6 +46,7 @@ If you like to appreciate my work, please consider donating to me (either via [P
 * [SmgKhOaRn](https://github.com/SmgKhOaRn), Korean Translations
 * [Mikesew1320](https://github.com/Mikesew1320), Amharic Translations
 * [tsiflimagas](https://github.com/tsiflimagas), Greek Translations
+* [Lennoard Silva](https://github.com/Lennoard), Portuguese (Brazilian) Translations
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 
 ## License

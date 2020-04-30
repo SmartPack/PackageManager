@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="about">About</string>
-    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="allow_ads">Allow Ads</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
@@ -60,6 +60,7 @@
     <string name="language_default">Default</string>
     <string name="language_ko">Korean</string>
     <string name="language_ml">Malayalam</string>
+    <string name="language_pt">Portuguese</string>
     <string name="more">More</string>
     <string name="more_apps">More from Developer</string>
     <string name="name">Name</string>
