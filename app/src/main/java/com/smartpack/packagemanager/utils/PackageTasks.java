@@ -281,22 +281,23 @@ public class PackageTasks {
         String sid = RootUtils.runAndGetOutput("pm install-create").replace(
                 "Success: created install session [","").replace("]", "");
         mOutput.append(" - ").append(activityRef.get().getString(R.string.session_id, sid)).append("\n\n");
-        mOutput.append("** " + R.string.creating_directory_message + ": ");
+        mOutput.append("** ").append(activityRef.get().getString(R.string.creating_directory_message)).append(": ");
         RootUtils.runCommand("mkdir /data/local/tmp/pm/");
-        mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? R.string.done + " *\n\n" : R.string.failed + " *\n\n");
-        mOutput.append("** " + R.string.copying_apk_message + ": ");
+        mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? activityRef.get().getString(R.string.done) + " *\n\n" : activityRef.get().getString(R.string.failed) + " *\n\n");
+        mOutput.append("** ").append(activityRef.get().getString(R.string.copying_apk_message)).append(": ");
         RootUtils.runCommand("cp " + dir + "/* /data/local/tmp/pm/");
-        mOutput.append(R.string.done + " *\n\n");
+        mOutput.append(activityRef.get().getString(R.string.done)).append(" *\n\n");
         mOutput.append("** Bundle Path: ").append(dir).append("\n\n");
-        mOutput.append("** " + R.string.split_apk_list + " *\n");
+        mOutput.append("** ").append(activityRef.get().getString(R.string.split_apk_list)).append(" *\n");
         for (final String splitApps : splitApks("/data/local/tmp/pm")) {
             File file = new File("/data/local/tmp/pm/" + splitApps);
             mOutput.append(" - ").append(file.getName()).append(": ").append(file.length()).append(" KB\n");
             RootUtils.runCommand("pm install-write -S " + file.length() + " " + sid + " " + file.getName() + " " + file.toString());
         }
-        mOutput.append("\n** " + R.string.cleaning_message + ": ");
+        mOutput.append("\n** ").append(activityRef.get().getString(R.string.cleaning_message)).append(": ");
         Utils.delete("/data/local/tmp/pm/");
-        mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? R.string.failed + " *\n\n" : ": " + R.string.done + " *\n\n");
+        mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? activityRef.get().getString(R.string.failed) +
+                " *\n\n" : ": " + activityRef.get().getString(R.string.done) + " *\n\n");
         mOutput.append("** ").append(activityRef.get().getString(R.string.result, RootUtils.runAndGetError("pm install-commit " + sid)));
     }
 

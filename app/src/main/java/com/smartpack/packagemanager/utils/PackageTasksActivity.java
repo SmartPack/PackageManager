@@ -51,7 +51,7 @@ public class PackageTasksActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(100);
+                        Thread.sleep(500);
                         runOnUiThread(() -> {
                             if (PackageTasks.mOutput != null) {
                                 mOutput.setText(PackageTasks.mOutput.toString());
