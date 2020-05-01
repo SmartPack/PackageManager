@@ -4,10 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.PopupMenu;
 
 import com.smartpack.packagemanager.R;
 
@@ -26,26 +24,18 @@ public class DescriptionView extends RecyclerViewItem {
         void onChanged(DescriptionView descriptionView, boolean isChecked);
     }
 
-    public interface OnMenuListener {
-        void onMenuReady(DescriptionView descriptionView, PopupMenu popupMenu);
-    }
-
     private List<OnCheckBoxListener> mOnCheckBoxListeners = new ArrayList<>();
 
     private View mRootView;
     private AppCompatImageView mImageView;
     private AppCompatTextView mTitleView;
     private AppCompatTextView mSummaryView;
-    private AppCompatImageButton mMenuIconView;
     private AppCompatCheckBox mCheckBox;
 
     private boolean mChecked;
     private Drawable mImage;
     private CharSequence mTitle;
     private CharSequence mSummary;
-    private Drawable mMenuIcon;
-    private PopupMenu mPopupMenu;
-    private OnMenuListener mOnMenuListener;
 
     @Override
     public int getLayoutRes() {
@@ -65,7 +55,6 @@ public class DescriptionView extends RecyclerViewItem {
                 }
             });
         }
-
         mSummaryView = view.findViewById(R.id.summary);
         if (mSummaryView != null) {
             mSummaryView.setOnFocusChangeListener((v, hasFocus) -> {
@@ -74,19 +63,10 @@ public class DescriptionView extends RecyclerViewItem {
                 }
             });
         }
-
-        mMenuIconView = view.findViewById(R.id.menu_icon);
-        mMenuIconView.setOnClickListener(v -> {
-            if (mPopupMenu != null) {
-                mPopupMenu.show();
-            }
-        });
-
         mCheckBox = view.findViewById(R.id.checkbox);
 
         super.onCreateView(view);
 
-        //view.setOnClickListener(v -> mCheckBox.setChecked(!mChecked));
         mCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mChecked = isChecked;
             List<OnCheckBoxListener> applied = new ArrayList<>();
@@ -111,16 +91,6 @@ public class DescriptionView extends RecyclerViewItem {
 
     public void setSummary(CharSequence summary) {
         mSummary = summary;
-        refresh();
-    }
-
-    public void setMenuIcon(Drawable menuIcon) {
-        mMenuIcon = menuIcon;
-        refresh();
-    }
-
-    public void setOnMenuListener(OnMenuListener onMenuListener) {
-        mOnMenuListener = onMenuListener;
         refresh();
     }
 
@@ -154,13 +124,7 @@ public class DescriptionView extends RecyclerViewItem {
                 mSummaryView.setVisibility(View.GONE);
             }
         }
-        if (mMenuIconView != null && mMenuIcon != null && mOnMenuListener != null) {
-            mMenuIconView.setImageDrawable(mMenuIcon);
-            mMenuIconView.setVisibility(View.VISIBLE);
-            mPopupMenu = new PopupMenu(mMenuIconView.getContext(), mMenuIconView);
-            mOnMenuListener.onMenuReady(this, mPopupMenu);
-        }
-        if (mOnMenuListener == null && mCheckBox != null) {
+        if (mCheckBox != null) {
             mCheckBox.setVisibility(View.VISIBLE);
             mCheckBox.setChecked(mChecked);
         }

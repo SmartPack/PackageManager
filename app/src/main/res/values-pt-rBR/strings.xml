@@ -5,13 +5,11 @@
     <string name="always_show">Sempre mostrar</string>
     <string name="already_exists">%s já existe! Abortando!</string>
     <string name="app_info">Informações do app</string>
-    <string name="app_settings">Configurações do app</string>
     <string name="batch_list_clear">Limpar lista</string>
     <string name="batch_list_disable">Tem certeza de que deseja desativar (se ativado) ou ativar (se desativado) o(s) seguinte (s) aplicativo(s)?</string>
     <string name="batch_list_backup">Tem certeza de que deseja fazer backup (dos dados apenas) dos seguintes aplicativos?</string>
     <string name="batch_list_empty">Nada foi adicionado à lista em lote!</string>
     <string name="batch_list_remove">Deseja remover os seguintes aplicativos?</string>
-    <string name="batch_options">Opções em lote</string>
     <string name="batch_warning">Suas configurações em lote serão removidas! Você tem certeza?</string>
     <string name="backup">Backup</string>
     <string name="backing_up">Fazendo backup de %s (somente dados) para \'/memoriaInterna/Package_Manager/\'</string>

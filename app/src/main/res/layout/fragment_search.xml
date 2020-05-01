@@ -2,28 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:background="@color/black"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/viewpagerparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp" >
+        android:padding="10dp"
+        tools:ignore="UselessParent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:paddingTop="15dp"
-            android:paddingBottom="5dp"
             android:textSize="20sp"
             android:text="@string/app_name"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp"
             android:textColor="?android:attr/colorAccent"
             android:visibility="visible" />
 
@@ -32,20 +33,54 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:paddingBottom="5dp"
             android:textSize="15sp"
             android:text="@string/app_name_summary"
             android:textColor="@color/white"
             android:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/key_edittext"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:backgroundTint="?android:attr/colorAccent"
-            android:textSize="18sp" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:baselineAligned="false">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:ignore="UselessParent">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/batch_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/white"
+                    android:scaleType="center" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/key_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginEnd="75dp"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:backgroundTint="?android:attr/colorAccent"
+                    android:textSize="18sp" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/settings_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/white"
+                    android:scaleType="center" />
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -7,7 +7,6 @@
     <string name="always_show">항상 보이기</string>
     <string name="already_exists">%s은(는) 이미 존재합니다!</string>
     <string name="app_info">앱 정보</string>
-    <string name="app_settings">설정</string>
     <string name="backing_summary">%s의 데이터 파일들을 백업합니다.</string>
     <string name="backup">백업</string>
     <string name="backing_up">%s (데이터) 을(를) \'/sdcard/Package_Manager/\'로 백업하는 중</string>
@@ -18,7 +17,6 @@
     <string name="batch_list_empty">모음집에 아무것도 추가되지 않았습니다!</string>
     <string name="batch_list_remove">선택된 앱들을 제거합니다.\n선택된 앱들은 다음과 같습니다:</string>
     <string name="batch_list_summary">모음집에 추가된 앱들은 다음과 같습니다:</string>
-    <string name="batch_options">모음집</string>
     <string name="batch_processing">일괄 작업 중</string>
     <string name="batch_processing_finished">일괄 작업이 완료되었습니다!</string>
     <string name="batch_processing_initialized">일괄 작업을 초기화하는 중</string>

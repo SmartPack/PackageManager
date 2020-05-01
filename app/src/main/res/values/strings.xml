@@ -2,13 +2,12 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="about">About</string>
-    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n<b>Credits</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Mikesew1320</i></b>: Amharic translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="allow_ads">Allow Ads</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="app_info">App info</string>
     <string name="app_name_summary" translatable="false">An Application to Manage your Apps</string>
-    <string name="app_settings">App Settings</string>
     <string name="backing_summary">Backing up the data files of %s</string>
     <string name="backup">Backup</string>
     <string name="backing_up">Backing up %s (data only) into \'/sdcard/Package_Manager/\'</string>
@@ -19,7 +18,6 @@
     <string name="batch_list_empty">Noting is added to the batch list!</string>
     <string name="batch_list_remove">Are you sure to remove the following app(s)?</string>
     <string name="batch_list_summary">The following applications are added to the batch list</string>
-    <string name="batch_options">Batch Options</string>
     <string name="batch_processing">Batch Processing in Progress!</string>
     <string name="batch_processing_finished">Batch Processing Completed!</string>
     <string name="batch_processing_initialized">Initializing Batch Process</string>

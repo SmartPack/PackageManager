@@ -7,13 +7,11 @@
     <string name="always_show">Εμφάνιση πάντα</string>
     <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
     <string name="app_info">Πληροφορίες εφαρμογής</string>
-    <string name="app_settings">Ρυθμίσεις εφαρμογής</string>
     <string name="batch_list_clear">Διαγραφή λίστας</string>
     <string name="batch_list_disable">Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε (εάν είναι ενεργοποιημένη) ή να ενεργοποιήσετε (εάν είναι απενεργοποιημένη) την ακόλουθη εφαρμογή(ές);?</string>
     <string name="batch_list_backup">Είστε σίγουρος για τη δημιουργία αντιγράφου (δεδομένα μόνο) για την ακόλουθη εφαρμογή(ές);</string>
     <string name="batch_list_empty">Τίποτα δεν έχει προστεθεί στην ομαδική λίστα!</string>
     <string name="batch_list_remove">Είστε σίγουρος ότι θέλετε να αφαιρέσετε τις ακόλουθες εφαρμογές;</string>
-    <string name="batch_options">Επιλογές Ομάδας</string>
     <string name="batch_warning">Οι ρυθμίσεις ομάδας σας θα αφαιρεθούν! Είστε σίγουρος;</string>
     <string name="backup">Αντίγραφο</string>
     <string name="backing_up">Δημιουργία αντιγράφου %s (δεδομένα μόνο) σε \'/sdcard/Package_Manager/\'</string>

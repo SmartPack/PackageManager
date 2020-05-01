@@ -7,13 +7,11 @@
     <string name="always_show">ሁልጊዜ አሳይ</string>
     <string name="already_exists">%s ቀድሞዉኑ ነበር! በማቋረጥ ላይ</string>
     <string name="app_info">የመተግበሪያ መረጃ</string>
-    <string name="app_settings">የመተግበሪያ መቼት</string>
     <string name="batch_list_clear">ዝርዝሩን አፅዳ</string>
     <string name="batch_list_disable">እርግጠኛ ኖት እነዚህን መተግበሪያ(ዎች) ማጥፉት ይፈልጋሉ(በርቶ ከነበር) ወይም አብራ(ጠፍቶ ከነበር)?</string>
     <string name="batch_list_backup">እርግጠኛ ኖት ለእነዚህን መተግበሪያ(ዎች) መጠባበቂያ(ዉሂብ ብቻ) መያዝ ይፈልጋሉ?</string>
     <string name="batch_list_empty">ወደ ቡድኑ ዝርዝር ምንም አልጨመሩም!</string>
     <string name="batch_list_remove">እርግጠኛ ኖት እነዚህን መተግበሪያ(ዎች) ማጥፉት ይፈልጋሉ?</string>
-    <string name="batch_options">የቡድን አማራጮች</string>
     <string name="batch_warning">የቡድኑን መቼቶት ሊያጠፉ ነው! እርግጠኛ ኖት?</string>
     <string name="backup">መጠባበቂያ</string>
     <string name="backing_up">%s ዉሂብ ብቻ ወደ \'/sdcard/Package_Manager/\' መጠባበቂያ በመያዝ ላይ</string>

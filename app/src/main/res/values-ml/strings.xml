@@ -6,7 +6,6 @@
     <string name="always_show">എപ്പോളും കാണിക്കുക</string>
     <string name="already_exists">%s നിലവിൽ ഉണ്ട്! നിർത്തലാക്കുന്നു!</string>
     <string name="app_info">വിശദാംശങ്ങൾ</string>
-    <string name="app_settings">ക്രമീകരണങ്ങൾ</string>
     <string name="backup">ബാക്കപ്പ്</string>
     <string name="backing_up">%s (ഡാറ്റ മാത്രം) \'/sdcard/Package_Manager/\' ൽ ബാക്കപ്പ് ചെയ്യ്യുന്നു</string>
     <string name="backing_summary">%s ന്റെ ഡാറ്റ ഫയലുകൾ ബാക്കപ്പ് ചെയ്യുന്നു</string>
@@ -17,7 +16,6 @@
     <string name="batch_list_empty">ബാച്ച് പട്ടികയിലേക്ക് നിലവിൽ ഒന്നും ചേർത്തിട്ടില്ല!</string>
     <string name="batch_list_remove">താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) നീക്കംചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
     <string name="batch_list_summary">താഴെപ്പറയുന്ന അപ്ലിക്കേഷനുകൾ ബാച്ച് ലിസ്റ്റിനോട് ചേർത്തിരിക്കുന്നു </string>
-    <string name="batch_options">ബാച്ച് ഓപ്ഷനുകൾ</string>
     <string name="batch_processing">ബാച്ച് പ്രോസസ്സിംഗ് പുരോഗമിക്കുന്നു!</string>
     <string name="batch_processing_finished">ബാച്ച് പ്രോസസ്സിംഗ് പൂർത്തിയായിരിക്കുന്നു!</string>
     <string name="batch_processing_initialized">ബാച്ച് പ്രോസസ്സ് ആരംഭിക്കുന്നു</string>

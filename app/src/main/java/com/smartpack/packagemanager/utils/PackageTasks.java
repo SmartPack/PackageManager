@@ -37,6 +37,7 @@ import java.util.List;
 public class PackageTasks {
 
     public static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
+    public static String mAppName;
 
     public static StringBuilder mBatchApps = null;
     public static StringBuilder mOutput = null;
