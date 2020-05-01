@@ -10,6 +10,8 @@ package com.smartpack.packagemanager;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.CheckBox;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.views.dialog.Dialog;
 
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
@@ -33,6 +36,7 @@ import java.lang.ref.WeakReference;
 public class MainActivity extends AppCompatActivity {
 
     private boolean mExit;
+    private boolean mWelcomeDialog = true;
     private Handler mHandler = new Handler();
 
     @Override
@@ -68,6 +72,43 @@ public class MainActivity extends AppCompatActivity {
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageTasksFragment(), "");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Utils.getBoolean("welcomeMessage", true, this)) {
+            WelcomeDialog();
+        }
+        if (PackageTasks.mBatchApps == null) {
+            PackageTasks.mBatchApps = new StringBuilder();
+        }
+    }
+
+    /*
+     * Taken and used almost as such from https://github.com/morogoku/MTweaks-KernelAdiutorMOD/
+     * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
+     */
+    private void WelcomeDialog() {
+        View checkBoxView = View.inflate(this, R.layout.rv_checkbox, null);
+        CheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
+        checkBox.setChecked(true);
+        checkBox.setText(getString(R.string.always_show));
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mWelcomeDialog = isChecked;
+        });
+
+        Dialog alert = new Dialog(Objects.requireNonNull(this));
+        alert.setIcon(R.mipmap.ic_launcher);
+        alert.setTitle(getString(R.string.app_name));
+        alert.setMessage(getText(R.string.welcome_message));
+        alert.setView(checkBoxView);
+        alert.setCancelable(false);
+        alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+            Utils.saveBoolean("welcomeMessage", mWelcomeDialog, this);
+        });
+
+        alert.show();
     }
 
     @Override

@@ -32,7 +32,6 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,8 +65,6 @@ import java.util.Objects;
 public class PackageTasksFragment extends RecyclerViewFragment {
 
     private AsyncTask<Void, Void, List<RecyclerViewItem>> mLoader;
-
-    private boolean mWelcomeDialog = true;
 
     private Dialog mOptionsDialog;
 
@@ -635,7 +632,12 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 apps.setDrawable(requireActivity().getPackageManager().getApplicationIcon(packageInfo));
                 apps.setTitle(pm.getApplicationLabel(packageInfo) + (PackageTasks.isEnabled(
                         packageInfo.packageName, new WeakReference<>(requireActivity())) ? "" : " (Disabled)"));
-                apps.setSummary(packageInfo.packageName);
+                if (mAppName != null && !mAppName.isEmpty()) {
+                    apps.setSummary(Utils.htmlFrom(packageInfo.packageName.replace(mAppName,
+                            "<b><font color=\"" + ViewUtils.getThemeAccentColor(requireActivity()) + "\">" + mAppName + "</font></b>")));
+                } else {
+                    apps.setSummary(packageInfo.packageName);
+                }
                 apps.setFullSpan(true);
                 apps.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
                     @Override
@@ -941,6 +943,24 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         }.execute();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (PackageTasks.mBatchApps == null) {
+            PackageTasks.mBatchApps = new StringBuilder();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mLoader != null) {
+            mLoader.cancel(true);
+        }
+        mAppName = null;
+        PackageTasks.mBatchApps.setLength(0);
+    }
+
     public static class SearchFragment extends BaseFragment {
         @Nullable
         @Override
@@ -981,53 +1001,6 @@ public class PackageTasksFragment extends RecyclerViewFragment {
 
             return rootView;
         }
-    }
-
-    /*
-     * Taken and used almost as such from https://github.com/morogoku/MTweaks-KernelAdiutorMOD/
-     * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
-     */
-    private void WelcomeDialog() {
-        View checkBoxView = View.inflate(getActivity(), R.layout.rv_checkbox, null);
-        CheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
-        checkBox.setChecked(true);
-        checkBox.setText(getString(R.string.always_show));
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            mWelcomeDialog = isChecked;
-        });
-
-        Dialog alert = new Dialog(Objects.requireNonNull(getActivity()));
-        alert.setIcon(R.mipmap.ic_launcher);
-        alert.setTitle(getString(R.string.app_name));
-        alert.setMessage(getText(R.string.welcome_message));
-        alert.setView(checkBoxView);
-        alert.setCancelable(false);
-        alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-            Utils.saveBoolean("welcomeMessage", mWelcomeDialog, getActivity());
-        });
-
-        alert.show();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (Utils.getBoolean("welcomeMessage", true, getActivity())) {
-            WelcomeDialog();
-        }
-        if (PackageTasks.mBatchApps == null) {
-            PackageTasks.mBatchApps = new StringBuilder();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mLoader != null) {
-            mLoader.cancel(true);
-        }
-        mAppName = null;
-        PackageTasks.mBatchApps.setLength(0);
     }
 
 }

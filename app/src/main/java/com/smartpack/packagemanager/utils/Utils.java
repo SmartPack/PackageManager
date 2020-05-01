@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
@@ -129,6 +130,14 @@ public class Utils {
             context.startActivity(i);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static CharSequence htmlFrom(String text) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(text);
         }
     }
 
