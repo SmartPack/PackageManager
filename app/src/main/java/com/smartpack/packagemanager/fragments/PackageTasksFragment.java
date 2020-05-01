@@ -157,18 +157,23 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                         @Override
                         protected List<RecyclerViewItem> doInBackground(Void... voids) {
                             List<RecyclerViewItem> items = new ArrayList<>();
-                            load(items);
+                            loadInTo(items);
                             return items;
                         }
 
                         @Override
                         protected void onPostExecute(List<RecyclerViewItem> recyclerViewItems) {
                             super.onPostExecute(recyclerViewItems);
-                            for (RecyclerViewItem item : recyclerViewItems) {
-                                addItem(item);
+
+                            if (isAdded()) {
+                                clearItems();
+                                for (RecyclerViewItem item : recyclerViewItems) {
+                                    addItem(item);
+                                }
+
+                                hideProgress();
+                                mLoader = null;
                             }
-                            hideProgress();
-                            mLoader = null;
                         }
                     };
                     mLoader.execute();
@@ -178,7 +183,8 @@ public class PackageTasksFragment extends RecyclerViewFragment {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private void load(List<RecyclerViewItem> items) {
+    private void loadInTo(List<RecyclerViewItem> items) {
+        // TODO: 01/05/20 hardcode it outside recyclerview
         DescriptionView batch = new DescriptionView();
         batch.setTitle(getString(R.string.batch_options));
         batch.setMenuIcon(getResources().getDrawable(R.drawable.ic_queue));
@@ -385,6 +391,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
 
         items.add(batch);
 
+        // TODO: 01/05/20 hardcode it outside recyclerview
         DescriptionView options = new DescriptionView();
         options.setTitle(getString(R.string.app_settings));
         options.setMenuIcon(getResources().getDrawable(R.drawable.ic_settings));
