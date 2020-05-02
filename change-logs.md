@@ -1,5 +1,9 @@
 # Change-logs
 
+## 10. May 02, 2020
+*Release-tag: 1.5*<br>
+Migrated to libsu (Credits: @Lennoard). Improved app UI. Moved batch options and app settings to the top description. Fixed rarely occurring item duplication. Simplified batch app tasks. Added a more detailed view for batch options and split apk installation. Added Portuguese (Brazilian) translations (Credits: @Lennoard). Improved Korean translations (Credits: @SmgKhOaRn). Updated malayalam translations. Miscellaneous changes.
+
 ## 9. March 26, 2020
 *Release-tag: 1.4*<br>
 Added option to sort apps by Name (default) & Package ID. Fixed creating app folder on Android 10. Added Amharic (credits: @Mikesew1320), Greek (credits: @tsiflimagas) and Malayalam (credits: me) translations. Improved Korean translations (Credits: @SmgKhOaRn). Miscellaneous changes.
