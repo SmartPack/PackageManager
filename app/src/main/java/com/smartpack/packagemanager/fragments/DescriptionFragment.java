@@ -87,7 +87,7 @@ public class DescriptionFragment extends BaseFragment {
         batch.setImageDrawable(getResources().getDrawable(R.drawable.ic_queue));
         batch.setOnClickListener(v -> {
             if (RootUtils.rootAccessDenied()) {
-                Utils.toast(R.string.no_root, getActivity());
+                Utils.showSnackbar(rootView, getString(R.string.no_root));
                 return;
             }
             PopupMenu popupMenu = new PopupMenu(requireActivity(), batch);

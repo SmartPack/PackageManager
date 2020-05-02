@@ -52,6 +52,8 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     private Handler mHandler;
     private ScheduledThreadPoolExecutor mPoolExecutor;
 
+    private View mRootView;
+
     private List<RecyclerViewItem> mItems = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -79,7 +81,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         mHandler = new Handler();
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
@@ -431,6 +433,10 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     protected FloatingActionButton getBottomFab() {
         return mBottomFab;
+    }
+
+    View getRootView() {
+        return mRootView;
     }
 
     @Override

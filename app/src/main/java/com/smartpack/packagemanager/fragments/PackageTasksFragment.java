@@ -88,14 +88,14 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         super.onBottomFabClick();
 
         if (RootUtils.rootAccessDenied()) {
-            Utils.toast(R.string.no_root, getActivity());
+            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
             return;
         }
 
         if (Utils.isStorageWritePermissionDenied(requireActivity())) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            Utils.toast(R.string.permission_denied_write_storage, getActivity());
+            Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
             return;
         }
 
@@ -213,18 +213,18 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                 switch (i) {
                                     case 0:
                                         if (packageInfo.packageName.equals(BuildConfig.APPLICATION_ID)) {
-                                            Utils.toast(R.string.open_message, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.open_message));
                                             return;
                                         }
                                         if (!PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity()))) {
-                                            Utils.toast(getString(R.string.disabled_message, pm.getApplicationLabel(packageInfo)), getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.disabled_message, pm.getApplicationLabel(packageInfo)));
                                             return;
                                         }
                                         Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
                                         if (launchIntent != null) {
                                             startActivity(launchIntent);
                                         } else {
-                                            Utils.toast(getString(R.string.open_failed, pm.getApplicationLabel(packageInfo)), getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.open_failed, pm.getApplicationLabel(packageInfo)));
                                         }
                                         break;
                                     case 1:
@@ -236,13 +236,13 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         break;
                                     case 2:
                                         if (RootUtils.rootAccessDenied()) {
-                                            Utils.toast(R.string.no_root, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
                                             return;
                                         }
                                         if (Utils.isStorageWritePermissionDenied(requireActivity())) {
                                             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                                            Utils.toast(R.string.permission_denied_write_storage, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
                                             return;
                                         }
                                         Utils.getInstance().showInterstitialAd(getActivity());
@@ -253,7 +253,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                     @Override
                                                     public void onClick(String text) {
                                                         if (text.isEmpty()) {
-                                                            Utils.toast(R.string.name_empty, getActivity());
+                                                            Utils.showSnackbar(getRootView(), getString(R.string.name_empty));
                                                             return;
                                                         }
                                                         if (!text.endsWith(".tar.gz")) {
@@ -263,7 +263,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                             text = text.replace(" ", "_");
                                                         }
                                                         if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
-                                                            Utils.toast(getString(R.string.already_exists, text), getActivity());
+                                                            Utils.showSnackbar(getRootView(), getString(R.string.already_exists, text));
                                                             return;
                                                         }
                                                         final String path = text;
@@ -299,20 +299,20 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         break;
                                     case 3:
                                         if (RootUtils.rootAccessDenied()) {
-                                            Utils.toast(R.string.no_root, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
                                             return;
                                         }
                                         if (Utils.isStorageWritePermissionDenied(requireActivity())) {
                                             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                                            Utils.toast(R.string.permission_denied_write_storage, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
                                             return;
                                         }
                                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                                         for (final String splitApps : PackageTasks.splitApks(packageInfo.sourceDir.replace("base.apk", ""))) {
                                             if (splitApps.contains("split_")) {
                                                 if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" + packageInfo.packageName)) {
-                                                    Utils.toast(getString(R.string.already_exists, packageInfo.packageName), getActivity());
+                                                    Utils.showSnackbar(getRootView(), getString(R.string.already_exists, packageInfo.packageName));
                                                     return;
                                                 }
                                                 PackageTasks.exportingBundleTask(packageInfo.sourceDir.replace("base.apk", ""), packageInfo.packageName,
@@ -327,7 +327,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         break;
                                     case 4:
                                         if (RootUtils.rootAccessDenied()) {
-                                            Utils.toast(R.string.no_root, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
                                             return;
                                         }
                                         Utils.getInstance().showInterstitialAd(getActivity());
@@ -355,7 +355,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                         break;
                                     case 6:
                                         if (packageInfo.packageName.equals(BuildConfig.APPLICATION_ID)) {
-                                            Utils.toast(R.string.uninstall_nope, getActivity());
+                                            Utils.showSnackbar(getRootView(), getString(R.string.uninstall_nope));
                                             return;
                                         }
                                         if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 ||
@@ -366,7 +366,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                             startActivity(remove);
                                         } else {
                                             if (RootUtils.rootAccessDenied()) {
-                                                Utils.toast(R.string.no_root, getActivity());
+                                                Utils.showSnackbar(getRootView(), getString(R.string.no_root));
                                                 return;
                                             }
                                             Utils.getInstance().showInterstitialAd(getActivity());
@@ -422,7 +422,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
             String fileName = new File(mPath).getName();
             if (requestCode == 0) {
                 if (!mPath.endsWith(".tar.gz")) {
-                    Utils.toast(getString(R.string.wrong_extension, ".tar.gz"), getActivity());
+                    Utils.showSnackbar(getRootView(), getString(R.string.wrong_extension, ".tar.gz"));
                     return;
                 }
                 Utils.getInstance().showInterstitialAd(getActivity());
@@ -440,7 +440,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 restoreApp.show();
             } else if (requestCode == 1) {
                 if (!mPath.endsWith(".apk")) {
-                    Utils.toast(getString(R.string.wrong_extension, ".apk"), getActivity());
+                    Utils.showSnackbar(getRootView(), getString(R.string.wrong_extension, ".apk"));
                     return;
                 }
                 Utils.getInstance().showInterstitialAd(getActivity());

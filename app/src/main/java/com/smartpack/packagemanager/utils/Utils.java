@@ -23,6 +23,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
@@ -32,6 +33,7 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.root.RootFile;
@@ -117,6 +119,12 @@ public class Utils {
 
     private static void toast(String message, Context context, int duration) {
         Toast.makeText(context, message, duration).show();
+    }
+
+    public static void showSnackbar(View view, String message) {
+        Snackbar snackbar;
+        snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     public static void launchUrl(String url, Context context) {
