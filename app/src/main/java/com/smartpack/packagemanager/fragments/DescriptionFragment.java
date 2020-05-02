@@ -58,7 +58,7 @@ public class DescriptionFragment extends BaseFragment {
         }
         final PackageTasksFragment systemAppsFragment = (PackageTasksFragment) fragment;
 
-        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_description, container, false);
 
         AppCompatEditText keyEdit = rootView.findViewById(R.id.key_edittext);
 
@@ -309,23 +309,7 @@ public class DescriptionFragment extends BaseFragment {
                     .setChecked(Utils.getBoolean("sort_name", true, getActivity()));
             sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sort_id", false, getActivity()));
-            String lang;
-            if (Utils.getBoolean("use_english", false, getActivity())) {
-                lang = "en_US";
-            } else if (Utils.getBoolean("use_korean", false, getActivity())) {
-                lang = "ko";
-            } else if (Utils.getBoolean("use_am", false, getActivity())) {
-                lang = "am";
-            } else if (Utils.getBoolean("use_el", false, getActivity())) {
-                lang = "el";
-            } else if (Utils.getBoolean("use_ml", false, getActivity())) {
-                lang = "ml";
-            } else if (Utils.getBoolean("use_pt", false, getActivity())) {
-                lang = "pt";
-            } else {
-                lang = java.util.Locale.getDefault().getLanguage();
-            }
-            SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, lang));
+            SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, Utils.getLanguage(getActivity())));
             language.add(Menu.NONE, 12, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
                     .setChecked(Utils.languageDefault(getActivity()));
             language.add(Menu.NONE, 13, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
@@ -414,7 +398,7 @@ public class DescriptionFragment extends BaseFragment {
                     case 8:
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(
-                                "https://play.google.com/store/apps/developer?id=sunilpaulmathew"));
+                                "https://play.google.com/store/apps/dev?id=5836199813143882901"));
                         startActivity(intent);
                         break;
                     case 9:

@@ -308,24 +308,26 @@ public class Utils {
                 && !Utils.getBoolean("use_pt", false, context);
     }
 
-    public static void setLanguage(Context context) {
-        String lang;
+    public static String getLanguage(Context context) {
         if (getBoolean("use_english", false, context)) {
-            lang = "en_US";
+            return  "en_US";
         } else if (getBoolean("use_korean", false, context)) {
-            lang = "ko";
+            return  "ko";
         } else if (getBoolean("use_am", false, context)) {
-            lang = "am";
+            return  "am";
         } else if (getBoolean("use_el", false, context)) {
-            lang = "el";
+            return  "el";
         } else if (getBoolean("use_ml", false, context)) {
-            lang = "ml";
+            return  "ml";
         } else if (getBoolean("use_pt", false, context)) {
-            lang = "pt";
+            return  "pt";
         } else {
-            lang = java.util.Locale.getDefault().getLanguage();
+            return java.util.Locale.getDefault().getLanguage();
         }
-        Locale myLocale = new Locale(lang);
+    }
+
+    public static void setLanguage(Context context) {
+        Locale myLocale = new Locale(getLanguage(context));
         Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();

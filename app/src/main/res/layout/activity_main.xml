@@ -12,7 +12,7 @@
         android:textSize="18sp"
         android:padding="12dp"
         android:longClickable="true"
-        android:textColor="@color/white"
+        android:textColor="?android:attr/colorAccent"
         android:background="@color/black" />
 
     <com.google.android.gms.ads.AdView

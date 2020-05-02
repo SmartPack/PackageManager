@@ -1,6 +1,11 @@
 # Package Manager
 
-![Package Manager](https://github.com/SmartPack/PackageManager/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
+![Package Manager](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
+
+[![](https://img.shields.io/badge/Package%20Manager-v1.4-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
+![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
+![](https://img.shields.io/github/contributors/smartpack/PackageManager)
+![](https://img.shields.io/github/license/smartpack/PackageManager)
 
 ### Package Manager is a  highly powerful app to manage both system and user apps installed on an android device.
 
@@ -43,6 +48,7 @@ If you like to appreciate my work, please consider donating to me (either via [P
 
 ## Credits
 * [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
+* [topjohnwu](https://github.com/topjohnwu), libsu
 * [SmgKhOaRn](https://github.com/SmgKhOaRn), Korean Translations
 * [Mikesew1320](https://github.com/Mikesew1320), Amharic Translations
 * [tsiflimagas](https://github.com/tsiflimagas), Greek Translations
