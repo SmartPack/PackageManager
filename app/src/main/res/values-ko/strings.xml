@@ -2,7 +2,7 @@
     <!--Author: SmgKhOaRn <smgkhoarn@gmail.com>-->
 
     <string name="about">정보</string>
-    <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i>\n\n<b>도움을 주신 분들</b>\n<b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>topjohnwu</i></b>: libsu 라이브러리\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>tsiflimagas</i></b>: 그리스어 번역\n<b><i>Lennoard Silva</i></b>: 포르투칼어(브라질) 번역\n<b><i>Mikesew1320</i></b>: 에티오피아어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
+    <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i>\n\n<b>도움을 주신 분들</b>\n<b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>topjohnwu</i></b>: libsu 라이브러리\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>tsiflimagas</i></b>: 그리스어 번역\n<b><i>Lennoard Silva</i></b>: 브라질 포르투갈어 번역\n<b><i>Mikesew1320</i></b>: 에티오피아어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
     <string name="allow_ads">광고 활성화</string>
     <string name="always_show">항상 보이기</string>
     <string name="already_exists">%s은(는) 이미 존재합니다!</string>
@@ -12,7 +12,7 @@
     <string name="backing_up">%s (데이터) 을(를) \'/sdcard/Package_Manager/\'로 백업하는 중</string>
     <string name="batch_backup_finished">백업 파일들이 \'%s\'에 저장되었습니다.</string>
     <string name="batch_list_clear">목록 지우기</string>
-    <string name="batch_list_disable">선택된 앱들을 (비)활성화합니다.\n선택된 앱들은 다음과 같습니다:</string>
+    <string name="batch_list_disable">선택된 앱들을 활성화 또는 비활성화합니다.\n선택된 앱들은 다음과 같습니다:</string>
     <string name="batch_list_backup">선택된 앱들의 데이터를 백업합니다.\n선택된 앱들은 다음과 같습니다:</string>
     <string name="batch_list_empty">모음집에 아무것도 추가되지 않았습니다!</string>
     <string name="batch_list_remove">선택된 앱들을 제거합니다.\n선택된 앱들은 다음과 같습니다:</string>
@@ -55,7 +55,7 @@
     <string name="language_am">에티오피아어</string>
     <string name="language_el">그리스어</string>
     <string name="language_ml">말라얄람어</string>
-    <string name="language_pt">포르투칼어</string>
+    <string name="language_pt">브라질 포어</string>
     <string name="more">더보기</string>
     <string name="more_apps">개발자의 다른 앱들 보기</string>
     <string name="name">이름</string>
@@ -86,7 +86,7 @@
     <string name="support">지원 받기</string>
     <string name="sure_question">계속하시겠어요?</string>
     <string name="system">시스템 앱</string>
-    <string name="turn_on_off">(비)활성화</string>
+    <string name="turn_on_off">활성화/비활성화</string>
     <string name="uninstall">제거</string>
     <string name="uninstall_nope">죄송합니다! 여기서 이것을 할 수 없습니다!</string>
     <string name="uninstall_summary">%s을(를) 제거하는 중</string>
