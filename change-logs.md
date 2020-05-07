@@ -1,5 +1,9 @@
 # Change-logs
 
+## 11. May 07, 2020
+*Release-tag: 1.6*<br>
+Added Russian and Ukrainian translations. Improved Greek translations. Miscellaneous changes.
+
 ## 10. May 02, 2020
 *Release-tag: 1.5*<br>
 Migrated to libsu (Credits: @Lennoard). Improved app UI. Moved batch options and app settings to the top description. Fixed rarely occurring item duplication. Simplified batch app tasks. Added a more detailed view for batch options and split apk installation. Added Portuguese (Brazilian) translations (Credits: @Lennoard). Improved Korean translations (Credits: @SmgKhOaRn). Updated malayalam translations. Miscellaneous changes.

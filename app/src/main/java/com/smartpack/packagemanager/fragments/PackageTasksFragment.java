@@ -260,7 +260,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                             text += ".tar.gz";
                                                         }
                                                         if (text.contains(" ")) {
-                                                            text = text.replace(" ", "_");
+                                                            text = text.replaceAll(" ", "_");
                                                         }
                                                         if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
                                                             Utils.showSnackbar(getRootView(), getString(R.string.already_exists, text));
