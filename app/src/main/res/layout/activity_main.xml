@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7791710838910455/5329474187">
+        ads:adUnitId="ca-app-pub-2781194772510522/3410087547">
     </com.google.android.gms.ads.AdView>
 
     <androidx.viewpager.widget.ViewPager

@@ -92,9 +92,9 @@ public class Utils {
     }
 
     public void initializeGoogleAds(Context context) {
-        MobileAds.initialize(context, "ca-app-pub-7791710838910455~4399535899");
+        MobileAds.initialize(context, "ca-app-pub-2781194772510522~2288577561");
         mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-7791710838910455/7664681843");
+        mInterstitialAd.setAdUnitId("ca-app-pub-2781194772510522/7110964686");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
 
