@@ -324,6 +324,10 @@ public class DescriptionFragment extends BaseFragment {
                     .setChecked(Utils.getBoolean("use_ml", false, getActivity()));
             language.add(Menu.NONE, 18, Menu.NONE, getString(R.string.language_pt)).setCheckable(true)
                     .setChecked(Utils.getBoolean("use_pt", false, getActivity()));
+            language.add(Menu.NONE, 19, Menu.NONE, getString(R.string.language_ru)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_ru", false, getActivity()));
+            language.add(Menu.NONE, 20, Menu.NONE, getString(R.string.language_uk)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("use_uk", false, getActivity()));
             if (!Utils.isNotDonated(requireActivity())) {
                 menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
                         .setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
@@ -412,78 +416,63 @@ public class DescriptionFragment extends BaseFragment {
                         break;
                     case 12:
                         if (!Utils.languageDefault(getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            Utils.saveBoolean("use_am", false, getActivity());
-                            Utils.saveBoolean("use_el", false, getActivity());
-                            Utils.saveBoolean("use_ml", false, getActivity());
-                            Utils.saveBoolean("use_pt", false, getActivity());
+                            Utils.setDefaultLanguage(getActivity());
                             restartApp();
                         }
                         break;
                     case 13:
                         if (!Utils.getBoolean("use_english", false, getActivity())) {
+                            Utils.setDefaultLanguage(getActivity());
                             Utils.saveBoolean("use_english", true, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            Utils.saveBoolean("use_am", false, getActivity());
-                            Utils.saveBoolean("use_el", false, getActivity());
-                            Utils.saveBoolean("use_ml", false, getActivity());
-                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
                     case 14:
                         if (!Utils.getBoolean("use_korean", false, getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
+                            Utils.setDefaultLanguage(getActivity());
                             Utils.saveBoolean("use_korean", true, getActivity());
-                            Utils.saveBoolean("use_am", false, getActivity());
-                            Utils.saveBoolean("use_el", false, getActivity());
-                            Utils.saveBoolean("use_ml", false, getActivity());
-                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
                     case 15:
                         if (!Utils.getBoolean("use_am", false, getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
+                            Utils.setDefaultLanguage(getActivity());
                             Utils.saveBoolean("use_am", true, getActivity());
-                            Utils.saveBoolean("use_el", false, getActivity());
-                            Utils.saveBoolean("use_ml", false, getActivity());
-                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
                     case 16:
                         if (!Utils.getBoolean("use_el", false, getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            Utils.saveBoolean("use_am", false, getActivity());
+                            Utils.setDefaultLanguage(getActivity());
                             Utils.saveBoolean("use_el", true, getActivity());
-                            Utils.saveBoolean("use_ml", false, getActivity());
-                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
                     case 17:
                         if (!Utils.getBoolean("use_ml", false, getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            Utils.saveBoolean("use_am", false, getActivity());
-                            Utils.saveBoolean("use_el", false, getActivity());
+                            Utils.setDefaultLanguage(getActivity());
                             Utils.saveBoolean("use_ml", true, getActivity());
-                            Utils.saveBoolean("use_pt", false, getActivity());
                             restartApp();
                         }
                         break;
                     case 18:
                         if (!Utils.getBoolean("use_pt", false, getActivity())) {
-                            Utils.saveBoolean("use_english", false, getActivity());
-                            Utils.saveBoolean("use_korean", false, getActivity());
-                            Utils.saveBoolean("use_am", false, getActivity());
-                            Utils.saveBoolean("use_el", false, getActivity());
-                            Utils.saveBoolean("use_ml", false, getActivity());
+                            Utils.setDefaultLanguage(getActivity());
                             Utils.saveBoolean("use_pt", true, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 19:
+                        if (!Utils.getBoolean("use_ru", false, getActivity())) {
+                            Utils.setDefaultLanguage(getActivity());
+                            Utils.saveBoolean("use_ru", true, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 20:
+                        if (!Utils.getBoolean("use_uk", false, getActivity())) {
+                            Utils.setDefaultLanguage(getActivity());
+                            Utils.saveBoolean("use_uk", true, getActivity());
                             restartApp();
                         }
                         break;

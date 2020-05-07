@@ -299,13 +299,26 @@ public class Utils {
         }).show();
     }
 
+    public static void setDefaultLanguage(Context context) {
+        Utils.saveBoolean("use_english", false, context);
+        Utils.saveBoolean("use_korean", false, context);
+        Utils.saveBoolean("use_am", false, context);
+        Utils.saveBoolean("use_el", false, context);
+        Utils.saveBoolean("use_ml", false, context);
+        Utils.saveBoolean("use_pt", false, context);
+        Utils.saveBoolean("use_ru", false, context);
+        Utils.saveBoolean("use_uk", false, context);
+    }
+
     public static boolean languageDefault(Context context) {
         return !Utils.getBoolean("use_english", false, context)
                 && !Utils.getBoolean("use_korean", false, context)
                 && !Utils.getBoolean("use_am", false, context)
                 && !Utils.getBoolean("use_el", false, context)
                 && !Utils.getBoolean("use_ml", false, context)
-                && !Utils.getBoolean("use_pt", false, context);
+                && !Utils.getBoolean("use_pt", false, context)
+                && !Utils.getBoolean("use_ru", false, context)
+                && !Utils.getBoolean("use_uk", false, context);
     }
 
     public static String getLanguage(Context context) {
@@ -321,6 +334,10 @@ public class Utils {
             return  "ml";
         } else if (getBoolean("use_pt", false, context)) {
             return  "pt";
+        } else if (getBoolean("use_ru", false, context)) {
+            return  "ru";
+        } else if (getBoolean("use_uk", false, context)) {
+            return  "uk";
         } else {
             return java.util.Locale.getDefault().getLanguage();
         }
