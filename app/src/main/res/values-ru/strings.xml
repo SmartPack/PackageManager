@@ -1,25 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    
+
     <string name="about">О программе</string>
-    <string name="about_summary"><i>Простое, но мощное приложение для управления вашими приложениями.</i>\n\n<b>Благодарности</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейский перевод\n<b><i>tsiflimagas</i></b>: Греческий перевод\n<b><i>Lennoard Silva</i></b>: Португальский (Br) перевод\n<b><i>Mikesew1320</i></b>: Амхарский перевод\n<b><i>MONSTER_PC</i></b>: Русский перевод\n<b><i>Toxinpiper</i></b>: Иконка приложения</string>
+    <string name="about_summary"><i>Простое, но мощное приложение для управления вашими приложениями.</i>\n\n<b>Благодарности</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Базовый код)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейский перевод\n<b><i>tsiflimagas</i></b>: Греческий перевод\n<b><i>Lennoard Silva</i></b>: Португальский (Br) перевод\n<b><i>Mikesew1320</i></b>: Амхарский перевод\n<b><i>MONSTER_PC</i></b>: Русский и Украинский перевод\n<b><i>Toxinpiper</i></b>: Значок приложения</string>
     <string name="allow_ads">Разрешить рекламу</string>
-    <string name="always_show">Показать всегда</string>
+    <string name="always_show">Всегда показывать</string>
     <string name="already_exists">%s уже существует! Неудача!</string>
     <string name="app_info">Информация о приложении</string>
+    <string name="app_name_summary">Приложение для управления вашими приложениями</string>
     <string name="backing_summary">Резервное копирование файлов данных %s</string>
     <string name="backup">Резервное копирование</string>
     <string name="backing_up">Резервное копирование %s (только данные) в \'/sdcard/Package_Manager/\'</string>
     <string name="batch_backup_finished">Резервные файлы создаются в \'%s\'</string>
     <string name="batch_list_clear">Очистить список</string>
-    <string name="batch_list_disable">Очистить список</string>
+    <string name="batch_list_disable">Вы уверены, что хотите отключить (если включено) или включить (если отключено) следующие приложения?</string>
     <string name="batch_list_backup">Вы уверены, что сделали резервную копию (только данные) следующих приложений?</string>
-    <string name="batch_list_empty">Ничего не добавлено в список партий!</string>
-    <string name="batch_list_remove">Вы уверены, что удалили следующие приложения?</string>
+    <string name="batch_list_empty">Ничего не добавлено в список пакетов!</string>
+    <string name="batch_list_remove">Вы уверены, что хотите удалить следующие приложения?</string>
     <string name="batch_list_summary">Следующие приложения добавляются в список пакетов</string>
     <string name="batch_processing">Выполняется пакетная обработка!</string>
     <string name="batch_processing_finished">Пакетная обработка завершена!</string>
     <string name="batch_processing_initialized">Инициализация пакетного процесса</string>
-    <string name="batch_warning">Ваши настройки пакета будут удалены! Ты уверен?</string>
+    <string name="batch_warning">Ваши настройки пакетов будут удалены! Ты уверен?</string>
     <string name="bundle_install">Вы уверены, что хотите установить split apks из \'%s\'?\n\nОбратите внимание: установка split apks может не всегда работать хорошо, особенно если apks извлечены с другого устройства. Также, пожалуйста, убедитесь, что все необходимые (только необходимые) apks доступны в выбранной папке, чтобы избежать сбоя установки!</string>
     <string name="cancel">Отмена</string>
     <string name="cleaning_message">Очистка временных файлов</string>
@@ -30,11 +31,11 @@
     <string name="creating_directory_message">Создание временного рабочего каталога</string>
     <string name="dark_theme">Тёмная тема</string>
     <string name="disable_message">будет %s! Ты уверен?</string>
-    <string name="disabled">отключен</string>
-    <string name="disabled_message">%s в настоящее время отключен! Пожалуйста, включите его сначала и попробуйте снова!</string>
+    <string name="disabled">отключено</string>
+    <string name="disabled_message">%s в настоящее время отключено! Пожалуйста, включите его сначала и попробуйте снова!</string>
     <string name="disabling">Отключение %s</string>
     <string name="done">Готово</string>
-    <string name="enabled">включен</string>
+    <string name="enabled">включено</string>
     <string name="enabling">Включение %s</string>
     <string name="export">Экспорт</string>
     <string name="export_summary">экспортируется в %s. Вы хотите поделиться этим?</string>
@@ -58,6 +59,7 @@
     <string name="language_ml">Малаяламский</string>
     <string name="language_pt">Португальский</string>
     <string name="language_ru">Русский</string>
+    <string name="language_uk">Украинский</string>
     <string name="more">Больше</string>
     <string name="more_apps">Больше от разработчика</string>
     <string name="name">Имя</string>
@@ -67,7 +69,7 @@
     <string name="ok">ОК</string>
     <string name="open">Открыть</string>
     <string name="open_message">Вы уже запускаете это приложение.</string>
-    <string name="open_failed">%s не предназначен для работы в пространстве пользователя!</string>
+    <string name="open_failed">%s не предназначено для работы в пространстве пользователя!</string>
     <string name="options">Опции</string>
     <string name="package_id">Идентификатор пакета</string>
     <string name="permission_denied_write_storage">В разрешении на запись в хранилище отказано!</string>
@@ -100,6 +102,6 @@
     <string name="uninstall_warning">Обратите внимание: удаление системных приложений будет иногда опасно!\n\n *** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b>> ***\n</string>
     <string name="user">Показать пользовательские приложения</string>
     <string name="welcome_message"><b>Добро пожаловать в Package Manager</b>, простое, но мощное приложение для управления вашими приложениями.\n\n*** <b>ПРЕДУПРЕЖДЕНИЕ</b> ***\nЭто приложение слишком мощное, чтобы испортить ваше устройство. Разработчик этого приложения не несет никакой ответственности, если с вашим устройством что-то случилось.</string>
-    <string name="wrong_extension">Please select a file with %s extension.</string>
+    <string name="wrong_extension">Пожалуйста, выберите файл с %s расширением.</string>
     <string name="yes">Да</string>
 </resources>
