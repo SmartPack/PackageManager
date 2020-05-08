@@ -12,14 +12,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.PagerAdapter;
@@ -41,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Initialize Dark Theme & Google Ads
+        // Initialize Dark Theme & FaceBook Ads
         Utils.initializeAppTheme(this);
-        Utils.getInstance().initializeGoogleAds(this);
+        Utils.getInstance().initializeFaceBookAds(this);
         super.onCreate(savedInstanceState);
         // Set App Language
         Utils.setLanguage(this);
@@ -64,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if (Utils.getBoolean("allow_ads", true, this)) {
-            AdView mAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder()
-                    .build();
-            mAdView.loadAd(adRequest);
+            AdView mAdView = new AdView(this, "721915415222020_721917968555098", AdSize.BANNER_HEIGHT_50);
+            LinearLayout adContainer = findViewById(R.id.banner_container);
+            adContainer.addView(mAdView);
+            mAdView.loadAd();
         }
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageTasksFragment(), "");

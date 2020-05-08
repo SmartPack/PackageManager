@@ -20,10 +20,6 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="q" >
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2781194772510522~2288577561" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

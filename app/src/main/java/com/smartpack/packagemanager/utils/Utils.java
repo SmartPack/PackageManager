@@ -30,9 +30,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
@@ -65,8 +63,6 @@ public class Utils {
         return sInstance;
     }
 
-    private InterstitialAd mInterstitialAd;
-
     public static boolean isPackageInstalled(String packageID, Context context) {
         try {
             context.getPackageManager().getApplicationInfo(packageID, 0);
@@ -91,17 +87,8 @@ public class Utils {
         }
     }
 
-    public void initializeGoogleAds(Context context) {
-        MobileAds.initialize(context, "ca-app-pub-2781194772510522~2288577561");
-        mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-2781194772510522/7110964686");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-    }
-
-    public void showInterstitialAd(Context context) {
-        if (getBoolean("allow_ads", true, context) && mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
+    public void initializeFaceBookAds(Context context) {
+        AudienceNetworkAds.initialize(context);
     }
 
     public static boolean isTablet(Context context) {
