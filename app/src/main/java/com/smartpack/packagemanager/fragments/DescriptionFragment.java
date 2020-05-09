@@ -10,6 +10,8 @@ package com.smartpack.packagemanager.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -46,6 +48,9 @@ import java.lang.ref.WeakReference;
  */
 
 public class DescriptionFragment extends BaseFragment {
+
+    private View mRootView;
+
     @SuppressLint("StaticFieldLeak")
     @Nullable
     @Override
@@ -58,9 +63,9 @@ public class DescriptionFragment extends BaseFragment {
         }
         final PackageTasksFragment systemAppsFragment = (PackageTasksFragment) fragment;
 
-        View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_description, container, false);
 
-        AppCompatEditText keyEdit = rootView.findViewById(R.id.key_edittext);
+        AppCompatEditText keyEdit = mRootView.findViewById(R.id.key_edittext);
 
         keyEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,11 +88,11 @@ public class DescriptionFragment extends BaseFragment {
             keyEdit.append(PackageTasks.mAppName);
         }
 
-        AppCompatImageButton batch = rootView.findViewById(R.id.batch_icon);
+        AppCompatImageButton batch = mRootView.findViewById(R.id.batch_icon);
         batch.setImageDrawable(getResources().getDrawable(R.drawable.ic_queue));
         batch.setOnClickListener(v -> {
             if (RootUtils.rootAccessDenied()) {
-                Utils.showSnackbar(rootView, getString(R.string.no_root));
+                Utils.showSnackbar(mRootView, getString(R.string.no_root));
                 return;
             }
             PopupMenu popupMenu = new PopupMenu(requireActivity(), batch);
@@ -102,9 +107,9 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.isStorageWritePermissionDenied(requireActivity())) {
                             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                            Utils.toast(R.string.permission_denied_write_storage, getActivity());
+                            Utils.showSnackbar(mRootView, getString(R.string.permission_denied_write_storage));
                         } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                            Utils.toast(getString(R.string.batch_list_empty), getActivity());
+                            Utils.showSnackbar(mRootView, getString(R.string.batch_list_empty));
                         } else {
                             Dialog backup = new Dialog(requireActivity());
                             backup.setIcon(R.mipmap.ic_launcher);
@@ -162,7 +167,7 @@ public class DescriptionFragment extends BaseFragment {
                         break;
                     case 1:
                         if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                            Utils.toast(getString(R.string.batch_list_empty), getActivity());
+                            Utils.showSnackbar(mRootView, getString(R.string.batch_list_empty));
                         } else {
                             Dialog turnoff = new Dialog(requireActivity());
                             turnoff.setIcon(R.mipmap.ic_launcher);
@@ -225,7 +230,7 @@ public class DescriptionFragment extends BaseFragment {
                         break;
                     case 2:
                         if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                            Utils.toast(getString(R.string.batch_list_empty), getActivity());
+                            Utils.showSnackbar(mRootView, getString(R.string.batch_list_empty));
                         } else {
                             Dialog uninstall = new Dialog(requireActivity());
                             uninstall.setIcon(R.mipmap.ic_launcher);
@@ -283,7 +288,7 @@ public class DescriptionFragment extends BaseFragment {
                         break;
                     case 3:
                         if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                            Utils.toast(getString(R.string.batch_list_empty), getActivity());
+                            Utils.showSnackbar(mRootView, getString(R.string.batch_list_empty));
                         } else {
                             PackageTasks.mBatchApps.setLength(0);
                             systemAppsFragment.reload();
@@ -295,7 +300,7 @@ public class DescriptionFragment extends BaseFragment {
             popupMenu.show();
         });
 
-        AppCompatImageButton settings = rootView.findViewById(R.id.settings_icon);
+        AppCompatImageButton settings = mRootView.findViewById(R.id.settings_icon);
         settings.setImageDrawable(getResources().getDrawable(R.drawable.ic_settings));
         settings.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), settings);
@@ -397,7 +402,7 @@ public class DescriptionFragment extends BaseFragment {
                         restartApp();
                         break;
                     case 7:
-                        Utils.launchUrl("https://t.me/smartpack_kmanager", getActivity());
+                        launchURL("https://t.me/smartpack_kmanager", getActivity());
                         break;
                     case 8:
                         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -406,10 +411,10 @@ public class DescriptionFragment extends BaseFragment {
                         startActivity(intent);
                         break;
                     case 9:
-                        Utils.launchUrl("https://github.com/SmartPack/PackageManager/issues/new", getActivity());
+                        launchURL("https://github.com/SmartPack/PackageManager/issues/new", getActivity());
                         break;
                     case 10:
-                        Utils.launchUrl("https://github.com/SmartPack/PackageManager/", getActivity());
+                        launchURL("https://github.com/SmartPack/PackageManager/", getActivity());
                         break;
                     case 11:
                         aboutDialogue();
@@ -482,7 +487,21 @@ public class DescriptionFragment extends BaseFragment {
             popupMenu.show();
         });
 
-        return rootView;
+        return mRootView;
+    }
+
+    private void launchURL(String url, Context context) {
+        if (Utils.isNetworkAvailable(context)) {
+            try {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Utils.showSnackbar(mRootView, getString(R.string.no_internet));
+        }
     }
 
     private void restartApp() {

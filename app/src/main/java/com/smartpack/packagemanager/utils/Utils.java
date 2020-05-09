@@ -8,11 +8,8 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -24,16 +21,12 @@ import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityCompat;
 
 import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
-import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.root.RootFile;
 import com.smartpack.packagemanager.utils.root.RootUtils;
 
@@ -43,7 +36,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 /*
@@ -53,15 +45,6 @@ import java.util.Locale;
  */
 
 public class Utils {
-
-    private static Utils sInstance;
-
-    public static Utils getInstance() {
-        if (sInstance == null) {
-            sInstance = new Utils();
-        }
-        return sInstance;
-    }
 
     public static boolean isPackageInstalled(String packageID, Context context) {
         try {
@@ -87,7 +70,7 @@ public class Utils {
         }
     }
 
-    public void initializeFaceBookAds(Context context) {
+    public static void initializeFaceBookAds(Context context) {
         AudienceNetworkAds.initialize(context);
     }
 
@@ -96,36 +79,10 @@ public class Utils {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    public static void toast(String message, Context context) {
-        toast(message, context, Toast.LENGTH_SHORT);
-    }
-
-    public static void toast(@StringRes int id, Context context) {
-        toast(context.getString(id), context);
-    }
-
-    private static void toast(String message, Context context, int duration) {
-        Toast.makeText(context, message, duration).show();
-    }
-
     public static void showSnackbar(View view, String message) {
         Snackbar snackbar;
         snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
         snackbar.show();
-    }
-
-    public static void launchUrl(String url, Context context) {
-        if (!isNetworkAvailable(context)) {
-            Utils.toast(R.string.no_internet, context);
-            return;
-        }
-        try {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            context.startActivity(i);
-        } catch (ActivityNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public static CharSequence htmlFrom(String text) {
@@ -176,7 +133,7 @@ public class Utils {
         RootUtils.runCommand("cp -r " + source + " " + dest);
     }
 
-    static void create(String text, String path) {
+    public static void create(String text, String path) {
         try {
             File logFile = new File(path);
             logFile.createNewFile();
@@ -229,7 +186,7 @@ public class Utils {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
-    private static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         return (cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isConnectedOrConnecting();
@@ -251,39 +208,6 @@ public class Utils {
 
     public static void saveBoolean(String name, boolean value, Context context) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(name, value).apply();
-    }
-
-    public static String copyRightPath() {
-        return Environment.getExternalStorageDirectory().toString() + "/Package_Manager/copyright";
-    }
-
-    public static void setCopyRightText(WeakReference<Activity> activityRef) {
-        if (isStorageWritePermissionDenied(activityRef.get())) {
-            ActivityCompat.requestPermissions(activityRef.get(), new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            toast(R.string.permission_denied_write_storage, activityRef.get());
-            return;
-        }
-        String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
-        File file = new File(PACKAGES);
-        if (file.exists() && file.isFile()) {
-            file.delete();
-        }
-        file.mkdirs();
-        ViewUtils.dialogEditText(readFile(copyRightPath()),
-                (dialogInterface, i) -> {
-                }, text -> {
-                    if (text.equals(readFile(copyRightPath()))) return;
-                    if (text.isEmpty()) {
-                        new File(copyRightPath()).delete();
-                        toast(activityRef.get().getString(R.string.copyright_default, activityRef.get()
-                                .getString(R.string.copyright)), activityRef.get());
-                        return;
-                    }
-                    create(text, copyRightPath());
-                    toast(activityRef.get().getString(R.string.copyright_message, text), activityRef.get());
-                }, activityRef.get()).setOnDismissListener(dialogInterface -> {
-        }).show();
     }
 
     public static void setDefaultLanguage(Context context) {
