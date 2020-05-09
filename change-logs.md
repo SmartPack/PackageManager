@@ -1,5 +1,9 @@
 # Change-logs
 
+## 12. May 09, 2020
+*Release-tag: 1.7*<br>
+Removed interstitial ads from app. Replace toast messages with snackbar. Miscellaneous changes.
+
 ## 11. May 07, 2020
 *Release-tag: 1.6*<br>
 Added Russian and Ukrainian translations. Improved Greek translations. Miscellaneous changes.
