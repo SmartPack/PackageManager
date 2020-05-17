@@ -1,5 +1,9 @@
 # Change-logs
 
+## 13. May 17, 2020
+*Release-tag: 1.8*<br>
+Brand New About & Change-log view. Updated Korean translations (Credits: @SmgKhOaRn). Miscellaneous changes.
+
 ## 12. May 09, 2020
 *Release-tag: 1.7*<br>
 Removed interstitial ads from app. Replace toast messages with snackbar. Miscellaneous changes.
