@@ -2,7 +2,7 @@
     <!--Author: Mikesew1320 <mikesew1320@gmail.com>-->
 
     <string name="about">ስለ እኛ</string>
-    <string name="about_summary"><i>በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ</i>\n\n&#169;<b>sunilpaulmathew</b>\n\n<b>ምስጋና</b>\n<b><i>Grarak</i></b>: KernelAdiutor (መነሻ ኮድ)\n<b><i>SmgKhOaRn</i></b>: ኮርያኛ ትርጉም\n<b><i>Toxinpiper</i></b>: የመተግበሪያ ምስል</string>
+    <string name="about_summary"><i>በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ</i>\n\n&#169;<b>sunilpaulmathew</b></string>
     <string name="allow_ads">ማስታወቂያዎች እንዲታዩ ፍቀድ</string>
     <string name="always_show">ሁልጊዜ አሳይ</string>
     <string name="already_exists">%s ቀድሞዉኑ ነበር! በማቋረጥ ላይ</string>
@@ -17,6 +17,8 @@
     <string name="backing_up">%s ዉሂብ ብቻ ወደ \'/sdcard/Package_Manager/\' መጠባበቂያ በመያዝ ላይ</string>
     <string name="bundle_install">እርግጠኛ ኖት ክፍልፍል መተግበሪያን ከ \'%s\' መጫን ይፈልጋሉ?\n\ማሳሰቢያ! ክፍልፍል መተግበሪያን ለመጫን መሞከር ሁልጊዜ ላይሳካ ይችላል፤በተለይ የሚጫነው ክፍልፍል መተግበሪያ ከሌላ ስልክ የተገኘ ከሆነ እንዲሁም ሁሉም ወሳኝ የሆኑት ክፍልፍል መተግበሪያዎች በመረጡት ማህደር ዉስጥ መኖራቸዉን እርግጠኛ ይሁኑ!</string>
     <string name="cancel">ተዉ</string>
+    <string name="credits">ምስጋና</string>
+    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (መነሻ ኮድ)\n<b><i>SmgKhOaRn</i></b>: ኮርያኛ ትርጉም\n<b><i>Toxinpiper</i></b>: የመተግበሪያ ምስል</string>
     <string name="dark_theme">ጠቆር ያለ ገፅታ</string>
     <string name="disable_message">%s መጠቀም አይችሉም! እርግጠኛ ኖት?</string>
     <string name="disabled">ጠፍቷል</string>

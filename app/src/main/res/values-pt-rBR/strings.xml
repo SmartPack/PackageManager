@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="about">Sobre</string>
-    <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i>\n\n<b>Créditos</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Báse de código)\n<b><i>SmgKhOaRn</i></b>: Tradção coreana\n<b><i>tsiflimagas</i></b>: Tradução grega\n<b><i>Lennoard Silva</i></b>: Tradução portuguesa (BR)\n<b><i>Toxinpiper</i></b>: Ícone do app</string>
+    <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i>\n\n&#169;<b>sunilpaulmathew</b></string>
     <string name="allow_ads">Permitir anúncios</string>
     <string name="always_show">Sempre mostrar</string>
     <string name="already_exists">%s já existe! Abortando!</string>
@@ -16,6 +16,8 @@
     <string name="bundle_install">Você tem certeza de instalar os apks divididos em \'%s\'?\n\nPor favor, observe: A instalação de aplicativos divididos nem sempre funciona bem, especialmente se os apks foram extraídos de um dispositivo diferente. Além disso, verifique se todos os apk necessários (apenas os necessários) estão disponíveis na pasta selecionada para evitar falhas na instalação!</string>
     <string name="cancel">Cancelar</string>
     <string name="copyright">&#169;<b>SmartPack Projects</b></string>
+    <string name="credits">Créditos</string>
+    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (Báse de código)\n<b><i>SmgKhOaRn</i></b>: Tradção coreana\n<b><i>tsiflimagas</i></b>: Tradução grega\n<b><i>Lennoard Silva</i></b>: Tradução portuguesa (BR)\n<b><i>Toxinpiper</i></b>: Ícone do app</string>
     <string name="dark_theme">Tema escuro</string>
     <string name="disable_message">será %s! Tem certeza?</string>
     <string name="disabled">desativado</string>

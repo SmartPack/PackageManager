@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="about">Про додаток</string>
-    <string name="about_summary"><i>Простий, але потужний додаток для управління вашими програмами.</i>\n\n<b>Подяки</b>\n<b><i>Grarak</i></b>: KernelAdiutor (Базовий код)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейський переклад\n<b><i>tsiflimagas</i></b>: Грецький переклад\n<b><i>Lennoard Silva</i></b>: Португальський (Br) переклад\n<b><i>Mikesew1320</i></b>: Амхарський переклад\n<b><i>MONSTER_PC</i></b>: Російський та Український переклад\n<b><i>Toxinpiper</i></b>: Значок додатка</string>
+    <string name="about_summary"><i>Простий, але потужний додаток для управління вашими програмами.</i>\n\n&#169;<b>sunilpaulmathew</b></string>
     <string name="allow_ads">Дозволити рекламу</string>
     <string name="always_show">Завжди показувати</string>
     <string name="already_exists">%s вже існує! Невдача!</string>
@@ -29,6 +29,8 @@
     <string name="copyright_message">Новий текст авторських прав, %s, буде застосовано під час наступного запуску програми!</string>
     <string name="copying_apk_message">Копіювання Split APKs у робочий каталог</string>
     <string name="creating_directory_message">Створення тимчасового робочого каталогу</string>
+    <string name="credits">Подяки</string>
+    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (Базовий код)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейський переклад\n<b><i>tsiflimagas</i></b>: Грецький переклад\n<b><i>Lennoard Silva</i></b>: Португальський (Br) переклад\n<b><i>Mikesew1320</i></b>: Амхарський переклад\n<b><i>MONSTER_PC</i></b>: Російський та Український переклад\n<b><i>Toxinpiper</i></b>: Значок додатка</string>
     <string name="dark_theme">Темна тема</string>
     <string name="disable_message">буде %s! Ти впевнений?</string>
     <string name="disabled">відключено</string>

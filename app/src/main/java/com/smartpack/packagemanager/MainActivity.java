@@ -59,6 +59,23 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewPagerID);
         AppCompatTextView copyRightText = findViewById(R.id.copyright_Text);
 
+        Utils.mForegroundCard = findViewById(R.id.foreground_card);
+        Utils.mBack = findViewById(R.id.back);
+        Utils.mAppIcon = findViewById(R.id.app_image);
+        Utils.mCardTitle = findViewById(R.id.card_title);
+        Utils.mAppName = findViewById(R.id.app_title);
+        Utils.mAboutApp = findViewById(R.id.about_app);
+        Utils.mCreditsTitle = findViewById(R.id.credits_title);
+        Utils.mCredits = findViewById(R.id.credits);
+        Utils.mForegroundText = findViewById(R.id.foreground_text);
+        Utils.mCancel = findViewById(R.id.cancel_button);
+        Utils.mBack.setOnClickListener(v -> {
+            Utils.closeForeground();
+        });
+        Utils.mCancel.setOnClickListener(v -> {
+            Utils.closeForeground();
+        });
+
         // Allow changing Copyright Text
         if (Utils.readFile(copyright) != null) {
             copyRightText.setText(Utils.readFile(copyright));
@@ -148,7 +165,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
+        if (Utils.mForegroundActive) {
+            Utils.closeForeground();
+        } else if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
             new Dialog(this)
                     .setMessage(R.string.batch_warning)
                     .setCancelable(false)

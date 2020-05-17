@@ -32,7 +32,6 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageTasks;
@@ -91,6 +90,7 @@ public class DescriptionFragment extends BaseFragment {
         AppCompatImageButton batch = mRootView.findViewById(R.id.batch_icon);
         batch.setImageDrawable(getResources().getDrawable(R.drawable.ic_queue));
         batch.setOnClickListener(v -> {
+            if (Utils.mForegroundActive) return;
             if (RootUtils.rootAccessDenied()) {
                 Utils.showSnackbar(mRootView, getString(R.string.no_root));
                 return;
@@ -303,6 +303,7 @@ public class DescriptionFragment extends BaseFragment {
         AppCompatImageButton settings = mRootView.findViewById(R.id.settings_icon);
         settings.setImageDrawable(getResources().getDrawable(R.drawable.ic_settings));
         settings.setOnClickListener(v -> {
+            if (Utils.mForegroundActive) return;
             PopupMenu popupMenu = new PopupMenu(requireActivity(), settings);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.system)).setCheckable(true)
@@ -340,10 +341,11 @@ public class DescriptionFragment extends BaseFragment {
             menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
                     .setChecked(Utils.getBoolean("dark_theme", true, getActivity()));
             SubMenu about = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.about));
+            about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.source_code));
             about.add(Menu.NONE, 7, Menu.NONE, getString(R.string.support));
             about.add(Menu.NONE, 8, Menu.NONE, getString(R.string.more_apps));
             about.add(Menu.NONE, 9, Menu.NONE, getString(R.string.report_issue));
-            about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.source_code));
+            about.add(Menu.NONE, 21, Menu.NONE, getString(R.string.change_logs));
             about.add(Menu.NONE, 11, Menu.NONE, getString(R.string.about));
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
@@ -417,7 +419,7 @@ public class DescriptionFragment extends BaseFragment {
                         launchURL("https://github.com/SmartPack/PackageManager/", getActivity());
                         break;
                     case 11:
-                        aboutDialogue();
+                        Utils.aboutDialogue(requireActivity());
                         break;
                     case 12:
                         if (!Utils.languageDefault(getActivity())) {
@@ -481,6 +483,9 @@ public class DescriptionFragment extends BaseFragment {
                             restartApp();
                         }
                         break;
+                    case 21:
+                        Utils.changeLogs(requireActivity());
+                        break;
                 }
                 return false;
             });
@@ -508,16 +513,6 @@ public class DescriptionFragment extends BaseFragment {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-    private void aboutDialogue() {
-        new Dialog(requireActivity())
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(getString(R.string.app_name) + "\nv" + BuildConfig.VERSION_NAME)
-                .setMessage(getText(R.string.about_summary))
-                .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                })
-                .show();
     }
 
 }
