@@ -23,13 +23,14 @@
     <string name="batch_warning">여러분의 모음집이 초기화될 것입니다. 계속하시겠어요?</string>
     <string name="bundle_install">\'%s\'에 위치한 Split Apks를 설치합니다. 계속하시겠어요? \n\n 반드시 알아두기: 특히 만약 앱이 다른 기기에서 추출되었다면, Split Apks를 설치하는 것은 잘 작동되지 않을 수 있습니다. 또한, 설치 실패를 피하기 위해 필요한 파일들이 선택된 폴더 안에 있는지 확인해주세요!</string>
     <string name="cancel">취소</string>
+    <string name="change_logs">변경사항</string>
     <string name="cleaning_message">임시 파일들을 지우는 중</string>
     <string name="copyright_default">기본 저작권 표시 글인 %s이 다음에 앱을 실행할 때 적용될 것입니다!</string>
     <string name="copyright_message">새 저작권 표시 글인 %s이 다음에 앱을 실행할 떄 적용될 것입니다!</string>
     <string name="copying_apk_message">Split APKs를 임시 폴더로 복사하는 중</string>
     <string name="creating_directory_message">임시 폴더를 생성하는 중</string>
     <string name="credits">도움을 주신 분들</string>
-    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>topjohnwu</i></b>: libsu 라이브러리\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>tsiflimagas</i></b>: 그리스어 번역\n<b><i>Lennoard Silva</i></b>: 브라질 포르투갈어 번역\n<b><i>Mikesew1320</i></b>: 에티오피아어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
+    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (코드 기반)\n<b><i>topjohnwu</i></b>: libsu 라이브러리\n<b><i>SmgKhOaRn</i></b>: 한국어 번역\n<b><i>tsiflimagas</i></b>: 그리스어 번역\n<b><i>Lennoard Silva</i></b>: 브라질 포르투갈어 번역\n<b><i>Mikesew1320</i></b>: 에티오피아어 번역\n<b><i>MONSTER_PC</i></b>: 러시아어 &amp; 우크라이나어 번역\n<b><i>Toxinpiper</i></b>: 앱 아이콘</string>
     <string name="dark_theme">어두운 테마</string>
     <string name="disabled">비활성화</string>
     <string name="disable_message">을(를) %s합니다. 계속하시겠어요?</string>
@@ -58,6 +59,8 @@
     <string name="language_el">그리스어</string>
     <string name="language_ml">말라얄람어</string>
     <string name="language_pt">브라질 포어</string>
+    <string name="language_ru">러시아어</string>
+    <string name="language_uk">우크라이나어</string>
     <string name="more">더보기</string>
     <string name="more_apps">개발자의 다른 앱들 보기</string>
     <string name="name">이름</string>
