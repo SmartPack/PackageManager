@@ -177,7 +177,22 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 continue;
             }
             boolean mAppType;
-            if (Utils.getBoolean("system_apps", true, getActivity())
+            if (Utils.getBoolean("google_apps", true, getActivity())) {
+                mAppType = packageInfo.packageName.startsWith("com.google.android.");
+            } else if (Utils.getBoolean("samsung_apps", true, getActivity())) {
+                mAppType = packageInfo.packageName.startsWith("com.samsung.")
+                        || packageInfo.packageName.startsWith("com.sec.android.");
+            } else if (Utils.getBoolean("moto_apps", true, getActivity())) {
+                mAppType = packageInfo.packageName.startsWith("com.motorola.");
+            } else if (Utils.getBoolean("oneplus_apps", true, getActivity())) {
+                mAppType = packageInfo.packageName.startsWith("com.oneplus.");
+            } else if (Utils.getBoolean("sony_apps", true, getActivity())) {
+                mAppType = packageInfo.packageName.startsWith("com.sony.")
+                        || packageInfo.packageName.startsWith("jp.sony.")
+                        || packageInfo.packageName.startsWith("jp.co.sony.");
+            } else if (Utils.getBoolean("mi_apps", true, getActivity())) {
+                mAppType = packageInfo.packageName.startsWith("com.mi.") || packageInfo.packageName.startsWith("com.xiaomi.");
+            } else if (Utils.getBoolean("system_apps", true, getActivity())
                     && Utils.getBoolean("user_apps", true, getActivity())) {
                 mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
                         || (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0;

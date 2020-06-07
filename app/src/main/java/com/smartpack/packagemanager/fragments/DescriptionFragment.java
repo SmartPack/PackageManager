@@ -315,6 +315,19 @@ public class DescriptionFragment extends BaseFragment {
                     .setChecked(Utils.getBoolean("sort_name", true, getActivity()));
             sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sort_id", false, getActivity()));
+            SubMenu oem = sort.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.oem));
+            oem.add(Menu.NONE, 22, Menu.NONE, getString(R.string.oem_google)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("google_apps", false, getActivity()));
+            oem.add(Menu.NONE, 23, Menu.NONE, getString(R.string.oem_samsung)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("samsung_apps", false, getActivity()));
+            oem.add(Menu.NONE, 24, Menu.NONE, getString(R.string.oem_moto)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("moto_apps", false, getActivity()));
+            oem.add(Menu.NONE, 25, Menu.NONE, getString(R.string.oem_oneplus)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("oneplus_apps", false, getActivity()));
+            oem.add(Menu.NONE, 26, Menu.NONE, getString(R.string.oem_sony)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sony_apps", false, getActivity()));
+            oem.add(Menu.NONE, 27, Menu.NONE, getString(R.string.oem_mi)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("mi_apps", false, getActivity()));
             SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, Utils.getLanguage(getActivity())));
             language.add(Menu.NONE, 12, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
                     .setChecked(Utils.languageDefault(getActivity()));
@@ -356,6 +369,12 @@ public class DescriptionFragment extends BaseFragment {
                             Utils.saveBoolean("system_apps", false, getActivity());
                         } else {
                             Utils.saveBoolean("system_apps", true, getActivity());
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -364,6 +383,12 @@ public class DescriptionFragment extends BaseFragment {
                             Utils.saveBoolean("user_apps", false, getActivity());
                         } else {
                             Utils.saveBoolean("user_apps", true, getActivity());
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -485,6 +510,96 @@ public class DescriptionFragment extends BaseFragment {
                         break;
                     case 21:
                         Utils.changeLogs(requireActivity());
+                        break;
+                    case 22:
+                        if (Utils.getBoolean("google_apps", false, getActivity())) {
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                        } else {
+                            Utils.saveBoolean("google_apps", true, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
+                            Utils.saveBoolean("system_apps", false, getActivity());
+                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 23:
+                        if (Utils.getBoolean("samsung_apps", false, getActivity())) {
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                        } else {
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", true, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
+                            Utils.saveBoolean("system_apps", false, getActivity());
+                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 24:
+                        if (Utils.getBoolean("moto_apps", false, getActivity())) {
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                        } else {
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", true, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
+                            Utils.saveBoolean("system_apps", false, getActivity());
+                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 25:
+                        if (Utils.getBoolean("oneplus_apps", false, getActivity())) {
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                        } else {
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", true, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
+                            Utils.saveBoolean("system_apps", false, getActivity());
+                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 26:
+                        if (Utils.getBoolean("sony_apps", false, getActivity())) {
+                            Utils.saveBoolean("sony_apps", false, getActivity());
+                        } else {
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", true, getActivity());
+                            Utils.saveBoolean("system_apps", false, getActivity());
+                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 27:
+                        if (Utils.getBoolean("mi_apps", false, getActivity())) {
+                            Utils.saveBoolean("mi_apps", false, getActivity());
+                        } else {
+                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.saveBoolean("mi_apps", true, getActivity());
+                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.saveBoolean("sony_apps", false, getActivity());
+                            Utils.saveBoolean("system_apps", false, getActivity());
+                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
                         break;
                 }
                 return false;

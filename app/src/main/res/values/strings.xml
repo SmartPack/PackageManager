@@ -70,6 +70,13 @@
     <string name="name_empty">Name is empty! Aborting!</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
+    <string name="oem">OEM</string>
+    <string name="oem_google">Google</string>
+    <string name="oem_oneplus">OnePlus</string>
+    <string name="oem_mi">Mi</string>
+    <string name="oem_moto">Motorola</string>
+    <string name="oem_samsung">Samsung</string>
+    <string name="oem_sony">Sony</string>
     <string name="ok">OK</string>
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
