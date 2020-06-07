@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -129,10 +130,11 @@ public class Utils {
     }
 
     @SuppressLint("SetTextI18n")
-    public static void aboutDialogue(Context context) {
+    public static void aboutDialogue(Activity activity) {
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         mCardTitle.setText(R.string.about);
-        mAppName.setText(context.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
-        mCredits.setText(context.getString(R.string.credits_summary));
+        mAppName.setText(activity.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
+        mCredits.setText(activity.getString(R.string.credits_summary));
         mCardTitle.setVisibility(View.VISIBLE);
         mBack.setVisibility(View.VISIBLE);
         mAppIcon.setVisibility(View.VISIBLE);
@@ -146,14 +148,15 @@ public class Utils {
     }
 
     @SuppressLint("SetTextI18n")
-    public static void changeLogs(Context context) {
+    public static void changeLogs(Activity activity) {
         String change_log = null;
         try {
             change_log = new JSONObject(Objects.requireNonNull(readAssetFile(
-                    context, "changelogs.json"))).getString("releaseNotes");
+                    activity, "changelogs.json"))).getString("releaseNotes");
         } catch (JSONException ignored) {
         }
-        mAppName.setText(context.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        mAppName.setText(activity.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
         mForegroundText.setText(change_log);
         mAppIcon.setVisibility(View.VISIBLE);
         mAppName.setVisibility(View.VISIBLE);
@@ -163,7 +166,7 @@ public class Utils {
         mForegroundCard.setVisibility(View.VISIBLE);
     }
 
-    public static void closeForeground() {
+    public static void closeForeground(Activity activity) {
         mCardTitle.setVisibility(View.GONE);
         mBack.setVisibility(View.GONE);
         mAppIcon.setVisibility(View.GONE);
@@ -175,6 +178,7 @@ public class Utils {
         mCancel.setVisibility(View.GONE);
         mForegroundCard.setVisibility(View.GONE);
         mForegroundActive = false;
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     public static void showSnackbar(View view, String message) {

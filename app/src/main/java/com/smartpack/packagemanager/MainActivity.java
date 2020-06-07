@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         Utils.mForegroundText = findViewById(R.id.foreground_text);
         Utils.mCancel = findViewById(R.id.cancel_button);
         Utils.mBack.setOnClickListener(v -> {
-            Utils.closeForeground();
+            Utils.closeForeground(this);
         });
         Utils.mCancel.setOnClickListener(v -> {
-            Utils.closeForeground();
+            Utils.closeForeground(this);
         });
 
         // Allow changing Copyright Text
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (Utils.mForegroundActive) {
-            Utils.closeForeground();
+            Utils.closeForeground(this);
         } else if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
             new Dialog(this)
                     .setMessage(R.string.batch_warning)
