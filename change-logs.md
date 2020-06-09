@@ -1,5 +1,9 @@
 # Change-logs
 
+## 14. June 09, 2020
+*Release-tag: 1.9*<br>
+Added option to sort apps by OEM. Fixed minor issues for About & Change-logs view. Updated Russian and Ukrainian translations. Miscellaneous changes.
+
 ## 13. May 17, 2020
 *Release-tag: 1.8*<br>
 Brand New About & Change-log view. Updated Korean translations (Credits: @SmgKhOaRn). Miscellaneous changes.
