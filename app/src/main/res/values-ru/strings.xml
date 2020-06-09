@@ -23,6 +23,7 @@
     <string name="batch_warning">Ваши настройки пакетов будут удалены! Ты уверен?</string>
     <string name="bundle_install">Вы уверены, что хотите установить split apks из \'%s\'?\n\nОбратите внимание: установка split apks может не всегда работать хорошо, особенно если apks извлечены с другого устройства. Также, пожалуйста, убедитесь, что все необходимые (только необходимые) apks доступны в выбранной папке, чтобы избежать сбоя установки!</string>
     <string name="cancel">Отмена</string>
+    <string name="change_logs">Изменения</string>
     <string name="cleaning_message">Очистка временных файлов</string>
     <string name="copyright">&#169;<b>SmartPack Projects</b></string>
     <string name="copyright_default">Текст авторского права по умолчанию, %s, будет применен при следующем запуске приложения!</string>
@@ -68,6 +69,16 @@
     <string name="name_empty">Имя пусто! Неудача!</string>
     <string name="no_internet">Пожалуйста, проверьте ваше интернет-соединение!</string>
     <string name="no_root">Эта функция не будет работать без root прав!</string>
+    <string name="oem">Производитель</string>
+    <string name="oem_asus">ASUS</string>
+    <string name="oem_google">Google</string>
+    <string name="oem_huawei">Huawei</string>
+    <string name="oem_lg">LG</string>
+    <string name="oem_oneplus">OnePlus</string>
+    <string name="oem_mi">Mi</string>
+    <string name="oem_moto">Motorola</string>
+    <string name="oem_samsung">Samsung</string>
+    <string name="oem_sony">Sony</string>
     <string name="ok">ОК</string>
     <string name="open">Открыть</string>
     <string name="open_message">Вы уже запускаете это приложение.</string>
