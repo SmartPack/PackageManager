@@ -316,6 +316,8 @@ public class DescriptionFragment extends BaseFragment {
             sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sort_id", false, getActivity()));
             SubMenu oem = sort.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.oem));
+            oem.add(Menu.NONE, 30, Menu.NONE, getString(R.string.oem_asus)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("asus_apps", false, getActivity()));
             oem.add(Menu.NONE, 22, Menu.NONE, getString(R.string.oem_google)).setCheckable(true)
                     .setChecked(Utils.getBoolean("google_apps", false, getActivity()));
             oem.add(Menu.NONE, 23, Menu.NONE, getString(R.string.oem_samsung)).setCheckable(true)
@@ -324,8 +326,12 @@ public class DescriptionFragment extends BaseFragment {
                     .setChecked(Utils.getBoolean("moto_apps", false, getActivity()));
             oem.add(Menu.NONE, 25, Menu.NONE, getString(R.string.oem_oneplus)).setCheckable(true)
                     .setChecked(Utils.getBoolean("oneplus_apps", false, getActivity()));
+            oem.add(Menu.NONE, 28, Menu.NONE, getString(R.string.oem_huawei)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("huawei_apps", false, getActivity()));
             oem.add(Menu.NONE, 26, Menu.NONE, getString(R.string.oem_sony)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sony_apps", false, getActivity()));
+            oem.add(Menu.NONE, 29, Menu.NONE, getString(R.string.oem_lg)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("lg_apps", false, getActivity()));
             oem.add(Menu.NONE, 27, Menu.NONE, getString(R.string.oem_mi)).setCheckable(true)
                     .setChecked(Utils.getBoolean("mi_apps", false, getActivity()));
             SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, Utils.getLanguage(getActivity())));
@@ -515,14 +521,8 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.getBoolean("google_apps", false, getActivity())) {
                             Utils.saveBoolean("google_apps", false, getActivity());
                         } else {
+                            Utils.resetDefault(getActivity());
                             Utils.saveBoolean("google_apps", true, getActivity());
-                            Utils.saveBoolean("oneplus_apps", false, getActivity());
-                            Utils.saveBoolean("samsung_apps", false, getActivity());
-                            Utils.saveBoolean("mi_apps", false, getActivity());
-                            Utils.saveBoolean("moto_apps", false, getActivity());
-                            Utils.saveBoolean("sony_apps", false, getActivity());
-                            Utils.saveBoolean("system_apps", false, getActivity());
-                            Utils.saveBoolean("user_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -530,14 +530,8 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.getBoolean("samsung_apps", false, getActivity())) {
                             Utils.saveBoolean("samsung_apps", false, getActivity());
                         } else {
-                            Utils.saveBoolean("google_apps", false, getActivity());
-                            Utils.saveBoolean("oneplus_apps", false, getActivity());
+                            Utils.resetDefault(getActivity());
                             Utils.saveBoolean("samsung_apps", true, getActivity());
-                            Utils.saveBoolean("mi_apps", false, getActivity());
-                            Utils.saveBoolean("moto_apps", false, getActivity());
-                            Utils.saveBoolean("sony_apps", false, getActivity());
-                            Utils.saveBoolean("system_apps", false, getActivity());
-                            Utils.saveBoolean("user_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -545,14 +539,8 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.getBoolean("moto_apps", false, getActivity())) {
                             Utils.saveBoolean("moto_apps", false, getActivity());
                         } else {
-                            Utils.saveBoolean("google_apps", false, getActivity());
-                            Utils.saveBoolean("oneplus_apps", false, getActivity());
-                            Utils.saveBoolean("samsung_apps", false, getActivity());
-                            Utils.saveBoolean("mi_apps", false, getActivity());
+                            Utils.resetDefault(getActivity());
                             Utils.saveBoolean("moto_apps", true, getActivity());
-                            Utils.saveBoolean("sony_apps", false, getActivity());
-                            Utils.saveBoolean("system_apps", false, getActivity());
-                            Utils.saveBoolean("user_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -560,14 +548,8 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.getBoolean("oneplus_apps", false, getActivity())) {
                             Utils.saveBoolean("oneplus_apps", false, getActivity());
                         } else {
-                            Utils.saveBoolean("google_apps", false, getActivity());
+                            Utils.resetDefault(getActivity());
                             Utils.saveBoolean("oneplus_apps", true, getActivity());
-                            Utils.saveBoolean("samsung_apps", false, getActivity());
-                            Utils.saveBoolean("mi_apps", false, getActivity());
-                            Utils.saveBoolean("moto_apps", false, getActivity());
-                            Utils.saveBoolean("sony_apps", false, getActivity());
-                            Utils.saveBoolean("system_apps", false, getActivity());
-                            Utils.saveBoolean("user_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -575,14 +557,8 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.getBoolean("sony_apps", false, getActivity())) {
                             Utils.saveBoolean("sony_apps", false, getActivity());
                         } else {
-                            Utils.saveBoolean("google_apps", false, getActivity());
-                            Utils.saveBoolean("oneplus_apps", false, getActivity());
-                            Utils.saveBoolean("samsung_apps", false, getActivity());
-                            Utils.saveBoolean("mi_apps", false, getActivity());
-                            Utils.saveBoolean("moto_apps", false, getActivity());
+                            Utils.resetDefault(getActivity());
                             Utils.saveBoolean("sony_apps", true, getActivity());
-                            Utils.saveBoolean("system_apps", false, getActivity());
-                            Utils.saveBoolean("user_apps", false, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;
@@ -590,14 +566,35 @@ public class DescriptionFragment extends BaseFragment {
                         if (Utils.getBoolean("mi_apps", false, getActivity())) {
                             Utils.saveBoolean("mi_apps", false, getActivity());
                         } else {
-                            Utils.saveBoolean("google_apps", false, getActivity());
-                            Utils.saveBoolean("oneplus_apps", false, getActivity());
-                            Utils.saveBoolean("samsung_apps", false, getActivity());
+                            Utils.resetDefault(getActivity());
                             Utils.saveBoolean("mi_apps", true, getActivity());
-                            Utils.saveBoolean("moto_apps", false, getActivity());
-                            Utils.saveBoolean("sony_apps", false, getActivity());
-                            Utils.saveBoolean("system_apps", false, getActivity());
-                            Utils.saveBoolean("user_apps", false, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 28:
+                        if (Utils.getBoolean("huawei_apps", false, getActivity())) {
+                            Utils.saveBoolean("huawei_apps", false, getActivity());
+                        } else {
+                            Utils.resetDefault(getActivity());
+                            Utils.saveBoolean("huawei_apps", true, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 29:
+                        if (Utils.getBoolean("lg_apps", false, getActivity())) {
+                            Utils.saveBoolean("lg_apps", false, getActivity());
+                        } else {
+                            Utils.resetDefault(getActivity());
+                            Utils.saveBoolean("lg_apps", true, getActivity());
+                        }
+                        systemAppsFragment.reload();
+                        break;
+                    case 30:
+                        if (Utils.getBoolean("asus_apps", false, getActivity())) {
+                            Utils.saveBoolean("asus_apps", false, getActivity());
+                        } else {
+                            Utils.resetDefault(getActivity());
+                            Utils.saveBoolean("asus_apps", true, getActivity());
                         }
                         systemAppsFragment.reload();
                         break;

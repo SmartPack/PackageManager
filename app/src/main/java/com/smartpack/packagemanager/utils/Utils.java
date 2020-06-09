@@ -365,4 +365,18 @@ public class Utils {
         res.updateConfiguration(conf, dm);
     }
 
+    public static void resetDefault(Context context) {
+        Utils.saveBoolean("asus_apps", false, context);
+        Utils.saveBoolean("google_apps", false, context);
+        Utils.saveBoolean("huawei_apps", false, context);
+        Utils.saveBoolean("lg_apps", false, context);
+        Utils.saveBoolean("mi_apps", false, context);
+        Utils.saveBoolean("moto_apps", false, context);
+        Utils.saveBoolean("oneplus_apps", false, context);
+        Utils.saveBoolean("samsung_apps", false, context);
+        Utils.saveBoolean("sony_apps", false, context);
+        Utils.saveBoolean("system_apps", false, context);
+        Utils.saveBoolean("user_apps", false, context);
+    }
+
 }

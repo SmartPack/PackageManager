@@ -71,7 +71,10 @@
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
     <string name="oem">OEM</string>
+    <string name="oem_asus">ASUS</string>
     <string name="oem_google">Google</string>
+    <string name="oem_huawei">Huawei</string>
+    <string name="oem_lg">LG</string>
     <string name="oem_oneplus">OnePlus</string>
     <string name="oem_mi">Mi</string>
     <string name="oem_moto">Motorola</string>
