@@ -12,7 +12,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -24,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.view.Menu;
 
 import androidx.core.app.ActivityCompat;
 
@@ -226,196 +226,189 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                     apps.setSummary(packageInfo.packageName);
                 }
                 apps.setFullSpan(true);
-                apps.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-                    @Override
-                    public void onClick(RecyclerViewItem item) {
-                        mOptionsDialog = new Dialog(requireActivity()).setItems(getResources().getStringArray(
-                                R.array.app_options), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                switch (i) {
-                                    case 0:
-                                        if (packageInfo.packageName.equals(BuildConfig.APPLICATION_ID)) {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.open_message));
-                                            return;
-                                        }
-                                        if (!PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity()))) {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.disabled_message, pm.getApplicationLabel(packageInfo)));
-                                            return;
-                                        }
-                                        Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
-                                        if (launchIntent != null) {
-                                            startActivity(launchIntent);
-                                        } else {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.open_failed, pm.getApplicationLabel(packageInfo)));
-                                        }
-                                        break;
-                                    case 1:
-                                        Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                        settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        Uri uri = Uri.fromParts("package", packageInfo.packageName, null);
-                                        settings.setData(uri);
-                                        startActivity(settings);
-                                        break;
-                                    case 2:
-                                        if (RootUtils.rootAccessDenied()) {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
-                                            return;
-                                        }
-                                        if (Utils.isStorageWritePermissionDenied(requireActivity())) {
-                                            ActivityCompat.requestPermissions(requireActivity(), new String[]{
-                                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                                            Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
-                                            return;
-                                        }
-                                        ViewUtils.dialogEditText(pm.getApplicationLabel(packageInfo).toString(),
-                                                (dialogInterface1, i1) -> {
-                                                }, new ViewUtils.OnDialogEditTextListener() {
-                                                    @SuppressLint("StaticFieldLeak")
-                                                    @Override
-                                                    public void onClick(String text) {
-                                                        if (text.isEmpty()) {
-                                                            Utils.showSnackbar(getRootView(), getString(R.string.name_empty));
-                                                            return;
-                                                        }
-                                                        if (!text.endsWith(".tar.gz")) {
-                                                            text += ".tar.gz";
-                                                        }
-                                                        if (text.contains(" ")) {
-                                                            text = text.replaceAll(" ", "_");
-                                                        }
-                                                        if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
-                                                            Utils.showSnackbar(getRootView(), getString(R.string.already_exists, text));
-                                                            return;
-                                                        }
-                                                        final String path = text;
-                                                        new AsyncTask<Void, Void, Void>() {
-                                                            private ProgressDialog mProgressDialog;
-                                                            @Override
-                                                            protected void onPreExecute() {
-                                                                super.onPreExecute();
-                                                                mProgressDialog = new ProgressDialog(getActivity());
-                                                                mProgressDialog.setMessage(getString(R.string.backing_up, pm.getApplicationLabel(packageInfo).toString()) + "...");
-                                                                mProgressDialog.setCancelable(false);
-                                                                mProgressDialog.show();
-                                                            }
-                                                            @Override
-                                                            protected Void doInBackground(Void... voids) {
-                                                                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                                                                PackageTasks.backupApp(packageInfo.packageName, path);
-                                                                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                                                                return null;
-                                                            }
-                                                            @Override
-                                                            protected void onPostExecute(Void aVoid) {
-                                                                super.onPostExecute(aVoid);
-                                                                try {
-                                                                    mProgressDialog.dismiss();
-                                                                } catch (IllegalArgumentException ignored) {
-                                                                }
-                                                            }
-                                                        }.execute();
+                apps.setOnMenuListener((itemslist1, popupMenu) -> {
+                    Menu menu = popupMenu.getMenu();
+                    menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.open));
+                    menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.app_info));
+                    menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.backup));
+                    menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
+                    menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.turn_on_off));
+                    menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.playstore));
+                    menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.uninstall));
+                    popupMenu.setOnMenuItemClickListener(item -> {
+                        switch (item.getItemId()) {
+                            case 0:
+                                if (packageInfo.packageName.equals(BuildConfig.APPLICATION_ID)) {
+                                    Utils.showSnackbar(getRootView(), getString(R.string.open_message));
+                                } else if (!PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity()))) {
+                                    Utils.showSnackbar(getRootView(), getString(R.string.disabled_message, pm.getApplicationLabel(packageInfo)));
+                                } else {
+                                    Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(packageInfo.packageName);
+                                    if (launchIntent != null) {
+                                        startActivity(launchIntent);
+                                    } else {
+                                        Utils.showSnackbar(getRootView(), getString(R.string.open_failed, pm.getApplicationLabel(packageInfo)));
+                                    }
+                                }
+                                break;
+                            case 1:
+                                Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Uri uri = Uri.fromParts("package", packageInfo.packageName, null);
+                                settings.setData(uri);
+                                startActivity(settings);
+                                break;
+                            case 2:
+                                if (RootUtils.rootAccessDenied()) {
+                                    Utils.showSnackbar(getRootView(), getString(R.string.no_root));
+                                } else if (Utils.isStorageWritePermissionDenied(requireActivity())) {
+                                    ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                                    Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
+                                } else {
+                                    ViewUtils.dialogEditText(pm.getApplicationLabel(packageInfo).toString(),
+                                            (dialogInterface1, i1) -> {
+                                            }, new ViewUtils.OnDialogEditTextListener() {
+                                                @SuppressLint("StaticFieldLeak")
+                                                @Override
+                                                public void onClick(String text) {
+                                                    if (text.isEmpty()) {
+                                                        Utils.showSnackbar(getRootView(), getString(R.string.name_empty));
+                                                        return;
                                                     }
-                                                }, getActivity()).setOnDismissListener(dialogInterface12 -> {
-                                                }).show();
-                                        break;
-                                    case 3:
-                                        if (RootUtils.rootAccessDenied()) {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
-                                            return;
-                                        }
-                                        if (Utils.isStorageWritePermissionDenied(requireActivity())) {
-                                            ActivityCompat.requestPermissions(requireActivity(), new String[]{
-                                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                                            Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
-                                            return;
-                                        }
-                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                                        for (final String splitApps : PackageTasks.splitApks(packageInfo.sourceDir.replace("base.apk", ""))) {
-                                            if (splitApps.contains("split_")) {
-                                                if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" + packageInfo.packageName)) {
-                                                    Utils.showSnackbar(getRootView(), getString(R.string.already_exists, packageInfo.packageName));
-                                                    return;
+                                                    if (!text.endsWith(".tar.gz")) {
+                                                        text += ".tar.gz";
+                                                    }
+                                                    if (text.contains(" ")) {
+                                                        text = text.replaceAll(" ", "_");
+                                                    }
+                                                    if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
+                                                        Utils.showSnackbar(getRootView(), getString(R.string.already_exists, text));
+                                                        return;
+                                                    }
+                                                    final String path = text;
+                                                    new AsyncTask<Void, Void, Void>() {
+                                                        private ProgressDialog mProgressDialog;
+
+                                                        @Override
+                                                        protected void onPreExecute() {
+                                                            super.onPreExecute();
+                                                            mProgressDialog = new ProgressDialog(getActivity());
+                                                            mProgressDialog.setMessage(getString(R.string.backing_up, pm.getApplicationLabel(packageInfo).toString()) + "...");
+                                                            mProgressDialog.setCancelable(false);
+                                                            mProgressDialog.show();
+                                                        }
+
+                                                        @Override
+                                                        protected Void doInBackground(Void... voids) {
+                                                            requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                                            PackageTasks.backupApp(packageInfo.packageName, path);
+                                                            requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                                            return null;
+                                                        }
+
+                                                        @Override
+                                                        protected void onPostExecute(Void aVoid) {
+                                                            super.onPostExecute(aVoid);
+                                                            try {
+                                                                mProgressDialog.dismiss();
+                                                            } catch (IllegalArgumentException ignored) {
+                                                            }
+                                                        }
+                                                    }.execute();
                                                 }
+                                            }, getActivity()).setOnDismissListener(dialogInterface12 -> {
+                                    }).show();
+                                }
+                                break;
+                            case 3:
+                                if (RootUtils.rootAccessDenied()) {
+                                    Utils.showSnackbar(getRootView(), getString(R.string.no_root));
+                                } else if (Utils.isStorageWritePermissionDenied(requireActivity())) {
+                                    ActivityCompat.requestPermissions(requireActivity(), new String[]{
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                                    Utils.showSnackbar(getRootView(), getString(R.string.permission_denied_write_storage));
+                                } else {
+                                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                    for (final String splitApps : PackageTasks.splitApks(packageInfo.sourceDir.replace("base.apk", ""))) {
+                                        if (splitApps.contains("split_")) {
+                                            if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" + packageInfo.packageName)) {
+                                                Utils.showSnackbar(getRootView(), getString(R.string.already_exists, packageInfo.packageName));
+                                            } else {
                                                 PackageTasks.exportingBundleTask(packageInfo.sourceDir.replace("base.apk", ""), packageInfo.packageName,
                                                         requireActivity().getPackageManager().getApplicationIcon(packageInfo), new WeakReference<>(getActivity()));
                                                 requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                                                return;
                                             }
                                         }
-                                        PackageTasks.exportingTask(packageInfo.sourceDir, packageInfo.packageName,
-                                                requireActivity().getPackageManager().getApplicationIcon(packageInfo), new WeakReference<>(getActivity()));
-                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                                        break;
-                                    case 4:
-                                        if (RootUtils.rootAccessDenied()) {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.no_root));
-                                            return;
-                                        }
+                                    }
+                                    PackageTasks.exportingTask(packageInfo.sourceDir, packageInfo.packageName,
+                                            requireActivity().getPackageManager().getApplicationIcon(packageInfo), new WeakReference<>(getActivity()));
+                                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                                }
+                                break;
+                            case 4:
+                                if (RootUtils.rootAccessDenied()) {
+                                    Utils.showSnackbar(getRootView(), getString(R.string.no_root));
+                                } else {
+                                    new Dialog(requireActivity())
+                                            .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
+                                            .setTitle(pm.getApplicationLabel(packageInfo))
+                                            .setMessage(pm.getApplicationLabel(packageInfo) + " " + getString(R.string.disable_message,
+                                                    PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity())) ?
+                                                            getString(R.string.disabled) : getString(R.string.enabled)))
+                                            .setCancelable(false)
+                                            .setNeutralButton(getString(R.string.cancel), (dialog, id) -> {
+                                            })
+                                            .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
+                                                PackageTasks.disableApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), new WeakReference<>(getActivity()));
+                                                reload();
+                                            })
+                                            .show();
+                                }
+                                break;
+                            case 5:
+                                Intent ps = new Intent(Intent.ACTION_VIEW);
+                                ps.setData(Uri.parse(
+                                        "https://play.google.com/store/apps/details?id=" + packageInfo.packageName));
+                                startActivity(ps);
+                                break;
+                            case 6:
+                                if (packageInfo.packageName.equals(BuildConfig.APPLICATION_ID)) {
+                                    Utils.showSnackbar(getRootView(), getString(R.string.uninstall_nope));
+                                } else if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 ||
+                                        (packageInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                                    Intent remove = new Intent(Intent.ACTION_DELETE);
+                                    remove.setData(Uri.parse("package:" + packageInfo.packageName));
+                                    startActivity(remove);
+                                } else {
+                                    if (RootUtils.rootAccessDenied()) {
+                                        Utils.showSnackbar(getRootView(), getString(R.string.no_root));
+                                    } else {
                                         new Dialog(requireActivity())
                                                 .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
-                                                .setTitle(pm.getApplicationLabel(packageInfo))
-                                                .setMessage(pm.getApplicationLabel(packageInfo) + " " + getString(R.string.disable_message,
-                                                        PackageTasks.isEnabled(packageInfo.packageName, new WeakReference<>(requireActivity())) ?
-                                                                getString(R.string.disabled) : getString(R.string.enabled)))
+                                                .setTitle(getString(R.string.uninstall_title, pm.getApplicationLabel(packageInfo)))
+                                                .setMessage(getString(R.string.uninstall_warning))
                                                 .setCancelable(false)
-                                                .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
+                                                .setNeutralButton(getString(R.string.cancel), (dialog, id) -> {
                                                 })
                                                 .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                                                    PackageTasks.disableApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), new WeakReference<>(getActivity()));
+                                                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                                    PackageTasks.removeSystemApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), new WeakReference<>(getActivity()));
+                                                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                                                     reload();
                                                 })
                                                 .show();
-                                        break;
-                                    case 5:
-                                        Intent ps = new Intent(Intent.ACTION_VIEW);
-                                        ps.setData(Uri.parse(
-                                                "https://play.google.com/store/apps/details?id=" + packageInfo.packageName));
-                                        startActivity(ps);
-                                        break;
-                                    case 6:
-                                        if (packageInfo.packageName.equals(BuildConfig.APPLICATION_ID)) {
-                                            Utils.showSnackbar(getRootView(), getString(R.string.uninstall_nope));
-                                            return;
-                                        }
-                                        if ((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 ||
-                                                (packageInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
-
-                                            Intent remove = new Intent(Intent.ACTION_DELETE);
-                                            remove.setData(Uri.parse("package:" + packageInfo.packageName));
-                                            startActivity(remove);
-                                        } else {
-                                            if (RootUtils.rootAccessDenied()) {
-                                                Utils.showSnackbar(getRootView(), getString(R.string.no_root));
-                                                return;
-                                            }
-                                            new Dialog(requireActivity())
-                                                    .setIcon(requireActivity().getPackageManager().getApplicationIcon(packageInfo))
-                                                    .setTitle(getString(R.string.uninstall_title, pm.getApplicationLabel(packageInfo)))
-                                                    .setMessage(getString(R.string.uninstall_warning))
-                                                    .setCancelable(false)
-                                                    .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
-                                                    })
-                                                    .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                                                        PackageTasks.removeSystemApp(packageInfo.packageName, pm.getApplicationLabel(packageInfo).toString(), new WeakReference<>(getActivity()));
-                                                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                                                        reload();
-                                                    })
-                                                    .show();
-                                        }
-                                        break;
+                                    }
                                 }
-                            }
-                        }).setOnDismissListener(dialogInterface -> mOptionsDialog = null);
-                        mOptionsDialog.show();
-                    }
+                                break;
+                        }
+                        return false;
+                    });
                 });
                 apps.setChecked(PackageTasks.mBatchApps.toString().contains(packageInfo.packageName));
                 apps.setOnCheckBoxListener((descriptionView, isChecked) -> {
                     PackageTasks.batchOption(packageInfo.packageName);
                 });
-
                 items.add(apps);
             }
         }
