@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Initialize Dark Theme & FaceBook Ads
+        // Initialize App Theme & FaceBook Ads
         Utils.initializeAppTheme(this);
         Utils.initializeFaceBookAds(this);
         super.onCreate(savedInstanceState);

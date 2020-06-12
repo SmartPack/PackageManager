@@ -357,8 +357,13 @@ public class DescriptionFragment extends BaseFragment {
                 menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
                         .setChecked(Utils.getBoolean("allow_ads", true, getActivity()));
             }
-            menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("dark_theme", true, getActivity()));
+            SubMenu appTheme = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.dark_theme));
+            appTheme.add(Menu.NONE, 32, Menu.NONE, getString(R.string.dark_theme_auto)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("theme_auto", true, getActivity()));
+            appTheme.add(Menu.NONE, 6, Menu.NONE, getString(R.string.dark_theme_enable)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("dark_theme", false, getActivity()));
+            appTheme.add(Menu.NONE, 31, Menu.NONE, getString(R.string.dark_theme_disable)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("light_theme", false, getActivity()));
             SubMenu about = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.about));
             about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.source_code));
             about.add(Menu.NONE, 7, Menu.NONE, getString(R.string.support));
@@ -427,12 +432,12 @@ public class DescriptionFragment extends BaseFragment {
                         restartApp();
                         break;
                     case 6:
-                        if (Utils.getBoolean("dark_theme", true, getActivity())) {
-                            Utils.saveBoolean("dark_theme", false, getActivity());
-                        } else {
+                        if (!Utils.getBoolean("dark_theme", false, getActivity())) {
                             Utils.saveBoolean("dark_theme", true, getActivity());
+                            Utils.saveBoolean("light_theme", false, getActivity());
+                            Utils.saveBoolean("theme_auto", false, getActivity());
+                            restartApp();
                         }
-                        restartApp();
                         break;
                     case 7:
                         launchURL("https://t.me/smartpack_kmanager", getActivity());
@@ -597,6 +602,22 @@ public class DescriptionFragment extends BaseFragment {
                             Utils.saveBoolean("asus_apps", true, getActivity());
                         }
                         systemAppsFragment.reload();
+                        break;
+                    case 31:
+                        if (!Utils.getBoolean("light_theme", false, getActivity())) {
+                            Utils.saveBoolean("dark_theme", false, getActivity());
+                            Utils.saveBoolean("light_theme", true, getActivity());
+                            Utils.saveBoolean("theme_auto", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 32:
+                        if (!Utils.getBoolean("theme_auto", true, getActivity())) {
+                            Utils.saveBoolean("dark_theme", false, getActivity());
+                            Utils.saveBoolean("light_theme", false, getActivity());
+                            Utils.saveBoolean("theme_auto", true, getActivity());
+                            restartApp();
+                        }
                         break;
                 }
                 return false;
