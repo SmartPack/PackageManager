@@ -36,7 +36,6 @@
     <string name="dark_theme">Dark Theme</string>
     <string name="dark_theme_auto">Auto</string>
     <string name="dark_theme_disable">Disable</string>
-    <string name="dark_theme_disable_message">Disable</string>
     <string name="dark_theme_enable">Enable</string>
     <string name="disable_message">will be %s! Are you sure?</string>
     <string name="disabled">disabled</string>
