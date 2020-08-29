@@ -108,6 +108,28 @@
                         android:textSize="15sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/developed_by"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal"
+                        android:text="@string/developed_by"
+                        android:textColor="?android:attr/colorAccent"
+                        android:textIsSelectable="true"
+                        android:visibility="gone"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/developer"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_developer"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/credits_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

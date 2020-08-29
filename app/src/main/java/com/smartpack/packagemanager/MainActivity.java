@@ -9,6 +9,9 @@
 package com.smartpack.packagemanager;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -65,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         Utils.mCardTitle = findViewById(R.id.card_title);
         Utils.mAppName = findViewById(R.id.app_title);
         Utils.mAboutApp = findViewById(R.id.about_app);
+        Utils.mDevelopedBy = findViewById(R.id.developed_by);
+        Utils.mDeveloper = findViewById(R.id.developer);
         Utils.mCreditsTitle = findViewById(R.id.credits_title);
         Utils.mCredits = findViewById(R.id.credits);
         Utils.mForegroundText = findViewById(R.id.foreground_text);
@@ -74,6 +79,19 @@ public class MainActivity extends AppCompatActivity {
         });
         Utils.mCancel.setOnClickListener(v -> {
             Utils.closeForeground(this);
+        });
+        Utils.mDeveloper.setOnClickListener(v -> {
+            if (Utils.isNetworkAvailable(this)) {
+                try {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse("https://github.com/sunilpaulmathew"));
+                    startActivity(i);
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Utils.showSnackbar(mViewPager, getString(R.string.no_internet));
+            }
         });
 
         // Allow changing Copyright Text

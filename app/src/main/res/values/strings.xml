@@ -37,6 +37,7 @@
     <string name="dark_theme_auto">Auto</string>
     <string name="dark_theme_disable">Disable</string>
     <string name="dark_theme_enable">Enable</string>
+    <string name="developed_by">Developed By</string>
     <string name="disable_message">will be %s! Are you sure?</string>
     <string name="disabled">disabled</string>
     <string name="disabled_message">%s is currently disabled! Please enable it first and try again!</string>

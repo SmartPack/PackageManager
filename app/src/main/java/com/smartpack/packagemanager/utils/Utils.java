@@ -64,10 +64,12 @@ public class Utils {
     public static AppCompatTextView mCardTitle;
     public static AppCompatTextView mAppName;
     public static AppCompatTextView mAboutApp;
+    public static AppCompatTextView mDevelopedBy;
     public static AppCompatTextView mCreditsTitle;
     public static AppCompatTextView mCredits;
     public static AppCompatTextView mForegroundText;
     public static AppCompatTextView mCancel;
+    public static AppCompatImageView mDeveloper;
     public static boolean mForegroundActive = false;
     public static CardView mForegroundCard;
 
@@ -143,6 +145,8 @@ public class Utils {
         mAppIcon.setVisibility(View.VISIBLE);
         mAppName.setVisibility(View.VISIBLE);
         mAboutApp.setVisibility(View.VISIBLE);
+        mDevelopedBy.setVisibility(View.VISIBLE);
+        mDeveloper.setVisibility(View.VISIBLE);
         mCreditsTitle.setVisibility(View.VISIBLE);
         mCredits.setVisibility(View.VISIBLE);
         mCancel.setVisibility(View.VISIBLE);
@@ -175,6 +179,8 @@ public class Utils {
         mAppIcon.setVisibility(View.GONE);
         mAppName.setVisibility(View.GONE);
         mAboutApp.setVisibility(View.GONE);
+        mDevelopedBy.setVisibility(View.GONE);
+        mDeveloper.setVisibility(View.GONE);
         mCreditsTitle.setVisibility(View.GONE);
         mCredits.setVisibility(View.GONE);
         mForegroundText.setVisibility(View.GONE);
