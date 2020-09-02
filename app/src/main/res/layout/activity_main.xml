@@ -15,13 +15,15 @@
         android:textColor="?android:attr/colorAccent"
         android:background="@color/black" />
 
-    <LinearLayout
-        android:id="@+id/banner_container"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:gravity="center_horizontal" />
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7791710838910455/5329474187">
+    </com.google.android.gms.ads.AdView>
 
     <include layout="@layout/rv_foreground_view" />
 

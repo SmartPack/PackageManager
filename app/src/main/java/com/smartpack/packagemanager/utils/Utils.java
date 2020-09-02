@@ -30,7 +30,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 
-import com.facebook.ads.AudienceNetworkAds;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
@@ -100,8 +100,8 @@ public class Utils {
         }
     }
 
-    public static void initializeFaceBookAds(Context context) {
-        AudienceNetworkAds.initialize(context);
+    public static void initializeGoogleAds(Context context) {
+        MobileAds.initialize(context, "ca-app-pub-7791710838910455~4399535899");
     }
 
     public static boolean isTablet(Context context) {
