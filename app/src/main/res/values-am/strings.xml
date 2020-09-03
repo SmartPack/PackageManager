@@ -2,7 +2,7 @@
     <!--Author: Mikesew1320 <mikesew1320@gmail.com>-->
 
     <string name="about">ስለ እኛ</string>
-    <string name="about_summary"><i>በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ</i>\n\n&#169;<b>sunilpaulmathew</b></string>
+    <string name="about_summary"><i>በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ</i></string>
     <string name="allow_ads">ማስታወቂያዎች እንዲታዩ ፍቀድ</string>
     <string name="always_show">ሁልጊዜ አሳይ</string>
     <string name="already_exists">%s ቀድሞዉኑ ነበር! በማቋረጥ ላይ</string>

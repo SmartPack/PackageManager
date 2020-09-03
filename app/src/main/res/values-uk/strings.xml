@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="about">Про додаток</string>
-    <string name="about_summary"><i>Простий, але потужний додаток для управління вашими програмами.</i>\n\n&#169;<b>sunilpaulmathew</b></string>
+    <string name="about_summary"><i>Простий, але потужний додаток для управління вашими програмами.</i></string>
     <string name="allow_ads">Дозволити рекламу</string>
     <string name="always_show">Завжди показувати</string>
     <string name="already_exists">%s вже існує! Невдача!</string>

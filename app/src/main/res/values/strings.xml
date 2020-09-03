@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="about">About</string>
-    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i>\n\n&#169;<b>sunilpaulmathew</b></string>
+    <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i></string>
     <string name="allow_ads">Allow Ads</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>

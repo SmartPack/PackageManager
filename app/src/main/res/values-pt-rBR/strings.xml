@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="about">Sobre</string>
-    <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i>\n\n&#169;<b>sunilpaulmathew</b></string>
+    <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i></string>
     <string name="allow_ads">Permitir anúncios</string>
     <string name="always_show">Sempre mostrar</string>
     <string name="already_exists">%s já existe! Abortando!</string>
