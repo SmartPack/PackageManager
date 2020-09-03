@@ -64,9 +64,9 @@ public class DescriptionFragment extends BaseFragment {
 
         mRootView = inflater.inflate(R.layout.fragment_description, container, false);
 
-        AppCompatEditText keyEdit = mRootView.findViewById(R.id.key_edittext);
+        Utils.mKeyEdit = mRootView.findViewById(R.id.key_edittext);
 
-        keyEdit.addTextChangedListener(new TextWatcher() {
+        Utils.mKeyEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -84,7 +84,7 @@ public class DescriptionFragment extends BaseFragment {
         });
         assert systemAppsFragment != null;
         if (PackageTasks.mAppName != null) {
-            keyEdit.append(PackageTasks.mAppName);
+            Utils.mKeyEdit.append(PackageTasks.mAppName);
         }
 
         AppCompatImageButton batch = mRootView.findViewById(R.id.batch_icon);

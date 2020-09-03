@@ -25,6 +25,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -59,6 +60,7 @@ import java.util.Objects;
 
 public class Utils {
 
+    public static AppCompatEditText mKeyEdit;
     public static AppCompatImageButton mBack;
     public static AppCompatImageView mAppIcon;
     public static AppCompatTextView mCardTitle;
