@@ -25,8 +25,6 @@
     <string name="cancel">취소</string>
     <string name="change_logs">변경사항</string>
     <string name="cleaning_message">임시 파일들을 지우는 중</string>
-    <string name="copyright_default">기본 저작권 표시 글인 %s이 다음에 앱을 실행할 때 적용될 것입니다!</string>
-    <string name="copyright_message">새 저작권 표시 글인 %s이 다음에 앱을 실행할 떄 적용될 것입니다!</string>
     <string name="copying_apk_message">Split APKs를 임시 폴더로 복사하는 중</string>
     <string name="creating_directory_message">임시 폴더를 생성하는 중</string>
     <string name="credits">도움을 주신 분들</string>

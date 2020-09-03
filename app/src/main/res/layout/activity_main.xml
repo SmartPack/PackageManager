@@ -3,18 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/copyright_Text"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:padding="12dp"
-        android:longClickable="true"
-        android:textColor="?android:attr/colorAccent"
-        android:background="@color/black" />
-
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"

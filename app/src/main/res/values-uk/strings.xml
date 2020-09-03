@@ -25,9 +25,6 @@
     <string name="cancel">Скасувати</string>
     <string name="change_logs">Зміни</string>
     <string name="cleaning_message">Очищення тимчасових файлів</string>
-    <string name="copyright">&#169;<b>SmartPack Projects</b></string>
-    <string name="copyright_default">Текст авторських прав за замовчуванням, %s, буде застосовано під час наступного запуску програми!</string>
-    <string name="copyright_message">Новий текст авторських прав, %s, буде застосовано під час наступного запуску програми!</string>
     <string name="copying_apk_message">Копіювання Split APKs у робочий каталог</string>
     <string name="creating_directory_message">Створення тимчасового робочого каталогу</string>
     <string name="credits">Подяки</string>

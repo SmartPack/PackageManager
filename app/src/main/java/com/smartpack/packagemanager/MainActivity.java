@@ -8,33 +8,29 @@
 
 package com.smartpack.packagemanager;
 
-import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.PagerAdapter;
 import com.smartpack.packagemanager.utils.Utils;
-import com.smartpack.packagemanager.utils.ViewUtils;
 import com.smartpack.packagemanager.views.dialog.Dialog;
 
-import java.io.File;
 import java.util.Objects;
 
 /*
@@ -46,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean mExit;
     private boolean mWelcomeDialog = true;
     private Handler mHandler = new Handler();
-    private String copyright = Environment.getExternalStorageDirectory().toString() + "/Package_Manager/copyright";
     private ViewPager mViewPager;
+    private ViewGroup.MarginLayoutParams mLayoutParams;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mViewPager = findViewById(R.id.viewPagerID);
-        AppCompatTextView copyRightText = findViewById(R.id.copyright_Text);
+        mLayoutParams = (ViewGroup.MarginLayoutParams) mViewPager.getLayoutParams();
 
         Utils.mForegroundCard = findViewById(R.id.foreground_card);
         Utils.mBack = findViewById(R.id.back);
@@ -94,60 +90,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Allow changing Copyright Text
-        if (Utils.readFile(copyright) != null) {
-            copyRightText.setText(Utils.readFile(copyright));
-        } else {
-            copyRightText.setText(R.string.copyright);
-        }
-        copyRightText.setOnLongClickListener(item -> {
-            setCopyRightText();
-            return false;
-        });
-
         if (Utils.getBoolean("allow_ads", true, this)) {
             AdView mAdView = findViewById(R.id.adView);
             mAdView.setAdListener(new AdListener() {
                 @Override
-                public void onAdLoaded() {
-                    copyRightText.setVisibility(View.GONE);
+                public void onAdFailedToLoad(LoadAdError adError) {
+                    mLayoutParams.bottomMargin = 0;
                 }
             });
             AdRequest adRequest = new AdRequest.Builder()
                     .build();
             mAdView.loadAd(adRequest);
+        } else {
+            mLayoutParams.bottomMargin = 0;
         }
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageTasksFragment(), "");
         mViewPager.setAdapter(adapter);
-    }
-
-    public void setCopyRightText() {
-        if (Utils.isStorageWritePermissionDenied(this)) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            Utils.showSnackbar(mViewPager, getString(R.string.permission_denied_write_storage));
-            return;
-        }
-        String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
-        File file = new File(PACKAGES);
-        if (file.exists() && file.isFile()) {
-            file.delete();
-        }
-        file.mkdirs();
-        ViewUtils.dialogEditText(Utils.readFile(copyright),
-                (dialogInterface, i) -> {
-                }, text -> {
-                    if (text.equals(Utils.readFile(copyright))) return;
-                    if (text.isEmpty()) {
-                        new File(copyright).delete();
-                        Utils.showSnackbar(mViewPager, getString(R.string.copyright_default, getString(R.string.copyright)));
-                        return;
-                    }
-                    Utils.create(text, copyright);
-                    Utils.showSnackbar(mViewPager, getString(R.string.copyright_message, text));
-                }, this).setOnDismissListener(dialogInterface -> {
-        }).show();
     }
 
     @Override
