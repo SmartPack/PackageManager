@@ -1,5 +1,9 @@
 # Change-logs
 
+## 17. September 03, 2020
+*Release-tag: 2.2*<br>
+Slightly improved app searching. Improved AdView and layout. Removed copyright text. Miscellaneous changes.
+
 ## 16. August 29, 2020
 *Release-tag: 2.1*<br>
 Updated about dialog. Updated libsu to v3.0.2. Updated gradle build tools. Miscellaneous changes.
