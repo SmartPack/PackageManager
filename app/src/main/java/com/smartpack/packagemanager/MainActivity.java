@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             Utils.closeForeground(this);
         } else if (PackageTasks.mAppName != null) {
             Utils.mKeyEdit.setText(null);
+            PackageTasks.mAppName = null;
         } else if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
             new Dialog(this)
                     .setMessage(R.string.batch_warning)
