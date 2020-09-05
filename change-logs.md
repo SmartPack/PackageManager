@@ -1,5 +1,9 @@
 # Change-logs
 
+## 18. September 05, 2020
+*Release-tag: 2.3*<br>
+Fixed a bug on app closing when search word is entered.
+
 ## 17. September 03, 2020
 *Release-tag: 2.2*<br>
 Slightly improved app searching. Improved AdView and layout. Removed copyright text. Miscellaneous changes.
