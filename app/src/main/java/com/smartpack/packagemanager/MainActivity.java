@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
             AdView mAdView = findViewById(R.id.adView);
             mAdView.setAdListener(new AdListener() {
                 @Override
+                public void onAdLoaded() {
+                    mAdView.setVisibility(View.VISIBLE);
+                }
+                @Override
                 public void onAdFailedToLoad(LoadAdError adError) {
                     mLayoutParams.bottomMargin = 0;
                 }
