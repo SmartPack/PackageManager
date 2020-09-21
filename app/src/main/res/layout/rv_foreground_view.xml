@@ -79,7 +79,7 @@
                 android:textSize="23sp"
                 android:textStyle="bold"
                 android:textColor="?android:attr/colorAccent"/>
-            
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -233,7 +233,7 @@
                         android:visibility="gone"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textIsSelectable="true"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/native_lib"
@@ -256,7 +256,7 @@
                         android:visibility="gone"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textIsSelectable="true"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/apk_path"
@@ -278,7 +278,7 @@
                         android:visibility="gone"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textIsSelectable="true"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/permissions"
@@ -302,7 +302,7 @@
                         android:textColor="?android:attr/textColorPrimary"
                         android:textIsSelectable="true"
                         android:paddingBottom="16dp"
-                        android:textSize="15sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

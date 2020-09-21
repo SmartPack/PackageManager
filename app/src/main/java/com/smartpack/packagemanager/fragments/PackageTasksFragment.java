@@ -416,7 +416,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                 if (RootUtils.rootAccessDenied()) {
                                     Utils.mAPKPath.setText(packageInfo.sourceDir + "\n");
                                 } else {
-                                    Utils.mAPKPath.setText(PackageTasks.listSplitAPKs(packageInfo.sourceDir.replace("base.apk", "")));
+                                    Utils.mAPKPath.setText(PackageTasks.listSplitAPKs(packageInfo.sourceDir.replace(new File(packageInfo.sourceDir).getName(), "")));
                                 }
                                 Utils.mPermissions.setText(PackageTasks.getPermissions(packageInfo.packageName, requireActivity()));
                                 Utils.mAppIcon.setVisibility(View.VISIBLE);
