@@ -68,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
         Utils.mDeveloper = findViewById(R.id.developer);
         Utils.mCreditsTitle = findViewById(R.id.credits_title);
         Utils.mCredits = findViewById(R.id.credits);
+        Utils.mPackageIDTitle = findViewById(R.id.package_id);
+        Utils.mPackageID = findViewById(R.id.package_id_text);
+        Utils.mVersionTitle = findViewById(R.id.version);
+        Utils.mVersion = findViewById(R.id.version_text);
+        Utils.mDataDirTitle = findViewById(R.id.data_dir);
+        Utils.mDataDir = findViewById(R.id.data_dir_text);
+        Utils.mNatLibTitle = findViewById(R.id.native_lib);
+        Utils.mNatLib = findViewById(R.id.native_lib_text);
+        Utils.mAPKPathTitle = findViewById(R.id.apk_path);
+        Utils.mAPKPath = findViewById(R.id.apk_path_text);
+        Utils.mPermissionsTitle = findViewById(R.id.permissions);
+        Utils.mPermissions = findViewById(R.id.permissions_text);
         Utils.mForegroundText = findViewById(R.id.foreground_text);
         Utils.mCancel = findViewById(R.id.cancel_button);
         Utils.mBack.setOnClickListener(v -> {

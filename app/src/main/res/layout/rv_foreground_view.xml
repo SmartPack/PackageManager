@@ -66,7 +66,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="15dp"
-                android:src="@mipmap/ic_launcher_round"
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
@@ -80,7 +79,7 @@
                 android:textSize="23sp"
                 android:textStyle="bold"
                 android:textColor="?android:attr/colorAccent"/>
-
+            
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -162,8 +161,147 @@
                         android:paddingBottom="16dp"
                         android:paddingTop="16dp"
                         android:gravity="start"
+                        android:visibility="gone"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/package_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/colorAccent"
+                        android:text="@string/package_id"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/package_id_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/version"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/colorAccent"
+                        android:text="@string/version"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/version_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/data_dir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/colorAccent"
+                        android:text="@string/data_dir"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/data_dir_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/native_lib"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/colorAccent"
+                        android:text="@string/native_lib"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/native_lib_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/apk_path"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/colorAccent"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/apk_path_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textIsSelectable="true"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/permissions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/colorAccent"
+                        android:text="@string/permissions"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/permissions_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:visibility="gone"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textIsSelectable="true"
+                        android:paddingBottom="16dp"
                         android:textSize="15sp" />
                 </LinearLayout>
             </ScrollView>

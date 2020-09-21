@@ -10,8 +10,10 @@ package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -28,6 +30,7 @@ import com.smartpack.packagemanager.views.dialog.Dialog;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -254,12 +257,43 @@ public class PackageTasks {
         }.execute();
     }
 
+    public static String getVersionName(String path, Context context) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(path, 0);
+        if (info == null) return null;
+        return info.versionName;
+    }
+
+    public static String getPermissions(String appID, Context context) {
+        List<String> perms = new ArrayList<>();
+        try {
+            PackageInfo pi = context.getPackageManager().getPackageInfo(appID, PackageManager.GET_PERMISSIONS);
+            for (int i = 0; i < pi.requestedPermissions.length; i++) {
+                if ((pi.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
+                    perms.add(pi.requestedPermissions[i]);
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return perms.toString().replace("[","").replace("]","").replace(", ","\n");
+    }
+
     public static List<String> splitApks(String string) {
         RootFile file = new RootFile(string);
         if (!file.exists()) {
             file.mkdir();
         }
         return file.list();
+    }
+
+    public static String listSplitAPKs(String string) {
+        StringBuilder sb = new StringBuilder();
+        for (final String splitApps : splitApks(string)) {
+            if (splitApps.endsWith(".apk")) {
+                sb.append(string).append(splitApps).append("\n");
+            }
+        }
+        return sb.toString();
     }
 
     public static boolean isEnabled(String app, WeakReference<Activity> activityRef) {

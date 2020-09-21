@@ -72,6 +72,18 @@ public class Utils {
     public static AppCompatTextView mForegroundText;
     public static AppCompatTextView mCancel;
     public static AppCompatImageView mDeveloper;
+    public static AppCompatTextView mPackageIDTitle;
+    public static AppCompatTextView mPackageID;
+    public static AppCompatTextView mVersionTitle;
+    public static AppCompatTextView mVersion;
+    public static AppCompatTextView mDataDirTitle;
+    public static AppCompatTextView mDataDir;
+    public static AppCompatTextView mNatLibTitle;
+    public static AppCompatTextView mNatLib;
+    public static AppCompatTextView mAPKPathTitle;
+    public static AppCompatTextView mAPKPath;
+    public static AppCompatTextView mPermissionsTitle;
+    public static AppCompatTextView mPermissions;
     public static boolean mForegroundActive = false;
     public static CardView mForegroundCard;
 
@@ -140,6 +152,7 @@ public class Utils {
     public static void aboutDialogue(Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         mCardTitle.setText(R.string.about);
+        mAppIcon.setImageDrawable(activity.getResources().getDrawable(R.mipmap.ic_launcher_round));
         mAppName.setText(activity.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
         mCredits.setText(activity.getString(R.string.credits_summary));
         mCardTitle.setVisibility(View.VISIBLE);
@@ -165,6 +178,7 @@ public class Utils {
         } catch (JSONException ignored) {
         }
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        mAppIcon.setImageDrawable(activity.getResources().getDrawable(R.mipmap.ic_launcher_round));
         mAppName.setText(activity.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
         mForegroundText.setText(change_log);
         mAppIcon.setVisibility(View.VISIBLE);
@@ -186,6 +200,18 @@ public class Utils {
         mCreditsTitle.setVisibility(View.GONE);
         mCredits.setVisibility(View.GONE);
         mForegroundText.setVisibility(View.GONE);
+        mPackageIDTitle.setVisibility(View.GONE);
+        mPackageID.setVisibility(View.GONE);
+        mVersionTitle.setVisibility(View.GONE);
+        mVersion.setVisibility(View.GONE);
+        mDataDirTitle.setVisibility(View.GONE);
+        mDataDir.setVisibility(View.GONE);
+        mNatLibTitle.setVisibility(View.GONE);
+        mNatLib.setVisibility(View.GONE);
+        mAPKPathTitle.setVisibility(View.GONE);
+        mAPKPath.setVisibility(View.GONE);
+        mPermissionsTitle.setVisibility(View.GONE);
+        mPermissions.setVisibility(View.GONE);
         mCancel.setVisibility(View.GONE);
         mForegroundCard.setVisibility(View.GONE);
         mForegroundActive = false;

@@ -6,6 +6,7 @@
     <string name="allow_ads">Allow Ads</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
+    <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
     <string name="app_name_summary">An Application to Manage your Apps</string>
     <string name="backing_summary">Backing up the data files of %s</string>
@@ -34,6 +35,8 @@
     <string name="dark_theme_auto">Auto</string>
     <string name="dark_theme_disable">Disable</string>
     <string name="dark_theme_enable">Enable</string>
+    <string name="data_dir">Data Directory</string>
+    <string name="details">Details</string>
     <string name="developed_by">Developed By</string>
     <string name="disable_message">will be %s! Are you sure?</string>
     <string name="disabled">disabled</string>
@@ -69,6 +72,7 @@
     <string name="more_apps">More from Developer</string>
     <string name="name">Name</string>
     <string name="name_empty">Name is empty! Aborting!</string>
+    <string name="native_lib">Native Library</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
     <string name="oem">OEM</string>
@@ -87,6 +91,7 @@
     <string name="open_failed">%s is not designed to run in user space!</string>
     <string name="options">Options</string>
     <string name="package_id">Package ID</string>
+    <string name="permissions">Permissions</string>
     <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
     <string name="playstore">PlayStore</string>
     <string name="press_back">Press back again to exit</string>
@@ -116,6 +121,7 @@
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b>> ***\n</string>
     <string name="user">Show User Apps</string>
+    <string name="version">Version</string>
     <string name="welcome_message"><b>Welcome to Package Manager</b>, a simple, yet powerful application to manage your apps.\n\n*** <b>WARNING</b> ***\nThis app is too powerful to messed up your device. The developer of this app won\'t take any responsibility, if something wrong happened to your device.</string>
     <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="yes">Yes</string>

@@ -24,6 +24,7 @@ import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.view.Menu;
+import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
@@ -166,6 +167,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void loadInTo(List<RecyclerViewItem> items) {
         final PackageManager pm = requireActivity().getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -229,6 +231,7 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                 apps.setOnMenuListener((itemslist1, popupMenu) -> {
                     Menu menu = popupMenu.getMenu();
                     menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.open));
+                    menu.add(Menu.NONE, 7, Menu.NONE, getString(R.string.details));
                     menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.app_info));
                     menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.backup));
                     menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
@@ -400,6 +403,39 @@ public class PackageTasksFragment extends RecyclerViewFragment {
                                                 .show();
                                     }
                                 }
+                                break;
+                            case 7:
+                                requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                                Utils.mAppIcon.setImageDrawable(requireActivity().getPackageManager().getApplicationIcon(packageInfo));
+                                Utils.mAppName.setText(pm.getApplicationLabel(packageInfo));
+                                Utils.mPackageID.setText(packageInfo.packageName);
+                                Utils.mVersion.setText(PackageTasks.getVersionName(packageInfo.sourceDir, requireActivity()));
+                                Utils.mDataDir.setText(packageInfo.dataDir);
+                                Utils.mNatLib.setText(packageInfo.nativeLibraryDir);
+                                Utils.mAPKPathTitle.setText(getString(R.string.apk_path));
+                                if (RootUtils.rootAccessDenied()) {
+                                    Utils.mAPKPath.setText(packageInfo.sourceDir + "\n");
+                                } else {
+                                    Utils.mAPKPath.setText(PackageTasks.listSplitAPKs(packageInfo.sourceDir.replace("base.apk", "")));
+                                }
+                                Utils.mPermissions.setText(PackageTasks.getPermissions(packageInfo.packageName, requireActivity()));
+                                Utils.mAppIcon.setVisibility(View.VISIBLE);
+                                Utils.mAppName.setVisibility(View.VISIBLE);
+                                Utils.mPackageIDTitle.setVisibility(View.VISIBLE);
+                                Utils.mPackageID.setVisibility(View.VISIBLE);
+                                Utils.mVersionTitle.setVisibility(View.VISIBLE);
+                                Utils.mVersion.setVisibility(View.VISIBLE);
+                                Utils.mDataDirTitle.setVisibility(View.VISIBLE);
+                                Utils.mDataDir.setVisibility(View.VISIBLE);
+                                Utils.mNatLibTitle.setVisibility(View.VISIBLE);
+                                Utils.mNatLib.setVisibility(View.VISIBLE);
+                                Utils.mAPKPathTitle.setVisibility(View.VISIBLE);
+                                Utils.mAPKPath.setVisibility(View.VISIBLE);
+                                Utils.mPermissionsTitle.setVisibility(View.VISIBLE);
+                                Utils.mPermissions.setVisibility(View.VISIBLE);
+                                Utils.mCancel.setVisibility(View.VISIBLE);
+                                Utils.mForegroundActive = true;
+                                Utils.mForegroundCard.setVisibility(View.VISIBLE);
                                 break;
                         }
                         return false;
