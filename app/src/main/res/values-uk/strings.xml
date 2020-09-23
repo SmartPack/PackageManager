@@ -5,6 +5,7 @@
     <string name="allow_ads">Дозволити рекламу</string>
     <string name="always_show">Завжди показувати</string>
     <string name="already_exists">%s вже існує! Невдача!</string>
+    <string name="apk_path">Шлях до APK</string>
     <string name="app_info">Інформація про додаток</string>
     <string name="app_name_summary">Додаток для керування вашими додатками</string>
     <string name="backing_summary">Резервне копіювання файлів даних %s</string>
@@ -30,6 +31,11 @@
     <string name="credits">Подяки</string>
     <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (Базовий код)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейський переклад\n<b><i>tsiflimagas</i></b>: Грецький переклад\n<b><i>Lennoard Silva</i></b>: Португальський (Br) переклад\n<b><i>Mikesew1320</i></b>: Амхарський переклад\n<b><i>MONSTER_PC</i></b>: Російський та Український переклад\n<b><i>Toxinpiper</i></b>: Значок додатка</string>
     <string name="dark_theme">Темна тема</string>
+    <string name="dark_theme_auto">Авто</string>
+    <string name="dark_theme_disable">Вимкнути</string>
+    <string name="dark_theme_enable">Увімкнути</string>
+    <string name="data_dir">Каталог даних</string>
+    <string name="developed_by">Розроблено</string>
     <string name="disable_message">буде %s! Ти впевнений?</string>
     <string name="disabled">відключено</string>
     <string name="disabling">Відключення %s</string>
@@ -63,6 +69,7 @@
     <string name="more_apps">Більше від розробника</string>
     <string name="name">Ім\'я</string>
     <string name="name_empty">Ім\'я порожнє! Невдача!</string>
+    <string name="native_lib">Внутрішня бібліотека</string>
     <string name="no_internet">Будь ласка, перевірте своє інтернет-з\'єднання!</string>
     <string name="no_root">Ця функція не працюватиме без root доступу!</string>
     <string name="oem">Виробник</string>
@@ -81,6 +88,7 @@
     <string name="open_failed">%s не розроблено для роботи в просторі користувача!</string>
     <string name="options">Опції</string>
     <string name="package_id">Ідентифікатор пакета</string>
+    <string name="permissions">Дозволи</string>
     <string name="permission_denied_write_storage">У дозволі на запис в сховище відмовлено!</string>
     <string name="playstore">Play Маркет</string>
     <string name="press_back">Знову натисніть назад, щоб вийти</string>
@@ -109,6 +117,7 @@
     <string name="uninstall_title">Ви впевнені, що хочете видалити %s?</string>
     <string name="uninstall_warning">Зверніть увагу: Видалення системних додатків може бути часом небезпечним!\n\n *** <b>ВИКОРИСТОВУЙТЕ НА ВАШ ВЛАСНИЙ РИЗИК</b>> ***\n</string>
     <string name="user">Показати користувацькі додатки</string>
+    <string name="version">Версія</string>
     <string name="welcome_message"><b>Ласкаво просимо до Package Manager</b>, простий, але потужний додаток для управління вашими програмами.\n\n*** <b>ПОПЕРЕДЖЕННЯ</b> ***\nЦей додаток занадто потужний, щоб зіпсувати ваш пристрій. Розробник цього додатка не несе відповідальності, якщо з вашим пристроєм трапилося щось не так.</string>
     <string name="wrong_extension">Виберіть файл із %s розширенням.</string>
     <string name="yes">Так</string>

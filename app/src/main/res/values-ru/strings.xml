@@ -5,6 +5,7 @@
     <string name="allow_ads">Разрешить рекламу</string>
     <string name="always_show">Всегда показывать</string>
     <string name="already_exists">%s уже существует! Неудача!</string>
+    <string name="apk_path">Путь к APK</string>
     <string name="app_info">Информация о приложении</string>
     <string name="app_name_summary">Приложение для управления вашими приложениями</string>
     <string name="backing_summary">Резервное копирование файлов данных %s</string>
@@ -30,6 +31,11 @@
     <string name="credits">Благодарности</string>
     <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (Базовый код)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейский перевод\n<b><i>tsiflimagas</i></b>: Греческий перевод\n<b><i>Lennoard Silva</i></b>: Португальский (Br) перевод\n<b><i>Mikesew1320</i></b>: Амхарский перевод\n<b><i>MONSTER_PC</i></b>: Русский и Украинский перевод\n<b><i>Toxinpiper</i></b>: Значок приложения</string>
     <string name="dark_theme">Тёмная тема</string>
+    <string name="dark_theme_auto">Авто</string>
+    <string name="dark_theme_disable">Отключить</string>
+    <string name="dark_theme_enable">Включить</string>
+    <string name="data_dir">Каталог данных</string>
+    <string name="developed_by">Разработано</string>
     <string name="disable_message">будет %s! Ты уверен?</string>
     <string name="disabled">отключено</string>
     <string name="disabling">Отключение %s</string>
@@ -63,6 +69,7 @@
     <string name="more_apps">Больше от разработчика</string>
     <string name="name">Имя</string>
     <string name="name_empty">Имя пусто! Неудача!</string>
+    <string name="native_lib">Внутренняя библиотека</string>
     <string name="no_internet">Пожалуйста, проверьте ваше интернет-соединение!</string>
     <string name="no_root">Эта функция не будет работать без root прав!</string>
     <string name="oem">Производитель</string>
@@ -81,6 +88,7 @@
     <string name="open_failed">%s не предназначено для работы в пространстве пользователя!</string>
     <string name="options">Опции</string>
     <string name="package_id">Идентификатор пакета</string>
+    <string name="permissions">Разрешения</string>
     <string name="permission_denied_write_storage">В разрешении на запись в хранилище отказано!</string>
     <string name="playstore">Play Маркет</string>
     <string name="press_back">Нажмите еще раз, чтобы выйти</string>
@@ -109,6 +117,7 @@
     <string name="uninstall_title">Вы уверены, что хотите удалить %s?</string>
     <string name="uninstall_warning">Обратите внимание: удаление системных приложений будет иногда опасно!\n\n *** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b>> ***\n</string>
     <string name="user">Показать пользовательские приложения</string>
+    <string name="version">Версия</string>
     <string name="welcome_message"><b>Добро пожаловать в Package Manager</b>, простое, но мощное приложение для управления вашими приложениями.\n\n*** <b>ПРЕДУПРЕЖДЕНИЕ</b> ***\nЭто приложение слишком мощное, чтобы испортить ваше устройство. Разработчик этого приложения не несет никакой ответственности, если с вашим устройством что-то случилось.</string>
     <string name="wrong_extension">Пожалуйста, выберите файл с %s расширением.</string>
     <string name="yes">Да</string>
