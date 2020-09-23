@@ -21,7 +21,6 @@
     <string name="dark_theme">Tema escuro</string>
     <string name="disable_message">será %s! Tem certeza?</string>
     <string name="disabled">desativado</string>
-    <string name="disabled_message">%s está desativado no momento! Ative-o primeiro e tente novamente!</string>
     <string name="disabling">Desativando %s</string>
     <string name="enabled">ativado</string>
     <string name="enabling">Ativando %s</string>
@@ -98,5 +97,4 @@
     <string name="result">Resultado: %s</string>
     <string name="session_id">ID da Sessão: %s</string>
     <string name="split_apk_list">Lista de APKs divididos</string>
-    <string name="uninstall_failed">Infelizmente, o Package Manager não conseguiu remover o %s do seu dispositivo!</string>
 </resources>

@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.PopupMenu;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
@@ -22,10 +21,6 @@ import java.util.List;
 
 public class DescriptionView extends RecyclerViewItem {
 
-    public interface OnMenuListener {
-        void onMenuReady(DescriptionView descriptionView, PopupMenu popupMenu);
-    }
-
     public interface OnCheckBoxListener {
         void onChanged(DescriptionView descriptionView, boolean isChecked);
     }
@@ -40,10 +35,8 @@ public class DescriptionView extends RecyclerViewItem {
 
     private boolean mChecked;
     private Drawable mImage;
-    private PopupMenu mPopupMenu;
     private CharSequence mTitle;
     private CharSequence mSummary;
-    private OnMenuListener mOnMenuListener;
 
     @Override
     public int getLayoutRes() {
@@ -53,12 +46,6 @@ public class DescriptionView extends RecyclerViewItem {
     @Override
     public void onCreateView(View view) {
         mRootView = view;
-        mRootView.setOnClickListener(v -> {
-            if (Utils.mForegroundActive) return;
-            if (mPopupMenu != null) {
-                mPopupMenu.show();
-            }
-        });
 
         mImageView = view.findViewById(R.id.image);
         mTitleView = view.findViewById(R.id.title);
@@ -108,11 +95,6 @@ public class DescriptionView extends RecyclerViewItem {
         refresh();
     }
 
-    public void setOnMenuListener(OnMenuListener onMenuListener) {
-        mOnMenuListener = onMenuListener;
-        refresh();
-    }
-
     public void setOnCheckBoxListener(OnCheckBoxListener OnCheckBoxListener) {
         if (Utils.mForegroundActive) return;
         mOnCheckBoxListeners.add(OnCheckBoxListener);
@@ -148,12 +130,16 @@ public class DescriptionView extends RecyclerViewItem {
             mCheckBox.setVisibility(View.VISIBLE);
             mCheckBox.setChecked(mChecked);
         }
-        if (mRootView != null && mTitleView != null && mSummaryView != null
-                && mOnMenuListener != null) {
+        if (mRootView != null && getOnItemClickListener() != null && mTitleView != null
+                && mSummaryView != null) {
             mTitleView.setTextIsSelectable(false);
             mSummaryView.setTextIsSelectable(false);
-            mPopupMenu = new PopupMenu(mRootView.getContext(), mRootView);
-            mOnMenuListener.onMenuReady(this, mPopupMenu);
+            mRootView.setOnClickListener(v -> {
+                if (Utils.mForegroundActive) return;
+                if (getOnItemClickListener() != null) {
+                    getOnItemClickListener().onClick(DescriptionView.this);
+                }
+            });
         }
     }
 

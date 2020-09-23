@@ -32,7 +32,6 @@
     <string name="dark_theme">Тёмная тема</string>
     <string name="disable_message">будет %s! Ты уверен?</string>
     <string name="disabled">отключено</string>
-    <string name="disabled_message">%s в настоящее время отключено! Пожалуйста, включите его сначала и попробуйте снова!</string>
     <string name="disabling">Отключение %s</string>
     <string name="done">Готово</string>
     <string name="enabled">включено</string>
@@ -105,7 +104,6 @@
     <string name="system">Показать системные приложения</string>
     <string name="turn_on_off">Включение/отключение</string>
     <string name="uninstall">Удалить</string>
-    <string name="uninstall_failed">К сожалению, Package Manager не удалось удалить %s с вашего устройства!</string>
     <string name="uninstall_nope">Сожалею! Вы не можете сделать это отсюда!</string>
     <string name="uninstall_summary">Удаление %s</string>
     <string name="uninstall_title">Вы уверены, что хотите удалить %s?</string>

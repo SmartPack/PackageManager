@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground"
+        android:id="@+id/layout_details"
+        android:orientation="vertical" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/app_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/app_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/colorAccent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/version_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textIsSelectable="true"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/open_app"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:paddingStart="1dp"
+                android:paddingEnd="5dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:tint="?android:attr/colorAccent"
+                    android:gravity="start|center_vertical"
+                    android:src="@drawable/ic_open" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/colorAccent"
+                    android:textStyle="bold"
+                    android:text="@string/open"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/disable_app"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:tint="?android:attr/colorAccent"
+                    android:gravity="start|center_vertical"
+                    android:src="@drawable/ic_disable" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/enable_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/colorAccent"
+                    android:textStyle="bold"
+                    android:text="@string/enable"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/remove_app"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:tint="?android:attr/colorAccent"
+                    android:gravity="start|center_vertical"
+                    android:src="@drawable/ic_delete" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/colorAccent"
+                    android:textStyle="bold"
+                    android:text="@string/uninstall"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/info_app"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="1dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:tint="?android:attr/colorAccent"
+                    android:gravity="start|center_vertical"
+                    android:src="@drawable/ic_settings" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/colorAccent"
+                    android:textStyle="bold"
+                    android:text="@string/app_info"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="85dp"
+                            android:layout_gravity="center_vertical|start"
+                            android:orientation="vertical" >
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:gravity="start"
+                                android:textColor="?android:attr/colorAccent"
+                                android:text="@string/package_id"
+                                android:textIsSelectable="true"
+                                android:textSize="18sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/package_id_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textColor="?android:attr/textColorPrimary"
+                                android:textIsSelectable="true"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/playstore_app"
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="end"
+                            android:orientation="vertical" >
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:layout_gravity="center_horizontal"
+                                android:tint="?android:attr/colorAccent"
+                                android:src="@drawable/ic_playstore" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textColor="?android:attr/colorAccent"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/playstore"
+                                android:textIsSelectable="true"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="85dp"
+                            android:layout_gravity="center_vertical|start"
+                            android:orientation="vertical" >
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:gravity="start"
+                                android:text="@string/apk_path"
+                                android:textColor="?android:attr/colorAccent"
+                                android:textIsSelectable="true"
+                                android:textSize="18sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/apk_path_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textColor="?android:attr/textColorPrimary"
+                                android:textIsSelectable="true"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/export_app"
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="end"
+                            android:visibility="gone"
+                            android:orientation="vertical" >
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:layout_gravity="center_horizontal"
+                                android:tint="?android:attr/colorAccent"
+                                android:src="@drawable/ic_export" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textColor="?android:attr/colorAccent"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/export"
+                                android:textIsSelectable="true"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="85dp"
+                            android:layout_gravity="center_vertical|start"
+                            android:orientation="vertical" >
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:gravity="start"
+                                android:textColor="?android:attr/colorAccent"
+                                android:text="@string/data_dir"
+                                android:textIsSelectable="true"
+                                android:textSize="18sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/data_dir_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:textColor="?android:attr/textColorPrimary"
+                                android:textIsSelectable="true"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/backup_app"
+                            android:layout_width="75dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="end"
+                            android:visibility="gone"
+                            android:orientation="vertical" >
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:layout_gravity="center_horizontal"
+                                android:tint="?android:attr/colorAccent"
+                                android:src="@drawable/ic_backup" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textColor="?android:attr/colorAccent"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/backup"
+                                android:textIsSelectable="true"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:textColor="?android:attr/colorAccent"
+                    android:text="@string/native_lib"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/native_lib_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:textColor="?android:attr/colorAccent"
+                    android:text="@string/permissions"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/permissions_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textIsSelectable="true"
+                    android:paddingBottom="16dp"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="bottom"
+        android:text="@string/cancel"
+        android:textStyle="bold"
+        android:background="@color/black"
+        android:textColor="?android:attr/colorAccent"
+        android:textSize="18sp"
+        android:padding="10dp" />
+</androidx.cardview.widget.CardView>

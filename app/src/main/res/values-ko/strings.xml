@@ -32,7 +32,6 @@
     <string name="dark_theme">어두운 테마</string>
     <string name="disabled">비활성화</string>
     <string name="disable_message">을(를) %s합니다. 계속하시겠어요?</string>
-    <string name="disabled_message">%s은(는) 현제 비활성화 상태입니다! 먼저 활성화시키고, 다시 시도해주세요!</string>
     <string name="disabling">%s을(를) 비활성화하는 중</string>
     <string name="done">완료됨</string>
     <string name="enabled">활성화</string>

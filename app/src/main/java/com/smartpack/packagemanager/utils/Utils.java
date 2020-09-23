@@ -15,6 +15,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -72,20 +73,16 @@ public class Utils {
     public static AppCompatTextView mForegroundText;
     public static AppCompatTextView mCancel;
     public static AppCompatImageView mDeveloper;
-    public static AppCompatTextView mPackageIDTitle;
-    public static AppCompatTextView mPackageID;
-    public static AppCompatTextView mVersionTitle;
-    public static AppCompatTextView mVersion;
-    public static AppCompatTextView mDataDirTitle;
-    public static AppCompatTextView mDataDir;
-    public static AppCompatTextView mNatLibTitle;
-    public static AppCompatTextView mNatLib;
-    public static AppCompatTextView mAPKPathTitle;
-    public static AppCompatTextView mAPKPath;
-    public static AppCompatTextView mPermissionsTitle;
-    public static AppCompatTextView mPermissions;
     public static boolean mForegroundActive = false;
+    public static boolean mReloadPage = false;
+    public static boolean mSystemApp = false;
     public static CardView mForegroundCard;
+    public static CharSequence mApplicationName;
+    public static Drawable mApplicationIcon;
+    public static String mApplicationID;
+    public static String mDirData;
+    public static String mDirNatLib;
+    public static String mDirSource;
 
     public static boolean isPackageInstalled(String packageID, Context context) {
         try {
@@ -200,18 +197,6 @@ public class Utils {
         mCreditsTitle.setVisibility(View.GONE);
         mCredits.setVisibility(View.GONE);
         mForegroundText.setVisibility(View.GONE);
-        mPackageIDTitle.setVisibility(View.GONE);
-        mPackageID.setVisibility(View.GONE);
-        mVersionTitle.setVisibility(View.GONE);
-        mVersion.setVisibility(View.GONE);
-        mDataDirTitle.setVisibility(View.GONE);
-        mDataDir.setVisibility(View.GONE);
-        mNatLibTitle.setVisibility(View.GONE);
-        mNatLib.setVisibility(View.GONE);
-        mAPKPathTitle.setVisibility(View.GONE);
-        mAPKPath.setVisibility(View.GONE);
-        mPermissionsTitle.setVisibility(View.GONE);
-        mPermissions.setVisibility(View.GONE);
         mCancel.setVisibility(View.GONE);
         mForegroundCard.setVisibility(View.GONE);
         mForegroundActive = false;

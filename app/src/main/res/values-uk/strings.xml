@@ -32,7 +32,6 @@
     <string name="dark_theme">Темна тема</string>
     <string name="disable_message">буде %s! Ти впевнений?</string>
     <string name="disabled">відключено</string>
-    <string name="disabled_message">%s наразі відключено! Увімкніть його спершу та спробуйте ще раз!</string>
     <string name="disabling">Відключення %s</string>
     <string name="done">Готово</string>
     <string name="enabled">увімкнено</string>
@@ -105,7 +104,6 @@
     <string name="system">Показати системні додатки</string>
     <string name="turn_on_off">Увімкнення/відключення</string>
     <string name="uninstall">Видалити</string>
-    <string name="uninstall_failed">На жаль, Package Manager не вдалося видалити %s з вашого пристрою!</string>
     <string name="uninstall_nope">Вибачте! Ви не можете зробити це звідси!</string>
     <string name="uninstall_summary">Видалення %s</string>
     <string name="uninstall_title">Ви впевнені, що хочете видалити %s?</string>

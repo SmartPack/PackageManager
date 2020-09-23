@@ -33,7 +33,6 @@
     <string name="dark_theme">Σκούρο Θέμα</string>
     <string name="disable_message">θα είναι %s! Είστε σίγουρος;</string>
     <string name="disabled">Ανενεργό</string>
-    <string name="disabled_message">%s είναι απενεργοποιημένο! Παρακαλώ ενεργοποίησε το πρώτα και προσπαθήστε ξανά!</string>
     <string name="disabling">Απενεργοποίηση %s</string>
     <string name="done">Ολοκληρώθηκε</string>
     <string name="enabled">Ενεργό</string>
@@ -94,7 +93,6 @@
     <string name="system">Εμφάνιση εφαρμογών συστήματος</string>
     <string name="turn_on_off">Ενεργοποίηση/απενεργοποίηση</string>
     <string name="uninstall">Απεγκατάσταση</string>
-    <string name="uninstall_failed">Δυστυχώς, το Package Manager απέτυχε να αφαιρέσει %s από τη συσκευή σας!</string>
     <string name="uninstall_nope">Συγγνώμη! Δεν μπορείτε να κάνετε αυτό από εδώ!</string>
     <string name="uninstall_summary">Αφαίρεση %s</string>
     <string name="uninstall_title">Είστε σίγουρος ότι θέλετε να προχωρήσετε σε απεγκατάσταση %s?</string>

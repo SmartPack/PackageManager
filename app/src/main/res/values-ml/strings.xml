@@ -30,7 +30,6 @@
     <string name="dark_theme">ഇരുണ്ട തീം</string>
     <string name="disable_message">%s ചെയ്യ്യപ്പെടും! ഉറപ്പാണോ?</string>
     <string name="disabled">പ്രവർത്തനരഹിതമാണ്</string>
-    <string name="disabled_message">%s നിലവിൽ പ്രവർത്തനരഹിതമാണ്! ദയവായി പ്രവർത്തനക്ഷമമാക്കിയതിനു ശേഷം വീണ്ടും ശ്രമിക്കുക!</string>
     <string name="disabling">%s നെ പ്രവർത്തനരഹിതമാക്കുന്നു</string>
     <string name="done">പൂർത്തിയായി</string>
     <string name="enabled">പ്രവർത്തനക്ഷമമാണ്</string>
@@ -82,7 +81,6 @@
     <string name="system">സിസ്റ്റം അപ്ലിക്കേഷനുകൾ</string>
     <string name="turn_on_off">പ്രവർത്തനരഹിതം/ക്ഷമം ആക്കുക</string>
     <string name="uninstall">അൺ‌ഇൻ‌സ്റ്റാൾ‌ ചെയ്യുക</string>
-    <string name="uninstall_failed">നിർഭാഗ്യവശാൽ, നിങ്ങളുടെ ഫോണിൽനിന്ന് %s നെ നീക്കംചെയ്യുന്നതിൽനിന്നും പാക്കേജ് മാനേജർ പരാജയപ്പെട്ടിരിക്കുന്നു!</string>
     <string name="uninstall_nope">ക്ഷമിക്കണം! നിങ്ങൾക്ക് ഇവിടെ നിന്ന് ഇത് ചെയ്യാൻ കഴിയില്ല!</string>
     <string name="uninstall_summary">%s നീക്കംചെയ്യുന്നു</string>
     <string name="uninstall_title">%s അൺ‌ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>

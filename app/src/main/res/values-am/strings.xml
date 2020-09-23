@@ -22,7 +22,6 @@
     <string name="dark_theme">ጠቆር ያለ ገፅታ</string>
     <string name="disable_message">%s መጠቀም አይችሉም! እርግጠኛ ኖት?</string>
     <string name="disabled">ጠፍቷል</string>
-    <string name="disabled_message">%s በአሁኑ ጊዜ ጠፍቶ ይገኛል! እባክዎን ካበሩ በኋላ እንደገና ይሞክሩ!</string>
     <string name="disabling">%s በማቋረጥ ላይ</string>
     <string name="enabled">በርቷል</string>
     <string name="enabling">%s በማብራት ላይ</string>
