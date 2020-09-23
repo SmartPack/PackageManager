@@ -14,8 +14,6 @@
         ads:adUnitId="ca-app-pub-7791710838910455/5329474187">
     </com.google.android.gms.ads.AdView>
 
-    <include layout="@layout/rv_foreground_view" />
-
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"

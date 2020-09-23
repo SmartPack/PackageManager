@@ -8,10 +8,8 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -27,31 +25,19 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
-import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.root.RootFile;
 import com.smartpack.packagemanager.utils.root.RootUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Locale;
-import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
@@ -62,21 +48,8 @@ import java.util.Objects;
 public class Utils {
 
     public static AppCompatEditText mKeyEdit;
-    public static AppCompatImageButton mBack;
-    public static AppCompatImageView mAppIcon;
-    public static AppCompatTextView mCardTitle;
-    public static AppCompatTextView mAppName;
-    public static AppCompatTextView mAboutApp;
-    public static AppCompatTextView mDevelopedBy;
-    public static AppCompatTextView mCreditsTitle;
-    public static AppCompatTextView mCredits;
-    public static AppCompatTextView mForegroundText;
-    public static AppCompatTextView mCancel;
-    public static AppCompatImageView mDeveloper;
-    public static boolean mForegroundActive = false;
     public static boolean mReloadPage = false;
     public static boolean mSystemApp = false;
-    public static CardView mForegroundCard;
     public static CharSequence mApplicationName;
     public static Drawable mApplicationIcon;
     public static String mApplicationID;
@@ -120,7 +93,7 @@ public class Utils {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    private static String readAssetFile(Context context, String file) {
+    public static String readAssetFile(Context context, String file) {
         InputStream input = null;
         BufferedReader buf = null;
         try {
@@ -145,64 +118,6 @@ public class Utils {
         return null;
     }
 
-    @SuppressLint("SetTextI18n")
-    public static void aboutDialogue(Activity activity) {
-        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        mCardTitle.setText(R.string.about);
-        mAppIcon.setImageDrawable(activity.getResources().getDrawable(R.mipmap.ic_launcher_round));
-        mAppName.setText(activity.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
-        mCredits.setText(activity.getString(R.string.credits_summary));
-        mCardTitle.setVisibility(View.VISIBLE);
-        mBack.setVisibility(View.VISIBLE);
-        mAppIcon.setVisibility(View.VISIBLE);
-        mAppName.setVisibility(View.VISIBLE);
-        mAboutApp.setVisibility(View.VISIBLE);
-        mDevelopedBy.setVisibility(View.VISIBLE);
-        mDeveloper.setVisibility(View.VISIBLE);
-        mCreditsTitle.setVisibility(View.VISIBLE);
-        mCredits.setVisibility(View.VISIBLE);
-        mCancel.setVisibility(View.VISIBLE);
-        mForegroundActive = true;
-        mForegroundCard.setVisibility(View.VISIBLE);
-    }
-
-    @SuppressLint("SetTextI18n")
-    public static void changeLogs(Activity activity) {
-        String change_log = null;
-        try {
-            change_log = new JSONObject(Objects.requireNonNull(readAssetFile(
-                    activity, "changelogs.json"))).getString("releaseNotes");
-        } catch (JSONException ignored) {
-        }
-        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        mAppIcon.setImageDrawable(activity.getResources().getDrawable(R.mipmap.ic_launcher_round));
-        mAppName.setText(activity.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
-        mForegroundText.setText(change_log);
-        mAppIcon.setVisibility(View.VISIBLE);
-        mAppName.setVisibility(View.VISIBLE);
-        mForegroundText.setVisibility(View.VISIBLE);
-        mCancel.setVisibility(View.VISIBLE);
-        mForegroundActive = true;
-        mForegroundCard.setVisibility(View.VISIBLE);
-    }
-
-    public static void closeForeground(Activity activity) {
-        mCardTitle.setVisibility(View.GONE);
-        mBack.setVisibility(View.GONE);
-        mAppIcon.setVisibility(View.GONE);
-        mAppName.setVisibility(View.GONE);
-        mAboutApp.setVisibility(View.GONE);
-        mDevelopedBy.setVisibility(View.GONE);
-        mDeveloper.setVisibility(View.GONE);
-        mCreditsTitle.setVisibility(View.GONE);
-        mCredits.setVisibility(View.GONE);
-        mForegroundText.setVisibility(View.GONE);
-        mCancel.setVisibility(View.GONE);
-        mForegroundCard.setVisibility(View.GONE);
-        mForegroundActive = false;
-        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-    }
-
     public static void showSnackbar(View view, String message) {
         Snackbar snackbar;
         snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
@@ -222,29 +137,6 @@ public class Utils {
                 Configuration.ORIENTATION_PORTRAIT : activity.getResources().getConfiguration().orientation;
     }
 
-    public static String readFile(String file) {
-        BufferedReader buf = null;
-        try {
-            buf = new BufferedReader(new FileReader(file));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = buf.readLine()) != null) {
-                stringBuilder.append(line).append("\n");
-            }
-
-            return stringBuilder.toString().trim();
-        } catch (IOException ignored) {
-        } finally {
-            try {
-                if (buf != null) buf.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
     public static boolean existFile(String file) {
         return existFile(file, true);
     }
@@ -255,20 +147,6 @@ public class Utils {
 
     static void copy(String source, String dest) {
         RootUtils.runCommand("cp -r " + source + " " + dest);
-    }
-
-    public static void create(String text, String path) {
-        try {
-            File logFile = new File(path);
-            logFile.createNewFile();
-            FileOutputStream fOut = new FileOutputStream(logFile);
-            OutputStreamWriter myOutWriter =
-                    new OutputStreamWriter(fOut);
-            myOutWriter.append(text);
-            myOutWriter.close();
-            fOut.close();
-        } catch (Exception ignored) {
-        }
     }
 
     static void delete(String path) {

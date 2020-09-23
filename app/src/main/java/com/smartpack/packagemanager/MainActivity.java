@@ -8,9 +8,6 @@
 
 package com.smartpack.packagemanager;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -57,38 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager = findViewById(R.id.viewPagerID);
         mLayoutParams = (ViewGroup.MarginLayoutParams) mViewPager.getLayoutParams();
-
-        Utils.mForegroundCard = findViewById(R.id.foreground_card);
-        Utils.mBack = findViewById(R.id.back);
-        Utils.mAppIcon = findViewById(R.id.app_image);
-        Utils.mCardTitle = findViewById(R.id.card_title);
-        Utils.mAppName = findViewById(R.id.app_title);
-        Utils.mAboutApp = findViewById(R.id.about_app);
-        Utils.mDevelopedBy = findViewById(R.id.developed_by);
-        Utils.mDeveloper = findViewById(R.id.developer);
-        Utils.mCreditsTitle = findViewById(R.id.credits_title);
-        Utils.mCredits = findViewById(R.id.credits);
-        Utils.mForegroundText = findViewById(R.id.foreground_text);
-        Utils.mCancel = findViewById(R.id.cancel_button);
-        Utils.mBack.setOnClickListener(v -> {
-            Utils.closeForeground(this);
-        });
-        Utils.mCancel.setOnClickListener(v -> {
-            Utils.closeForeground(this);
-        });
-        Utils.mDeveloper.setOnClickListener(v -> {
-            if (Utils.isNetworkAvailable(this)) {
-                try {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse("https://github.com/sunilpaulmathew"));
-                    startActivity(i);
-                } catch (ActivityNotFoundException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Utils.showSnackbar(mViewPager, getString(R.string.no_internet));
-            }
-        });
 
         if (Utils.getBoolean("allow_ads", true, this)) {
             AdView mAdView = findViewById(R.id.adView);
@@ -152,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (Utils.mForegroundActive) {
-            Utils.closeForeground(this);
-        } else if (PackageTasks.mAppName != null) {
+        if (PackageTasks.mAppName != null) {
             Utils.mKeyEdit.setText(null);
             PackageTasks.mAppName = null;
         } else if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {

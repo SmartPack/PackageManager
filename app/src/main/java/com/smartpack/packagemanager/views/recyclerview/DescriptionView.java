@@ -8,7 +8,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +95,6 @@ public class DescriptionView extends RecyclerViewItem {
     }
 
     public void setOnCheckBoxListener(OnCheckBoxListener OnCheckBoxListener) {
-        if (Utils.mForegroundActive) return;
         mOnCheckBoxListeners.add(OnCheckBoxListener);
     }
 
@@ -135,7 +133,6 @@ public class DescriptionView extends RecyclerViewItem {
             mTitleView.setTextIsSelectable(false);
             mSummaryView.setTextIsSelectable(false);
             mRootView.setOnClickListener(v -> {
-                if (Utils.mForegroundActive) return;
                 if (getOnItemClickListener() != null) {
                     getOnItemClickListener().onClick(DescriptionView.this);
                 }

@@ -338,9 +338,6 @@ public class PackageTasksFragment extends RecyclerViewFragment {
         if (PackageTasks.mBatchApps == null) {
             PackageTasks.mBatchApps = new StringBuilder();
         }
-        if (Utils.mReloadPage) {
-            reload();
-        }
     }
 
     @Override

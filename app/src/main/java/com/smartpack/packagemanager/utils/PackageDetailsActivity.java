@@ -333,7 +333,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (PackageTasks.mRunning) return;
         super.onBackPressed();
     }
 
