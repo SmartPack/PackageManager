@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    
+
     <string name="about">Про додаток</string>
     <string name="about_summary"><i>Простий, але потужний додаток для управління вашими програмами.</i></string>
     <string name="allow_ads">Дозволити рекламу</string>

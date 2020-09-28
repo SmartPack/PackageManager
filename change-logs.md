@@ -1,5 +1,9 @@
 # Change-logs
 
+## 19. September 28, 2020
+*Release-tag: 2.4*<br>
+Brand new package details view. Largely improved app interface. About and change-logs are now in a single place. Updated Russian & Ukraine translations. Miscellaneous changes.
+
 ## 18. September 05, 2020
 *Release-tag: 2.3*<br>
 Fixed a bug on app closing when search word is entered.
