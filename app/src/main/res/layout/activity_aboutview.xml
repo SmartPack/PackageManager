@@ -94,26 +94,27 @@
                     android:textIsSelectable="true"
                     android:textSize="15sp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"
-                    android:text="@string/change_logs"
-                    android:textColor="?android:attr/colorAccent"
-                    android:textIsSelectable="true"
-                    android:textSize="18sp" />
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal"
+                        android:text="@string/change_logs"
+                        android:textColor="?android:attr/colorAccent"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/foreground_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:padding="10dp"
                         android:gravity="start"
                         android:visibility="gone"
