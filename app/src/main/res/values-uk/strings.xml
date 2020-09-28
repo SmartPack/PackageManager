@@ -1,12 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-
+    
     <string name="about">Про додаток</string>
     <string name="about_summary"><i>Простий, але потужний додаток для управління вашими програмами.</i></string>
     <string name="allow_ads">Дозволити рекламу</string>
     <string name="always_show">Завжди показувати</string>
     <string name="already_exists">%s вже існує! Невдача!</string>
     <string name="apk_path">Шлях до APK</string>
-    <string name="app_info">Інформація про додаток</string>
+    <string name="app_info">Інфо</string>
     <string name="app_name_summary">Додаток для керування вашими додатками</string>
     <string name="backing_summary">Резервне копіювання файлів даних %s</string>
     <string name="backup">Резервне копіювання</string>
@@ -37,9 +37,11 @@
     <string name="data_dir">Каталог даних</string>
     <string name="developed_by">Розроблено</string>
     <string name="disable_message">буде %s! Ти впевнений?</string>
+    <string name="disable">Відключити</string>
     <string name="disabled">відключено</string>
     <string name="disabling">Відключення %s</string>
     <string name="done">Готово</string>
+    <string name="enable">Увімкнути</string>
     <string name="enabled">увімкнено</string>
     <string name="enabling">Увімкнення %s</string>
     <string name="export">Експорт</string>
@@ -109,15 +111,15 @@
     <string name="split_apk_list">Список split APKs</string>
     <string name="support">Група підтримки</string>
     <string name="sure_question">Ти впевнений?</string>
-    <string name="system">Показати системні додатки</string>
+    <string name="system">Системні додатки</string>
     <string name="turn_on_off">Увімкнення/відключення</string>
     <string name="uninstall">Видалити</string>
     <string name="uninstall_nope">Вибачте! Ви не можете зробити це звідси!</string>
     <string name="uninstall_summary">Видалення %s</string>
     <string name="uninstall_title">Ви впевнені, що хочете видалити %s?</string>
     <string name="uninstall_warning">Зверніть увагу: Видалення системних додатків може бути часом небезпечним!\n\n *** <b>ВИКОРИСТОВУЙТЕ НА ВАШ ВЛАСНИЙ РИЗИК</b>> ***\n</string>
-    <string name="user">Показати користувацькі додатки</string>
-    <string name="version">Версія</string>
+    <string name="user">Встановлені додатки</string>
+    <string name="version">Версія: %s</string>
     <string name="welcome_message"><b>Ласкаво просимо до Package Manager</b>, простий, але потужний додаток для управління вашими програмами.\n\n*** <b>ПОПЕРЕДЖЕННЯ</b> ***\nЦей додаток занадто потужний, щоб зіпсувати ваш пристрій. Розробник цього додатка не несе відповідальності, якщо з вашим пристроєм трапилося щось не так.</string>
     <string name="wrong_extension">Виберіть файл із %s розширенням.</string>
     <string name="yes">Так</string>
