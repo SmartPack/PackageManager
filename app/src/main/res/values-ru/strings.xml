@@ -40,6 +40,7 @@
     <string name="disable">Отключить</string>
     <string name="disabled">отключено</string>
     <string name="disabling">Отключение %s</string>
+    <string name="dismiss">Закрыть</string>
     <string name="done">Готово</string>
     <string name="enable">Включить</string>
     <string name="enabled">включено</string>
@@ -67,7 +68,6 @@
     <string name="language_pt">Португальский</string>
     <string name="language_ru">Русский</string>
     <string name="language_uk">Украинский</string>
-    <string name="more">Больше</string>
     <string name="more_apps">Больше от разработчика</string>
     <string name="name">Имя</string>
     <string name="name_empty">Имя пусто! Неудача!</string>
@@ -88,8 +88,8 @@
     <string name="open">Открыть</string>
     <string name="open_message">Вы уже запускаете это приложение.</string>
     <string name="open_failed">%s не предназначено для работы в пространстве пользователя!</string>
-    <string name="options">Опции</string>
     <string name="package_id">Идентификатор пакета</string>
+    <string name="package_removed">Выбранный пакет удален! Неудача…</string>
     <string name="permissions">Разрешения</string>
     <string name="permission_denied_write_storage">В разрешении на запись в хранилище отказано!</string>
     <string name="playstore">Play Маркет</string>
@@ -101,6 +101,7 @@
     <string name="restore_summary">\nПредупреждение!\n\nВосстановление неправильного файла резервной копии может вызвать проблемы на вашем устройстве. Это исключительно ваша ответственность, чтобы выбрать правильный файл резервной копии, подготовленный этим приложением для вашего устройства. Также обратите внимание, что восстановление не будет работать хорошо для всех приложений.</string>
     <string name="restoring">Восстановление %s</string>
     <string name="result">Результат: %s</string>
+    <string name="search">Поиск…</string>
     <string name="session_id">Идентификатор сессии: %s</string>
     <string name="share">Поделиться</string>
     <string name="shared_by">%s/поделился Package Manager</string>

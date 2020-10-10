@@ -40,6 +40,7 @@
     <string name="disable">Відключити</string>
     <string name="disabled">відключено</string>
     <string name="disabling">Відключення %s</string>
+    <string name="dismiss">Закрити</string>
     <string name="done">Готово</string>
     <string name="enable">Увімкнути</string>
     <string name="enabled">увімкнено</string>
@@ -67,7 +68,6 @@
     <string name="language_pt">Португальська</string>
     <string name="language_ru">Російська</string>
     <string name="language_uk">Українська</string>
-    <string name="more">Більше</string>
     <string name="more_apps">Більше від розробника</string>
     <string name="name">Ім\'я</string>
     <string name="name_empty">Ім\'я порожнє! Невдача!</string>
@@ -88,8 +88,8 @@
     <string name="open">Відкрити</string>
     <string name="open_message">Ви вже працюєте з цим додатком.</string>
     <string name="open_failed">%s не розроблено для роботи в просторі користувача!</string>
-    <string name="options">Опції</string>
     <string name="package_id">Ідентифікатор пакета</string>
+    <string name="package_removed">Вибраний пакет просто видалено! Невдача…</string>
     <string name="permissions">Дозволи</string>
     <string name="permission_denied_write_storage">У дозволі на запис в сховище відмовлено!</string>
     <string name="playstore">Play Маркет</string>
@@ -101,6 +101,7 @@
     <string name="restore_summary">\nПопередження!\n\nВідновлення неправильного файлу резервної копії, можливо, спричинить проблеми на вашому пристрої. Ви несете відповідальність лише за вибір належного файлу резервної копії, підготовленого цим додатком для вашого пристрою. Також зауважте, що відновлення не працюватиме добре для всіх додатків.</string>
     <string name="restoring">Відновлення %s</string>
     <string name="result">Результат: %s</string>
+    <string name="search">Пошук…</string>
     <string name="session_id">Ідентифікатор сесії: %s</string>
     <string name="share">Поділитися</string>
     <string name="shared_by">%s/поділився Package Manager</string>
