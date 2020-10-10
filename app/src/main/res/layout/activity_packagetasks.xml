@@ -21,7 +21,7 @@
             android:padding="10dp"
             android:visibility="gone"
             android:background="?attr/colorAccent"
-            android:textColor="@color/black" />
+            android:textColor="@color/colorBlack" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 android:visibility="gone"
                 android:textSize="18sp"
                 android:padding="10dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

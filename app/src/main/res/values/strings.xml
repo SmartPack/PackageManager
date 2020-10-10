@@ -41,6 +41,7 @@
     <string name="disable">Disable</string>
     <string name="disabled">disabled</string>
     <string name="disabling">Disabling %s</string>
+    <string name="dismiss">Dismiss</string>
     <string name="done">Done</string>
     <string name="enable">Enable</string>
     <string name="enabled">enabled</string>
@@ -68,7 +69,6 @@
     <string name="language_pt">Portuguese</string>
     <string name="language_ru">Russian</string>
     <string name="language_uk">Ukrainian</string>
-    <string name="more">More</string>
     <string name="more_apps">More from Developer</string>
     <string name="name">Name</string>
     <string name="name_empty">Name is empty! Aborting!</string>
@@ -89,8 +89,8 @@
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
     <string name="open_failed">%s is not designed to run in user space!</string>
-    <string name="options">Options</string>
     <string name="package_id">Package ID</string>
+    <string name="package_removed">Selected package is just removed! Aborting…</string>
     <string name="permissions">Permissions</string>
     <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
     <string name="playstore">PlayStore</string>
@@ -102,6 +102,7 @@
     <string name="restore_summary">\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
     <string name="restoring">Restoring %s</string>
     <string name="result">Result: %s</string>
+    <string name="search">Search…</string>
     <string name="session_id">Session ID: %s</string>
     <string name="share">Share</string>
     <string name="shared_by">%s/shared by Package Manager</string>

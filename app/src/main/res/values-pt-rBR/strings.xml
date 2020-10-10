@@ -39,7 +39,6 @@
     <string name="language_default">Padrão</string>
     <string name="language_ko">Coreano</string>
     <string name="language_ml">Malaiala</string>
-    <string name="more">Mais</string>
     <string name="more_apps">Mais do desenvolvedor</string>
     <string name="name">Nome</string>
     <string name="name_empty">O nome está vazio! Abortando!</string>
@@ -49,7 +48,6 @@
     <string name="open">Abrir</string>
     <string name="open_message">Você já está executando este aplicativo.</string>
     <string name="open_failed">%s não foi projetado para ser executado no espaço do usuário!</string>
-    <string name="options">Opções</string>
     <string name="package_id">ID do pacote</string>
     <string name="permission_denied_write_storage">Permissão para modificar o armazenamento negada!</string>
     <string name="playstore">PlayStore</string>

@@ -40,7 +40,6 @@
     <string name="language_en">እንግሊዘኛ</string>
     <string name="language_default">ነባር</string>
     <string name="language_ko">ኮርያኛ</string>
-    <string name="more">ተጨማሪ</string>
     <string name="more_apps">ከ አበልፃጊዉ ተጨማሪ መተግበሪያ</string>
     <string name="name_empty">ስም አልተገኘም! በማቋረጥ ላይ</string>
     <string name="no_internet">እባክዎን የኢንተርኔት አገልግሎት መኖሩን ያረጋግጡ!</string>
@@ -49,7 +48,6 @@
     <string name="open">ክፈት</string>
     <string name="open_message">ይህን መተግበሪያ በአሁኑ ሰዐት እየተጠቀሙበት ይገኛሉ!</string>
     <string name="open_failed">%s በ ተጠቃሚ ማከማቻ ላይ ለመጠቀም ተብሎ አልተሰራም!</string>
-    <string name="options">አማራጮች</string>
     <string name="permission_denied_write_storage">ማከማቻን የመጠቀም ፍቃድ አልተገኘም!</string>
     <string name="playstore">ፕሌይስቶር</string>
     <string name="press_back">ለመዉጣት ከፈለጉ የኋላ መመለሻ ቁልፉን ደግመዉ ይጫኑ።</string>

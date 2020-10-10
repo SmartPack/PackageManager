@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- Package Manager -->
-    <string-array name="fab_options">
-        <item>@string/restore_data</item>
-        <item>@string/install_bundle</item>
-    </string-array>
-</resources>

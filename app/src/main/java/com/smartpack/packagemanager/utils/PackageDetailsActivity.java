@@ -11,8 +11,9 @@ package com.smartpack.packagemanager.utils;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -31,11 +32,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.root.RootUtils;
-import com.smartpack.packagemanager.views.dialog.Dialog;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020
@@ -44,7 +42,6 @@ import java.lang.ref.WeakReference;
 public class PackageDetailsActivity extends AppCompatActivity {
 
     private AppCompatTextView mDisableTitle;
-    private LinearLayout mDetailsLayout;
     private LinearLayout mOpenApp;
 
     @SuppressLint("SetTextI18n")
@@ -63,7 +60,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
         AppCompatTextView mPermissions = findViewById(R.id.permissions_text);
         mDisableTitle = findViewById(R.id.enable_title);
         AppCompatTextView mCancelButton = findViewById(R.id.cancel_button);
-        mDetailsLayout = findViewById(R.id.layout_details);
         mOpenApp = findViewById(R.id.open_app);
         LinearLayout mBackup = findViewById(R.id.backup_app);
         LinearLayout mExport = findViewById(R.id.export_app);
@@ -75,54 +71,46 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mAppName.setText(Utils.mApplicationName);
         mPackageID.setText(Utils.mApplicationID);
         mVersion.setText(getString(R.string.version, PackageTasks.getVersionName(Utils.mDirSource, this)));
-        mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, new WeakReference<>(this)) ? R.string.disable : R.string.enable);
+        mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, this) ? R.string.disable : R.string.enable);
         mDataDir.setText(Utils.mDirData);
         mNatLib.setText(Utils.mDirNatLib);
-        if (RootUtils.rootAccessDenied()) {
-            mAPKPath.setText(Utils.mDirSource);
-        } else {
+        if (Utils.rootAccess()) {
             mAPKPath.setText(PackageTasks.listSplitAPKs(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), "")));
+        } else {
+            mAPKPath.setText(Utils.mDirSource);
         }
         mPermissions.setText(PackageTasks.getPermissions(Utils.mApplicationID, this));
-        mOpenApp.setVisibility(PackageTasks.isEnabled(Utils.mApplicationID, new WeakReference<>(this)) ? View.VISIBLE : View.GONE);
+        mOpenApp.setVisibility(PackageTasks.isEnabled(Utils.mApplicationID, this) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {
             if (Utils.mApplicationID.equals(BuildConfig.APPLICATION_ID)) {
-                Utils.showSnackbar(mDetailsLayout, getString(R.string.open_message));
+                Utils.snackbar(getString(R.string.open_message));
             } else {
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage(Utils.mApplicationID);
                 if (launchIntent != null) {
                     startActivity(launchIntent);
                     onBackPressed();
                 } else {
-                    Utils.showSnackbar(mDetailsLayout, getString(R.string.open_failed, Utils.mApplicationName));
+                    Utils.snackbar(getString(R.string.open_failed, Utils.mApplicationName));
                 }
             }
         });
         mBackup.setOnClickListener(v -> backupApp(this));
         mExport.setOnClickListener(v -> exportApp(this));
-        mDisable.setOnClickListener(v -> new Dialog(this)
+        mDisable.setOnClickListener(v -> new AlertDialog.Builder(this)
                 .setIcon(Utils.mApplicationIcon)
                 .setTitle(Utils.mApplicationName)
                 .setMessage(Utils.mApplicationName + " " + getString(R.string.disable_message,
-                        PackageTasks.isEnabled(Utils.mApplicationID, new WeakReference<>(this)) ?
+                        PackageTasks.isEnabled(Utils.mApplicationID, this) ?
                                 getString(R.string.disabled) : getString(R.string.enabled)))
                 .setCancelable(false)
                 .setNeutralButton(getString(R.string.cancel), (dialog, id) -> {
                 })
                 .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                    disableApp(new WeakReference<>(this));
+                    disableApp(this);
                 })
                 .show());
         mOpenStore.setOnClickListener(v -> {
-            try {
-                Intent ps = new Intent(Intent.ACTION_VIEW);
-                ps.setData(Uri.parse(
-                        "https://play.google.com/store/apps/details?id=" + Utils.mApplicationID));
-                startActivity(ps);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
-            }
-            onBackPressed();
+            Utils.launchUrl("https://play.google.com/store/apps/details?id=" + Utils.mApplicationID, this);
         });
         mUninstallApp.setOnClickListener(v -> uninstallApp(this));
         mOpenSettings.setOnClickListener(v -> {
@@ -136,7 +124,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mCancelButton.setOnClickListener(v -> {
             onBackPressed();
         });
-        if (!RootUtils.rootAccessDenied()) {
+        if (Utils.rootAccess()) {
             mBackup.setVisibility(View.VISIBLE);
             mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);
@@ -144,26 +132,26 @@ public class PackageDetailsActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private void disableApp(WeakReference<Activity> activityRef) {
+    private void disableApp(Context context) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(activityRef.get());
-                mProgressDialog.setMessage(PackageTasks.isEnabled(Utils.mApplicationID, activityRef) ?
-                        activityRef.get().getString(R.string.disabling, Utils.mApplicationName) + "..." :
-                        activityRef.get().getString(R.string.enabling, Utils.mApplicationName) + "...");
+                mProgressDialog = new ProgressDialog(context);
+                mProgressDialog.setMessage(PackageTasks.isEnabled(Utils.mApplicationID, context) ?
+                        context.getString(R.string.disabling, Utils.mApplicationName) + "..." :
+                       context.getString(R.string.enabling, Utils.mApplicationName) + "...");
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                if (PackageTasks.isEnabled(Utils.mApplicationID, activityRef)) {
-                    RootUtils.runCommand("pm disable " + Utils.mApplicationID);
+                if (PackageTasks.isEnabled(Utils.mApplicationID, context)) {
+                    Utils.runCommand("pm disable " + Utils.mApplicationID);
                 } else {
-                    RootUtils.runCommand("pm enable " + Utils.mApplicationID);
+                    Utils.runCommand("pm enable " + Utils.mApplicationID);
                 }
                 return null;
             }
@@ -174,8 +162,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {
                 }
-                mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, new WeakReference<>(activityRef.get())) ? R.string.disable : R.string.enable);
-                mOpenApp.setVisibility(PackageTasks.isEnabled(Utils.mApplicationID, new WeakReference<>(activityRef.get())) ? View.VISIBLE : View.GONE);
+                mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, context) ? R.string.disable : R.string.enable);
+                mOpenApp.setVisibility(PackageTasks.isEnabled(Utils.mApplicationID, context) ? View.VISIBLE : View.GONE);
                 Utils.mReloadPage = true;
             }
         }.execute();
@@ -183,7 +171,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
 
     private void uninstallApp(Activity activity) {
         if (Utils.mApplicationID.equals(BuildConfig.APPLICATION_ID)) {
-            Utils.showSnackbar(mDetailsLayout, getString(R.string.uninstall_nope));
+            Utils.snackbar(getString(R.string.uninstall_nope));
         } else if (!Utils.mSystemApp) {
             Intent remove = new Intent(Intent.ACTION_DELETE);
             remove.setData(Uri.parse("package:" + Utils.mApplicationID));
@@ -191,10 +179,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
             Utils.mReloadPage = true;
             onBackPressed();
         } else {
-            if (RootUtils.rootAccessDenied()) {
-                Utils.showSnackbar(mDetailsLayout, getString(R.string.no_root));
-            } else {
-                new Dialog(activity)
+            if (Utils.rootAccess()) {
+                new AlertDialog.Builder(activity)
                         .setIcon(Utils.mApplicationIcon)
                         .setTitle(getString(R.string.uninstall_title, Utils.mApplicationName))
                         .setMessage(getString(R.string.uninstall_warning))
@@ -202,29 +188,31 @@ public class PackageDetailsActivity extends AppCompatActivity {
                         .setNeutralButton(getString(R.string.cancel), (dialog, id) -> {
                         })
                         .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                            removeSystemApp(new WeakReference<>(activity));
+                            removeSystemApp(this);
                         })
                         .show();
+            } else {
+                Utils.snackbar(getString(R.string.no_root));
             }
         }
     }
 
     @SuppressLint("StaticFieldLeak")
-    private void removeSystemApp(WeakReference<Activity> activityRef) {
+    private void removeSystemApp(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog mProgressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mProgressDialog = new ProgressDialog(activityRef.get());
-                mProgressDialog.setMessage(activityRef.get().getString(R.string.uninstall_summary, Utils.mApplicationName));
+                mProgressDialog = new ProgressDialog(activity);
+                mProgressDialog.setMessage(activity.getString(R.string.uninstall_summary, Utils.mApplicationName));
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                RootUtils.runCommand("pm uninstall --user 0 " + Utils.mApplicationID);
+                Utils.runCommand("pm uninstall --user 0 " + Utils.mApplicationID);
                 return null;
             }
             @Override
@@ -234,8 +222,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {
                 }
-                Utils.mReloadPage = true;
                 onBackPressed();
+                Utils.mReloadPage = true;
             }
         }.execute();
     }
@@ -244,22 +232,21 @@ public class PackageDetailsActivity extends AppCompatActivity {
         if (Utils.isStorageWritePermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            Utils.showSnackbar(mDetailsLayout, getString(R.string.permission_denied_write_storage));
+            Utils.snackbar(getString(R.string.permission_denied_write_storage));
         } else {
             for (final String splitApps : PackageTasks.splitApks(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""))) {
                 if (splitApps.contains("split_")) {
                     if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" + Utils.mApplicationID)) {
-                        Utils.showSnackbar(mDetailsLayout, getString(R.string.already_exists, Utils.mApplicationID));
+                        Utils.snackbar(getString(R.string.already_exists, Utils.mApplicationID));
                     } else {
                         PackageTasks.exportingBundleTask(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""), Utils.mApplicationID,
-                                Utils.mApplicationIcon, new WeakReference<>(this));
+                                Utils.mApplicationIcon, this);
                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                     }
                     return;
                 }
             }
-            PackageTasks.exportingTask(Utils.mDirSource, Utils.mApplicationID,
-                    Utils.mApplicationIcon, new WeakReference<>(this));
+            PackageTasks.exportingTask(Utils.mDirSource, Utils.mApplicationID, Utils.mApplicationIcon, this);
         }
     }
 
@@ -267,16 +254,16 @@ public class PackageDetailsActivity extends AppCompatActivity {
         if (Utils.isStorageWritePermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            Utils.showSnackbar(mDetailsLayout, getString(R.string.permission_denied_write_storage));
+            Utils.snackbar(getString(R.string.permission_denied_write_storage));
         } else {
-            ViewUtils.dialogEditText(Utils.mApplicationName.toString(),
+            Utils.dialogEditText(Utils.mApplicationName.toString(),
                     (dialogInterface1, i1) -> {
-                    }, new ViewUtils.OnDialogEditTextListener() {
+                    }, new Utils.OnDialogEditTextListener() {
                         @SuppressLint("StaticFieldLeak")
                         @Override
                         public void onClick(String text) {
                             if (text.isEmpty()) {
-                                Utils.showSnackbar(mDetailsLayout, getString(R.string.name_empty));
+                                Utils.snackbar(getString(R.string.name_empty));
                                 return;
                             }
                             if (!text.endsWith(".tar.gz")) {
@@ -286,7 +273,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                                 text = text.replaceAll(" ", "_");
                             }
                             if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
-                                Utils.showSnackbar(mDetailsLayout, getString(R.string.already_exists, text));
+                                Utils.snackbar(getString(R.string.already_exists, text));
                                 return;
                             }
                             final String path = text;

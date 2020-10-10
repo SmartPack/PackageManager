@@ -52,7 +52,6 @@
     <string name="language_en">ഇംഗ്ലീഷ്</string>
     <string name="language_ko">കൊറിയൻ</string>
     <string name="language_ml">മലയാളം</string>
-    <string name="more">കൂടുതൽ</string>
     <string name="more_apps">കൂടുതൽ അപ്ലിക്കേഷനുകൾ</string>
     <string name="name">പേര് കൊണ്ട്</string>
     <string name="name_empty">പേര് ശൂന്യമാണ്! നിർത്തലാക്കുന്നു!</string>
@@ -62,7 +61,6 @@
     <string name="open">തുറക്കുക</string>
     <string name="open_message">ഈ അപ്ലിക്കേഷൻ നിലവിൽ പ്രവർത്തിക്കുന്നുണ്ട്.</string>
     <string name="open_failed">%s \'userspace\' ൽ പ്രവർത്തിക്കാൻ രൂപകൽപ്പന ചെയ്‌തിട്ടില്ല!</string>
-    <string name="options">ഓപ്ഷനുകൾ</string>
     <string name="package_id">പാക്കേജ് ID കൊണ്ട്</string>
     <string name="permission_denied_write_storage">\'writing to storage\' അനുമതി നിരസിച്ചിരിക്കുന്നു!</string>
     <string name="report_issue">ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക</string>

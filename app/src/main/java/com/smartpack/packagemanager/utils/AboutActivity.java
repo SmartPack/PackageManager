@@ -9,13 +9,9 @@
 package com.smartpack.packagemanager.utils;
 
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,22 +43,11 @@ public class AboutActivity extends AppCompatActivity {
         AppCompatTextView mForegroundText = findViewById(R.id.foreground_text);
         mAppName.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
         AppCompatTextView mCancel = findViewById(R.id.cancel_button);
-        LinearLayout layoutFG = findViewById(R.id.layout_foreground);
         mCancel.setOnClickListener(v -> {
             super.onBackPressed();
         });
         mDeveloper.setOnClickListener(v -> {
-            if (Utils.isNetworkAvailable(this)) {
-                try {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse("https://github.com/sunilpaulmathew"));
-                    startActivity(i);
-                } catch (ActivityNotFoundException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Utils.showSnackbar(layoutFG, getString(R.string.no_internet));
-            }
+            Utils.launchUrl("https://github.com/sunilpaulmathew", this);
         });
 
         String change_log = null;

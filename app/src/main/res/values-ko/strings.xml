@@ -58,7 +58,6 @@
     <string name="language_pt">브라질 포어</string>
     <string name="language_ru">러시아어</string>
     <string name="language_uk">우크라이나어</string>
-    <string name="more">더보기</string>
     <string name="more_apps">개발자의 다른 앱들 보기</string>
     <string name="name">이름</string>
     <string name="name_empty">이름이 비었습니다!</string>
@@ -68,7 +67,6 @@
     <string name="open">열기</string>
     <string name="open_message">이미 이 앱을 실행하고 있습니다.</string>
     <string name="open_failed">%s은(는) 사용자가 실행할 수 있도록 설계되지 않았습니다!</string>
-    <string name="options">설정</string>
     <string name="package_id">패키지명</string>
     <string name="permission_denied_write_storage">저장공간 쓰기 권한이 거부되었습니다!</string>
     <string name="playstore">플레이 스토어</string>

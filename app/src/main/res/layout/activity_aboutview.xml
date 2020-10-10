@@ -6,7 +6,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <LinearLayout
-        android:id="@+id/layout_foreground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/colorBackground"
@@ -134,7 +133,7 @@
         android:layout_gravity="bottom"
         android:text="@string/cancel"
         android:textStyle="bold"
-        android:background="@color/black"
+        android:background="@color/colorBlack"
         android:textColor="?android:attr/colorAccent"
         android:textSize="18sp"
         android:padding="10dp" />
