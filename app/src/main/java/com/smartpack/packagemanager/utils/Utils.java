@@ -67,6 +67,7 @@ public class Utils {
     public static AppCompatEditText mSearchWord;
     private static boolean mWelcomeDialog = true;
     public static boolean mReloadPage = true;
+    public static boolean mSortByOEM = false;
     public static boolean mSystemApp = true;
     public static CharSequence mApplicationName;
     public static Drawable mApplicationIcon;
@@ -439,8 +440,11 @@ public class Utils {
         saveBoolean("oneplus_apps", false, context);
         saveBoolean("samsung_apps", false, context);
         saveBoolean("sony_apps", false, context);
-        saveBoolean("system_apps", false, context);
-        saveBoolean("user_apps", false, context);
+        if (mSortByOEM) {
+            saveBoolean("system_apps", false, context);
+            saveBoolean("user_apps", false, context);
+            mSortByOEM = false;
+        }
     }
 
 }

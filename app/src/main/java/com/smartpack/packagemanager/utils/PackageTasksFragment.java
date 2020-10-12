@@ -209,9 +209,9 @@ public class PackageTasksFragment extends Fragment {
                 .setChecked(Utils.getBoolean("user_apps", true, activity));
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
         sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sort_name", true, activity));
+                .setChecked(Utils.getBoolean("sort_name", false, activity));
         sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sort_id", false, activity));
+                .setChecked(Utils.getBoolean("sort_id", true, activity));
         SubMenu oem = sort.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.oem));
         oem.add(Menu.NONE, 29, Menu.NONE, getString(R.string.oem_asus)).setCheckable(true)
                 .setChecked(Utils.getBoolean("asus_apps", false, activity));
@@ -290,24 +290,18 @@ public class PackageTasksFragment extends Fragment {
                     reload(activity);
                     break;
                 case 3:
-                    if (Utils.getBoolean("sort_name", true, activity)) {
-                        Utils.saveBoolean("sort_name", false, activity);
-                        Utils.saveBoolean("sort_id", true, activity);
-                    } else {
+                    if (!Utils.getBoolean("sort_name", false, activity)) {
                         Utils.saveBoolean("sort_name", true, activity);
                         Utils.saveBoolean("sort_id", false, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 4:
-                    if (Utils.getBoolean("sort_id", false, activity)) {
-                        Utils.saveBoolean("sort_id", false, activity);
-                        Utils.saveBoolean("sort_name", true, activity);
-                    } else {
+                    if (!Utils.getBoolean("sort_id", true, activity)) {
                         Utils.saveBoolean("sort_id", true, activity);
                         Utils.saveBoolean("sort_name", false, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 5:
                     if (Utils.getBoolean("allow_ads", true, activity)) {
@@ -407,85 +401,76 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 21:
-                    if (Utils.getBoolean("google_apps", false, activity)) {
-                        Utils.saveBoolean("google_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("google_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("google_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 22:
-                    if (Utils.getBoolean("samsung_apps", false, activity)) {
-                        Utils.saveBoolean("samsung_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("samsung_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("samsung_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 23:
-                    if (Utils.getBoolean("moto_apps", false, activity)) {
-                        Utils.saveBoolean("moto_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("moto_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("moto_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 24:
-                    if (Utils.getBoolean("oneplus_apps", false, activity)) {
-                        Utils.saveBoolean("oneplus_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("oneplus_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("oneplus_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 25:
-                    if (Utils.getBoolean("sony_apps", false, activity)) {
-                        Utils.saveBoolean("sony_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("sony_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("sony_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 26:
-                    if (Utils.getBoolean("mi_apps", false, activity)) {
-                        Utils.saveBoolean("mi_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("mi_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("mi_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 27:
-                    if (Utils.getBoolean("huawei_apps", false, activity)) {
-                        Utils.saveBoolean("huawei_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("huawei_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("huawei_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 28:
-                    if (Utils.getBoolean("lg_apps", false, activity)) {
-                        Utils.saveBoolean("lg_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("lg_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("lg_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 29:
-                    if (Utils.getBoolean("asus_apps", false, activity)) {
-                        Utils.saveBoolean("asus_apps", false, activity);
-                    } else {
+                    if (!Utils.getBoolean("asus_apps", false, activity)) {
+                        Utils.mSortByOEM = true;
                         Utils.resetDefault(activity);
                         Utils.saveBoolean("asus_apps", true, activity);
+                        reload(activity);
                     }
-                    reload(activity);
                     break;
                 case 30:
                     if (!Utils.getBoolean("light_theme", false, activity)) {
