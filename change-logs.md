@@ -1,5 +1,9 @@
 # Change-logs
 
+## 21. October 13, 2020
+*Release-tag: 2.6*<br>
+Fixed a minor issue.
+
 ## 20. October 12, 2020
 *Release-tag: 2.5*<br>
 Re-built from (nearly) scratch. Added Brand-New progress view. Sort apps by package id by default (much more responsive). Search by app name (instead of package id). Improved app sorting. App should be much more response now. Updated Russian & Ukrainian translations. Miscellaneous changes.

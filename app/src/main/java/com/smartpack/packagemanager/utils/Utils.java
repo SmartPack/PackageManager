@@ -232,7 +232,7 @@ public class Utils {
     }
 
     public static void initializeGoogleAds(Context context) {
-        MobileAds.initialize(context, "ca-app-pub-7791710838910455~1734786052");
+        MobileAds.initialize(context, "ca-app-pub-7791710838910455~4399535899");
     }
 
     public static void delete(String path) {
