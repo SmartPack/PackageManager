@@ -430,4 +430,6 @@
         android:textColor="?android:attr/colorAccent"
         android:textSize="18sp"
         android:padding="10dp" />
+
+    <include layout="@layout/rv_progress_view" />
 </androidx.cardview.widget.CardView>

@@ -9,21 +9,15 @@
 package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.FileProvider;
-
-import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 
 import java.io.File;
@@ -46,7 +40,7 @@ public class PackageTasks {
     public static boolean mAppType;
     public static boolean mRunning = false;
 
-    private static void makePackageFolder() {
+    static void makePackageFolder() {
         File file = new File(PACKAGES);
         if (file.exists() && file.isFile()) {
             file.delete();
@@ -118,95 +112,6 @@ public class PackageTasks {
         } else {
             mBatchApps.append(" ").append(name);
         }
-    }
-
-    public static void exportingTask(String apk, String name, Drawable icon, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            private ProgressDialog mProgressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressDialog = new ProgressDialog(activity);
-                mProgressDialog.setMessage(activity.getString(R.string.exporting, name) + "...");
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                makePackageFolder();
-                Utils.sleep(1);
-                Utils.copy(apk, PACKAGES + "/" + name + ".apk");
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                try {
-                    mProgressDialog.dismiss();
-                } catch (IllegalArgumentException ignored) {
-                }
-                if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
-                    new AlertDialog.Builder(activity)
-                            .setIcon(icon)
-                            .setTitle(activity.getString(R.string.share) + " " + name + "?")
-                            .setMessage(name + " " + activity.getString(R.string.export_summary, PACKAGES))
-                            .setNeutralButton(activity.getString(R.string.cancel), (dialog, id) -> {
-                            })
-                            .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
-                                Uri uriFile = FileProvider.getUriForFile(activity,
-                                        BuildConfig.APPLICATION_ID + ".provider", new File(PACKAGES + "/" + name + ".apk"));
-                                Intent shareScript = new Intent(Intent.ACTION_SEND);
-                                shareScript.setType("application/java-archive");
-                                shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
-                                shareScript.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
-                                shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
-                                shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
-                            })
-
-                            .show();
-                }
-            }
-        }.execute();
-    }
-
-    public static void exportingBundleTask(String apk, String name, Drawable icon, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            private ProgressDialog mProgressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressDialog = new ProgressDialog(activity);
-                mProgressDialog.setMessage(activity.getString(R.string.exporting_bundle, name) + "...");
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                makePackageFolder();
-                Utils.sleep(1);
-                Utils.runCommand("cp -r " + apk + " " + PACKAGES + "/" + name);
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                try {
-                    mProgressDialog.dismiss();
-                } catch (IllegalArgumentException ignored) {
-                }
-                if (Utils.existFile(PACKAGES + "/" + name + "/base.apk")) {
-                    new AlertDialog.Builder(activity)
-                            .setIcon(icon)
-                            .setTitle(name)
-                            .setMessage(activity.getString(R.string.export_bundle_summary, PACKAGES))
-                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
-                            })
-
-                            .show();
-                }
-            }
-        }.execute();
     }
 
     public static void backupApp(String app, String name) {
@@ -350,34 +255,6 @@ public class PackageTasks {
                 super.onPostExecute(aVoid);
                 mOutput.append("** ").append(context.getString(R.string.everything_done)).append(" *");
                 mRunning = false;
-            }
-        }.execute();
-    }
-
-    public static void restoreApp(String path, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            private ProgressDialog mProgressDialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressDialog = new ProgressDialog(activity);
-                mProgressDialog.setMessage(activity.getString(R.string.restoring, path) + "...");
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Utils.sleep(2);
-                Utils.runCommand("tar -zxvf " + path + " -C /");
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                try {
-                    mProgressDialog.dismiss();
-                } catch (IllegalArgumentException ignored) {
-                }
             }
         }.execute();
     }

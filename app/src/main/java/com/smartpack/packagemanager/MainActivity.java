@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean mExit;
     private Handler mHandler = new Handler();
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Utils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
-        ViewPager mViewPager = findViewById(R.id.viewPagerID);
+        mViewPager = findViewById(R.id.viewPagerID);
         AdView mAdView = findViewById(R.id.adView);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) mViewPager.getLayoutParams();
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             mExit = false;
             super.onBackPressed();
         } else {
-            Utils.snackbar(getString(R.string.press_back));
+            Utils.snackbar(mViewPager, getString(R.string.press_back));
             mExit = true;
             mHandler.postDelayed(() -> mExit = false, 2000);
         }

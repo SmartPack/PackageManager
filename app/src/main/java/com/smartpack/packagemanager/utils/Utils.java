@@ -226,6 +226,11 @@ public class Utils {
         }
     }
 
+    public static boolean isDarkTheme(Context context) {
+        int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
     public static void initializeGoogleAds(Context context) {
         MobileAds.initialize(context, "ca-app-pub-7791710838910455~1734786052");
     }
@@ -244,8 +249,8 @@ public class Utils {
         runCommand("sleep " + sec);
     }
 
-    public static void snackbar(String message) {
-        Snackbar snackbar = Snackbar.make(mSearchWord, message, Snackbar.LENGTH_LONG);
+    public static void snackbar(View view, String message) {
+        Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
         snackbar.setAction(R.string.dismiss, v -> snackbar.dismiss());
         snackbar.show();
     }
@@ -258,9 +263,9 @@ public class Utils {
         }
     }
 
-    public static void launchUrl(String url, Context context) {
+    public static void launchUrl(String url, View view, Context context) {
         if (isNetworkUnavailable(context)) {
-            snackbar(context.getString(R.string.no_internet));
+            snackbar(view, context.getString(R.string.no_internet));
         } else {
             try {
                 Intent i = new Intent(Intent.ACTION_VIEW);

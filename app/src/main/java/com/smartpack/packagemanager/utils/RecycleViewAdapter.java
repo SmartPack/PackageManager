@@ -82,7 +82,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         @Override
         public void onClick(View view) {
             if (!Utils.isPackageInstalled(this.appID.getText().toString(), view.getContext())) {
-                Utils.snackbar(view.getContext().getString(R.string.package_removed));
+                Utils.snackbar(view, view.getContext().getString(R.string.package_removed));
                 return;
             }
             Utils.mApplicationID = this.appID.getText().toString();

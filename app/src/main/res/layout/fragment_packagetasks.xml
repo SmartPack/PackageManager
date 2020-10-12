@@ -84,20 +84,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/progress_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:orientation="vertical" >
-
-        <ProgressBar
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -117,4 +103,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="-15dp"/>
     </LinearLayout>
+
+    <include layout="@layout/rv_progress_view" />
 </RelativeLayout>

@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -54,6 +56,7 @@ public class PackageTasksFragment extends Fragment {
 
     private AppCompatImageButton mBatch;
     private AppCompatImageButton mSettings;
+    private AppCompatTextView mProgressMessage;
     private AsyncTask<Void, Void, List<String>> mLoader;
     private FloatingActionButton mFAB;
     private Handler mHandler = new Handler();
@@ -69,6 +72,7 @@ public class PackageTasksFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_packagetasks, container, false);
 
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
+        mProgressMessage = mRootView.findViewById(R.id.progress_message);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
@@ -98,7 +102,7 @@ public class PackageTasksFragment extends Fragment {
 
         mBatch.setOnClickListener(v -> {
             if (!Utils.rootAccess()) {
-                Utils.snackbar(getString(R.string.no_root));
+                Utils.snackbar(mRecyclerView, getString(R.string.no_root));
                 return;
             }
             batchMenu(requireActivity());
@@ -108,13 +112,13 @@ public class PackageTasksFragment extends Fragment {
 
         mFAB.setOnClickListener(v -> {
             if (!Utils.rootAccess()) {
-                Utils.snackbar(getString(R.string.no_root));
+                Utils.snackbar(mRecyclerView, getString(R.string.no_root));
                 return;
             }
             if (Utils.isStorageWritePermissionDenied(requireActivity())) {
                 ActivityCompat.requestPermissions(requireActivity(), new String[]{
                         Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                Utils.snackbar(getString(R.string.permission_denied_write_storage));
+                Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
                 return;
             }
             fabMenu(requireActivity());
@@ -136,9 +140,9 @@ public class PackageTasksFragment extends Fragment {
                     if (Utils.isStorageWritePermissionDenied(activity)) {
                         ActivityCompat.requestPermissions(activity, new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                        Utils.snackbar(getString(R.string.permission_denied_write_storage));
+                        Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
                     } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                        Utils.snackbar(getString(R.string.batch_list_empty));
+                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setIcon(R.mipmap.ic_launcher)
@@ -155,7 +159,7 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 1:
                     if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                        Utils.snackbar(getString(R.string.batch_list_empty));
+                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setIcon(R.mipmap.ic_launcher)
@@ -172,7 +176,7 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 2:
                     if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                        Utils.snackbar(getString(R.string.batch_list_empty));
+                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         AlertDialog.Builder uninstall = new AlertDialog.Builder(activity);
                         uninstall.setIcon(R.mipmap.ic_launcher);
@@ -188,7 +192,7 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 3:
                     if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
-                        Utils.snackbar(getString(R.string.batch_list_empty));
+                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         PackageTasks.mBatchApps.setLength(0);
                         reload(activity);
@@ -320,7 +324,7 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 7:
-                    Utils.launchUrl("https://t.me/smartpack_kmanager", activity);
+                    Utils.launchUrl("https://t.me/smartpack_kmanager", mRecyclerView, activity);
                     break;
                 case 8:
                     Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -329,10 +333,10 @@ public class PackageTasksFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case 9:
-                    Utils.launchUrl("https://github.com/SmartPack/PackageManager/issues/new", activity);
+                    Utils.launchUrl("https://github.com/SmartPack/PackageManager/issues/new", mRecyclerView, activity);
                     break;
                 case 10:
-                    Utils.launchUrl("https://github.com/SmartPack/PackageManager/", activity);
+                    Utils.launchUrl("https://github.com/SmartPack/PackageManager/", mRecyclerView, activity);
                     break;
                 case 11:
                     Intent aboutView = new Intent(activity, AboutActivity.class);
@@ -517,6 +521,40 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.show();
     }
 
+    private void showProgress(String message) {
+        mProgressMessage.setText(message);
+        mProgressMessage.setVisibility(View.VISIBLE);
+        mProgressLayout.setBackgroundColor(Utils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
+        mProgressLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        mProgressMessage.setVisibility(View.GONE);
+        mProgressLayout.setVisibility(View.GONE);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void restore(String path, Activity activity) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                showProgress(activity.getString(R.string.restoring, path) + "...");
+            }
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Utils.sleep(2);
+                Utils.runCommand("tar -zxvf " + path + " -C /");
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                hideProgress();
+            }
+        }.execute();
+    }
+
     @SuppressLint("StaticFieldLeak")
     private void loadUI(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
@@ -601,7 +639,7 @@ public class PackageTasksFragment extends Fragment {
             String fileName = new File(mPath).getName();
             if (requestCode == 0) {
                 if (!mPath.endsWith(".tar.gz")) {
-                    Utils.snackbar(getString(R.string.wrong_extension, ".tar.gz"));
+                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".tar.gz"));
                     return;
                 }
                 AlertDialog.Builder restoreApp = new AlertDialog.Builder(requireActivity());
@@ -612,13 +650,13 @@ public class PackageTasksFragment extends Fragment {
                 });
                 restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                    PackageTasks.restoreApp(mPath, requireActivity());
+                    restore(mPath, requireActivity());
                     requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 });
                 restoreApp.show();
             } else if (requestCode == 1) {
                 if (!mPath.endsWith(".apk")) {
-                    Utils.snackbar(getString(R.string.wrong_extension, ".apk"));
+                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk"));
                     return;
                 }
                 AlertDialog.Builder installApp = new AlertDialog.Builder(requireActivity());

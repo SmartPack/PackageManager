@@ -32,6 +32,8 @@ import java.util.Objects;
 
 public class AboutActivity extends AppCompatActivity {
 
+    private AppCompatImageView mDeveloper;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aboutview);
 
         AppCompatTextView mAppName = findViewById(R.id.app_title);
-        AppCompatImageView mDeveloper = findViewById(R.id.developer);
+        mDeveloper = findViewById(R.id.developer);
         AppCompatTextView mForegroundText = findViewById(R.id.foreground_text);
         mAppName.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
         AppCompatTextView mCancel = findViewById(R.id.cancel_button);
@@ -47,7 +49,7 @@ public class AboutActivity extends AppCompatActivity {
             super.onBackPressed();
         });
         mDeveloper.setOnClickListener(v -> {
-            Utils.launchUrl("https://github.com/sunilpaulmathew", this);
+            Utils.launchUrl("https://github.com/sunilpaulmathew", mDeveloper, this);
         });
 
         String change_log = null;
