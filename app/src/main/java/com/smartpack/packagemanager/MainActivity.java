@@ -74,21 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        if (PackageTasks.mBatchApps == null) {
-            PackageTasks.mBatchApps = new StringBuilder();
-        }
-    }
-
-    @Override
     public void onBackPressed() {
         if (Utils.mSearchText != null) {
             Utils.mSearchWord.setText(null);
             Utils.mSearchText = null;
             return;
         }
-        if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
+        if (!PackageTasks.getBatchList().isEmpty() && PackageTasks.getBatchList().contains(".")) {
             new AlertDialog.Builder(this)
                     .setMessage(R.string.batch_warning)
                     .setCancelable(false)

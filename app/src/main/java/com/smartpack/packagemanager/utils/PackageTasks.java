@@ -34,8 +34,9 @@ public class PackageTasks {
 
     public static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
 
-    public static StringBuilder mBatchApps = null;
     public static StringBuilder mOutput = null;
+
+    public static List<String> mBatchList = new ArrayList<>();
 
     public static boolean mAppType;
     public static boolean mRunning = false;
@@ -105,15 +106,6 @@ public class PackageTasks {
         return mData;
     }
 
-    public static void batchOption(String name) {
-        if (mBatchApps.toString().contains(name)) {
-            int appID = mBatchApps.indexOf(name);
-            mBatchApps.delete(appID, appID + name.length());
-        } else {
-            mBatchApps.append(" ").append(name);
-        }
-    }
-
     public static void backupApp(String app, String name) {
         makePackageFolder();
         Utils.sleep(2);
@@ -133,8 +125,7 @@ public class PackageTasks {
                     mOutput.setLength(0);
                 }
                 mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageTasks
-                        .mBatchApps.toString().replaceAll("\\s+", "\n - ")).append("\n\n");
+                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
                 Intent turnOffIntent = new Intent(activity, PackageTasksActivity.class);
                 turnOffIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 turnOffIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
@@ -143,8 +134,7 @@ public class PackageTasks {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                String[] batchApps = mBatchApps.toString().replaceFirst(" ", "")
-                        .replaceAll("\\s+", " ").split(" ");
+                String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".")) {
                         mOutput.append(isEnabled(packageID, activity) ? "** " +
@@ -183,8 +173,7 @@ public class PackageTasks {
                     mOutput.setLength(0);
                 }
                 mOutput.append("** ").append(context.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(PackageTasks
-                        .mBatchApps.toString().replaceAll("\\s+", "\n - ")).append("\n\n");
+                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
                 Intent backupIntent = new Intent(context, PackageTasksActivity.class);
                 backupIntent.putExtra(PackageTasksActivity.TITLE_START, context.getString(R.string.batch_processing));
                 backupIntent.putExtra(PackageTasksActivity.TITLE_FINISH, context.getString(R.string.batch_processing_finished));
@@ -193,8 +182,7 @@ public class PackageTasks {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                String[] batchApps = mBatchApps.toString().replaceFirst(" ", "")
-                        .replaceAll("\\s+", " ").split(" ");
+                String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".")) {
                         mOutput.append("** ").append(context.getString(R.string.backing_summary, packageID));
@@ -226,8 +214,7 @@ public class PackageTasks {
                     mOutput.setLength(0);
                 }
                 mOutput.append("** ").append(context.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(PackageTasks
-                        .mBatchApps.toString().replaceAll("\\s+", "\n - ")).append("\n\n");
+                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
                 Intent removeIntent = new Intent(context, PackageTasksActivity.class);
                 removeIntent.putExtra(PackageTasksActivity.TITLE_START, context.getString(R.string.batch_processing));
                 removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, context.getString(R.string.batch_processing_finished));
@@ -236,8 +223,7 @@ public class PackageTasks {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                String[] batchApps = mBatchApps.toString().replaceFirst(" ", "")
-                        .replaceAll("\\s+", " ").split(" ");
+                String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, context)) {
                         mOutput.append("** ").append(context.getString(R.string.uninstall_summary, packageID));
@@ -401,6 +387,20 @@ public class PackageTasks {
             }
         }
         return sb.toString();
+    }
+
+    public static String getBatchList() {
+        return mBatchList.toString().substring(1, mBatchList.toString().length()-1);
+    }
+
+    public static String showBatchList() {
+        String[] array = getBatchList().trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (String s : array) {
+            if (s != null && !s.isEmpty())
+                sb.append(" - ").append(s).append("\n");
+        }
+        return "\n" + sb.toString();
     }
 
 }

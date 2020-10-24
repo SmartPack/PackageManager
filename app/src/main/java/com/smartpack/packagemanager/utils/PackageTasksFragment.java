@@ -141,14 +141,13 @@ public class PackageTasksFragment extends Fragment {
                         ActivityCompat.requestPermissions(activity, new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                         Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
-                    } else if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
+                    } else if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setIcon(R.mipmap.ic_launcher)
                                 .setTitle(R.string.sure_question)
-                                .setMessage(getString(R.string.batch_list_backup) + "\n" + PackageTasks.mBatchApps.toString()
-                                        .replaceAll("\\s+", "\n - "))
+                                .setMessage(getString(R.string.batch_list_backup) + "\n" + PackageTasks.showBatchList())
                                 .setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                                 })
                                 .setPositiveButton(getString(R.string.backup), (dialogInterface, i) -> {
@@ -158,14 +157,13 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 1:
-                    if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
+                    if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setIcon(R.mipmap.ic_launcher)
                                 .setTitle(R.string.sure_question)
-                                .setMessage(getString(R.string.batch_list_disable) + "\n" + PackageTasks.mBatchApps.toString()
-                                        .replaceAll("\\s+", "\n - "))
+                                .setMessage(getString(R.string.batch_list_disable) + "\n" + PackageTasks.showBatchList())
                                 .setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                                 })
                                 .setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) -> {
@@ -175,13 +173,13 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 2:
-                    if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
+                    if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
                         AlertDialog.Builder uninstall = new AlertDialog.Builder(activity);
                         uninstall.setIcon(R.mipmap.ic_launcher);
                         uninstall.setTitle(R.string.sure_question);
-                        uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageTasks.mBatchApps.toString().replaceAll("\\s+", "\n - "));
+                        uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageTasks.showBatchList());
                         uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
                         uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) -> {
@@ -191,10 +189,10 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 3:
-                    if (PackageTasks.mBatchApps.toString().isEmpty() || !PackageTasks.mBatchApps.toString().contains(".")) {
+                    if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
-                        PackageTasks.mBatchApps.setLength(0);
+                        PackageTasks.mBatchList.clear();
                         reload(activity);
                     }
                     break;
@@ -591,8 +589,8 @@ public class PackageTasksFragment extends Fragment {
                             super.onPreExecute();
                             mProgressLayout.setVisibility(View.VISIBLE);
                             mRecyclerView.setVisibility(View.GONE);
-                            if (!PackageTasks.mBatchApps.toString().isEmpty() && PackageTasks.mBatchApps.toString().contains(".")) {
-                                PackageTasks.mBatchApps.setLength(0);
+                            if (!PackageTasks.getBatchList().isEmpty() && PackageTasks.getBatchList().contains(".")) {
+                                PackageTasks.mBatchList.clear();
                             }
                             mRecyclerView.removeAllViews();
                         }

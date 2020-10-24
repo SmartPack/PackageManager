@@ -56,7 +56,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         } else {
             holder.appName.setText(PackageTasks.getAppName(this.data.get(position), holder.appName.getContext()));
         }
-        holder.checkBox.setOnClickListener(v -> PackageTasks.batchOption(this.data.get(position)));
+        holder.checkBox.setChecked(PackageTasks.mBatchList.contains(this.data.get(position)));
+        holder.checkBox.setOnClickListener(v -> {
+            if (PackageTasks.mBatchList.contains(this.data.get(position))) {
+                PackageTasks.mBatchList.remove(this.data.get(position));
+            } else {
+                PackageTasks.mBatchList.add(this.data.get(position));
+            }
+        });
     }
 
     @Override
