@@ -398,7 +398,7 @@ public class PackageTasks {
         StringBuilder sb = new StringBuilder();
         for (String s : array) {
             if (s != null && !s.isEmpty())
-                sb.append(" - ").append(s).append("\n");
+                sb.append(" - ").append(s.replaceAll(","," ")).append("\n");
         }
         return "\n" + sb.toString();
     }
