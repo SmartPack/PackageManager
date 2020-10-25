@@ -1,5 +1,9 @@
 # Change-logs
 
+## 22. October 25, 2020
+*Release-tag: 2.7*<br>
+Improved batch processing. Updated build tools.
+
 ## 21. October 13, 2020
 *Release-tag: 2.6*<br>
 Fixed a minor issue.
