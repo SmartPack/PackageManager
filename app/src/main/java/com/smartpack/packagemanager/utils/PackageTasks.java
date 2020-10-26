@@ -365,6 +365,10 @@ public class PackageTasks {
         return perms.toString().replace("[","").replace("]","").replace(", ","\n");
     }
 
+    public static void clearAppSettings(String packageID) {
+        Utils.runCommand("pm clear " + packageID);
+    }
+
     public static List<String> splitApks(String path) {
         List<String> list = new ArrayList<>();
         String files = Utils.runAndGetOutput("ls '" + path + "/'");

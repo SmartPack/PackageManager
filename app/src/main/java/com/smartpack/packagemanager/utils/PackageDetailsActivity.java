@@ -69,6 +69,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mDisableTitle = findViewById(R.id.enable_title);
         AppCompatTextView mCancelButton = findViewById(R.id.cancel_button);
         mOpenApp = findViewById(R.id.open_app);
+        LinearLayout mClear = findViewById(R.id.clear_app);
         LinearLayout mBackup = findViewById(R.id.backup_app);
         LinearLayout mExport = findViewById(R.id.export_app);
         LinearLayout mDisable = findViewById(R.id.disable_app);
@@ -102,6 +103,13 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 }
             }
         });
+        mClear.setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setMessage(getString(R.string.reset_message, Utils.mApplicationID))
+                .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                })
+                .setPositiveButton(R.string.yes, (dialog, id) -> {
+                    PackageTasks.clearAppSettings(Utils.mApplicationID);
+                }).show());
         mBackup.setOnClickListener(v -> backupApp(this));
         mExport.setOnClickListener(v -> exportApp(this));
         mDisable.setOnClickListener(v -> new AlertDialog.Builder(this)
@@ -133,6 +141,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
             onBackPressed();
         });
         if (Utils.rootAccess()) {
+            mClear.setVisibility(View.VISIBLE);
             mBackup.setVisibility(View.VISIBLE);
             mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);

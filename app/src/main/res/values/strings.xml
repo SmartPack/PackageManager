@@ -96,6 +96,8 @@
     <string name="playstore">PlayStore</string>
     <string name="press_back">Press back again to exit</string>
     <string name="report_issue">Report an Issue</string>
+    <string name="reset">Reset</string>
+    <string name="reset_message">Reset %s?</string>
     <string name="restore">Restore</string>
     <string name="restore_data">Restore App Data</string>
     <string name="restore_message">Are you sure to restore %s?</string>
