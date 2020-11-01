@@ -133,7 +133,8 @@ public class PackageTasksFragment extends Fragment {
         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.backup));
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.turn_on_off));
         menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.uninstall));
-        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.batch_list_clear));
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reset));
+        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.batch_list_clear));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -183,12 +184,28 @@ public class PackageTasksFragment extends Fragment {
                         uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
                         uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) -> {
-                            PackageTasks.uninstallTask(activity);
+                            PackageTasks.batchUninstallTask(activity);
                         });
                         uninstall.show();
                     }
                     break;
                 case 3:
+                    if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
+                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
+                    } else {
+                        AlertDialog.Builder reset = new AlertDialog.Builder(activity);
+                        reset.setIcon(R.mipmap.ic_launcher);
+                        reset.setTitle(R.string.sure_question);
+                        reset.setMessage(getString(R.string.batch_list_reset) + "\n" + PackageTasks.showBatchList());
+                        reset.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        });
+                        reset.setPositiveButton(getString(R.string.reset), (dialogInterface, i) -> {
+                            PackageTasks.batchResetTask(activity);
+                        });
+                        reset.show();
+                    }
+                    break;
+                case 4:
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {

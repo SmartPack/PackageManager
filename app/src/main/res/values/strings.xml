@@ -18,6 +18,7 @@
     <string name="batch_list_backup">Are you sure to backup (data only) the following app(s)?</string>
     <string name="batch_list_empty">Noting is added to the batch list!</string>
     <string name="batch_list_remove">Are you sure to remove the following app(s)?</string>
+    <string name="batch_list_reset">Are you sure to reset the following app(s)?</string>
     <string name="batch_list_summary">The following applications are added to the batch list</string>
     <string name="batch_processing">Batch Processing in Progress!</string>
     <string name="batch_processing_finished">Batch Processing Completed!</string>
@@ -98,6 +99,7 @@
     <string name="report_issue">Report an Issue</string>
     <string name="reset">Reset</string>
     <string name="reset_message">Reset %s?</string>
+    <string name="reset_summary">Resetting %s</string>
     <string name="restore">Restore</string>
     <string name="restore_data">Restore App Data</string>
     <string name="restore_message">Are you sure to restore %s?</string>

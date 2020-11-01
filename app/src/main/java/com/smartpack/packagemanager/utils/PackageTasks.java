@@ -55,9 +55,6 @@ public class PackageTasks {
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
         }
-        if (Utils.getBoolean("sort_name", true, context)) {
-            Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
-        }
         for (ApplicationInfo packageInfo: packages) {
             if (Utils.getBoolean("system_apps", true, context)
                     && Utils.getBoolean("user_apps", true, context)) {
@@ -203,7 +200,48 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void uninstallTask(Context context) {
+    public static void batchResetTask(Context context) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (mOutput == null) {
+                    mOutput = new StringBuilder();
+                } else {
+                    mOutput.setLength(0);
+                }
+                mOutput.append("** ").append(context.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
+                Intent removeIntent = new Intent(context, PackageTasksActivity.class);
+                removeIntent.putExtra(PackageTasksActivity.TITLE_START, context.getString(R.string.batch_processing));
+                removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, context.getString(R.string.batch_processing_finished));
+                context.startActivity(removeIntent);
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
+                for (String packageID : batchApps) {
+                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, context)) {
+                        mOutput.append("** ").append(context.getString(R.string.reset_summary, packageID));
+                        Utils.runCommand("pm clear " + packageID);
+                        mOutput.append(": ").append(context.getString(R.string.done)).append(" *\n\n");
+                        Utils.sleep(1);
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                mOutput.append("** ").append(context.getString(R.string.everything_done)).append(" *");
+                mRunning = false;
+            }
+        }.execute();
+    }
+
+    public static void batchUninstallTask(Context context) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
