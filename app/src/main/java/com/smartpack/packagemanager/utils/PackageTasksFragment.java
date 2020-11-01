@@ -621,8 +621,8 @@ public class PackageTasksFragment extends Fragment {
                         @Override
                         protected void onPostExecute(List<String> recyclerViewItems) {
                             super.onPostExecute(recyclerViewItems);
-                            mRecycleViewAdapter.notifyDataSetChanged();
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
+                            mRecycleViewAdapter.notifyDataSetChanged();
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mLoader = null;

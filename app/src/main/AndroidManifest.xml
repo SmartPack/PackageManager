@@ -24,13 +24,14 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7791710838910455~4399535899" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".MainActivity" />
         <activity android:name=".utils.AboutActivity" />
         <activity android:name=".utils.PackageDetailsActivity" />
         <activity android:name=".utils.PackageTasksActivity" />
