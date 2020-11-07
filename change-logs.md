@@ -1,5 +1,9 @@
 # Change-logs
 
+## 23. November 07, 2020
+*Release-tag: 2.8*<br>
+Option to reset (individual & batch) apps. Updated Russian & Ukraine translations.
+
 ## 22. October 25, 2020
 *Release-tag: 2.7*<br>
 Improved batch processing. Updated build tools.
