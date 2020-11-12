@@ -31,7 +31,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.PopupMenu;
@@ -41,6 +40,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.packagemanager.R;
 
@@ -145,7 +145,7 @@ public class PackageTasksFragment extends Fragment {
                     } else if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
-                        new AlertDialog.Builder(activity)
+                        new MaterialAlertDialogBuilder(activity)
                                 .setIcon(R.mipmap.ic_launcher)
                                 .setTitle(R.string.sure_question)
                                 .setMessage(getString(R.string.batch_list_backup) + "\n" + PackageTasks.showBatchList())
@@ -161,7 +161,7 @@ public class PackageTasksFragment extends Fragment {
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
-                        new AlertDialog.Builder(activity)
+                        new MaterialAlertDialogBuilder(activity)
                                 .setIcon(R.mipmap.ic_launcher)
                                 .setTitle(R.string.sure_question)
                                 .setMessage(getString(R.string.batch_list_disable) + "\n" + PackageTasks.showBatchList())
@@ -177,7 +177,7 @@ public class PackageTasksFragment extends Fragment {
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
-                        AlertDialog.Builder uninstall = new AlertDialog.Builder(activity);
+                        MaterialAlertDialogBuilder uninstall = new MaterialAlertDialogBuilder(activity);
                         uninstall.setIcon(R.mipmap.ic_launcher);
                         uninstall.setTitle(R.string.sure_question);
                         uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageTasks.showBatchList());
@@ -193,7 +193,7 @@ public class PackageTasksFragment extends Fragment {
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
-                        AlertDialog.Builder reset = new AlertDialog.Builder(activity);
+                        MaterialAlertDialogBuilder reset = new MaterialAlertDialogBuilder(activity);
                         reset.setIcon(R.mipmap.ic_launcher);
                         reset.setTitle(R.string.sure_question);
                         reset.setMessage(getString(R.string.batch_list_reset) + "\n" + PackageTasks.showBatchList());
@@ -657,7 +657,7 @@ public class PackageTasksFragment extends Fragment {
                     Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".tar.gz"));
                     return;
                 }
-                AlertDialog.Builder restoreApp = new AlertDialog.Builder(requireActivity());
+                MaterialAlertDialogBuilder restoreApp = new MaterialAlertDialogBuilder(requireActivity());
                 restoreApp.setIcon(R.mipmap.ic_launcher);
                 restoreApp.setTitle(getString(R.string.restore_message, fileName));
                 restoreApp.setMessage(getString(R.string.restore_summary));
@@ -674,7 +674,7 @@ public class PackageTasksFragment extends Fragment {
                     Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk"));
                     return;
                 }
-                AlertDialog.Builder installApp = new AlertDialog.Builder(requireActivity());
+                MaterialAlertDialogBuilder installApp = new MaterialAlertDialogBuilder(requireActivity());
                 installApp.setIcon(R.mipmap.ic_launcher);
                 installApp.setTitle(getString(R.string.sure_question));
                 installApp.setMessage(getString(R.string.bundle_install, mPath.replace(fileName, "")));

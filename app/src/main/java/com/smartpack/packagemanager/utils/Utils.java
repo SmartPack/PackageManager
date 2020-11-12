@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +35,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.MainActivity;
@@ -140,13 +140,13 @@ public class Utils {
         void onClick(String text);
     }
 
-    public static AlertDialog.Builder dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
-                                             final OnDialogEditTextListener onDialogEditTextListener,
-                                             Context context) {
+    public static MaterialAlertDialogBuilder dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
+                                                            final OnDialogEditTextListener onDialogEditTextListener,
+                                                            Context context) {
         return dialogEditText(text, negativeListener, onDialogEditTextListener, -1, context);
     }
 
-    public static AlertDialog.Builder dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
+    public static MaterialAlertDialogBuilder dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
                                         final OnDialogEditTextListener onDialogEditTextListener, int inputType,
                                         Context context) {
         LinearLayout layout = new LinearLayout(context);
@@ -166,7 +166,7 @@ public class Utils {
 
         layout.addView(editText);
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(context).setView(layout);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context).setView(layout);
         if (negativeListener != null) {
             dialog.setNegativeButton(context.getString(R.string.cancel), negativeListener);
         }
@@ -338,7 +338,7 @@ public class Utils {
             mWelcomeDialog = isChecked;
         });
 
-        androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(Objects.requireNonNull(context));
+        MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(Objects.requireNonNull(context));
         alert.setIcon(R.mipmap.ic_launcher);
         alert.setTitle(context.getString(R.string.app_name));
         alert.setMessage(context.getText(R.string.welcome_message));

@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -21,6 +20,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.PackageTasksFragment;
 import com.smartpack.packagemanager.utils.PagerAdapter;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if (!PackageTasks.getBatchList().isEmpty() && PackageTasks.getBatchList().contains(".")) {
-            new AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                     .setMessage(R.string.batch_warning)
                     .setCancelable(false)
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {

@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.utils;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -32,6 +31,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 
@@ -103,7 +103,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-        mClear.setOnClickListener(v -> new AlertDialog.Builder(this)
+        mClear.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setMessage(getString(R.string.reset_message, Utils.mApplicationID))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                 })
@@ -112,7 +112,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 }).show());
         mBackup.setOnClickListener(v -> backupApp(this));
         mExport.setOnClickListener(v -> exportApp(this));
-        mDisable.setOnClickListener(v -> new AlertDialog.Builder(this)
+        mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setIcon(Utils.mApplicationIcon)
                 .setTitle(Utils.mApplicationName)
                 .setMessage(Utils.mApplicationName + " " + getString(R.string.disable_message,
@@ -190,7 +190,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
             onBackPressed();
         } else {
             if (Utils.rootAccess()) {
-                new AlertDialog.Builder(activity)
+                new MaterialAlertDialogBuilder(activity)
                         .setIcon(Utils.mApplicationIcon)
                         .setTitle(getString(R.string.uninstall_title, Utils.mApplicationName))
                         .setMessage(getString(R.string.uninstall_warning))
@@ -273,7 +273,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 hideProgress();
                 if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
-                    new androidx.appcompat.app.AlertDialog.Builder(activity)
+                    new MaterialAlertDialogBuilder(activity)
                             .setIcon(icon)
                             .setTitle(activity.getString(R.string.share) + " " + name + "?")
                             .setMessage(name + " " + activity.getString(R.string.export_summary, PACKAGES))
@@ -371,7 +371,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 hideProgress();
                 if (Utils.existFile(PACKAGES + "/" + name + "/base.apk")) {
-                    new androidx.appcompat.app.AlertDialog.Builder(activity)
+                    new MaterialAlertDialogBuilder(activity)
                             .setIcon(icon)
                             .setTitle(name)
                             .setMessage(getString(R.string.export_bundle_summary, PACKAGES))
