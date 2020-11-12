@@ -69,18 +69,33 @@
                 android:scaleType="center" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/search_word"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:layout_marginEnd="75dp"
-            android:maxLines="1"
-            android:hint="@string/search"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="?android:attr/colorAccent"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/donate_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/colorWhite"
+                android:src="@drawable/ic_donate"
+                android:scaleType="center" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/search_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginEnd="75dp"
+                android:maxLines="1"
+                android:hint="@string/search"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="?android:attr/colorAccent"
+                android:textSize="18sp" />
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout

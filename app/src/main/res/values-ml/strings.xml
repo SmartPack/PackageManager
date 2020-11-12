@@ -2,7 +2,6 @@
 
     <string name="about">അപ്ലിക്കേഷനെക്കുറിച്ച്</string>
     <string name="about_summary"><i>നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ മാനേജുചെയ്യുന്നതിനുള്ള ലളിതവും ശക്തവുമായ അപ്ലിക്കേഷൻ.</i></string>
-    <string name="allow_ads">പരസ്യങ്ങൾ അനുവദിക്കുക</string>
     <string name="always_show">എപ്പോളും കാണിക്കുക</string>
     <string name="already_exists">%s നിലവിൽ ഉണ്ട്! നിർത്തലാക്കുന്നു!</string>
     <string name="app_info">വിശദാംശങ്ങൾ</string>

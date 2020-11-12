@@ -3,7 +3,6 @@
 
     <string name="about">정보</string>
     <string name="about_summary"><i>당신의 앱들을 관리하는 간단하면서도, 강력한 애플리케이션.</i></string>
-    <string name="allow_ads">광고 활성화</string>
     <string name="always_show">항상 보이기</string>
     <string name="already_exists">%s은(는) 이미 존재합니다!</string>
     <string name="app_info">앱 정보</string>

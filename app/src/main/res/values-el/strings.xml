@@ -3,7 +3,6 @@
 
     <string name="about">Σχετικά με</string>
     <string name="about_summary"><i>Μία απλή, αλλά πανίσχυρη εφαρμογή για να διαχειριστείτε τις εφαρμογές σας.</i></string>
-    <string name="allow_ads">Επιτρέψτε τις διαφημίσεις</string>
     <string name="always_show">Εμφάνιση πάντα</string>
     <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
     <string name="app_info">Πληροφορίες εφαρμογής</string>

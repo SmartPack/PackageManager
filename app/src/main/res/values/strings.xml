@@ -3,7 +3,6 @@
 
     <string name="about">About</string>
     <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i></string>
-    <string name="allow_ads">Allow Ads</string>
     <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="apk_path">APK Path</string>
@@ -24,6 +23,7 @@
     <string name="batch_processing_finished">Batch Processing Completed!</string>
     <string name="batch_processing_initialized">Initializing Batch Process</string>
     <string name="batch_warning">Your batch settings will be removed! Are you sure?</string>
+    <string name="billing_client_disconnected">Failed to connect with Google Play Billing client!</string>
     <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?\n\nPlease Note: Installing split apk\'s may not always work well, especially if the apk\'s are extracted from a different device. Also, please make sure that all the necessary (only necessary) apk\'s are available in the selected folder to avoid installation failure!</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
@@ -116,6 +116,16 @@
     <string name="source_code">Source Code</string>
     <string name="split_apk_list">List of split APKs</string>
     <string name="support">Support Group</string>
+    <string name="support_acknowledged">Donation Acknowledged \u2665</string>
+    <string name="support_app">Buy Donation App</string>
+    <string name="support_development">Support Development</string>
+    <string name="support_development_summary">If you like to appreciate the efforts of the developer to provide this tool entirely free, please consider sending a small donation by clicking one among the below-provided options!</string>
+    <string name="support_dinner">Buy me a Dinner</string>
+    <string name="support_meal">Buy me a Meal</string>
+    <string name="support_coffee">Buy me a Coffee</string>
+    <string name="support_already_received_message">You\'re already supported the development with this item before!</string>
+    <string name="support_received_message">Thank you very much for your support \u2665\nIt will motivate me a lot to continue my projects more active!</string>
+    <string name="support_retry_message">Please try purchasing again!</string>
     <string name="sure_question">Are you sure?</string>
     <string name="system">Show System Apps</string>
     <string name="turn_on_off">Turn-On/Off</string>

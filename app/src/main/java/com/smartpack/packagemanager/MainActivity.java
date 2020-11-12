@@ -10,16 +10,10 @@ package com.smartpack.packagemanager;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.PackageTasksFragment;
@@ -40,37 +34,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Initialize App Theme & Google Ads
         Utils.initializeAppTheme(this);
-        Utils.initializeGoogleAds(this);
         super.onCreate(savedInstanceState);
         // Set App Language
         Utils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
         mViewPager = findViewById(R.id.viewPagerID);
-        AdView mAdView = findViewById(R.id.adView);
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) mViewPager.getLayoutParams();
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageTasksFragment(), null);
         mViewPager.setAdapter(adapter);
-
-        if (Utils.isNotDonated(this) || Utils.getBoolean("allow_ads", true, this)) {
-            mAdView.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    mAdView.setVisibility(View.VISIBLE);
-                }
-                @Override
-                public void onAdFailedToLoad(LoadAdError adError) {
-                    layoutParams.setMargins(0,0,0,0);
-                }
-            });
-            AdRequest adRequest = new AdRequest.Builder()
-                    .build();
-            mAdView.loadAd(adRequest);
-        } else {
-            layoutParams.setMargins(0,0,0,0);
-        }
     }
 
     @Override

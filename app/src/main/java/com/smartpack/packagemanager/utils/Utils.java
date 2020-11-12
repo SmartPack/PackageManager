@@ -34,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
@@ -209,7 +208,6 @@ public class Utils {
     }
 
     public static boolean isNotDonated(Context context) {
-        if (BuildConfig.DEBUG) return false;
         return !isPackageInstalled("com.smartpack.donate", context);
     }
 
@@ -229,10 +227,6 @@ public class Utils {
     public static boolean isDarkTheme(Context context) {
         int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
-    }
-
-    public static void initializeGoogleAds(Context context) {
-        MobileAds.initialize(context, "ca-app-pub-7791710838910455~4399535899");
     }
 
     public static void delete(String path) {
