@@ -1,5 +1,9 @@
 # Change-logs
 
+## 24. November 13, 2020
+*Release-tag: 2.9*<br>
+Completely removed Ads from the app. Switched to use Material Alert Dialogs. Added donation option. Miscellaneous changes.
+
 ## 23. November 07, 2020
 *Release-tag: 2.8*<br>
 Option to reset (individual & batch) apps. Updated Russian & Ukraine translations.

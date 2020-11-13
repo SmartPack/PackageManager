@@ -2,7 +2,7 @@
 
 ![Package Manager](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/Package%20Manager-v2.8-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
+[![](https://img.shields.io/badge/Package%20Manager-v2.9-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
 ![](https://img.shields.io/github/contributors/smartpack/PackageManager)
 ![](https://img.shields.io/github/license/smartpack/PackageManager)
