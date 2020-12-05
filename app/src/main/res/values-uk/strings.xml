@@ -22,6 +22,7 @@
     <string name="batch_processing_finished">Пакетна обробка завершена!</string>
     <string name="batch_processing_initialized">Ініціалізація пакетного процесу</string>
     <string name="batch_warning">Ваші налаштування пакетів буде видалено! Ти впевнений?</string>
+    <string name="billing_client_disconnected">Не вдалося підключитися до клієнта Google Play Billing!</string>
     <string name="bundle_install">Ви впевнені, що хочете встановити split apks з \'%s\'?\n\nЗверніть увагу: Встановлення split apks може не завжди добре працювати, особливо якщо вони витягнуті з іншого пристрою. Також переконайтесь, що всі необхідні (лише необхідні) apks доступні у вибраній папці, щоб уникнути збою встановлення!</string>
     <string name="cancel">Скасувати</string>
     <string name="change_logs">Зміни</string>
@@ -114,6 +115,16 @@
     <string name="source_code">Вихідний код</string>
     <string name="split_apk_list">Список split APKs</string>
     <string name="support">Група підтримки</string>
+    <string name="support_acknowledged">Пожертва підтверджена \u2665</string>
+    <string name="support_app">Купити додаток для пожертв</string>
+    <string name="support_development">Підтримка розвитку</string>
+    <string name="support_development_summary">Якщо ви хочете оцінити зусилля розробника, щоб надати цей інструмент абсолютно безкоштовно, надішліть невелику пожертву, натиснувши одну із запропонованих нижче опцій!</string>
+    <string name="support_dinner">Купіть мені вечерю</string>
+    <string name="support_meal">Купіть мені їжу</string>
+    <string name="support_coffee">Купіть мені каву</string>
+    <string name="support_already_received_message">Ви вже підтримували розробку цим предметом раніше!</string>
+    <string name="support_received_message">Дуже дякую за вашу підтримку \u2665\nIt буде сильно мотивувати мене продовжувати проекти!</string>
+    <string name="support_retry_message">Будь ласка, спробуйте придбати ще раз!</string>
     <string name="sure_question">Ти впевнений?</string>
     <string name="system">Системні додатки</string>
     <string name="turn_on_off">Увімкнення/відключення</string>

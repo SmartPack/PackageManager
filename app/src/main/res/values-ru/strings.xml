@@ -22,6 +22,7 @@
     <string name="batch_processing_finished">Пакетная обработка завершена!</string>
     <string name="batch_processing_initialized">Инициализация пакетного процесса</string>
     <string name="batch_warning">Ваши настройки пакетов будут удалены! Ты уверен?</string>
+    <string name="billing_client_disconnected">Не удалось подключиться к клиенту Google Play Billing!</string>
     <string name="bundle_install">Вы уверены, что хотите установить split apks из \'%s\'?\n\nОбратите внимание: установка split apks может не всегда работать хорошо, особенно если apks извлечены с другого устройства. Также, пожалуйста, убедитесь, что все необходимые (только необходимые) apks доступны в выбранной папке, чтобы избежать сбоя установки!</string>
     <string name="cancel">Отмена</string>
     <string name="change_logs">Изменения</string>
@@ -114,6 +115,16 @@
     <string name="source_code">Исходный код</string>
     <string name="split_apk_list">Список split APKs</string>
     <string name="support">Группа поддержки</string>
+    <string name="support_acknowledged">Пожертвование подтверждено \u2665</string>
+    <string name="support_app">Купить приложение для пожертвований</string>
+    <string name="support_development">Поддержка развития</string>
+    <string name="support_development_summary">Если вы хотите оценить усилия разработчика по предоставлению этого инструмента совершенно бесплатно, рассмотрите возможность отправки небольшого пожертвования, выбрав один из вариантов ниже!</string>
+    <string name="support_dinner">Купите мне ужин</string>
+    <string name="support_meal">Купите мне еду</string>
+    <string name="support_coffee">Купите мне кофе</string>
+    <string name="support_already_received_message">Вы уже поддерживали разработку с помощью этого элемента раньшее!</string>
+    <string name="support_received_message">Большое спасибо вам за вашу поддержку \u2665\nIt будет очень мотивировать меня поддерживать мои проекты!</string>
+    <string name="support_retry_message">Пожалуйста, попробуйте купить еще раз!</string>
     <string name="sure_question">Ты уверен?</string>
     <string name="system">Системные приложения</string>
     <string name="turn_on_off">Включение/отключение</string>
