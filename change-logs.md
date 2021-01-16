@@ -1,5 +1,9 @@
 # Change-logs
 
+## 24. January 16, 2021
+*Release-tag: 3.0*<br>
+Updated overall app to use material libraries. App will now show a supporter badge for those who supported development. Updated Russian & Ukraine translations. Miscellaneous changes.
+
 ## 24. November 13, 2020
 *Release-tag: 2.9*<br>
 Completely removed Ads from the app. Switched to use Material Alert Dialogs. Added donation option. Miscellaneous changes.
