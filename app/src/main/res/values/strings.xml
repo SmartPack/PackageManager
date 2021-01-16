@@ -15,7 +15,7 @@
     <string name="batch_list_clear">Clear list</string>
     <string name="batch_list_disable">Are you sure to disable (if enabled) or enable (if disabled) the following app(s)?</string>
     <string name="batch_list_backup">Are you sure to backup (data only) the following app(s)?</string>
-    <string name="batch_list_empty">Noting is added to the batch list!</string>
+    <string name="batch_list_empty">Nothing is added to the batch list!</string>
     <string name="batch_list_remove">Are you sure to remove the following app(s)?</string>
     <string name="batch_list_reset">Are you sure to reset the following app(s)?</string>
     <string name="batch_list_summary">The following applications are added to the batch list</string>
