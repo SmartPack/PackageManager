@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/colorBackground"
         android:orientation="vertical" >
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -17,22 +16,21 @@
             android:layout_marginTop="15dp"
             android:layout_gravity="center" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/app_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
             android:textSize="23sp"
             android:textStyle="bold"
-            android:textColor="?android:attr/colorAccent"/>
+            android:textColor="?attr/colorAccent"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/version_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal"
-            android:textColor="?android:attr/textColorPrimary"
             android:textIsSelectable="true"
             android:textSize="15sp" />
 
@@ -57,14 +55,14 @@
                     android:layout_height="50dp"
                     android:background="@null"
                     android:clickable="false"
-                    android:tint="?android:attr/colorAccent"
+                    android:tint="?attr/colorAccent"
                     android:gravity="start|center_vertical"
                     android:src="@drawable/ic_open" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:textStyle="bold"
                     android:text="@string/open"
                     android:textIsSelectable="true"
@@ -86,15 +84,15 @@
                     android:layout_height="50dp"
                     android:background="@null"
                     android:clickable="false"
-                    android:tint="?android:attr/colorAccent"
+                    android:tint="?attr/colorAccent"
                     android:gravity="start|center_vertical"
                     android:src="@drawable/ic_disable" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/enable_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:textStyle="bold"
                     android:text="@string/enable"
                     android:textIsSelectable="true"
@@ -115,14 +113,14 @@
                     android:layout_height="50dp"
                     android:background="@null"
                     android:clickable="false"
-                    android:tint="?android:attr/colorAccent"
+                    android:tint="?attr/colorAccent"
                     android:gravity="start|center_vertical"
                     android:src="@drawable/ic_delete" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:textStyle="bold"
                     android:text="@string/uninstall"
                     android:textIsSelectable="true"
@@ -143,14 +141,14 @@
                     android:layout_height="50dp"
                     android:background="@null"
                     android:clickable="false"
-                    android:tint="?android:attr/colorAccent"
+                    android:tint="?attr/colorAccent"
                     android:gravity="start|center_vertical"
                     android:src="@drawable/ic_settings" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:textStyle="bold"
                     android:text="@string/app_info"
                     android:textIsSelectable="true"
@@ -158,7 +156,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="50dp"
@@ -171,284 +169,261 @@
                 android:orientation="vertical"
                 android:gravity="center_vertical" >
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content" >
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="85dp"
+                        android:layout_gravity="center_vertical|start"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="85dp"
-                            android:layout_gravity="center_vertical|start"
-                            android:orientation="vertical" >
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:gravity="start"
+                            android:textColor="?attr/colorAccent"
+                            android:text="@string/package_id"
+                            android:textIsSelectable="true"
+                            android:textSize="18sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:gravity="start"
-                                android:textColor="?android:attr/colorAccent"
-                                android:text="@string/package_id"
-                                android:textIsSelectable="true"
-                                android:textSize="18sp" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/package_id_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/package_id_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="start"
-                                android:textColor="?android:attr/textColorPrimary"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/playstore_app"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="end"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
-                            android:id="@+id/playstore_app"
-                            android:layout_width="75dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:layout_gravity="end"
-                            android:orientation="vertical" >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:layout_gravity="center_horizontal"
+                            android:tint="?attr/colorAccent"
+                            android:src="@drawable/ic_playstore" />
 
-                            <androidx.appcompat.widget.AppCompatImageButton
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@null"
-                                android:clickable="false"
-                                android:layout_gravity="center_horizontal"
-                                android:tint="?android:attr/colorAccent"
-                                android:src="@drawable/ic_playstore" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorAccent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/playstore"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </FrameLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textColor="?android:attr/colorAccent"
-                                android:layout_gravity="center_horizontal"
-                                android:text="@string/playstore"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content" >
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="85dp"
+                        android:layout_gravity="center_vertical|start"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="85dp"
-                            android:layout_gravity="center_vertical|start"
-                            android:orientation="vertical" >
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:gravity="start"
+                            android:text="@string/apk_path"
+                            android:textColor="?attr/colorAccent"
+                            android:textIsSelectable="true"
+                            android:textSize="18sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:gravity="start"
-                                android:text="@string/apk_path"
-                                android:textColor="?android:attr/colorAccent"
-                                android:textIsSelectable="true"
-                                android:textSize="18sp" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/apk_path_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/apk_path_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="start"
-                                android:textColor="?android:attr/textColorPrimary"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/export_app"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="end"
+                        android:visibility="gone"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
-                            android:id="@+id/export_app"
-                            android:layout_width="75dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:layout_gravity="end"
-                            android:visibility="gone"
-                            android:orientation="vertical" >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:layout_gravity="center_horizontal"
+                            android:tint="?attr/colorAccent"
+                            android:src="@drawable/ic_export" />
 
-                            <androidx.appcompat.widget.AppCompatImageButton
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@null"
-                                android:clickable="false"
-                                android:layout_gravity="center_horizontal"
-                                android:tint="?android:attr/colorAccent"
-                                android:src="@drawable/ic_export" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorAccent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/export"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </FrameLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textColor="?android:attr/colorAccent"
-                                android:layout_gravity="center_horizontal"
-                                android:text="@string/export"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content" >
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="100dp"
+                        android:layout_gravity="center_vertical|start"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="100dp"
-                            android:layout_gravity="center_vertical|start"
-                            android:orientation="vertical" >
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:gravity="start"
+                            android:textColor="?attr/colorAccent"
+                            android:text="@string/data_dir"
+                            android:textIsSelectable="true"
+                            android:textSize="18sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:textStyle="bold"
-                                android:gravity="start"
-                                android:textColor="?android:attr/colorAccent"
-                                android:text="@string/data_dir"
-                                android:textIsSelectable="true"
-                                android:textSize="18sp" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/data_dir_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/data_dir_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="start"
-                                android:textColor="?android:attr/textColorPrimary"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/clear_app"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="50dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="end"
+                        android:visibility="gone"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
-                            android:id="@+id/clear_app"
-                            android:layout_width="75dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="50dp"
-                            android:gravity="center_vertical"
-                            android:layout_gravity="end"
-                            android:visibility="gone"
-                            android:orientation="vertical" >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:layout_gravity="center_horizontal"
+                            android:tint="?attr/colorAccent"
+                            android:src="@drawable/ic_reset" />
 
-                            <androidx.appcompat.widget.AppCompatImageButton
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@null"
-                                android:clickable="false"
-                                android:layout_gravity="center_horizontal"
-                                android:tint="?android:attr/colorAccent"
-                                android:src="@drawable/ic_reset" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorAccent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/reset"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textColor="?android:attr/colorAccent"
-                                android:layout_gravity="center_horizontal"
-                                android:text="@string/reset"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/backup_app"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="end"
+                        android:visibility="gone"
+                        android:orientation="vertical" >
 
-                        <LinearLayout
-                            android:id="@+id/backup_app"
-                            android:layout_width="75dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:layout_gravity="end"
-                            android:visibility="gone"
-                            android:orientation="vertical" >
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:layout_gravity="center_horizontal"
+                            android:tint="?attr/colorAccent"
+                            android:src="@drawable/ic_backup" />
 
-                            <androidx.appcompat.widget.AppCompatImageButton
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@null"
-                                android:clickable="false"
-                                android:layout_gravity="center_horizontal"
-                                android:tint="?android:attr/colorAccent"
-                                android:src="@drawable/ic_backup" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="?attr/colorAccent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/backup"
+                            android:textIsSelectable="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </FrameLayout>
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textColor="?android:attr/colorAccent"
-                                android:layout_gravity="center_horizontal"
-                                android:text="@string/backup"
-                                android:textIsSelectable="true"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:gravity="start"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:text="@string/native_lib"
                     android:textIsSelectable="true"
                     android:textSize="18sp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/native_lib_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:textColor="?android:attr/textColorPrimary"
                     android:textIsSelectable="true"
                     android:textSize="12sp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
                     android:gravity="start"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:text="@string/permissions"
                     android:textIsSelectable="true"
                     android:textSize="18sp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/permissions_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:textColor="?android:attr/textColorPrimary"
                     android:textIsSelectable="true"
                     android:paddingBottom="16dp"
                     android:textSize="12sp" />
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cancel_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -462,4 +437,4 @@
         android:padding="10dp" />
 
     <include layout="@layout/rv_progress_view" />
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

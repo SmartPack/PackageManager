@@ -16,8 +16,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.utils.PackageTasks;
-import com.smartpack.packagemanager.utils.PackageTasksFragment;
-import com.smartpack.packagemanager.utils.PagerAdapter;
+import com.smartpack.packagemanager.fragments.PackageTasksFragment;
+import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.utils.Utils;
 
 /*

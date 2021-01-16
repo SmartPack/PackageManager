@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.utils;
+package com.smartpack.packagemanager.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

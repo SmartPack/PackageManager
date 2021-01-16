@@ -6,13 +6,16 @@
  *
  */
 
-package com.smartpack.packagemanager;
+package com.smartpack.packagemanager.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.smartpack.packagemanager.MainActivity;
+import com.smartpack.packagemanager.R;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 1, 2020

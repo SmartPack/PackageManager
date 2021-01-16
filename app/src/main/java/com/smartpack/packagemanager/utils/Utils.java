@@ -26,7 +26,6 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -34,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
@@ -325,7 +325,7 @@ public class Utils {
      */
     public static void WelcomeDialog(Context context) {
         View checkBoxView = View.inflate(context, R.layout.rv_checkbox, null);
-        CheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
+        MaterialCheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
         checkBox.setChecked(true);
         checkBox.setText(context.getString(R.string.always_show));
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -345,7 +345,7 @@ public class Utils {
         alert.show();
     }
 
-    static String readAssetFile(Context context, String file) {
+    public static String readAssetFile(Context context, String file) {
         InputStream input = null;
         BufferedReader buf = null;
         try {

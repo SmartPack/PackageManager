@@ -6,21 +6,24 @@
  *
  */
 
-package com.smartpack.packagemanager.utils;
+package com.smartpack.packagemanager.adapters;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.PackageDetailsActivity;
+import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
@@ -73,9 +76,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private AppCompatImageButton appIcon;
-        private AppCompatTextView appName;
-        private AppCompatTextView appID;
-        public CheckBox checkBox;
+        public MaterialCheckBox checkBox;
+        private MaterialTextView appName;
+        private MaterialTextView appID;
 
         public ViewHolder(View view) {
             super(view);

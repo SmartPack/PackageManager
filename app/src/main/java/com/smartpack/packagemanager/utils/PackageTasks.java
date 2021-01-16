@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.PackageTasksActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class PackageTasks {
     public static boolean mAppType;
     public static boolean mRunning = false;
 
-    static void makePackageFolder() {
+    public static void makePackageFolder() {
         File file = new File(PACKAGES);
         if (file.exists() && file.isFile()) {
             file.delete();

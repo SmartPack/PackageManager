@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.utils;
+package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
@@ -35,6 +35,7 @@ import com.android.billingclient.api.SkuDetailsParams;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.utils;
+package com.smartpack.packagemanager.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -27,13 +27,15 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 
@@ -43,8 +45,8 @@ import java.io.File;
 
 public class PackageDetailsActivity extends AppCompatActivity {
 
-    private AppCompatTextView mDisableTitle;
-    private AppCompatTextView mProgressMessage;
+    private MaterialTextView mDisableTitle;
+    private MaterialTextView mProgressMessage;
     private LinearLayout mOpenApp;
     private LinearLayout mProgressLayout;
     private String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
@@ -59,15 +61,15 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mProgressLayout.setBackgroundColor(Utils.isDarkTheme(this) ? Color.BLACK : Color.WHITE);
         mProgressMessage = findViewById(R.id.progress_message);
         AppCompatImageView mAppIcon = findViewById(R.id.app_image);
-        AppCompatTextView mAppName = findViewById(R.id.app_title);
-        AppCompatTextView mPackageID = findViewById(R.id.package_id_text);
-        AppCompatTextView mVersion = findViewById(R.id.version_text);
-        AppCompatTextView mDataDir = findViewById(R.id.data_dir_text);
-        AppCompatTextView mNatLib = findViewById(R.id.native_lib_text);
-        AppCompatTextView mAPKPath = findViewById(R.id.apk_path_text);
-        AppCompatTextView mPermissions = findViewById(R.id.permissions_text);
+        MaterialTextView mAppName = findViewById(R.id.app_title);
+        MaterialTextView mPackageID = findViewById(R.id.package_id_text);
+        MaterialTextView mVersion = findViewById(R.id.version_text);
+        MaterialTextView mDataDir = findViewById(R.id.data_dir_text);
+        MaterialTextView mNatLib = findViewById(R.id.native_lib_text);
+        MaterialTextView mAPKPath = findViewById(R.id.apk_path_text);
+        MaterialTextView mPermissions = findViewById(R.id.permissions_text);
         mDisableTitle = findViewById(R.id.enable_title);
-        AppCompatTextView mCancelButton = findViewById(R.id.cancel_button);
+        MaterialTextView mCancelButton = findViewById(R.id.cancel_button);
         mOpenApp = findViewById(R.id.open_app);
         LinearLayout mClear = findViewById(R.id.clear_app);
         LinearLayout mBackup = findViewById(R.id.backup_app);

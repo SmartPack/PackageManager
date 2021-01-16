@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.utils;
+package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
@@ -15,10 +15,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,14 +40,14 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutview);
 
-        AppCompatTextView mAppName = findViewById(R.id.app_title);
         mDeveloper = findViewById(R.id.developer);
-        AppCompatTextView mForegroundText = findViewById(R.id.foreground_text);
+        MaterialTextView mAppName = findViewById(R.id.app_title);
+        MaterialTextView mForegroundText = findViewById(R.id.foreground_text);
 
         boolean isProUser = Utils.getBoolean("support_received", false, this) || !Utils.isNotDonated(this);
 
         mAppName.setText(getString(R.string.app_name) + (isProUser ? " Pro " : " ") + BuildConfig.VERSION_NAME);
-        AppCompatTextView mCancel = findViewById(R.id.cancel_button);
+        MaterialTextView mCancel = findViewById(R.id.cancel_button);
         mCancel.setOnClickListener(v -> {
             super.onBackPressed();
         });

@@ -20,7 +20,7 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="q" >
 
-        <activity android:name=".StartActivity">
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,10 +28,10 @@
         </activity>
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".utils.BillingActivity" />
-        <activity android:name=".utils.AboutActivity" />
-        <activity android:name=".utils.PackageDetailsActivity" />
-        <activity android:name=".utils.PackageTasksActivity" />
+        <activity android:name=".activities.BillingActivity" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.PackageDetailsActivity" />
+        <activity android:name=".activities.PackageTasksActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

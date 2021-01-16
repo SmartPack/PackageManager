@@ -37,22 +37,21 @@
                             android:layout_marginEnd="35dp"
                             android:baselineAligned="false">
 
-                                <androidx.appcompat.widget.AppCompatTextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:focusable="false"
-                                    android:textSize="17sp"
-                                    android:textColor="?android:attr/textColorPrimary" />
+                                    android:textSize="17sp" />
 
-                                <androidx.appcompat.widget.AppCompatTextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/description"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:focusable="false" />
                         </LinearLayout>
 
-                        <androidx.appcompat.widget.AppCompatCheckBox
+                        <com.google.android.material.checkbox.MaterialCheckBox
                             android:id="@+id/checkbox"
                             android:layout_width="35dp"
                             android:layout_height="wrap_content"
