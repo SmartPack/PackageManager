@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.utils;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +42,10 @@ public class AboutActivity extends AppCompatActivity {
         AppCompatTextView mAppName = findViewById(R.id.app_title);
         mDeveloper = findViewById(R.id.developer);
         AppCompatTextView mForegroundText = findViewById(R.id.foreground_text);
-        mAppName.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
+
+        boolean isProUser = Utils.getBoolean("support_received", false, this) || !Utils.isNotDonated(this);
+
+        mAppName.setText(getString(R.string.app_name) + (isProUser ? " Pro " : " ") + BuildConfig.VERSION_NAME);
         AppCompatTextView mCancel = findViewById(R.id.cancel_button);
         mCancel.setOnClickListener(v -> {
             super.onBackPressed();
@@ -59,11 +61,7 @@ public class AboutActivity extends AppCompatActivity {
         } catch (JSONException ignored) {
         }
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        mAppName.setText(getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME);
         mForegroundText.setText(change_log);
-        mAppName.setVisibility(View.VISIBLE);
-        mForegroundText.setVisibility(View.VISIBLE);
-        mCancel.setVisibility(View.VISIBLE);
     }
 
     @Override

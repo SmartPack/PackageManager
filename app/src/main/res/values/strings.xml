@@ -119,13 +119,14 @@
     <string name="support_acknowledged">Donation Acknowledged \u2665</string>
     <string name="support_app">Buy Donation App</string>
     <string name="support_development">Support Development</string>
-    <string name="support_development_summary">If you like to appreciate the efforts of the developer to provide this tool entirely free, please consider sending a small donation by clicking one among the below-provided options!</string>
+    <string name="support_development_summary">If you like to appreciate the efforts of the developer to provide this tool entirely free, please consider sending a small donation by clicking one among the below-provided options! Buying any of this product will award you a supporter badge here!</string>
     <string name="support_dinner">Buy me a Dinner</string>
     <string name="support_meal">Buy me a Meal</string>
     <string name="support_coffee">Buy me a Coffee</string>
     <string name="support_already_received_message">You\'re already supported the development with this item before!</string>
-    <string name="support_received_message">Thank you very much for your support \u2665\nIt will motivate me a lot to continue my projects more active!</string>
+    <string name="support_received_message">Thank you very much for your support \u2665\nIt will motivate me a lot to continue my projects more active! Moreover, you\'ll receive a supporter badge on the top of this page.</string>
     <string name="support_retry_message">Please try purchasing again!</string>
+    <string name="support_status_message">Thank you very much for your support!</string>
     <string name="sure_question">Are you sure?</string>
     <string name="system">Show System Apps</string>
     <string name="turn_on_off">Turn-On/Off</string>

@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +33,7 @@ import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 
 import java.io.Serializable;
@@ -58,7 +58,14 @@ public class BillingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_billing);
 
         AppCompatImageButton mBack = findViewById(R.id.back_button);
-        AppCompatTextView mCancel = findViewById(R.id.cancel_button);
+        AppCompatImageButton mSupporterIcon = findViewById(R.id.supporter_button);
+        MaterialTextView mSupporterMessage = findViewById(R.id.supporter_message);
+        MaterialTextView mCancel = findViewById(R.id.cancel_button);
+
+        if (Utils.getBoolean("support_received", false, this) || !Utils.isNotDonated(this)) {
+            mSupporterIcon.setVisibility(View.VISIBLE);
+            mSupporterMessage.setText(getString(R.string.support_status_message));
+        }
 
         mData.add(new RecycleViewItem(getString(R.string.support_app), getResources().getDrawable(R.drawable.ic_donation_app)));
         mData.add(new RecycleViewItem(getString(R.string.support_coffee), getResources().getDrawable(R.drawable.ic_coffee)));
@@ -210,8 +217,9 @@ public class BillingActivity extends AppCompatActivity {
                     new MaterialAlertDialogBuilder(this)
                             .setMessage(getString(R.string.support_received_message))
                             .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                            })
-                            .show();
+                            }).show();
+
+                    Utils.saveBoolean("support_received", true, this);
                 }
             }
         } catch (Exception ignored) {}
@@ -249,7 +257,7 @@ public class BillingActivity extends AppCompatActivity {
 
         public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             private AppCompatImageView mIcon;
-            private AppCompatTextView mTitle;
+            private MaterialTextView mTitle;
 
             public ViewHolder(View view) {
                 super(view);

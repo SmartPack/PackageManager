@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/colorBackground"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -32,15 +31,15 @@
                     android:layout_gravity="start"
                     android:src="@drawable/ic_back"
                     android:background="@color/colorBlack"
-                    android:tint="?android:attr/colorAccent"/>
+                    android:tint="?attr/colorAccent"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginEnd="50dp"
                     android:gravity="center_vertical"
-                    android:textColor="?android:attr/colorAccent"
+                    android:textColor="?attr/colorAccent"
                     android:text="@string/support_development"
                     android:layout_gravity="center"
                     android:textStyle="bold"
@@ -48,14 +47,32 @@
                     android:padding="10dp" />
             </FrameLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:text="@string/support_development_summary"
-                android:linksClickable="true"
-                android:gravity="center"
-                android:padding="15dp" />
+                android:orientation="horizontal"
+                android:gravity="end|center_vertical"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/supporter_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/ic_heart"
+                    android:background="@color/colorBlack"
+                    android:tint="?attr/colorAccent"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/supporter_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/support_development_summary"
+                    android:gravity="center" />
+            </LinearLayout>
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -70,7 +87,7 @@
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cancel_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -79,6 +96,6 @@
         android:textStyle="bold"
         android:background="@color/colorBlack"
         android:text="@string/cancel"
-        android:textColor="?android:attr/colorAccent"
+        android:textColor="?attr/colorAccent"
         android:textSize="18sp" />
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
