@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -44,7 +44,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
-import com.smartpack.packagemanager.activities.BillingActivity;
+import com.smartpack.packagemanager.utils.Billing;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.Utils;
@@ -56,7 +56,6 @@ import java.util.Objects;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
  */
-
 public class PackageTasksFragment extends Fragment {
 
     private AppCompatImageButton mBatch;
@@ -117,8 +116,7 @@ public class PackageTasksFragment extends Fragment {
         mSettings.setOnClickListener(v -> settingsMenu(requireActivity()));
 
         mDonate.setOnClickListener(v -> {
-            Intent donations = new Intent(requireActivity(), BillingActivity.class);
-            startActivity(donations);
+            Billing.showDonateOption(requireActivity());
         });
 
         mFAB.setOnClickListener(v -> {

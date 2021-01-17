@@ -35,6 +35,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "release"
+    productFlavors {
+        play {
+            dimension "release"
+        }
+        fdroid {
+            dimension "release"
+        }
+    }
+
     lintOptions {
         abortOnError false
     }
@@ -49,7 +60,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.android.billingclient:billing:3.0.2'
+    playImplementation 'com.android.billingclient:billing:3.0.2'
     implementation "com.github.topjohnwu.libsu:core:3.0.2"
     implementation 'com.google.android.material:material:1.3.0-beta01'
 }
