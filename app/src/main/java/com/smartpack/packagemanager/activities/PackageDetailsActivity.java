@@ -67,6 +67,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         MaterialTextView mDataDir = findViewById(R.id.data_dir_text);
         MaterialTextView mNatLib = findViewById(R.id.native_lib_text);
         MaterialTextView mAPKPath = findViewById(R.id.apk_path_text);
+        MaterialTextView mLastUpdated = findViewById(R.id.updated_text);
         MaterialTextView mPermissions = findViewById(R.id.permissions_text);
         mDisableTitle = findViewById(R.id.enable_title);
         MaterialTextView mCancelButton = findViewById(R.id.cancel_button);
@@ -80,6 +81,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
         LinearLayout mOpenSettings = findViewById(R.id.info_app);
         mAppIcon.setImageDrawable(Utils.mApplicationIcon);
         mAppName.setText(Utils.mApplicationName);
+        mLastUpdated.setText(getString(R.string.date_installed, PackageTasks.getInstalledDate(Utils.mApplicationID, this)) +
+                "\n" + getString(R.string.date_updated, PackageTasks.getUpdatedDate(Utils.mApplicationID, this)));
         mPackageID.setText(Utils.mApplicationID);
         mVersion.setText(getString(R.string.version, PackageTasks.getVersionName(Utils.mDirSource, this)));
         mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, this) ? R.string.disable : R.string.enable);

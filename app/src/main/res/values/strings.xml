@@ -37,6 +37,9 @@
     <string name="dark_theme_disable">Disable</string>
     <string name="dark_theme_enable">Enable</string>
     <string name="data_dir">Data Directory</string>
+    <string name="date_installation">Installation Dates</string>
+    <string name="date_installed">First Installed: %s</string>
+    <string name="date_updated">Last Updated: %s</string>
     <string name="developed_by">Developed By</string>
     <string name="disable_message">will be %s! Are you sure?</string>
     <string name="disable">Disable</string>

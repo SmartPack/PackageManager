@@ -407,6 +407,26 @@
                     android:textStyle="bold"
                     android:gravity="start"
                     android:textColor="?attr/colorAccent"
+                    android:text="@string/date_installation"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/updated_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textIsSelectable="true"
+                    android:paddingBottom="16dp"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:textColor="?attr/colorAccent"
                     android:text="@string/permissions"
                     android:textIsSelectable="true"
                     android:textSize="18sp" />

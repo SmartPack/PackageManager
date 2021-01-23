@@ -22,6 +22,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageTasksActivity;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -381,6 +382,14 @@ public class PackageTasks {
 
     public static String getVersionName(String path, Context context) {
         return Objects.requireNonNull(getPackageManager(context).getPackageArchiveInfo(path, 0)).versionName;
+    }
+
+    public static String getInstalledDate(String path, Context context) {
+        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(path, context)).firstInstallTime);
+    }
+
+    public static String getUpdatedDate(String path, Context context) {
+        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(path, context)).lastUpdateTime);
     }
 
     public static boolean isEnabled(String packageName, Context context) {
