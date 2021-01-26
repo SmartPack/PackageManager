@@ -24,7 +24,9 @@
     <string name="batch_processing_initialized">Initializing Batch Process</string>
     <string name="batch_warning">Your batch settings will be removed! Are you sure?</string>
     <string name="billing_client_disconnected">Failed to connect with Google Play Billing client!</string>
+    <string name="bundle_extract_message">Extracting %s into working folder</string>
     <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?\n\nPlease Note: Installing split apk\'s may not always work well, especially if the apk\'s are extracted from a different device. Also, please make sure that all the necessary (only necessary) apk\'s are available in the selected folder to avoid installation failure!</string>
+    <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
     <string name="cleaning_message">Cleaning temporary files</string>

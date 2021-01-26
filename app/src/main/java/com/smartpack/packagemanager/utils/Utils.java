@@ -239,6 +239,10 @@ public class Utils {
         runCommand("cp -r " + source + " " + dest);
     }
 
+    public static void create(String path) {
+       new File(path).mkdirs();
+    }
+
     public static void sleep(int sec) {
         runCommand("sleep " + sec);
     }
@@ -274,6 +278,11 @@ public class Utils {
     public static boolean existFile(String file) {
         String output = runAndGetOutput("[ -e " + file + " ] && echo true");
         return !output.isEmpty() && output.equals("true");
+    }
+
+    public static void unzip(String zip, String dir) {
+        Utils.runCommand((Utils.existFile("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
+                : "unzip ") + zip + " -d " + dir);
     }
 
     public static boolean isNetworkUnavailable(Context context) {

@@ -311,23 +311,43 @@ public class PackageTasks {
                 String sid = Utils.runAndGetOutput("pm install-create").replace(
                         "Success: created install session [","").replace("]", "");
                 mOutput.append(" - ").append(activity.getString(R.string.session_id, sid)).append("\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.creating_directory_message)).append(": ");
-                Utils.runCommand("mkdir /data/local/tmp/pm/");
-                mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.copying_apk_message)).append(": ");
-                Utils.runCommand("cp " + dir + "/* /data/local/tmp/pm/");
-                mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
+                Utils.delete(activity.getCacheDir().getPath() + "/splits");
                 mOutput.append("** Bundle Path: ").append(dir).append("\n\n");
+                if (dir.endsWith(".apks")) {
+                    Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
+                    mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
+                    Utils.unzip(dir, activity.getCacheDir().getPath());
+                    mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
+                            : activity.getString(R.string.failed)).append("\n\n");
+                } else if (dir.endsWith(".xapk")) {
+                    mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
+                    Utils.create(activity.getCacheDir().getPath() + "/splits");
+                    Utils.unzip(dir, activity.getCacheDir().getPath() + "/splits");
+                    mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
+                            : activity.getString(R.string.failed)).append("\n\n");
+                } else {
+                    mOutput.append("** ").append(activity.getString(R.string.creating_directory_message)).append(": ");
+                    Utils.create(activity.getCacheDir().getPath() + "/splits");
+                    mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
+                    mOutput.append("** ").append(activity.getString(R.string.copying_apk_message)).append(": ");
+                    Utils.runCommand("cp " + dir + "/* " + activity.getCacheDir().getPath() + "/splits");
+                    mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
+                }
                 mOutput.append("** ").append(activity.getString(R.string.split_apk_list)).append(" *\n");
-                for (final String splitApps : splitApks("/data/local/tmp/pm")) {
-                    File file = new File("/data/local/tmp/pm/" + splitApps);
-                    mOutput.append(" - ").append(file.getName()).append(": ").append(file.length()).append(" KB\n");
-                    Utils.runCommand("pm install-write -S " + file.length() + " " + sid + " " + file.getName() + " " + file.toString());
+                for (final String splitApps : splitApks(activity.getCacheDir().getPath() + "/splits")) {
+                    if (splitApps.endsWith(".apk")) {
+                        File file = new File(activity.getCacheDir().getPath() + "/splits/" + splitApps);
+                        mOutput.append(" - ").append(file.getName()).append(": ").append(file.length()).append(" KB\n");
+                        Utils.runCommand("pm install-write -S " + file.length() + " " + sid + " " + file.getName() + " " + file.toString());
+                    }
                 }
                 mOutput.append("\n** ").append(activity.getString(R.string.cleaning_message)).append(": ");
-                Utils.delete("/data/local/tmp/pm/");
-                mOutput.append(Utils.existFile("/data/local/tmp/pm/") ? activity.getString(R.string.failed) +
-                        " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
+                Utils.delete(activity.getCacheDir().getPath() + "/splits");
+                if (dir.endsWith(".apks")) {
+                    Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
+                }
+                mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.failed) +
+                        " *\n\n" : activity.getString(R.string.done) + " *\n\n");
                 mOutput.append("** ").append(activity.getString(R.string.result, Utils.runAndGetError("pm install-commit " + sid)));
                 return null;
             }

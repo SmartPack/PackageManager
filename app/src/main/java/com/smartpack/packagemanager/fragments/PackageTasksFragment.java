@@ -642,7 +642,7 @@ public class PackageTasksFragment extends Fragment {
             if (Utils.isDocumentsUI(uri)) {
                 @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
-                    mPath = Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" +
+                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 }
             } else {
@@ -667,22 +667,32 @@ public class PackageTasksFragment extends Fragment {
                 });
                 restoreApp.show();
             } else if (requestCode == 1) {
-                if (!mPath.endsWith(".apk")) {
-                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk"));
-                    return;
+                if (mPath.endsWith(".apk") || mPath.endsWith(".apks") || mPath.endsWith(".xapk")) {
+                    MaterialAlertDialogBuilder installApp = new MaterialAlertDialogBuilder(requireActivity());
+                    if (mPath.endsWith(".apks") || mPath.endsWith(".xapk")) {
+                        installApp.setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()));
+                    } else {
+                        installApp.setIcon(R.mipmap.ic_launcher);
+                        installApp.setTitle(getString(R.string.sure_question));
+                        installApp.setMessage(getString(R.string.bundle_install, Objects.requireNonNull(new File(mPath)
+                                .getParentFile()).toString()));
+                    }
+                    installApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                    });
+                    installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
+                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                        if (mPath.endsWith(".apk")) {
+                            PackageTasks.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
+                                    .toString(), requireActivity());
+                        } else {
+                            PackageTasks.installSplitAPKs(mPath, requireActivity());
+                        }
+                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+                    });
+                    installApp.show();
+                } else {
+                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk/.apks"));
                 }
-                MaterialAlertDialogBuilder installApp = new MaterialAlertDialogBuilder(requireActivity());
-                installApp.setIcon(R.mipmap.ic_launcher);
-                installApp.setTitle(getString(R.string.sure_question));
-                installApp.setMessage(getString(R.string.bundle_install, mPath.replace(fileName, "")));
-                installApp.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                });
-                installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                    PackageTasks.installSplitAPKs(mPath.replace(fileName, ""), requireActivity());
-                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                });
-                installApp.show();
             }
         }
     }
