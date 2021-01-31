@@ -7,13 +7,8 @@
     <string name="apk_path">Путь к APK</string>
     <string name="app_info">Инфо</string>
     <string name="app_name_summary">Приложение для управления вашими приложениями</string>
-    <string name="backing_summary">Бэкап файлов данных %s</string>
-    <string name="backup">Бэкап</string>
-    <string name="backing_up">Бэкап %s (только данные) в \'/sdcard/Package_Manager/\'</string>
-    <string name="batch_backup_finished">Бэкапы создаются в \'%s\'</string>
     <string name="batch_list_clear">Очистить список</string>
     <string name="batch_list_disable">Вы уверены, что хотите отключить (если включено) или включить (если отключено) следующие приложения?</string>
-    <string name="batch_list_backup">Вы уверены, что хотите сделаль бэкап (только данные) следующих приложений?</string>
     <string name="batch_list_empty">Ничего не добавлено в список пакетов!</string>
     <string name="batch_list_remove">Вы уверены, что хотите удалить следующие приложения?</string>
     <string name="batch_list_reset">Вы уверены, что хотите сбросить следующие приложения?</string>
@@ -71,7 +66,6 @@
     <string name="language_uk">Украинский</string>
     <string name="more_apps">Больше от разработчика</string>
     <string name="name">Имя</string>
-    <string name="name_empty">Имя пусто! Неудача!</string>
     <string name="native_lib">Внутренняя библиотека</string>
     <string name="no_internet">Пожалуйста, проверьте ваше интернет-соединение!</string>
     <string name="no_root">Эта функция не будет работать без root прав!</string>
@@ -99,10 +93,6 @@
     <string name="reset">Сбросить</string>
     <string name="reset_message">Сбросить %s?</string>
     <string name="reset_summary">Сброс %s</string>
-    <string name="restore">Восстановить</string>
-    <string name="restore_data">Восстановить данные приложения</string>
-    <string name="restore_message">Вы уверены, что хотите восстановить %s?</string>
-    <string name="restore_summary">\nПредупреждение!\n\nВосстановление неправильного файла резервной копии может вызвать проблемы на вашем устройстве. Это исключительно ваша ответственность, чтобы выбрать правильный файл резервной копии, подготовленный этим приложением для вашего устройства. Также обратите внимание, что восстановление не будет работать хорошо для всех приложений.</string>
     <string name="restoring">Восстановление %s</string>
     <string name="result">Результат: %s</string>
     <string name="search">Поиск…</string>

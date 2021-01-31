@@ -8,13 +8,8 @@
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
     <string name="app_name_summary">An Application to Manage your Apps</string>
-    <string name="backing_summary">Backing up the data files of %s</string>
-    <string name="backup">Backup</string>
-    <string name="backing_up">Backing up %s (data only) into \'/sdcard/Package_Manager/\'</string>
-    <string name="batch_backup_finished">Backup files are generated at \'%s\'</string>
     <string name="batch_list_clear">Clear list</string>
     <string name="batch_list_disable">Are you sure to disable (if enabled) or enable (if disabled) the following app(s)?</string>
-    <string name="batch_list_backup">Are you sure to backup (data only) the following app(s)?</string>
     <string name="batch_list_empty">Nothing is added to the batch list!</string>
     <string name="batch_list_remove">Are you sure to remove the following app(s)?</string>
     <string name="batch_list_reset">Are you sure to reset the following app(s)?</string>
@@ -77,7 +72,6 @@
     <string name="language_uk">Ukrainian</string>
     <string name="more_apps">More from Developer</string>
     <string name="name">Name</string>
-    <string name="name_empty">Name is empty! Aborting!</string>
     <string name="native_lib">Native Library</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
@@ -105,10 +99,6 @@
     <string name="reset">Reset</string>
     <string name="reset_message">Reset %s?</string>
     <string name="reset_summary">Resetting %s</string>
-    <string name="restore">Restore</string>
-    <string name="restore_data">Restore App Data</string>
-    <string name="restore_message">Are you sure to restore %s?</string>
-    <string name="restore_summary">\nWarning!\n\nRestoring a wrong backup file likely make issues on your device. It is solely your responsibility to select a proper backup file prepared by this app for your device. Also, please be noted that restoring won\'t work well for all the apps.</string>
     <string name="restoring">Restoring %s</string>
     <string name="result">Result: %s</string>
     <string name="search">Search…</string>

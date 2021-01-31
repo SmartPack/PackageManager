@@ -5,13 +5,8 @@
     <string name="always_show">എപ്പോളും കാണിക്കുക</string>
     <string name="already_exists">%s നിലവിൽ ഉണ്ട്! നിർത്തലാക്കുന്നു!</string>
     <string name="app_info">വിശദാംശങ്ങൾ</string>
-    <string name="backup">ബാക്കപ്പ്</string>
-    <string name="backing_up">%s (ഡാറ്റ മാത്രം) \'/sdcard/Package_Manager/\' ൽ ബാക്കപ്പ് ചെയ്യ്യുന്നു</string>
-    <string name="backing_summary">%s ന്റെ ഡാറ്റ ഫയലുകൾ ബാക്കപ്പ് ചെയ്യുന്നു</string>
-    <string name="batch_backup_finished">ബാക്കപ്പ് ഫയലുകൾ \'%s\'ൽ നിർമ്മിക്കപ്പെട്ടിരിക്കുന്നു</string>
     <string name="batch_list_clear">മായ്‌ക്കുക</string>
     <string name="batch_list_disable">താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) പ്രവർത്തനരഹിതമാക്കണമെന്ന് (പ്രവർത്തനക്ഷമമാണെങ്കിൽ) അല്ലെങ്കിൽ പ്രവർത്തനക്ഷമമാക്കണമെന്ന് (പ്രവർത്തനരഹിതമാണെങ്കിൽ ) നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
-    <string name="batch_list_backup">താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) ബാക്കപ്പ് ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
     <string name="batch_list_empty">ബാച്ച് പട്ടികയിലേക്ക് നിലവിൽ ഒന്നും ചേർത്തിട്ടില്ല!</string>
     <string name="batch_list_remove">താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) നീക്കംചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
     <string name="batch_list_summary">താഴെപ്പറയുന്ന അപ്ലിക്കേഷനുകൾ ബാച്ച് ലിസ്റ്റിനോട് ചേർത്തിരിക്കുന്നു </string>
@@ -53,7 +48,6 @@
     <string name="language_ml">മലയാളം</string>
     <string name="more_apps">കൂടുതൽ അപ്ലിക്കേഷനുകൾ</string>
     <string name="name">പേര് കൊണ്ട്</string>
-    <string name="name_empty">പേര് ശൂന്യമാണ്! നിർത്തലാക്കുന്നു!</string>
     <string name="no_internet">നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക!</string>
     <string name="no_root">റൂട്ട് ആക്‌സസ് ഇല്ലാതെ ഈ സവിശേഷത പ്രവർത്തിക്കില്ല!</string>
     <string name="ok">ശരി</string>
@@ -63,10 +57,6 @@
     <string name="package_id">പാക്കേജ് ID കൊണ്ട്</string>
     <string name="permission_denied_write_storage">\'writing to storage\' അനുമതി നിരസിച്ചിരിക്കുന്നു!</string>
     <string name="report_issue">ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക</string>
-    <string name="restore">പുനസ്ഥാപിക്കുക</string>
-    <string name="restore_data">അപ്ലിക്കേഷൻ ഡാറ്റ പുനസ്ഥാപിക്കൽ</string>
-    <string name="restore_message">%s പുനസ്ഥാപിക്കണോ?</string>
-    <string name="restore_summary">\nമുന്നറിയിപ്പ്!\n\nതെറ്റായ ബാക്കപ്പ് ഫയൽ പുനസ്ഥാപിക്കുന്നത് നിങ്ങളുടെ മൊബൈലിൽ പ്രശ്‌നങ്ങൾ സൃഷ്ടിച്ചേക്കാം. നിങ്ങളുടെ മൊബൈലിന് വേണ്ടി തയ്യാറാക്കിയ ശരിയായ ബാക്കപ്പ് ഫയൽ തിരഞ്ഞെടുക്കേണ്ടത് നിങ്ങളുടെ മാത്രം ഉത്തരവാദിത്തമാണ്. കൂടാതെ, പുനസ്ഥാപിക്കുന്നത് എല്ലാ അപ്ലിക്കേഷനുകൾക്കും നന്നായി പ്രവർത്തിക്കില്ലെന്നതും ശ്രദ്ധിക്കുക.</string>
     <string name="restoring">%s പുനസ്ഥാപിക്കുന്നു</string>
     <string name="result">ഫലം: %s</string>
     <string name="session_id">സെഷൻ ഐഡി: %s</string>

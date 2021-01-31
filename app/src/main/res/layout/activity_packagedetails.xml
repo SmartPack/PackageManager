@@ -325,7 +325,6 @@
                         android:id="@+id/clear_app"
                         android:layout_width="75dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="50dp"
                         android:gravity="center_vertical"
                         android:layout_gravity="end"
                         android:visibility="gone"
@@ -347,35 +346,6 @@
                             android:textColor="?attr/colorAccent"
                             android:layout_gravity="center_horizontal"
                             android:text="@string/reset"
-                            android:textIsSelectable="true"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/backup_app"
-                        android:layout_width="75dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_gravity="end"
-                        android:visibility="gone"
-                        android:orientation="vertical" >
-
-                        <androidx.appcompat.widget.AppCompatImageButton
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@null"
-                            android:clickable="false"
-                            android:layout_gravity="center_horizontal"
-                            android:tint="?attr/colorAccent"
-                            android:src="@drawable/ic_backup" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textColor="?attr/colorAccent"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/backup"
                             android:textIsSelectable="true"
                             android:textSize="12sp" />
                     </LinearLayout>

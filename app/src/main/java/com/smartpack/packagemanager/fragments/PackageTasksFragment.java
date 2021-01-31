@@ -139,34 +139,13 @@ public class PackageTasksFragment extends Fragment {
     private void batchMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mBatch);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.backup));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.turn_on_off));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.uninstall));
-        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reset));
-        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.batch_list_clear));
+        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
+        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.batch_list_clear));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    if (Utils.isStorageWritePermissionDenied(activity)) {
-                        ActivityCompat.requestPermissions(activity, new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                        Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
-                    } else if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
-                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
-                    } else {
-                        new MaterialAlertDialogBuilder(activity)
-                                .setIcon(R.mipmap.ic_launcher)
-                                .setTitle(R.string.sure_question)
-                                .setMessage(getString(R.string.batch_list_backup) + "\n" + PackageTasks.showBatchList())
-                                .setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                })
-                                .setPositiveButton(getString(R.string.backup), (dialogInterface, i) -> {
-                                    PackageTasks.batchBackupTask(activity);
-                                })
-                                .show();
-                    }
-                    break;
-                case 1:
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
@@ -182,7 +161,7 @@ public class PackageTasksFragment extends Fragment {
                                 .show();
                     }
                     break;
-                case 2:
+                case 1:
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
@@ -198,7 +177,7 @@ public class PackageTasksFragment extends Fragment {
                         uninstall.show();
                     }
                     break;
-                case 3:
+                case 2:
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
@@ -214,7 +193,7 @@ public class PackageTasksFragment extends Fragment {
                         reset.show();
                     }
                     break;
-                case 4:
+                case 3:
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {
@@ -513,20 +492,12 @@ public class PackageTasksFragment extends Fragment {
     private void fabMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mFAB);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.restore_data));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.install_bundle));
+        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.install_bundle));
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 0:
-                    Intent restore = new Intent(Intent.ACTION_GET_CONTENT);
-                    restore.setType("*/*");
-                    startActivityForResult(restore, 0);
-                    break;
-                case 1:
-                    Intent install = new Intent(Intent.ACTION_GET_CONTENT);
-                    install.setType("*/*");
-                    startActivityForResult(install, 1);
-                    break;
+            if (item.getItemId() == 0) {
+                Intent install = new Intent(Intent.ACTION_GET_CONTENT);
+                install.setType("*/*");
+                startActivityForResult(install, 0);
             }
             return false;
         });
@@ -648,25 +619,7 @@ public class PackageTasksFragment extends Fragment {
             } else {
                 mPath = Utils.getPath(file);
             }
-            String fileName = new File(mPath).getName();
             if (requestCode == 0) {
-                if (!mPath.endsWith(".tar.gz")) {
-                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".tar.gz"));
-                    return;
-                }
-                MaterialAlertDialogBuilder restoreApp = new MaterialAlertDialogBuilder(requireActivity());
-                restoreApp.setIcon(R.mipmap.ic_launcher);
-                restoreApp.setTitle(getString(R.string.restore_message, fileName));
-                restoreApp.setMessage(getString(R.string.restore_summary));
-                restoreApp.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                });
-                restoreApp.setPositiveButton(getString(R.string.restore), (dialogInterface, i) -> {
-                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                    restore(mPath, requireActivity());
-                    requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                });
-                restoreApp.show();
-            } else if (requestCode == 1) {
                 if (mPath.endsWith(".apk") || mPath.endsWith(".apks") || mPath.endsWith(".xapk")) {
                     MaterialAlertDialogBuilder installApp = new MaterialAlertDialogBuilder(requireActivity());
                     if (mPath.endsWith(".apks") || mPath.endsWith(".xapk")) {
@@ -691,7 +644,7 @@ public class PackageTasksFragment extends Fragment {
                     });
                     installApp.show();
                 } else {
-                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk/.apks"));
+                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk/.apks/.xapk"));
                 }
             }
         }

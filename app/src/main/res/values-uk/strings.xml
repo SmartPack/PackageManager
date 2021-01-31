@@ -7,13 +7,8 @@
     <string name="apk_path">Шлях до APK</string>
     <string name="app_info">Інфо</string>
     <string name="app_name_summary">Додаток для керування вашими додатками</string>
-    <string name="backing_summary">Бекап файлів даних %s</string>
-    <string name="backup">Бекап</string>
-    <string name="backing_up">Бекап %s (лише дані) в \'/sdcard/Package_Manager/\'</string>
-    <string name="batch_backup_finished">Бекапи генеруються в \'%s\'</string>
     <string name="batch_list_clear">Очистити список</string>
     <string name="batch_list_disable">Ви впевнені, що хочете відключити (якщо увімкнено) чи увімкнути (якщо відключено) такі додатки?</string>
-    <string name="batch_list_backup">Ви впевнені, що хочете створити бекап (лише дані) таких додатків?</string>
     <string name="batch_list_empty">Нічого не додано до списку пакетів!</string>
     <string name="batch_list_remove">Ви впевнені, що хочете видалити такі додатки?</string>
     <string name="batch_list_reset">Ви впевнені, що хочете скинути наступні програми?</string>
@@ -71,7 +66,6 @@
     <string name="language_uk">Українська</string>
     <string name="more_apps">Більше від розробника</string>
     <string name="name">Ім\'я</string>
-    <string name="name_empty">Ім\'я порожнє! Невдача!</string>
     <string name="native_lib">Внутрішня бібліотека</string>
     <string name="no_internet">Будь ласка, перевірте своє інтернет-з\'єднання!</string>
     <string name="no_root">Ця функція не працюватиме без root доступу!</string>
@@ -99,10 +93,6 @@
     <string name="reset">Скинути</string>
     <string name="reset_message">Скинути %s?</string>
     <string name="reset_summary">Скидання %s</string>
-    <string name="restore">Відновити</string>
-    <string name="restore_data">Відновити дані додатків</string>
-    <string name="restore_message">Ви впевнені, що хочете відновити %s?</string>
-    <string name="restore_summary">\nПопередження!\n\nВідновлення неправильного файлу резервної копії, можливо, спричинить проблеми на вашому пристрої. Ви несете відповідальність лише за вибір належного файлу резервної копії, підготовленого цим додатком для вашого пристрою. Також зауважте, що відновлення не працюватиме добре для всіх додатків.</string>
     <string name="restoring">Відновлення %s</string>
     <string name="result">Результат: %s</string>
     <string name="search">Пошук…</string>

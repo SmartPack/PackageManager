@@ -105,13 +105,6 @@ public class PackageTasks {
         return mData;
     }
 
-    public static void backupApp(String app, String name) {
-        makePackageFolder();
-        Utils.sleep(2);
-        Utils.runCommand("tar -zcvf " + PACKAGES + "/" +
-                name + " /data/data/" + app);
-    }
-
     public static void batchDisableTask(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -156,48 +149,6 @@ public class PackageTasks {
                 mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 mRunning = false;
                 Utils.mReloadPage = true;
-            }
-        }.execute();
-    }
-
-    public static void batchBackupTask(Context context) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mRunning = true;
-                if (mOutput == null) {
-                    mOutput = new StringBuilder();
-                } else {
-                    mOutput.setLength(0);
-                }
-                mOutput.append("** ").append(context.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
-                Intent backupIntent = new Intent(context, PackageTasksActivity.class);
-                backupIntent.putExtra(PackageTasksActivity.TITLE_START, context.getString(R.string.batch_processing));
-                backupIntent.putExtra(PackageTasksActivity.TITLE_FINISH, context.getString(R.string.batch_processing_finished));
-                context.startActivity(backupIntent);
-            }
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
-                for (String packageID : batchApps) {
-                    if (packageID.contains(".")) {
-                        mOutput.append("** ").append(context.getString(R.string.backing_summary, packageID));
-                        backupApp(packageID, packageID + "_batch.tar.gz");
-                        mOutput.append(": ").append(context.getString(R.string.done)).append(" *\n\n");
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                mOutput.append("** ").append(context.getString(R.string.everything_done)).append(" ").append(context.getString(
-                        R.string.batch_backup_finished, PACKAGES)).append(" *");
-                mRunning = false;
             }
         }.execute();
     }

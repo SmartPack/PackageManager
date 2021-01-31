@@ -73,7 +73,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
         MaterialTextView mCancelButton = findViewById(R.id.cancel_button);
         mOpenApp = findViewById(R.id.open_app);
         LinearLayout mClear = findViewById(R.id.clear_app);
-        LinearLayout mBackup = findViewById(R.id.backup_app);
         LinearLayout mExport = findViewById(R.id.export_app);
         LinearLayout mDisable = findViewById(R.id.disable_app);
         LinearLayout mOpenStore = findViewById(R.id.playstore_app);
@@ -115,7 +114,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
                     PackageTasks.clearAppSettings(Utils.mApplicationID);
                 }).show());
-        mBackup.setOnClickListener(v -> backupApp(this));
         mExport.setOnClickListener(v -> exportApp(this));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setIcon(Utils.mApplicationIcon)
@@ -147,7 +145,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
         });
         if (Utils.rootAccess()) {
             mClear.setVisibility(View.VISIBLE);
-            mBackup.setVisibility(View.VISIBLE);
             mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);
         }
@@ -300,60 +297,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 }
             }
         }.execute();
-    }
-
-    private void backupApp(Activity activity) {
-        if (Utils.isStorageWritePermissionDenied(activity)) {
-            ActivityCompat.requestPermissions(activity, new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            Utils.snackbar(mProgressLayout, getString(R.string.permission_denied_write_storage));
-        } else {
-            Utils.dialogEditText(Utils.mApplicationName.toString(),
-                    (dialogInterface1, i1) -> {
-                    }, new Utils.OnDialogEditTextListener() {
-                        @SuppressLint("StaticFieldLeak")
-                        @Override
-                        public void onClick(String text) {
-                            if (text.isEmpty()) {
-                                Utils.snackbar(mProgressLayout, getString(R.string.name_empty));
-                                return;
-                            }
-                            if (!text.endsWith(".tar.gz")) {
-                                text += ".tar.gz";
-                            }
-                            if (text.contains(" ")) {
-                                text = text.replaceAll(" ", "_");
-                            }
-                            if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager" + "/" + text)) {
-                                Utils.snackbar(mProgressLayout, getString(R.string.already_exists, text));
-                                return;
-                            }
-                            final String path = text;
-                            new AsyncTask<Void, Void, Void>() {
-                                @Override
-                                protected void onPreExecute() {
-                                    super.onPreExecute();
-                                    showProgress(getString(R.string.backing_up, Utils.mApplicationName) + "...");
-                                }
-
-                                @Override
-                                protected Void doInBackground(Void... voids) {
-                                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-                                    PackageTasks.backupApp(Utils.mApplicationID, path);
-                                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                                    return null;
-                                }
-
-                                @Override
-                                protected void onPostExecute(Void aVoid) {
-                                    super.onPostExecute(aVoid);
-                                    hideProgress();
-                                }
-                            }.execute();
-                        }
-                    }, this).setOnDismissListener(dialogInterface12 -> {
-            }).show();
-        }
     }
 
     @SuppressLint("StaticFieldLeak")

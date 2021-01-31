@@ -6,13 +6,8 @@
     <string name="always_show">항상 보이기</string>
     <string name="already_exists">%s은(는) 이미 존재합니다!</string>
     <string name="app_info">앱 정보</string>
-    <string name="backing_summary">%s의 데이터 파일들을 백업합니다.</string>
-    <string name="backup">백업</string>
-    <string name="backing_up">%s (데이터) 을(를) \'/sdcard/Package_Manager/\'로 백업하는 중</string>
-    <string name="batch_backup_finished">백업 파일들이 \'%s\'에 저장되었습니다.</string>
     <string name="batch_list_clear">목록 지우기</string>
     <string name="batch_list_disable">선택된 앱들을 활성화 또는 비활성화합니다.\n선택된 앱들은 다음과 같습니다:</string>
-    <string name="batch_list_backup">선택된 앱들의 데이터를 백업합니다.\n선택된 앱들은 다음과 같습니다:</string>
     <string name="batch_list_empty">모음집에 아무것도 추가되지 않았습니다!</string>
     <string name="batch_list_remove">선택된 앱들을 제거합니다.\n선택된 앱들은 다음과 같습니다:</string>
     <string name="batch_list_summary">모음집에 추가된 앱들은 다음과 같습니다:</string>
@@ -59,7 +54,6 @@
     <string name="language_uk">우크라이나어</string>
     <string name="more_apps">개발자의 다른 앱들 보기</string>
     <string name="name">이름</string>
-    <string name="name_empty">이름이 비었습니다!</string>
     <string name="no_internet">인터넷 연결을 확인해주세요!</string>
     <string name="no_root">이 기능은 루트 권한 없이 작동하지 않습니다!</string>
     <string name="ok">확인</string>
@@ -71,10 +65,6 @@
     <string name="playstore">플레이 스토어</string>
     <string name="press_back">나가려면 뒤로가기 버튼을 다시 누르세요</string>
     <string name="report_issue">문제 제출하기</string>
-    <string name="restore">복구</string>
-    <string name="restore_data">앱 데이터 복구 </string>
-    <string name="restore_message">%s을(를) 복구합니다. 계속하시겠어요?</string>
-    <string name="restore_summary">\n주의!\n\n잘못된 백업 파일을 복구하는 것은 당신의 기기에 문제를 일으킬 수 있습니다. 당신의 기기를 위해 이 앱에서 만들어진 알맞은 백업 파일을 고르세요. 또한, 복구가 모든 앱에서 작동되지는 않는다는 것을 기억하세요.</string>
     <string name="restoring">%s을(를) 복구하는 중</string>
     <string name="share">공유</string>
     <string name="shared_by">%s/Package Manager 공유</string>

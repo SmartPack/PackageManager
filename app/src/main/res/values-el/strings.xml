@@ -7,13 +7,8 @@
     <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
     <string name="app_info">Πληροφορίες εφαρμογής</string>
     <string name="app_name_summary">Μία Εφαρμογή για να Διαχειριστείτε τις Εφαρμογές σας</string>
-    <string name="backing_summary">Δημιουργία αντιγράφου αρχείων των δεδομένων του %s</string>
-    <string name="backup">Αντίγραφο</string>
-    <string name="backing_up">Δημιουργία αντιγράφου %s (δεδομένα μόνο) στο \'/sdcard/Package_Manager/\'</string>
-    <string name="batch_backup_finished">Τα αρχεία αντιγράφων παράγονται στο \'%s\'</string>
     <string name="batch_list_clear">Διαγραφή λίστας</string>
     <string name="batch_list_disable">Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε (εάν είναι ενεργοποιημένη) ή να ενεργοποιήσετε (εάν είναι απενεργοποιημένη) την ακόλουθη εφαρμογή(ές);?</string>
-    <string name="batch_list_backup">Είστε σίγουρος για τη δημιουργία αντιγράφου (δεδομένα μόνο) για την ακόλουθη εφαρμογή(ές);</string>
     <string name="batch_list_empty">Τίποτα δεν έχει προστεθεί στην ομαδική λίστα!</string>
     <string name="batch_list_remove">Είστε σίγουρος ότι θέλετε να αφαιρέσετε τις ακόλουθες εφαρμογές;</string>
     <string name="batch_list_summary">Οι ακόλουθες εφαρμογές προστέθηκαν στη λίστα ομάδας</string>
@@ -59,7 +54,6 @@
     <string name="language_pt">Πορτογαλικά</string>
     <string name="more_apps">Περισσότερα από τον προγραμματιστή</string>
     <string name="name">Όνομα</string>
-    <string name="name_empty">Το όνομα είναι κενό! Διακοπή!</string>
     <string name="no_internet">Παρακαλώ ελέγξτε τη σύνδεση δικτύου σας!</string>
     <string name="no_root">Αυτή η επιλογή δε θα λειτουργήσει χωρίς πρόσβαση root!</string>
     <string name="ok">OK</string>
@@ -71,10 +65,6 @@
     <string name="playstore">PlayStore</string>
     <string name="press_back">Πιέστε πίσω ξανά για να βγείτε</string>
     <string name="report_issue">Αναφέρετε κάποιο πρόβλημα</string>
-    <string name="restore">Επαναφορά</string>
-    <string name="restore_data">Επαναφορά δεδομένων εφαρμογής</string>
-    <string name="restore_message">Είστε σίγουρος ότι θέλετε να επαναφέρετε %s?</string>
-    <string name="restore_summary">\nΠροειδοποίηση!\n\nΗ επαναφορά ενός λάθος αρχείου αντιγράφου ενδέχεται να προκαλέσει προβλήματα στη συσκευή. Είναι αποκλειστικά δικη σας ευθύνη να επιλέξετε ένα κατάλληλο αρχείο αντιγράφου προετοιμασμένο από αυτήν την εφαρμογή για το κινητό σας. Επίσης, παρακαλώ να σημειωθεί ότι η επαναφορά δε θα λειτουργήσει καλά για ολες τις εφαρμογές.</string>
     <string name="restoring">Επαναφορά %s</string>
     <string name="result">Αποτέλεσμα: %s</string>
     <string name="session_id">Ταυτότητα περιόδου λειτουργίας: %s</string>
