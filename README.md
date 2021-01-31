@@ -2,7 +2,7 @@
 
 ![Package Manager](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
 
-[![](https://img.shields.io/badge/Package%20Manager-v3.0-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
+[![](https://img.shields.io/badge/Package%20Manager-v3.1-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
 ![](https://img.shields.io/github/contributors/smartpack/PackageManager)
 ![](https://img.shields.io/github/license/smartpack/PackageManager)
@@ -13,9 +13,9 @@
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
      alt=""
      height="80">](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
-[<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
-     alt=""
-     height="80">](https://github.com/SmartPack/PackageManager/blob/master/release/com.smartpack.packagemanager.apk?raw=true)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+          alt=""
+          height="80">](https://f-droid.org/packages/com.smartpack.packagemanager)
 
 ## Requirements
 * ROOT Access required for some advanced features
