@@ -504,40 +504,6 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void showProgress(String message) {
-        mProgressMessage.setText(message);
-        mProgressMessage.setVisibility(View.VISIBLE);
-        mProgressLayout.setBackgroundColor(Utils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
-        mProgressLayout.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgress() {
-        mProgressMessage.setVisibility(View.GONE);
-        mProgressLayout.setVisibility(View.GONE);
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private void restore(String path, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                showProgress(activity.getString(R.string.restoring, path) + "...");
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Utils.sleep(2);
-                Utils.runCommand("tar -zxvf " + path + " -C /");
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                hideProgress();
-            }
-        }.execute();
-    }
-
     @SuppressLint("StaticFieldLeak")
     private void loadUI(Activity activity) {
         new AsyncTask<Void, Void, Void>() {

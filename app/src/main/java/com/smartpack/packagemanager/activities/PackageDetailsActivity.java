@@ -49,7 +49,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
     private MaterialTextView mProgressMessage;
     private LinearLayout mOpenApp;
     private LinearLayout mProgressLayout;
-    private String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -147,6 +146,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         });
         if (Utils.rootAccess()) {
             mClear.setVisibility(View.VISIBLE);
+            mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);
         }
     }
@@ -266,25 +266,25 @@ public class PackageDetailsActivity extends AppCompatActivity {
             }
             @Override
             protected Void doInBackground(Void... voids) {
-                PackageTasks.makePackageFolder();
+                PackageTasks.makePackageFolder(activity);
                 Utils.sleep(1);
-                Utils.copy(apk, PACKAGES + "/" + name + ".apk");
+                Utils.copy(apk, PackageTasks.getPackageDir(activity) + "/" + name + ".apk");
                 return null;
             }
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 hideProgress();
-                if (Utils.existFile(PACKAGES + "/" + name + ".apk")) {
+                if (Utils.existFile(PackageTasks.getPackageDir(activity) + "/" + name + ".apk")) {
                     new MaterialAlertDialogBuilder(activity)
                             .setIcon(icon)
                             .setTitle(activity.getString(R.string.share) + " " + name + "?")
-                            .setMessage(name + " " + activity.getString(R.string.export_summary, PACKAGES))
+                            .setMessage(name + " " + activity.getString(R.string.export_summary, PackageTasks.getPackageDir(activity)))
                             .setNeutralButton(activity.getString(R.string.cancel), (dialog, id) -> {
                             })
                             .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
                                 Uri uriFile = FileProvider.getUriForFile(activity,
-                                        BuildConfig.APPLICATION_ID + ".provider", new File(PACKAGES + "/" + name + ".apk"));
+                                        BuildConfig.APPLICATION_ID + ".provider", new File(PackageTasks.getPackageDir(activity) + "/" + name + ".apk"));
                                 Intent shareScript = new Intent(Intent.ACTION_SEND);
                                 shareScript.setType("application/java-archive");
                                 shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
@@ -310,20 +310,20 @@ public class PackageDetailsActivity extends AppCompatActivity {
             }
             @Override
             protected Void doInBackground(Void... voids) {
-                PackageTasks.makePackageFolder();
+                PackageTasks.makePackageFolder(activity);
                 Utils.sleep(1);
-                Utils.runCommand("cp -r " + apk + " " + PACKAGES + "/" + name);
+                Utils.runCommand("cp -r " + apk + " " + PackageTasks.getPackageDir(activity) + "/" + name);
                 return null;
             }
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 hideProgress();
-                if (Utils.existFile(PACKAGES + "/" + name + "/base.apk")) {
+                if (Utils.existFile(PackageTasks.getPackageDir(activity) + "/" + name + "/base.apk")) {
                     new MaterialAlertDialogBuilder(activity)
                             .setIcon(icon)
                             .setTitle(name)
-                            .setMessage(getString(R.string.export_bundle_summary, PACKAGES))
+                            .setMessage(getString(R.string.export_bundle_summary, PackageTasks.getPackageDir(activity)))
                             .setPositiveButton(R.string.cancel, (dialog, id) -> {
                             })
 

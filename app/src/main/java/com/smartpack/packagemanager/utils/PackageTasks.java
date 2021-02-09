@@ -16,6 +16,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
@@ -35,8 +36,6 @@ import java.util.Objects;
 
 public class PackageTasks {
 
-    public static final String PACKAGES = Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
-
     public static StringBuilder mOutput = null;
 
     public static List<String> mBatchList = new ArrayList<>();
@@ -44,8 +43,8 @@ public class PackageTasks {
     public static boolean mAppType;
     public static boolean mRunning = false;
 
-    public static void makePackageFolder() {
-        File file = new File(PACKAGES);
+    public static void makePackageFolder(Context context) {
+        File file = new File(getPackageDir(context));
         if (file.exists() && file.isFile()) {
             file.delete();
         }
@@ -397,6 +396,14 @@ public class PackageTasks {
 
     public static boolean isSystemApp(String packageName, Context context) {
         return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+    }
+
+    public static String getPackageDir(Context context) {
+        if (Build.VERSION.SDK_INT >= 29) {
+            return Objects.requireNonNull(context.getExternalFilesDir("Package_Manager")).toString();
+        } else {
+            return Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
+        }
     }
 
     public static String getPermissions(String packageName, Context context) {
