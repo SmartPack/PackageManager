@@ -67,7 +67,7 @@
     <string name="sure_question">ഉറപ്പാണോ?</string>
     <string name="system">സിസ്റ്റം അപ്ലിക്കേഷനുകൾ</string>
     <string name="turn_on_off">പ്രവർത്തനരഹിതം/ക്ഷമം ആക്കുക</string>
-    <string name="uninstall">അൺ‌ഇൻ‌സ്റ്റാൾ‌ ചെയ്യുക</string>
+    <string name="uninstall">അൺ‌ഇൻ‌സ്റ്റാൾ‌</string>
     <string name="uninstall_nope">ക്ഷമിക്കണം! നിങ്ങൾക്ക് ഇവിടെ നിന്ന് ഇത് ചെയ്യാൻ കഴിയില്ല!</string>
     <string name="uninstall_summary">%s നീക്കംചെയ്യുന്നു</string>
     <string name="uninstall_title">%s അൺ‌ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>

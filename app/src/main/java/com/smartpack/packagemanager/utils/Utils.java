@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +76,7 @@ public class Utils {
     public static String mDirData;
     public static String mDirNatLib;
     public static String mDirSource;
+    public static String mPath;
     public static String mSearchText;
 
     /*
@@ -85,7 +88,14 @@ public class Utils {
     }
 
     public static void runCommand(String command) {
-        Shell.su(command).exec();
+        if (rootAccess()) {
+            Shell.su(command).exec();
+        } else {
+            try {
+                Runtime.getRuntime().exec(command);
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     @NonNull
@@ -181,6 +191,12 @@ public class Utils {
         return dialog;
     }
 
+    public static int getThemeAccentColor(Context context) {
+        TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+        return value.data;
+    }
+
     /*
      * The following code is partly taken from https://github.com/Grarak/KernelAdiutor
      * Ref: https://github.com/Grarak/KernelAdiutor/blob/master/app/src/main/java/com/grarak/kerneladiutor/utils/Prefs.java
@@ -211,6 +227,11 @@ public class Utils {
         return !isPackageInstalled("com.smartpack.donate", context);
     }
 
+    public static boolean isDarkTheme(Context context) {
+        int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
     public static void initializeAppTheme(Context context) {
         if (getBoolean("dark_theme", false, context)) {
             AppCompatDelegate.setDefaultNightMode(
@@ -224,14 +245,16 @@ public class Utils {
         }
     }
 
-    public static boolean isDarkTheme(Context context) {
-        int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    public static int getOrientation(Activity activity) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && activity.isInMultiWindowMode() ?
+                Configuration.ORIENTATION_PORTRAIT : activity.getResources().getConfiguration().orientation;
     }
 
     public static void delete(String path) {
-        if (existFile(path)) {
+        if (new File(path).isDirectory()) {
             runCommand("rm -r " + path);
+        } else {
+            new File(path).delete();
         }
     }
 
@@ -280,9 +303,9 @@ public class Utils {
         return !output.isEmpty() && output.equals("true");
     }
 
-    public static void unzip(String zip, String dir) {
+    public static void unzip(String zip, String path) {
         Utils.runCommand((Utils.existFile("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
-                : "unzip ") + zip + " -d " + dir);
+                : "unzip ") + zip + " -d " + path);
     }
 
     public static boolean isNetworkUnavailable(Context context) {

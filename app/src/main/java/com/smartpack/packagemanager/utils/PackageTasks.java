@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.PackageTasksActivity;
 
 import java.io.File;
@@ -306,6 +307,33 @@ public class PackageTasks {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 PackageTasks.mRunning = false;
+            }
+        }.execute();
+    }
+
+    public static void exploreAPK(String path, Activity activity) {
+        new AsyncTask<Void, Void, List<String>>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (new File(activity.getCacheDir().getPath() + "/apk").exists()) {
+                    Utils.delete(activity.getCacheDir().getPath() + "/apk");
+                }
+                new File(activity.getCacheDir().getPath() + "/apk").mkdirs();
+                Utils.mPath = activity.getCacheDir().getPath() + "/apk";
+            }
+
+            @Override
+            protected List<String> doInBackground(Void... voids) {
+                Utils.unzip(path,activity.getCacheDir().getPath() + "/apk");
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<String> recyclerViewItems) {
+                super.onPostExecute(recyclerViewItems);
+                Intent filePicker = new Intent(activity, FilePickerActivity.class);
+                activity.startActivity(filePicker);
             }
         }.execute();
     }

@@ -47,6 +47,7 @@
     <string name="enable">Enable</string>
     <string name="enabled">enabled</string>
     <string name="enabling">Enabling %s</string>
+    <string name="explore">Explore</string>
     <string name="export">Export</string>
     <string name="export_summary">is exported into %s. Do you want to share it?</string>
     <string name="export_bundle_summary">The entire app bundle is exported into %s!</string>

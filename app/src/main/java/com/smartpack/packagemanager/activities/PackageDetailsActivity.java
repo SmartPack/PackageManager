@@ -73,6 +73,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         MaterialTextView mCancelButton = findViewById(R.id.cancel_button);
         mOpenApp = findViewById(R.id.open_app);
         LinearLayout mClear = findViewById(R.id.clear_app);
+        LinearLayout mExplore = findViewById(R.id.explore_app);
         LinearLayout mExport = findViewById(R.id.export_app);
         LinearLayout mDisable = findViewById(R.id.disable_app);
         LinearLayout mOpenStore = findViewById(R.id.playstore_app);
@@ -114,6 +115,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
                     PackageTasks.clearAppSettings(Utils.mApplicationID);
                 }).show());
+        mExplore.setOnClickListener(v -> PackageTasks.exploreAPK(Utils.mDirSource, this));
         mExport.setOnClickListener(v -> exportApp(this));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setIcon(Utils.mApplicationIcon)
@@ -145,7 +147,6 @@ public class PackageDetailsActivity extends AppCompatActivity {
         });
         if (Utils.rootAccess()) {
             mClear.setVisibility(View.VISIBLE);
-            mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);
         }
     }

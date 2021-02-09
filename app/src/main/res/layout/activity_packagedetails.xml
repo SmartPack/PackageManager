@@ -70,6 +70,34 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/explore_app"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_gravity="end"
+                android:orientation="vertical" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:layout_gravity="center_horizontal"
+                    android:tint="?attr/colorAccent"
+                    android:src="@drawable/ic_explore" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorAccent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/explore"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/disable_app"
                 android:layout_width="wrap_content"
                 android:layout_height="75dp"
@@ -236,7 +264,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="85dp"
+                        android:layout_marginEnd="75dp"
                         android:layout_gravity="center_vertical|start"
                         android:orientation="vertical" >
 
@@ -297,7 +325,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="100dp"
+                        android:layout_marginEnd="75dp"
                         android:layout_gravity="center_vertical|start"
                         android:orientation="vertical" >
 
