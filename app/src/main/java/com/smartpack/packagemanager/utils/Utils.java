@@ -323,8 +323,12 @@ public class Utils {
     }
 
     public static boolean existFile(String file) {
-        String output = runAndGetOutput("[ -e " + file + " ] && echo true");
-        return !output.isEmpty() && output.equals("true");
+        if (!file.startsWith("/storage/")) {
+            String output = runAndGetOutput("[ -e " + file + " ] && echo true");
+            return !output.isEmpty() && output.equals("true");
+        } else {
+            return new File(file).exists();
+        }
     }
 
     public static void unzip(String zip, String path) {

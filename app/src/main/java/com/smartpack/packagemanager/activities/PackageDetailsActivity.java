@@ -19,7 +19,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -87,11 +86,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, this) ? R.string.disable : R.string.enable);
         mDataDir.setText(Utils.mDirData);
         mNatLib.setText(Utils.mDirNatLib);
-        if (Utils.rootAccess()) {
-            mAPKPath.setText(PackageTasks.listSplitAPKs(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), "")));
-        } else {
-            mAPKPath.setText(Utils.mDirSource);
-        }
+        mAPKPath.setText(PackageTasks.listSplitAPKs(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), "")));
         mPermissions.setText(PackageTasks.getPermissions(Utils.mApplicationID, this));
         mOpenApp.setVisibility(PackageTasks.isEnabled(Utils.mApplicationID, this) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {
@@ -242,7 +237,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         } else {
             for (final String splitApps : PackageTasks.splitApks(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""))) {
                 if (splitApps.contains("split_")) {
-                    if (Utils.existFile(Environment.getExternalStorageDirectory().toString() + "/Package_Manager/" + Utils.mApplicationID)) {
+                    if (Utils.existFile(PackageTasks.getPackageDir(this) + "/" + Utils.mApplicationID)) {
                         Utils.snackbar(mProgressLayout, getString(R.string.already_exists, Utils.mApplicationID));
                     } else {
                         exportingBundleTask(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""), Utils.mApplicationID,
@@ -312,14 +307,14 @@ public class PackageDetailsActivity extends AppCompatActivity {
             protected Void doInBackground(Void... voids) {
                 PackageTasks.makePackageFolder(activity);
                 Utils.sleep(1);
-                Utils.runCommand("cp -r " + apk + " " + PackageTasks.getPackageDir(activity) + "/" + name);
+                Utils.copy(apk, PackageTasks.getPackageDir(activity) + "/" + name);
                 return null;
             }
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 hideProgress();
-                if (Utils.existFile(PackageTasks.getPackageDir(activity) + "/" + name + "/base.apk")) {
+                if (Utils.existFile(PackageTasks.getPackageDir(activity) + "/" + name)) {
                     new MaterialAlertDialogBuilder(activity)
                             .setIcon(icon)
                             .setTitle(name)

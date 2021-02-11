@@ -294,7 +294,6 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_gravity="end"
-                        android:visibility="gone"
                         android:orientation="vertical" >
 
                         <androidx.appcompat.widget.AppCompatImageButton

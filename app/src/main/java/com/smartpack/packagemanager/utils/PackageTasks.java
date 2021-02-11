@@ -425,12 +425,10 @@ public class PackageTasks {
 
     public static List<String> splitApks(String path) {
         List<String> list = new ArrayList<>();
-        String files = Utils.runAndGetOutput("ls '" + path + "/'");
-        if (!files.isEmpty()) {
-            // Make sure the files exists
-            for (String file : files.split("\\r?\\n")) {
-                if (file != null && !file.isEmpty() && Utils.existFile(path + "/" + file)) {
-                    list.add(file);
+        if (new File(path).exists()) {
+            for (File mFile : Objects.requireNonNull(new File(path).listFiles())) {
+                if (mFile.exists()) {
+                    list.add(mFile.getAbsolutePath());
                 }
             }
         }
