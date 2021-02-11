@@ -268,18 +268,18 @@ public class PackageTasks {
                     Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
                     mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
                     Utils.unzip(dir, activity.getCacheDir().getPath());
-                    mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
+                    mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
                             : activity.getString(R.string.failed)).append("\n\n");
                 } else if (dir.endsWith(".xapk")) {
                     mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
                     Utils.create(activity.getCacheDir().getPath() + "/splits");
                     Utils.unzip(dir, activity.getCacheDir().getPath() + "/splits");
-                    mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
+                    mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
                             : activity.getString(R.string.failed)).append("\n\n");
                 } else {
                     mOutput.append("** ").append(activity.getString(R.string.creating_directory_message)).append(": ");
                     Utils.create(activity.getCacheDir().getPath() + "/splits");
-                    mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
+                    mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
                     mOutput.append("** ").append(activity.getString(R.string.copying_apk_message)).append(": ");
                     Utils.runCommand("cp " + dir + "/* " + activity.getCacheDir().getPath() + "/splits");
                     mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
@@ -297,7 +297,7 @@ public class PackageTasks {
                 if (dir.endsWith(".apks")) {
                     Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
                 }
-                mOutput.append(Utils.existFile(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.failed) +
+                mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.failed) +
                         " *\n\n" : activity.getString(R.string.done) + " *\n\n");
                 mOutput.append("** ").append(activity.getString(R.string.result, Utils.runAndGetError("pm install-commit " + sid)));
                 return null;

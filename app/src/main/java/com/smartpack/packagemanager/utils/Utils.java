@@ -322,7 +322,7 @@ public class Utils {
         return null;
     }
 
-    public static boolean existFile(String file) {
+    public static boolean exist(String file) {
         if (!file.startsWith("/storage/")) {
             String output = runAndGetOutput("[ -e " + file + " ] && echo true");
             return !output.isEmpty() && output.equals("true");
@@ -332,7 +332,7 @@ public class Utils {
     }
 
     public static void unzip(String zip, String path) {
-        Utils.runCommand((Utils.existFile("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
+        Utils.runCommand((Utils.exist("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
                 : "unzip ") + zip + " -d " + path);
     }
 

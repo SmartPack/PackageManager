@@ -237,7 +237,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         } else {
             for (final String splitApps : PackageTasks.splitApks(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""))) {
                 if (splitApps.contains("split_")) {
-                    if (Utils.existFile(PackageTasks.getPackageDir(this) + "/" + Utils.mApplicationID)) {
+                    if (Utils.exist(PackageTasks.getPackageDir(this) + "/" + Utils.mApplicationID)) {
                         Utils.snackbar(mProgressLayout, getString(R.string.already_exists, Utils.mApplicationID));
                     } else {
                         exportingBundleTask(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""), Utils.mApplicationID,
@@ -270,27 +270,25 @@ public class PackageDetailsActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 hideProgress();
-                if (Utils.existFile(PackageTasks.getPackageDir(activity) + "/" + name + ".apk")) {
-                    new MaterialAlertDialogBuilder(activity)
-                            .setIcon(icon)
-                            .setTitle(activity.getString(R.string.share) + " " + name + "?")
-                            .setMessage(name + " " + activity.getString(R.string.export_summary, PackageTasks.getPackageDir(activity)))
-                            .setNeutralButton(activity.getString(R.string.cancel), (dialog, id) -> {
-                            })
-                            .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
-                                Uri uriFile = FileProvider.getUriForFile(activity,
-                                        BuildConfig.APPLICATION_ID + ".provider", new File(PackageTasks.getPackageDir(activity) + "/" + name + ".apk"));
-                                Intent shareScript = new Intent(Intent.ACTION_SEND);
-                                shareScript.setType("application/java-archive");
-                                shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
-                                shareScript.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
-                                shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
-                                shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
-                            })
+                new MaterialAlertDialogBuilder(activity)
+                        .setIcon(icon)
+                        .setTitle(activity.getString(R.string.share) + " " + name + "?")
+                        .setMessage(name + " " + activity.getString(R.string.export_summary, PackageTasks.getPackageDir(activity)))
+                        .setNeutralButton(activity.getString(R.string.cancel), (dialog, id) -> {
+                        })
+                        .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
+                            Uri uriFile = FileProvider.getUriForFile(activity,
+                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageTasks.getPackageDir(activity) + "/" + name + ".apk"));
+                            Intent shareScript = new Intent(Intent.ACTION_SEND);
+                            shareScript.setType("application/java-archive");
+                            shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
+                            shareScript.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
+                            shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
+                            shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
+                        })
 
-                            .show();
-                }
+                        .show();
             }
         }.execute();
     }
@@ -314,16 +312,14 @@ public class PackageDetailsActivity extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 hideProgress();
-                if (Utils.existFile(PackageTasks.getPackageDir(activity) + "/" + name)) {
-                    new MaterialAlertDialogBuilder(activity)
-                            .setIcon(icon)
-                            .setTitle(name)
-                            .setMessage(getString(R.string.export_bundle_summary, PackageTasks.getPackageDir(activity)))
-                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
-                            })
+                new MaterialAlertDialogBuilder(activity)
+                        .setIcon(icon)
+                        .setTitle(name)
+                        .setMessage(getString(R.string.export_bundle_summary, PackageTasks.getPackageDir(activity)))
+                        .setPositiveButton(R.string.cancel, (dialog, id) -> {
+                        })
 
-                            .show();
-                }
+                        .show();
             }
         }.execute();
     }
