@@ -14,7 +14,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -41,12 +39,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
-import com.smartpack.packagemanager.utils.Billing;
-import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
+import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -60,7 +57,6 @@ public class PackageTasksFragment extends Fragment {
 
     private AppCompatImageButton mBatch;
     private AppCompatImageButton mSettings;
-    private MaterialTextView mProgressMessage;
     private AsyncTask<Void, Void, List<String>> mLoader;
     private FloatingActionButton mFAB;
     private Handler mHandler = new Handler();
@@ -76,7 +72,6 @@ public class PackageTasksFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_packagetasks, container, false);
 
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
-        mProgressMessage = mRootView.findViewById(R.id.progress_message);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
@@ -84,7 +79,6 @@ public class PackageTasksFragment extends Fragment {
         loadUI(requireActivity());
 
         Utils.mSearchWord = mRootView.findViewById(R.id.search_word);
-        AppCompatImageButton mDonate = mRootView.findViewById(R.id.donate_icon);
         mBatch = mRootView.findViewById(R.id.batch_icon);
         mSettings = mRootView.findViewById(R.id.settings_icon);
         mFAB = mRootView.findViewById(R.id.fab);
@@ -114,10 +108,6 @@ public class PackageTasksFragment extends Fragment {
         });
 
         mSettings.setOnClickListener(v -> settingsMenu(requireActivity()));
-
-        mDonate.setOnClickListener(v -> {
-            Billing.showDonateOption(requireActivity());
-        });
 
         mFAB.setOnClickListener(v -> {
             if (!Utils.rootAccess()) {
@@ -210,71 +200,15 @@ public class PackageTasksFragment extends Fragment {
     private void settingsMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mSettings);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.system)).setCheckable(true)
+        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.system)).setCheckable(true)
                 .setChecked(Utils.getBoolean("system_apps", true, activity));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.user)).setCheckable(true)
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.user)).setCheckable(true)
                 .setChecked(Utils.getBoolean("user_apps", true, activity));
-        SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
-        sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sort_name", false, activity));
-        sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sort_id", true, activity));
-        SubMenu oem = sort.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.oem));
-        oem.add(Menu.NONE, 28, Menu.NONE, getString(R.string.oem_asus)).setCheckable(true)
-                .setChecked(Utils.getBoolean("asus_apps", false, activity));
-        oem.add(Menu.NONE, 20, Menu.NONE, getString(R.string.oem_google)).setCheckable(true)
-                .setChecked(Utils.getBoolean("google_apps", false, activity));
-        oem.add(Menu.NONE, 21, Menu.NONE, getString(R.string.oem_samsung)).setCheckable(true)
-                .setChecked(Utils.getBoolean("samsung_apps", false, activity));
-        oem.add(Menu.NONE, 22, Menu.NONE, getString(R.string.oem_moto)).setCheckable(true)
-                .setChecked(Utils.getBoolean("moto_apps", false, activity));
-        oem.add(Menu.NONE, 23, Menu.NONE, getString(R.string.oem_oneplus)).setCheckable(true)
-                .setChecked(Utils.getBoolean("oneplus_apps", false, activity));
-        oem.add(Menu.NONE, 26, Menu.NONE, getString(R.string.oem_huawei)).setCheckable(true)
-                .setChecked(Utils.getBoolean("huawei_apps", false, activity));
-        oem.add(Menu.NONE, 24, Menu.NONE, getString(R.string.oem_sony)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sony_apps", false, activity));
-        oem.add(Menu.NONE, 27, Menu.NONE, getString(R.string.oem_lg)).setCheckable(true)
-                .setChecked(Utils.getBoolean("lg_apps", false, activity));
-        oem.add(Menu.NONE, 25, Menu.NONE, getString(R.string.oem_mi)).setCheckable(true)
-                .setChecked(Utils.getBoolean("mi_apps", false, activity));
-        SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, Utils.getLanguage(activity)));
-        language.add(Menu.NONE, 11, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
-                .setChecked(Utils.languageDefault(activity));
-        language.add(Menu.NONE, 12, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_english", false, activity));
-        language.add(Menu.NONE, 13, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_korean", false, activity));
-        language.add(Menu.NONE, 14, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_am", false, activity));
-        language.add(Menu.NONE, 15, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_el", false, activity));
-        language.add(Menu.NONE, 16, Menu.NONE, getString(R.string.language_ml)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_ml", false, activity));
-        language.add(Menu.NONE, 17, Menu.NONE, getString(R.string.language_pt)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_pt", false, activity));
-        language.add(Menu.NONE, 18, Menu.NONE, getString(R.string.language_ru)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_ru", false, activity));
-        language.add(Menu.NONE, 19, Menu.NONE, getString(R.string.language_uk)).setCheckable(true)
-                .setChecked(Utils.getBoolean("use_uk", false, activity));
-        SubMenu appTheme = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.dark_theme));
-        appTheme.add(Menu.NONE, 30, Menu.NONE, getString(R.string.dark_theme_auto)).setCheckable(true)
-                .setChecked(Utils.getBoolean("theme_auto", true, activity));
-        appTheme.add(Menu.NONE, 5, Menu.NONE, getString(R.string.dark_theme_enable)).setCheckable(true)
-                .setChecked(Utils.getBoolean("dark_theme", false, activity));
-        appTheme.add(Menu.NONE, 29, Menu.NONE, getString(R.string.dark_theme_disable)).setCheckable(true)
-                .setChecked(Utils.getBoolean("light_theme", false, activity));
-        SubMenu about = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.about));
-        about.add(Menu.NONE, 9, Menu.NONE, getString(R.string.source_code));
-        about.add(Menu.NONE, 6, Menu.NONE, getString(R.string.support));
-        about.add(Menu.NONE, 7, Menu.NONE, getString(R.string.more_apps));
-        about.add(Menu.NONE, 8, Menu.NONE, getString(R.string.report_issue));
-        about.add(Menu.NONE, 10, Menu.NONE, getString(R.string.about));
+        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.settings));
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.about));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    break;
-                case 1:
                     if (Utils.getBoolean("system_apps", true, activity)) {
                         Utils.saveBoolean("system_apps", false, activity);
                     } else {
@@ -283,7 +217,7 @@ public class PackageTasksFragment extends Fragment {
                     }
                     reload(activity);
                     break;
-                case 2:
+                case 1:
                     if (Utils.getBoolean("user_apps", true, activity)) {
                         Utils.saveBoolean("user_apps", false, activity);
                     } else {
@@ -292,196 +226,13 @@ public class PackageTasksFragment extends Fragment {
                     }
                     reload(activity);
                     break;
+                case 2:
+                    Intent settingsPage = new Intent(activity, SettingsActivity.class);
+                    startActivity(settingsPage);
+                    break;
                 case 3:
-                    if (!Utils.getBoolean("sort_name", false, activity)) {
-                        Utils.saveBoolean("sort_name", true, activity);
-                        Utils.saveBoolean("sort_id", false, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 4:
-                    if (!Utils.getBoolean("sort_id", true, activity)) {
-                        Utils.saveBoolean("sort_id", true, activity);
-                        Utils.saveBoolean("sort_name", false, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 5:
-                    if (!Utils.getBoolean("dark_theme", false, activity)) {
-                        Utils.saveBoolean("dark_theme", true, activity);
-                        Utils.saveBoolean("light_theme", false, activity);
-                        Utils.saveBoolean("theme_auto", false, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 6:
-                    Utils.launchUrl("https://t.me/smartpack_kmanager", mRecyclerView, activity);
-                    break;
-                case 7:
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(
-                            "https://play.google.com/store/apps/dev?id=5836199813143882901"));
-                    startActivity(intent);
-                    break;
-                case 8:
-                    Utils.launchUrl("https://github.com/SmartPack/PackageManager/issues/new", mRecyclerView, activity);
-                    break;
-                case 9:
-                    Utils.launchUrl("https://github.com/SmartPack/PackageManager/", mRecyclerView, activity);
-                    break;
-                case 10:
                     Intent aboutView = new Intent(activity, AboutActivity.class);
                     startActivity(aboutView);
-                    break;
-                case 11:
-                    if (!Utils.languageDefault(activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 12:
-                    if (!Utils.getBoolean("use_english", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_english", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 13:
-                    if (!Utils.getBoolean("use_korean", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_korean", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 14:
-                    if (!Utils.getBoolean("use_am", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_am", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 15:
-                    if (!Utils.getBoolean("use_el", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_el", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 16:
-                    if (!Utils.getBoolean("use_ml", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_ml", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 17:
-                    if (!Utils.getBoolean("use_pt", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_pt", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 18:
-                    if (!Utils.getBoolean("use_ru", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_ru", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 19:
-                    if (!Utils.getBoolean("use_uk", false, activity)) {
-                        Utils.setDefaultLanguage(activity);
-                        Utils.saveBoolean("use_uk", true, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 20:
-                    if (!Utils.getBoolean("google_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("google_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 21:
-                    if (!Utils.getBoolean("samsung_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("samsung_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 22:
-                    if (!Utils.getBoolean("moto_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("moto_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 23:
-                    if (!Utils.getBoolean("oneplus_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("oneplus_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 24:
-                    if (!Utils.getBoolean("sony_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("sony_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 25:
-                    if (!Utils.getBoolean("mi_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("mi_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 26:
-                    if (!Utils.getBoolean("huawei_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("huawei_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 27:
-                    if (!Utils.getBoolean("lg_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("lg_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 28:
-                    if (!Utils.getBoolean("asus_apps", false, activity)) {
-                        Utils.mSortByOEM = true;
-                        Utils.resetDefault(activity);
-                        Utils.saveBoolean("asus_apps", true, activity);
-                        reload(activity);
-                    }
-                    break;
-                case 29:
-                    if (!Utils.getBoolean("light_theme", false, activity)) {
-                        Utils.saveBoolean("dark_theme", false, activity);
-                        Utils.saveBoolean("light_theme", true, activity);
-                        Utils.saveBoolean("theme_auto", false, activity);
-                        Utils.restartApp(activity);
-                    }
-                    break;
-                case 30:
-                    if (!Utils.getBoolean("theme_auto", true, activity)) {
-                        Utils.saveBoolean("dark_theme", false, activity);
-                        Utils.saveBoolean("light_theme", false, activity);
-                        Utils.saveBoolean("theme_auto", true, activity);
-                        Utils.restartApp(activity);
-                    }
                     break;
             }
             return false;

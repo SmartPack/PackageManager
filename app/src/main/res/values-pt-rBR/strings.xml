@@ -28,7 +28,7 @@
     <string name="got_it">Beleza</string>
     <string name="install">Instalar</string>
     <string name="install_bundle">Instalar APKs divididos</string>
-    <string name="language">Idioma (%s)</string>
+    <string name="language">Idioma</string>
     <string name="language_am">Amárico</string>
     <string name="language_el">Grego</string>
     <string name="language_en">Inglês</string>
@@ -39,7 +39,6 @@
     <string name="name">Nome</string>
     <string name="no_internet">Por favor, verifique sua conexão à internet!</string>
     <string name="no_root">Este recurso não funcionará sem acesso root!</string>
-    <string name="ok">OK</string>
     <string name="open">Abrir</string>
     <string name="open_message">Você já está executando este aplicativo.</string>
     <string name="open_failed">%s não foi projetado para ser executado no espaço do usuário!</string>
@@ -48,7 +47,6 @@
     <string name="playstore">PlayStore</string>
     <string name="press_back">Pressione voltar novamente para sair</string>
     <string name="report_issue">Comunicar um problema</string>
-    <string name="restoring">Restaurando %s</string>
     <string name="share">Compartilhar</string>
     <string name="shared_by">%s/compartilhado pelo Package Manager</string>
     <string name="share_message">Package Manager %s pode ser obitido em\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>

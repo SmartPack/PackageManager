@@ -44,7 +44,7 @@
     <string name="install_bundle_initialized">Αρχικοποίηση Εγκατάστασης Διαιρεμένων APKs</string>
     <string name="installing_bundle">Εγκατάσταση εφαρμογής δεσμίδας!</string>
     <string name="installing_bundle_finished">Η εγκατάσταση εφαρμογής δεσμίδας ολοκληρώθηκε!</string>
-    <string name="language">Γλώσσα (%s)</string>
+    <string name="language">Γλώσσα</string>
     <string name="language_am">Amharic</string>
     <string name="language_el">Ελληνικά</string>
     <string name="language_en">Αγγλικά</string>
@@ -56,7 +56,6 @@
     <string name="name">Όνομα</string>
     <string name="no_internet">Παρακαλώ ελέγξτε τη σύνδεση δικτύου σας!</string>
     <string name="no_root">Αυτή η επιλογή δε θα λειτουργήσει χωρίς πρόσβαση root!</string>
-    <string name="ok">OK</string>
     <string name="open">Άνοιγμα</string>
     <string name="open_message">Χρησιμοποιείτε ήδη αυτήν την εφαρμογή.</string>
     <string name="open_failed">%s δεν είναι σχεδιασμένο για να εκτελεστεί στο χώρο χρήστη!</string>
@@ -65,7 +64,6 @@
     <string name="playstore">PlayStore</string>
     <string name="press_back">Πιέστε πίσω ξανά για να βγείτε</string>
     <string name="report_issue">Αναφέρετε κάποιο πρόβλημα</string>
-    <string name="restoring">Επαναφορά %s</string>
     <string name="result">Αποτέλεσμα: %s</string>
     <string name="session_id">Ταυτότητα περιόδου λειτουργίας: %s</string>
     <string name="share">Κοινοποίηση</string>

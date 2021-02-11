@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.utils;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -25,10 +24,7 @@ import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +42,8 @@ import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,7 +67,6 @@ public class Utils {
     public static AppCompatEditText mSearchWord;
     private static boolean mWelcomeDialog = true;
     public static boolean mReloadPage = true;
-    public static boolean mSortByOEM = false;
     public static boolean mSystemApp = true;
     public static CharSequence mApplicationName;
     public static Drawable mApplicationIcon;
@@ -146,52 +143,6 @@ public class Utils {
      * Ref: https://github.com/Grarak/KernelAdiutor/blob/master/app/src/main/java/com/grarak/kerneladiutor/utils/ViewUtils.java
      */
 
-    public interface OnDialogEditTextListener {
-        void onClick(String text);
-    }
-
-    public static MaterialAlertDialogBuilder dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
-                                                            final OnDialogEditTextListener onDialogEditTextListener,
-                                                            Context context) {
-        return dialogEditText(text, negativeListener, onDialogEditTextListener, -1, context);
-    }
-
-    public static MaterialAlertDialogBuilder dialogEditText(String text, final DialogInterface.OnClickListener negativeListener,
-                                        final OnDialogEditTextListener onDialogEditTextListener, int inputType,
-                                        Context context) {
-        LinearLayout layout = new LinearLayout(context);
-        layout.setPadding(75, 75, 75, 75);
-
-        final AppCompatEditText editText = new AppCompatEditText(context);
-        editText.setGravity(Gravity.CENTER);
-        editText.setLayoutParams(new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        if (text != null) {
-            editText.append(text);
-        }
-        editText.setSingleLine(true);
-        if (inputType >= 0) {
-            editText.setInputType(inputType);
-        }
-
-        layout.addView(editText);
-
-        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context).setView(layout);
-        if (negativeListener != null) {
-            dialog.setNegativeButton(context.getString(R.string.cancel), negativeListener);
-        }
-        if (onDialogEditTextListener != null) {
-            dialog.setPositiveButton(context.getString(R.string.ok), (dialog1, which)
-                    -> onDialogEditTextListener.onClick(Objects.requireNonNull(editText.getText()).toString()))
-                    .setOnDismissListener(dialog1 -> {
-                        if (negativeListener != null) {
-                            negativeListener.onClick(dialog1, 0);
-                        }
-                    });
-        }
-        return dialog;
-    }
-
     public static int getThemeAccentColor(Context context) {
         TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
@@ -228,6 +179,10 @@ public class Utils {
         return !isPackageInstalled("com.smartpack.donate", context);
     }
 
+    public static boolean isProUser(Context context) {
+        return getBoolean("support_received", false, context) || !Utils.isNotDonated(context);
+    }
+
     public static boolean isDarkTheme(Context context) {
         int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
@@ -260,7 +215,22 @@ public class Utils {
     }
 
     public static void copy(String source, String dest) {
-        runCommand("cp -r " + source + " " + dest);
+        if (new File(source).isDirectory()) {
+            runCommand("cp -r " + source + " " + dest);
+        } else {
+            try {
+                FileInputStream inputStream = new FileInputStream(source);
+                FileOutputStream outputStream = new FileOutputStream(dest);
+                byte[] buf = new byte[1024 * 1024];
+                int len;
+                while ((len = inputStream.read(buf)) > 0) {
+                    outputStream.write(buf, 0, len);
+                }
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException ignored) {
+            }
+        }
     }
 
     public static void create(String path) {
@@ -285,14 +255,14 @@ public class Utils {
         }
     }
 
-    public static void launchUrl(String url, View view, Context context) {
-        if (isNetworkUnavailable(context)) {
-            snackbar(view, context.getString(R.string.no_internet));
+    public static void launchUrl(String url, Activity activity) {
+        if (isNetworkUnavailable(activity)) {
+            snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet));
         } else {
             try {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
-                context.startActivity(i);
+                activity.startActivity(i);
             } catch (ActivityNotFoundException e) {
                 e.printStackTrace();
             }
@@ -490,6 +460,8 @@ public class Utils {
     }
 
     public static void resetDefault(Context context) {
+        saveBoolean("system_apps", false, context);
+        saveBoolean("user_apps", false, context);
         saveBoolean("asus_apps", false, context);
         saveBoolean("google_apps", false, context);
         saveBoolean("huawei_apps", false, context);
@@ -499,11 +471,6 @@ public class Utils {
         saveBoolean("oneplus_apps", false, context);
         saveBoolean("samsung_apps", false, context);
         saveBoolean("sony_apps", false, context);
-        if (mSortByOEM) {
-            saveBoolean("system_apps", false, context);
-            saveBoolean("user_apps", false, context);
-            mSortByOEM = false;
-        }
     }
 
 }

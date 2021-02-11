@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string-array name="sort_apps">
+        <item>@string/name</item>
+        <item>@string/package_id</item>
+    </string-array>
+
+    <string-array name="show_oem">
+        <item>@string/oem_all</item>
+        <item>@string/oem_asus</item>
+        <item>@string/oem_google</item>
+        <item>@string/oem_samsung</item>
+        <item>@string/oem_moto</item>
+        <item>@string/oem_oneplus</item>
+        <item>@string/oem_huawei</item>
+        <item>@string/oem_sony</item>
+        <item>@string/oem_lg</item>
+        <item>@string/oem_mi</item>
+    </string-array>
+
+    <string-array name="app_theme">
+        <item>@string/dark_theme_auto</item>
+        <item>@string/dark_theme_enable</item>
+        <item>@string/dark_theme_disable</item>
+    </string-array>
+
+    <string-array name="app_language">
+        <item>@string/language_default</item>
+        <item>@string/language_en</item>
+        <item>@string/language_ko</item>
+        <item>@string/language_am</item>
+        <item>@string/language_el</item>
+        <item>@string/language_ml</item>
+        <item>@string/language_pt</item>
+        <item>@string/language_ru</item>
+        <item>@string/language_uk</item>
+    </string-array>
+</resources>

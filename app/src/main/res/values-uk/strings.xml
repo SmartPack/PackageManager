@@ -54,7 +54,7 @@
     <string name="install_bundle_initialized">Ініціалізація встановлення Split APKs</string>
     <string name="installing_bundle">Встановлення пакету додатків!</string>
     <string name="installing_bundle_finished">Встановлення пакету додатків завершено!</string>
-    <string name="language">Мова (%s)</string>
+    <string name="language">Мова</string>
     <string name="language_am">Амхарська</string>
     <string name="language_el">Грецька</string>
     <string name="language_en">Англійська</string>
@@ -69,7 +69,6 @@
     <string name="native_lib">Внутрішня бібліотека</string>
     <string name="no_internet">Будь ласка, перевірте своє інтернет-з\'єднання!</string>
     <string name="no_root">Ця функція не працюватиме без root доступу!</string>
-    <string name="oem">Виробник</string>
     <string name="oem_asus">ASUS</string>
     <string name="oem_google">Google</string>
     <string name="oem_huawei">Huawei</string>
@@ -79,7 +78,6 @@
     <string name="oem_moto">Motorola</string>
     <string name="oem_samsung">Samsung</string>
     <string name="oem_sony">Sony</string>
-    <string name="ok">ОК</string>
     <string name="open">Відкрити</string>
     <string name="open_message">Ви вже працюєте з цим додатком.</string>
     <string name="open_failed">%s не розроблено для роботи в просторі користувача!</string>
@@ -93,7 +91,6 @@
     <string name="reset">Скинути</string>
     <string name="reset_message">Скинути %s?</string>
     <string name="reset_summary">Скидання %s</string>
-    <string name="restoring">Відновлення %s</string>
     <string name="result">Результат: %s</string>
     <string name="search">Пошук…</string>
     <string name="session_id">Ідентифікатор сесії: %s</string>

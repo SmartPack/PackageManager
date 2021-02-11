@@ -1,0 +1,77 @@
+/*
+ * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ *
+ * This file is part of Package Manager, a simple, yet powerful application
+ * to manage other application installed on an android device.
+ *
+ */
+
+package com.smartpack.packagemanager.utils;
+
+/*
+ * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
+ */
+
+import android.content.Context;
+
+import com.smartpack.packagemanager.R;
+
+public class AppSettings {
+
+    public static String getAppThemeDescription(Context context) {
+        if (Utils.getBoolean("dark_theme", false, context)) {
+            return context.getString(R.string.dark_theme_enable);
+        } else if (Utils.getBoolean("light_theme", false, context)) {
+            return context.getString(R.string.dark_theme_disable);
+        } else {
+            return context.getString(R.string.dark_theme_auto);
+        }
+    }
+
+    public static String getOEMDescription(Context context) {
+        if (Utils.getBoolean("asus_apps", false, context)) {
+            return context.getString(R.string.oem_asus);
+        } else if (Utils.getBoolean("google_apps", false, context)) {
+            return context.getString(R.string.oem_google);
+        } else if (Utils.getBoolean("samsung_apps", false, context)) {
+            return context.getString(R.string.oem_samsung);
+        } else if (Utils.getBoolean("moto_apps", false, context)) {
+            return context.getString(R.string.oem_moto);
+        }else if (Utils.getBoolean("oneplus_apps", false, context)) {
+            return context.getString(R.string.oem_oneplus);
+        } else if (Utils.getBoolean("huawei_apps", false, context)) {
+            return context.getString(R.string.oem_huawei);
+        } else if (Utils.getBoolean("sony_apps", false, context)) {
+            return context.getString(R.string.oem_sony);
+        } else if (Utils.getBoolean("lg_apps", false, context)) {
+            return context.getString(R.string.oem_lg);
+        } else if (Utils.getBoolean("mi_apps", false, context)) {
+            return context.getString(R.string.oem_mi);
+        } else {
+            return context.getString(R.string.oem_all);
+        }
+    }
+
+    public static String getLanguage(Context context) {
+        if (Utils.getBoolean("use_english", false, context)) {
+            return context.getString(R.string.language_en);
+        } else if (Utils.getBoolean("use_korean", false, context)) {
+            return context.getString(R.string.language_ko);
+        } else if (Utils.getBoolean("use_am", false, context)) {
+            return context.getString(R.string.language_am);
+        } else if (Utils.getBoolean("use_el", false, context)) {
+            return context.getString(R.string.language_el);
+        }else if (Utils.getBoolean("use_ml", false, context)) {
+            return context.getString(R.string.language_ml);
+        } else if (Utils.getBoolean("use_pt", false, context)) {
+            return context.getString(R.string.language_pt);
+        } else if (Utils.getBoolean("use_ru", false, context)) {
+            return context.getString(R.string.language_ru);
+        } else if (Utils.getBoolean("use_uk", false, context)) {
+            return context.getString(R.string.language_uk);
+        } else {
+            return context.getString(R.string.language_default);
+        }
+    }
+
+}

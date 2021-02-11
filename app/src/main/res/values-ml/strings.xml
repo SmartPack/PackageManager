@@ -41,7 +41,7 @@
     <string name="install_bundle_initialized">സ്പ്ലിറ്റ് APK-കളുടെ ഇൻസ്റ്റാളേഷൻ ആരംഭിക്കുന്നു</string>
     <string name="installing_bundle">അപ്ലിക്കേഷൻ ബണ്ടിൽ ഇൻസ്റ്റാളുചെയ്യുന്നു!</string>
     <string name="installing_bundle_finished">ഇൻസ്റ്റാളേഷൻ വിജയകരമായി പൂർത്തിയാക്കി!</string>
-    <string name="language">ഭാഷ (%s)</string>
+    <string name="language">ഭാഷ</string>
     <string name="language_el">ഗ്രീക്ക്</string>
     <string name="language_en">ഇംഗ്ലീഷ്</string>
     <string name="language_ko">കൊറിയൻ</string>
@@ -50,14 +50,12 @@
     <string name="name">പേര് കൊണ്ട്</string>
     <string name="no_internet">നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക!</string>
     <string name="no_root">റൂട്ട് ആക്‌സസ് ഇല്ലാതെ ഈ സവിശേഷത പ്രവർത്തിക്കില്ല!</string>
-    <string name="ok">ശരി</string>
     <string name="open">തുറക്കുക</string>
     <string name="open_message">ഈ അപ്ലിക്കേഷൻ നിലവിൽ പ്രവർത്തിക്കുന്നുണ്ട്.</string>
     <string name="open_failed">%s \'userspace\' ൽ പ്രവർത്തിക്കാൻ രൂപകൽപ്പന ചെയ്‌തിട്ടില്ല!</string>
     <string name="package_id">പാക്കേജ് ID കൊണ്ട്</string>
     <string name="permission_denied_write_storage">\'writing to storage\' അനുമതി നിരസിച്ചിരിക്കുന്നു!</string>
     <string name="report_issue">ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക</string>
-    <string name="restoring">%s പുനസ്ഥാപിക്കുന്നു</string>
     <string name="result">ഫലം: %s</string>
     <string name="session_id">സെഷൻ ഐഡി: %s</string>
     <string name="sort_by">അടുക്കുക</string>

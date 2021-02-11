@@ -125,7 +125,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 })
                 .show());
         mOpenStore.setOnClickListener(v -> {
-            Utils.launchUrl("https://play.google.com/store/apps/details?id=" + Utils.mApplicationID, mProgressLayout,this);
+            Utils.launchUrl("https://play.google.com/store/apps/details?id=" + Utils.mApplicationID, this);
         });
         mUninstallApp.setOnClickListener(v -> uninstallApp(this));
         mOpenSettings.setOnClickListener(v -> {

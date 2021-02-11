@@ -31,7 +31,7 @@
     <string name="install_bundle">ክፍልፍል መተግበሪያ ጫን</string>
     <string name="installing_bundle">ክፍልፍል መተግበሪያ በመጫን ላይ</string>
     <string name="installing_bundle_finished">መተግበሪያዉን መጫን በተሳካ ሁኔታ ተጠናቋል!</string>
-    <string name="language">ቋንቋ (%s)</string>
+    <string name="language">ቋንቋ</string>
     <string name="language_am">አማርኛ</string>
     <string name="language_en">እንግሊዘኛ</string>
     <string name="language_default">ነባር</string>
@@ -39,7 +39,6 @@
     <string name="more_apps">ከ አበልፃጊዉ ተጨማሪ መተግበሪያ</string>
     <string name="no_internet">እባክዎን የኢንተርኔት አገልግሎት መኖሩን ያረጋግጡ!</string>
     <string name="no_root">ይህንን አገልግሎት ስልክዎን ሩት ካላደረጉ በስተቀር መጠቀም አይችሉም!</string>
-    <string name="ok">እሺ</string>
     <string name="open">ክፈት</string>
     <string name="open_message">ይህን መተግበሪያ በአሁኑ ሰዐት እየተጠቀሙበት ይገኛሉ!</string>
     <string name="open_failed">%s በ ተጠቃሚ ማከማቻ ላይ ለመጠቀም ተብሎ አልተሰራም!</string>
@@ -47,7 +46,6 @@
     <string name="playstore">ፕሌይስቶር</string>
     <string name="press_back">ለመዉጣት ከፈለጉ የኋላ መመለሻ ቁልፉን ደግመዉ ይጫኑ።</string>
     <string name="report_issue">ችግር ካለ ለመጠቆም</string>
-    <string name="restoring">%s ዳግም በመመለስ ላይ</string>
     <string name="share">አጋራ</string>
     <string name="shared_by">%s/ በ ፖኬጅ ማኔጀር ተጋርቷል</string>
     <string name="share_message">ፖኬጅ ማኔጀር %s ማዉረድ ከፈለጉ\ፕሌይስቶር: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
