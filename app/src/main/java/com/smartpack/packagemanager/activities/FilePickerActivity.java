@@ -74,6 +74,10 @@ public class FilePickerActivity extends AppCompatActivity {
                 Intent textView = new Intent(this, TextViewActivity.class);
                 textView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
                 startActivity(textView);
+            } else if (mData.get(position).endsWith(".html")) {
+                Intent webView = new Intent(this, WebViewActivity.class);
+                webView.putExtra(WebViewActivity.PATH_INTENT, mData.get(position));
+                startActivity(webView);
             } else if (FilePicker.isImageFile(mData.get(position))) {
                 Intent imageView = new Intent(this, ImageViewActivity.class);
                 imageView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
@@ -183,6 +187,12 @@ public class FilePickerActivity extends AppCompatActivity {
             if (FilePicker.isDirectory(this.data.get(position))) {
                 holder.mIcon.setImageDrawable(holder.mTitle.getContext().getResources().getDrawable(R.drawable.ic_folder));
                 holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
+            } else if (FilePicker.isImageFile(this.data.get(position))) {
+                if (FilePicker.getIconFromPath(this.data.get(position)) != null) {
+                    holder.mIcon.setImageURI(FilePicker.getIconFromPath(this.data.get(position)));
+                } else {
+                    holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file);
+                }
             } else {
                 holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file));
                 holder.mIcon.setColorFilter(Utils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()

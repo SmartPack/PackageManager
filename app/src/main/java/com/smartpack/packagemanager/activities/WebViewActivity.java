@@ -8,12 +8,13 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
@@ -25,25 +26,27 @@ import java.io.File;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-public class ImageViewActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity {
 
     public static final String PATH_INTENT = "path";
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imageview);
+        setContentView(R.layout.activity_webview);
 
         AppCompatImageButton mBack = findViewById(R.id.back);
         AppCompatImageButton mExport = findViewById(R.id.export);
-        AppCompatImageView mImage = findViewById(R.id.image);
         MaterialTextView mTitle = findViewById(R.id.title);
+        WebView mWebView = findViewById(R.id.webview);
 
         String path = getIntent().getStringExtra(PATH_INTENT);
 
         assert path != null;
         mTitle.setText(new  File(path).getName());
-        mImage.setImageURI(FilePicker.getIconFromPath(path));
+
+        mWebView.loadUrl("file:///" + path);
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setMessage(getString(R.string.export_storage_message, new File(path).getName()))

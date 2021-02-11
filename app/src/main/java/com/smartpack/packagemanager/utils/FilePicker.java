@@ -14,6 +14,7 @@ package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -26,8 +27,8 @@ public class FilePicker {
 
     public static boolean isTextFile(String path) {
         return path.endsWith(".txt") || path.endsWith(".xml") || path.endsWith(".json") || path.endsWith(".properties")
-                || path.endsWith(".html") || path.endsWith(".version") || path.endsWith(".sh") || path.endsWith(".MF")
-                || path.endsWith(".SF") || path.endsWith(".RSA");
+                || path.endsWith(".version") || path.endsWith(".sh") || path.endsWith(".MF") || path.endsWith(".SF")
+                || path.endsWith(".RSA");
     }
 
     public static boolean isImageFile(String path) {
@@ -51,6 +52,14 @@ public class FilePicker {
             Utils.mPath = Utils.mPath + "/";
         }
         return new File(Utils.mPath).listFiles();
+    }
+
+    public static Uri getIconFromPath(String path) {
+        File mFile = new File(path);
+        if (mFile.exists()) {
+            return Uri.fromFile(mFile);
+        }
+        return null;
     }
 
     public static void copyToStorage(String path, Activity activity) {
