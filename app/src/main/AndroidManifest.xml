@@ -30,8 +30,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".activities.AboutActivity" />
         <activity android:name=".activities.FilePickerActivity" />
+        <activity android:name=".activities.ImageViewActivity" />
         <activity android:name=".activities.PackageDetailsActivity" />
         <activity android:name=".activities.PackageTasksActivity" />
+        <activity android:name=".activities.TextViewActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

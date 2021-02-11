@@ -46,6 +46,7 @@ import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -298,6 +299,29 @@ public class Utils {
         }
     }
 
+    public static String read(String file) {
+        BufferedReader buf = null;
+        try {
+            buf = new BufferedReader(new FileReader(file));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = buf.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+
+            return stringBuilder.toString().trim();
+        } catch (IOException ignored) {
+        } finally {
+            try {
+                if (buf != null) buf.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     public static boolean existFile(String file) {
         String output = runAndGetOutput("[ -e " + file + " ] && echo true");
         return !output.isEmpty() && output.equals("true");
@@ -356,7 +380,7 @@ public class Utils {
      * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
      */
     public static void WelcomeDialog(Context context) {
-        View checkBoxView = View.inflate(context, R.layout.rv_checkbox, null);
+        View checkBoxView = View.inflate(context, R.layout.checkbox_layout, null);
         MaterialCheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
         checkBox.setChecked(true);
         checkBox.setText(context.getString(R.string.always_show));

@@ -5,14 +5,13 @@
  * to manage other application installed on an android device.
  *
  */
+
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +24,10 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -54,7 +55,7 @@ public class FilePickerActivity extends AppCompatActivity {
         AppCompatImageButton mBack = findViewById(R.id.back);
         mTitle = findViewById(R.id.title);
         mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, getSpanCount(this)));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, FilePicker.getSpanCount(this)));
         mRecycleViewAdapter = new RecycleViewAdapter(getData());
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
@@ -66,51 +67,42 @@ public class FilePickerActivity extends AppCompatActivity {
         });
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
-            if (isDirectory(mData.get(position))) {
+            if (FilePicker.isDirectory(mData.get(position))) {
                 Utils.mPath = mData.get(position);
                 reload();
+            } else if (FilePicker.isTextFile(mData.get(position))) {
+                Intent textView = new Intent(this, TextViewActivity.class);
+                textView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
+                startActivity(textView);
+            } else if (FilePicker.isImageFile(mData.get(position))) {
+                Intent imageView = new Intent(this, ImageViewActivity.class);
+                imageView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
+                startActivity(imageView);
             } else {
-                Utils.snackbar(findViewById(android.R.id.content), "Don't do anything for now");
+                new MaterialAlertDialogBuilder(this)
+                        .setMessage(getString(R.string.open_failed_export_message, new File(mData.get(position)).getName()))
+                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+                        .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> FilePicker
+                                .copyToStorage(mData.get(position), this)).show();
             }
         });
     }
 
-    private int getSpanCount(Activity activity) {
-        return Utils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
-    }
-
-    private File[] getFilesList() {
-        if (!Utils.mPath.endsWith("/")) {
-            Utils.mPath = Utils.mPath + "/";
-        }
-        if (!new File(Utils.mPath).exists()) {
-            Utils.mPath = Environment.getExternalStorageDirectory().toString();
-        }
-        return new File(Utils.mPath).listFiles();
-    }
-
     private List<String> getData() {
         // Add directories
-        for (File mFile : getFilesList()) {
-            if (isDirectory(Utils.mPath + mFile.getName())) {
+        for (File mFile : FilePicker.getFilesList()) {
+            if (FilePicker.isDirectory(Utils.mPath + mFile.getName())) {
                 mData.add(Utils.mPath + mFile.getName());
             }
         }
         // Add files
-        for (File mFile : getFilesList()) {
-            if (isFile(Utils.mPath + mFile.getName())) {
+        for (File mFile : FilePicker.getFilesList()) {
+            if (FilePicker.isFile(Utils.mPath + mFile.getName())) {
                 mData.add(Utils.mPath + mFile.getName());
             }
         }
         return mData;
-    }
-
-    private static boolean isDirectory(String path) {
-        return new File(path).isDirectory();
-    }
-
-    private static boolean isFile(String path) {
-        return new File(path).isFile();
     }
 
     private void reload() {
@@ -151,6 +143,13 @@ public class FilePickerActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        Utils.snackbar(findViewById(android.R.id.content), getString(R.string.file_picker_message));
+    }
+
+    @Override
     public void onBackPressed() {
         if (Utils.mPath.equals(getCacheDir().toString() + "/apk/")) {
             Utils.delete(getCacheDir().getPath() + "/apk");
@@ -181,7 +180,7 @@ public class FilePickerActivity extends AppCompatActivity {
         @SuppressLint("UseCompatLoadingForDrawables")
         @Override
         public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
-            if (isDirectory(this.data.get(position))) {
+            if (FilePicker.isDirectory(this.data.get(position))) {
                 holder.mIcon.setImageDrawable(holder.mTitle.getContext().getResources().getDrawable(R.drawable.ic_folder));
                 holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
             } else {

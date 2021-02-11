@@ -400,7 +400,7 @@ public class PackageTasks {
 
     public static String getPackageDir(Context context) {
         if (Build.VERSION.SDK_INT >= 29) {
-            return Objects.requireNonNull(context.getExternalFilesDir("Package_Manager")).toString();
+            return Objects.requireNonNull(context.getExternalFilesDir("")).toString();
         } else {
             return Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
         }

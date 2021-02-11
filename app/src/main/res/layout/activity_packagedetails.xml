@@ -454,5 +454,5 @@
         android:textSize="18sp"
         android:padding="10dp" />
 
-    <include layout="@layout/rv_progress_view" />
+    <include layout="@layout/progress_view_layout" />
 </com.google.android.material.card.MaterialCardView>

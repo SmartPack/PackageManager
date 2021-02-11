@@ -49,12 +49,15 @@
     <string name="enabling">Enabling %s</string>
     <string name="explore">Explore</string>
     <string name="export">Export</string>
-    <string name="export_summary">is exported into %s. Do you want to share it?</string>
     <string name="export_bundle_summary">The entire app bundle is exported into %s!</string>
+    <string name="export_file_message">is successfully exported into %s!</string>
+    <string name="export_summary">is exported into %s. Do you want to share it?</string>
+    <string name="export_storage_message">Export %s into device storage?</string>
     <string name="exporting">Exporting %s</string>
     <string name="exporting_bundle">Exporting %s app bundle</string>
     <string name="everything_done">Everything Done!</string>
     <string name="failed">Failed</string>
+    <string name="file_picker_message">Please Note: This feature is too experimental!</string>
     <string name="got_it">Got it</string>
     <string name="install">Install</string>
     <string name="install_bundle">Install Split APKs</string>
@@ -90,6 +93,7 @@
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
     <string name="open_failed">%s is not designed to run in user space!</string>
+    <string name="open_failed_export_message">Unable to open %s! Do you want to export it into device storage?</string>
     <string name="package_id">Package ID</string>
     <string name="package_removed">Selected package is just removed! Aborting…</string>
     <string name="permissions">Permissions</string>

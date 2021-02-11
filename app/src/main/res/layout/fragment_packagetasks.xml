@@ -119,5 +119,5 @@
             android:layout_marginTop="-15dp"/>
     </LinearLayout>
 
-    <include layout="@layout/rv_progress_view" />
+    <include layout="@layout/progress_view_layout" />
 </RelativeLayout>
