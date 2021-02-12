@@ -258,10 +258,10 @@ public class PackageDetailsActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(activity.getString(R.string.exporting, name) + "...");
+                PackageTasks.makePackageFolder(activity);
             }
             @Override
             protected Void doInBackground(Void... voids) {
-                PackageTasks.makePackageFolder(activity);
                 Utils.sleep(1);
                 Utils.copy(apk, PackageTasks.getPackageDir(activity) + "/" + name + ".apk");
                 return null;
@@ -300,12 +300,19 @@ public class PackageDetailsActivity extends AppCompatActivity {
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(getString(R.string.exporting_bundle, name) + "...");
+                PackageTasks.makePackageFolder(activity);
+                Utils.mkdir(PackageTasks.getPackageDir(activity) + "/" + name);
             }
             @Override
             protected Void doInBackground(Void... voids) {
-                PackageTasks.makePackageFolder(activity);
                 Utils.sleep(1);
-                Utils.copy(apk, PackageTasks.getPackageDir(activity) + "/" + name);
+                String[] mFiles = new File(apk).list();
+                assert mFiles != null;
+                for (String files : mFiles) {
+                    if (files.endsWith(".apk")) {
+                        Utils.copy(new File(apk) + "/" + files, PackageTasks.getPackageDir(activity) + "/" + name);
+                    }
+                }
                 return null;
             }
             @Override

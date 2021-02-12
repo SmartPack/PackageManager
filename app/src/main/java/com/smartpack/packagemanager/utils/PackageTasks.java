@@ -272,16 +272,22 @@ public class PackageTasks {
                             : activity.getString(R.string.failed)).append("\n\n");
                 } else if (dir.endsWith(".xapk")) {
                     mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
-                    Utils.create(activity.getCacheDir().getPath() + "/splits");
+                    Utils.mkdir(activity.getCacheDir().getPath() + "/splits");
                     Utils.unzip(dir, activity.getCacheDir().getPath() + "/splits");
                     mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
                             : activity.getString(R.string.failed)).append("\n\n");
                 } else {
                     mOutput.append("** ").append(activity.getString(R.string.creating_directory_message)).append(": ");
-                    Utils.create(activity.getCacheDir().getPath() + "/splits");
+                    Utils.mkdir(activity.getCacheDir().getPath() + "/splits");
                     mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
                     mOutput.append("** ").append(activity.getString(R.string.copying_apk_message)).append(": ");
-                    Utils.runCommand("cp " + dir + "/* " + activity.getCacheDir().getPath() + "/splits");
+                    String[] mFiles = new File(dir).list();
+                    assert mFiles != null;
+                    for (String files : mFiles) {
+                        if (files.endsWith(".apk")) {
+                            Utils.copy(new File(dir) + "/" + files, activity.getCacheDir().getPath() + "/splits");
+                        }
+                    }
                     mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
                 }
                 mOutput.append("** ").append(activity.getString(R.string.split_apk_list)).append(" *\n");
@@ -318,7 +324,7 @@ public class PackageTasks {
                 if (new File(activity.getCacheDir().getPath() + "/apk").exists()) {
                     Utils.delete(activity.getCacheDir().getPath() + "/apk");
                 }
-                new File(activity.getCacheDir().getPath() + "/apk").mkdirs();
+                Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
                 Utils.mPath = activity.getCacheDir().getPath() + "/apk";
             }
 

@@ -35,7 +35,6 @@
         <activity android:name=".activities.PackageTasksActivity" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.TextViewActivity" />
-        <activity android:name=".activities.WebViewActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

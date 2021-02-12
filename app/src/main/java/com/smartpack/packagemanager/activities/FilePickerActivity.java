@@ -74,10 +74,6 @@ public class FilePickerActivity extends AppCompatActivity {
                 Intent textView = new Intent(this, TextViewActivity.class);
                 textView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
                 startActivity(textView);
-            } else if (mData.get(position).endsWith(".html")) {
-                Intent webView = new Intent(this, WebViewActivity.class);
-                webView.putExtra(WebViewActivity.PATH_INTENT, mData.get(position));
-                startActivity(webView);
             } else if (FilePicker.isImageFile(mData.get(position))) {
                 Intent imageView = new Intent(this, ImageViewActivity.class);
                 imageView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));

@@ -42,8 +42,6 @@ import com.topjohnwu.superuser.ShellUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -215,25 +213,10 @@ public class Utils {
     }
 
     public static void copy(String source, String dest) {
-        if (new File(source).isDirectory()) {
-            runCommand("cp -r " + source + " " + dest);
-        } else {
-            try {
-                FileInputStream inputStream = new FileInputStream(source);
-                FileOutputStream outputStream = new FileOutputStream(dest);
-                byte[] buf = new byte[1024 * 1024];
-                int len;
-                while ((len = inputStream.read(buf)) > 0) {
-                    outputStream.write(buf, 0, len);
-                }
-                inputStream.close();
-                outputStream.close();
-            } catch (IOException ignored) {
-            }
-        }
+        runCommand("cp -r " + source + " " + dest);
     }
 
-    public static void create(String path) {
+    public static void mkdir(String path) {
        new File(path).mkdirs();
     }
 
