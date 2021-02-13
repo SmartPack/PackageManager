@@ -1,5 +1,9 @@
 # Change-logs
 
+## 25. February 13, 2021
+*Release-tag: 3.2*<br>
+Initial support to explore and export contents of APK files. Updated storage permission for latest android versions. APK/Bundle exports now work on non-rooted devices. Moved top pop-up menu items into a new Settings page. Updated Russian, Ukrainian & Malayalam translations. Miscellaneous changes.
+
 ## 25. January 31, 2021
 *Release-tag: 3.1*<br>
 Package Manager now supports installing .apks and .xapk bundles. Removed backup and restore app data (too buggy). Temporarily fix storage related issues on Android 11. Added installed & last updated information to Package Details page. Miscellaneous changes.

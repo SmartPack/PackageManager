@@ -1,5 +1,0 @@
-* Package Manager now supports installing .apks and .xapk bundles (requires root).
-* Removed backup and restore app data (too buggy).
-* Temporarily fix storage related issues on Android 11.
-* Added installed & last updated information to Package Details page.
-* Miscellaneous changes.
