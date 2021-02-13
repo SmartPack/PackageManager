@@ -309,8 +309,8 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 String[] mFiles = new File(apk).list();
                 assert mFiles != null;
                 for (String files : mFiles) {
-                    if (files.endsWith(".apk")) {
-                        Utils.copy(new File(apk) + "/" + files, PackageTasks.getPackageDir(activity) + "/" + name);
+                    if (new File(apk + "/" + files).exists() && files.endsWith(".apk")) {
+                        Utils.copy(new File(apk + "/" + files).toString(), PackageTasks.getPackageDir(activity) + "/" + name);
                     }
                 }
                 return null;

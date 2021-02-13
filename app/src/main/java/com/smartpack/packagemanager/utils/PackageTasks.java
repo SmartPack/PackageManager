@@ -284,8 +284,8 @@ public class PackageTasks {
                     String[] mFiles = new File(dir).list();
                     assert mFiles != null;
                     for (String files : mFiles) {
-                        if (files.endsWith(".apk")) {
-                            Utils.copy(new File(dir) + "/" + files, activity.getCacheDir().getPath() + "/splits");
+                        if (new File(dir + "/" + files).exists() && files.endsWith(".apk")) {
+                            Utils.copy(new File(dir + "/" + files).toString(), activity.getCacheDir().getPath() + "/splits");
                         }
                     }
                     mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
