@@ -125,7 +125,7 @@ public class BillingActivity extends AppCompatActivity {
             Utils.snackbar(findViewById(android.R.id.content), getString(R.string.support_already_received_message));
             return;
         }
-        Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.donate", findViewById(android.R.id.content), this);
+        Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.donate", this);
     }
 
     private void buyMeACoffee() {
