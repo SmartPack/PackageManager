@@ -144,7 +144,7 @@
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
     <string name="uninstall_summary">Removing %s</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
-    <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b>> ***\n</string>
+    <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="user">Show User Apps</string>
     <string name="version">Version: %s</string>
     <string name="welcome_message"><b>Welcome to Package Manager</b>, a simple, yet powerful application to manage your apps.\n\n*** <b>WARNING</b> ***\nThis app is too powerful to messed up your device. The developer of this app won\'t take any responsibility, if something wrong happened to your device.</string>

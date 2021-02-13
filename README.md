@@ -49,6 +49,9 @@ If you like to appreciate my work, please consider donating to me (either via [L
      alt=""
      height="80">](https://play.google.com/store/apps/details?id=com.smartpack.donate)
 
+## Translations
+Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).
+
 ## Credits
 * [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
 * [topjohnwu](https://github.com/topjohnwu), libsu
