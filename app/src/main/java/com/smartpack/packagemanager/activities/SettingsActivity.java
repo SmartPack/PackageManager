@@ -132,6 +132,7 @@ public class SettingsActivity extends AppCompatActivity {
                             Utils.saveBoolean("system_apps", true, this);
                             Utils.saveBoolean("user_apps", true, this);
                             Utils.mReloadPage = true;
+                            Utils.mSortByOEM = false;
                             mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                     getResources().getDrawable(R.drawable.ic_show), null));
                             mRecycleViewAdapter.notifyItemChanged(position);
@@ -141,6 +142,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("asus_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -151,6 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("google_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -161,6 +164,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("samsung_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -171,6 +175,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("moto_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -181,6 +186,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("oneplus_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -191,6 +197,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("huawei_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -201,6 +208,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("sony_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -211,6 +219,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("lg_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
@@ -221,6 +230,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.resetDefault(this);
                                 Utils.saveBoolean("mi_apps", true, this);
                                 Utils.mReloadPage = true;
+                                Utils.mSortByOEM = true;
                                 mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
                                         getResources().getDrawable(R.drawable.ic_show), null));
                                 mRecycleViewAdapter.notifyItemChanged(position);
