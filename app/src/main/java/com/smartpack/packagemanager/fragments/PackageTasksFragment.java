@@ -101,10 +101,6 @@ public class PackageTasksFragment extends Fragment {
         });
 
         mBatch.setOnClickListener(v -> {
-            if (!Utils.rootAccess()) {
-                Utils.snackbar(mRecyclerView, getString(R.string.no_root));
-                return;
-            }
             batchMenu(requireActivity());
         });
 
@@ -130,10 +126,13 @@ public class PackageTasksFragment extends Fragment {
     private void batchMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mBatch);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
-        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.batch_list_clear));
+        if (Utils.rootAccess()) {
+            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
+            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
+            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
+        }
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
+        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.batch_list_clear));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -185,6 +184,22 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 3:
+                    if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
+                        Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
+                    } else {
+                        MaterialAlertDialogBuilder reset = new MaterialAlertDialogBuilder(activity);
+                        reset.setIcon(R.mipmap.ic_launcher);
+                        reset.setTitle(R.string.sure_question);
+                        reset.setMessage(getString(R.string.batch_list_export) + "\n" + PackageTasks.showBatchList());
+                        reset.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        });
+                        reset.setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
+                            PackageTasks.batchExportTask(activity);
+                        });
+                        reset.show();
+                    }
+                    break;
+                case 4:
                     if (PackageTasks.getBatchList().isEmpty() || !PackageTasks.getBatchList().contains(".")) {
                         Utils.snackbar(mRecyclerView, getString(R.string.batch_list_empty));
                     } else {

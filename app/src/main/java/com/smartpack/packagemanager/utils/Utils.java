@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
@@ -222,7 +223,9 @@ public class Utils {
     }
 
     public static void sleep(int sec) {
-        runCommand("sleep " + sec);
+        try {
+            TimeUnit.SECONDS.sleep(sec);
+        } catch (InterruptedException ignored) {}
     }
 
     public static void snackbar(View view, String message) {

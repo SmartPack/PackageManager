@@ -129,7 +129,8 @@ public class PackageTasks {
                 for (String packageID : batchApps) {
                     if (packageID.contains(".")) {
                         mOutput.append(isEnabled(packageID, activity) ? "** " +
-                                activity.getString(R.string.disabling, packageID) : "** " + activity.getString(R.string.enabling, packageID));
+                                activity.getString(R.string.disabling, PackageTasks.getAppName(packageID, activity)) :
+                                "** " + activity.getString(R.string.enabling, PackageTasks.getAppName(packageID, activity)));
                         if (isEnabled(packageID, activity)) {
                             Utils.runCommand("pm disable " + packageID);
                         } else {
@@ -152,7 +153,7 @@ public class PackageTasks {
         }.execute();
     }
 
-    public static void batchResetTask(Context context) {
+    public static void batchResetTask(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -162,22 +163,22 @@ public class PackageTasks {
                 } else {
                     mOutput.setLength(0);
                 }
-                mOutput.append("** ").append(context.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
-                Intent removeIntent = new Intent(context, PackageTasksActivity.class);
-                removeIntent.putExtra(PackageTasksActivity.TITLE_START, context.getString(R.string.batch_processing));
-                removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, context.getString(R.string.batch_processing_finished));
-                context.startActivity(removeIntent);
+                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
+                Intent removeIntent = new Intent(activity, PackageTasksActivity.class);
+                removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
+                removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
+                activity.startActivity(removeIntent);
             }
 
             @Override
             protected Void doInBackground(Void... voids) {
                 String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
-                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, context)) {
-                        mOutput.append("** ").append(context.getString(R.string.reset_summary, packageID));
+                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                        mOutput.append("** ").append(activity.getString(R.string.reset_summary, PackageTasks.getAppName(packageID, activity)));
                         Utils.runCommand("pm clear " + packageID);
-                        mOutput.append(": ").append(context.getString(R.string.done)).append(" *\n\n");
+                        mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);
                     }
                 }
@@ -187,13 +188,13 @@ public class PackageTasks {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mOutput.append("** ").append(context.getString(R.string.everything_done)).append(" *");
+                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 mRunning = false;
             }
         }.execute();
     }
 
-    public static void batchUninstallTask(Context context) {
+    public static void batchExportTask(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -203,23 +204,26 @@ public class PackageTasks {
                 } else {
                     mOutput.setLength(0);
                 }
-                mOutput.append("** ").append(context.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(context.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
-                Intent removeIntent = new Intent(context, PackageTasksActivity.class);
-                removeIntent.putExtra(PackageTasksActivity.TITLE_START, context.getString(R.string.batch_processing));
-                removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, context.getString(R.string.batch_processing_finished));
-                context.startActivity(removeIntent);
+                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
+                Intent removeIntent = new Intent(activity, PackageTasksActivity.class);
+                removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
+                removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
+                activity.startActivity(removeIntent);
             }
 
             @Override
             protected Void doInBackground(Void... voids) {
                 String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
-                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, context)) {
-                        mOutput.append("** ").append(context.getString(R.string.uninstall_summary, packageID));
-                        Utils.runCommand("pm uninstall --user 0 " + packageID);
-                        mOutput.append(Utils.isPackageInstalled(packageID, context) ? ": " +
-                                context.getString(R.string.failed) + " *\n\n" : ": " + context.getString(R.string.done) + " *\n\n");
+                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                        if (SplitAPKInstaller.isAppBundle(PackageTasks.getParentDir(packageID, activity))) {
+                            mOutput.append("** ").append(activity.getString(R.string.skip_exporting_bundle, PackageTasks.getAppName(packageID, activity))).append(" *\n\n");
+                        } else {
+                            mOutput.append("** ").append(activity.getString(R.string.exporting, PackageTasks.getAppName(packageID, activity)));
+                            Utils.copy(PackageTasks.getSourceDir(packageID, activity), PackageTasks.getPackageDir(activity) + "/" + packageID + ".apk");
+                            mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                        }
                         Utils.sleep(1);
                     }
                 }
@@ -229,7 +233,49 @@ public class PackageTasks {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mOutput.append("** ").append(context.getString(R.string.everything_done)).append(" *");
+                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
+                mRunning = false;
+            }
+        }.execute();
+    }
+
+    public static void batchUninstallTask(Activity activity) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (mOutput == null) {
+                    mOutput = new StringBuilder();
+                } else {
+                    mOutput.setLength(0);
+                }
+                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(showBatchList()).append("\n\n");
+                Intent removeIntent = new Intent(activity, PackageTasksActivity.class);
+                removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
+                removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
+                activity.startActivity(removeIntent);
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                String[] batchApps = getBatchList().replaceAll(","," ").split(" ");
+                for (String packageID : batchApps) {
+                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                        mOutput.append("** ").append(activity.getString(R.string.uninstall_summary, PackageTasks.getAppName(packageID, activity)));
+                        Utils.runCommand("pm uninstall --user 0 " + packageID);
+                        mOutput.append(Utils.isPackageInstalled(packageID, activity) ? ": " +
+                                activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
+                        Utils.sleep(1);
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 mRunning = false;
             }
         }.execute();
@@ -266,6 +312,11 @@ public class PackageTasks {
 
     public static String getSourceDir(String packageName, Context context) {
         return Objects.requireNonNull(getAppInfo(packageName, context)).sourceDir;
+    }
+
+    public static String getParentDir(String packageName, Context context) {
+        return Objects.requireNonNull(new File(Objects.requireNonNull(getAppInfo(packageName, context))
+                .sourceDir).getParentFile()).toString();
     }
 
     public static String getNativeLibDir(String packageName, Context context) {

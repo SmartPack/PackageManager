@@ -41,7 +41,7 @@ public class SplitAPKInstaller {
         List<String> list = new ArrayList<>();
         if (new File(path).exists()) {
             for (File mFile : Objects.requireNonNull(new File(path).listFiles())) {
-                if (mFile.exists()) {
+                if (mFile.exists() && mFile.getName().endsWith(".apk")) {
                     list.add(mFile.getName());
                 }
             }
@@ -52,11 +52,13 @@ public class SplitAPKInstaller {
     public static String listSplitAPKs(String string) {
         StringBuilder sb = new StringBuilder();
         for (final String splitApps : splitApks(string)) {
-            if (splitApps.endsWith(".apk")) {
-                sb.append(string).append(splitApps).append("\n");
-            }
+            sb.append(string).append(splitApps).append("\n");
         }
         return sb.toString();
+    }
+
+    public static boolean isAppBundle(String path) {
+        return splitApks(path).size() > 1;
     }
 
     private static void installWrite(Activity activity) {
