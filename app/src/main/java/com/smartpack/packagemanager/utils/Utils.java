@@ -277,7 +277,7 @@ public class Utils {
     }
 
     public static boolean exist(String file) {
-        if (!file.startsWith("/storage/")) {
+        if (!file.startsWith("/storage/") && rootAccess()) {
             String output = runAndGetOutput("[ -e " + file + " ] && echo true");
             return !output.isEmpty() && output.equals("true");
         } else {

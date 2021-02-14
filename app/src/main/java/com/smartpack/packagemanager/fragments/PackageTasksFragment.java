@@ -44,6 +44,7 @@ import com.smartpack.packagemanager.activities.AboutActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -352,10 +353,10 @@ public class PackageTasksFragment extends Fragment {
                     installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                         if (mPath.endsWith(".apk")) {
-                            PackageTasks.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
+                            SplitAPKInstaller.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
                                     .toString(), requireActivity());
                         } else {
-                            PackageTasks.installSplitAPKs(mPath, requireActivity());
+                            SplitAPKInstaller.installSplitAPKs(mPath, requireActivity());
                         }
                         requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                     });

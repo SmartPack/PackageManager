@@ -8,21 +8,22 @@
 
 package com.smartpack.packagemanager.utils;
 
-/*
- * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
- */
-
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.FilePickerActivity;
 
 import java.io.File;
 import java.util.List;
 
+/*
+ * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
+ */
 public class FilePicker {
 
     public static boolean isTextFile(String path) {
@@ -78,6 +79,33 @@ public class FilePicker {
                                 activity.getString(R.string.export_file_message, PackageTasks.getPackageDir(activity)))
                         .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                         }).show();
+            }
+        }.execute();
+    }
+
+    public static void exploreAPK(String path, Activity activity) {
+        new AsyncTask<Void, Void, List<String>>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (new File(activity.getCacheDir().getPath() + "/apk").exists()) {
+                    Utils.delete(activity.getCacheDir().getPath() + "/apk");
+                }
+                Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
+                Utils.mPath = activity.getCacheDir().getPath() + "/apk";
+            }
+
+            @Override
+            protected List<String> doInBackground(Void... voids) {
+                Utils.unzip(path,activity.getCacheDir().getPath() + "/apk");
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(List<String> recyclerViewItems) {
+                super.onPostExecute(recyclerViewItems);
+                Intent filePicker = new Intent(activity, FilePickerActivity.class);
+                activity.startActivity(filePicker);
             }
         }.execute();
     }

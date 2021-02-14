@@ -33,7 +33,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -86,7 +88,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mDisableTitle.setText(PackageTasks.isEnabled(Utils.mApplicationID, this) ? R.string.disable : R.string.enable);
         mDataDir.setText(Utils.mDirData);
         mNatLib.setText(Utils.mDirNatLib);
-        mAPKPath.setText(PackageTasks.listSplitAPKs(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), "")));
+        mAPKPath.setText(SplitAPKInstaller.listSplitAPKs(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), "")));
         mPermissions.setText(PackageTasks.getPermissions(Utils.mApplicationID, this));
         mOpenApp.setVisibility(PackageTasks.isEnabled(Utils.mApplicationID, this) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {
@@ -109,7 +111,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
                     PackageTasks.clearAppSettings(Utils.mApplicationID);
                 }).show());
-        mExplore.setOnClickListener(v -> PackageTasks.exploreAPK(Utils.mDirSource, this));
+        mExplore.setOnClickListener(v -> FilePicker.exploreAPK(Utils.mDirSource, this));
         mExport.setOnClickListener(v -> exportApp(this));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setIcon(Utils.mApplicationIcon)
@@ -235,7 +237,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Utils.snackbar(mProgressLayout, getString(R.string.permission_denied_write_storage));
         } else {
-            for (final String splitApps : PackageTasks.splitApks(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""))) {
+            for (final String splitApps : SplitAPKInstaller.splitApks(Utils.mDirSource.replace(new File(Utils.mDirSource).getName(), ""))) {
                 if (splitApps.contains("split_")) {
                     if (Utils.exist(PackageTasks.getPackageDir(this) + "/" + Utils.mApplicationID)) {
                         Utils.snackbar(mProgressLayout, getString(R.string.already_exists, Utils.mApplicationID));

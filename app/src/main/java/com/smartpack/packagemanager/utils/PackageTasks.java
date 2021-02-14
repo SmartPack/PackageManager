@@ -20,7 +20,6 @@ import android.os.Build;
 import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.PackageTasksActivity;
 
 import java.io.File;
@@ -236,113 +235,6 @@ public class PackageTasks {
         }.execute();
     }
 
-    /*
-     * Inspired from the original implementation of split apk installer by @yeriomin on https://github.com/yeriomin/YalpStore/
-     * Ref: https://github.com/yeriomin/YalpStore/blob/master/app/src/main/java/com/github/yeriomin/yalpstore/install/InstallerRoot.java
-     */
-    public static void installSplitAPKs(String dir, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                PackageTasks.mRunning = true;
-                if (PackageTasks.mOutput == null) {
-                    PackageTasks.mOutput = new StringBuilder();
-                } else {
-                    PackageTasks.mOutput.setLength(0);
-                }
-                PackageTasks.mOutput.append("** ").append(activity.getString(R.string.install_bundle_initialized)).append("...\n\n");
-                Intent installIntent = new Intent(activity, PackageTasksActivity.class);
-                installIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.installing_bundle));
-                installIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.installing_bundle_finished));
-                activity.startActivity(installIntent);
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                String sid = Utils.runAndGetOutput("pm install-create").replace(
-                        "Success: created install session [","").replace("]", "");
-                mOutput.append(" - ").append(activity.getString(R.string.session_id, sid)).append("\n\n");
-                Utils.delete(activity.getCacheDir().getPath() + "/splits");
-                mOutput.append("** Bundle Path: ").append(dir).append("\n\n");
-                if (dir.endsWith(".apks")) {
-                    Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
-                    mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
-                    Utils.unzip(dir, activity.getCacheDir().getPath());
-                    mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
-                            : activity.getString(R.string.failed)).append("\n\n");
-                } else if (dir.endsWith(".xapk")) {
-                    mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
-                    Utils.mkdir(activity.getCacheDir().getPath() + "/splits");
-                    Utils.unzip(dir, activity.getCacheDir().getPath() + "/splits");
-                    mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
-                            : activity.getString(R.string.failed)).append("\n\n");
-                } else {
-                    mOutput.append("** ").append(activity.getString(R.string.creating_directory_message)).append(": ");
-                    Utils.mkdir(activity.getCacheDir().getPath() + "/splits");
-                    mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
-                    mOutput.append("** ").append(activity.getString(R.string.copying_apk_message)).append(": ");
-                    String[] mFiles = new File(dir).list();
-                    assert mFiles != null;
-                    for (String files : mFiles) {
-                        if (new File(dir + "/" + files).exists() && files.endsWith(".apk")) {
-                            Utils.copy(new File(dir + "/" + files).toString(), activity.getCacheDir().getPath() + "/splits");
-                        }
-                    }
-                    mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
-                }
-                mOutput.append("** ").append(activity.getString(R.string.split_apk_list)).append(" *\n");
-                for (final String splitApps : splitApks(activity.getCacheDir().getPath() + "/splits")) {
-                    if (splitApps.endsWith(".apk")) {
-                        File file = new File(activity.getCacheDir().getPath() + "/splits/" + splitApps);
-                        mOutput.append(" - ").append(file.getName()).append(": ").append(file.length()).append(" KB\n");
-                        Utils.runCommand("pm install-write -S " + file.length() + " " + sid + " " + file.getName() + " " + file.toString());
-                    }
-                }
-                mOutput.append("\n** ").append(activity.getString(R.string.cleaning_message)).append(": ");
-                Utils.delete(activity.getCacheDir().getPath() + "/splits");
-                if (dir.endsWith(".apks")) {
-                    Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
-                }
-                mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.failed) +
-                        " *\n\n" : activity.getString(R.string.done) + " *\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.result, Utils.runAndGetError("pm install-commit " + sid)));
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                PackageTasks.mRunning = false;
-            }
-        }.execute();
-    }
-
-    public static void exploreAPK(String path, Activity activity) {
-        new AsyncTask<Void, Void, List<String>>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                if (new File(activity.getCacheDir().getPath() + "/apk").exists()) {
-                    Utils.delete(activity.getCacheDir().getPath() + "/apk");
-                }
-                Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
-                Utils.mPath = activity.getCacheDir().getPath() + "/apk";
-            }
-
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-                Utils.unzip(path,activity.getCacheDir().getPath() + "/apk");
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(List<String> recyclerViewItems) {
-                super.onPostExecute(recyclerViewItems);
-                Intent filePicker = new Intent(activity, FilePickerActivity.class);
-                activity.startActivity(filePicker);
-            }
-        }.execute();
-    }
-
     public static PackageManager getPackageManager(Context context) {
         return context.getApplicationContext().getPackageManager();
     }
@@ -427,40 +319,6 @@ public class PackageTasks {
 
     public static void clearAppSettings(String packageID) {
         Utils.runCommand("pm clear " + packageID);
-    }
-
-    public static List<String> splitApks(String path) {
-        List<String> list = new ArrayList<>();
-        if (Utils.rootAccess()) {
-            String files = Utils.runAndGetOutput("ls '" + path + "/'");
-            if (!files.isEmpty()) {
-                // Make sure the files exists
-                for (String file : files.split("\\r?\\n")) {
-                    if (file != null && !file.isEmpty() && Utils.exist(path + "/" + file)) {
-                        list.add(file);
-                    }
-                }
-            }
-        } else {
-            if (new File(path).exists()) {
-                for (File mFile : Objects.requireNonNull(new File(path).listFiles())) {
-                    if (mFile.exists()) {
-                        list.add(mFile.getAbsolutePath());
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    public static String listSplitAPKs(String string) {
-        StringBuilder sb = new StringBuilder();
-        for (final String splitApps : splitApks(string)) {
-            if (splitApps.endsWith(".apk")) {
-                sb.append(string).append(splitApps).append("\n");
-            }
-        }
-        return sb.toString();
     }
 
     public static String getBatchList() {
