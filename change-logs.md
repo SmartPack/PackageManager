@@ -1,5 +1,9 @@
 # Change-logs
 
+## 26. February 14, 2021
+*Release-tag: 3.3*<br>
+Batch APK (not Bundle) exports now work on non-rooted devices. Fixed some layout issues. Improved split apk installation. Miscellaneous changes.
+
 ## 25. February 13, 2021
 *Release-tag: 3.2*<br>
 Initial support to explore and export contents of APK files. Updated storage permission for latest android versions. APK/Bundle exports now work on non-rooted devices. Moved top pop-up menu items into a new Settings page. Updated Russian, Ukrainian & Malayalam translations. Miscellaneous changes.
