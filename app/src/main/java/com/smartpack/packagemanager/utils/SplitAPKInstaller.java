@@ -49,14 +49,6 @@ public class SplitAPKInstaller {
         return list;
     }
 
-    public static String listSplitAPKs(String string) {
-        StringBuilder sb = new StringBuilder();
-        for (final String splitApps : splitApks(string)) {
-            sb.append(string).append(splitApps).append("\n");
-        }
-        return sb.toString();
-    }
-
     public static boolean isAppBundle(String path) {
         return splitApks(path).size() > 1;
     }
@@ -76,18 +68,20 @@ public class SplitAPKInstaller {
         return Utils.runAndGetError("pm install-commit " + mSid);
     }
 
-    private static void handleAPKs(String dir, Activity activity) {
+    private static void handleAPKs(String apks, Activity activity) {
         Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
-        PackageTasks.mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
-        Utils.unzip(dir, activity.getCacheDir().getPath());
+        PackageTasks.mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(apks).getName())).append(": ");
+        Utils.runCommand((Utils.exist("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
+                : "unzip ") + apks + " -d " + activity.getCacheDir().getPath());
         PackageTasks.mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
                 : activity.getString(R.string.failed)).append("\n\n");
     }
 
-    private static void handleXAPK(String dir, Activity activity) {
-        PackageTasks.mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(dir).getName())).append(": ");
+    private static void handleXAPK(String xapk, Activity activity) {
+        PackageTasks.mOutput.append("** ").append(activity.getString(R.string.bundle_extract_message, new File(xapk).getName())).append(": ");
         Utils.mkdir(activity.getCacheDir().getPath() + "/splits");
-        Utils.unzip(dir, activity.getCacheDir().getPath() + "/splits");
+        Utils.runCommand((Utils.exist("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
+                : "unzip ") + xapk + " -d " + activity.getCacheDir().getPath() + "/splits");
         PackageTasks.mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done)
                 : activity.getString(R.string.failed)).append("\n\n");
     }
@@ -97,12 +91,8 @@ public class SplitAPKInstaller {
         Utils.mkdir(activity.getCacheDir().getPath() + "/splits");
         PackageTasks.mOutput.append(Utils.exist(activity.getCacheDir().getPath() + "/splits") ? activity.getString(R.string.done) + " *\n\n" : activity.getString(R.string.failed) + " *\n\n");
         PackageTasks.mOutput.append("** ").append(activity.getString(R.string.copying_apk_message)).append(": ");
-        String[] mFiles = new File(dir).list();
-        assert mFiles != null;
-        for (String files : mFiles) {
-            if (new File(dir + "/" + files).exists() && files.endsWith(".apk")) {
-                Utils.copy(new File(dir + "/" + files).toString(), activity.getCacheDir().getPath() + "/splits");
-            }
+        for (final String splitApps : splitApks(dir)) {
+            Utils.copy(dir + "/" + splitApps, activity.getCacheDir().getPath() + "/splits/" + splitApps);
         }
         PackageTasks.mOutput.append(activity.getString(R.string.done)).append(" *\n\n");
     }
@@ -122,17 +112,17 @@ public class SplitAPKInstaller {
                 Intent installIntent = new Intent(activity, PackageTasksActivity.class);
                 installIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.installing_bundle));
                 installIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.installing_bundle_finished));
+                Utils.delete(activity.getCacheDir().getPath() + "/splits");
                 activity.startActivity(installIntent);
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 mSid = createInstallationSession();
                 PackageTasks.mOutput.append(" - ").append(activity.getString(R.string.session_id, mSid)).append("\n\n");
-                Utils.delete(activity.getCacheDir().getPath() + "/splits");
                 PackageTasks.mOutput.append("** Bundle Path: ").append(dir).append("\n\n");
                 if (dir.endsWith(".apks")) {
                     handleAPKs(dir, activity);
-                } else if (dir.endsWith(".xapk")) {
+                } else if (dir.endsWith(".xapk") || dir.endsWith(".apkm")) {
                     handleXAPK(dir, activity);
                 } else {
                     handleMultipleAPKs(dir, activity);

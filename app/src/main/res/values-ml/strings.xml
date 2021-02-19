@@ -7,7 +7,6 @@
     <string name="app_info">"വിശദാംശങ്ങൾ"</string>
     <string name="batch_list_clear">"മായ്‌ക്കുക"</string>
     <string name="batch_list_disable">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) പ്രവർത്തനരഹിതമാക്കണമെന്ന് (പ്രവർത്തനക്ഷമമാണെങ്കിൽ) അല്ലെങ്കിൽ പ്രവർത്തനക്ഷമമാക്കണമെന്ന് (പ്രവർത്തനരഹിതമാണെങ്കിൽ ) നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
-    <string name="batch_list_empty">"ബാച്ച് പട്ടികയിലേക്ക് നിലവിൽ ഒന്നും ചേർത്തിട്ടില്ല!"</string>
     <string name="batch_list_remove">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) നീക്കംചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="batch_list_reset">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷനുകൾ reset ചെയ്യണമെന്ന്  ഉറപ്പാണോ?"</string>
     <string name="batch_list_summary">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷനുകൾ ബാച്ച് ലിസ്റ്റിനോട് ചേർത്തിരിക്കുന്നു"</string>
@@ -59,13 +58,13 @@
     <string name="language_ru">"റഷ്യൻ"</string>
     <string name="language_uk">"ഉക്രേനിയൻ"</string>
     <string name="more_apps">"കൂടുതൽ അപ്ലിക്കേഷനുകൾ"</string>
-    <string name="name">"പേര് കൊണ്ട്"</string>
+    <string name="name">"പേര്"</string>
     <string name="no_internet">"നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക!"</string>
     <string name="no_root">"റൂട്ട് ആക്‌സസ് ഇല്ലാതെ ഈ സവിശേഷത പ്രവർത്തിക്കില്ല!"</string>
     <string name="open">"തുറക്കുക"</string>
     <string name="open_message">"ഈ അപ്ലിക്കേഷൻ നിലവിൽ പ്രവർത്തിക്കുന്നുണ്ട്."</string>
     <string name="open_failed">"%s 'userspace' ൽ പ്രവർത്തിക്കാൻ രൂപകൽപ്പന ചെയ്‌തിട്ടില്ല!"</string>
-    <string name="package_id">"പാക്കേജ് ID കൊണ്ട്"</string>
+    <string name="package_id">"പാക്കേജ് ID"</string>
     <string name="package_removed">"തിരഞ്ഞെടുത്ത പാക്കേജ് നീക്കംചെയ്യപെട്ടു!"</string>
     <string name="permissions">"അനുമതികൾ"</string>
     <string name="permission_denied_write_storage">"'writing to storage' അനുമതി നിരസിച്ചിരിക്കുന്നു!"</string>

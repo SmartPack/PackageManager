@@ -30,12 +30,12 @@ import java.util.ArrayList;
 
 public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleViewSettingsAdapter.ViewHolder> {
 
-    private ArrayList<RecycleViewItem> data;
+    private static ArrayList<RecycleViewItem> data;
 
     private static ClickListener mClickListener;
 
     public RecycleViewSettingsAdapter(ArrayList<RecycleViewItem> data) {
-        this.data = data;
+        RecycleViewSettingsAdapter.data = data;
     }
 
     @NonNull
@@ -47,19 +47,19 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewSettingsAdapter.ViewHolder holder, int position) {
-        if (this.data.get(position).getTitle() != null) {
-            holder.mTitle.setText(this.data.get(position).getTitle());
+        if (data.get(position).getTitle() != null) {
+            holder.mTitle.setText(data.get(position).getTitle());
             holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         }
-        if (this.data.get(position).getDescription() != null) {
-            holder.mDescription.setText(this.data.get(position).getDescription());
+        if (data.get(position).getDescription() != null) {
+            holder.mDescription.setText(data.get(position).getDescription());
             holder.mDescription.setVisibility(View.VISIBLE);
             holder.mDescription.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         }
-        if (this.data.get(position).getIcon() != null) {
-            holder.mIcon.setImageDrawable(this.data.get(position).getIcon());
+        if (data.get(position).getIcon() != null) {
+            holder.mIcon.setImageDrawable(data.get(position).getIcon());
             holder.mIcon.setVisibility(View.VISIBLE);
-            if (position != 9 && !Utils.isDarkTheme(holder.mIcon.getContext())) {
+            if (position != 7 && !Utils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setColorFilter(Color.BLACK);
             }
         }
@@ -67,7 +67,7 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
 
     @Override
     public int getItemCount() {
-        return this.data.size();
+        return data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

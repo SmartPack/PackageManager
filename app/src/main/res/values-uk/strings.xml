@@ -6,10 +6,8 @@
     <string name="already_exists">"%s вже існує! Невдача!"</string>
     <string name="apk_path">"Шлях до APK"</string>
     <string name="app_info">"Інфо"</string>
-    <string name="app_name_summary">"Додаток для керування вашими додатками"</string>
     <string name="batch_list_clear">"Очистити список"</string>
     <string name="batch_list_disable">"Ви впевнені, що хочете відключити (якщо увімкнено) чи увімкнути (якщо відключено) такі додатки?"</string>
-    <string name="batch_list_empty">"Нічого не додано до списку пакетів!"</string>
     <string name="batch_list_remove">"Ви впевнені, що хочете видалити такі додатки?"</string>
     <string name="batch_list_reset">"Ви впевнені, що хочете скинути наступні програми?"</string>
     <string name="batch_list_summary">"Наступні програми додаються до списку пакетів"</string>

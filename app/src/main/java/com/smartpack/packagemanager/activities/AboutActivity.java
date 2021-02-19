@@ -32,15 +32,13 @@ import java.util.Objects;
 
 public class AboutActivity extends AppCompatActivity {
 
-    private AppCompatImageView mDeveloper;
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutview);
 
-        mDeveloper = findViewById(R.id.developer);
+        AppCompatImageView mDeveloper = findViewById(R.id.developer);
         MaterialTextView mAppName = findViewById(R.id.app_title);
         MaterialTextView mForegroundText = findViewById(R.id.foreground_text);
 

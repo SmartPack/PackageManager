@@ -28,11 +28,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.AboutActivity" />
-        <activity android:name=".activities.FilePickerActivity" />
         <activity android:name=".activities.ImageViewActivity" />
+        <activity android:name=".activities.OEMPackageActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.PackageDetailsActivity" />
+        <activity android:name=".activities.PackageExploreActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.PackageTasksActivity" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.TextViewActivity" />

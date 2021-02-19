@@ -55,7 +55,7 @@ Please help me to translate this application via [POEditor](https://poeditor.com
 ## Credits
 * [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
 * [topjohnwu](https://github.com/topjohnwu), libsu
-* [SmgKhOaRn](https://github.com/SmgKhOaRn), Korean Translations
+* [FiestaLake](https://github.com/FiestaLake), Korean Translations
 * [Mikesew1320](https://github.com/Mikesew1320), Amharic Translations
 * [tsiflimagas](https://github.com/tsiflimagas), Greek Translations
 * [Lennoard Silva](https://github.com/Lennoard), Portuguese (Brazilian) Translations

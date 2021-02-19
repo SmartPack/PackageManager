@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -29,7 +28,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatEditText;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -40,8 +38,12 @@ import com.smartpack.packagemanager.R;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +53,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
@@ -63,19 +67,8 @@ public class Utils {
         Shell.Config.setTimeout(10);
     }
 
-    public static AppCompatEditText mSearchWord;
     private static boolean mWelcomeDialog = true;
-    public static boolean mReloadPage = true;
     public static boolean mSortByOEM = false;
-    public static boolean mSystemApp = true;
-    public static CharSequence mApplicationName;
-    public static Drawable mApplicationIcon;
-    public static String mApplicationID;
-    public static String mDirData;
-    public static String mDirNatLib;
-    public static String mDirSource;
-    public static String mPath;
-    public static String mSearchText;
 
     /*
      * The following code is partly taken from https://github.com/SmartPack/SmartPack-Kernel-Manager
@@ -215,7 +208,19 @@ public class Utils {
     }
 
     public static void copy(String source, String dest) {
-        runCommand("cp -r " + source + " " + dest);
+        try {
+            FileInputStream inputStream = new FileInputStream(new File(source));
+            FileOutputStream outputStream = new FileOutputStream(new File(dest));
+
+            byte[] buf = new byte[1024 * 1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException ignored) {}
     }
 
     public static void mkdir(String path) {
@@ -289,8 +294,29 @@ public class Utils {
     }
 
     public static void unzip(String zip, String path) {
-        Utils.runCommand((Utils.exist("/data/adb/magisk/busybox") ? "/data/adb/magisk/busybox unzip "
-                : "unzip ") + zip + " -d " + path);
+        try (FileInputStream fis = new FileInputStream(new File(zip))) {
+            try (BufferedInputStream bis = new BufferedInputStream(fis)) {
+                try (ZipInputStream zis = new ZipInputStream(bis)) {
+                    ZipEntry ze;
+                    int count;
+                    byte[] buffer = new byte[1024];
+                    while ((ze = zis.getNextEntry()) != null) {
+                        File file = new File(new File(path), ze.getName());
+                        File dir = ze.isDirectory() ? file : file.getParentFile();
+                        assert dir != null;
+                        if (!dir.isDirectory() && !dir.mkdirs())
+                            throw new FileNotFoundException("Failed to ensure directory: " + dir.getAbsolutePath());
+                        if (ze.isDirectory())
+                            continue;
+                        try (FileOutputStream fout = new FileOutputStream(file)) {
+                            while ((count = zis.read(buffer)) != -1)
+                                fout.write(buffer, 0, count);
+                        }
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     public static boolean isNetworkUnavailable(Context context) {
@@ -387,10 +413,10 @@ public class Utils {
         return null;
     }
 
-    public static void restartApp(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+    public static void restartApp(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intent);
+        activity.startActivity(intent);
     }
 
     public static void setDefaultLanguage(Context context) {
@@ -447,10 +473,12 @@ public class Utils {
     }
 
     public static void resetDefault(Context context) {
-        if (mSortByOEM) {
-            saveBoolean("system_apps", false, context);
-            saveBoolean("user_apps", false, context);
-        }
+        saveBoolean("system_apps", false, context);
+        saveBoolean("user_apps", false, context);
+        resetOEMs(context);
+    }
+
+    public static void resetOEMs(Context context) {
         saveBoolean("asus_apps", false, context);
         saveBoolean("google_apps", false, context);
         saveBoolean("huawei_apps", false, context);
@@ -460,6 +488,7 @@ public class Utils {
         saveBoolean("oneplus_apps", false, context);
         saveBoolean("samsung_apps", false, context);
         saveBoolean("sony_apps", false, context);
+        Utils.mSortByOEM = false;
     }
 
 }

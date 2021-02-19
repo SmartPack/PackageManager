@@ -6,10 +6,8 @@
     <string name="always_show">Εμφάνιση πάντα</string>
     <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
     <string name="app_info">Πληροφορίες εφαρμογής</string>
-    <string name="app_name_summary">Μία Εφαρμογή για να Διαχειριστείτε τις Εφαρμογές σας</string>
     <string name="batch_list_clear">Διαγραφή λίστας</string>
     <string name="batch_list_disable">Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε (εάν είναι ενεργοποιημένη) ή να ενεργοποιήσετε (εάν είναι απενεργοποιημένη) την ακόλουθη εφαρμογή(ές);?</string>
-    <string name="batch_list_empty">Τίποτα δεν έχει προστεθεί στην ομαδική λίστα!</string>
     <string name="batch_list_remove">Είστε σίγουρος ότι θέλετε να αφαιρέσετε τις ακόλουθες εφαρμογές;</string>
     <string name="batch_list_summary">Οι ακόλουθες εφαρμογές προστέθηκαν στη λίστα ομάδας</string>
     <string name="batch_processing">Επεξεργασία Ομάδας σε Εξέλιξη!</string>

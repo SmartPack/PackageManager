@@ -27,10 +27,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.adapters.RecycleViewSettingsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.Billing;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
-import com.smartpack.packagemanager.adapters.RecycleViewSettingsAdapter;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -41,7 +41,6 @@ import java.util.ArrayList;
 public class SettingsActivity extends AppCompatActivity {
 
     private ArrayList <RecycleViewItem> mData = new ArrayList<>();
-    private String mPath;
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     @Override
@@ -73,11 +72,8 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         });
 
-        mData.add(new RecycleViewItem(getString(R.string.sort_by), getString(Utils.getBoolean("sort_id", true, this) ?
-                R.string.package_id : R.string.name), getResources().getDrawable(R.drawable.ic_sort), null));
-        mData.add(new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this), getResources().getDrawable(R.drawable.ic_show), null));
-        mData.add(new RecycleViewItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null));
         mData.add(new RecycleViewItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null));
+        mData.add(new RecycleViewItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null));
         mData.add(new RecycleViewItem(getString(R.string.source_code), getString(R.string.source_code_summary), getResources().getDrawable(
                 R.drawable.ic_github), "https://github.com/SmartPack/PackageManager"));
         mData.add(new RecycleViewItem(getString(R.string.support), getString(R.string.support_summary), getResources().getDrawable(R.drawable.ic_support),
@@ -97,180 +93,6 @@ public class SettingsActivity extends AppCompatActivity {
             if (mData.get(position).getUrl() != null) {
                 Utils.launchUrl(mData.get(position).getUrl(), this);
             } else if (position == 0) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.sort_apps), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            if (!Utils.getBoolean("sort_name", false, this)) {
-                                Utils.saveBoolean("sort_name", true, this);
-                                Utils.saveBoolean("sort_id", false, this);
-                                Utils.mReloadPage = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.sort_by), getString(Utils.getBoolean("sort_id", true, this) ?
-                                        R.string.package_id : R.string.name), getResources().getDrawable(R.drawable.ic_sort), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 1:
-                            if (!Utils.getBoolean("sort_id", true, this)) {
-                                Utils.saveBoolean("sort_id", true, this);
-                                Utils.saveBoolean("sort_name", false, this);
-                                Utils.mReloadPage = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.sort_by), getString(Utils.getBoolean("sort_id", true, this) ?
-                                        R.string.package_id : R.string.name), getResources().getDrawable(R.drawable.ic_sort), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                    }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
-            } else if (position == 1) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.show_oem), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            Utils.resetDefault(this);
-                            Utils.saveBoolean("system_apps", true, this);
-                            Utils.saveBoolean("user_apps", true, this);
-                            Utils.mReloadPage = true;
-                            Utils.mSortByOEM = false;
-                            mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                    getResources().getDrawable(R.drawable.ic_show), null));
-                            mRecycleViewAdapter.notifyItemChanged(position);
-                            break;
-                        case 1:
-                            if (!Utils.getBoolean("asus_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("asus_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 2:
-                            if (!Utils.getBoolean("google_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("google_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 3:
-                            if (!Utils.getBoolean("samsung_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("samsung_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 4:
-                            if (!Utils.getBoolean("moto_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("moto_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 5:
-                            if (!Utils.getBoolean("oneplus_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("oneplus_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 6:
-                            if (!Utils.getBoolean("huawei_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("huawei_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 7:
-                            if (!Utils.getBoolean("sony_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("sony_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 8:
-                            if (!Utils.getBoolean("lg_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("lg_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 9:
-                            if (!Utils.getBoolean("mi_apps", false, this)) {
-                                Utils.resetDefault(this);
-                                Utils.saveBoolean("mi_apps", true, this);
-                                Utils.mReloadPage = true;
-                                Utils.mSortByOEM = true;
-                                mData.set(position, new RecycleViewItem(getString(R.string.show_oem), AppSettings.getOEMDescription(this),
-                                        getResources().getDrawable(R.drawable.ic_show), null));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                    }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
-            } else if (position == 2) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.app_theme), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            if (!Utils.getBoolean("theme_auto", true, this)) {
-                                Utils.saveBoolean("dark_theme", false, this);
-                                Utils.saveBoolean("light_theme", false, this);
-                                Utils.saveBoolean("theme_auto", true, this);
-                                Utils.restartApp(this);
-                            }
-                            break;
-                        case 1:
-                            if (!Utils.getBoolean("dark_theme", false, this)) {
-                                Utils.saveBoolean("dark_theme", true, this);
-                                Utils.saveBoolean("light_theme", false, this);
-                                Utils.saveBoolean("theme_auto", false, this);
-                                Utils.restartApp(this);
-                            }
-                            break;
-                        case 2:
-                            if (!Utils.getBoolean("light_theme", false, this)) {
-                                Utils.saveBoolean("dark_theme", false, this);
-                                Utils.saveBoolean("light_theme", true, this);
-                                Utils.saveBoolean("theme_auto", false, this);
-                                Utils.restartApp(this);
-                            }
-                            break;
-                    }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
-            } else if (position == 3) {
                 new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
                         R.array.app_language), (dialogInterface, i) -> {
                     switch (i) {
@@ -339,9 +161,40 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();
-            } else if (position == 7) {
+            } else if (position == 1) {
+                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
+                        R.array.app_theme), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            if (!Utils.getBoolean("theme_auto", true, this)) {
+                                Utils.saveBoolean("dark_theme", false, this);
+                                Utils.saveBoolean("light_theme", false, this);
+                                Utils.saveBoolean("theme_auto", true, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
+                        case 1:
+                            if (!Utils.getBoolean("dark_theme", false, this)) {
+                                Utils.saveBoolean("dark_theme", true, this);
+                                Utils.saveBoolean("light_theme", false, this);
+                                Utils.saveBoolean("theme_auto", false, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
+                        case 2:
+                            if (!Utils.getBoolean("light_theme", false, this)) {
+                                Utils.saveBoolean("dark_theme", false, this);
+                                Utils.saveBoolean("light_theme", true, this);
+                                Utils.saveBoolean("theme_auto", false, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> {
+                }).show();
+            } else if (position == 5) {
                 Billing.showDonateOption(this);
-            } else if (position == 10) {
+            } else if (position == 8) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));

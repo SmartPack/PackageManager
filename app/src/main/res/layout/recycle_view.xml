@@ -1,62 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="start|center_vertical"
+    android:orientation="horizontal"
+    android:padding="5dp" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@null"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@color/colorBlack"
+            android:layout_marginEnd="10dp" />
+
+        <FrameLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:gravity="start|center_vertical"
-            tools:ignore="UselessParent"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:gravity="end|center_vertical">
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/icon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@null"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="fitCenter"
-                    android:src="@color/colorBlack"
-                    android:layout_marginEnd="10dp" />
-
-                <FrameLayout
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end|center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="35dp"
+                    android:baselineAligned="false">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/title"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:layout_gravity="center_vertical"
-                            android:orientation="vertical"
-                            android:layout_marginEnd="35dp"
-                            android:baselineAligned="false">
+                            android:focusable="false"
+                            android:textSize="17sp" />
 
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:focusable="false"
-                                    android:textSize="17sp" />
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/description"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:focusable="false" />
-                        </LinearLayout>
-
-                        <com.google.android.material.checkbox.MaterialCheckBox
-                            android:id="@+id/checkbox"
-                            android:layout_width="35dp"
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/description"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:background="@null" />
-                </FrameLayout>
-        </LinearLayout>
+                            android:focusable="false" />
+                </LinearLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@null" />
+        </FrameLayout>
 </LinearLayout>

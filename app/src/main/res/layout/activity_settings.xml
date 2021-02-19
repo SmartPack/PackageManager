@@ -27,11 +27,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/colorAccent"
-            android:text="@string/settings"
+            android:layout_gravity="start|center_vertical"
             android:layout_marginStart="50dp"
+            android:text="@string/settings"
             android:gravity="start"
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:padding="5dp" />
     </FrameLayout>
 

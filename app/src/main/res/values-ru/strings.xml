@@ -6,10 +6,8 @@
     <string name="already_exists">"%s уже существует! Неудача!"</string>
     <string name="apk_path">"Путь к APK"</string>
     <string name="app_info">"Инфо"</string>
-    <string name="app_name_summary">"Приложение для управления вашими приложениями"</string>
     <string name="batch_list_clear">"Очистить список"</string>
     <string name="batch_list_disable">"Вы уверены, что хотите заморозить (если разморожено) или разморозить (если заморожено) следующие приложения?"</string>
-    <string name="batch_list_empty">"Ничего не добавлено в список пакетной обработки!"</string>
     <string name="batch_list_remove">"Вы уверены, что хотите удалить следующие приложения?"</string>
     <string name="batch_list_reset">"Вы уверены, что хотите сбросить следующие приложения?"</string>
     <string name="batch_list_summary">"Следующие приложения добавлены в список пакетной обработки"</string>

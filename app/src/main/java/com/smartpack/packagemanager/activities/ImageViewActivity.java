@@ -18,7 +18,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
 
@@ -43,14 +43,14 @@ public class ImageViewActivity extends AppCompatActivity {
 
         assert path != null;
         mTitle.setText(new  File(path).getName());
-        mImage.setImageURI(FilePicker.getIconFromPath(path));
+        mImage.setImageURI(PackageExplorer.getIconFromPath(path));
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setMessage(getString(R.string.export_storage_message, new File(path).getName()))
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                    FilePicker.copyToStorage(path, this);
+                    PackageExplorer.copyToStorage(path, this);
                 }).show());
 
         mBack.setOnClickListener(v -> finish());

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:padding="10dp" >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/action"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:layout_gravity="start"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_android"
+            android:tint="?attr/colorAccent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="start"
+            android:focusable="false"
+            android:textSize="15sp" />
+</FrameLayout>

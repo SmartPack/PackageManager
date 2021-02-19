@@ -28,30 +28,6 @@ public class AppSettings {
         }
     }
 
-    public static String getOEMDescription(Context context) {
-        if (Utils.getBoolean("asus_apps", false, context)) {
-            return context.getString(R.string.oem_asus);
-        } else if (Utils.getBoolean("google_apps", false, context)) {
-            return context.getString(R.string.oem_google);
-        } else if (Utils.getBoolean("samsung_apps", false, context)) {
-            return context.getString(R.string.oem_samsung);
-        } else if (Utils.getBoolean("moto_apps", false, context)) {
-            return context.getString(R.string.oem_moto);
-        }else if (Utils.getBoolean("oneplus_apps", false, context)) {
-            return context.getString(R.string.oem_oneplus);
-        } else if (Utils.getBoolean("huawei_apps", false, context)) {
-            return context.getString(R.string.oem_huawei);
-        } else if (Utils.getBoolean("sony_apps", false, context)) {
-            return context.getString(R.string.oem_sony);
-        } else if (Utils.getBoolean("lg_apps", false, context)) {
-            return context.getString(R.string.oem_lg);
-        } else if (Utils.getBoolean("mi_apps", false, context)) {
-            return context.getString(R.string.oem_mi);
-        } else {
-            return context.getString(R.string.oem_all);
-        }
-    }
-
     public static String getLanguage(Context context) {
         if (Utils.getBoolean("use_english", false, context)) {
             return context.getString(R.string.language_en);
@@ -70,7 +46,7 @@ public class AppSettings {
         } else if (Utils.getBoolean("use_uk", false, context)) {
             return context.getString(R.string.language_uk);
         } else {
-            return context.getString(R.string.language_default);
+            return context.getString(R.string.language_default) + " (" + java.util.Locale.getDefault().getLanguage() + ")";
         }
     }
 

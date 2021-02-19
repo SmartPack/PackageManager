@@ -16,7 +16,7 @@ import android.os.AsyncTask;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.activities.FilePickerActivity;
+import com.smartpack.packagemanager.activities.PackageExploreActivity;
 
 import java.io.File;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
  */
-public class FilePicker {
+public class PackageExplorer {
 
     public static boolean isTextFile(String path) {
         return path.endsWith(".txt") || path.endsWith(".xml") || path.endsWith(".json") || path.endsWith(".properties")
@@ -36,23 +36,8 @@ public class FilePicker {
         return path.endsWith(".bmp") || path.endsWith(".png") || path.endsWith(".jpg");
     }
 
-    public static boolean isDirectory(String path) {
-        return new File(path).isDirectory();
-    }
-
-    public static boolean isFile(String path) {
-        return new File(path).isFile();
-    }
-
     public static int getSpanCount(Activity activity) {
         return Utils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
-    }
-
-    public static File[] getFilesList() {
-        if (!Utils.mPath.endsWith("/")) {
-            Utils.mPath = Utils.mPath + "/";
-        }
-        return new File(Utils.mPath).listFiles();
     }
 
     public static Uri getIconFromPath(String path) {
@@ -67,7 +52,7 @@ public class FilePicker {
         new AsyncTask<Void, Void, List<String>>() {
             @Override
             protected List<String> doInBackground(Void... voids) {
-                Utils.copy(path, PackageTasks.getPackageDir(activity));
+                Utils.copy(path, PackageData.getPackageDir(activity) + "/" + new File(path).getName());
                 return null;
             }
 
@@ -76,7 +61,7 @@ public class FilePicker {
                 super.onPostExecute(recyclerViewItems);
                 new MaterialAlertDialogBuilder(activity)
                         .setMessage(new File(path).getName() + " " +
-                                activity.getString(R.string.export_file_message, PackageTasks.getPackageDir(activity)))
+                                activity.getString(R.string.export_file_message, PackageData.getPackageDir(activity)))
                         .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                         }).show();
             }
@@ -84,7 +69,7 @@ public class FilePicker {
     }
 
     public static void exploreAPK(String path, Activity activity) {
-        new AsyncTask<Void, Void, List<String>>() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -92,20 +77,19 @@ public class FilePicker {
                     Utils.delete(activity.getCacheDir().getPath() + "/apk");
                 }
                 Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
-                Utils.mPath = activity.getCacheDir().getPath() + "/apk";
+                PackageData.mPath = activity.getCacheDir().getPath() + "/apk";
             }
 
             @Override
-            protected List<String> doInBackground(Void... voids) {
+            protected Void doInBackground(Void... voids) {
                 Utils.unzip(path,activity.getCacheDir().getPath() + "/apk");
                 return null;
             }
-
             @Override
-            protected void onPostExecute(List<String> recyclerViewItems) {
-                super.onPostExecute(recyclerViewItems);
-                Intent filePicker = new Intent(activity, FilePickerActivity.class);
-                activity.startActivity(filePicker);
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                Intent explorer = new Intent(activity, PackageExploreActivity.class);
+                activity.startActivity(explorer);
             }
         }.execute();
     }
