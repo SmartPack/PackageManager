@@ -17,5 +17,6 @@
         <item>@string/language_pt</item>
         <item>@string/language_ru</item>
         <item>@string/language_uk</item>
+        <item>@string/language_fr</item>
     </string-array>
 </resources>

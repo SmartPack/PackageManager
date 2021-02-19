@@ -60,6 +60,7 @@ Please help me to translate this application via [POEditor](https://poeditor.com
 * [tsiflimagas](https://github.com/tsiflimagas), Greek Translations
 * [Lennoard Silva](https://github.com/Lennoard), Portuguese (Brazilian) Translations
 * [Nikita](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
+* B3Nd2R & Reno, French Translations
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 
 ## License

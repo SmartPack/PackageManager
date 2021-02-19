@@ -428,6 +428,7 @@ public class Utils {
         saveBoolean("use_pt", false, context);
         saveBoolean("use_ru", false, context);
         saveBoolean("use_uk", false, context);
+        saveBoolean("use_fr", false, context);
     }
 
     public static boolean languageDefault(Context context) {
@@ -438,7 +439,8 @@ public class Utils {
                 && !getBoolean("use_ml", false, context)
                 && !getBoolean("use_pt", false, context)
                 && !getBoolean("use_ru", false, context)
-                && !getBoolean("use_uk", false, context);
+                && !getBoolean("use_uk", false, context)
+                && !getBoolean("use_fr", false, context);
     }
 
     public static String getLanguage(Context context) {
@@ -458,6 +460,8 @@ public class Utils {
             return  "ru";
         } else if (getBoolean("use_uk", false, context)) {
             return  "uk";
+        } else if (getBoolean("use_fr", false, context)) {
+            return  "fr";
         } else {
             return java.util.Locale.getDefault().getLanguage();
         }

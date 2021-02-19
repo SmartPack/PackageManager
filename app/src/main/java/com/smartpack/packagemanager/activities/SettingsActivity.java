@@ -158,6 +158,13 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.restartApp(this);
                             }
                             break;
+                        case 9:
+                            if (!Utils.getBoolean("use_fr", false, this)) {
+                                Utils.setDefaultLanguage(this);
+                                Utils.saveBoolean("use_fr", true, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();
