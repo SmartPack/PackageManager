@@ -10,6 +10,7 @@ package com.smartpack.packagemanager.adapters;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleV
     public void onBindViewHolder(@NonNull RecycleViewPermissionsAdapter.ViewHolder holder, int position) {
         if (data.get(position).equals("Granted") || data.get(position).equals("Denied")) {
             holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
+            holder.mName.setTypeface(Typeface.DEFAULT_BOLD);
         } else {
             holder.mName.setTextColor(Utils.isDarkTheme(holder.mName.getContext()) ? Color.WHITE : Color.BLACK);
         }

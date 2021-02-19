@@ -8,9 +8,9 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:focusable="false"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 </FrameLayout>

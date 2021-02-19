@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -50,20 +51,20 @@ public class PackageExplorer {
         return null;
     }
 
-    public static void copyToStorage(String path, Activity activity) {
+    public static void copyToStorage(String path, Context context) {
         new AsyncTask<Void, Void, List<String>>() {
             @Override
             protected List<String> doInBackground(Void... voids) {
-                Utils.copy(path, PackageData.getPackageDir(activity) + "/" + new File(path).getName());
+                Utils.copy(path, PackageData.getPackageDir(context) + "/" + new File(path).getName());
                 return null;
             }
 
             @Override
             protected void onPostExecute(List<String> recyclerViewItems) {
                 super.onPostExecute(recyclerViewItems);
-                new MaterialAlertDialogBuilder(activity)
+                new MaterialAlertDialogBuilder(context)
                         .setMessage(new File(path).getName() + " " +
-                                activity.getString(R.string.export_file_message, PackageData.getPackageDir(activity)))
+                                context.getString(R.string.export_file_message, PackageData.getPackageDir(context)))
                         .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                         }).show();
             }

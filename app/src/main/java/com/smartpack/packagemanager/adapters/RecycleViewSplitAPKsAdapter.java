@@ -18,6 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.PackageExplorer;
+import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
@@ -43,6 +47,15 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     @Override
     public void onBindViewHolder(@NonNull RecycleViewSplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
+        if (FilePicker.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+                .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
+            holder.mIcon.setImageDrawable(FilePicker.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+                    .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
+        } else {
+            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
+        }
+        holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+                .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
     }
 
     @Override
@@ -51,13 +64,14 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private AppCompatImageButton mAction;
+        private AppCompatImageButton mExport, mIcon;
         private MaterialTextView mName;
 
         public ViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
-            this.mAction = view.findViewById(R.id.action);
+            this.mExport = view.findViewById(R.id.export);
+            this.mIcon = view.findViewById(R.id.icon);
             this.mName = view.findViewById(R.id.name);
         }
 
