@@ -11,9 +11,7 @@ package com.smartpack.packagemanager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
-import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -25,18 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Initialize App Theme & Google Ads
+        // Initialize App Theme
         Utils.initializeAppTheme(this);
         super.onCreate(savedInstanceState);
         // Set App Language
         Utils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
-        ViewPager mViewPager = findViewById(R.id.viewPagerID);
-
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new PackageTasksFragment(), null);
-        mViewPager.setAdapter(adapter);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new PackageTasksFragment()).commit();
     }
 
 }

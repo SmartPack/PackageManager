@@ -97,6 +97,7 @@ public class PackageTasksFragment extends Fragment {
                 mAppTitle.setVisibility(View.VISIBLE);
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
+                mSearchWord.requestFocus();
                 mAppTitle.setVisibility(View.GONE);
             }
         });
@@ -213,6 +214,10 @@ public class PackageTasksFragment extends Fragment {
                     if (PackageData.mSearchText != null) {
                         mSearchWord.setText(null);
                         PackageData.mSearchText = null;
+                        if (mSearchWord.getVisibility() == View.VISIBLE) {
+                            mSearchWord.setVisibility(View.GONE);
+                            mAppTitle.setVisibility(View.VISIBLE);
+                        }
                     }
                     PackageList.mOEMApps = true;
                     Intent oemView = new Intent(requireActivity(), OEMPackageActivity.class);

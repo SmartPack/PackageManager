@@ -23,7 +23,6 @@ import com.smartpack.packagemanager.fragments.SplitApksFragment;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020

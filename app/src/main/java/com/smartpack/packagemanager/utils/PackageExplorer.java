@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
@@ -68,11 +70,12 @@ public class PackageExplorer {
         }.execute();
     }
 
-    public static void exploreAPK(String path, Activity activity) {
+    public static void exploreAPK(LinearLayout linearLayout, String path, Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                linearLayout.setVisibility(View.VISIBLE);
                 if (new File(activity.getCacheDir().getPath() + "/apk").exists()) {
                     Utils.delete(activity.getCacheDir().getPath() + "/apk");
                 }
@@ -88,6 +91,7 @@ public class PackageExplorer {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+                linearLayout.setVisibility(View.GONE);
                 Intent explorer = new Intent(activity, PackageExploreActivity.class);
                 activity.startActivity(explorer);
             }

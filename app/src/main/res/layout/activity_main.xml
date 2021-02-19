@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.viewpager.widget.ViewPager
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/viewPagerID" />
+        android:layout_height="match_parent" />
 </RelativeLayout>

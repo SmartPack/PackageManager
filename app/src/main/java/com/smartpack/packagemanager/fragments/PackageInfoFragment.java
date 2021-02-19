@@ -95,7 +95,7 @@ public class PackageInfoFragment extends Fragment {
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
                     PackageData.clearAppSettings(PackageData.mApplicationID);
                 }).show());
-        mExplore.setOnClickListener(v -> PackageExplorer.exploreAPK(PackageData.mDirSource, requireActivity()));
+        mExplore.setOnClickListener(v -> PackageExplorer.exploreAPK(mProgressLayout, PackageData.mDirSource, requireActivity()));
         mExport.setOnClickListener(v -> PackageDetails.exportApp(mProgressLayout, mProgressMessage, requireActivity()));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(requireActivity())
                 .setIcon(PackageData.mApplicationIcon)

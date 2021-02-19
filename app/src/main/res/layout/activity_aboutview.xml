@@ -35,7 +35,7 @@
             android:textIsSelectable="true"
             android:textSize="15sp" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="50sp"
@@ -116,7 +116,7 @@
                         android:textSize="15sp" />
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
