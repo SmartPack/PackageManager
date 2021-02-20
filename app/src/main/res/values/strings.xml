@@ -110,7 +110,6 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
-    <string name="skip_exporting_bundle">Skipping app bundle: %s (Please export it individually!)</string>
     <string name="sort_by">Sort Apps</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Package Manager is an open-source application which is ready to accept contributions from the development community. Click here to check out the source code!</string>

@@ -101,7 +101,6 @@
     <string name="shared_by">%s/Package Manager에서 공유</string>
     <string name="share_message">Package Manager %s은(는) 아래에서 설치할 수 있습니다.\n구글 플레이 스토어 (Google Play Store): https://play.google.com/store/apps/details?id=com.smartpack.packagemanager\n깃허브 (GitHub): https://github.com/SmartPack/PackageManager/releases</string>
     <string name="share_with">다른 앱들을 사용하는 공유</string>
-    <string name="skip_exporting_bundle">Split Apks: %s을(를) 건너뛰는 중… (따로 내보내주세요!)</string>
     <string name="sort_by">앱 정렬</string>
     <string name="source_code">소스 코드</string>
     <string name="source_code_summary">Package Manager은(는) GPL3을(를) 따르는 오픈 소스 프로젝트로서, 언제든 누구나 기여할 수 있습니다. 여기를 눌러 소스 코드를 확인하세요!</string>
