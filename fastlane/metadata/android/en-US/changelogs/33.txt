@@ -1,4 +1,0 @@
-* Batch APK (not Bundle) exports now work on non-rooted devices.
-* Fixed some layout issues.
-* Improved split apk installation.
-* Miscellaneous changes.

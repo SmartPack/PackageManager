@@ -1,5 +1,9 @@
 # Change-logs
 
+## 27. February 20, 2021
+*Release-tag: 3.4*<br>
+Partly re-designed app UI and menu options. More options are added to package details page. Split APK Installer now handles "apkm" bundles (root-only). App now allow exporting individual split apks. Improved app exploring. Added French translations. Updated Korean translations. Miscellaneous changes.
+
 ## 26. February 14, 2021
 *Release-tag: 3.3*<br>
 Batch APK (not Bundle) exports now work on non-rooted devices. Fixed some layout issues. Improved split apk installation. Miscellaneous changes.
