@@ -8,14 +8,16 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
@@ -51,20 +53,26 @@ public class PackageExplorer {
         return null;
     }
 
-    public static void copyToStorage(String path, Context context) {
+    public static void copyToStorage(String path, Activity activity) {
+        if (Utils.isStorageWritePermissionDenied(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[] {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
+            return;
+        }
         new AsyncTask<Void, Void, List<String>>() {
             @Override
             protected List<String> doInBackground(Void... voids) {
-                Utils.copy(path, PackageData.getPackageDir(context) + "/" + new File(path).getName());
+                Utils.copy(path, PackageData.getPackageDir(activity) + "/" + new File(path).getName());
                 return null;
             }
 
             @Override
             protected void onPostExecute(List<String> recyclerViewItems) {
                 super.onPostExecute(recyclerViewItems);
-                new MaterialAlertDialogBuilder(context)
+                new MaterialAlertDialogBuilder(activity)
                         .setMessage(new File(path).getName() + " " +
-                                context.getString(R.string.export_file_message, PackageData.getPackageDir(context)))
+                                activity.getString(R.string.export_file_message, PackageData.getPackageDir(activity)))
                         .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                         }).show();
             }

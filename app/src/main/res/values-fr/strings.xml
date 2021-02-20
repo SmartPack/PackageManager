@@ -72,15 +72,6 @@
     <string name="native_lib">"Librairie native"</string>
     <string name="no_internet">"Verifiez votre connexion internet!"</string>
     <string name="no_root">"Cette fonctionnalitévne fonctionnera pas sans un Accés Root!"</string>
-    <string name="oem_asus">"ASUS"</string>
-    <string name="oem_google">"Google"</string>
-    <string name="oem_huawei">"Huawei"</string>
-    <string name="oem_lg">"LG"</string>
-    <string name="oem_oneplus">"OnePlus"</string>
-    <string name="oem_mi">"Mi"</string>
-    <string name="oem_moto">"Motorola"</string>
-    <string name="oem_samsung">"Samsung"</string>
-    <string name="oem_sony">"Sony"</string>
     <string name="open">"Ouvrire"</string>
     <string name="open_message">"Vous êtes déjà entrain de faire fonctionner cette appli."</string>
     <string name="open_failed">"%s n'est pas "</string>
@@ -141,7 +132,6 @@
     <string name="settings">"Paramètres"</string>
     <string name="share_app">"Partager l'application"</string>
     <string name="share_app_Summary">"Inviter un ami à utiliser Package Manager"</string>
-    <string name="show_oem">"Afficher par OEM"</string>
     <string name="source_code_summary">"Package Manager est une application open source qui peut être améliorée grâce aux contributions de la communauté de développement. Cliquez ici pour consulter le code source!"</string>
     <string name="support_summary">"Rejoindre le groupe de support Telegram"</string>
     <string name="translations">"Traductions "</string>

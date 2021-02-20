@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,11 +44,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
-import com.smartpack.packagemanager.activities.OEMPackageActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageList;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -173,7 +173,6 @@ public class PackageTasksFragment extends Fragment {
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
         sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
-        menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.show_oem));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -182,7 +181,6 @@ public class PackageTasksFragment extends Fragment {
                     if (Utils.getBoolean("system_apps", true, activity)) {
                         Utils.saveBoolean("system_apps", false, activity);
                     } else {
-                        Utils.resetOEMs(activity);
                         Utils.saveBoolean("system_apps", true, activity);
                     }
                     reload(activity);
@@ -191,7 +189,6 @@ public class PackageTasksFragment extends Fragment {
                     if (Utils.getBoolean("user_apps", true, activity)) {
                         Utils.saveBoolean("user_apps", false, activity);
                     } else {
-                        Utils.resetOEMs(activity);
                         Utils.saveBoolean("user_apps", true, activity);
                     }
                     reload(activity);
@@ -210,19 +207,6 @@ public class PackageTasksFragment extends Fragment {
                         reload(activity);
                     }
                     break;
-                case 5:
-                    if (PackageData.mSearchText != null) {
-                        mSearchWord.setText(null);
-                        PackageData.mSearchText = null;
-                        if (mSearchWord.getVisibility() == View.VISIBLE) {
-                            mSearchWord.setVisibility(View.GONE);
-                            mAppTitle.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    PackageList.mOEMApps = true;
-                    Intent oemView = new Intent(requireActivity(), OEMPackageActivity.class);
-                    startActivity(oemView);
-                    break;
             }
             return false;
         });
@@ -240,9 +224,15 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    Intent install = new Intent(Intent.ACTION_GET_CONTENT);
-                    install.setType("*/*");
-                    startActivityForResult(install, 0);
+                    if (Utils.isStorageWritePermissionDenied(requireActivity())) {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                        Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
+                    } else {
+                        Intent install = new Intent(Intent.ACTION_GET_CONTENT);
+                        install.setType("*/*");
+                        startActivityForResult(install, 0);
+                    }
                     break;
                 case 1:
                     Intent settingsPage = new Intent(activity, SettingsActivity.class);
@@ -339,7 +329,7 @@ public class PackageTasksFragment extends Fragment {
             }
             @Override
             protected Void doInBackground(Void... voids) {
-                mRecycleViewAdapter = new RecycleViewAdapter(PackageList.getData(activity));
+                mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
                 return null;
             }
             @Override
@@ -373,7 +363,7 @@ public class PackageTasksFragment extends Fragment {
 
                         @Override
                         protected List<String> doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageList.getData(activity));
+                            mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
                             return null;
                         }
 

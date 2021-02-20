@@ -90,7 +90,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         });
     }
 
-    public List<String> getData() {
+    private List<String> getData() {
         mData.clear();
         // Add directories
         for (File mFile : getFilesList()) {
@@ -107,7 +107,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         return mData;
     }
 
-    public File[] getFilesList() {
+    private File[] getFilesList() {
         if (!PackageData.mPath.endsWith(File.separator)) {
             PackageData.mPath = PackageData.mPath + File.separator;
         }

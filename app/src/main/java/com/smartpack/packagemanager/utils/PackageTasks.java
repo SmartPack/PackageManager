@@ -81,6 +81,7 @@ public class PackageTasks {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                mRunning = true;
                 if (mOutput == null) {
                     mOutput = new StringBuilder();
                 } else {
@@ -122,6 +123,7 @@ public class PackageTasks {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                mRunning = true;
                 if (mOutput == null) {
                     mOutput = new StringBuilder();
                 } else {
@@ -167,6 +169,7 @@ public class PackageTasks {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                mRunning = true;
                 if (mOutput == null) {
                     mOutput = new StringBuilder();
                 } else {

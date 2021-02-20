@@ -67,15 +67,6 @@
     <string name="native_lib">"Внутрішня бібліотека"</string>
     <string name="no_internet">"Будь ласка, перевірте своє інтернет-з'єднання!"</string>
     <string name="no_root">"Ця функція не працюватиме без root доступу!"</string>
-    <string name="oem_asus">"ASUS"</string>
-    <string name="oem_google">"Google"</string>
-    <string name="oem_huawei">"Huawei"</string>
-    <string name="oem_lg">"LG"</string>
-    <string name="oem_oneplus">"OnePlus"</string>
-    <string name="oem_mi">"Mi"</string>
-    <string name="oem_moto">"Motorola"</string>
-    <string name="oem_samsung">"Samsung"</string>
-    <string name="oem_sony">"Sony"</string>
     <string name="open">"Відкрити"</string>
     <string name="open_message">"Ви вже працюєте з цим додатком."</string>
     <string name="open_failed">"%s не розроблено для роботи в просторі користувача!"</string>

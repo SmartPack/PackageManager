@@ -38,7 +38,6 @@ public class PackageTasksActivity extends AppCompatActivity {
 
         mCancelButton = findViewById(R.id.cancel_button);
         mPackageTitle = findViewById(R.id.package_title);
-        mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
         mOutput = findViewById(R.id.result_text);
         mCancelButton.setOnClickListener(v -> {
             onBackPressed();
@@ -54,13 +53,17 @@ public class PackageTasksActivity extends AppCompatActivity {
                     while (!isInterrupted()) {
                         Thread.sleep(500);
                         runOnUiThread(() -> {
+                            if (!PackageTasks.mRunning) {
+                                mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
+                            } else {
+                                mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
+                            }
                             if (PackageTasks.mOutput != null) {
                                 mOutput.setText(PackageTasks.mOutput.toString());
                                 mPackageTitle.setVisibility(View.VISIBLE);
                                 mOutput.setVisibility(View.VISIBLE);
                                 if (!PackageTasks.mRunning) {
                                     mCancelButton.setVisibility(View.VISIBLE);
-                                    mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
                                 }
                             }
                         });

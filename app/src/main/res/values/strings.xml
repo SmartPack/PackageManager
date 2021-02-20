@@ -84,15 +84,6 @@
     <string name="native_lib">Native Library</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="no_root">This feature won\'t work without Root Access!</string>
-    <string name="oem_asus">ASUS</string>
-    <string name="oem_google">Google</string>
-    <string name="oem_huawei">Huawei</string>
-    <string name="oem_lg">LG</string>
-    <string name="oem_oneplus">OnePlus</string>
-    <string name="oem_mi">Mi</string>
-    <string name="oem_moto">Motorola</string>
-    <string name="oem_samsung">Samsung</string>
-    <string name="oem_sony">Sony</string>
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
     <string name="open_failed">%s is not designed to run in user space!</string>
@@ -120,7 +111,6 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
-    <string name="show_oem">Show by OEM</string>
     <string name="skip_exporting_bundle">Skipping app bundle: %s (Please export it individually!)</string>
     <string name="sort_by">Sort Apps</string>
     <string name="source_code">Source Code</string>

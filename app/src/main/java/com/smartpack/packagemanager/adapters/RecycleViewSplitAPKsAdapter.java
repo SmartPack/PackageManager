@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
@@ -47,15 +47,15 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     @Override
     public void onBindViewHolder(@NonNull RecycleViewSplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
-        if (FilePicker.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+        if (PackageData.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
-            holder.mIcon.setImageDrawable(FilePicker.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+            holder.mIcon.setImageDrawable(PackageData.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         } else {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
         }
         holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
-                .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
+                .getContext()) + "/" + data.get(position), (Activity) holder.mIcon.getContext()));
     }
 
     @Override
@@ -63,20 +63,15 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
         return data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private AppCompatImageButton mExport, mIcon;
         private MaterialTextView mName;
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
             this.mExport = view.findViewById(R.id.export);
             this.mIcon = view.findViewById(R.id.icon);
             this.mName = view.findViewById(R.id.name);
-        }
-
-        @Override
-        public void onClick(View view) {
         }
     }
 

@@ -19,6 +19,7 @@ import android.os.Environment;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ import java.util.Objects;
 
 public class PackageData {
 
-    public static boolean mSystemApp = true;
+    public static boolean mAppType= false, mSystemApp = true;
     public static CharSequence mApplicationName;
     public static Drawable mApplicationIcon;
     public static List<String> mBatchList = new ArrayList<>();
@@ -45,6 +46,38 @@ public class PackageData {
             file.delete();
         }
         file.mkdirs();
+    }
+
+    public static List<String> getData(Context context) {
+        List<String> mData = new ArrayList<>();
+        List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
+        if (Utils.getBoolean("sort_name", true, context)) {
+            Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
+        }
+        for (ApplicationInfo packageInfo: packages) {
+            if (Utils.getBoolean("system_apps", true, context)
+                    && Utils.getBoolean("user_apps", true, context)) {
+                mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
+                        || (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0;
+            } else if (Utils.getBoolean("system_apps", true, context)
+                    && !Utils.getBoolean("user_apps", true, context)) {
+                mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+            } else if (!Utils.getBoolean("system_apps", true, context)
+                    && Utils.getBoolean("user_apps", true, context)) {
+                mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0;
+            } else {
+                mAppType = false;
+            }
+            if (mAppType && packageInfo.packageName.contains(".")) {
+                if (mSearchText == null) {
+                    mData.add(packageInfo.packageName);
+                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(mSearchText.toLowerCase())
+                        || packageInfo.packageName.toLowerCase().contains(mSearchText.toLowerCase())) {
+                    mData.add(packageInfo.packageName);
+                }
+            }
+        }
+        return mData;
     }
 
     public static PackageManager getPackageManager(Context context) {
@@ -111,6 +144,15 @@ public class PackageData {
 
     public static boolean isSystemApp(String packageName, Context context) {
         return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+    }
+
+    public static Drawable getAPKIcon(String apkPath, Context context) {
+        PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+        if (pi != null) {
+            return pi.applicationInfo.loadIcon(PackageData.getPackageManager(context));
+        } else {
+            return null;
+        }
     }
 
     public static String getPackageDir(Context context) {

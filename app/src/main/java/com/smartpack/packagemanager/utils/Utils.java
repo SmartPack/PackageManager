@@ -67,9 +67,6 @@ public class Utils {
         Shell.Config.setTimeout(10);
     }
 
-    private static boolean mWelcomeDialog = true;
-    public static boolean mSortByOEM = false;
-
     /*
      * The following code is partly taken from https://github.com/SmartPack/SmartPack-Kernel-Manager
      * Ref: https://github.com/SmartPack/SmartPack-Kernel-Manager/blob/beta/app/src/main/java/com/smartpack/kernelmanager/utils/root/RootUtils.java
@@ -371,21 +368,16 @@ public class Utils {
         MaterialCheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
         checkBox.setChecked(true);
         checkBox.setText(context.getString(R.string.always_show));
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            mWelcomeDialog = isChecked;
-        });
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> getBoolean("welcomeMessage", true, context));
 
-        MaterialAlertDialogBuilder alert = new MaterialAlertDialogBuilder(Objects.requireNonNull(context));
-        alert.setIcon(R.mipmap.ic_launcher);
-        alert.setTitle(context.getString(R.string.app_name));
-        alert.setMessage(context.getText(R.string.welcome_message));
-        alert.setView(checkBoxView);
-        alert.setCancelable(false);
-        alert.setPositiveButton(context.getString(R.string.got_it), (dialog, id) -> {
-            saveBoolean("welcomeMessage", mWelcomeDialog, context);
-        });
-
-        alert.show();
+        new MaterialAlertDialogBuilder(Objects.requireNonNull(context))
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(context.getString(R.string.app_name))
+                .setMessage(context.getText(R.string.welcome_message))
+                .setView(checkBoxView)
+                .setCancelable(false)
+                .setPositiveButton(context.getString(R.string.got_it), (dialog, id) ->
+                        Utils.saveBoolean("welcomeMessage", false, context)).show();
     }
 
     public static String readAssetFile(Context context, String file) {
@@ -474,25 +466,6 @@ public class Utils {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-    }
-
-    public static void resetDefault(Context context) {
-        saveBoolean("system_apps", false, context);
-        saveBoolean("user_apps", false, context);
-        resetOEMs(context);
-    }
-
-    public static void resetOEMs(Context context) {
-        saveBoolean("asus_apps", false, context);
-        saveBoolean("google_apps", false, context);
-        saveBoolean("huawei_apps", false, context);
-        saveBoolean("lg_apps", false, context);
-        saveBoolean("mi_apps", false, context);
-        saveBoolean("moto_apps", false, context);
-        saveBoolean("oneplus_apps", false, context);
-        saveBoolean("samsung_apps", false, context);
-        saveBoolean("sony_apps", false, context);
-        Utils.mSortByOEM = false;
     }
 
 }

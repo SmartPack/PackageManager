@@ -32,12 +32,12 @@
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.AboutActivity" />
         <activity android:name=".activities.ImageViewActivity" />
-        <activity android:name=".activities.OEMPackageActivity"
+        <activity android:name=".activities.PackageDetailsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity android:name=".activities.PackageDetailsActivity" />
         <activity android:name=".activities.PackageExploreActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity android:name=".activities.PackageTasksActivity" />
+        <activity android:name=".activities.PackageTasksActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.TextViewActivity" />
 

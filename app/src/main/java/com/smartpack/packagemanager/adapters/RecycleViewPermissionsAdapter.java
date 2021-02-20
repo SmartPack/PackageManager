@@ -60,17 +60,12 @@ public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleV
         return data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private MaterialTextView mName;
 
         public ViewHolder(View view) {
             super(view);
-            view.setOnClickListener(this);
             this.mName = view.findViewById(R.id.name);
-        }
-
-        @Override
-        public void onClick(View view) {
         }
     }
 

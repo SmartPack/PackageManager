@@ -23,7 +23,6 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageDetailsActivity;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageList;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -54,13 +53,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             return;
         }
         holder.appIcon.setImageDrawable(PackageData.getAppIcon(data.get(position), holder.appIcon.getContext()));
-        if (!PackageList.mOEMApps && PackageData.mSearchText != null && data.get(position).toLowerCase().contains(PackageData.mSearchText)) {
+        if (PackageData.mSearchText != null && data.get(position).toLowerCase().contains(PackageData.mSearchText)) {
             holder.appID.setText(Utils.fromHtml(data.get(position).toLowerCase().replace(PackageData.mSearchText,"<b><i><font color=\"" +
                     Color.RED + "\">" + PackageData.mSearchText + "</font></i></b>")));
         } else {
             holder.appID.setText(data.get(position));
         }
-        if (!PackageList.mOEMApps && PackageData.mSearchText != null && PackageData.getAppName(data.get(position), holder.appName.getContext()).toLowerCase().contains(PackageData.mSearchText)) {
+        if (PackageData.mSearchText != null && PackageData.getAppName(data.get(position), holder.appName.getContext()).toLowerCase().contains(PackageData.mSearchText)) {
             holder.appName.setText(Utils.fromHtml(PackageData.getAppName(data.get(position), holder.appName.getContext()).toLowerCase().replace(PackageData.mSearchText,
                     "<b><i><font color=\"" + Color.RED + "\">" + PackageData.mSearchText + "</font></i></b>")));
         } else {
