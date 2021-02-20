@@ -49,6 +49,10 @@ public class SplitAPKInstaller {
         return list;
     }
 
+    public static String listSplitAPKs(String path) {
+        return splitApks(path).toString().substring(1, splitApks(path).toString().length() - 1).replace(", ", "\n");
+    }
+
     public static boolean isAppBundle(String path) {
         return splitApks(path).size() > 1;
     }

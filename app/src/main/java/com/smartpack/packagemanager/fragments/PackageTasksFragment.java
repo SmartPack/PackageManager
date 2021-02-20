@@ -229,9 +229,19 @@ public class PackageTasksFragment extends Fragment {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                         Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
                     } else {
-                        Intent install = new Intent(Intent.ACTION_GET_CONTENT);
-                        install.setType("*/*");
-                        startActivityForResult(install, 0);
+                        if (Utils.getBoolean("firstAttempt", true, requireActivity())) {
+                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(getString(R.string.install_bundle))
+                                    .setMessage(getString(R.string.bundle_install_message))
+                                    .setCancelable(false)
+                                    .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+                                        Utils.saveBoolean("firstAttempt", false, requireActivity());
+                                        initializeSplitAPKInstallation();
+                                    }).show();
+                        } else {
+                            initializeSplitAPKInstallation();
+                        }
                     }
                     break;
                 case 1:
@@ -316,6 +326,12 @@ public class PackageTasksFragment extends Fragment {
             return false;
         });
         popupMenu.show();
+    }
+
+    private void initializeSplitAPKInstallation() {
+        Intent install = new Intent(Intent.ACTION_GET_CONTENT);
+        install.setType("*/*");
+        startActivityForResult(install, 0);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -412,18 +428,26 @@ public class PackageTasksFragment extends Fragment {
                         installApp.setTitle(getString(R.string.sure_question));
                         installApp.setMessage(getString(R.string.bundle_install, Objects.requireNonNull(new File(mPath)
                                 .getParentFile()).toString()));
+                        installApp.setNeutralButton(getString(R.string.list), (dialogInterface, i) ->
+                                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                        .setIcon(R.mipmap.ic_launcher)
+                                        .setTitle(R.string.split_apk_list)
+                                        .setMessage(SplitAPKInstaller.listSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile()).toString()))
+                                        .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
+                                        })
+                                        .setPositiveButton(getString(R.string.install), (dialog, id) ->
+                                                SplitAPKInstaller.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
+                                                .toString(), requireActivity())).show());
                     }
                     installApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
                     installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
                         if (mPath.endsWith(".apk")) {
                             SplitAPKInstaller.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
                                     .toString(), requireActivity());
                         } else {
                             SplitAPKInstaller.installSplitAPKs(mPath, requireActivity());
                         }
-                        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                     });
                     installApp.show();
                 } else {

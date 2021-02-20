@@ -15,7 +15,7 @@
     <string name="batch_processing_initialized">"Ініціалізація пакетного процесу"</string>
     <string name="batch_warning">"Ваші налаштування пакетів буде видалено! Ти впевнений?"</string>
     <string name="billing_client_disconnected">"Не вдалося підключитися до клієнта Google Play Billing!"</string>
-    <string name="bundle_install">"Ви впевнені, що хочете встановити split apks з '%s'?\nЗверніть увагу: Встановлення split apks може не завжди добре працювати, особливо якщо вони витягнуті з іншого пристрою. Також переконайтесь, що всі необхідні (лише необхідні) apks доступні у вибраній папці, щоб уникнути збою встановлення!"</string>
+    <string name="bundle_install">"Ви впевнені, що хочете встановити split apks з '%s'?"</string>
     <string name="cancel">"Скасувати"</string>
     <string name="change_logs">"Зміни"</string>
     <string name="cleaning_message">"Очищення тимчасових файлів"</string>

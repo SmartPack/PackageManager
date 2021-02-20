@@ -16,7 +16,7 @@
     <string name="batch_warning">"Les configurations de votre lot vont être supprimés! Êtes vous sûr?"</string>
     <string name="billing_client_disconnected">"Échec de connexion avec le client de facturation Google Play!"</string>
     <string name="bundle_extract_message">"Extraction %s dans le dossier de travail"</string>
-    <string name="bundle_install">"Êtes-vous sûr d'installer les apk modulaires de '%s'?\n\nRemarque : l'installation d'apk modulaires peut ne pas toujours fonctionner correctement, en particulier si les apk sont extraits d'un appareil différent. Assurez-vous également que tous les apk nécessaires (uniquement nécessaires) sont disponibles dans le dossier sélectionné pour éviter l'échec de l'installation!"</string>
+    <string name="bundle_install">"Êtes-vous sûr d'installer les apk modulaires de '%s'?"</string>
     <string name="bundle_install_apks">"Êtes-vous sûr d'installer App bundle '%s'?"</string>
     <string name="cancel">"Annuler"</string>
     <string name="change_logs">"Change-logs"</string>

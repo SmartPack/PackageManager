@@ -366,7 +366,7 @@ public class Utils {
         new MaterialAlertDialogBuilder(Objects.requireNonNull(context))
                 .setIcon(R.mipmap.ic_launcher)
                 .setTitle(context.getString(R.string.app_name))
-                .setMessage(context.getText(R.string.welcome_message) + "\n\n" + context.getText(rootAccess() ? R.string.welcome_message_root
+                .setMessage(context.getString(R.string.welcome_message) + "\n\n" + context.getString(rootAccess() ? R.string.welcome_message_root
                         : R.string.welcome_message_noroot))
                 .setCancelable(false)
                 .setPositiveButton(context.getString(R.string.got_it), (dialog, id) ->

@@ -168,7 +168,7 @@ public class PackageData {
     }
 
     public static String getBatchList() {
-        return mBatchList.toString().substring(1, mBatchList.toString().length()-1);
+        return mBatchList.toString().substring(1, mBatchList.toString().length() - 1);
     }
 
     public static String showBatchList() {

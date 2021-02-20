@@ -21,8 +21,9 @@
     <string name="batch_warning">Your batch settings will be removed! Are you sure?</string>
     <string name="billing_client_disconnected">Failed to connect with Google Play Billing client!</string>
     <string name="bundle_extract_message">Extracting %s into working folder</string>
-    <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?\n\nPlease Note: Installing split apk\'s may not always work well, especially if the apk\'s are extracted from a different device. Also, please make sure that all the necessary (only necessary) apk\'s are available in the selected folder to avoid installation failure!</string>
+    <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?</string>
     <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
+    <string name="bundle_install_message">Please Note: In order to install multiple APK\'s (split APK\'s), please place all of them in a single folder and select one among them. Package Manager will pick and handle the rest.</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
     <string name="cleaning_message">Cleaning temporary files</string>
@@ -77,6 +78,7 @@
     <string name="language_pt">Portuguese</string>
     <string name="language_ru">Russian</string>
     <string name="language_uk">Ukrainian</string>
+    <string name="list">List</string>
     <string name="more_apps">More from Developer</string>
     <string name="more_apps_summary">Checkout more applications provided by the developer in Google Play</string>
     <string name="name">Name</string>
