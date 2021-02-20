@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="about">Sobre</string>
     <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i></string>
-    <string name="always_show">Sempre mostrar</string>
     <string name="already_exists">%s já existe! Abortando!</string>
     <string name="app_info">Informações do app</string>
     <string name="batch_list_clear">Limpar lista</string>
@@ -62,7 +61,8 @@
     <string name="uninstall_title">Tem certeza de que deseja desinstalar %s?</string>
     <string name="uninstall_warning">Observe: A remoção de aplicativos do sistema às vezes é perigosa!\n\n *** <b>USE POR SUA CONTA E RISCO</b>> ***\n</string>
     <string name="user">Mostrar apps do usuário</string>
-    <string name="welcome_message"><b>Bem-vindo ao Package Manager</b>, um simples mas poderoso aplicativo para gerenciar seus aplicativos.\n\n*** <b>AVISO</b> ***\nEste aplicativo é muito poderoso e pode bagunçar o seu dispositivo. O desenvolvedor deste aplicativo não assumirá nenhuma responsabilidade se algo errado acontecer com o seu dispositivo.</string>
+    <string name="welcome_message">Bem-vindo ao Package Manager, um simples mas poderoso aplicativo para gerenciar seus aplicativos.</string>
+    <string name="welcome_message_root">AVISO: Este aplicativo é muito poderoso e pode bagunçar o seu dispositivo. O desenvolvedor deste aplicativo não assumirá nenhuma responsabilidade se algo errado acontecer com o seu dispositivo.</string>
     <string name="wrong_extension">Por favor, selecione um aquivo com extansão %s.</string>
     <string name="yes">Sim</string>
     <string name="batch_list_summary">Os seguintes aplicativos foram adicionados à lista em lote</string>

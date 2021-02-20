@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
@@ -364,17 +363,11 @@ public class Utils {
      * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
      */
     public static void WelcomeDialog(Context context) {
-        View checkBoxView = View.inflate(context, R.layout.checkbox_layout, null);
-        MaterialCheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
-        checkBox.setChecked(true);
-        checkBox.setText(context.getString(R.string.always_show));
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> getBoolean("welcomeMessage", true, context));
-
         new MaterialAlertDialogBuilder(Objects.requireNonNull(context))
                 .setIcon(R.mipmap.ic_launcher)
                 .setTitle(context.getString(R.string.app_name))
-                .setMessage(context.getText(R.string.welcome_message))
-                .setView(checkBoxView)
+                .setMessage(context.getText(R.string.welcome_message) + "\n\n" + context.getText(rootAccess() ? R.string.welcome_message_root
+                        : R.string.welcome_message_noroot))
                 .setCancelable(false)
                 .setPositiveButton(context.getString(R.string.got_it), (dialog, id) ->
                         Utils.saveBoolean("welcomeMessage", false, context)).show();

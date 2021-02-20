@@ -2,7 +2,6 @@
 
     <string name="about">"Про додаток"</string>
     <string name="about_summary">"<i>Простий, але потужний додаток для управління вашими програмами.</i>"</string>
-    <string name="always_show">"Завжди показувати"</string>
     <string name="already_exists">"%s вже існує! Невдача!"</string>
     <string name="apk_path">"Шлях до APK"</string>
     <string name="app_info">"Інфо"</string>
@@ -112,7 +111,8 @@
 "</string>
     <string name="user">"Встановлені додатки"</string>
     <string name="version">"Версія: %s"</string>
-    <string name="welcome_message">"<b>Ласкаво просимо до Package Manager</b>, простий, але потужний додаток для управління вашими програмами.\n\n*** <b>ПОПЕРЕДЖЕННЯ</b> ***\nЦей додаток занадто потужний, щоб зіпсувати ваш пристрій. Розробник цього додатка не несе відповідальності, якщо з вашим пристроєм трапилося щось не так."</string>
+    <string name="welcome_message">"Ласкаво просимо до Package Manager, простий, але потужний додаток для управління вашими програмами."</string>
+    <string name="welcome_message_root">"ПОПЕРЕДЖЕННЯ: Цей додаток занадто потужний, щоб зіпсувати ваш пристрій. Розробник цього додатка не несе відповідальності, якщо з вашим пристроєм трапилося щось не так."</string>
     <string name="wrong_extension">"Виберіть файл із %s розширенням."</string>
     <string name="yes">"Так"</string>
 </resources>

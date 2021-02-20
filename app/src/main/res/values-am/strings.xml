@@ -3,7 +3,6 @@
 
     <string name="about">ስለ እኛ</string>
     <string name="about_summary"><i>በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ</i></string>
-    <string name="always_show">ሁልጊዜ አሳይ</string>
     <string name="already_exists">%s ቀድሞዉኑ ነበር! በማቋረጥ ላይ</string>
     <string name="app_info">የመተግበሪያ መረጃ</string>
     <string name="batch_list_clear">ዝርዝሩን አፅዳ</string>
@@ -59,7 +58,8 @@
     <string name="uninstall_title">እርግጠኛ ኖት %s መሰረዝ ይፈልጋሉ?</string>
     <string name="uninstall_warning">ማሳሰቢያ! የሲስተም መተግበሪያዎችን መሰረዝ አንዳንድ ጊዜ ችግር ሊያስከትል ይችላል!\n\n *** <b>ለሚፈጠረዉ ነገር ሀላፊነቱን ይዉሰዱ!</b>> ***\n</string>
     <string name="user">የተጠቃሚ መተግበሪያዎችን አሳይ</string>
-    <string name="welcome_message"><b>እንኳን ወደ ፖኬጅ ማኔጀር በደህና መጡ!</b>በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ!\n\n*** <b>ማስጠንቀቂያ</b> ***\nይህ መተግበሪያ ስልክዎን ወዳልተፈለገ ሁኔታ ሊከት ይችላል። በስልክዎ ላይ የሆነ ነገር ቢፈጠር የዚህ መተግበሪያ አበልፃጊ ሀላፊነቱን አይወስድም!</string>
+    <string name="welcome_message">እንኳን ወደ ፖኬጅ ማኔጀር በደህና መጡ! በስልክዎ ላይ የተጫኑ መተግበሪያዎችን ለማስተዳደር የሚያገለግል ቀላል ግን ሀይለኛ መተግበሪያ!</string>
+    <string name="welcome_message_root">ΠΡΟΕΙΔΟΠΟΊΗΣΗ: Αυτή η εφαρμογή είναι αρκετά ισχυρή ώστε να προκαλέσει προβλήματα στη συσκευή σας. Ο προγραμματιστής αυτής της εφαρμογής δε θα αναλάβει καμία ευθύνη, εάν κάτι λάθος συμβεί στη συσκευή σας.</string>
     <string name="wrong_extension">እባክዎን %s አይነት ቅጥያ ያለዉ ፋይል ይምረጡ!</string>
     <string name="yes">አዎ</string>
 </resources>

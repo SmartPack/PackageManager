@@ -2,7 +2,6 @@
 
     <string name="about">"À propos"</string>
     <string name="about_summary">"Une application simple et puissante pour la gestion de vos appli"</string>
-    <string name="always_show">"Toujours afficher"</string>
     <string name="already_exists">"%s existe déjà! Interrompu!"</string>
     <string name="apk_path">"APK Chemin"</string>
     <string name="app_info">"info Appli"</string>
@@ -117,7 +116,8 @@
     <string name="uninstall_warning">"Remarque : la suppression des applications système sera parfois dangereuse!\n\n*** <b>UTILISATION À VOS PROPRES RISQUES</b> ***"</string>
     <string name="user">"Afficher les applications utilisateur"</string>
     <string name="version">"Version : %s"</string>
-    <string name="welcome_message">"<b>Bienvenue dans Package Manager</b>, une application simple mais puissante pour gérer vos applications.\n\n*** <b>AVERTISSEMENTS</b> ***\nCette application est très puissante et peut endommager le système si elle est mal utilisée. Le développeur de cette application n\'assumera aucune responsabilité en cas de problème avec votre appareil."</string>
+    <string name="welcome_message">"Bienvenue dans Package Manager, une application simple mais puissante pour gérer vos applications."</string>
+    <string name="welcome_message_root">"AVERTISSEMENTS: Cette application est très puissante et peut endommager le système si elle est mal utilisée. Le développeur de cette application n\'assumera aucune responsabilité en cas de problème avec votre appareil."</string>
     <string name="wrong_extension">"Veuillez sélectionner un fichier avec l'extension %s."</string>
     <string name="yes">"Oui"</string>
     <string name="explore">"Explorer"</string>

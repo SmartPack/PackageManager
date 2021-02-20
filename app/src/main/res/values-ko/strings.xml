@@ -3,7 +3,6 @@
 
     <string name="about">정보</string>
     <string name="about_summary">여러분의 앱들을 관리할 수 있는 심플한 어플리케이션입니다.</string>
-    <string name="always_show">항상 보기</string>
     <string name="already_exists">%s은(는) 이미 존재해요!</string>
     <string name="apk_path">APK 경로</string>
     <string name="app_info">앱 정보</string>
@@ -129,7 +128,8 @@
     <string name="uninstall_warning">알아두기: 시스템 앱을 지우는 것은 위험합니다!\n\n *** <b>위험을 감수하고 사용하세요 (본인 책임입니다)</b> ***\n</string>
     <string name="user">사용자 앱</string>
     <string name="version">버전: %s</string>
-    <string name="welcome_message"><b>Package Manager에 오신 것을 환영합니다.</b>\n당신의 앱들을 관리하는 심플한 어플리케이션.\n\n*** <b>주의</b> ***\n이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 발생하더라도 책임지지 않습니다.</string>
+    <string name="welcome_message">Package Manager에 오신 것을 환영합니다.\n당신의 앱들을 관리하는 심플한 어플리케이션.</string>
+    <string name="welcome_message_root">주의: 이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 발생하더라도 책임지지 않습니다.</string>
     <string name="wrong_extension">%s 확장자를 가진 파일을 선택해주세요.</string>
     <string name="yes">예</string>
 </resources>

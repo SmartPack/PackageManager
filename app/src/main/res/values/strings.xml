@@ -3,7 +3,6 @@
 
     <string name="about">About</string>
     <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i></string>
-    <string name="always_show">Always Show</string>
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
@@ -142,7 +141,9 @@
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="user">Show User Apps</string>
     <string name="version">Version: %s</string>
-    <string name="welcome_message"><b>Welcome to Package Manager</b>, a simple, yet powerful application to manage your apps.\n\n*** <b>WARNING</b> ***\nThis app is too powerful to messed up your device. The developer of this app won\'t take any responsibility, if something wrong happened to your device.</string>
+    <string name="welcome_message">Welcome to Package Manager, a simple, yet powerful application to manage your apps.</string>
+    <string name="welcome_message_root">WARNING\nThis application is too powerful to messed up your device. The developer of this application won\'t take any responsibility, if something wrong happened to your device.</string>
+    <string name="welcome_message_noroot">Please Note: Root Access is either unavailable in your device, or declined for Package Manager! The capabilities of this application on your device will be, therefore, limited.</string>
     <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="yes">Yes</string>
 </resources>

@@ -2,7 +2,6 @@
 
     <string name="about">"О программе"</string>
     <string name="about_summary">"<i>Простое, но мощное приложение для управления вашими приложениями.</i>"</string>
-    <string name="always_show">"Всегда показывать"</string>
     <string name="already_exists">"%s уже существует! Неудача!"</string>
     <string name="apk_path">"Путь к APK"</string>
     <string name="app_info">"Инфо"</string>
@@ -118,7 +117,8 @@
 "</string>
     <string name="user">"Пользовательские приложения"</string>
     <string name="version">"Версия: %s"</string>
-    <string name="welcome_message">"<b>Добро пожаловать в Package Manager</b>, простое, но мощное приложение для управления вашими приложениями.\n\n*** <b>ПРЕДУПРЕЖДЕНИЕ</b> ***\nЭто приложение слишком мощное, чтобы испортить ваше устройство. Разработчик этого приложения не несет никакой ответственности, если с вашим устройством что-то случилось."</string>
+    <string name="welcome_message">"Добро пожаловать в Package Manager, простое, но мощное приложение для управления вашими приложениями."</string>
+    <string name="welcome_message_root">"ПРЕДУПРЕЖДЕНИЕ: Это приложение слишком мощное, чтобы испортить ваше устройство. Разработчик этого приложения не несет никакой ответственности, если с вашим устройством что-то случилось."</string>
     <string name="wrong_extension">"Пожалуйста, выберите файл с %s расширением."</string>
     <string name="yes">"Да"</string>
 </resources>
