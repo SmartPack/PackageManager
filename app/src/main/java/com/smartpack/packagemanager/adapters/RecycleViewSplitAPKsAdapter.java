@@ -17,12 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
 
+import java.io.File;
 import java.util.List;
 
 /*
@@ -54,8 +56,15 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
         } else {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
         }
-        holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
-                .getContext()) + "/" + data.get(position), (Activity) holder.mIcon.getContext()));
+        holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(holder.mExport.getContext())
+                .setMessage(holder.mExport.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
+                .setNegativeButton(holder.mExport.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
+                })
+                .setPositiveButton(holder.mExport.getContext().getString(R.string.export), (dialogInterface, i) -> {
+                    PackageExplorer.copyToStorage(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+                            .getContext()) + "/" + data.get(position), PackageData.getPackageDir(holder.mExport.getContext()) + "/" +
+                            PackageData.mApplicationID, (Activity) holder.mExport.getContext());
+                }).show());
     }
 
     @Override

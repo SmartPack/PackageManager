@@ -24,7 +24,6 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 
 import java.io.File;
-import java.util.List;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
@@ -53,26 +52,33 @@ public class PackageExplorer {
         return null;
     }
 
-    public static void copyToStorage(String path, Activity activity) {
+    public static void copyToStorage(String path, String dest, Activity activity) {
         if (Utils.isStorageWritePermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[] {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
             return;
         }
-        new AsyncTask<Void, Void, List<String>>() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            protected List<String> doInBackground(Void... voids) {
-                Utils.copy(path, PackageData.getPackageDir(activity) + "/" + new File(path).getName());
+            protected void onPreExecute() {
+                super.onPreExecute();
+                if (!Utils.exist(dest)) {
+                    Utils.mkdir(dest);
+                }
+            }
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Utils.copy(path, dest + "/" + new File(path).getName());
                 return null;
             }
 
             @Override
-            protected void onPostExecute(List<String> recyclerViewItems) {
-                super.onPostExecute(recyclerViewItems);
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
                 new MaterialAlertDialogBuilder(activity)
                         .setMessage(new File(path).getName() + " " +
-                                activity.getString(R.string.export_file_message, PackageData.getPackageDir(activity)))
+                                activity.getString(R.string.export_file_message, dest))
                         .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                         }).show();
             }

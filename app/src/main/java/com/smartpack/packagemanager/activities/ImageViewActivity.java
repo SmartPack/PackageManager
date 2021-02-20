@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
@@ -50,7 +51,8 @@ public class ImageViewActivity extends AppCompatActivity {
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                    PackageExplorer.copyToStorage(path, this);
+                    PackageExplorer.copyToStorage(path, PackageData.getPackageDir(this) + "/" +
+                            PackageData.mApplicationID, this);
                 }).show());
 
         mBack.setOnClickListener(v -> finish());
