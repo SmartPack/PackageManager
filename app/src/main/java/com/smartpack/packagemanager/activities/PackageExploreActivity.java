@@ -92,18 +92,22 @@ public class PackageExploreActivity extends AppCompatActivity {
     }
 
     private List<String> getData() {
-        mData.clear();
-        // Add directories
-        for (File mFile : getFilesList()) {
-            if (mFile.isDirectory()) {
-                mData.add(mFile.getAbsolutePath());
+        try {
+            mData.clear();
+            // Add directories
+            for (File mFile : getFilesList()) {
+                if (mFile.isDirectory()) {
+                    mData.add(mFile.getAbsolutePath());
+                }
             }
-        }
-        // Add files
-        for (File mFile : getFilesList()) {
-            if (mFile.isFile()) {
-                mData.add(mFile.getAbsolutePath());
+            // Add files
+            for (File mFile : getFilesList()) {
+                if (mFile.isFile()) {
+                    mData.add(mFile.getAbsolutePath());
+                }
             }
+        } catch (NullPointerException ignored) {
+            finish();
         }
         return mData;
     }
