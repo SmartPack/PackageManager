@@ -27,8 +27,8 @@
     <string name="credits_summary">"<b><i>Grarak</i></b>: KernelAdiutor (Базовый код)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Корейский перевод\n<b><i>tsiflimagas</i></b>: Греческий перевод\n<b><i>Lennoard Silva</i></b>: Португальский (Br) перевод\n<b><i>Mikesew1320</i></b>: Амхарский перевод\n<b><i>MONSTER_PC</i></b>: Русский и Украинский перевод\n<b><i>Toxinpiper</i></b>: Значок приложения"</string>
     <string name="dark_theme">"Тёмная тема"</string>
     <string name="dark_theme_auto">"Авто"</string>
-    <string name="dark_theme_disable">"Заморозить"</string>
-    <string name="dark_theme_enable">"Разморозить"</string>
+    <string name="dark_theme_disable">"Включить"</string>
+    <string name="dark_theme_enable">"Выключить"</string>
     <string name="data_dir">"Каталог данных"</string>
     <string name="date_installation">"Дата установки"</string>
     <string name="date_installed">"Впервые установлено: %s"</string>
@@ -44,8 +44,8 @@
     <string name="enabled">"разморожено"</string>
     <string name="enabling">"Разморозка %s"</string>
     <string name="export">"Экспорт"</string>
-    <string name="export_summary">"экспортируется в %s. Вы хотите поделиться этим?"</string>
-    <string name="export_bundle_summary">"Весь пакет приложения экспортируется %s!"</string>
+    <string name="export_summary">"экспортирован в %s. Вы хотите им поделиться?"</string>
+    <string name="export_bundle_summary">"Весь пакет приложения экспортиован %s!"</string>
     <string name="exporting">"Экспорт %s"</string>
     <string name="exporting_bundle">"Экспорт %s пакета приложений"</string>
     <string name="everything_done">"Все готово!"</string>
@@ -54,8 +54,8 @@
     <string name="install">"Установка"</string>
     <string name="install_bundle">"Установить Split APKs"</string>
     <string name="install_bundle_initialized">"Инициализация установки Split APK"</string>
-    <string name="installing_bundle">"Установка пакета приложений!"</string>
-    <string name="installing_bundle_finished">"Установка пакета приложений завершена!"</string>
+    <string name="installing_bundle">"Установка пакетного приложения!"</string>
+    <string name="installing_bundle_finished">"Установка пакетного приложения завершена!"</string>
     <string name="language">"Язык"</string>
     <string name="language_am">"Амхарский"</string>
     <string name="language_el">"Греческий"</string>
@@ -72,7 +72,7 @@
     <string name="no_internet">"Пожалуйста, проверьте ваше интернет-соединение!"</string>
     <string name="no_root">"Эта функция не будет работать без root прав!"</string>
     <string name="open">"Открыть"</string>
-    <string name="open_message">"Вы уже запускаете это приложение."</string>
+    <string name="open_message">"Вы уже запустили это приложение."</string>
     <string name="open_failed">"%s не предназначено для работы в пространстве пользователя!"</string>
     <string name="package_id">"Идентификатор пакета"</string>
     <string name="package_removed">"Выбранный пакет удален! Неудача…"</string>
@@ -88,8 +88,8 @@
     <string name="search">"Поиск…"</string>
     <string name="session_id">"Идентификатор сессии: %s"</string>
     <string name="share">"Поделиться"</string>
-    <string name="shared_by">"%s/поделился Package Manager"</string>
-    <string name="share_message">"Package Manager %s можно получить изbundle_installPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
+    <string name="shared_by">"%s/поделиться Package Manager"</string>
+    <string name="share_message">"Package Manager %s можно получить в\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
     <string name="share_with">"Поделиться с"</string>
     <string name="sort_by">"Сортировать приложения по"</string>
     <string name="source_code">"Исходный код"</string>
@@ -103,22 +103,37 @@
     <string name="support_meal">"Купите мне еды"</string>
     <string name="support_coffee">"Купите мне кофе"</string>
     <string name="support_already_received_message">"Вы уже поддержали разработку с помощью этого элемента раньше!"</string>
-    <string name="support_received_message">"Большое спасибо вам за вашу поддержку \u2665bundle_installЭто будет очень мотивировать меня поддерживать мои проекты!"</string>
+    <string name="support_received_message">"Большое спасибо вам за вашу поддержку \u2665Это будет очень мотивировать меня поддерживать мои проекты!"</string>
     <string name="support_retry_message">"Пожалуйста, попробуйте купить еще раз!"</string>
     <string name="support_status_message">"Большое спасибо за вашу поддержку!"</string>
     <string name="sure_question">"Вы уверены?"</string>
     <string name="system">"Системные приложения"</string>
-    <string name="turn_on_off">"Включение/отключение"</string>
+    <string name="turn_on_off">"Включение/выключение"</string>
     <string name="uninstall">"Удалить"</string>
     <string name="uninstall_nope">"Сожалею! Вы не можете сделать это отсюда!"</string>
     <string name="uninstall_summary">"Удаление %s"</string>
     <string name="uninstall_title">"Вы уверены, что хотите удалить %s?"</string>
-    <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!\n\n*** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***
-"</string>
+    <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!\n\n*** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***\n"</string>
     <string name="user">"Пользовательские приложения"</string>
     <string name="version">"Версия: %s"</string>
     <string name="welcome_message">"Добро пожаловать в Package Manager, простое, но мощное приложение для управления вашими приложениями."</string>
     <string name="welcome_message_root">"ПРЕДУПРЕЖДЕНИЕ: Это приложение слишком мощное, чтобы испортить ваше устройство. Разработчик этого приложения не несет никакой ответственности, если с вашим устройством что-то случилось."</string>
     <string name="wrong_extension">"Пожалуйста, выберите файл с %s расширением."</string>
     <string name="yes">"Да"</string>
+    <string name="explore">"Обзор"</string>
+    <string name="export_file_message">"успешно экспортирован в %s!"</string>
+    <string name="export_storage_message">"Экспортировать %s в хранилище устройства?"</string>
+    <string name="file_picker_message">"Обратите внимание: эта функция очень экспериментальная!"</string>
+    <string name="more_apps_summary">"Ознакомьтесь с другими приложениями, предоставленными разработчиком, в Play Маркет"</string>
+    <string name="open_failed_export_message">"Невозможно открыть %s! Вы хотите экспортировать его в хранилище устройства?"</string>
+    <string name="rate_us">"Оценить приложение"</string>
+    <string name="rate_us_Summary">"Напишите отзыв или/и поставьте оценку Package Manager в Play Маркет"</string>
+    <string name="report_issue_summary">"Сообщить о проблеме на GitHub"</string>
+    <string name="settings">"Настройки"</string>
+    <string name="share_app">"Поделиться приложением"</string>
+    <string name="share_app_Summary">"Предложить друзьям использовать Package Manager"</string>
+    <string name="source_code_summary">"Package Manage- это приложение с открытым исходным кодом, которое готово принимать вклад сообщества разработчиков. Щелкните здесь, чтобы ознакомиться с исходным кодом!"</string>
+    <string name="support_summary">"Присоединиться к группе поддержки в Telegram"</string>
+    <string name="translations">"Переводы"</string>
+    <string name="translations_summary">"Помогите мне перевести это приложение! Нажмите здесь, чтобы получить исходные языковые строки на английском"</string>
 </resources>
