@@ -165,6 +165,13 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.restartApp(this);
                             }
                             break;
+                        case 10:
+                            if (!Utils.getBoolean("use_de", false, this)) {
+                                Utils.setDefaultLanguage(this);
+                                Utils.saveBoolean("use_de", true, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();

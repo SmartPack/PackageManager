@@ -21,17 +21,15 @@
 * ROOT Access required for some advanced features
 
 ## Features
-Package Manager is a simple, yet powerful application to manage the apps installed on an android phone, which can do the following things
-* Offer a beautiful list view of System and User Apps, together or separately.
-* Helps to do basic tasks such as Open app, show App info, visit PlayStore page, uninstall (User apps), etc.
-* Do advanced tasks such (need Root access)
-  * Uninstall system apps (de-bloating)
-  * Export (to SDCard) and Share an app
-  * Export Split APK's into SDCard
-  * Install Split APK's from SDCard.
-  * Disable or Enable apps
-  * Back up individual app data 
-  * Restore individual app data
+Package Manager is a simple, yet powerful application to manage the apps installed on an android phone, which offers the following features
+* A beautiful list view of System and User applications, together or separately.
+* Helps to do basic tasks such as Open app, show app info, visit PlayStore page, uninstall (User apps), etc.
+* Explore and export contents of an installed app (Experimental).
+* Export individual or a batch of apps (including Split apk's) into device storage.
+* Do advanced tasks such as (need Root access).
+  * Uninstall an individual or a batch of system apps (de-bloating).
+  * Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
+  * Disable or Enable an individual or a batch of apps.
 
 ## Donations
 If you like to appreciate my work, please consider donating to me (either via [Liberapay](https://liberapay.com/sunilpaulmathew/donate), [PayPal](https://www.paypal.me/menacherry/), [Ko-fi](https://ko-fi.com/sunilpaulmathew/), or by purchasing the [SmartPack Donation Package](https://play.google.com/store/apps/details?id=com.smartpack.donate) from playstore) as it is helpful to continue my projects more active, although it is not at all necessary.
@@ -61,6 +59,7 @@ Please help me to translate this application via [POEditor](https://poeditor.com
 * [Lennoard Silva](https://github.com/Lennoard), Portuguese (Brazilian) Translations
 * [Nikita](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
 * B3Nd2R & Reno, French Translations
+* Jan, German Translations
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 
 ## License
