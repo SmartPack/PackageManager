@@ -22,7 +22,6 @@
     <string name="copying_apk_message">"സ്‌പ്ലിറ്റ് APKകൾ പ്രവർത്തന ഡയറക്‌ടറിയിലേക്ക് പകർത്തുന്നു"</string>
     <string name="creating_directory_message">"ഒരു താൽക്കാലിക പ്രവർത്തന ഡയറക്‌ടറി സൃഷ്‌ടിക്കുന്നു"</string>
     <string name="credits">"ക്രെഡിറ്റുകൾ"</string>
-    <string name="credits_summary">"<b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>SmgKhOaRn</i></b>: Korean translations\n<b><i>Toxinpiper</i></b>: App Icon"</string>
     <string name="dark_theme">"ഇരുണ്ട തീം"</string>
     <string name="date_installation">"ഇൻസ്റ്റാളേഷൻ തീയതികൾ"</string>
     <string name="date_installed">"ആദ്യം ഇൻസ്റ്റാൾ ചെയ്തത്: %s"</string>

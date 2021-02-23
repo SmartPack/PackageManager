@@ -24,7 +24,6 @@
     <string name="copying_apk_message">"Bölünmüş APK'ler çalışma klasörüne kopyalanıyor"</string>
     <string name="creating_directory_message">"Geçici bir çalışma klasörü oluşturuluyor"</string>
     <string name="credits">"Katkılar"</string>
-    <string name="credits_summary">"<b><i>Grarak</i></b>: KernelAdiutor (kod tabanı)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>FiestaLake</i></b>: Korece çeviri\n<b><i>tsiflimagas</i></b>: Yunanca çeviri\n<b><i>Lennoard Silva</i></b>: Portekizce (Br) çeviri\n<b><i>Mikesew1320</i></b>: Amharca (Habeşistan) çeviri\n<b><i>MONSTER_PC</i></b>: Rusça ve Ukraynaca çeviri\n<b><i>B3Nd2R &amp; Reno</i></b>: Fransızca çeviri\n<b><i>BSÇE'den omerakgoz34</i></b>: Türkçe çeviri\n<b><i>Toxinpiper</i></b>: Uygulama Simgesi"</string>
     <string name="dark_theme">"Karanlık Tema"</string>
     <string name="dark_theme_auto">"Otomatik"</string>
     <string name="dark_theme_disable">"Devre Dışı Bırak"</string>

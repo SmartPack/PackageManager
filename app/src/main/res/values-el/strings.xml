@@ -20,7 +20,6 @@
     <string name="copying_apk_message">Αντιγραφή διαιρεμένων APKs στο φάκελο εργασίας</string>
     <string name="creating_directory_message">Δημιουργία προσωρινού φακέλου εργασίας</string>
     <string name="credits">Ευχαριστίες</string>
-    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (Βάση κώδικα)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>SmgKhOaRn</i></b>: Κορεατική μετάφραση\n<b><i>tsiflimagas</i></b>: Ελληνική μετάφραση\n<b><i>Lennoard Silva</i></b>: Πορτογαλική (Br) μετάφραση\n<b><i>Mikesew1320</i></b>: Amharic translations\n<b><i>Toxinpiper</i></b>: Εικονίδιο Εφαρμογής</string>
     <string name="dark_theme">Σκούρο Θέμα</string>
     <string name="disable_message">θα είναι %s! Είστε σίγουρος;</string>
     <string name="disabled">Ανενεργό</string>

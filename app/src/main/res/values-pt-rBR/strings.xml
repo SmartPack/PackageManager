@@ -11,7 +11,6 @@
     <string name="cancel">Cancelar</string>
     <string name="change_logs">Mudanças</string>
     <string name="credits">Créditos</string>
-    <string name="credits_summary"><b><i>Grarak</i></b>: KernelAdiutor (Báse de código)\n<b><i>SmgKhOaRn</i></b>: Tradção coreana\n<b><i>tsiflimagas</i></b>: Tradução grega\n<b><i>Lennoard Silva</i></b>: Tradução portuguesa (BR)\n<b><i>Toxinpiper</i></b>: Ícone do app</string>
     <string name="dark_theme">Tema escuro</string>
     <string name="disable_message">será %s! Tem certeza?</string>
     <string name="disabled">desativado</string>
