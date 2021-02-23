@@ -1,0 +1,7 @@
+* Added activity page to Package info.
+* Updated app explorer to avoid possible crashes.
+* Fixed minor issues in light mode.
+* Added documentation to Settings page and welcome dialog.
+* Added German & Turkish translations.
+* Updated Russian translation.
+* Miscellaneous changes.

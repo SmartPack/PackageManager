@@ -1,5 +1,9 @@
 # Change-logs
 
+## 28. February 23, 2021
+*Release-tag: 3.5*<br>
+Added activity page to Package info. Updated app explorer to avoid possible crashes. Fixed minor issues in light mode. Added documentation to Settings page and welcome dialog. Added German & Turkish translations. Updated Russian translation. Miscellaneous changes.
+
 ## 27. February 20, 2021
 *Release-tag: 3.4*<br>
 Partly re-designed app UI and menu options. More options are added to package details page. Split APK Installer now handles "apkm" bundles (root-only). App now allow exporting individual split apks. Improved app exploring. Added French translations. Updated Korean translations. Miscellaneous changes.
