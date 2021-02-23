@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PagerAdapter;
+import com.smartpack.packagemanager.fragments.ActivitiesFragment;
 import com.smartpack.packagemanager.fragments.PackageInfoFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.fragments.SplitApksFragment;
@@ -45,6 +46,9 @@ public class PackageDetailsActivity extends AppCompatActivity {
         }
         if (PackageDetails.getPermissions(PackageData.mApplicationID, this).size() > 0) {
             adapter.AddFragment(new PermissionsFragment(), getString(R.string.permissions));
+        }
+        if (PackageDetails.getActivities(PackageData.mApplicationID, this).size() > 0) {
+            adapter.AddFragment(new ActivitiesFragment(), getString(R.string.activities));
         }
 
         mViewPager.setAdapter(adapter);

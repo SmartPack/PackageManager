@@ -3,6 +3,7 @@
 
     <string name="about">About</string>
     <string name="about_summary"><i>A simple, yet powerful application to manage your apps.</i></string>
+    <string name="activities">Activities</string>
     <string name="already_exists">%s already exists! Aborting!</string>
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>

@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -30,6 +31,7 @@ import com.smartpack.packagemanager.R;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -125,9 +127,7 @@ public class PackageDetails {
                         .setTitle(name)
                         .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir(activity)))
                         .setPositiveButton(R.string.cancel, (dialog, id) -> {
-                        })
-
-                        .show();
+                        }).show();
             }
         }.execute();
     }
@@ -251,6 +251,16 @@ public class PackageDetails {
         } catch (NullPointerException ignored) {
         }
         return perms;
+    }
+
+    public static List<ActivityInfo> getActivities(String packageName, Context context) {
+        List<ActivityInfo> activities = new ArrayList<>();
+        try {
+            ActivityInfo[] list = PackageData.getPackageManager(context).getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
+            activities.addAll(Arrays.asList(list));
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return activities;
     }
 
     private static void showProgress(LinearLayout linearLayout, MaterialTextView textView, String message) {

@@ -20,14 +20,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewPermissionsAdapter;
+import com.smartpack.packagemanager.adapters.RecycleViewActivitiesAdapter;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-public class PermissionsFragment extends Fragment {
+public class ActivitiesFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -37,7 +37,7 @@ public class PermissionsFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecycleViewPermissionsAdapter mRecycleViewAdapter = new RecycleViewPermissionsAdapter(PackageDetails.getPermissions(PackageData.mApplicationID, requireActivity()));
+        RecycleViewActivitiesAdapter mRecycleViewAdapter = new RecycleViewActivitiesAdapter(PackageDetails.getActivities(PackageData.mApplicationID, requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;
