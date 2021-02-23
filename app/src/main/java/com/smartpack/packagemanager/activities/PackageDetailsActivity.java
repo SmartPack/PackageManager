@@ -36,7 +36,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_packagedetails);
 
         TabLayout mTabLayout = findViewById(R.id.tab_Layout);
-        ViewPager mViewPager = findViewById(R.id.viewPagerID);
+        ViewPager mViewPager = findViewById(R.id.view_pager);
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageInfoFragment(), getString(R.string.app_info));

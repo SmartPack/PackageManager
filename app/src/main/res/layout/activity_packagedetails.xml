@@ -14,12 +14,12 @@
         app:tabMode="scrollable"
         android:textAlignment="center"
         android:background="@color/colorBlack"
-        app:tabTextColor="?android:attr/textColorPrimary"
+        app:tabTextColor="@color/colorWhite"
         app:tabSelectedTextColor="?attr/colorAccent"
         android:id="@+id/tab_Layout" />
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewPagerID" />
+        android:id="@+id/view_pager" />
 </LinearLayout>
