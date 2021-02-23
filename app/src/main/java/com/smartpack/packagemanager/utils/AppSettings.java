@@ -49,6 +49,8 @@ public class AppSettings {
             return context.getString(R.string.language_fr);
         } else if (Utils.getBoolean("use_de", false, context)) {
             return context.getString(R.string.language_de);
+        } else if (Utils.getBoolean("use_tr", false, context)) {
+            return context.getString(R.string.language_tr);
         } else {
             return context.getString(R.string.language_default) + " (" + java.util.Locale.getDefault().getLanguage() + ")";
         }

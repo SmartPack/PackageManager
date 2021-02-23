@@ -60,6 +60,7 @@ Please help me to translate this application via [POEditor](https://poeditor.com
 * [Nikita](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
 * B3Nd2R & Reno, French Translations
 * Jan, German Translations
+* BSÇE (BlueSoul Çeviri Ekibi), Turkish Translations
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 
 ## License
