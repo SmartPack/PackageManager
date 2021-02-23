@@ -175,12 +175,6 @@ public class PackageExploreActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Utils.snackbar(findViewById(android.R.id.content), getString(R.string.file_picker_message));
-    }
-
-    @Override
     public void onBackPressed() {
         if (PackageData.mPath.equals(getCacheDir().toString() + "/apk/")) {
             Utils.delete(getCacheDir().getPath() + "/apk");

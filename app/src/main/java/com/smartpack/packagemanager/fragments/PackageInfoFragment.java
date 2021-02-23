@@ -32,12 +32,14 @@ import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
 
+import java.util.Objects;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
 public class PackageInfoFragment extends Fragment {
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "StringFormatInvalid"})
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -95,7 +97,22 @@ public class PackageInfoFragment extends Fragment {
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
                     PackageData.clearAppSettings(PackageData.mApplicationID);
                 }).show());
-        mExplore.setOnClickListener(v -> PackageExplorer.exploreAPK(mProgressLayout, PackageData.mDirSource, requireActivity()));
+        mExplore.setOnClickListener(v -> {
+            if (Utils.getBoolean("firstExploreAttempt", true, requireActivity())) {
+                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(getString(R.string.warning))
+                        .setMessage(getString(R.string.file_picker_message))
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+                            Utils.saveBoolean("firstExploreAttempt", false, requireActivity());
+                            PackageExplorer.exploreAPK(mProgressLayout, PackageData.mDirSource, requireActivity());
+                        }).show();
+            } else {
+                PackageExplorer.exploreAPK(mProgressLayout, PackageData.mDirSource, requireActivity());
+            }
+
+        });
         mExport.setOnClickListener(v -> PackageDetails.exportApp(mProgressLayout, mProgressMessage, requireActivity()));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(requireActivity())
                 .setIcon(PackageData.mApplicationIcon)

@@ -59,7 +59,7 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
         if (data.get(position).getIcon() != null) {
             holder.mIcon.setImageDrawable(data.get(position).getIcon());
             holder.mIcon.setVisibility(View.VISIBLE);
-            if (position != 7 && !Utils.isDarkTheme(holder.mIcon.getContext())) {
+            if (position != 8 && !Utils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setColorFilter(Color.BLACK);
             }
         }

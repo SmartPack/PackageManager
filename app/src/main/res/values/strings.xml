@@ -45,6 +45,8 @@
     <string name="disabled">disabled</string>
     <string name="disabling">Disabling %s</string>
     <string name="dismiss">Dismiss</string>
+    <string name="documentation">Documentation</string>
+    <string name="documentation_summary">Check out detailed documentation to use Package Manager</string>
     <string name="done">Done</string>
     <string name="enable">Enable</string>
     <string name="enabled">enabled</string>
@@ -102,7 +104,7 @@
     <string name="report_issue">Report an Issue</string>
     <string name="report_issue_summary">Raise an issue at GitHub</string>
     <string name="reset">Reset</string>
-    <string name="reset_message">Reset %s?</string>
+    <string name="reset_message">Reset \'%s\'?</string>
     <string name="reset_summary">Resetting %s</string>
     <string name="result">Result: %s</string>
     <string name="search">Search…</string>
@@ -135,7 +137,7 @@
     <string name="sure_question">Are you sure?</string>
     <string name="system">Show System Apps</string>
     <string name="translations">Translations</string>
-    <string name="translations_summary">Help me to translate this app! Click here to get the original language strings in english</string>
+    <string name="translations_summary">Help me to translate this app! Click here to visit POEditor localization project</string>
     <string name="turn_on_off">Turn-On/Off</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
@@ -144,6 +146,7 @@
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="user">Show User Apps</string>
     <string name="version">Version: %s</string>
+    <string name="warning">Warning</string>
     <string name="welcome_message">Welcome to Package Manager, a simple, yet powerful application to manage your apps.</string>
     <string name="welcome_message_root">WARNING: This application is too powerful to mess up your device. The developer of this application won\'t take any responsibility if something wrong happened to your device.</string>
     <string name="welcome_message_noroot">Please Note: Root Access is either unavailable in your device, or declined for Package Manager! The capabilities of this application on your device will be, therefore, limited.</string>

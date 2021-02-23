@@ -362,15 +362,17 @@ public class Utils {
      * The following code is partly taken from https://github.com/morogoku/MTweaks-KernelAdiutorMOD/
      * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
      */
-    public static void WelcomeDialog(Context context) {
-        new MaterialAlertDialogBuilder(Objects.requireNonNull(context))
+    public static void WelcomeDialog(Activity activity) {
+        new MaterialAlertDialogBuilder(Objects.requireNonNull(activity))
                 .setIcon(R.mipmap.ic_launcher)
-                .setTitle(context.getString(R.string.app_name))
-                .setMessage(context.getString(R.string.welcome_message) + "\n\n" + context.getString(rootAccess() ? R.string.welcome_message_root
+                .setTitle(R.string.app_name)
+                .setMessage(activity.getString(R.string.welcome_message) + "\n\n" + activity.getString(rootAccess() ? R.string.welcome_message_root
                         : R.string.welcome_message_noroot))
                 .setCancelable(false)
-                .setPositiveButton(context.getString(R.string.got_it), (dialog, id) ->
-                        Utils.saveBoolean("welcomeMessage", false, context)).show();
+                .setNeutralButton(R.string.documentation, (dialog, id) ->
+                        Utils.launchUrl("https://ko-fi.com/post/Package-Manager-Documentation-L3L23Q2I9", activity))
+                .setPositiveButton(R.string.got_it, (dialog, id) ->
+                        Utils.saveBoolean("welcomeMessage",false, activity)).show();
     }
 
     public static String readAssetFile(Context context, String file) {

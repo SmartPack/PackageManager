@@ -83,6 +83,8 @@ public class SettingsActivity extends AppCompatActivity {
         mData.add(new RecycleViewItem(getString(R.string.support_development), null, getResources().getDrawable(R.drawable.ic_donate), null));
         mData.add(new RecycleViewItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(
                 R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
+        mData.add(new RecycleViewItem(getString(R.string.documentation), getString(R.string.documentation_summary), getResources().getDrawable(
+                R.drawable.ic_book), "https://ko-fi.com/post/Package-Manager-Documentation-L3L23Q2I9"));
         mData.add(new RecycleViewItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(
                 R.drawable.ic_translate), "https://poeditor.com/join/project?hash=0CitpyI1Oc"));
         mData.add(new RecycleViewItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
@@ -215,7 +217,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }).show();
             } else if (position == 5) {
                 Billing.showDonateOption(this);
-            } else if (position == 8) {
+            } else if (position == 9) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
