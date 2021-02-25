@@ -43,9 +43,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
+import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -228,18 +230,25 @@ public class PackageTasksFragment extends Fragment {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                         Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
                     } else {
-                        if (Utils.getBoolean("firstAttempt", true, requireActivity())) {
-                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                    .setIcon(R.mipmap.ic_launcher)
-                                    .setTitle(getString(R.string.install_bundle))
-                                    .setMessage(getString(R.string.bundle_install_message))
-                                    .setCancelable(false)
-                                    .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-                                        Utils.saveBoolean("firstAttempt", false, requireActivity());
-                                        initializeSplitAPKInstallation();
-                                    }).show();
+                        PackageExplorer.mAPKList.clear();
+                        if (Utils.getBoolean("filePicker", true, requireActivity())) {
+                            PackageData.mPath = Environment.getExternalStorageDirectory().toString();
+                            Intent filePicker = new Intent(activity, FilePickerActivity.class);
+                            startActivity(filePicker);
                         } else {
-                            initializeSplitAPKInstallation();
+                            if (Utils.getBoolean("firstAttempt", true, requireActivity())) {
+                                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                        .setIcon(R.mipmap.ic_launcher)
+                                        .setTitle(getString(R.string.install_bundle))
+                                        .setMessage(getString(R.string.bundle_install_message))
+                                        .setCancelable(false)
+                                        .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+                                            Utils.saveBoolean("firstAttempt", false, requireActivity());
+                                            initializeSplitAPKInstallation();
+                                        }).show();
+                            } else {
+                                initializeSplitAPKInstallation();
+                            }
                         }
                     }
                     break;

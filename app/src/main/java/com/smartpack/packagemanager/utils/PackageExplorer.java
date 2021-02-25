@@ -19,16 +19,22 @@ import android.widget.LinearLayout;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
  */
 public class PackageExplorer {
+
+    public static List<String> mAPKList = new ArrayList<>();
+    public static MaterialCardView mSelect;
 
     public static boolean isTextFile(String path) {
         return path.endsWith(".txt") || path.endsWith(".xml") || path.endsWith(".json") || path.endsWith(".properties")

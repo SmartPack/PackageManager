@@ -204,6 +204,9 @@ public class Utils {
     }
 
     public static void copy(String source, String dest) {
+        if (!exist(Objects.requireNonNull(new File(dest).getParentFile()).toString())) {
+            mkdir(Objects.requireNonNull(new File(dest).getParentFile()).toString());
+        }
         try {
             FileInputStream inputStream = new FileInputStream(new File(source));
             FileOutputStream outputStream = new FileOutputStream(new File(dest));

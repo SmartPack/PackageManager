@@ -73,6 +73,8 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         mData.add(new RecycleViewItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null));
+        mData.add(new RecycleViewItem(getString(R.string.file_picker), getString(Utils.getBoolean("filePicker", true, this) ? R.string.file_picker_inbuilt
+                : R.string.file_picker_external), getResources().getDrawable(R.drawable.ic_folder), null));
         mData.add(new RecycleViewItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null));
         mData.add(new RecycleViewItem(getString(R.string.source_code), getString(R.string.source_code_summary), getResources().getDrawable(
                 R.drawable.ic_github), "https://github.com/SmartPack/PackageManager"));
@@ -186,6 +188,25 @@ public class SettingsActivity extends AppCompatActivity {
                 }).show();
             } else if (position == 1) {
                 new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
+                        R.array.file_picker), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            Utils.saveBoolean("filePicker", true, this);
+                            mData.set(position, new RecycleViewItem(getString(R.string.file_picker), getString(R.string.file_picker_inbuilt),
+                                    getResources().getDrawable(R.drawable.ic_folder), null));
+                            mRecycleViewAdapter.notifyItemChanged(position);
+                            break;
+                        case 1:
+                            Utils.saveBoolean("filePicker", false, this);
+                            mData.set(position, new RecycleViewItem(getString(R.string.file_picker), getString(R.string.file_picker_external),
+                                    getResources().getDrawable(R.drawable.ic_folder), null));
+                            mRecycleViewAdapter.notifyItemChanged(position);
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> {
+                }).show();
+            } else if (position == 2) {
+                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
                         R.array.app_theme), (dialogInterface, i) -> {
                     switch (i) {
                         case 0:
@@ -215,9 +236,9 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();
-            } else if (position == 5) {
+            } else if (position == 6) {
                 Billing.showDonateOption(this);
-            } else if (position == 9) {
+            } else if (position == 10) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));

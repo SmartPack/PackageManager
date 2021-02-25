@@ -21,4 +21,9 @@
         <item>@string/language_de</item>
         <item>@string/language_tr</item>
     </string-array>
+
+    <string-array name="file_picker">
+        <item>@string/file_picker_inbuilt</item>
+        <item>@string/file_picker_external</item>
+    </string-array>
 </resources>

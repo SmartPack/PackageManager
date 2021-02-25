@@ -13,6 +13,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
@@ -24,12 +25,11 @@ import com.smartpack.packagemanager.utils.PackageTasks;
 
 public class PackageTasksActivity extends AppCompatActivity {
 
-    public static final String TITLE_START = "start";
-    public static final String TITLE_FINISH = "finish";
+    public static final String TITLE_START = "start", TITLE_FINISH = "finish";
 
-    private static MaterialTextView mCancelButton;
-    private static MaterialTextView mPackageTitle;
-    private static MaterialTextView mOutput;
+    private MaterialTextView mCancelButton, mOutput, mPackageTitle;
+
+    private NestedScrollView mScrollView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +39,13 @@ public class PackageTasksActivity extends AppCompatActivity {
         mCancelButton = findViewById(R.id.cancel_button);
         mPackageTitle = findViewById(R.id.package_title);
         mOutput = findViewById(R.id.result_text);
-        mCancelButton.setOnClickListener(v -> {
-            onBackPressed();
-        });
+
+        mScrollView = findViewById(R.id.scroll_view);
+
+        mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
+
+        mCancelButton.setOnClickListener(v -> onBackPressed());
+
         refreshStatus();
     }
 
@@ -53,17 +57,15 @@ public class PackageTasksActivity extends AppCompatActivity {
                     while (!isInterrupted()) {
                         Thread.sleep(500);
                         runOnUiThread(() -> {
-                            if (!PackageTasks.mRunning) {
-                                mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
-                            } else {
-                                mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
-                            }
                             if (PackageTasks.mOutput != null) {
                                 mOutput.setText(PackageTasks.mOutput.toString());
                                 mPackageTitle.setVisibility(View.VISIBLE);
                                 mOutput.setVisibility(View.VISIBLE);
                                 if (!PackageTasks.mRunning) {
+                                    mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
                                     mCancelButton.setVisibility(View.VISIBLE);
+                                } else {
+                                    mScrollView.fullScroll(NestedScrollView.FOCUS_DOWN);
                                 }
                             }
                         });
