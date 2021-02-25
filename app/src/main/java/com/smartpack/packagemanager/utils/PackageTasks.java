@@ -143,19 +143,19 @@ public class PackageTasks {
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
                         if (SplitAPKInstaller.isAppBundle(PackageData.getParentDir(packageID, activity))) {
-                            if (Utils.exist(PackageData.getPackageDir(activity) + "/" + packageID)) {
+                            if (Utils.exist(PackageData.getPackageDir() + "/" + packageID)) {
                                 mOutput.append("** ").append(activity.getString(R.string.already_exists, packageID)).append(" *\n\n");
                             } else {
-                                Utils.mkdir(PackageData.getPackageDir(activity) + "/" + packageID);
+                                Utils.mkdir(PackageData.getPackageDir() + "/" + packageID);
                                 mOutput.append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
                                 for (final String splitApps : SplitAPKInstaller.splitApks(PackageData.getParentDir(packageID, activity))) {
-                                    Utils.copy(PackageData.getParentDir(packageID, activity) + "/" + splitApps, PackageData.getPackageDir(activity) + "/" + packageID + "/" + splitApps);
+                                    Utils.copy(PackageData.getParentDir(packageID, activity) + "/" + splitApps, PackageData.getPackageDir() + "/" + packageID + "/" + splitApps);
                                 }
                                 mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                             }
                         } else {
                             mOutput.append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
-                            Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir(activity) + "/" + packageID + ".apk");
+                            Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir() + "/" + packageID + ".apk");
                             mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
                         Utils.sleep(1);

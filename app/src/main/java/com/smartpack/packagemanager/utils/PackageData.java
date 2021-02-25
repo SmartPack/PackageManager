@@ -40,8 +40,8 @@ public class PackageData {
     public static String mPath;
     public static String mSearchText;
 
-    public static void makePackageFolder(Context context) {
-        File file = new File(getPackageDir(context));
+    public static void makePackageFolder() {
+        File file = new File(getPackageDir());
         if (file.exists() && file.isFile()) {
             file.delete();
         }
@@ -155,12 +155,8 @@ public class PackageData {
         }
     }
 
-    public static String getPackageDir(Context context) {
-        if (Build.VERSION.SDK_INT >= 29) {
-            return Objects.requireNonNull(context.getExternalFilesDir("")).toString();
-        } else {
-            return Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
-        }
+    public static String getPackageDir() {
+        return Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
     }
 
     public static void clearAppSettings(String packageID) {

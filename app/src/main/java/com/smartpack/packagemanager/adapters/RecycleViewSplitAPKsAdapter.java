@@ -62,7 +62,7 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
                 })
                 .setPositiveButton(holder.mExport.getContext().getString(R.string.export), (dialogInterface, i) -> {
                     PackageExplorer.copyToStorage(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
-                            .getContext()) + "/" + data.get(position), PackageData.getPackageDir(holder.mExport.getContext()) + "/" +
+                            .getContext()) + "/" + data.get(position), PackageData.getPackageDir() + "/" +
                             PackageData.mApplicationID, (Activity) holder.mExport.getContext());
                 }).show());
     }

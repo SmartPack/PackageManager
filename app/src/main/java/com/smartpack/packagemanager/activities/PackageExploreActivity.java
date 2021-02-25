@@ -85,7 +85,7 @@ public class PackageExploreActivity extends AppCompatActivity {
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
-                                .copyToStorage(mData.get(position), PackageData.getPackageDir(this) + "/" +
+                                .copyToStorage(mData.get(position), PackageData.getPackageDir() + "/" +
                                         PackageData.mApplicationID,this)).show();
             }
         });

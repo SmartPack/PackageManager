@@ -51,7 +51,7 @@ public class TextViewActivity extends AppCompatActivity {
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                    PackageExplorer.copyToStorage(path, PackageData.getPackageDir(this) + "/" +
+                    PackageExplorer.copyToStorage(path, PackageData.getPackageDir() + "/" +
                             PackageData.mApplicationID, this);
                 }).show());
 

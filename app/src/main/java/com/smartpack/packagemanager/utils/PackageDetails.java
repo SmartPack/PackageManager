@@ -48,7 +48,7 @@ public class PackageDetails {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
         } else if (SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, activity)).size() > 1) {
-            if (Utils.exist(PackageData.getPackageDir(activity) + "/" + PackageData.mApplicationID)) {
+            if (Utils.exist(PackageData.getPackageDir() + "/" + PackageData.mApplicationID)) {
                 Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.already_exists, PackageData.mApplicationID));
             } else {
                 exportingBundleTask(linearLayout, textView, PackageData.getParentDir(PackageData.mApplicationID, activity), PackageData.mApplicationID,
@@ -66,12 +66,12 @@ public class PackageDetails {
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting, name) + "...");
-                PackageData.makePackageFolder(activity);
+                PackageData.makePackageFolder();
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                Utils.copy(apk, PackageData.getPackageDir(activity) + "/" + name + ".apk");
+                Utils.copy(apk, PackageData.getPackageDir() + "/" + name + ".apk");
                 return null;
             }
             @Override
@@ -81,12 +81,12 @@ public class PackageDetails {
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
                         .setTitle(activity.getString(R.string.share) + " " + name + "?")
-                        .setMessage(name + " " + activity.getString(R.string.export_summary, PackageData.getPackageDir(activity)))
+                        .setMessage(name + " " + activity.getString(R.string.export_summary, PackageData.getPackageDir()))
                         .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                         })
                         .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
                             Uri uriFile = FileProvider.getUriForFile(activity,
-                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(activity) + "/" + name + ".apk"));
+                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir() + "/" + name + ".apk"));
                             Intent shareScript = new Intent(Intent.ACTION_SEND);
                             shareScript.setType("application/java-archive");
                             shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
@@ -107,14 +107,14 @@ public class PackageDetails {
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting_bundle, name) + "...");
-                PackageData.makePackageFolder(activity);
-                Utils.mkdir(PackageData.getPackageDir(activity) + "/" + name);
+                PackageData.makePackageFolder();
+                Utils.mkdir(PackageData.getPackageDir() + "/" + name);
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
                 for (final String splitApps : SplitAPKInstaller.splitApks(apk)) {
-                    Utils.copy(apk + "/" + splitApps, PackageData.getPackageDir(activity) + "/" + name + "/" + splitApps);
+                    Utils.copy(apk + "/" + splitApps, PackageData.getPackageDir() + "/" + name + "/" + splitApps);
                 }
                 return null;
             }
@@ -125,7 +125,7 @@ public class PackageDetails {
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
                         .setTitle(name)
-                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir(activity)))
+                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir()))
                         .setPositiveButton(R.string.cancel, (dialog, id) -> {
                         }).show();
             }
