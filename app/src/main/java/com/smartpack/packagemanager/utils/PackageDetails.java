@@ -216,12 +216,14 @@ public class PackageDetails {
 
     public static List<String> getPermissions(String packageName, Context context) {
         List<String> perms = new ArrayList<>();
-        if (getPermissionsGranted(packageName, context).size() > 1) {
-            perms.addAll(getPermissionsGranted(packageName, context));
-        }
-        if (getPermissionsDenied(packageName, context).size() > 1) {
-            perms.addAll(getPermissionsDenied(packageName, context));
-        }
+        try {
+            if (getPermissionsGranted(packageName, context).size() > 1) {
+                perms.addAll(getPermissionsGranted(packageName, context));
+            }
+            if (getPermissionsDenied(packageName, context).size() > 1) {
+                perms.addAll(getPermissionsDenied(packageName, context));
+            }
+        } catch (NullPointerException ignored) {}
         return perms;
     }
 
@@ -256,10 +258,12 @@ public class PackageDetails {
     public static List<ActivityInfo> getActivities(String packageName, Context context) {
         List<ActivityInfo> activities = new ArrayList<>();
         try {
-            ActivityInfo[] list = PackageData.getPackageManager(context).getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
-            activities.addAll(Arrays.asList(list));
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
+            try {
+                ActivityInfo[] list = PackageData.getPackageManager(context).getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
+                activities.addAll(Arrays.asList(list));
+            } catch (PackageManager.NameNotFoundException ignored) {
+            }
+        } catch (NullPointerException ignored) {}
         return activities;
     }
 
