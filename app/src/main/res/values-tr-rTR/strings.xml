@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="about">"Hakkında"</string>
-    <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>i>"</string>
+    <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>"</string>
     <string name="already_exists">"%s zaten var! İptal ediliyor!"</string>
     <string name="apk_path">"APK Konumu"</string>
     <string name="app_info">"Uygulama bilgileri"</string>
@@ -37,7 +37,7 @@
     <string name="disable">"Devre Dışı Bırak"</string>
     <string name="disabled">"devre dışı"</string>
     <string name="disabling">"%s devre dışı bırakılıyor"</string>
-    <string name="dismiss">"Reddet"</string>
+    <string name="dismiss">"İptal Et"</string>
     <string name="done">"Bitti"</string>
     <string name="enable">"Aktif Et"</string>
     <string name="enabled">"aktif"</string>
@@ -69,7 +69,6 @@
     <string name="name">"İsim"</string>
     <string name="native_lib">"Doğal Kütüphane"</string>
     <string name="no_internet">"Lütfen internet bağlantınızı kontrol ediniz!"</string>
-    <string name="no_root">"Bu özellik Root Erişimi olmadan çalışamaz!"</string>
     <string name="open">"Aç"</string>
     <string name="open_message">"Bu uygulamayı zaten çalıştırmaktasınız."</string>
     <string name="open_failed">"%s, kullanıcı alanında çalışmak için tasarlanmadı!"</string>
@@ -112,9 +111,9 @@
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
-    <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** KENDİ SORUMLULUĞUNUZDA KULLANINIZ ***"</string>
+    <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***"</string>
     <string name="user">"Kullanıcı Uygulamalarını Göster"</string>
-    <string name="version">"Versiyon: %s"</string>
+    <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz! Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>
     <string name="yes">"Evet"</string>
@@ -143,6 +142,8 @@
     <string name="language_fr">"Fransızca"</string>
     <string name="list">"Liste"</string>
     <string name="split_apk">"Bölünmüş APK'ler"</string>
-    <string name="welcome_message_root">"UYARI: Bu uygulama, cihazınızı kurcalamak için fazla güçlüdür. Bu uygulamanın geliştiricisi, cihazınızın başına gelebilecek hiçbir şeyin sorumluluğunu kabul etmemektedir."</string>
+    <string name="welcome_message_root">"UYARI\nBu uygulama, cihazınızı kurcalamak için fazla güçlüdür. Bu uygulamanın geliştiricisi, cihazınızın başına gelebilecek hiçbir şeyin sorumluluğunu kabul etmemektedir."</string>
     <string name="welcome_message_noroot">"Sakın unutma: Cihazınızda Root Erişimi mevcut değildir veya Package Manager için reddedilmiştir. Bu nedenle uygulamanın cihazınıza yapabilecekleri sınırlıdır."</string>
+    <string name="language_de">"Almanca"</string>
+    <string name="language_tr">"Türkçe"</string>
 </resources>
