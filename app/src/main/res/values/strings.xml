@@ -74,7 +74,6 @@
     <string name="installation__status_failed">Installation Failed!</string>
     <string name="installation_status_success">Installation Completed Successfully!</string>
     <string name="install_bundle_initialized">Initializing Split APKs Installation</string>
-    <string name="install_bundle_unsupported">You\'ve selected an app bundle, which is not yet supported by the Split APK Installer of Package Manager. Please try again after extracting the APK files from \'%s\' using a suitable File Manager.</string>
     <string name="installing_bundle">Installing App Bundle!</string>
     <string name="installing_bundle_finished">Installing App Bundle Finished!</string>
     <string name="language">Language</string>
