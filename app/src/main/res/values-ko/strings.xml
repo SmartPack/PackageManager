@@ -74,7 +74,6 @@
     <string name="name">이름</string>
     <string name="native_lib">네이티브 라이브러리</string>
     <string name="no_internet">인터넷 연결을 확인해주세요!</string>
-    <string name="no_root">이 기능은 루트 권한 없이 작동하지 않습니다!</string>
     <string name="open">열기</string>
     <string name="open_message">이미 이 앱을 실행하고 있어요.</string>
     <string name="open_failed">%s은(는) 사용자가 실행할 수 있도록 설계되지 않았어요!</string>

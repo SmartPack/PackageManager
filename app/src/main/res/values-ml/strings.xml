@@ -58,7 +58,6 @@
     <string name="more_apps">"കൂടുതൽ അപ്ലിക്കേഷനുകൾ"</string>
     <string name="name">"പേര്"</string>
     <string name="no_internet">"നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക!"</string>
-    <string name="no_root">"റൂട്ട് ആക്‌സസ് ഇല്ലാതെ ഈ സവിശേഷത പ്രവർത്തിക്കില്ല!"</string>
     <string name="open">"തുറക്കുക"</string>
     <string name="open_message">"ഈ അപ്ലിക്കേഷൻ നിലവിൽ പ്രവർത്തിക്കുന്നുണ്ട്."</string>
     <string name="open_failed">"%s 'userspace' ൽ പ്രവർത്തിക്കാൻ രൂപകൽപ്പന ചെയ്‌തിട്ടില്ല!"</string>

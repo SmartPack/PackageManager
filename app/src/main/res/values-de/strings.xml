@@ -68,7 +68,6 @@
     <string name="name">"Name"</string>
     <string name="native_lib">"systemeigene Bibliothek"</string>
     <string name="no_internet">"Bitte überprüfen Sie ihre Internetverbindung!"</string>
-    <string name="no_root">"Diese Funktion können Sie nur mit Root-Berechtigung benutzen!"</string>
     <string name="open">"Öffnen"</string>
     <string name="open_message">"Die App läuft bereits."</string>
     <string name="open_failed">"%s wurde nicht entwickelt um im Vordergrund zu laufen!"</string>

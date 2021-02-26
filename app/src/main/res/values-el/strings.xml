@@ -51,7 +51,6 @@
     <string name="more_apps">Περισσότερα από τον προγραμματιστή</string>
     <string name="name">Όνομα</string>
     <string name="no_internet">Παρακαλώ ελέγξτε τη σύνδεση δικτύου σας!</string>
-    <string name="no_root">Αυτή η επιλογή δε θα λειτουργήσει χωρίς πρόσβαση root!</string>
     <string name="open">Άνοιγμα</string>
     <string name="open_message">Χρησιμοποιείτε ήδη αυτήν την εφαρμογή.</string>
     <string name="open_failed">%s δεν είναι σχεδιασμένο για να εκτελεστεί στο χώρο χρήστη!</string>
