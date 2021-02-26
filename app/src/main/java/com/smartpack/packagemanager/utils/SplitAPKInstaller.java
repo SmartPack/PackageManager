@@ -33,7 +33,7 @@ import java.util.Objects;
  */
 public class SplitAPKInstaller {
 
-    private static boolean mInstall = false;
+    public static boolean mInstall = false;
     private static String mSid;
 
     private static String createInstallationSession() {

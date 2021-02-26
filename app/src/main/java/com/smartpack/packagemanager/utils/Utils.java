@@ -150,6 +150,14 @@ public class Utils {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(name, value).apply();
     }
 
+    public static String getString(String name, String defaults, Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(name, defaults);
+    }
+
+    public static void saveString(String name, String value, Context context) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(name, value).apply();
+    }
+
     /*
      * The following code is partly taken from https://github.com/Grarak/KernelAdiutor
      * Ref: https://github.com/Grarak/KernelAdiutor/blob/master/app/src/main/java/com/grarak/kerneladiutor/utils/Utils.java
@@ -169,7 +177,7 @@ public class Utils {
     }
 
     public static boolean isProUser(Context context) {
-        return getBoolean("support_received", false, context) || !Utils.isNotDonated(context);
+        return getBoolean("support_received", false, context) || !isNotDonated(context);
     }
 
     public static boolean isDarkTheme(Context context) {
@@ -373,9 +381,9 @@ public class Utils {
                         : R.string.welcome_message_noroot))
                 .setCancelable(false)
                 .setNeutralButton(R.string.documentation, (dialog, id) ->
-                        Utils.launchUrl("https://ko-fi.com/post/Package-Manager-Documentation-L3L23Q2I9", activity))
+                        launchUrl("https://ko-fi.com/post/Package-Manager-Documentation-L3L23Q2I9", activity))
                 .setPositiveButton(R.string.got_it, (dialog, id) ->
-                        Utils.saveBoolean("welcomeMessage",false, activity)).show();
+                        saveBoolean("welcomeMessage",false, activity)).show();
     }
 
     public static String readAssetFile(Context context, String file) {

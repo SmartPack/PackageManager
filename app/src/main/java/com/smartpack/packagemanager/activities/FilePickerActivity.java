@@ -28,6 +28,7 @@ import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
+import com.smartpack.packagemanager.utils.SplitAPKInstallerNoRoot;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -74,7 +75,11 @@ public class FilePickerActivity extends AppCompatActivity {
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                            SplitAPKInstaller.handleAppBundle(mProgressLayout, mData.get(position), this);
+                            if (Utils.rootAccess()) {
+                                SplitAPKInstaller.handleAppBundle(mProgressLayout, mData.get(position), this);
+                            } else {
+                                SplitAPKInstallerNoRoot.handleAppBundle(mProgressLayout, mData.get(position), this);
+                            }
                             finish();
                         }).show();
             } else if (mData.get(position).endsWith(".apk")) {
@@ -91,7 +96,11 @@ public class FilePickerActivity extends AppCompatActivity {
         });
 
         PackageExplorer.mSelect.setOnClickListener(v -> {
-            SplitAPKInstaller.installSplitAPKs(null, this);
+            if (Utils.rootAccess()) {
+                SplitAPKInstaller.installSplitAPKs(null, this);
+            } else {
+                SplitAPKInstallerNoRoot.installSplitAPKs(this);
+            }
             finish();
         });
 
