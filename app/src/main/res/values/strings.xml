@@ -96,7 +96,6 @@
     <string name="name">Name</string>
     <string name="native_lib">Native Library</string>
     <string name="no_internet">Please check your internet connection!</string>
-    <string name="no_root">This feature won\'t work without Root Access!</string>
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
     <string name="open_failed">%s is not designed to run in user space!</string>
@@ -150,6 +149,8 @@
     <string name="translations_summary">Help me to translate this app! Click here to visit POEditor localization project</string>
     <string name="turn_on_off">Turn-On/Off</string>
     <string name="uninstall">Uninstall</string>
+    <string name="uninstall_adb">Uninstall with ADB</string>
+    <string name="uninstall_adb_summary">You\'re selected \'%s\', which is a system application. Unfortunately, the android ecosystem doesn\'t allow third-party user applications, such as Package Manager, remove system applications in non-rooted environments. Don\'t worry though! Package Manager will guide you to remove this application using Android Debug Bridge (ADB) method. If you already have a fully working ADB, executing the following command from an ADB will uninstall this application. In order to configure a working ADB environment, please checkout the linked Documentation page.</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
     <string name="uninstall_summary">Removing %s</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>

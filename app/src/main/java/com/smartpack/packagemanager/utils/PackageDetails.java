@@ -186,7 +186,17 @@ public class PackageDetails {
                         })
                         .show();
             } else {
-                Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_root));
+                new MaterialAlertDialogBuilder(activity)
+                        .setIcon(PackageData.mApplicationIcon)
+                        .setTitle(activity.getString(R.string.uninstall_adb))
+                        .setMessage(activity.getString(R.string.uninstall_adb_summary, PackageData.mApplicationName) +
+                                "\n\nadb shell pm uninstall -k --user 0 " + PackageData.mApplicationID)
+                        .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) -> {
+                            Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity);
+                        })
+                        .setPositiveButton(activity.getString(R.string.got_it), (dialog, id) -> {
+                        })
+                        .show();
             }
         }
     }
