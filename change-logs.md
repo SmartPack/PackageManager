@@ -1,5 +1,9 @@
 # Change-logs
 
+## 29. February 26, 2021
+*Release-tag: 3.6*<br>
+Split APK installation will now work on non-rooted devices. App will now use own file picker (by default: configurable in Settings) for split apk installation. Updated Turkish translations. Fixed possible crashes on Permission and Activity page. Miscellaneous changes.
+
 ## 28. February 23, 2021
 *Release-tag: 3.5*<br>
 Added activity page to Package info. Updated app explorer to avoid possible crashes. Fixed minor issues in light mode. Added documentation to Settings page and welcome dialog. Added German & Turkish translations. Updated Russian translation. Miscellaneous changes.

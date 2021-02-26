@@ -9,11 +9,11 @@
 <i>Package Manager</i> is a simple, yet powerful application, offering the following features</b>
 * A beautiful list view of System and User applications, together or separately.
 * Helps to do basic tasks such as Open app, show app info, visit PlayStore page, uninstall (User apps), etc.
+* Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
 * Explore and export contents of an installed app (Experimental).
 * Export individual or a batch of apps (including Split apk's) into device storage.
 * Do advanced tasks such as (need Root access).
   * Uninstall an individual or a batch of system apps (de-bloating).
-  * Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
   * Disable or Enable individual or a batch of apps.
 
 <b>Translations</b>

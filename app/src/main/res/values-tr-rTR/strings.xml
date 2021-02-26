@@ -142,7 +142,7 @@
     <string name="language_fr">"Fransızca"</string>
     <string name="list">"Liste"</string>
     <string name="split_apk">"Bölünmüş APK'ler"</string>
-    <string name="welcome_message_root">"UYARI\nBu uygulama, cihazınızı kurcalamak için fazla güçlüdür. Bu uygulamanın geliştiricisi, cihazınızın başına gelebilecek hiçbir şeyin sorumluluğunu kabul etmemektedir."</string>
+    <string name="welcome_message_root">"UYARI: Bu uygulama, cihazınızı kurcalamak için fazla güçlüdür. Bu uygulamanın geliştiricisi, cihazınızın başına gelebilecek hiçbir şeyin sorumluluğunu kabul etmemektedir."</string>
     <string name="welcome_message_noroot">"Sakın unutma: Cihazınızda Root Erişimi mevcut değildir veya Package Manager için reddedilmiştir. Bu nedenle uygulamanın cihazınıza yapabilecekleri sınırlıdır."</string>
     <string name="language_de">"Almanca"</string>
     <string name="language_tr">"Türkçe"</string>
