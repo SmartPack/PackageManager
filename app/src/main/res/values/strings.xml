@@ -31,7 +31,7 @@
     <string name="copying_apk_message">Copying Split APKs into working directory</string>
     <string name="creating_directory_message">Creating a temporary working directory</string>
     <string name="credits">Credits</string>
-    <string name="credits_summary" translatable="false"><b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>FiestaLake</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Mikesew1320</i></b>: Amharic translations\n<b><i>MONSTER_PC</i></b>: Russian &amp; Ukrainian translations\n<b><i>Jan</i></b>: German translations\n<b><i>B3Nd2R &amp; Reno</i></b>: French translations\n<b><i>BSÇE (BlueSoul Çeviri Ekibi)</i></b>: Turkish translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="credits_summary" translatable="false"><b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>FiestaLake</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Mikesew1320</i></b>: Amharic translations\n<b><i>MONSTER_PC</i></b>: Russian &amp; Ukrainian translations\n<b><i>Jan</i></b>: German translations\n<b><i>B3Nd2R &amp; Reno</i></b>: French translations\n<b><i>omerakgoz34 (BSÇE)</i></b>: Turkish translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="dark_theme_auto">Auto</string>
     <string name="dark_theme_disable">Disable</string>
@@ -149,7 +149,7 @@
     <string name="turn_on_off">Turn-On/Off</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_adb">Uninstall with ADB</string>
-    <string name="uninstall_adb_summary">You\'re selected \'%s\', which is a system application. Unfortunately, the android ecosystem doesn\'t allow third-party user applications, such as Package Manager, remove system applications in non-rooted environments. Don\'t worry though! Package Manager will guide you to remove this application using Android Debug Bridge (ADB) method. If you already have a fully working ADB, executing the following command from an ADB will uninstall this application. In order to configure a working ADB environment, please checkout the linked Documentation page.</string>
+    <string name="uninstall_adb_summary">You\'re selected \'%s\', which is a system application. Unfortunately, the Android ecosystem doesn\'t allow third-party user applications, such as Package Manager, to remove system applications in non-rooted environments. Don\'t worry though! Package Manager will guide you to remove this application using the Android Debug Bridge (ADB) method. If you already have a fully working ADB, executing the following command from an ADB will uninstall this application. In order to configure a working ADB environment, please check out the linked Documentation page.</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
     <string name="uninstall_summary">Removing %s</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
