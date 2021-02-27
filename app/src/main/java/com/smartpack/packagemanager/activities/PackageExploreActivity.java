@@ -40,8 +40,7 @@ import java.util.Objects;
 public class PackageExploreActivity extends AppCompatActivity {
 
     private List<String> mData = new ArrayList<>();
-    private LinearLayout mProgressLayout;
-    private MaterialTextView mError, mTitle;
+    private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
     private RecycleViewExploreAdapter mRecycleViewAdapter;
 
@@ -52,8 +51,8 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         AppCompatImageButton mBack = findViewById(R.id.back);
         mTitle = findViewById(R.id.title);
-        mError = findViewById(R.id.error_status);
-        mProgressLayout = findViewById(R.id.progress_layout);
+        MaterialTextView mError = findViewById(R.id.error_status);
+        LinearLayout mProgressLayout = findViewById(R.id.progress_layout);
         mRecyclerView = findViewById(R.id.recycler_view);
 
         mTitle.setText(PackageData.mApplicationName);
@@ -64,8 +63,14 @@ public class PackageExploreActivity extends AppCompatActivity {
         });
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
-
-        loadUI();
+        try {
+            mRecycleViewAdapter = new RecycleViewExploreAdapter(getData());
+            mRecyclerView.setAdapter(mRecycleViewAdapter);
+        } catch (NullPointerException ignored) {
+            mRecyclerView.setVisibility(View.GONE);
+            mError.setText(getString(R.string.explore_error_status, PackageData.mApplicationName));
+            mError.setVisibility(View.VISIBLE);
+        }
 
         RecycleViewExploreAdapter.setOnItemClickListener((position, v) -> {
             if (new File(mData.get(position)).isDirectory()) {
@@ -117,42 +122,6 @@ public class PackageExploreActivity extends AppCompatActivity {
             PackageData.mPath = PackageData.mPath + File.separator;
         }
         return new File(PackageData.mPath).listFiles();
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private void loadUI() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressLayout.setVisibility(View.VISIBLE);
-                if (new File(getCacheDir().getPath() + "/apk").exists()) {
-                    Utils.delete(getCacheDir().getPath() + "/apk");
-                }
-                Utils.mkdir(getCacheDir().getPath() + "/apk");
-                PackageData.mPath = getCacheDir().getPath() + "/apk";
-            }
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Utils.unzip(PackageData.mDirSource, getCacheDir().getPath() + "/apk");
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                mProgressLayout.setVisibility(View.GONE);
-                try {
-                    mRecycleViewAdapter = new RecycleViewExploreAdapter(getData());
-                    mRecyclerView.setAdapter(mRecycleViewAdapter);
-                } catch (NullPointerException ignored) {
-                    mRecyclerView.setVisibility(View.GONE);
-                    mError.setText(getString(R.string.explore_error_status, PackageData.mApplicationName));
-                    mError.setVisibility(View.VISIBLE);
-                }
-            }
-        }.execute();
     }
 
     @SuppressLint("StaticFieldLeak")

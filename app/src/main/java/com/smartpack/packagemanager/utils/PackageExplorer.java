@@ -97,7 +97,7 @@ public class PackageExplorer {
             protected void onPreExecute() {
                 super.onPreExecute();
                 linearLayout.setVisibility(View.VISIBLE);
-                if (new File(activity.getCacheDir().getPath() + "/apk").exists()) {
+                if (Utils.exist(activity.getCacheDir().getPath() + "/apk")) {
                     Utils.delete(activity.getCacheDir().getPath() + "/apk");
                 }
                 Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
