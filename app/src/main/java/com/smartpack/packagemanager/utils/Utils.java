@@ -205,10 +205,10 @@ public class Utils {
 
     public static void delete(String path) {
         if (new File(path).isDirectory()) {
-            runCommand("rm -r " + path);
-        } else {
-            new File(path).delete();
+            for (File files : Objects.requireNonNull(new File(path).listFiles()))
+                delete(files.getAbsolutePath());
         }
+        new File(path).delete();
     }
 
     public static void copy(String source, String dest) {
