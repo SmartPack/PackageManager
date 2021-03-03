@@ -1,5 +1,0 @@
-* Split APK installation will now work on non-rooted devices.
-* App will now use own file picker (by default: configurable in Settings) for split apk installation.
-* Updated Turkish translations.
-* Fixed possible crashes on Permission and Activity page.
-* Miscellaneous changes.

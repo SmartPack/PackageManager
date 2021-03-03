@@ -1,5 +1,9 @@
 # Change-logs
 
+## 30. March 03, 2021
+*Release-tag: 3.7*<br>
+Improved package explorer. App will now load (and also allowed to save) app icon when clicking the icon on each entry. Added Czech, Spanish, Vietnamese, & Chinese translations. Updated French, German & Russian translations. Improved language switch on Settings page. Credits are now moved as a separate entry into Settings page. Miscellaneous changes.
+
 ## 29. February 26, 2021
 *Release-tag: 3.6*<br>
 Split APK installation will now work on non-rooted devices. App will now use own file picker (by default: configurable in Settings) for split apk installation. Updated Turkish translations. Fixed possible crashes on Permission and Activity page. Miscellaneous changes.

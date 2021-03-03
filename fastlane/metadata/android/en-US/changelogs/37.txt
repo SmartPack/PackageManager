@@ -1,0 +1,7 @@
+* Improved package explorer.
+* App will now load (and also allowed to save) app icon when clicking the icon on each entry.
+* Added Czech, Spanish, Vietnamese, & Chinese translations.
+* Updated French, German & Russian translations.
+* Improved language switch on Settings page.
+* Credits are now moved as a separate entry into Settings page.
+* Miscellaneous changes.
