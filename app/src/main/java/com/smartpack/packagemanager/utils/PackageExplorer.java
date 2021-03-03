@@ -9,9 +9,14 @@
 package com.smartpack.packagemanager.utils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
@@ -25,8 +30,12 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
@@ -58,6 +67,64 @@ public class PackageExplorer {
         return null;
     }
 
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        Bitmap bitmap;
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    public static void saveIcon(Bitmap bitmap, String dest, Activity activity) {
+        if (Utils.isStorageWritePermissionDenied(activity)) {
+            ActivityCompat.requestPermissions(activity, new String[] {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
+            return;
+        }
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                PackageData.makePackageFolder();
+            }
+            @Override
+            protected Void doInBackground(Void... voids) {
+                File file = new File(dest);
+                try {
+                    OutputStream outStream = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                    outStream.flush();
+                    outStream.close();
+                } catch (IOException ignored) {}
+                return null;
+            }
+
+            @SuppressLint("StringFormatInvalid")
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                new MaterialAlertDialogBuilder(activity)
+                        .setMessage(PackageData.mApplicationName + " icon " +
+                                activity.getString(R.string.export_file_message, Objects.requireNonNull(
+                                        new File(dest).getParentFile()).toString()))
+                        .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
+                        }).show();
+            }
+        }.execute();
+    }
+
     public static void copyToStorage(String path, String dest, Activity activity) {
         if (Utils.isStorageWritePermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[] {
@@ -79,6 +146,7 @@ public class PackageExplorer {
                 return null;
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);

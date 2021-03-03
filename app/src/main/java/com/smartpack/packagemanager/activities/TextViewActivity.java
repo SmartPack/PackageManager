@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ public class TextViewActivity extends AppCompatActivity {
 
     public static final String PATH_INTENT = "path";
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

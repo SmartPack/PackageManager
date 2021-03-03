@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.ImageViewActivity;
 import com.smartpack.packagemanager.activities.PackageDetailsActivity;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageTasks;
@@ -31,7 +33,6 @@ import java.util.List;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
  */
-
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
     private static List<String> data;
@@ -47,6 +48,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return new ViewHolder(rowItem);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
         if (!Utils.isPackageInstalled(data.get(position), holder.appID.getContext())) {
@@ -65,6 +67,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         } else {
             holder.appName.setText(PackageData.getAppName(data.get(position), holder.appName.getContext()));
         }
+        holder.appIcon.setOnClickListener(v -> {
+            PackageData.mApplicationName = PackageData.getAppName(data.get(position), holder.appIcon.getContext());
+            PackageData.mApplicationIcon = PackageData.getAppIcon(data.get(position), holder.appIcon.getContext());
+            Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
+            holder.appIcon.getContext().startActivity(imageView);
+        });
         holder.checkBox.setChecked(PackageData.mBatchList.contains(data.get(position)));
         holder.checkBox.setOnClickListener(v -> {
             if (PackageData.mBatchList.contains(data.get(position))) {

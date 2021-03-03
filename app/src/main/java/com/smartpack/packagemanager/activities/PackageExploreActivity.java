@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +43,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecycleViewExploreAdapter mRecycleViewAdapter;
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,6 @@ public class PackageExploreActivity extends AppCompatActivity {
         AppCompatImageButton mBack = findViewById(R.id.back);
         mTitle = findViewById(R.id.title);
         MaterialTextView mError = findViewById(R.id.error_status);
-        LinearLayout mProgressLayout = findViewById(R.id.progress_layout);
         mRecyclerView = findViewById(R.id.recycler_view);
 
         mTitle.setText(PackageData.mApplicationName);
@@ -82,7 +81,7 @@ public class PackageExploreActivity extends AppCompatActivity {
                 startActivity(textView);
             } else if (PackageExplorer.isImageFile(mData.get(position))) {
                 Intent imageView = new Intent(this, ImageViewActivity.class);
-                imageView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
+                imageView.putExtra(ImageViewActivity.PATH_INTENT, mData.get(position));
                 startActivity(imageView);
             } else {
                 new MaterialAlertDialogBuilder(this)
