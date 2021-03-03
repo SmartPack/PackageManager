@@ -92,6 +92,8 @@ public class SettingsActivity extends AppCompatActivity {
         mData.add(new RecycleViewItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
         mData.add(new RecycleViewItem(getString(R.string.rate_us), getString(R.string.rate_us_Summary), getResources().getDrawable(R.drawable.ic_rate),
                 "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"));
+        mData.add(new RecycleViewItem(getString(R.string.credits), getString(R.string.credits_summary), getResources().getDrawable(R.drawable.ic_credits),
+                "https://github.com/SmartPack/PackageManager/blob/master/Credits.md"));
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             if (mData.get(position).getUrl() != null) {

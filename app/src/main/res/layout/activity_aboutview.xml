@@ -63,31 +63,9 @@
                     android:id="@+id/developer"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_margin="15dp"
                     android:src="@drawable/ic_developer"
                     android:layout_gravity="center" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"
-                    android:text="@string/credits"
-                    android:textColor="?attr/colorAccent"
-                    android:textIsSelectable="true"
-                    android:textSize="18sp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingTop="16dp"
-                    android:gravity="center_horizontal"
-                    android:lineSpacingExtra="5dp"
-                    android:text="@string/credits_summary"
-                    android:textIsSelectable="true"
-                    android:textSize="15sp" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"

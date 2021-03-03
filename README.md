@@ -51,21 +51,7 @@ If you like to appreciate my work, please consider donating to me (either via [L
 Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).
 
 ## Credits
-* [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
-* [topjohnwu](https://github.com/topjohnwu), libsu
-* [FiestaLake](https://github.com/FiestaLake), Korean Translations
-* [Mikesew1320](https://github.com/Mikesew1320), Amharic Translations
-* [tsiflimagas](https://github.com/tsiflimagas), Greek Translations
-* [Lennoard Silva](https://github.com/Lennoard), Portuguese (Brazilian) Translations
-* [Nikita](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
-* B3Nd2R & Reno, French Translations
-* Jan, German Translations
-* BSÇE (BlueSoul Çeviri Ekibi), Turkish Translations
-* Woytazzer, Czech Translations
-* Javi, Spanish Translations
-* Hoa Gia Đại Thiếu, Vietnamese Translations
-* [jason5545](https://github.com/jason5545), Chinese (Simplified & Traditional) Translations
-* [Toxinpiper](https://t.me/toxinpiper), App Icon
+A list of people who contributed to this project is available [here](Credits.md).
 
 ## License
 
