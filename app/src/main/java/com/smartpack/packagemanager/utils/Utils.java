@@ -417,80 +417,14 @@ public class Utils {
         activity.startActivity(intent);
     }
 
-    public static void setDefaultLanguage(Context context) {
-        saveBoolean("use_english", false, context);
-        saveBoolean("use_korean", false, context);
-        saveBoolean("use_am", false, context);
-        saveBoolean("use_el", false, context);
-        saveBoolean("use_ml", false, context);
-        saveBoolean("use_pt", false, context);
-        saveBoolean("use_ru", false, context);
-        saveBoolean("use_uk", false, context);
-        saveBoolean("use_fr", false, context);
-        saveBoolean("use_de", false, context);
-        saveBoolean("use_tr", false, context);
-        saveBoolean("use_vi", false, context);
-        saveBoolean("use_es", false, context);
-        saveBoolean("use_cs", false, context);
-        saveBoolean("use_zh", false, context);
-    }
-
-    public static boolean languageDefault(Context context) {
-        return !getBoolean("use_english", false, context)
-                && !getBoolean("use_korean", false, context)
-                && !getBoolean("use_am", false, context)
-                && !getBoolean("use_el", false, context)
-                && !getBoolean("use_ml", false, context)
-                && !getBoolean("use_pt", false, context)
-                && !getBoolean("use_ru", false, context)
-                && !getBoolean("use_uk", false, context)
-                && !getBoolean("use_fr", false, context)
-                && !getBoolean("use_de", false, context)
-                && !getBoolean("use_tr", false, context)
-                && !getBoolean("use_cs", false, context)
-                && !getBoolean("use_vi", false, context)
-                && !getBoolean("use_es", false, context)
-                && !getBoolean("use_zh", false, context);
-    }
-
     public static String getLanguage(Context context) {
-        if (getBoolean("use_english", false, context)) {
-            return  "en_US";
-        } else if (getBoolean("use_korean", false, context)) {
-            return  "ko";
-        } else if (getBoolean("use_am", false, context)) {
-            return  "am";
-        } else if (getBoolean("use_el", false, context)) {
-            return  "el";
-        } else if (getBoolean("use_ml", false, context)) {
-            return  "ml";
-        } else if (getBoolean("use_pt", false, context)) {
-            return  "pt";
-        } else if (getBoolean("use_ru", false, context)) {
-            return  "ru";
-        } else if (getBoolean("use_uk", false, context)) {
-            return  "uk";
-        } else if (getBoolean("use_fr", false, context)) {
-            return  "fr";
-        } else if (getBoolean("use_de", false, context)) {
-            return  "de";
-        } else if (getBoolean("use_tr", false, context)) {
-            return  "tr";
-        } else if (getBoolean("use_cs", false, context)) {
-            return  "cs";
-        } else if (getBoolean("use_es", false, context)) {
-            return  "es";
-        } else if (getBoolean("use_vi", false, context)) {
-            return  "vi";
-        } else if (getBoolean("use_zh", false, context)) {
-            return  "zh";
-        } else {
-            return java.util.Locale.getDefault().getLanguage();
-        }
+        return getString("appLanguage", java.util.Locale.getDefault().getLanguage(),
+                context);
     }
 
     public static void setLanguage(Context context) {
-        Locale myLocale = new Locale(Objects.requireNonNull(getLanguage(context)));
+        Locale myLocale = new Locale(getString("appLanguage", java.util.Locale.getDefault()
+                .getLanguage(), context));
         Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
