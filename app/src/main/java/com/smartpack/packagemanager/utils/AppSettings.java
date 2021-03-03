@@ -51,6 +51,14 @@ public class AppSettings {
             return context.getString(R.string.language_de);
         } else if (Utils.getBoolean("use_tr", false, context)) {
             return context.getString(R.string.language_tr);
+        } else if (Utils.getBoolean("use_cs", false, context)) {
+            return context.getString(R.string.language_cs);
+        } else if (Utils.getBoolean("use_es", false, context)) {
+            return context.getString(R.string.language_es);
+        } else if (Utils.getBoolean("use_vi", false, context)) {
+            return context.getString(R.string.language_vi);
+        } else if (Utils.getBoolean("use_zh", false, context)) {
+            return context.getString(R.string.language_zh);
         } else {
             return context.getString(R.string.language_default) + " (" + java.util.Locale.getDefault().getLanguage() + ")";
         }

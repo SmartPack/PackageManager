@@ -183,6 +183,33 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.restartApp(this);
                             }
                             break;
+                        case 12:
+                            if (!Utils.getBoolean("use_cs", false, this)) {
+                                Utils.setDefaultLanguage(this);
+                                Utils.saveBoolean("use_cs", true, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
+                        case 13:
+                            if (!Utils.getBoolean("use_es", false, this)) {
+                                Utils.setDefaultLanguage(this);
+                                Utils.saveBoolean("use_es", true, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
+                        case 14:
+                            if (!Utils.getBoolean("use_vi", false, this)) {
+                                Utils.setDefaultLanguage(this);
+                                Utils.saveBoolean("use_vi", true, this);
+                                Utils.restartApp(this);
+                            }
+                        case 15:
+                            if (!Utils.getBoolean("use_zh", false, this)) {
+                                Utils.setDefaultLanguage(this);
+                                Utils.saveBoolean("use_zh", true, this);
+                                Utils.restartApp(this);
+                            }
+                            break;
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();

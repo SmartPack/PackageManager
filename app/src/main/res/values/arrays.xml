@@ -20,6 +20,10 @@
         <item>@string/language_fr</item>
         <item>@string/language_de</item>
         <item>@string/language_tr</item>
+        <item>@string/language_cs</item>
+        <item>@string/language_es</item>
+        <item>@string/language_vi</item>
+        <item>@string/language_zh</item>
     </string-array>
 
     <string-array name="file_picker">

@@ -24,7 +24,7 @@
     <string name="copying_apk_message">"Kopiere gesplittete APKs ins Arbeitsverzeichnis"</string>
     <string name="creating_directory_message">"Erstelle ein temporäres Arbeitsverzeichnis"</string>
     <string name="credits">"Impressum"</string>
-    <string name="dark_theme">"Dunkles Theme"</string>
+    <string name="dark_theme">"Dunkles Design"</string>
     <string name="dark_theme_auto">"Automatisch"</string>
     <string name="dark_theme_disable">"Ausschalten"</string>
     <string name="dark_theme_enable">"Einschalten"</string>
@@ -33,6 +33,7 @@
     <string name="date_installed">"Installiert: %s"</string>
     <string name="date_updated">"Zuletzt geupdatet: %s"</string>
     <string name="developed_by">"Entwickelt von"</string>
+    <string name="disable_message">"Sind Sie sicher?"</string>
     <string name="disable">"Deaktivieren"</string>
     <string name="disabled">"deaktiviert"</string>
     <string name="disabling">"Deaktiviere %s"</string>
@@ -100,7 +101,7 @@
     <string name="support_meal">"Kaufen Sie mir eine Mahlzeit"</string>
     <string name="support_coffee">"Kaufen Sie mir einen Kaffee"</string>
     <string name="support_already_received_message">"Sie haben die Entwicklung mit diesem Artikel schon einmal unterstützt!"</string>
-    <string name="support_received_message">"Vielen Dank für Ihre Unterstützung \u2665\nEs motiviert mich sehr, meine Projekte noch aktiver weiterzuführen! Außerdem erhalten Sie ein Supporter-Badge oben auf dieser Seite."</string>
+    <string name="support_received_message">"Vielen Dank für Ihre Unterstützung \u2665 \nEs motiviert mich sehr, meine Projekte noch aktiver weiterzuführen! Außerdem erhalten Sie ein Supporter-Badge oben auf dieser Seite."</string>
     <string name="support_retry_message">"Bitte versuchen Sie den Kauf erneut!"</string>
     <string name="support_status_message">"Herzlichen Dank für Ihre Unterstützung!"</string>
     <string name="sure_question">"Sind Sie sicher?"</string>
@@ -143,4 +144,20 @@
     <string name="split_apk">"splitte APKs"</string>
     <string name="welcome_message_root">"WARNUNG: Diese Anwendung ist fähig, Ihr Gerät zu beschädigen. Der Entwickler dieser Anwendung übernimmt keine Verantwortung, wenn etwas mit Ihrem Gerät schiefgeht."</string>
     <string name="welcome_message_noroot">"Bitte beachten Sie: Root-Zugriff ist auf Ihrem Gerät entweder nicht verfügbar oder für Package Manager abgelehnt! Die Möglichkeiten dieser Anwendung auf Ihrem Gerät sind daher eingeschränkt."</string>
+    <string name="language_de">"Deutsch"</string>
+    <string name="language_tr">"Türkisch"</string>
+    <string name="activities">"Aktivitäten"</string>
+    <string name="documentation">"Dokumentation"</string>
+    <string name="documentation_summary">"Schau Dir die Detaillierten Dokumente an wie man Package Manager benutzt"</string>
+    <string name="file_picker">"Datei auswählen"</string>
+    <string name="file_picker_external">"Extern"</string>
+    <string name="file_picker_inbuilt">"Intern"</string>
+    <string name="installation_cancel_message">"Willst Du die Installation abbrechen?"</string>
+    <string name="installation__status_failed">"Installation fehlgeschlagenen!"</string>
+    <string name="installation_status_success">"Erfolgreich Installiert"</string>
+    <string name="sdcard">"SD Karte"</string>
+    <string name="select">"Wählen"</string>
+    <string name="uninstall_adb">"Mit ADB entfernen"</string>
+    <string name="uninstall_adb_summary">"Deine Auswahl ist eine System App. Unglücklicherweise, erlaubt das Android Ökosystem keine Fremden Apps wie Package Manager das löschen auf Geräten ohne Root Rechten. Keine Panik deswegen! Package Manager führt Dich durch eine Anleitung um diese Applikation mit der Android Debug Bridge (ADB) zu entfernen. Wenn ADB Funktioniert, führe den folgenden Befehl aus und ADB löscht diese Applikation. Im Fall das ADB noch nicht eingerichtet ist, schau Dir die verlinkte Dokumentationen an"</string>
+    <string name="warning">"Warnung"</string>
 </resources>

@@ -429,6 +429,10 @@ public class Utils {
         saveBoolean("use_fr", false, context);
         saveBoolean("use_de", false, context);
         saveBoolean("use_tr", false, context);
+        saveBoolean("use_vi", false, context);
+        saveBoolean("use_es", false, context);
+        saveBoolean("use_cs", false, context);
+        saveBoolean("use_zh", false, context);
     }
 
     public static boolean languageDefault(Context context) {
@@ -442,7 +446,11 @@ public class Utils {
                 && !getBoolean("use_uk", false, context)
                 && !getBoolean("use_fr", false, context)
                 && !getBoolean("use_de", false, context)
-                && !getBoolean("use_tr", false, context);
+                && !getBoolean("use_tr", false, context)
+                && !getBoolean("use_cs", false, context)
+                && !getBoolean("use_vi", false, context)
+                && !getBoolean("use_es", false, context)
+                && !getBoolean("use_zh", false, context);
     }
 
     public static String getLanguage(Context context) {
@@ -468,13 +476,21 @@ public class Utils {
             return  "de";
         } else if (getBoolean("use_tr", false, context)) {
             return  "tr";
+        } else if (getBoolean("use_cs", false, context)) {
+            return  "cs";
+        } else if (getBoolean("use_es", false, context)) {
+            return  "es";
+        } else if (getBoolean("use_vi", false, context)) {
+            return  "vi";
+        } else if (getBoolean("use_zh", false, context)) {
+            return  "zh";
         } else {
             return java.util.Locale.getDefault().getLanguage();
         }
     }
 
     public static void setLanguage(Context context) {
-        Locale myLocale = new Locale(getLanguage(context));
+        Locale myLocale = new Locale(Objects.requireNonNull(getLanguage(context)));
         Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();

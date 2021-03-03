@@ -61,6 +61,10 @@ Please help me to translate this application via [POEditor](https://poeditor.com
 * B3Nd2R & Reno, French Translations
 * Jan, German Translations
 * BSÇE (BlueSoul Çeviri Ekibi), Turkish Translations
+* Woytazzer, Czech Translations
+* Javi, Spanish Translations
+* Hoa Gia Đại Thiếu, Vietnamese Translations
+* 瑞成, Chinese (Simplified) Translations
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 
 ## License

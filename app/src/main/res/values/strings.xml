@@ -31,7 +31,7 @@
     <string name="copying_apk_message">Copying Split APKs into working directory</string>
     <string name="creating_directory_message">Creating a temporary working directory</string>
     <string name="credits">Credits</string>
-    <string name="credits_summary" translatable="false"><b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>FiestaLake</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Mikesew1320</i></b>: Amharic translations\n<b><i>MONSTER_PC</i></b>: Russian &amp; Ukrainian translations\n<b><i>Jan</i></b>: German translations\n<b><i>B3Nd2R &amp; Reno</i></b>: French translations\n<b><i>omerakgoz34 (BSÇE)</i></b>: Turkish translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
+    <string name="credits_summary" translatable="false"><b><i>Grarak</i></b>: KernelAdiutor (Code base)\n<b><i>topjohnwu</i></b>: libsu\n<b><i>FiestaLake</i></b>: Korean translations\n<b><i>tsiflimagas</i></b>: Greek translations\n<b><i>Lennoard Silva</i></b>: Portuguese (Br) translations\n<b><i>Mikesew1320</i></b>: Amharic translations\n<b><i>MONSTER_PC</i></b>: Russian &amp; Ukrainian translations\n<b><i>Jan</i></b>: German translations\n<b><i>B3Nd2R &amp; Reno</i></b>: French translations\n<b><i>omerakgoz34 (BSÇEs)</i></b>: Turkish translations\n<b><i>Woytazzer</i></b>: Czech translations\n<b><i>Javi (BSÇEs)</i></b>: Spanish translations\n<b><i>Hoa Gia Đại Thiếu</i></b>: Vietnamese translations\n<b><i>瑞成</i></b>: Chinese (Simplified) translations\n<b><i>Toxinpiper</i></b>: App Icon</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="dark_theme_auto">Auto</string>
     <string name="dark_theme_disable">Disable</string>
@@ -78,9 +78,11 @@
     <string name="installing_bundle_finished">Installing App Bundle Finished!</string>
     <string name="language">Language</string>
     <string name="language_am">Amharic</string>
+    <string name="language_cs">Czech</string>
     <string name="language_default">Default</string>
     <string name="language_el">Greek</string>
     <string name="language_en">English</string>
+    <string name="language_es">Spanish</string>
     <string name="language_fr">French</string>
     <string name="language_de">German</string>
     <string name="language_ko">Korean</string>
@@ -89,6 +91,8 @@
     <string name="language_ru">Russian</string>
     <string name="language_tr">Turkish</string>
     <string name="language_uk">Ukrainian</string>
+    <string name="language_vi">Vietnamese</string>
+    <string name="language_zh">Chinese</string>
     <string name="list">List</string>
     <string name="more_apps">More from Developer</string>
     <string name="more_apps_summary">Checkout more applications provided by the developer in Google Play</string>
