@@ -25,6 +25,8 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
+import java.io.File;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020
  */
@@ -41,7 +43,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageInfoFragment(), getString(R.string.app_info));
-        if (SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, this)).size() > 1) {
+        if (new File(PackageData.getSourceDir(PackageData.mApplicationID, this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, this)).size() > 1) {
             adapter.AddFragment(new SplitApksFragment(), getString(R.string.split_apk));
         }
         if (PackageDetails.getPermissions(PackageData.mApplicationID, this).size() > 0) {

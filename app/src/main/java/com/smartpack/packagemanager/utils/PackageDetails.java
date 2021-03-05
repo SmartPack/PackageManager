@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -42,12 +43,13 @@ import java.util.Objects;
  */
 public class PackageDetails {
 
+    @SuppressLint("StringFormatInvalid")
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
         if (Utils.isStorageWritePermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
-        } else if (SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, activity)).size() > 1) {
+        } else if (new File(PackageData.getSourceDir(PackageData.mApplicationID, activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, activity)).size() > 1) {
             if (Utils.exist(PackageData.getPackageDir() + "/" + PackageData.mApplicationID)) {
                 Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.already_exists, PackageData.mApplicationID));
             } else {
