@@ -2,7 +2,6 @@
 
     <string name="about">"O aplikaci"</string>
     <string name="about_summary">"<i>Jednoduše, mocná aplikace pro správu aplikací.</i>"</string>
-    <string name="already_exists">"%s již existuje! Zrušeno!"</string>
     <string name="apk_path">"Cesta k apk souboru"</string>
     <string name="app_info">"Info o aplikaci"</string>
     <string name="batch_list_clear">"Vyčistit seznam"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Připravuji dávkový proces"</string>
     <string name="batch_warning">"Váše dávkové nastavení bude odstraněno! Opravdu?"</string>
     <string name="billing_client_disconnected">"Chyba spojení s Google Play platebním klientem!"</string>
-    <string name="bundle_extract_message">"Extrahování %s do pracovní složky"</string>
     <string name="bundle_install">"Opravdu chcete instalovat split apk soubory z '%s'?"</string>
     <string name="bundle_install_apks">"Opravdu chcete instalovat apk bundle (.aab) '%s'?"</string>
     <string name="cancel">"Storno"</string>
     <string name="change_logs">"Seznamy změn"</string>
-    <string name="cleaning_message">"Čištění dočasných souborů"</string>
-    <string name="copying_apk_message">"Kopírování split APKs do pracovního adresáře"</string>
-    <string name="creating_directory_message">"Vytváření dočasného pracovního adresáře"</string>
     <string name="credits">"Credits"</string>
     <string name="dark_theme">"Tmavé téma"</string>
     <string name="dark_theme_auto">"Automaticky"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"Mám to"</string>
     <string name="install">"Instalovat"</string>
     <string name="install_bundle">"Instalovat Split APK soubory"</string>
-    <string name="install_bundle_initialized">"Příprava Split APK souborů k instalaci"</string>
     <string name="installing_bundle">"Instalování App Budle!"</string>
-    <string name="installing_bundle_finished">"Instalování App Bundle dokončeno!"</string>
     <string name="language">"Jazyk"</string>
     <string name="language_am">"Amharic"</string>
     <string name="language_el">"Greek"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"Resetuji %s"</string>
     <string name="result">"Vysledek6: %s"</string>
     <string name="search">"Vyhledat…"</string>
-    <string name="session_id">"ID: %s"</string>
     <string name="share">"Sdílet"</string>
     <string name="shared_by">"%s/sdíleno Package Manager-em"</string>
     <string name="share_message">"Package Manager je k získání na Google Play obchodě: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -153,7 +145,7 @@
     <string name="file_picker_external">"Externí úložiště"</string>
     <string name="file_picker_inbuilt">"Interní úložiště"</string>
     <string name="installation_cancel_message">"Opravdu chcete stornovat instalaci?"</string>
-    <string name="installation__status_failed">"Instalace selhala!"</string>
+    <string name="installation_status_failed">"Instalace selhala!"</string>
     <string name="installation_status_success">"Instalace dokončena úspěšně!"</string>
     <string name="sdcard">"SD karta"</string>
     <string name="select">"Vybrat"</string>

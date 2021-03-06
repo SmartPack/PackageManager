@@ -145,6 +145,24 @@ public class PackageData {
         return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 
+    public static CharSequence getAPKName(String apkPath, Context context) {
+        PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+        if (pi != null) {
+            return pi.applicationInfo.loadLabel(PackageData.getPackageManager(context));
+        } else {
+            return null;
+        }
+    }
+
+    public static String getAPKId(String apkPath, Context context) {
+        PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+        if (pi != null) {
+            return pi.applicationInfo.packageName;
+        } else {
+            return null;
+        }
+    }
+
     public static Drawable getAPKIcon(String apkPath, Context context) {
         PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
         if (pi != null) {

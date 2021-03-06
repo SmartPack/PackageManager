@@ -3,7 +3,6 @@
 
     <string name="about">Σχετικά με</string>
     <string name="about_summary"><i>Μία απλή, αλλά πανίσχυρη εφαρμογή για να διαχειριστείτε τις εφαρμογές σας.</i></string>
-    <string name="already_exists">%s Υπάρχει ήδη! Διακοπή!</string>
     <string name="app_info">Πληροφορίες εφαρμογής</string>
     <string name="batch_list_clear">Διαγραφή λίστας</string>
     <string name="batch_list_disable">Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε (εάν είναι ενεργοποιημένη) ή να ενεργοποιήσετε (εάν είναι απενεργοποιημένη) την ακόλουθη εφαρμογή(ές);?</string>
@@ -16,9 +15,6 @@
     <string name="bundle_install">Είστε σίγουρος ότι θέλετε να εγκαταστήσετε τα διαιρεμένα apk\'s από \'%s\'?</string>
     <string name="cancel">Ακύρωση</string>
     <string name="change_logs">Λίστα αλλαγών</string>
-    <string name="cleaning_message">Διαγραφή προσωρινών αρχείων</string>
-    <string name="copying_apk_message">Αντιγραφή διαιρεμένων APKs στο φάκελο εργασίας</string>
-    <string name="creating_directory_message">Δημιουργία προσωρινού φακέλου εργασίας</string>
     <string name="credits">Ευχαριστίες</string>
     <string name="dark_theme">Σκούρο Θέμα</string>
     <string name="disable_message">θα είναι %s! Είστε σίγουρος;</string>
@@ -37,9 +33,7 @@
     <string name="got_it">Το κατάλαβα</string>
     <string name="install">Εγκατάσταση</string>
     <string name="install_bundle">Εγκατάσταση διαιρεμένων APKs</string>
-    <string name="install_bundle_initialized">Αρχικοποίηση Εγκατάστασης Διαιρεμένων APKs</string>
     <string name="installing_bundle">Εγκατάσταση εφαρμογής δεσμίδας!</string>
-    <string name="installing_bundle_finished">Η εγκατάσταση εφαρμογής δεσμίδας ολοκληρώθηκε!</string>
     <string name="language">Γλώσσα</string>
     <string name="language_am">Amharic</string>
     <string name="language_el">Ελληνικά</string>
@@ -60,7 +54,6 @@
     <string name="press_back">Πιέστε πίσω ξανά για να βγείτε</string>
     <string name="report_issue">Αναφέρετε κάποιο πρόβλημα</string>
     <string name="result">Αποτέλεσμα: %s</string>
-    <string name="session_id">Ταυτότητα περιόδου λειτουργίας: %s</string>
     <string name="share">Κοινοποίηση</string>
     <string name="shared_by">%s/κοινοποιημένο από το Package Manager</string>
     <string name="share_message">το Package Manager %s μπορεί να αποκτηθεί από\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>

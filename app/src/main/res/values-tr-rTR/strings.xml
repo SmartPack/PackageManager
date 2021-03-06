@@ -2,7 +2,6 @@
 
     <string name="about">"Hakkında"</string>
     <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>"</string>
-    <string name="already_exists">"%s zaten var! İptal ediliyor!"</string>
     <string name="apk_path">"APK Konumu"</string>
     <string name="app_info">"Uygulama bilgileri"</string>
     <string name="batch_list_clear">"Listeyi temizle"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Toplu İşlemler Başlatılıyor"</string>
     <string name="batch_warning">"Toplu İşlem ayarlarınız silinecek! İstediğinize emin misiniz?"</string>
     <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
-    <string name="bundle_extract_message">"%s, çalışma klasörüne çıkartılıyor"</string>
     <string name="bundle_install">"'%s'deki bölünmüş APK'leri yüklemek istediğinize emin misiniz?"</string>
     <string name="bundle_install_apks">"'%s' APK paketini yüklemek istediğinize emin misiniz?"</string>
     <string name="cancel">"Vazgeç"</string>
     <string name="change_logs">"Değişiklik Günlükleri"</string>
-    <string name="cleaning_message">"Geçici dosyalar temizleniyor"</string>
-    <string name="copying_apk_message">"Bölünmüş APK'ler çalışma klasörüne kopyalanıyor"</string>
-    <string name="creating_directory_message">"Geçici bir çalışma klasörü oluşturuluyor"</string>
     <string name="credits">"Katkılar"</string>
     <string name="dark_theme">"Karanlık Tema"</string>
     <string name="dark_theme_auto">"Otomatik"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"Anlaşıldı"</string>
     <string name="install">"Yükle"</string>
     <string name="install_bundle">"Bölünmüş APK'leri yükle"</string>
-    <string name="install_bundle_initialized">"Bölünmüş APK'ler yüklenmeye hazırlanıyor"</string>
     <string name="installing_bundle">"Uygulama Paketi yükleniyor!"</string>
-    <string name="installing_bundle_finished">"Uygulama Paketi yüklendi!"</string>
     <string name="language">"Dil"</string>
     <string name="language_am">"Amharca"</string>
     <string name="language_el">"Yunanca"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"%s sıfırlanıyor"</string>
     <string name="result">"Sonuç: %s"</string>
     <string name="search">"Ara…"</string>
-    <string name="session_id">"Oturum Kimliği: %s"</string>
     <string name="share">"Paylaş"</string>
     <string name="shared_by">"%s/Package Manager tarafından paylaşıldı"</string>
     <string name="share_message">"Package Manager %s Google Play'den alınabilir: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>

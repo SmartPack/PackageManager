@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.os.IBinder;
 
+import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
 
 /*
@@ -37,10 +38,28 @@ public class SplitAPKInstallService extends Service {
                 }
                 break;
             case PackageInstaller.STATUS_SUCCESS:
-                Utils.saveString("installationStatus", "success", this);
+                Utils.saveString("installationStatus", getString(R.string.installation_status_success), this);
+                break;
+            case PackageInstaller.STATUS_FAILURE_ABORTED:
+                Utils.saveString("installationStatus", getString(R.string.installation_status_aborted), this);
+                break;
+            case PackageInstaller.STATUS_FAILURE_BLOCKED:
+                Utils.saveString("installationStatus", getString(R.string.installation_status_blocked), this);
+                break;
+            case PackageInstaller.STATUS_FAILURE_CONFLICT:
+                Utils.saveString("installationStatus", getString(R.string.installation_status_conflict), this);
+                break;
+            case PackageInstaller.STATUS_FAILURE_INCOMPATIBLE:
+                Utils.saveString("installationStatus", getString(R.string.installation_status_incompatible), this);
+                break;
+            case PackageInstaller.STATUS_FAILURE_INVALID:
+                Utils.saveString("installationStatus", getString(R.string.installation_status_bad_apks), this);
+                break;
+            case PackageInstaller.STATUS_FAILURE_STORAGE:
+                Utils.saveString("installationStatus", getString(R.string.installation_status_storage), this);
                 break;
             default:
-                Utils.saveString("installationStatus", "failed", this);
+                Utils.saveString("installationStatus", getString(R.string.installation_status_failed), this);
                 break;
         }
         stopSelf();

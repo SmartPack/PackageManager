@@ -2,7 +2,6 @@
 
     <string name="about">"О программе"</string>
     <string name="about_summary">"<i>Простое, но мощное приложение для управления вашими приложениями.</i>"</string>
-    <string name="already_exists">"%s уже существует! Неудача!"</string>
     <string name="apk_path">"Путь к APK"</string>
     <string name="app_info">"Инфо"</string>
     <string name="batch_list_clear">"Очистить список"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Инициализация процесса пакетной обработки"</string>
     <string name="batch_warning">"Настройки пакетной обработки будут удалены! Вы уверены?"</string>
     <string name="billing_client_disconnected">"Не удалось подключиться к клиенту Google Play Billing!"</string>
-    <string name="bundle_extract_message">"Распаковка %s в рабочую папку"</string>
     <string name="bundle_install">"Вы уверены, что хотите установить split apks из '%s'?"</string>
     <string name="bundle_install_apks">"Вы точно хотите установить пакетное приложение(split) '%s'?"</string>
     <string name="cancel">"Отмена"</string>
     <string name="change_logs">"Список изменений"</string>
-    <string name="cleaning_message">"Очистка временных файлов"</string>
-    <string name="copying_apk_message">"Копирование Split APK в рабочий каталог"</string>
-    <string name="creating_directory_message">"Создание временного рабочего каталога"</string>
     <string name="credits">"Благодарности"</string>
     <string name="dark_theme">"Тёмная тема"</string>
     <string name="dark_theme_auto">"Авто"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"Понял"</string>
     <string name="install">"Установка"</string>
     <string name="install_bundle">"Установить Split APKs"</string>
-    <string name="install_bundle_initialized">"Инициализация установки Split APK"</string>
     <string name="installing_bundle">"Установка пакетного приложения!"</string>
-    <string name="installing_bundle_finished">"Установка пакетного приложения завершена!"</string>
     <string name="language">"Язык"</string>
     <string name="language_am">"Амхарский"</string>
     <string name="language_el">"Греческий"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"Сброс %s"</string>
     <string name="result">"Результат: %s"</string>
     <string name="search">"Поиск…"</string>
-    <string name="session_id">"Идентификатор сессии: %s"</string>
     <string name="share">"Поделиться"</string>
     <string name="shared_by">"%s/поделиться Package Manager"</string>
     <string name="share_message">"Package Manager %s можно получить в\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -153,7 +145,7 @@
     <string name="file_picker_external">"Внешний"</string>
     <string name="file_picker_inbuilt">"Встроенный в Package Manager"</string>
     <string name="installation_cancel_message">"Вы точно хотите отменить установку?"</string>
-    <string name="installation__status_failed">"Сбой установки!"</string>
+    <string name="installation_status_failed">"Сбой установки!"</string>
     <string name="installation_status_success">"Установка успешно завершена!"</string>
     <string name="sdcard">"SD карта"</string>
     <string name="select">"Выбор"</string>

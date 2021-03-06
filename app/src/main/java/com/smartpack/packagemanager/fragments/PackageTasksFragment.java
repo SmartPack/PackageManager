@@ -50,7 +50,6 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.SplitAPKInstallerNoRoot;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -408,6 +407,7 @@ public class PackageTasksFragment extends Fragment {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -443,52 +443,34 @@ public class PackageTasksFragment extends Fragment {
                                         .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                                         })
                                         .setPositiveButton(getString(R.string.install), (dialog, id) -> {
-                                            if (mPath.endsWith(".apk")) {
-                                                if (Utils.rootAccess()) {
-                                                    SplitAPKInstaller.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
-                                                            .toString(), requireActivity());
-                                                } else {
-                                                    PackageExplorer.mAPKList.clear();
-                                                    if (new File(mPath).exists()) {
-                                                        for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
-                                                                .toString()).listFiles())) {
-                                                            if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                                                PackageExplorer.mAPKList.add(mFile.getAbsolutePath());
-                                                            }
-                                                        }
+                                            PackageExplorer.mAPKList.clear();
+                                            if (new File(mPath).exists()) {
+                                                for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
+                                                        .toString()).listFiles())) {
+                                                    if (mFile.exists() && mFile.getName().endsWith(".apk")) {
+                                                        PackageExplorer.mAPKList.add(mFile.getAbsolutePath());
                                                     }
-                                                    SplitAPKInstallerNoRoot.installSplitAPKs(requireActivity());
                                                 }
-                                            } else {
-                                                SplitAPKInstaller.installSplitAPKs(mPath, requireActivity());
                                             }
+                                            SplitAPKInstaller.installSplitAPKs(requireActivity());
                                         }).show());
                     }
                     installApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
                     installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
                         if (mPath.endsWith(".apk")) {
-                            if (Utils.rootAccess()) {
-                                SplitAPKInstaller.installSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile())
-                                        .toString(), requireActivity());
-                            } else {
-                                PackageExplorer.mAPKList.clear();
-                                if (new File(mPath).exists()) {
-                                    for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
-                                            .toString()).listFiles())) {
-                                        if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                            PackageExplorer.mAPKList.add(mFile.getAbsolutePath());
-                                        }
+                            PackageExplorer.mAPKList.clear();
+                            if (new File(mPath).exists()) {
+                                for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
+                                        .toString()).listFiles())) {
+                                    if (mFile.exists() && mFile.getName().endsWith(".apk")) {
+                                        PackageExplorer.mAPKList.add(mFile.getAbsolutePath());
                                     }
                                 }
-                                SplitAPKInstallerNoRoot.installSplitAPKs(requireActivity());
                             }
+                            SplitAPKInstaller.installSplitAPKs(requireActivity());
                         } else {
-                            if (Utils.rootAccess()) {
-                                SplitAPKInstaller.installSplitAPKs(mPath, requireActivity());
-                            } else {
-                                SplitAPKInstallerNoRoot.handleAppBundle(mProgressLayout, mPath, requireActivity());
-                            }
+                            SplitAPKInstaller.handleAppBundle(mProgressLayout, mPath, requireActivity());
                         }
                     });
                     installApp.show();

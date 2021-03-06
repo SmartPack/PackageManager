@@ -2,7 +2,6 @@
 
     <string name="about">"À propos"</string>
     <string name="about_summary">"Une application simple et puissante pour la gestion de vos appli"</string>
-    <string name="already_exists">"%s existe déjà! Interrompu!"</string>
     <string name="apk_path">"APK Chemin"</string>
     <string name="app_info">"info Appli"</string>
     <string name="batch_list_clear">"Vider la liste"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Initialisation du traitement des lots"</string>
     <string name="batch_warning">"Les configurations de votre lot vont être supprimés ! Êtes vous sûr ?"</string>
     <string name="billing_client_disconnected">"Échec de connexion avec le client de facturation Google Play!"</string>
-    <string name="bundle_extract_message">"Extraction %s dans le dossier de travail"</string>
     <string name="bundle_install">"Êtes-vous sûr d'installer les apk modulaires de '%s'?"</string>
     <string name="bundle_install_apks">"Êtes-vous sûr d'installer App bundle '%s'?"</string>
     <string name="cancel">"Annuler"</string>
     <string name="change_logs">"Change-logs"</string>
-    <string name="cleaning_message">"Nettoyer les fichiers temporaires"</string>
-    <string name="copying_apk_message">"Copie séparée des APKs vers le dossier se travail"</string>
-    <string name="creating_directory_message">"Créer un dossier de travail temporaire"</string>
     <string name="credits">"Crédits"</string>
     <string name="dark_theme">"Théme sombre"</string>
     <string name="dark_theme_auto">"Auto"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"J'ai compris"</string>
     <string name="install">"Install"</string>
     <string name="install_bundle">"Installer les APKs séparément"</string>
-    <string name="install_bundle_initialized">"Initialisation de l'installation des APKs séparément"</string>
     <string name="installing_bundle">"Installation des Appli bundle"</string>
-    <string name="installing_bundle_finished">"Installation des appli bundle terminées!"</string>
     <string name="language">"Langue"</string>
     <string name="language_am">"Amharique"</string>
     <string name="language_el">"Grec"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"Réinitialisation de %s"</string>
     <string name="result">"Résultat: %s"</string>
     <string name="search">"Recherche…"</string>
-    <string name="session_id">"Session ID: %s"</string>
     <string name="share">"Partager"</string>
     <string name="shared_by">"%s/partagé par Package Manager"</string>
     <string name="share_message">"Package Manager %s peut être obtenu en passant par Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -153,7 +145,7 @@
     <string name="file_picker_external">"Externe"</string>
     <string name="file_picker_inbuilt">"Intégré"</string>
     <string name="installation_cancel_message">"Êtes-vous sûr d'annuler l'installation ?"</string>
-    <string name="installation__status_failed">"L'installation a échoué !"</string>
+    <string name="installation_status_failed">"L'installation a échoué !"</string>
     <string name="installation_status_success">"Installation terminée avec succès !"</string>
     <string name="sdcard">"SDCard"</string>
     <string name="select">"Sélectionner"</string>

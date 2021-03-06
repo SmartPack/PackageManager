@@ -2,7 +2,6 @@
 
     <string name="about">"Giới thiệu"</string>
     <string name="about_summary">"<i>Một ứng dụng đơn giản nhưng mạnh mẽ để quản lý các ứng dụng của bạn.</i>"</string>
-    <string name="already_exists">"%s đã tồn tại! Hủy bỏ!"</string>
     <string name="apk_path">"Đường dẫn APK"</string>
     <string name="app_info">"Thông tin ứng dụng"</string>
     <string name="batch_list_clear">"Dọn dẹp danh sách"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Khởi tạo quy trình hàng loạt"</string>
     <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa!  Bạn có chắc không?"</string>
     <string name="billing_client_disconnected">"Không kết nối được với ứng dụng Thanh toán của Google Play!"</string>
-    <string name="bundle_extract_message">"Đang giải nén %s vào thư mục làm việc"</string>
     <string name="bundle_install">"Bạn có chắc chắn cài đặt apk được tách từ '%s' không?"</string>
     <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
     <string name="cancel">"Hủy"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
-    <string name="cleaning_message">"Làm sạch các tệp tạm thời"</string>
-    <string name="copying_apk_message">"Sao chép các APK phân tách vào thư mục làm việc"</string>
-    <string name="creating_directory_message">"Tạo một thư mục làm việc tạm thời"</string>
     <string name="credits">"Tín dụng"</string>
     <string name="dark_theme">"Chủ đề tối"</string>
     <string name="dark_theme_auto">"Tự động"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"Hiểu rồi"</string>
     <string name="install">"Tải về"</string>
     <string name="install_bundle">"Cài đặt APK phân tách"</string>
-    <string name="install_bundle_initialized">"Khởi tạo cài đặt APK phân tách"</string>
     <string name="installing_bundle">"Cài đặt Gói ứng dụng!"</string>
-    <string name="installing_bundle_finished">"Cài đặt gói ứng dụng đã hoàn tất!"</string>
     <string name="language">"Ngôn ngữ"</string>
     <string name="language_am">"Tiếng Amharic"</string>
     <string name="language_el">"Tiếng Hy Lạp"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"Đang đặt lại %s"</string>
     <string name="result">"Kết quả: %s"</string>
     <string name="search">"Tìm kiếm…"</string>
-    <string name="session_id">"ID phiên: %s"</string>
     <string name="share">"Chia sẻ"</string>
     <string name="shared_by">"%s/được chia sẻ bởi Trình Quản Lý Gói"</string>
     <string name="share_message">"Trình Quản Lý Gói %s có thể được lấy từ\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -153,7 +145,7 @@
     <string name="file_picker_external">"Bên ngoài"</string>
     <string name="file_picker_inbuilt">"Trong xây dựng"</string>
     <string name="installation_cancel_message">"Bạn có chắc chắn hủy cài đặt không?"</string>
-    <string name="installation__status_failed">"Cài đặt thất bại!"</string>
+    <string name="installation_status_failed">"Cài đặt thất bại!"</string>
     <string name="installation_status_success">"Cài đặt hoàn tất thành công!"</string>
     <string name="sdcard">"Thẻ SD"</string>
     <string name="select">"Chọn"</string>

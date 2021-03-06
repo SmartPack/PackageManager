@@ -12,9 +12,8 @@
         android:layout_gravity="start"
         android:textSize="18sp"
         android:padding="10dp"
-        android:visibility="gone"
-        android:background="?attr/colorAccent"
-        android:textColor="@color/colorBlack" />
+        android:background="@color/colorBlack"
+        android:textColor="?attr/colorAccent" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
@@ -24,35 +23,17 @@
         android:layout_marginBottom="50sp"
         android:scrollbars="vertical">
 
-        <LinearLayout
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/result_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/result_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:cursorVisible="true"
-                android:gravity="top|start"
-                android:visibility="gone"
-                android:textColor="?attr/colorAccent"
-                android:padding="10dp"
-                android:textSize="15sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/status_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:cursorVisible="true"
-                android:gravity="top|start"
-                android:visibility="gone"
-                android:textColor="?attr/colorAccent"
-                android:padding="10dp"
-                android:textSize="15sp" />
-        </LinearLayout>
+            android:background="@null"
+            android:cursorVisible="true"
+            android:gravity="top|start"
+            android:visibility="gone"
+            android:textColor="?attr/colorAccent"
+            android:padding="10dp"
+            android:textSize="15sp" />
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
@@ -61,14 +42,14 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:background="?attr/colorAccent"
+        android:background="@color/colorBlack"
         android:baselineAligned="false" >
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cancel_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
+            android:textColor="?attr/colorAccent"
             android:gravity="center_horizontal"
             android:text="@string/cancel"
             android:visibility="gone"

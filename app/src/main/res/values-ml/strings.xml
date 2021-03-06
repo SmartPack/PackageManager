@@ -2,7 +2,6 @@
 
     <string name="about">"അപ്ലിക്കേഷനെക്കുറിച്ച്"</string>
     <string name="about_summary">"<i>നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ മാനേജുചെയ്യുന്നതിനുള്ള ലളിതവും ശക്തവുമായ അപ്ലിക്കേഷൻ.</i>"</string>
-    <string name="already_exists">"%s നിലവിൽ ഉണ്ട്! നിർത്തലാക്കുന്നു!"</string>
     <string name="app_info">"വിശദാംശങ്ങൾ"</string>
     <string name="batch_list_clear">"മായ്‌ക്കുക"</string>
     <string name="batch_list_disable">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) പ്രവർത്തനരഹിതമാക്കണമെന്ന് (പ്രവർത്തനക്ഷമമാണെങ്കിൽ) അല്ലെങ്കിൽ പ്രവർത്തനക്ഷമമാക്കണമെന്ന് (പ്രവർത്തനരഹിതമാണെങ്കിൽ ) നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
@@ -14,13 +13,9 @@
     <string name="batch_processing_initialized">"ബാച്ച് പ്രോസസ്സ് ആരംഭിക്കുന്നു"</string>
     <string name="batch_warning">"നിങ്ങളുടെ ബാച്ച് ക്രമീകരണങ്ങൾ നീക്കംചെയ്യും! നിങ്ങള്ക്ക് ഉറപ്പാണോ?"</string>
     <string name="billing_client_disconnected">"ഗൂഗിൾ പ്ലേ ബില്ലിംഗ് ക്ലയന്റുമായി ബന്ധിപ്പിക്കുന്നതിൽ പരാജയപ്പെട്ടു!"</string>
-    <string name="bundle_extract_message">"%sനെ താൽക്കാലിക ഫോൾഡറിലേക്ക്ക് ‌എക്‌സ്‌ട്രാക്റ്റുചെയ്യുന്നു"</string>
     <string name="bundle_install">"'%s' ൽ ഉള്ള സ്പ്ലിറ്റ് APKകൾ ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="bundle_install_apks">"അപ്ലിക്കേഷൻ ബണ്ടിൽ '%s' ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന്‌ ഉറപ്പാണോ?"</string>
     <string name="cancel">"റദ്ദാക്കുക"</string>
-    <string name="cleaning_message">"താൽക്കാലിക ഫയലുകൾ വൃത്തിയാക്കുന്നു"</string>
-    <string name="copying_apk_message">"സ്‌പ്ലിറ്റ് APKകൾ പ്രവർത്തന ഡയറക്‌ടറിയിലേക്ക് പകർത്തുന്നു"</string>
-    <string name="creating_directory_message">"ഒരു താൽക്കാലിക പ്രവർത്തന ഡയറക്‌ടറി സൃഷ്‌ടിക്കുന്നു"</string>
     <string name="credits">"ക്രെഡിറ്റുകൾ"</string>
     <string name="dark_theme">"ഇരുണ്ട തീം"</string>
     <string name="date_installation">"ഇൻസ്റ്റാളേഷൻ തീയതികൾ"</string>
@@ -44,9 +39,7 @@
     <string name="got_it">"മനസ്സിലായി"</string>
     <string name="install">"ഇൻസ്റ്റാൾ"</string>
     <string name="install_bundle">"Split APK ഇൻസ്റ്റാൾ"</string>
-    <string name="install_bundle_initialized">"സ്പ്ലിറ്റ് APK-കളുടെ ഇൻസ്റ്റാളേഷൻ ആരംഭിക്കുന്നു"</string>
     <string name="installing_bundle">"അപ്ലിക്കേഷൻ ബണ്ടിൽ ഇൻസ്റ്റാളുചെയ്യുന്നു!"</string>
-    <string name="installing_bundle_finished">"ഇൻസ്റ്റാളേഷൻ വിജയകരമായി പൂർത്തിയാക്കി!"</string>
     <string name="language">"ഭാഷ"</string>
     <string name="language_el">"ഗ്രീക്ക്"</string>
     <string name="language_en">"ഇംഗ്ലീഷ്"</string>
@@ -70,7 +63,6 @@
     <string name="report_issue">"ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക"</string>
     <string name="result">"ഫലം: %s"</string>
     <string name="search">"തിരയൽ…"</string>
-    <string name="session_id">"സെഷൻ ഐഡി: %s"</string>
     <string name="share">"പങ്കുവെക്കുക"</string>
     <string name="shared_by">"%s/പാക്കേജ് മാനേജർ പങ്കുവെച്ചത്"</string>
     <string name="share_message">"Package Manager %s താഴെ ലഭിക്കുന്നതിനായി കാണുന്ന എതെകിലും ലിങ്കിൽ ക്ലിക്ക് ചെയ്യ്യുക\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>

@@ -2,7 +2,6 @@
 
     <string name="about">"Про додаток"</string>
     <string name="about_summary">"<i>Простий, але потужний додаток для управління вашими програмами.</i>"</string>
-    <string name="already_exists">"%s вже існує! Невдача!"</string>
     <string name="apk_path">"Шлях до APK"</string>
     <string name="app_info">"Інфо"</string>
     <string name="batch_list_clear">"Очистити список"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Ініціалізація пакетного процесу"</string>
     <string name="batch_warning">"Ваші пакетні налаштування  буде видалено! Ви впевнені?"</string>
     <string name="billing_client_disconnected">"Не вдалося підключитися до клієнта Google Play Billing!"</string>
-    <string name="bundle_extract_message">"Розпакування %s в робочу папку"</string>
     <string name="bundle_install">"Ви впевнені, що хочете встановити split apks з '%s'?"</string>
     <string name="bundle_install_apks">"Ви впевнені що хочете встановити пакетний (split) додаток?"</string>
     <string name="cancel">"Скасувати"</string>
     <string name="change_logs">"Зміни"</string>
-    <string name="cleaning_message">"Очищення тимчасових файлів"</string>
-    <string name="copying_apk_message">"Копіювання Split APKs у робочий каталог"</string>
-    <string name="creating_directory_message">"Створення тимчасового робочого каталогу"</string>
     <string name="credits">"Подяки"</string>
     <string name="dark_theme">"Темна тема"</string>
     <string name="dark_theme_auto">"Авто"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"Зрозумів"</string>
     <string name="install">"Встановити"</string>
     <string name="install_bundle">"Встановити Split APKs"</string>
-    <string name="install_bundle_initialized">"Ініціалізація встановлення Split APKs"</string>
     <string name="installing_bundle">"Встановлення пакету додатків!"</string>
-    <string name="installing_bundle_finished">"Встановлення пакету додатків завершено!"</string>
     <string name="language">"Мова"</string>
     <string name="language_am">"Амхарська"</string>
     <string name="language_el">"Грецька"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"Скидання %s"</string>
     <string name="result">"Результат: %s"</string>
     <string name="search">"Пошук…"</string>
-    <string name="session_id">"Ідентифікатор сесії: %s"</string>
     <string name="share">"Поділитися"</string>
     <string name="shared_by">"%s/поділився Package Manager"</string>
     <string name="share_message">"Package Manager %s можна отримати з\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -153,7 +145,7 @@
     <string name="file_picker_external">"Зовнішній"</string>
     <string name="file_picker_inbuilt">"Вбудований"</string>
     <string name="installation_cancel_message">"Ви впевнені що хочете відмінити встановлення?"</string>
-    <string name="installation__status_failed">"Збій встановлення"</string>
+    <string name="installation_status_failed">"Збій встановлення"</string>
     <string name="installation_status_success">"Встановлення успішно завершено"</string>
     <string name="sdcard">"SD карта"</string>
     <string name="select">"Обрати"</string>

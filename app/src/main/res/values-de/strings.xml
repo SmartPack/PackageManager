@@ -2,7 +2,6 @@
 
     <string name="about">"Über"</string>
     <string name="about_summary">"<i>Eine einfache, aber leistungsfähige Anwendung zur Verwaltung Ihrer Apps.</i>"</string>
-    <string name="already_exists">"%s existiert bereits! Abbruch!"</string>
     <string name="apk_path">"Pfad zur APK"</string>
     <string name="app_info">"Appinformationen"</string>
     <string name="batch_list_clear">"Liste löschen"</string>
@@ -15,14 +14,10 @@
     <string name="batch_processing_initialized">"Starte Stapelverarbeitung"</string>
     <string name="batch_warning">"Ihre Stapeleinstellungen werden entfernt! Fortfahren?"</string>
     <string name="billing_client_disconnected">"Verbindung mit Google Play fehlgeschlagen!"</string>
-    <string name="bundle_extract_message">"Extrahiere %s ins Arbeitsverzeichnis"</string>
     <string name="bundle_install">"Sind Sie sich sicher, die gesplitteten APK's von \"%s\" zu installieren?"</string>
     <string name="bundle_install_apks">"Sind Sie sich sicher, das App-Bunde \"%s\" zu installieren?"</string>
     <string name="cancel">"Abbrechen"</string>
     <string name="change_logs">"Änderungsprotokolle"</string>
-    <string name="cleaning_message">"Entferne temporäre Dateien"</string>
-    <string name="copying_apk_message">"Kopiere gesplittete APKs ins Arbeitsverzeichnis"</string>
-    <string name="creating_directory_message">"Erstelle ein temporäres Arbeitsverzeichnis"</string>
     <string name="credits">"Impressum"</string>
     <string name="dark_theme">"Dunkles Design"</string>
     <string name="dark_theme_auto">"Automatisch"</string>
@@ -52,9 +47,7 @@
     <string name="got_it">"Verstanden"</string>
     <string name="install">"Installieren"</string>
     <string name="install_bundle">"Installiere gesplittete APKs"</string>
-    <string name="install_bundle_initialized">"Initialisiere Installation gesplitteter APKs"</string>
     <string name="installing_bundle">"Installiere App-Bundle!"</string>
-    <string name="installing_bundle_finished">"Installation von App-Bundle fertiggestellt!"</string>
     <string name="language">"Sprache"</string>
     <string name="language_am">"Amharisch"</string>
     <string name="language_el">"Griechisch"</string>
@@ -84,7 +77,6 @@
     <string name="reset_summary">"Setze %s zurück"</string>
     <string name="result">"Ergebnis: %s"</string>
     <string name="search">"Suchen…"</string>
-    <string name="session_id">"Sitzungs-ID: %s"</string>
     <string name="share">"Teilen"</string>
     <string name="shared_by">"%s/geteilt durch Package Manager"</string>
     <string name="share_message">"Package Manager %s kann von Google Play bezogen werden: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -153,7 +145,7 @@
     <string name="file_picker_external">"Extern"</string>
     <string name="file_picker_inbuilt">"Intern"</string>
     <string name="installation_cancel_message">"Willst Du die Installation abbrechen?"</string>
-    <string name="installation__status_failed">"Installation fehlgeschlagenen!"</string>
+    <string name="installation_status_failed">"Installation fehlgeschlagenen!"</string>
     <string name="installation_status_success">"Erfolgreich Installiert"</string>
     <string name="sdcard">"SD Karte"</string>
     <string name="select">"Wählen"</string>

@@ -3,7 +3,6 @@
 
     <string name="about">"關於"</string>
     <string name="about_summary">"<i>一個麻雀雖小但五臟俱全，用於管理您的應用程式的管理器。</i>"</string>
-    <string name="already_exists">"％s 已經存在！正在終止！"</string>
     <string name="apk_path">"APK 路徑"</string>
     <string name="app_info">"應用程式資訊"</string>
     <string name="batch_list_clear">"清除清單"</string>
@@ -16,14 +15,10 @@
     <string name="batch_processing_initialized">"初始化批次處理"</string>
     <string name="batch_warning">"您的批次處理設定將被刪除！你確定嗎？"</string>
     <string name="billing_client_disconnected">"無法連線至 Google Play 結算客戶端！"</string>
-    <string name="bundle_extract_message">"提取％s 進入工作資料夾"</string>
     <string name="bundle_install">"您是否可以確定要從'％s'拆分 apk's 安裝？"</string>
     <string name="bundle_install_apks">"您確定要安裝應用程式捆綁包'％s'嗎？"</string>
     <string name="cancel">"取消"</string>
     <string name="change_logs">"變更日誌"</string>
-    <string name="cleaning_message">"清理暫存文件"</string>
-    <string name="copying_apk_message">"將Split APK複製到工作目錄"</string>
-    <string name="creating_directory_message">"建立一個暫存工作目錄"</string>
     <string name="credits">"學分"</string>
     <string name="dark_theme">"黑暗主題"</string>
     <string name="dark_theme_auto">"自動"</string>
@@ -53,9 +48,7 @@
     <string name="got_it">"知道了"</string>
     <string name="install">"安裝"</string>
     <string name="install_bundle">"安裝拆分APK"</string>
-    <string name="install_bundle_initialized">"初始化拆分APK安裝"</string>
     <string name="installing_bundle">"安裝App Bundle！"</string>
-    <string name="installing_bundle_finished">"安裝應用程式捆綁包完成！"</string>
     <string name="language">"語言"</string>
     <string name="language_am">"阿姆哈拉語"</string>
     <string name="language_el">"希臘語"</string>
@@ -85,7 +78,6 @@
     <string name="reset_summary">"重設％s"</string>
     <string name="result">"結果：％s"</string>
     <string name="search">"搜尋…"</string>
-    <string name="session_id">"會話 ID：％s"</string>
     <string name="share">"分享"</string>
     <string name="shared_by">"％s /共享 by Package Manager"</string>
     <string name="share_message">"Package Manager ％s 可以從 Google Play 取得： https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -155,7 +147,7 @@
     <string name="file_picker_external">"外部的"</string>
     <string name="file_picker_inbuilt">"內建"</string>
     <string name="installation_cancel_message">"您確定要取消安裝嗎？"</string>
-    <string name="installation__status_failed">"安裝失敗！"</string>
+    <string name="installation_status_failed">"安裝失敗！"</string>
     <string name="installation_status_success">"安裝成功完成！"</string>
     <string name="sdcard">"SD卡"</string>
     <string name="select">"選擇"</string>

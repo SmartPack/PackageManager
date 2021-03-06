@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="about">Sobre</string>
     <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i></string>
-    <string name="already_exists">%s já existe! Abortando!</string>
     <string name="app_info">Informações do app</string>
     <string name="batch_list_clear">Limpar lista</string>
     <string name="batch_list_disable">Tem certeza de que deseja desativar (se ativado) ou ativar (se desativado) o(s) seguinte (s) aplicativo(s)?</string>
@@ -67,16 +66,10 @@
     <string name="batch_processing">Processamento em lote em andamento!</string>
     <string name="batch_processing_finished">Processamento em lote finalizado!</string>
     <string name="batch_processing_initialized">Inicializando processamento em lote!</string>
-    <string name="cleaning_message">Limpando arquivos temporários</string>
-    <string name="copying_apk_message">Copiando APKs divididos para o diretório de trabalho</string>
-    <string name="creating_directory_message">Criando um diretório de trabalho temporário</string>
     <string name="done">Pronto</string>
     <string name="everything_done">Tudo pronto!</string>
     <string name="failed">Falhou</string>
-    <string name="install_bundle_initialized">Inicializando a instalação de APKs divididos</string>
     <string name="installing_bundle">Instalando App Bundle!</string>
-    <string name="installing_bundle_finished">Instalação do App Bundle concluída!</string>
     <string name="result">Resultado: %s</string>
-    <string name="session_id">ID da Sessão: %s</string>
     <string name="split_apk_list">Lista de APKs divididos</string>
 </resources>
