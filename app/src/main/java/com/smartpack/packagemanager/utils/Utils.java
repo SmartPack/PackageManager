@@ -37,11 +37,12 @@ import com.smartpack.packagemanager.R;
 import com.topjohnwu.superuser.Shell;
 import com.topjohnwu.superuser.ShellUtils;
 
-import java.io.BufferedInputStream;
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,8 +53,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
@@ -301,29 +300,9 @@ public class Utils {
     }
 
     public static void unzip(String zip, String path) {
-        try (FileInputStream fis = new FileInputStream(new File(zip))) {
-            try (BufferedInputStream bis = new BufferedInputStream(fis)) {
-                try (ZipInputStream zis = new ZipInputStream(bis)) {
-                    ZipEntry ze;
-                    int count;
-                    byte[] buffer = new byte[1024];
-                    while ((ze = zis.getNextEntry()) != null) {
-                        File file = new File(new File(path), ze.getName());
-                        File dir = ze.isDirectory() ? file : file.getParentFile();
-                        assert dir != null;
-                        if (!dir.isDirectory() && !dir.mkdirs())
-                            throw new FileNotFoundException("Failed to ensure directory: " + dir.getAbsolutePath());
-                        if (ze.isDirectory())
-                            continue;
-                        try (FileOutputStream fout = new FileOutputStream(file)) {
-                            while ((count = zis.read(buffer)) != -1)
-                                fout.write(buffer, 0, count);
-                        }
-                    }
-                }
-            }
-        } catch (Exception ignored) {
-        }
+        try {
+            new ZipFile(zip).extractAll(path);
+        } catch (ZipException ignored) {}
     }
 
     public static boolean isNetworkUnavailable(Context context) {

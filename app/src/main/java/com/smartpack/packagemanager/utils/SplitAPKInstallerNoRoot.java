@@ -149,8 +149,7 @@ public class SplitAPKInstallerNoRoot {
                 if (path.endsWith(".apks")) {
                     Utils.unzip(path,  activity.getCacheDir().getPath());
                 } else if (path.endsWith(".xapk") || path.endsWith(".apkm")) {
-                    // To-do: Implement a proper java method
-                    Utils.runCommand("unzip " + path + " -d " + activity.getCacheDir().getPath() + "/splits");
+                    Utils.unzip(path,  activity.getCacheDir().getPath() + "/splits");
                 }
                 return null;
             }
