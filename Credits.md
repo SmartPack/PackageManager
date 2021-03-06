@@ -4,6 +4,8 @@ Package Manager is, and as always, an open-source project which is ready to acce
 ## Code
 * [Grarak](https://github.com/Grarak/): Kernel Adiutor, from where some code is taken
 * [topjohnwu](https://github.com/topjohnwu): libsu, the library in which Package Manager depending to handle root related tasks
+* [Srikanth Reddy Lingala](https://github.com/srikanth-lingala): zip4j, the library in which Package Manager depending for zipping/unzipping tasks
+* [Aefyr](https://github.com/Aefyr/) & [nkalra0123](https://github.com/nkalra0123/): a part of Split APK Installer code is taken from their work
 * [Lennoard Silva](https://github.com/Lennoard): contributed code to this project, especially in its early stage of development
 
 ## Icon
@@ -14,10 +16,10 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * [Mikesew1320](https://github.com/Mikesew1320), Amharic Translations
 * [tsiflimagas](https://github.com/tsiflimagas), Greek Translations
 * [Lennoard Silva](https://github.com/Lennoard), Portuguese (Brazilian) Translations
-* [Nikita](https://t.me/MONSTER_PC), Russian & Ukrainian Translations
+* [Nikita](https://t.me/MONSTER_PC) & tommynok, Russian & Ukrainian Translations
 * B3Nd2R & Reno, French Translations
-* Jan, German Translations
-* BSÇE (BlueSoul Çeviri Ekibi), Turkish Translations
+* Jan & Ray, German Translations
+* BSÇE (BlueSoul Çeviri Ekibi) & Emrehelvaci83, Turkish Translations
 * Woytazzer, Czech Translations
 * Javi, Spanish Translations
 * Hoa Gia Đại Thiếu, Vietnamese Translations
