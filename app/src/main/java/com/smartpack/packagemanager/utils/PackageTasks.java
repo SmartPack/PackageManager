@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,6 +16,10 @@ import android.os.AsyncTask;
 import com.google.android.material.card.MaterialCardView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageTasksActivity;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 12, 2020
@@ -46,6 +51,7 @@ public class PackageTasks {
                 activity.startActivity(turnOffIntent);
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected Void doInBackground(Void... voids) {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
@@ -95,6 +101,7 @@ public class PackageTasks {
                 activity.startActivity(removeIntent);
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected Void doInBackground(Void... voids) {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
@@ -137,27 +144,24 @@ public class PackageTasks {
                 activity.startActivity(removeIntent);
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected Void doInBackground(Void... voids) {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
                         if (SplitAPKInstaller.isAppBundle(PackageData.getParentDir(packageID, activity))) {
-                            if (Utils.exist(PackageData.getPackageDir() + "/" + packageID)) {
-                                mOutput.append("** ").append(activity.getString(R.string.already_exists, packageID)).append(" *\n\n");
-                            } else {
-                                Utils.mkdir(PackageData.getPackageDir() + "/" + packageID);
-                                mOutput.append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
-                                for (final String splitApps : SplitAPKInstaller.splitApks(PackageData.getParentDir(packageID, activity))) {
-                                    Utils.copy(PackageData.getParentDir(packageID, activity) + "/" + splitApps, PackageData.getPackageDir() + "/" + packageID + "/" + splitApps);
-                                }
-                                mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                            mOutput.append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
+                            List<File> mFiles = new ArrayList<>();
+                            for (final String splitApps : SplitAPKInstaller.splitApks(PackageData.getParentDir(packageID, activity))) {
+                                mFiles.add(new File(PackageData.getParentDir(packageID, activity) + "/" + splitApps));
                             }
+                            Utils.zip(PackageData.getPackageDir() + "/" + packageID + ".apkm", mFiles);
                         } else {
                             mOutput.append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
                             Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir() + "/" + packageID + ".apk");
-                            mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
+                        mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);
                     }
                 }
@@ -192,6 +196,7 @@ public class PackageTasks {
                 activity.startActivity(removeIntent);
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected Void doInBackground(Void... voids) {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");

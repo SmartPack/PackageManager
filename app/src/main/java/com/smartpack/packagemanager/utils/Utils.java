@@ -305,6 +305,13 @@ public class Utils {
         } catch (ZipException ignored) {}
     }
 
+    public static void zip(String zip, List<File> files) {
+        try {
+            new ZipFile(zip).addFiles(files);
+        } catch (ZipException ignored) {
+        }
+    }
+
     public static boolean isNetworkUnavailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;

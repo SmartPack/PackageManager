@@ -37,9 +37,7 @@ import java.util.List;
 import java.util.Objects;
 
 /*
- *
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2020
- *
  */
 public class PackageDetails {
 
@@ -50,13 +48,8 @@ public class PackageDetails {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
         } else if (new File(PackageData.getSourceDir(PackageData.mApplicationID, activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, activity)).size() > 1) {
-            if (Utils.exist(PackageData.getPackageDir() + "/" + PackageData.mApplicationID)) {
-                Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.already_exists, PackageData.mApplicationID));
-            } else {
-                exportingBundleTask(linearLayout, textView, PackageData.getParentDir(PackageData.mApplicationID, activity), PackageData.mApplicationID,
-                        PackageData.mApplicationIcon, activity);
-                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-            }
+            exportingBundleTask(linearLayout, textView, PackageData.getParentDir(PackageData.mApplicationID, activity), PackageData.mApplicationID,
+                    PackageData.mApplicationIcon, activity);
         } else {
             exportingTask(linearLayout, textView, PackageData.mDirSource, PackageData.mApplicationID, PackageData.mApplicationIcon, activity);
         }
@@ -64,6 +57,7 @@ public class PackageDetails {
 
     public static void exportingTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
         new AsyncTask<Void, Void, Void>() {
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -76,6 +70,7 @@ public class PackageDetails {
                 Utils.copy(apk, PackageData.getPackageDir() + "/" + name + ".apk");
                 return null;
             }
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
@@ -96,30 +91,31 @@ public class PackageDetails {
                             shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
                             shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
-                        })
-
-                        .show();
+                        }).show();
             }
         }.execute();
     }
 
     public static void exportingBundleTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
         new AsyncTask<Void, Void, Void>() {
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting_bundle, name) + "...");
                 PackageData.makePackageFolder();
-                Utils.mkdir(PackageData.getPackageDir() + "/" + name);
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
+                List<File> mFiles = new ArrayList<>();
                 for (final String splitApps : SplitAPKInstaller.splitApks(apk)) {
-                    Utils.copy(apk + "/" + splitApps, PackageData.getPackageDir() + "/" + name + "/" + splitApps);
+                    mFiles.add(new File(apk + "/" + splitApps));
                 }
+                Utils.zip(PackageData.getPackageDir() + "/" + name + ".apkm", mFiles);
                 return null;
             }
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
@@ -127,8 +123,19 @@ public class PackageDetails {
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
                         .setTitle(name)
-                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir()))
-                        .setPositiveButton(R.string.cancel, (dialog, id) -> {
+                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir() + "/" + name + ".apkm"))
+                        .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
+                        })
+                        .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
+                            Uri uriFile = FileProvider.getUriForFile(activity,
+                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir() + "/" + name + ".apkm"));
+                            Intent shareScript = new Intent(Intent.ACTION_SEND);
+                            shareScript.setType("application/zip");
+                            shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
+                            shareScript.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
+                            shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
+                            shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
                         }).show();
             }
         }.execute();
@@ -137,6 +144,7 @@ public class PackageDetails {
     public static void disableApp(LinearLayout progressLayout, LinearLayout openApp, MaterialTextView progressMessage,
                                   MaterialTextView statusMessage, Activity activity) {
         new AsyncTask<Void, Void, Void>() {
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -165,6 +173,7 @@ public class PackageDetails {
         }.execute();
     }
 
+    @SuppressLint("StringFormatInvalid")
     public static void uninstallApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
         if (PackageData.mApplicationID.equals(BuildConfig.APPLICATION_ID)) {
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.uninstall_nope));
@@ -205,6 +214,7 @@ public class PackageDetails {
 
     public static void removeSystemApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
         new AsyncTask<Void, Void, Void>() {
+            @SuppressLint("StringFormatInvalid")
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
