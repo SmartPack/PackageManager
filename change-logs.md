@@ -1,5 +1,9 @@
 # Change-logs
 
+## 31. March 06, 2021
+*Release-tag: 3.8*<br>
+Largely improved Split APK Installation with a Brand New installer view. Split APK installer now always proceed non-root method. Improved app bundle detection. App will now export app bundles as a single apkm file. App will now allow to share bundles after exporting. Updated Ukrainian translations. Miscellaneous changes.
+
 ## 30. March 03, 2021
 *Release-tag: 3.7*<br>
 Improved package explorer. App will now load (and also allowed to save) app icon when clicking the icon on each entry. Added Czech, Spanish, Vietnamese, & Chinese translations. Updated French, German & Russian translations. Improved language switch on Settings page. Credits are now moved as a separate entry into Settings page. Miscellaneous changes.

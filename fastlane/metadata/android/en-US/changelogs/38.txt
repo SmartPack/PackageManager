@@ -1,0 +1,7 @@
+* Largely improved Split APK Installation with a Brand New installer view.
+* Split APK installer now always proceed non-root method.
+* Improved app bundle detection.
+* App will now export app bundles as a single apkm file.
+* App will now allow sharing bundles after exporting.
+* Updated Ukrainian translations.
+* Miscellaneous changes.
