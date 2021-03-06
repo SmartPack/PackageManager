@@ -30,9 +30,9 @@ import java.util.List;
 import java.util.Objects;
 
 /*
- * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 23, 2020
- * Based on the original work of nkalra0123 for Split Apk Install
- * Ref: https://github.com/nkalra0123/splitapkinstall
+ * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
+ * Based on the original work of nkalra0123 (Ref: https://github.com/nkalra0123/splitapkinstall)
+ * & Aefyr (Ref: https://github.com/Aefyr/SAI)
  */
 public class SplitAPKInstaller {
 

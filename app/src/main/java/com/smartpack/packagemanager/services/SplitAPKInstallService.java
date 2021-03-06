@@ -18,8 +18,8 @@ import com.smartpack.packagemanager.utils.Utils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
- * Based on the original work of nkalra0123 for Split Apk Install
- * Ref: https://github.com/nkalra0123/splitapkinstall
+ * Based on the original work of nkalra0123 (Ref: https://github.com/nkalra0123/splitapkinstall)
+ * & Aefyr (Ref: https://github.com/Aefyr/SAI)
  */
 public class SplitAPKInstallService extends Service {
 

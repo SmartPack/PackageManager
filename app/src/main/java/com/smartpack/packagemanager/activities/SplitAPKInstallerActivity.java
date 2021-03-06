@@ -80,8 +80,10 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
                             } else {
                                 mStatus.setText(getString(R.string.result, installationStatus));
                                 if (installationStatus.equals(getString(R.string.installation_status_success))) {
-                                    mTitle.setText(PackageData.getAppName(getPackageId(), activity));
-                                    mIcon.setImageDrawable(PackageData.getAppIcon(getPackageId(), activity));
+                                    try {
+                                        mTitle.setText(PackageData.getAppName(getPackageId(), activity));
+                                        mIcon.setImageDrawable(PackageData.getAppIcon(getPackageId(), activity));
+                                    } catch (NullPointerException ignored) {}
                                 }
                                 mProgress.setVisibility(View.GONE);
                                 mCancel.setVisibility(View.VISIBLE);
