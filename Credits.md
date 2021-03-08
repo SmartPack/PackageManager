@@ -20,7 +20,7 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * [Nikita](https://t.me/MONSTER_PC) & tommynok, Russian & Ukrainian Translations
 * B3Nd2R & Reno, French Translations
 * Jan & Ray, German Translations
-* BSÇE (BlueSoul Çeviri Ekibi) & Emrehelvaci83, Turkish Translations
+* [omerakgoz34](https://github.com/omerakgoz34) ([BSÇE](https://bluesoulceviriekibi.net)) ve Emrehelvaci83, Türkçe Çeviri
 * Woytazzer, Czech Translations
 * Javi, Spanish Translations
 * Hoa Gia Đại Thiếu, Vietnamese Translations
