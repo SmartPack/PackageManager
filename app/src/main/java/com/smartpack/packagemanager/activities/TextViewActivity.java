@@ -46,7 +46,11 @@ public class TextViewActivity extends AppCompatActivity {
 
         assert path != null;
         mTitle.setText(new  File(path).getName());
-        mText.setText(Utils.read(path));
+        if (path.endsWith(".xml")) {
+            mText.setText(PackageExplorer.readXMLFromAPK(PackageData.mDirSource, path.replace(getCacheDir().getPath() + "/apk/", "")));
+        } else {
+            mText.setText(Utils.read(path));
+        }
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setMessage(getString(R.string.export_storage_message, new File(path).getName()))
