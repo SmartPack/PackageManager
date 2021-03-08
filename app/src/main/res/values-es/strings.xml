@@ -49,15 +49,7 @@
     <string name="install_bundle">"Instalar aplicaciones separadas"</string>
     <string name="installing_bundle">"Instalando paquete de aplicaciones"</string>
     <string name="language">"Lenguaje"</string>
-    <string name="language_am">"Amárico"</string>
-    <string name="language_el">"Griego"</string>
-    <string name="language_en">"Inglés"</string>
     <string name="language_default">"por defecto"</string>
-    <string name="language_ko">"Coreano"</string>
-    <string name="language_ml">"Malayo"</string>
-    <string name="language_pt">"Portugués"</string>
-    <string name="language_ru">"Ruso"</string>
-    <string name="language_uk">"Ucraniano"</string>
     <string name="more_apps">"Más del desarrollador"</string>
     <string name="name">"Nombre"</string>
     <string name="native_lib">"Librería nativa"</string>

@@ -25,12 +25,7 @@
     <string name="install">Instalar</string>
     <string name="install_bundle">Instalar APKs divididos</string>
     <string name="language">Idioma</string>
-    <string name="language_am">Amárico</string>
-    <string name="language_el">Grego</string>
-    <string name="language_en">Inglês</string>
     <string name="language_default">Padrão</string>
-    <string name="language_ko">Coreano</string>
-    <string name="language_ml">Malaiala</string>
     <string name="more_apps">Mais do desenvolvedor</string>
     <string name="name">Nome</string>
     <string name="no_internet">Por favor, verifique sua conexão à internet!</string>

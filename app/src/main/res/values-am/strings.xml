@@ -27,10 +27,7 @@
     <string name="install_bundle">ክፍልፍል መተግበሪያ ጫን</string>
     <string name="installing_bundle">ክፍልፍል መተግበሪያ በመጫን ላይ</string>
     <string name="language">ቋንቋ</string>
-    <string name="language_am">አማርኛ</string>
-    <string name="language_en">እንግሊዘኛ</string>
     <string name="language_default">ነባር</string>
-    <string name="language_ko">ኮርያኛ</string>
     <string name="more_apps">ከ አበልፃጊዉ ተጨማሪ መተግበሪያ</string>
     <string name="no_internet">እባክዎን የኢንተርኔት አገልግሎት መኖሩን ያረጋግጡ!</string>
     <string name="open">ክፈት</string>

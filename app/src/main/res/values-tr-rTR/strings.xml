@@ -49,15 +49,7 @@
     <string name="install_bundle">"Bölünmüş APK'leri yükle"</string>
     <string name="installing_bundle">"Uygulama Paketi yükleniyor!"</string>
     <string name="language">"Dil"</string>
-    <string name="language_am">"Amharca"</string>
-    <string name="language_el">"Yunanca"</string>
-    <string name="language_en">"İngilizce"</string>
     <string name="language_default">"Varsayılan"</string>
-    <string name="language_ko">"Korece"</string>
-    <string name="language_ml">"Malayalamca"</string>
-    <string name="language_pt">"Portekizce"</string>
-    <string name="language_ru">"Rusça"</string>
-    <string name="language_uk">"Ukraynaca"</string>
     <string name="more_apps">"Geliştiriciden daha fazla uygulama"</string>
     <string name="name">"İsim"</string>
     <string name="native_lib">"Doğal Kütüphane"</string>
@@ -131,11 +123,8 @@
     <string name="batch_list_removed">"%s toplu işlem listesinden kaldırıldı"</string>
     <string name="bundle_install_message">"Sakın unutma: Birden fazla APK'yi (bölünmüş APK'leri) yüklemek için lütfen hepsini tek bir klasörün içerisine koyup herhangi birini seçiniz. Package Manager gerisini sizin yerinize halledecektir."</string>
     <string name="explore_error_status">"%s keşfi başarısız oldu!"</string>
-    <string name="language_fr">"Fransızca"</string>
     <string name="list">"Liste"</string>
     <string name="split_apk">"Bölünmüş APK'ler"</string>
     <string name="welcome_message_root">"UYARI: Bu uygulama, cihazınızı kurcalamak için fazla güçlüdür. Bu uygulamanın geliştiricisi, cihazınızın başına gelebilecek hiçbir şeyin sorumluluğunu kabul etmemektedir."</string>
     <string name="welcome_message_noroot">"Sakın unutma: Cihazınızda Root Erişimi mevcut değildir veya Package Manager için reddedilmiştir. Bu nedenle uygulamanın cihazınıza yapabilecekleri sınırlıdır."</string>
-    <string name="language_de">"Almanca"</string>
-    <string name="language_tr">"Türkçe"</string>
 </resources>

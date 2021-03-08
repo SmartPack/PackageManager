@@ -35,13 +35,7 @@
     <string name="install_bundle">Εγκατάσταση διαιρεμένων APKs</string>
     <string name="installing_bundle">Εγκατάσταση εφαρμογής δεσμίδας!</string>
     <string name="language">Γλώσσα</string>
-    <string name="language_am">Amharic</string>
-    <string name="language_el">Ελληνικά</string>
-    <string name="language_en">Αγγλικά</string>
     <string name="language_default">Προεπιλογή</string>
-    <string name="language_ko">Κορεατικά</string>
-    <string name="language_ml">Malayalam</string>
-    <string name="language_pt">Πορτογαλικά</string>
     <string name="more_apps">Περισσότερα από τον προγραμματιστή</string>
     <string name="name">Όνομα</string>
     <string name="no_internet">Παρακαλώ ελέγξτε τη σύνδεση δικτύου σας!</string>

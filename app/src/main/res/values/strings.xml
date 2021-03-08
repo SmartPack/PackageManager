@@ -76,23 +76,24 @@
     <string name="installation_status_success">Installation Completed Successfully!</string>
     <string name="installing_bundle">Installing App Bundle!</string>
     <string name="language">Language</string>
-    <string name="language_am">Amharic</string>
-    <string name="language_cs">Czech</string>
+    <string name="language_am" translatable="false">አማርኛ</string>
+    <string name="language_cs" translatable="false">čeština</string>
     <string name="language_default">Default</string>
-    <string name="language_el">Greek</string>
-    <string name="language_en">English</string>
-    <string name="language_es">Spanish</string>
-    <string name="language_fr">French</string>
-    <string name="language_de">German</string>
-    <string name="language_ko">Korean</string>
-    <string name="language_ml">Malayalam</string>
-    <string name="language_pt">Portuguese</string>
-    <string name="language_ru">Russian</string>
-    <string name="language_tr">Turkish</string>
-    <string name="language_uk">Ukrainian</string>
-    <string name="language_vi">Vietnamese</string>
-    <string name="language_zh">Chinese</string>
+    <string name="language_el" translatable="false">Ελληνικά</string>
+    <string name="language_en" translatable="false">English</string>
+    <string name="language_es" translatable="false">Español</string>
+    <string name="language_fr" translatable="false">français</string>
+    <string name="language_de" translatable="false">Deutsche</string>
+    <string name="language_ko" translatable="false">한국어</string>
+    <string name="language_ml" translatable="false">മലയാളം</string>
+    <string name="language_pt" translatable="false">Português</string>
+    <string name="language_ru" translatable="false">русский</string>
+    <string name="language_tr" translatable="false">Türk</string>
+    <string name="language_uk" translatable="false">Українська</string>
+    <string name="language_vi" translatable="false">Tiếng Việt</string>
+    <string name="language_zh" translatable="false">中国人</string>
     <string name="list">List</string>
+    <string name="manifest">Manifest</string>
     <string name="more_apps">More from Developer</string>
     <string name="more_apps_summary">Checkout more applications provided by the developer in Google Play</string>
     <string name="name">Name</string>

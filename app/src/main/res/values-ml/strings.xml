@@ -41,13 +41,6 @@
     <string name="install_bundle">"Split APK ഇൻസ്റ്റാൾ"</string>
     <string name="installing_bundle">"അപ്ലിക്കേഷൻ ബണ്ടിൽ ഇൻസ്റ്റാളുചെയ്യുന്നു!"</string>
     <string name="language">"ഭാഷ"</string>
-    <string name="language_el">"ഗ്രീക്ക്"</string>
-    <string name="language_en">"ഇംഗ്ലീഷ്"</string>
-    <string name="language_ko">"കൊറിയൻ"</string>
-    <string name="language_ml">"മലയാളം"</string>
-    <string name="language_pt">"പോർച്ചുഗീസ്"</string>
-    <string name="language_ru">"റഷ്യൻ"</string>
-    <string name="language_uk">"ഉക്രേനിയൻ"</string>
     <string name="more_apps">"കൂടുതൽ അപ്ലിക്കേഷനുകൾ"</string>
     <string name="name">"പേര്"</string>
     <string name="no_internet">"നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക!"</string>

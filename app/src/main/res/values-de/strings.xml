@@ -49,15 +49,7 @@
     <string name="install_bundle">"Installiere gesplittete APKs"</string>
     <string name="installing_bundle">"Installiere App-Bundle!"</string>
     <string name="language">"Sprache"</string>
-    <string name="language_am">"Amharisch"</string>
-    <string name="language_el">"Griechisch"</string>
-    <string name="language_en">"Englisch"</string>
     <string name="language_default">"Standard"</string>
-    <string name="language_ko">"Koreanisch"</string>
-    <string name="language_ml">"Malaiisch"</string>
-    <string name="language_pt">"Portugiesisch"</string>
-    <string name="language_ru">"Russisch"</string>
-    <string name="language_uk">"Ukrainisch"</string>
     <string name="more_apps">"Weitere Apps des Entwicklers"</string>
     <string name="name">"Name"</string>
     <string name="native_lib">"systemeigene Bibliothek"</string>

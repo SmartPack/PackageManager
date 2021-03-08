@@ -49,15 +49,7 @@
     <string name="install_bundle">"Instalovat Split APK soubory"</string>
     <string name="installing_bundle">"Instalování App Budle!"</string>
     <string name="language">"Jazyk"</string>
-    <string name="language_am">"Amharic"</string>
-    <string name="language_el">"Greek"</string>
-    <string name="language_en">"English"</string>
     <string name="language_default">"Výchozí (default)"</string>
-    <string name="language_ko">"Korean"</string>
-    <string name="language_ml">"Malayalam"</string>
-    <string name="language_pt">"Portuguese"</string>
-    <string name="language_ru">"Russian"</string>
-    <string name="language_uk">"Ukrainian"</string>
     <string name="more_apps">"Více od vývojáře"</string>
     <string name="name">"Jméno"</string>
     <string name="native_lib">"Název knihovny"</string>
