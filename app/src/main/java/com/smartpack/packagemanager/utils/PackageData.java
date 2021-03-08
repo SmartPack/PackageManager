@@ -15,7 +15,12 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 
+import net.dongliu.apk.parser.ApkFile;
+import net.dongliu.apk.parser.bean.ApkSigner;
+
 import java.io.File;
+import java.io.IOException;
+import java.security.cert.CertificateException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,6 +140,19 @@ public class PackageData {
 
     public static String getUpdatedDate(String path, Context context) {
         return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(path, context)).lastUpdateTime);
+    }
+
+    public static String getCertificateDetails(String apk) {
+        StringBuilder sb = new StringBuilder();
+        try(ApkFile apkFile = new ApkFile(new File(apk))) {
+            List<ApkSigner> signers = apkFile.getApkSingers();
+            for (ApkSigner mSigner : signers) {
+                sb.append(mSigner).append("\n");
+            }
+        } catch (IOException | CertificateException ignored) {
+        }
+        return sb.toString().replace("{","").replace("=[","\n")
+                .replace("}]}","").replace(", ","\n");
     }
 
     public static boolean isEnabled(String packageName, Context context) {

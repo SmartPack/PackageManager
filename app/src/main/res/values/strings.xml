@@ -24,6 +24,7 @@
     <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
     <string name="bundle_install_message">Please Note: In order to install multiple APK\'s (split APK\'s), please place all of them in a single folder and select one among them. Package Manager will pick and handle the rest.</string>
     <string name="cancel">Cancel</string>
+    <string name="certificate">Certificate</string>
     <string name="change_logs">Change-logs</string>
     <string name="credits">Credits</string>
     <string name="credits_summary">A list of people who contributed to this project</string>

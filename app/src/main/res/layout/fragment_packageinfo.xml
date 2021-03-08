@@ -193,7 +193,6 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
@@ -420,7 +419,25 @@
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:textIsSelectable="true"
-                    android:paddingBottom="16dp"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:textColor="?attr/colorAccent"
+                    android:text="@string/certificate"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/certificate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textIsSelectable="true"
                     android:textSize="12sp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
