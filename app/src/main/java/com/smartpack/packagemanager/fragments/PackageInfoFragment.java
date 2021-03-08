@@ -91,7 +91,9 @@ public class PackageInfoFragment extends Fragment {
             }
         });
         mClear.setOnClickListener(v -> new MaterialAlertDialogBuilder(requireActivity())
-                .setMessage(getString(R.string.reset_message, PackageData.mApplicationID))
+                .setIcon(PackageData.mApplicationIcon)
+                .setTitle(PackageData.mApplicationName)
+                .setMessage(getString(R.string.reset_message, PackageData.mApplicationName))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                 })
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
@@ -121,7 +123,7 @@ public class PackageInfoFragment extends Fragment {
                         PackageData.isEnabled(PackageData.mApplicationID, requireActivity()) ?
                                 getString(R.string.disabled) : getString(R.string.enabled)))
                 .setCancelable(false)
-                .setNeutralButton(getString(R.string.cancel), (dialog, id) -> {
+                .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                 })
                 .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
                     PackageDetails.disableApp(mProgressLayout, mOpenApp, mProgressMessage, mDisableTitle, requireActivity());
