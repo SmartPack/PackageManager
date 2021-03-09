@@ -1,5 +1,9 @@
 # Change-logs
 
+## 32. March 09, 2021
+*Release-tag: 3.9*<br>
+Added Manifest page to Package Info. Package Explorer will now handle binary xml files. Added app certificate information to Package Info page. Fixed layout issues happened on some pages in landscape mode. Switched to blue (Pixel) accent color. Updated Turkish translations. Miscellaneous changes.
+
 ## 31. March 06, 2021
 *Release-tag: 3.8*<br>
 Largely improved Split APK Installation with a Brand New installer view. Split APK installer now always proceed non-root method. Improved app bundle detection. App will now export app bundles as a single apkm file. App will now allow to share bundles after exporting. Updated Ukrainian translations. Miscellaneous changes.
