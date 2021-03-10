@@ -21,14 +21,24 @@
 * ROOT Access required for some advanced features
 
 ## Features
-Package Manager is a simple, yet powerful application to manage the apps installed on an android phone, which offers the following features
+Package Manager is a simple, yet powerful application to manage the apps installed on an android phone offering the following features
 * A beautiful list view of System and User applications, together or separately.
-* Helps to do basic tasks such as Open app, show app info, visit PlayStore page, uninstall (User apps), etc.
+* Show detailed information about each app including, but not limited to,
+  * Application & Package name
+  * APK/Split APK's path
+  * Granted and denied permissions list
+  * List of all the active activities
+  * Data and native library paths
+  * First installed and last updated dates
+  * Certificate details
+  * Manifest details
+  * A lot more
+* Helps to do basic tasks such as Open app, visit PlayStore page, uninstall (User apps), etc.
+* Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
 * Explore and export contents of an installed app (Experimental).
 * Export individual or a batch of apps (including Split apk's) into device storage.
 * Do advanced tasks such as (need Root access).
   * Uninstall an individual or a batch of system apps (de-bloating).
-  * Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
   * Disable or Enable an individual or a batch of apps.
 
 ## Donations
