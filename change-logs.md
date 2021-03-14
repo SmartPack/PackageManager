@@ -1,5 +1,9 @@
 # Change-logs
 
+## 33. March 14, 2021
+*Release-tag: 4.0*<br>
+Added tabs at page top to easily switch app types. Added Downloads page to easily manage APK's/bundles. Updated Chinese, French, German and Turkish translations. Fixed language names in Settings page. Miscellaneous changes.
+
 ## 32. March 09, 2021
 *Release-tag: 3.9*<br>
 Added Manifest page to Package Info. Package Explorer will now handle binary xml files. Added app certificate information to Package Info page. Fixed layout issues happened on some pages in landscape mode. Switched to blue (Pixel) accent color. Updated Turkish translations. Miscellaneous changes.

@@ -1,7 +1,0 @@
-* Added Manifest page to Package Info.
-* Package Explorer will now handle binary xml files.
-* Added app certificate information to Package Info page.
-* Fixed layout issues happened on some pages in landscape mode.
-* Switched to blue (Pixel) accent color.
-* Updated Turkish translations.
-* Miscellaneous changes.
