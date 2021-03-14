@@ -17,7 +17,7 @@
     <string name="bundle_install">"'%s'deki bölünmüş APK'leri yüklemek istediğinize emin misiniz?"</string>
     <string name="bundle_install_apks">"'%s' APK paketini yüklemek istediğinize emin misiniz?"</string>
     <string name="cancel">"Vazgeç"</string>
-    <string name="change_logs">"Değişiklik Günlükleri"</string>
+    <string name="change_logs">"Değişiklik Günlüğü"</string>
     <string name="credits">"Katkılar"</string>
     <string name="credits_summary">"Bu projeye katkı sağlamış insanların bir listesi"</string>
     <string name="dark_theme">"Karanlık Tema"</string>
@@ -82,7 +82,7 @@
     <string name="support_app">"Bağış Uygulamasını Satın Al"</string>
     <string name="support_development">"Geliştirmeye Destek Olun"</string>
     <string name="support_development_summary">"Geliştiricinin bu aracı ücretsiz bir şekilde sunmak için gösterdiği bu çabasını takdir etmek isterseniz, aşağıdaki butonlardan birine tıklayarak küçük bir bağışta bulunabilirsiniz! Bu ürünlerden herhangi birini satın aldığınızda destekçi rozetiyle ödüllendirileceksiniz!"</string>
-    <string name="support_dinner">"Bana bir ziyafet ısmarla"</string>
+    <string name="support_dinner">"Bana bir akşam yemeği ısmarla"</string>
     <string name="support_meal">"Bana bir yemek al"</string>
     <string name="support_coffee">"Bana bir kahve al"</string>
     <string name="support_already_received_message">"Daha önce bununla geliştirmeye destek olmuştunuz zaten!"</string>
@@ -95,7 +95,7 @@
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
-    <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***"</string>
+    <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***s"</string>
     <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>
@@ -147,4 +147,6 @@
     <string name="installation_status_incompatible">"Uygulama bu cihazla uyumlu değil"</string>
     <string name="installation_status_storage">"Uygulamayı yüklemeye yetecek kadar boş depolama alanı yok"</string>
     <string name="split_apk_installer">"Bölünmüş APK Yükleyici"</string>
+    <string name="certificate">"Sertifika"</string>
+    <string name="manifest">"Manifest"</string>
 </resources>

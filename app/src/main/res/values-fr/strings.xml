@@ -132,11 +132,20 @@
     <string name="file_picker_external">"Externe"</string>
     <string name="file_picker_inbuilt">"Intégré"</string>
     <string name="installation_cancel_message">"Êtes-vous sûr d'annuler l'installation ?"</string>
-    <string name="installation_status_failed">"L'installation a échoué !"</string>
     <string name="installation_status_success">"Installation terminée avec succès !"</string>
     <string name="sdcard">"SDCard"</string>
     <string name="select">"Sélectionner"</string>
     <string name="uninstall_adb">"Désinstaller avec ADB"</string>
     <string name="uninstall_adb_summary">"Vous avez sélectionné '% s', qui est une application système. Malheureusement, l'écosystème Android n'autorise pas les applications utilisateur tierces, telles que Package Manager, à supprimer des applications système dans des environnements non rootés. Ne vous inquiétez pas ! Package Manager vous guidera pour supprimer cette application à l'aide de la méthode Android Debug Bridge (ADB). Si vous disposez déjà d'un ADB pleinement opérationnel, l'exécution de la commande suivante à partir d'un ADB désinstallera cette application. Afin de configurer un environnement ADB de travail, veuillez consulter la page de documentation liée."</string>
     <string name="warning">"Attention"</string>
+    <string name="installation_status_aborted">"L'installation est annulée par l'utilisateur "</string>
+    <string name="installation_status_bad_apks">"Les fichiers APK sélectionnés sont invalides"</string>
+    <string name="installation_status_blocked">"L'installation est bloquée"</string>
+    <string name="installation_status_conflict">"Impossible d'installer l'application car elle est en conflit avec une application déjà installée qui a le même nom de paquetage (package name)"</string>
+    <string name="installation_status_failed">"L'installation a échoué !"</string>
+    <string name="installation_status_incompatible">"L'application est incompatible avec cet appareil"</string>
+    <string name="installation_status_storage">"Il n'y a pas assez d'espace de stockage pour installer l'application"</string>
+    <string name="split_apk_installer">"Installateur d'APK modulaire (split APK)"</string>
+    <string name="certificate">"Certificat"</string>
+    <string name="manifest">"Manifeste"</string>
 </resources>

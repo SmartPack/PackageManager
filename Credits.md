@@ -25,3 +25,6 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * Javi, Spanish Translations
 * Hoa Gia Đại Thiếu, Vietnamese Translations
 * [jason5545](https://github.com/jason5545), Chinese (Simplified & Traditional) Translations
+* Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc)
+
+### If you think I missed your name, please let me know.
