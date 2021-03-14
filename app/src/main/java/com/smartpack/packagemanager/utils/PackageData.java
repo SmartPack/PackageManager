@@ -162,16 +162,16 @@ public class PackageData {
     }
 
     public static CharSequence getAPKName(String apkPath, Context context) {
-        PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+        PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
         if (pi != null) {
-            return pi.applicationInfo.loadLabel(PackageData.getPackageManager(context));
+            return pi.applicationInfo.loadLabel(getPackageManager(context));
         } else {
             return null;
         }
     }
 
     public static String getAPKId(String apkPath, Context context) {
-        PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+        PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
         if (pi != null) {
             return pi.applicationInfo.packageName;
         } else {
@@ -180,9 +180,9 @@ public class PackageData {
     }
 
     public static Drawable getAPKIcon(String apkPath, Context context) {
-        PackageInfo pi = PackageData.getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
+        PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
         if (pi != null) {
-            return pi.applicationInfo.loadIcon(PackageData.getPackageManager(context));
+            return pi.applicationInfo.loadIcon(getPackageManager(context));
         } else {
             return null;
         }

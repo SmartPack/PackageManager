@@ -44,6 +44,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
+import com.smartpack.packagemanager.activities.DownloadsActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
@@ -262,8 +263,9 @@ public class PackageTasksFragment extends Fragment {
         PopupMenu popupMenu = new PopupMenu(activity, mSettings);
         Menu menu = popupMenu.getMenu();
         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.install_bundle));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.settings));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.about));
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.downloads));
+        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.settings));
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.about));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -295,10 +297,14 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 1:
+                    Intent downloadsPage = new Intent(activity, DownloadsActivity.class);
+                    startActivity(downloadsPage);
+                    break;
+                case 2:
                     Intent settingsPage = new Intent(activity, SettingsActivity.class);
                     startActivity(settingsPage);
                     break;
-                case 2:
+                case 3:
                     Intent aboutView = new Intent(activity, AboutActivity.class);
                     startActivity(aboutView);
                     break;

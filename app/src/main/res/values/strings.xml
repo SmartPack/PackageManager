@@ -6,6 +6,7 @@
     <string name="activities">Activities</string>
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
+    <string name="apks">APK\'s</string>
     <string name="batch_options">Batch Options</string>
     <string name="batch_list_added">%s is added to the batch list</string>
     <string name="batch_list_clear">Clear list</string>
@@ -23,6 +24,7 @@
     <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?</string>
     <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
     <string name="bundle_install_message">Please Note: In order to install multiple APK\'s (split APK\'s), please place all of them in a single folder and select one among them. Package Manager will pick and handle the rest.</string>
+    <string name="bundles">Bundles</string>
     <string name="cancel">Cancel</string>
     <string name="certificate">Certificate</string>
     <string name="change_logs">Change-logs</string>
@@ -37,6 +39,8 @@
     <string name="date_installed">First Installed: %s</string>
     <string name="date_updated">Last Updated: %s</string>
     <string name="developed_by">Developed By</string>
+    <string name="delete">Delete</string>
+    <string name="delete_question">Delete \'%s\'?</string>
     <string name="disable_message">will be %s! Are you sure?</string>
     <string name="disable">Disable</string>
     <string name="disabled">disabled</string>
@@ -45,6 +49,7 @@
     <string name="documentation">Documentation</string>
     <string name="documentation_summary">Check out detailed documentation to use Package Manager</string>
     <string name="done">Done</string>
+    <string name="downloads">Downloads</string>
     <string name="enable">Enable</string>
     <string name="enabled">enabled</string>
     <string name="enabling">Enabling %s</string>
@@ -66,6 +71,7 @@
     <string name="got_it">Got it</string>
     <string name="install">Install</string>
     <string name="install_bundle">Install Split APKs</string>
+    <string name="install_question">Install \'%s\'?</string>
     <string name="installation_cancel_message">Are you sure to cancel the installation?</string>
     <string name="installation_status_aborted">Installation was cancelled by user</string>
     <string name="installation_status_bad_apks">Invalid APK files selected</string>
