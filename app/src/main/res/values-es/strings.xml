@@ -89,14 +89,12 @@
     <string name="support_retry_message">"¡Intente comprar de nuevo!"</string>
     <string name="support_status_message">"¡Muchas gracias por tu apoyo!"</string>
     <string name="sure_question">"¿Estás seguro?"</string>
-    <string name="system">"Mostrar aplicaciones de sistema"</string>
     <string name="turn_on_off">"Encender/Apagar"</string>
     <string name="uninstall">"Desinstalar"</string>
     <string name="uninstall_nope">"¡Lo siento!, no se puede hacer desde aquí"</string>
     <string name="uninstall_summary">"Eliminando %s"</string>
     <string name="uninstall_title">"¿Seguro de desinstalar %s?"</string>
     <string name="uninstall_warning">"Aviso: ¡Eliminar una aplicación del sistema puede ser peligroso!\n*** <b>ASUME EL RIESGO, ES TU RESPONSABILIDAD</b> ***"</string>
-    <string name="user">"Mostrar aplicaciones de usuario"</string>
     <string name="version">"Versión: %s"</string>
     <string name="welcome_message">"Bienvenido a Package Manager, una aplicación simple pero poderosa para administrar sus aplicaciones."</string>
     <string name="wrong_extension">"Por favor, seleccione un fichero con extensión %s"</string>

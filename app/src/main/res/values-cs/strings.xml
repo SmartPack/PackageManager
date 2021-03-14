@@ -89,14 +89,12 @@
     <string name="support_retry_message">"Prosím zkuste"</string>
     <string name="support_status_message">"Děkuji velmi děkuji za vaši podporu!"</string>
     <string name="sure_question">"Opravdu?"</string>
-    <string name="system">"Zobrazit Systémové aplikace"</string>
     <string name="turn_on_off">"Přepnout Zap/ Vyp"</string>
     <string name="uninstall">"Odinstalovat"</string>
     <string name="uninstall_nope">"Omlouvám se! Toto nelze provést odtud!"</string>
     <string name="uninstall_summary">"Odstraňování%s"</string>
     <string name="uninstall_title">"Opravdu chcete odinstalovat%s?"</string>
     <string name="uninstall_warning">"Poznámka: Odstranění systémových aplikací"</string>
-    <string name="user">"Zobrazit uživatelské aplikace"</string>
     <string name="version">"Verze:%s"</string>
     <string name="welcome_message">"Vítejte v Package Manager, jednoduše, mocná aplikace na správu aplikací."</string>
     <string name="wrong_extension">"Prosím vyberte soubor tímto %s rozšířením."</string>

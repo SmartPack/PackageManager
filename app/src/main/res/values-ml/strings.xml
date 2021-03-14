@@ -75,7 +75,6 @@
     <string name="support_retry_message">"ദയവായി വീണ്ടും വാങ്ങാൻ ശ്രമിക്കുക!"</string>
     <string name="support_status_message">"നിങ്ങളുടെ പിന്തുണയ്ക്ക് വളരെ നന്ദി!"</string>
     <string name="sure_question">"ഉറപ്പാണോ?"</string>
-    <string name="system">"സിസ്റ്റം അപ്ലിക്കേഷനുകൾ"</string>
     <string name="turn_on_off">"പ്രവർത്തനരഹിതം/ക്ഷമം ആക്കുക"</string>
     <string name="uninstall">"അൺ‌ഇൻ‌സ്റ്റാൾ‌"</string>
     <string name="uninstall_nope">"ക്ഷമിക്കണം! നിങ്ങൾക്ക് ഇവിടെ നിന്ന് ഇത് ചെയ്യാൻ കഴിയില്ല!"</string>
@@ -83,7 +82,6 @@
     <string name="uninstall_title">"%s അൺ‌ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="uninstall_warning">"ദയവായി ശ്രദ്ധിക്കുക: സിസ്റ്റം അപ്ലിക്കേഷനുകൾ നീക്കംചെയ്യുന്നത് ചിലപ്പോൾ അപകടകരമാണ്!\n\n*** <b>USE AT YOUR OWN RISK</b> ***
 "</string>
-    <string name="user">"ഉപയോക്തൃ അപ്ലിക്കേഷനുകൾ"</string>
     <string name="version">"പതിപ്പ്: %s"</string>
     <string name="welcome_message">"പാക്കേജ് മാനേജറിലേക്ക്, നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ മാനേജുചെയ്യുന്നതിനുള്ള ലളിതവും ശക്തവുമായ അപ്ലിക്കേഷനിലേക്ക് സ്വാഗതം."</string>
     <string name="welcome_message_root">"മുന്നറിയിപ്പ്: ഈ അപ്ലിക്കേഷൻ വളരെ ശക്തമാണ്. നിങ്ങളുടെ ഉപകരണത്തിന് എന്തെങ്കിലും സംഭവിച്ചാൽ ഈ അപ്ലിക്കേഷന്റെ ഡവലപ്പർ ഒരു ഉത്തരവാദിത്തവും ഏറ്റെടുക്കില്ല."</string>

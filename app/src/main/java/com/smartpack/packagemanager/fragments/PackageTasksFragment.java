@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
@@ -84,6 +85,7 @@ public class PackageTasksFragment extends Fragment {
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
         AppCompatImageButton mSearch = mRootView.findViewById(R.id.search_icon);
+        TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
         mSort = mRootView.findViewById(R.id.sort_icon);
         mSettings = mRootView.findViewById(R.id.settings_icon);
 
@@ -91,6 +93,47 @@ public class PackageTasksFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
         loadUI(requireActivity());
+
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_all)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_system)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_user)));
+
+        Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
+
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                String mStatus = Utils.getString("appTypes", "all", requireActivity());
+                switch (tab.getPosition()) {
+                    case 0:
+                        if (!mStatus.equals("all")) {
+                            Utils.saveString("appTypes", "all", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                    case 1:
+                        if (!mStatus.equals("system")) {
+                            Utils.saveString("appTypes", "system", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                    case 2:
+                        if (!mStatus.equals("user")) {
+                            Utils.saveString("appTypes", "user", requireActivity());
+                            loadUI(requireActivity());
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -115,7 +158,7 @@ public class PackageTasksFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 PackageData.mSearchText = s.toString().toLowerCase();
-                reload(requireActivity());
+                loadUI(requireActivity());
             }
         });
 
@@ -162,51 +205,52 @@ public class PackageTasksFragment extends Fragment {
         return mRootView;
     }
 
+    private int getTabPosition(Activity activity) {
+        String mStatus = Utils.getString("appTypes", "all", activity);
+        if (mStatus.equals("user")) {
+            return 2;
+        } else if (mStatus.equals("system")) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     private void sortMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mSort);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.system)).setCheckable(true)
-                .setChecked(Utils.getBoolean("system_apps", true, activity));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.user)).setCheckable(true)
-                .setChecked(Utils.getBoolean("user_apps", true, activity));
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
-        sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.name)).setCheckable(true)
+        sort.add(Menu.NONE, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
-        sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
+        sort.add(Menu.NONE, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
+                .setChecked(Utils.getBoolean("reverse_order", false, activity));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
                     break;
                 case 1:
-                    if (Utils.getBoolean("system_apps", true, activity)) {
-                        Utils.saveBoolean("system_apps", false, activity);
-                    } else {
-                        Utils.saveBoolean("system_apps", true, activity);
-                    }
-                    reload(activity);
-                    break;
-                case 2:
-                    if (Utils.getBoolean("user_apps", true, activity)) {
-                        Utils.saveBoolean("user_apps", false, activity);
-                    } else {
-                        Utils.saveBoolean("user_apps", true, activity);
-                    }
-                    reload(activity);
-                    break;
-                case 3:
                     if (!Utils.getBoolean("sort_name", false, activity)) {
                         Utils.saveBoolean("sort_name", true, activity);
                         Utils.saveBoolean("sort_id", false, activity);
-                        reload(activity);
+                        loadUI(activity);
                     }
                     break;
-                case 4:
+                case 2:
                     if (!Utils.getBoolean("sort_id", true, activity)) {
                         Utils.saveBoolean("sort_id", true, activity);
                         Utils.saveBoolean("sort_name", false, activity);
-                        reload(activity);
+                        loadUI(activity);
                     }
+                    break;
+                case 3:
+                    if (Utils.getBoolean("reverse_order", false, activity)) {
+                        Utils.saveBoolean("reverse_order", false, activity);
+                    } else {
+                        Utils.saveBoolean("reverse_order", true, activity);
+                    }
+                    loadUI(activity);
                     break;
             }
             return false;
@@ -326,7 +370,7 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 4:
                     PackageData.mBatchList.clear();
-                    reload(activity);
+                    loadUI(activity);
                     break;
             }
             return false;
@@ -340,31 +384,7 @@ public class PackageTasksFragment extends Fragment {
         startActivityForResult(install, 0);
     }
 
-    @SuppressLint("StaticFieldLeak")
     private void loadUI(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressLayout.setVisibility(View.VISIBLE);
-                mRecyclerView.setVisibility(View.GONE);
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                mRecyclerView.setAdapter(mRecycleViewAdapter);
-                mProgressLayout.setVisibility(View.GONE);
-                mRecyclerView.setVisibility(View.VISIBLE);
-            }
-        }.execute();
-    }
-
-    private void reload(Activity activity) {
         if (mLoader == null) {
             mHandler.postDelayed(new Runnable() {
                 @SuppressLint("StaticFieldLeak")
@@ -377,9 +397,7 @@ public class PackageTasksFragment extends Fragment {
                             mProgressLayout.setVisibility(View.VISIBLE);
                             PackageTasks.mBatchOptions.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.GONE);
-                            if (!PackageData.getBatchList().isEmpty() && PackageData.getBatchList().contains(".")) {
-                                PackageData.mBatchList.clear();
-                            }
+                            PackageData.mBatchList.clear();
                             mRecyclerView.removeAllViews();
                         }
 
@@ -394,8 +412,7 @@ public class PackageTasksFragment extends Fragment {
                             super.onPostExecute(recyclerViewItems);
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mRecycleViewAdapter.notifyDataSetChanged();
-                            PackageTasks.mBatchOptions.setVisibility(PackageData.getBatchList().length() > 0 && PackageData
-                                    .getBatchList().contains(".") ? View.VISIBLE : View.GONE);
+                            PackageTasks.mBatchOptions.setVisibility(View.GONE);
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mLoader = null;
@@ -489,7 +506,7 @@ public class PackageTasksFragment extends Fragment {
         }
         if (PackageTasks.mReloadPage) {
             PackageTasks.mReloadPage = false;
-            reload(requireActivity());
+            loadUI(requireActivity());
         }
     }
 

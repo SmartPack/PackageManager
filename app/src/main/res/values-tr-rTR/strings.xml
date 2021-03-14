@@ -90,14 +90,12 @@
     <string name="support_retry_message">"Lütfen tekrar satın almayı deneyiniz!"</string>
     <string name="support_status_message">"Desteğin için çok teşekkür ederim!"</string>
     <string name="sure_question">"Emin misin?"</string>
-    <string name="system">"Sistem Uygulamalarını Göster"</string>
     <string name="turn_on_off">"Aç/Kapat"</string>
     <string name="uninstall">"Kaldır"</string>
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
     <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***"</string>
-    <string name="user">"Kullanıcı Uygulamalarını Göster"</string>
     <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>

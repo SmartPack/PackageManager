@@ -89,14 +89,12 @@
     <string name="support_retry_message">"Vui lòng thử mua lại!"</string>
     <string name="support_status_message">"Xin chân thành cảm ơn quý khách hàng đã ủng hộ!"</string>
     <string name="sure_question">"Bạn có chắc không?"</string>
-    <string name="system">"Hiển thị ứng dụng hệ thống"</string>
     <string name="turn_on_off">"Bật/Tắt"</string>
     <string name="uninstall">"Gỡ cài đặt"</string>
     <string name="uninstall_nope">"Lấy làm tiếc! Bạn không thể làm điều này từ đây!"</string>
     <string name="uninstall_summary">"Đang xóa %s"</string>
     <string name="uninstall_title">"Bạn có chắc chắn gỡ cài đặt %s không?"</string>
     <string name="uninstall_warning">"Xin lưu ý: Việc xóa các ứng dụng hệ thống đôi khi sẽ rất nguy hiểm!\n\n*** <b>SỬ DỤNG RỦI RO CỦA RIÊNG BẠN</b> ***"</string>
-    <string name="user">"Hiển thị ứng dụng người dùng"</string>
     <string name="version">"Phiên bản: %s"</string>
     <string name="welcome_message">"Chào mừng bạn đến với Trình Quản Lý Gói, một ứng dụng đơn giản nhưng mạnh mẽ để quản lý các ứng dụng của bạn."</string>
     <string name="wrong_extension">"Vui lòng chọn một tệp có phần mở rộng %s."</string>

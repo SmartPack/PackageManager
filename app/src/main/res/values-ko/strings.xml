@@ -99,7 +99,6 @@
     <string name="support_status_message">후원해주셔서 정말 감사합니다!</string>
     <string name="support_summary">텔레그램 지원 그룹에 참여하세요.</string>
     <string name="sure_question">계속하시겠어요?</string>
-    <string name="system">시스템 앱</string>
     <string name="translations">번역</string>
     <string name="translations_summary">이 앱을 번역하는 것을 도와주세요!</string>
     <string name="turn_on_off">활성화/비활성화</string>
@@ -108,7 +107,6 @@
     <string name="uninstall_summary">%s을(를) 제거하는 중…</string>
     <string name="uninstall_title">%s을(를) 제거할까요?</string>
     <string name="uninstall_warning">알아두기: 시스템 앱을 지우는 것은 위험합니다!\n\n *** <b>위험을 감수하고 사용하세요 (본인 책임입니다)</b> ***\n</string>
-    <string name="user">사용자 앱</string>
     <string name="version">버전: %s</string>
     <string name="welcome_message">Package Manager에 오신 것을 환영합니다.\n당신의 앱들을 관리하는 심플한 어플리케이션.</string>
     <string name="welcome_message_root">주의: 이 앱은 여러분의 기기를 망가뜨릴 수 있을 정도로 강력합니다. 이 앱의 개발자는 여러분의 기기에 문제가 발생하더라도 책임지지 않습니다.</string>

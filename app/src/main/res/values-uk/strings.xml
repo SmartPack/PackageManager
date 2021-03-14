@@ -89,14 +89,12 @@
     <string name="support_retry_message">"Будь ласка, спробуйте придбати ще раз!"</string>
     <string name="support_status_message">"Дякую вам за підтримку!"</string>
     <string name="sure_question">"Ви впевнені?"</string>
-    <string name="system">"Системні додатки"</string>
     <string name="turn_on_off">"Увімкнення/вимкнення"</string>
     <string name="uninstall">"Видалити"</string>
     <string name="uninstall_nope">"Вибачте! Ви не можете зробити це звідси!"</string>
     <string name="uninstall_summary">"Видалення %s"</string>
     <string name="uninstall_title">"Ви впевнені, що хочете видалити %s?"</string>
     <string name="uninstall_warning">"Зверніть увагу: Видалення системних додатків може бути часом небезпечним!\n\n*** <b>ВИКОРИСТОВУЙТЕ НА ВАШ ВЛАСНИЙ РИЗИК</b> ***"</string>
-    <string name="user">"Встановлені додатки"</string>
     <string name="version">"Версія: %s"</string>
     <string name="welcome_message">"Ласкаво просимо до Package Manager, простий, але потужний додаток для управління вашими програмами."</string>
     <string name="wrong_extension">"Виберіть файл із %s розширенням."</string>

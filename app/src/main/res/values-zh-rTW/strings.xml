@@ -91,14 +91,12 @@
     <string name="support_retry_message">"請嘗試再次購買！"</string>
     <string name="support_status_message">"非常感謝您的支持！"</string>
     <string name="sure_question">"你確定嗎？"</string>
-    <string name="system">"顯示系統應用程式"</string>
     <string name="turn_on_off">"開啟/關閉"</string>
     <string name="uninstall">"解除安裝"</string>
     <string name="uninstall_nope">"對不起！您不能從這裡開始！"</string>
     <string name="uninstall_summary">"正在刪除％s"</string>
     <string name="uninstall_title">"您確定要解除安裝％s嗎？"</string>
     <string name="uninstall_warning">"請注意：刪除系統應用程式有時會很危險！\n\n*** <b>自行承擔使用風險</b> ***"</string>
-    <string name="user">"顯示使用者應用程式"</string>
     <string name="version">"版本：％s"</string>
     <string name="welcome_message">"歡迎使用Package Manager，這是一個簡單但功能強大的應用程式，用於管理您的應用程式。"</string>
     <string name="wrong_extension">"請選擇一個文件％s 副檔名。"</string>

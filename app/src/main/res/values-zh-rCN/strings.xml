@@ -90,14 +90,12 @@
     <string name="support_retry_message">"请再次尝试购买!"</string>
     <string name="support_status_message">"非常感谢您的支持!"</string>
     <string name="sure_question">"你确定吗？"</string>
-    <string name="system">"显示系统应用"</string>
     <string name="turn_on_off">"开/关"</string>
     <string name="uninstall">"卸载"</string>
     <string name="uninstall_nope">"对不起，你不能在这里做这个！你不能在这里做这个！"</string>
     <string name="uninstall_summary">"删除%s"</string>
     <string name="uninstall_title">"你确定要卸载%s吗？"</string>
     <string name="uninstall_warning">"请注意：删除系统应用有时会有危险!\n\n*** <b>使用风险自负</b> ***"</string>
-    <string name="user">"显示用户应用"</string>
     <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎来到包管理器，一个简单而强大的应用程序来管理你的应用程序。"</string>
     <string name="wrong_extension">"请选择一个扩展名为%s的文件。"</string>

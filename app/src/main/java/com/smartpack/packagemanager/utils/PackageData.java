@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class PackageData {
 
-    public static boolean mAppType= false, mSystemApp = true;
+    public static boolean mSystemApp = true;
     public static CharSequence mApplicationName;
     public static Drawable mApplicationIcon;
     public static List<String> mBatchList = new ArrayList<>();
@@ -53,24 +53,19 @@ public class PackageData {
     }
 
     public static List<String> getData(Context context) {
+        boolean mAppType;
         List<String> mData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
         }
         for (ApplicationInfo packageInfo: packages) {
-            if (Utils.getBoolean("system_apps", true, context)
-                    && Utils.getBoolean("user_apps", true, context)) {
-                mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
-                        || (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0;
-            } else if (Utils.getBoolean("system_apps", true, context)
-                    && !Utils.getBoolean("user_apps", true, context)) {
+            if (Utils.getString("appTypes", "all", context).equals("system")) {
                 mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-            } else if (!Utils.getBoolean("system_apps", true, context)
-                    && Utils.getBoolean("user_apps", true, context)) {
+            } else if (Utils.getString("appTypes", "all", context).equals("user")) {
                 mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0;
             } else {
-                mAppType = false;
+                mAppType = true;
             }
             if (mAppType && packageInfo.packageName.contains(".")) {
                 if (mSearchText == null) {
@@ -80,6 +75,9 @@ public class PackageData {
                     mData.add(packageInfo.packageName);
                 }
             }
+        }
+        if (Utils.getBoolean("reverse_order", false, context)) {
+            Collections.reverse(mData);
         }
         return mData;
     }

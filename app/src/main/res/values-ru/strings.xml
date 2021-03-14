@@ -89,14 +89,12 @@
     <string name="support_retry_message">"Пожалуйста, попробуйте купить еще раз!"</string>
     <string name="support_status_message">"Большое спасибо за вашу поддержку!"</string>
     <string name="sure_question">"Вы уверены?"</string>
-    <string name="system">"Системные приложения"</string>
     <string name="turn_on_off">"Включение/выключение"</string>
     <string name="uninstall">"Удалить"</string>
     <string name="uninstall_nope">"Сожалею! Вы не можете сделать это отсюда!"</string>
     <string name="uninstall_summary">"Удаление %s"</string>
     <string name="uninstall_title">"Вы уверены, что хотите удалить %s?"</string>
     <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!\n\n*** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***\n"</string>
-    <string name="user">"Пользовательские приложения"</string>
     <string name="version">"Версия: %s"</string>
     <string name="welcome_message">"Добро пожаловать в Package Manager, простое, но мощное приложение для управления вашими приложениями."</string>
     <string name="wrong_extension">"Пожалуйста, выберите файл с %s расширением."</string>

@@ -57,14 +57,12 @@
     <string name="split_apk_list">Λίστα Διαιρεμένων APKs</string>
     <string name="support">Ομάδα υποστήριξης</string>
     <string name="sure_question">Είστε σίγουρος;</string>
-    <string name="system">Εμφάνιση εφαρμογών συστήματος</string>
     <string name="turn_on_off">Ενεργοποίηση/απενεργοποίηση</string>
     <string name="uninstall">Απεγκατάσταση</string>
     <string name="uninstall_nope">Συγγνώμη! Δεν μπορείτε να κάνετε αυτό από εδώ!</string>
     <string name="uninstall_summary">Αφαίρεση %s</string>
     <string name="uninstall_title">Είστε σίγουρος ότι θέλετε να προχωρήσετε σε απεγκατάσταση %s?</string>
     <string name="uninstall_warning">Παρακαλώ προσέξτε: Η αφαίρεση εφαρμογών συστήματος μπορεί ορισμένες φορές να είναι επικίνδυνη!\n\n *** <b>ΧΡΗΣΙΜΟΠΟΙΉΣΤΕ ΜΕ ΔΙΚΉ ΣΑΣ ΕΥΘΎΝΗ</b>> ***\n</string>
-    <string name="user">Εμφάνιση εφαρμογών χρήστη</string>
     <string name="welcome_message">Καλώς ήρθατε στο Package Manager, μια απλή, αλλά πανίσχυρη εφαρμογή για να διαχειριστείτε τις εφαρμογές σας.</string>
     <string name="welcome_message_root">ΠΡΟΕΙΔΟΠΟΊΗΣΗ: Αυτή η εφαρμογή είναι αρκετά ισχυρή ώστε να προκαλέσει προβλήματα στη συσκευή σας. Ο προγραμματιστής αυτής της εφαρμογής δε θα αναλάβει καμία ευθύνη, εάν κάτι λάθος συμβεί στη συσκευή σας.</string>
     <string name="wrong_extension">Παρακαλώ επιλέξτε κάποιο αρχείο με %s προέκταση.</string>

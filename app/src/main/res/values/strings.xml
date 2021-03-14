@@ -118,6 +118,7 @@
     <string name="reset_message">Reset \'%s\'?</string>
     <string name="reset_summary">Resetting %s</string>
     <string name="result">Result: %s</string>
+    <string name="reverse_order">Reverse Order</string>
     <string name="search">Search…</string>
     <string name="sdcard">SDCard</string>
     <string name="select">Select</string>
@@ -128,6 +129,9 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
+    <string name="show_apps_all">All</string>
+    <string name="show_apps_system">System</string>
+    <string name="show_apps_user">User</string>
     <string name="sort_by">Sort Apps</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Package Manager is an open-source application which is ready to accept contributions from the development community. Click here to check out the source code!</string>
@@ -148,7 +152,6 @@
     <string name="support_status_message">Thank you very much for your support!</string>
     <string name="support_summary">Join Telegram support group</string>
     <string name="sure_question">Are you sure?</string>
-    <string name="system">Show System Apps</string>
     <string name="translations">Translations</string>
     <string name="translations_summary">Help me to translate this app! Click here to visit POEditor localization project</string>
     <string name="turn_on_off">Turn-On/Off</string>
@@ -159,7 +162,6 @@
     <string name="uninstall_summary">Removing %s</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
-    <string name="user">Show User Apps</string>
     <string name="version">Version: %s</string>
     <string name="warning">Warning</string>
     <string name="welcome_message">Welcome to Package Manager, a simple, yet powerful application to manage your apps.</string>

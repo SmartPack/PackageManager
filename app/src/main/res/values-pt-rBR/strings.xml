@@ -45,14 +45,12 @@
     <string name="source_code">Código fonte</string>
     <string name="support">Grupo de suporte</string>
     <string name="sure_question">Tem certeza?</string>
-    <string name="system">Mostrar aplicativos do sistema</string>
     <string name="turn_on_off">Ligar/Desligar</string>
     <string name="uninstall">Desinstalar</string>
     <string name="uninstall_nope">Desculpe! Você não pode fazer isso por aqui!</string>
     <string name="uninstall_summary">Removendo %s</string>
     <string name="uninstall_title">Tem certeza de que deseja desinstalar %s?</string>
     <string name="uninstall_warning">Observe: A remoção de aplicativos do sistema às vezes é perigosa!\n\n *** <b>USE POR SUA CONTA E RISCO</b>> ***\n</string>
-    <string name="user">Mostrar apps do usuário</string>
     <string name="welcome_message">Bem-vindo ao Package Manager, um simples mas poderoso aplicativo para gerenciar seus aplicativos.</string>
     <string name="welcome_message_root">AVISO: Este aplicativo é muito poderoso e pode bagunçar o seu dispositivo. O desenvolvedor deste aplicativo não assumirá nenhuma responsabilidade se algo errado acontecer com o seu dispositivo.</string>
     <string name="wrong_extension">Por favor, selecione um aquivo com extansão %s.</string>
