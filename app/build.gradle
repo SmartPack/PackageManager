@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
 
@@ -57,10 +58,13 @@ android {
 
 repositories {
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 dependencies {
     playImplementation 'com.android.billingclient:billing:3.0.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
     implementation "com.github.topjohnwu.libsu:core:3.0.2"
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'net.dongliu:apk-parser:2.6.10'
