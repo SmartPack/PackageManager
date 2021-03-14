@@ -297,8 +297,14 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 1:
-                    Intent downloadsPage = new Intent(activity, DownloadsActivity.class);
-                    startActivity(downloadsPage);
+                    if (Utils.isStorageWritePermissionDenied(requireActivity())) {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                        Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
+                    } else {
+                        Intent downloadsPage = new Intent(activity, DownloadsActivity.class);
+                        startActivity(downloadsPage);
+                    }
                     break;
                 case 2:
                     Intent settingsPage = new Intent(activity, SettingsActivity.class);
