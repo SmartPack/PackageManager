@@ -175,4 +175,8 @@
     <string name="welcome_message_noroot">Please Note: Root Access is either unavailable in your device, or declined for Package Manager! The capabilities of this application on your device will be, therefore, limited.</string>
     <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="yes">Yes</string>
+    <string name="root_only_feature">This feature is only available for rooted devices</string>
+    <string name="app_ops_no_op_found">No operation found</string>
+    <string name="operations">Operations</string>
+    <string name="no_description_available">No description available</string>
 </resources>

@@ -158,4 +158,8 @@
     <string name="version">Versão: %s</string>
     <string name="warning">Aviso</string>
     <string name="welcome_message_noroot">Aviso: O acesso root não está disponível em seu dispositivo ou foi negado para o Gerenciador de Pacotes! Os recursos deste aplicativo em seu dispositivo serão, portanto, limitados.</string>
+    <string name="operations">Operações</string>
+    <string name="app_ops_no_op_found">Nenhuma operação encontrada</string>
+    <string name="root_only_feature">Esta função só está disponível em dispositivos rooteados</string>
+    <string name="no_description_available">Nenhuma descrição disponível</string>
 </resources>

@@ -3,4 +3,5 @@
     <color name="colorAccent">#4285F4</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorError">#D50000</color>
 </resources>

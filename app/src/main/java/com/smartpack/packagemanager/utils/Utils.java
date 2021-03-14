@@ -85,7 +85,7 @@ public class Utils {
     }
 
     @NonNull
-    static String runAndGetOutput(String command) {
+    public static String runAndGetOutput(String command) {
         StringBuilder sb = new StringBuilder();
         try {
             List<String> outputs = Shell.su(command).exec().getOut();
