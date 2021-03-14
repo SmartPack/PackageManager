@@ -1,5 +1,5 @@
 /build
 /release
+/play
 /src/main/gen
-/release
 *.jks

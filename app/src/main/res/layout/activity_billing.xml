@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:padding="10dp"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="end|center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start"
+                    android:src="@drawable/ic_back"
+                    android:background="@color/colorBlack"
+                    android:tint="?attr/colorAccent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="?attr/colorAccent"
+                    android:text="@string/support_development"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:padding="10dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end|center_vertical"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/supporter_button"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="start|center"
+                    android:src="@drawable/ic_heart"
+                    android:background="@color/colorBlack"
+                    android:tint="?attr/colorAccent"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/supporter_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/support_development_summary"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_gravity="bottom|center"
+        android:textStyle="bold"
+        android:background="@color/colorBlack"
+        android:text="@string/cancel"
+        android:textColor="?attr/colorAccent"
+        android:textSize="18sp" />
+</com.google.android.material.card.MaterialCardView>

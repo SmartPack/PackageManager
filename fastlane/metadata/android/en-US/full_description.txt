@@ -1,0 +1,21 @@
+<i>Package Manager</i> is a highly powerful application to manage apps, both system and user, installed on an android device.
+
+<b>WARNING: I Am NOT Responsible for any Damages on Your Device!</b>
+
+<b>ROOT</b> Access is required for some advanced features.
+
+<b>Features</b>
+
+<i>Package Manager</i> is a simple, yet powerful application, offering the following features</b>
+* A beautiful list view of System and User applications, together or separately.
+* Helps to do basic tasks such as Open app, show app info, visit PlayStore page, uninstall (User apps), etc.
+* Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
+* Explore and export contents of an installed app (Experimental).
+* Export individual or a batch of apps (including Split apk's) into device storage.
+* Do advanced tasks such as (need Root access).
+  * Uninstall an individual or a batch of system apps (de-bloating).
+  * Disable or Enable individual or a batch of apps.
+
+<b>Translations</b>
+
+Please help me to translate this application via <a href='https://poeditor.com/join/project?hash=0CitpyI1Oc'>POEditor</a>. You may also translate after downloading the original language string available <a href='https://github.com/SmartPack/PackageManager/blob/master/app/src/main/res/values/strings.xml'>GitHub</a>.

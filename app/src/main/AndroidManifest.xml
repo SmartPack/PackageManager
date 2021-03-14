@@ -5,8 +5,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -20,17 +22,29 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="q" >
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7791710838910455~4399535899" />
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".utils.PackageTasksActivity" />
+
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.ExportedAppsActivity" />
+        <activity android:name=".activities.FilePickerActivity" />
+        <activity android:name=".activities.ImageViewActivity" />
+        <activity android:name=".activities.PackageDetailsActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+        <activity android:name=".activities.PackageExploreActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+        <activity android:name=".activities.PackageTasksActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.SplitAPKInstallerActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+        <activity android:name=".activities.TextViewActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -41,5 +55,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
+
+        <service android:name=".services.SplitAPKInstallService" />
     </application>
 </manifest>
