@@ -15,16 +15,31 @@
             android:scaleType="fitCenter"
             android:background="@null" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_gravity="start|center_vertical"
-            android:focusable="false"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:layout_gravity="center"
+            android:orientation="vertical" >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:focusable="false"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="italic"
+                    android:gravity="start" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/export"
