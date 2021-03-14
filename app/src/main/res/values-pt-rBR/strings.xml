@@ -125,7 +125,7 @@
     <string name="report_issue_summary">Levante um problema no GitHub</string>
     <string name="reset">Redefinir</string>
     <string name="reset_message">Redefinir \'%s\'?</string>
-    <string name="reset_summary">Redefinindo \'%s\'?</string>
+    <string name="reset_summary">Redefinindo \'%s\'</string>
     <string name="reverse_order">Ordem reversa</string>
     <string name="search">Pesquisar…</string>
     <string name="sdcard">SDCard</string>

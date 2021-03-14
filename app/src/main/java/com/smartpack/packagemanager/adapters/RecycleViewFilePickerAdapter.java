@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -51,25 +52,41 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
     @Override
     public void onBindViewHolder(@NonNull RecycleViewFilePickerAdapter.ViewHolder holder, int position) {
         if (new File(this.data.get(position)).isDirectory()) {
-            holder.mIcon.setImageDrawable(holder.mTitle.getContext().getResources().getDrawable(R.drawable.ic_folder));
-            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
+            holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_folder));
+            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
+            holder.mDescription.setVisibility(View.GONE);
+            holder.mSize.setVisibility(View.GONE);
+            holder.mCheckBox.setVisibility(View.GONE);
         } else if (this.data.get(position).endsWith(".apk")) {
+            if (PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()) != null) {
+                holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
+            } else {
+                holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
+            }
+            if (PackageData.getAPKId(data.get(position), holder.mIcon.getContext()) != null) {
+                holder.mDescription.setText(PackageData.getAPKId(data.get(position), holder.mIcon.getContext()));
+                holder.mDescription.setVisibility(View.VISIBLE);
+            }
+            holder.mCheckBox.setChecked(PackageExplorer.mAPKList.contains(this.data.get(position)));
+            holder.mCheckBox.setOnClickListener(v -> {
+                if (PackageExplorer.mAPKList.contains(this.data.get(position))) {
+                    PackageExplorer.mAPKList.remove(this.data.get(position));
+                } else {
+                    PackageExplorer.mAPKList.add(this.data.get(position));
+                }
+                PackageExplorer.mSelect.setVisibility(PackageExplorer.mAPKList.isEmpty() ? View.GONE : View.VISIBLE);
+            });
+            holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
+            holder.mSize.setVisibility(View.VISIBLE);
             holder.mCheckBox.setVisibility(View.VISIBLE);
         } else {
-            holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file));
+            holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_bundle));
             holder.mIcon.setColorFilter(Utils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
                     .getResources().getColor(R.color.colorWhite) : holder.mIcon.getContext().getResources().getColor(R.color.colorBlack));
+            holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
+            holder.mSize.setVisibility(View.VISIBLE);
         }
         holder.mTitle.setText(new File(this.data.get(position)).getName());
-        holder.mCheckBox.setChecked(PackageExplorer.mAPKList.contains(this.data.get(position)));
-        holder.mCheckBox.setOnClickListener(v -> {
-            if (PackageExplorer.mAPKList.contains(this.data.get(position))) {
-                PackageExplorer.mAPKList.remove(this.data.get(position));
-            } else {
-                PackageExplorer.mAPKList.add(this.data.get(position));
-            }
-            PackageExplorer.mSelect.setVisibility(PackageExplorer.mAPKList.isEmpty() ? View.GONE : View.VISIBLE);
-        });
     }
 
     @Override
@@ -80,7 +97,7 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private AppCompatImageButton mIcon;
         private MaterialCheckBox mCheckBox;
-        private MaterialTextView mTitle;
+        private MaterialTextView mTitle, mDescription, mSize;
 
         public ViewHolder(View view) {
             super(view);
@@ -88,6 +105,8 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
             this.mIcon = view.findViewById(R.id.icon);
             this.mCheckBox = view.findViewById(R.id.checkbox);
             this.mTitle = view.findViewById(R.id.title);
+            this.mDescription = view.findViewById(R.id.description);
+            this.mSize = view.findViewById(R.id.size);
         }
 
         @Override

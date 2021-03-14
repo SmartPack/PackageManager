@@ -51,6 +51,8 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     @Override
     public void onBindViewHolder(@NonNull RecycleViewSplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
+        holder.mSize.setText(PackageData.getAPKSize(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+                .getContext()) + "/" + data.get(position)));
         if (PackageData.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
             holder.mIcon.setImageDrawable(PackageData.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
@@ -76,13 +78,14 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private AppCompatImageButton mExport, mIcon;
-        private MaterialTextView mName;
+        private MaterialTextView mName, mSize;
 
         public ViewHolder(View view) {
             super(view);
             this.mExport = view.findViewById(R.id.export);
             this.mIcon = view.findViewById(R.id.icon);
             this.mName = view.findViewById(R.id.name);
+            this.mSize = view.findViewById(R.id.size);
         }
     }
 

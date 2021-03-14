@@ -95,7 +95,7 @@
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
-    <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***s"</string>
+    <string name="uninstall_warning">"Sakın unutma: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***"</string>
     <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>
@@ -149,4 +149,14 @@
     <string name="split_apk_installer">"Bölünmüş APK Yükleyici"</string>
     <string name="certificate">"Sertifika"</string>
     <string name="manifest">"Manifest"</string>
+    <string name="apks">"APK'ler"</string>
+    <string name="bundles">"Paketler"</string>
+    <string name="delete">"Sil"</string>
+    <string name="delete_question">"'%s' silinsin mi?"</string>
+    <string name="install_question">"'%s' yüklensin mi?"</string>
+    <string name="reverse_order">"Sıralamayı Ters Çevir"</string>
+    <string name="show_apps_all">"Hepsi"</string>
+    <string name="show_apps_system">"Sistem"</string>
+    <string name="show_apps_user">"Kullanıcı"</string>
+    <string name="exported_apps">"Dışa Aktarılmış Uygulamalar"</string>
 </resources>

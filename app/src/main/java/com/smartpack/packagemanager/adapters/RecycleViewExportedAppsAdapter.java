@@ -64,8 +64,6 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
             } else {
                 holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
             }
-            holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
-
             if (PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()) != null) {
                 holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
             } else {
@@ -81,6 +79,8 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
                 holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
             }
         }
+        holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+        holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
         holder.mAction.setImageDrawable(holder.mAction.getContext().getResources().getDrawable(R.drawable.ic_settings));
         holder.mAction.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
@@ -125,7 +125,7 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private AppCompatImageButton mAction, mIcon;
-        private MaterialTextView mTitle;
+        private MaterialTextView mTitle, mSize;
 
         public ViewHolder(View view) {
             super(view);
@@ -133,6 +133,7 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
             this.mAction = view.findViewById(R.id.export);
             this.mIcon = view.findViewById(R.id.icon);
             this.mTitle = view.findViewById(R.id.name);
+            this.mSize = view.findViewById(R.id.size);
         }
 
         @Override
