@@ -38,26 +38,26 @@ import java.util.List;
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
  */
 
-public class RecycleViewDownloadsAdapter extends RecyclerView.Adapter<RecycleViewDownloadsAdapter.ViewHolder> {
+public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<RecycleViewExportedAppsAdapter.ViewHolder> {
 
     private static List<String> data;
 
     private static ClickListener mClickListener;
 
-    public RecycleViewDownloadsAdapter(List<String> data) {
-        RecycleViewDownloadsAdapter.data = data;
+    public RecycleViewExportedAppsAdapter(List<String> data) {
+        RecycleViewExportedAppsAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewDownloadsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecycleViewExportedAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_apks, parent, false);
-        return new RecycleViewDownloadsAdapter.ViewHolder(rowItem);
+        return new RecycleViewExportedAppsAdapter.ViewHolder(rowItem);
     }
 
     @SuppressLint({"UseCompatLoadingForDrawables", "StringFormatInvalid"})
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewDownloadsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecycleViewExportedAppsAdapter.ViewHolder holder, int position) {
         if (data.get(position).endsWith(".apk")) {
             if (PackageData.getAPKName(data.get(position), holder.mIcon.getContext()) != null) {
                 holder.mTitle.setText(PackageData.getAPKName(data.get(position), holder.mTitle.getContext()));
@@ -142,7 +142,7 @@ public class RecycleViewDownloadsAdapter extends RecyclerView.Adapter<RecycleVie
     }
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecycleViewDownloadsAdapter.mClickListener = clickListener;
+        RecycleViewExportedAppsAdapter.mClickListener = clickListener;
     }
 
     public interface ClickListener {

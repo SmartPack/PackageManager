@@ -44,7 +44,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.AboutActivity;
-import com.smartpack.packagemanager.activities.DownloadsActivity;
+import com.smartpack.packagemanager.activities.ExportedAppsActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
@@ -263,7 +263,7 @@ public class PackageTasksFragment extends Fragment {
         PopupMenu popupMenu = new PopupMenu(activity, mSettings);
         Menu menu = popupMenu.getMenu();
         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.install_bundle));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.downloads));
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.exported_apps));
         menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.settings));
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.about));
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -302,7 +302,7 @@ public class PackageTasksFragment extends Fragment {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                         Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
                     } else {
-                        Intent downloadsPage = new Intent(activity, DownloadsActivity.class);
+                        Intent downloadsPage = new Intent(activity, ExportedAppsActivity.class);
                         startActivity(downloadsPage);
                     }
                     break;

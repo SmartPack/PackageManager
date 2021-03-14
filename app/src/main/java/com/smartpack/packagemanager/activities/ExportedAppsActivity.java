@@ -26,7 +26,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewDownloadsAdapter;
+import com.smartpack.packagemanager.adapters.RecycleViewExportedAppsAdapter;
 import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -37,16 +37,16 @@ import java.util.Objects;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
  */
-public class DownloadsActivity extends AppCompatActivity {
+public class ExportedAppsActivity extends AppCompatActivity {
 
     private LinearLayout mProgressLayout;
     private RecyclerView mRecyclerView;
-    private RecycleViewDownloadsAdapter mRecycleViewAdapter;
+    private RecycleViewExportedAppsAdapter mRecycleViewAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_downloads);
+        setContentView(R.layout.activity_exported_apps);
 
         AppCompatImageButton mBack = findViewById(R.id.back_button);
         mProgressLayout = findViewById(R.id.progress_layout);
@@ -66,17 +66,17 @@ public class DownloadsActivity extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = Utils.getString("downloadTypes", "apks", DownloadsActivity.this);
+                String mStatus = Utils.getString("downloadTypes", "apks", ExportedAppsActivity.this);
                 switch (tab.getPosition()) {
                     case 0:
                         if (!mStatus.equals("apks")) {
-                            Utils.saveString("downloadTypes", "apks", DownloadsActivity.this);
+                            Utils.saveString("downloadTypes", "apks", ExportedAppsActivity.this);
                             loadUI();
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("bundles")) {
-                            Utils.saveString("downloadTypes", "bundles", DownloadsActivity.this);
+                            Utils.saveString("downloadTypes", "bundles", ExportedAppsActivity.this);
                             loadUI();
                         }
                         break;
@@ -117,7 +117,7 @@ public class DownloadsActivity extends AppCompatActivity {
     }
 
     private void loadUI() {
-        mRecycleViewAdapter = new RecycleViewDownloadsAdapter(Downloads.getData(this));
+        mRecycleViewAdapter = new RecycleViewExportedAppsAdapter(Downloads.getData(this));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
     }
 

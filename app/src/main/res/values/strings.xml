@@ -49,7 +49,6 @@
     <string name="documentation">Documentation</string>
     <string name="documentation_summary">Check out detailed documentation to use Package Manager</string>
     <string name="done">Done</string>
-    <string name="downloads">Downloads</string>
     <string name="enable">Enable</string>
     <string name="enabled">enabled</string>
     <string name="enabling">Enabling %s</string>
@@ -60,6 +59,7 @@
     <string name="export_file_message">is successfully exported into %s!</string>
     <string name="export_summary">is exported into %s. Do you want to share it?</string>
     <string name="export_storage_message">Export %s into device storage?</string>
+    <string name="exported_apps">Exported Apps</string>
     <string name="exporting">Exporting %s</string>
     <string name="exporting_bundle">Exporting %s app bundle</string>
     <string name="everything_done">Everything Done!</string>

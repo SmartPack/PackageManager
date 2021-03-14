@@ -37,7 +37,7 @@
                 android:textColor="?attr/colorAccent"
                 android:layout_gravity="start|center_vertical"
                 android:layout_marginStart="50dp"
-                android:text="@string/downloads"
+                android:text="@string/exported_apps"
                 android:gravity="start"
                 android:textStyle="bold"
                 android:textSize="20sp"

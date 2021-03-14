@@ -32,7 +32,7 @@
         <activity android:name=".MainActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.AboutActivity" />
-        <activity android:name=".activities.DownloadsActivity" />
+        <activity android:name=".activities.ExportedAppsActivity" />
         <activity android:name=".activities.FilePickerActivity" />
         <activity android:name=".activities.ImageViewActivity" />
         <activity android:name=".activities.PackageDetailsActivity"
