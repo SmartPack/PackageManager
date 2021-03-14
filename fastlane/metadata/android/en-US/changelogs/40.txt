@@ -1,5 +1,0 @@
-* Added tabs at page top to easily switch app types.
-* Added Downloads page to easily manage APK's/bundles.
-* Updated Chinese, French, German and Turkish translations.
-* Fixed language names in Settings page.
-* Miscellaneous changes.

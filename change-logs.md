@@ -1,5 +1,9 @@
 # Change-logs
 
+## 34. March 14, 2021
+*Release-tag: 4.1*<br>
+Renamed (to more appropriate "Exported Apps") and enhanced downloads page. Improved in-built file picker. Updated Portuguese (Brazilian) and Turkish translations. Miscellaneous changes.
+
 ## 33. March 14, 2021
 *Release-tag: 4.0*<br>
 Added tabs at page top to easily switch app types. Added Downloads page to easily manage APK's/bundles. Updated Chinese, French, German and Turkish translations. Fixed language names in Settings page. Miscellaneous changes.
