@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.fragments;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,12 +22,15 @@ import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -140,10 +144,21 @@ public class PackageTasksFragment extends Fragment {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
                 mSearchWord.setVisibility(View.GONE);
                 mAppTitle.setVisibility(View.VISIBLE);
+                toggleKeyboard(getContext(),mSearchWord,0);
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
                 mSearchWord.requestFocus();
                 mAppTitle.setVisibility(View.GONE);
+                toggleKeyboard(getContext(),mSearchWord,1);
+            }
+        });
+
+        mSearchWord.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                toggleKeyboard(getContext(),mSearchWord,0);
+                mSearchWord.clearFocus();
+                return true;
             }
         });
 
@@ -206,6 +221,20 @@ public class PackageTasksFragment extends Fragment {
         return mRootView;
     }
 
+    public static void toggleKeyboard(Context context, View view, Integer mode){
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        switch(mode){
+            case 1:
+                if(view.requestFocus()){
+                    imm.showSoftInput(view,InputMethodManager.SHOW_IMPLICIT);
+                }
+                return;
+            case 0:
+            default:
+                imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+                return;
+        }
+    }
     private int getTabPosition(Activity activity) {
         String mStatus = Utils.getString("appTypes", "all", activity);
         if (mStatus.equals("user")) {

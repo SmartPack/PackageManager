@@ -45,6 +45,8 @@
                     android:hint="@string/search"
                     android:visibility="gone"
                     android:gravity="center"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
                     android:maxLines="1" />
             </LinearLayout>
 
