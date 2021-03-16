@@ -44,7 +44,9 @@
                     android:textColor="@color/colorWhite"
                     android:hint="@string/search"
                     android:visibility="gone"
-                    android:gravity="center"
+                    android:gravity="left"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"
                     android:maxLines="1" />
             </LinearLayout>
 
