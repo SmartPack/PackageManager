@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import androidx.activity.OnBackPressedCallback;
@@ -140,11 +141,18 @@ public class PackageTasksFragment extends Fragment {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
                 mSearchWord.setVisibility(View.GONE);
                 mAppTitle.setVisibility(View.VISIBLE);
+                toggleKeyboard(0);
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
-                mSearchWord.requestFocus();
                 mAppTitle.setVisibility(View.GONE);
+                toggleKeyboard(1);
             }
+        });
+
+        mSearchWord.setOnEditorActionListener((v, actionId, event) -> {
+            toggleKeyboard(0);
+            mSearchWord.clearFocus();
+            return true;
         });
 
         mSearchWord.addTextChangedListener(new TextWatcher() {
@@ -204,6 +212,17 @@ public class PackageTasksFragment extends Fragment {
         });
 
         return mRootView;
+    }
+
+    public void toggleKeyboard(int mode) {
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (mode == 1) {
+            if (mSearchWord.requestFocus()) {
+                imm.showSoftInput(mSearchWord, InputMethodManager.SHOW_IMPLICIT);
+            }
+        } else {
+            imm.hideSoftInputFromWindow(mSearchWord.getWindowToken(), 0);
+        }
     }
 
     private int getTabPosition(Activity activity) {
