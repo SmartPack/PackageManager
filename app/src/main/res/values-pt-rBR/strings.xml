@@ -32,6 +32,7 @@
     <string name="open">Abrir</string>
     <string name="open_message">Você já está executando este aplicativo.</string>
     <string name="open_failed">%s não foi projetado para ser executado no espaço do usuário!</string>
+    <string name="operations">Operações</string>
     <string name="package_id">ID do pacote</string>
     <string name="permission_denied_write_storage">Permissão para modificar o armazenamento negada!</string>
     <string name="playstore">PlayStore</string>

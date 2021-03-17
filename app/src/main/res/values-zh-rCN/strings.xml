@@ -87,7 +87,7 @@
     <string name="support_meal">"给我买一顿饭"</string>
     <string name="support_coffee">"给我买杯咖啡"</string>
     <string name="support_already_received_message">"之前，您已经获得了此项目的开发支持！"</string>
-    <string name="support_received_message">"非常感谢您的支持\ u2665 \n这将激励我继续积极开展我的项目！此外，您还将在此页面顶部收到支持者徽章"</string>
+    <string name="support_received_message">"非常感谢您的支持\ u2665 \n这将激励我继续积极开展我的项目！此外，您还将在此页面顶部收到支持者徽章。"</string>
     <string name="support_retry_message">"请尝试再次购买！"</string>
     <string name="support_status_message">"非常感谢您的支持！"</string>
     <string name="sure_question">"你确定吗？"</string>
