@@ -14,6 +14,7 @@
 * Export individual or a batch of apps (including Split apk's) into device storage.
 * Do advanced tasks such as (need Root access).
   * Uninstall an individual or a batch of system apps (de-bloating).
+  * Control Operations (AppOps).
   * Disable or Enable individual or a batch of apps.
 
 <b>Translations</b>

@@ -1,5 +1,9 @@
 # Change-logs
 
+## 35. March 17, 2021
+*Release-tag: 4.2*<br>
+Added Operations (AppOps) page with enable/disable options (root-only). Improved app searching. Updated Turkish, Portuguese (Brazilian), Russian, Ukrainian, and Malayalam translations. Miscellaneous changes.
+
 ## 34. March 14, 2021
 *Release-tag: 4.1*<br>
 Renamed (to more appropriate "Exported Apps") and enhanced downloads page. Improved in-built file picker. Updated Portuguese (Brazilian) and Turkish translations. Miscellaneous changes.

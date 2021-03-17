@@ -1,4 +1,0 @@
-* Renamed (to more appropriate Exported Apps) and enhanced downloads page.
-* Improved in-built file picker.
-* Updated Portuguese (Brazilian) and Turkish translations.
-* Miscellaneous changes.
