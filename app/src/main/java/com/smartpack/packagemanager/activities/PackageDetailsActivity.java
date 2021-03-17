@@ -18,13 +18,16 @@ import com.google.android.material.tabs.TabLayout;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.fragments.ActivitiesFragment;
+import com.smartpack.packagemanager.fragments.AppOpsFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PackageInfoFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.fragments.SplitApksFragment;
+import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
+import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 
@@ -49,6 +52,9 @@ public class PackageDetailsActivity extends AppCompatActivity {
         }
         if (PackageDetails.getPermissions(PackageData.mApplicationID, this).size() > 0) {
             adapter.AddFragment(new PermissionsFragment(), getString(R.string.permissions));
+        }
+        if (Utils.rootAccess() && AppOps.getOps(this).size() > 0) {
+            adapter.AddFragment(new AppOpsFragment(), getString(R.string.operations));
         }
         if (PackageDetails.getActivities(PackageData.mApplicationID, this).size() > 0) {
             adapter.AddFragment(new ActivitiesFragment(), getString(R.string.activities));
