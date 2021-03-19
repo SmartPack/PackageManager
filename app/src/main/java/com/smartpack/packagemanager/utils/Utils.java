@@ -367,7 +367,7 @@ public class Utils {
                         : R.string.welcome_message_noroot))
                 .setCancelable(false)
                 .setNeutralButton(R.string.documentation, (dialog, id) ->
-                        launchUrl("https://ko-fi.com/post/Package-Manager-Documentation-L3L23Q2I9", activity))
+                        launchUrl("https://smartpack.github.io/PackageManager/general/", activity))
                 .setPositiveButton(R.string.got_it, (dialog, id) ->
                         saveBoolean("welcomeMessage",false, activity)).show();
     }

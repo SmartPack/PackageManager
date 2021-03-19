@@ -86,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
         mData.add(new RecycleViewItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(
                 R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
         mData.add(new RecycleViewItem(getString(R.string.documentation), getString(R.string.documentation_summary), getResources().getDrawable(
-                R.drawable.ic_book), "https://ko-fi.com/post/Package-Manager-Documentation-L3L23Q2I9"));
+                R.drawable.ic_book), "https://smartpack.github.io/PackageManager/general/"));
         mData.add(new RecycleViewItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(
                 R.drawable.ic_translate), "https://poeditor.com/join/project?hash=0CitpyI1Oc"));
         mData.add(new RecycleViewItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
