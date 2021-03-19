@@ -1,6 +1,6 @@
 ---
 layout: default
-title: donations
+title: Donations
 permalink: /donations/
 ---
 

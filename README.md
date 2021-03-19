@@ -1,6 +1,6 @@
 # Package Manager
 
-![Package Manager](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true)
+<p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot001.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot002.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot003.jpg" alt="" width="250" height="450" /></p>
 
 [![](https://img.shields.io/badge/Package%20Manager-v4.2-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
