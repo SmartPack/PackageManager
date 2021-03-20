@@ -25,7 +25,7 @@ $container-max-width: 1000px;
 .topnav a {
   float: left;
   display: block;
-  color: $conifer;
+  color: #4285F4;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -50,7 +50,7 @@ $container-max-width: 1000px;
   font-size: 17px;
   border: none;
   outline: none;
-  color: $conifer;
+  color: #4285F4;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
@@ -60,7 +60,7 @@ $container-max-width: 1000px;
 .dropdown-content {
   display: none;
   position: fixed;
-  background-color: $conifer;
+  background-color: #4285F4;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -130,7 +130,7 @@ li {
 header {
   background: rgba(0, 0, 0, 0.1);
   width: 100%;
-  border-bottom: 1px dashed $conifer; //header;
+  border-bottom: 1px dashed #4285F4; //header;
   padding: 20px 0;
   margin: 0 0 40px 0;
 }
@@ -141,7 +141,7 @@ header h1 {
   margin: 0 0 0 -40px;
   font-weight: bold;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $conifer;//$header;
+  color: #4285F4;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
                0 0 5px rgba(181, 232, 83, 0.1),
                0 0 10px rgba(181, 232, 83, 0.1);
@@ -184,7 +184,7 @@ section img {
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $header;
+  color: #4285F4;
   letter-spacing: -0.03em;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
                0 0 5px rgba(181, 232, 83, 0.1),
@@ -240,7 +240,7 @@ pre {
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px;
   font-size: 16px;
-  color: #b5e853;
+  color: #4285F4;
   border-radius: 2px;
   word-wrap: normal;
   overflow: auto;
@@ -263,7 +263,7 @@ table {
 
 th {
   text-align: left;
-  border-bottom: 1px dashed #b5e853;
+  border-bottom: 1px dashed #4285F4;
   padding: 5px 10px;
 }
 
@@ -274,8 +274,8 @@ td {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px dashed #b5e853;
-  color: #b5e853;
+  border-bottom: 1px dashed #4285F4;
+  color: #4285F4;
 }
 
 /* Buttons

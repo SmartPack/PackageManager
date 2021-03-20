@@ -10,7 +10,7 @@ permalink: /permissions/
 
 ## Permissions Explained
 
-<p style="text-align: justify;"><tab1>As a privacy-friendly application, Package Manager only demands the very necessary permissions required to offer the above-promised features, and are</tab1></p>
+<p style="text-align: justify;"><tab1>As a privacy-friendly application, Package Manager only demands the very necessary permissions required to offer the promised features, and are</tab1></p>
 
 <ol>
     <li><b>ACCESS_NETWORK_STATE</b> - checking network state before attempting to open web links.</li>

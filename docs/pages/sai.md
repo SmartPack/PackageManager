@@ -17,10 +17,10 @@ permalink: /sai/
 
 In order to install multiple APK's or app bundles, please follow the guidelines
 
-1.  Click the top menu icon and select "<b>Install Split APK</b>"</li>
-2.  Package Manager will now open an in-built file picker to select the installation file(s). It is also possible to use a third-party file manager application for selecting the installation files, although with a little less flexibility (check out "<b>Settings --> File Picker</b>").</li>
-3.  In order to install an app bundle (<b>xapk</b>, <b>apkm</b>, or <b>apks</b> file), simply select the respective file and follow on-screen instructions.</li>
-4.  To install split APK's, please be sure to follow the additional requirements listed below</li>
+1.  Click the top menu icon and select "<b>Install Split APK</b>".
+2.  Package Manager will now open an in-built file picker to select the installation file(s). It is also possible to use a third-party file manager application for selecting the installation files, although with a little less flexibility (check out "<b>Settings --> File Picker</b>").
+3.  In order to install an app bundle (<b>xapk</b>, <b>apkm</b>, or <b>apks</b> file), simply select the respective file and follow on-screen instructions.
+4.  To install split APK's, please be sure to follow the additional requirements listed below
     1.   All the necessary split APK's should be placed in a single folder.
-    2.   Make sure that there are no other APK's (with a different package id) are present in the above-mentioned folder.
-    3.   Upon being prompted to select the installation files, please make sure to select all the necessary split APK's to avoid possible installation failure (select all if you're in doubt). Also, when you're using a third-party file manager, just select any of the APK placed in the folder, and follow on-screen instructions. Package Manager will handle the rest of them.
+    2.   Upon being prompted to select the installation files, please make sure to select all the necessary split APK's to avoid possible installation failure.
+    3.   If you're using a third-party file manager to pick split APK's, make sure that there are no unnecessary APK's (with a different package id) present in the above-mentioned folder and just select any one of them and follow on-screen instructions. Package Manager will handle the rest of them.
