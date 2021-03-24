@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="about">"Hakkında"</string>
-    <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>>"</string>
+    <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>"</string>
     <string name="apk_path">"APK Konumu"</string>
     <string name="app_info">"Uygulama bilgileri"</string>
     <string name="batch_list_clear">"Listeyi temizle"</string>
@@ -73,7 +73,7 @@
     <string name="share">"Paylaş"</string>
     <string name="shared_by">"%s/Package Manager tarafından paylaşıldı"</string>
     <string name="share_message">"Package Manager %s Google Play'den alınabilir: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
-    <string name="share_with">"Neyle paylaşacaksınız"</string>
+    <string name="share_with">"Paylaşacak bir şey seçiniz"</string>
     <string name="sort_by">"Uygulamala Sıralaması"</string>
     <string name="source_code">"Kaynak Kodu"</string>
     <string name="split_apk_list">"Bölünmüş APK'lerin listesi"</string>
@@ -191,25 +191,25 @@
     <string name="operations_receive_emergency_sms">"Bir uygulamanın Acil Durum SMS mesajı almasına izin verir"</string>
     <string name="operations_receive_wap_push">"Bir uygulamanın WAP bildirimleri almasına izin verir"</string>
     <string name="operations_record_audio">"Bir uygulamanın ses kaydetmesine izin verir"</string>
-    <string name="operations_ring_volume">"Zil sesi seviyesini değiştir"</string>
+    <string name="operations_ring_volume">"Zil sesi seviyesini değiştirir"</string>
     <string name="operations_run_background">"Bir uygulamanın arka planda çalışmasına izin verir"</string>
     <string name="operations_start_foreground">"Ön plan hizmetlerini başlat. FOREGROUND_SERVICE izni gerektirir"</string>
-    <string name="operations_system_alert_window">"Pencere oluştur ve diğer bütün uygulamaların üstünde göster"</string>
+    <string name="operations_system_alert_window">"Pencere oluşturur ve diğer bütün uygulamaların üzerinde gösterir"</string>
     <string name="operations_take_audio_focus">"Bir uygulamanın ses odağını elinde tutan tek uygulama olmasına izin verir"</string>
-    <string name="operations_toast_window">"Ekranda kısa süreli mesajlar göster"</string>
-    <string name="operations_unavailable">"'%s' için herhangi bir açıklama mevcut değil"</string>
+    <string name="operations_toast_window">"Ekranda kısa süreli mesajlar gösterir"</string>
+    <string name="operations_unavailable">"'%s' için herhangi bir açıklama bulunmuyor"</string>
     <string name="operations_usage_status">"Bir uygulamanın kullanım istatistiklerini toplamasına izin verir"</string>
-    <string name="operations_use_biometric">"Cihaz destekli biyometrik yöntemleri kullan"</string>
+    <string name="operations_use_biometric">"Cihaz destekli biyometrik yöntemleri kullanır"</string>
     <string name="operations_use_fingerprint">"Bir uygulamanın parmak izi donanımını kullanmasına verir"</string>
     <string name="operations_vibrate">"Titreşim cihazına erişmesine izin verir"</string>
-    <string name="operations_wake_lock">"İşlemcinin uyumasını veya ekranın kararmasını engellemek için Güç Yönetici Uyandırma Kilidini kullan"</string>
+    <string name="operations_wake_lock">"İşlemcinin uyumasını veya ekranın kararmasını engellemek için Güç Yönetici Uyandırma Kilidini kullanır"</string>
     <string name="operations_warning">"Operasyonlardan bazılarını değiştirmek tehlikelidir! Lütfen sadece ne yaptığınızı biliyorsanız yapınız. Ayrıca dikkat edin, bazı operasyonlar değiştirilemezler (yeni durumu kontrol etmek için bu ekranı kapatıp tekrar açınız)."</string>
     <string name="operations_wifi_scan">"Bir uygulamanın kablosuz ağları taramasına izin verir"</string>
     <string name="operations_write_calender">"Bir uygulamanın kullanıcıya ait takvim verilerine yazmasına izin verir"</string>
     <string name="operations_write_call_log">"Bir uygulamanın kullanıcıya ait çağrı geçmişi verilerine yazmasına izin verir (fakat okuyamaz)"</string>
-    <string name="operations_write_clipboard">"Panoya veri yaz"</string>
+    <string name="operations_write_clipboard">"Panoya veri yazar"</string>
     <string name="operations_write_contacts">"Bir uygulamanın kullanıcıya ait telefon rehberi verilerine yazmasına izin verir"</string>
-    <string name="operations_write_settings">"Sistem ayarlarını oku veya yaz (bazı kısıtlamalar bulunmaktadır)"</string>
+    <string name="operations_write_settings">"Sistem ayarlarını okur veya yazar (bazı kısıtlamalar bulunmaktadır)"</string>
     <string name="operations_write_sms">"Bir uygulamanın SMS mesajı göndermesine izin verir"</string>
     <string name="operations_write_storage">"Bir uygulamanın harici depolamaya yazmasına izin verir"</string>
     <string name="operations_write_wallpaper">"Bir uygulamanın duvar kağıdını değiştirmesine izin verir"</string>

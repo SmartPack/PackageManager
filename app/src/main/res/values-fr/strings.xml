@@ -148,4 +148,22 @@
     <string name="split_apk_installer">"Installateur d'APK modulaire (split APK)"</string>
     <string name="certificate">"Certificat"</string>
     <string name="manifest">"Manifeste"</string>
+    <string name="apks">"Apk"</string>
+    <string name="bundles">"Bundles"</string>
+    <string name="delete">"Supprimer"</string>
+    <string name="delete_question">"Supprimer '%s'?"</string>
+    <string name="install_question">"Installer '%s'?"</string>
+    <string name="reverse_order">"Inverser l'ordre"</string>
+    <string name="show_apps_all">"Tous"</string>
+    <string name="show_apps_system">"Système"</string>
+    <string name="show_apps_user">"Utilisateur"</string>
+    <string name="exported_apps">"Application exportées"</string>
+    <string name="operations">"Opérations"</string>
+    <string name="operations_audio_notification">"Changer le volume de notification"</string>
+    <string name="operations_camera">"Requis pour pouvoir accéder à l'appareil photo"</string>
+    <string name="operations_change_wifi">"Permet aux applications de modifier l'état de la connectivité Wi-Fi"</string>
+    <string name="operations_coarse_location">"Permet à une application d'accéder à la position approximative"</string>
+    <string name="operations_delete_packages">"Permet à une application de demander la suppression des packages"</string>
+    <string name="operations_fine_location">"Permet à une application d'accéder à l'emplacement précis"</string>
+    <string name="operations_get_accounts">"Permet d'accéder à la liste des comptes dans le Service Comptes"</string>
 </resources>

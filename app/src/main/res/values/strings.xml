@@ -98,7 +98,7 @@
     <string name="language_tr" translatable="false">Türkçe</string>
     <string name="language_uk" translatable="false">Українська</string>
     <string name="language_vi" translatable="false">Tiếng Việt</string>
-    <string name="language_zh" translatable="false">中文（简体</string>
+    <string name="language_zh" translatable="false">中文（简体）</string>
     <string name="list">List</string>
     <string name="manifest">Manifest</string>
     <string name="more_apps">More from Developer</string>
