@@ -1,4 +1,0 @@
-* Added support to control Operations (AppOps) (root-only).
-* Improved searching on main app UI.
-* Updated Turkish, Portuguese (Brazilian), Russian, Ukrainian, and Malayalam translations.
-* Miscellaneous changes.

@@ -1,5 +1,9 @@
 # Change-logs
 
+## 36. March 24, 2021
+*Release-tag: 4.3*<br>
+Updated Czech, Spanish, French, Turkish, Vietnamese & Chinese simplified translations. Improved sorting apps by package name. Improved documentation and linked to app. Miscellaneous changes.
+
 ## 35. March 17, 2021
 *Release-tag: 4.2*<br>
 Added Operations (AppOps) page with enable/disable options (root-only). Improved app searching. Updated Turkish, Portuguese (Brazilian), Russian, Ukrainian, and Malayalam translations. Miscellaneous changes.
