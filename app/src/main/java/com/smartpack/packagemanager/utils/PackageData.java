@@ -58,6 +58,8 @@ public class PackageData {
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
+        } else {
+            Collections.sort(packages, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.packageName, rhs.packageName));
         }
         for (ApplicationInfo packageInfo: packages) {
             if (Utils.getString("appTypes", "all", context).equals("system")) {
