@@ -28,11 +28,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:layout_gravity="start"
             android:layout_marginStart="30dp"
+            android:textColor="?attr/colorAccent"
+            android:layout_gravity="start"
             android:textSize="18sp"
             android:padding="10dp"
-            android:textColor="?attr/colorAccent" />
+            android:maxLines="1" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/export"
@@ -46,23 +47,10 @@
             android:layout_marginEnd="10dp" />
     </FrameLayout>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="5dp" >
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:gravity="start"
-                android:textIsSelectable="true"
-                android:textSize="15sp" />
-        </androidx.core.widget.NestedScrollView>
-    </com.google.android.material.card.MaterialCardView>
+        android:textIsSelectable="true"
+        android:layout_margin="10dp" />
 </LinearLayout>

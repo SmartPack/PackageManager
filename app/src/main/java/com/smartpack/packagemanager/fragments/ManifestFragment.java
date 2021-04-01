@@ -8,8 +8,6 @@
 
 package com.smartpack.packagemanager.fragments;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,29 +15,39 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.adapters.RecycleViewManifestAdapter;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 08, 2021
  */
 public class ManifestFragment extends Fragment {
 
-    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_manifest, container, false);
 
-        MaterialTextView mText = mRootView.findViewById(R.id.text);
-        mText.setTextColor(Utils.isDarkTheme(requireActivity()) ? Color.WHITE : Color.BLACK);
-        mText.setText(PackageExplorer.readManifest(PackageData.mDirSource));
+        RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mRecyclerView.setAdapter(new RecycleViewManifestAdapter(getData()));
 
         return mRootView;
+    }
+
+    private List<String> getData() {
+        return new ArrayList<>(Arrays.asList(Objects.requireNonNull(PackageExplorer.readManifest(
+                PackageData.mDirSource)).split("\\r?\\n")));
     }
 
 }

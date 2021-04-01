@@ -7,15 +7,10 @@
     android:layout_gravity="start"
     app:cardCornerRadius="15dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textIsSelectable="true"
-        android:lineSpacingExtra="10dp"
-        android:layout_margin="5dp"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:gravity="start"
-        android:padding="15dp" />
+        android:layout_margin="10dp" />
 </com.google.android.material.card.MaterialCardView>

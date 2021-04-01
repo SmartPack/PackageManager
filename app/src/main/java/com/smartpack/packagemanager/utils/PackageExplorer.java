@@ -50,11 +50,15 @@ public class PackageExplorer {
     public static boolean isTextFile(String path) {
         return path.endsWith(".txt") || path.endsWith(".xml") || path.endsWith(".json") || path.endsWith(".properties")
                 || path.endsWith(".version") || path.endsWith(".sh") || path.endsWith(".MF") || path.endsWith(".SF")
-                || path.endsWith(".RSA") || path.endsWith(".html");
+                || path.endsWith(".RSA") || path.endsWith(".html") || path.endsWith(".ini");
     }
 
     public static boolean isImageFile(String path) {
         return path.endsWith(".bmp") || path.endsWith(".png") || path.endsWith(".jpg");
+    }
+
+    public static boolean isBinaryXML(String path) {
+        return path.endsWith(".xml") && (new File(path).getName().equals("AndroidManifest.xml") || path.contains("/apk/res"));
     }
 
     public static int getSpanCount(Activity activity) {
