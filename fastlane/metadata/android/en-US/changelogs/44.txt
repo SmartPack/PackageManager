@@ -1,0 +1,5 @@
+* Improved Manifest and text view layouts.
+* Added APK/Bundle size to Package Details page.
+* Improved app searching.
+* Updated Czech, Spanish, Vietnamese & Russian translations.
+* Miscellaneous changes.

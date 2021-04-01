@@ -1,5 +1,9 @@
 # Change-logs
 
+## 37. April 01, 2021
+*Release-tag: 4.4*<br>
+Improved Manifest and text view layouts. Added APK/Bundle size to Package Details page. Improved app searching. Updated Czech, Spanish, Vietnamese & Russian translations. Miscellaneous changes.
+
 ## 36. March 24, 2021
 *Release-tag: 4.3*<br>
 Updated Czech, Spanish, French, Turkish, Vietnamese & Chinese simplified translations. Improved sorting apps by package name. Improved documentation and linked to app. Miscellaneous changes.

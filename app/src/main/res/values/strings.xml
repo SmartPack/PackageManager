@@ -194,7 +194,7 @@
     <string name="show_apps_system">System</string>
     <string name="show_apps_user">User</string>
     <string name="size_apk">APK Size: %s</string>
-    <string name="size_bundle">APK Bundle: %s</string>
+    <string name="size_bundle">Bundle Size: %s</string>
     <string name="sort_by">Sort Apps</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Package Manager is an open-source application which is ready to accept contributions from the development community. Click here to check out the source code!</string>
