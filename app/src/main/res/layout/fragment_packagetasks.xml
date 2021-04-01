@@ -42,9 +42,11 @@
                     android:layout_height="wrap_content"
                     android:textColorHint="?attr/colorAccent"
                     android:textColor="@color/colorWhite"
+                    android:imeOptions="actionDone"
                     android:hint="@string/search"
                     android:visibility="gone"
                     android:gravity="center"
+                    android:inputType="text"
                     android:maxLines="1" />
             </LinearLayout>
 
