@@ -30,8 +30,10 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
+import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
+import java.io.File;
 import java.util.Objects;
 
 /*
@@ -53,7 +55,9 @@ public class PackageInfoFragment extends Fragment {
         MaterialTextView mVersion = mRootView.findViewById(R.id.version_text);
         MaterialTextView mDataDir = mRootView.findViewById(R.id.data_dir_text);
         MaterialTextView mNatLib = mRootView.findViewById(R.id.native_lib_text);
+        MaterialTextView mAPKPathTitle = mRootView.findViewById(R.id.apk_path);
         MaterialTextView mAPKPath = mRootView.findViewById(R.id.apk_path_text);
+        MaterialTextView mAPKSize = mRootView.findViewById(R.id.apk_size);
         MaterialTextView mLastUpdated = mRootView.findViewById(R.id.updated_text);
         MaterialTextView mCertificate = mRootView.findViewById(R.id.certificate_text);
         MaterialTextView mDisableTitle = mRootView.findViewById(R.id.enable_title);
@@ -77,6 +81,14 @@ public class PackageInfoFragment extends Fragment {
         mDisableTitle.setText(PackageData.isEnabled(PackageData.mApplicationID, requireActivity()) ? R.string.disable : R.string.enable);
         mDataDir.setText(PackageData.mDirData);
         mNatLib.setText(PackageData.mDirNatLib);
+        if (new File(PackageData.getSourceDir(PackageData.mApplicationID, requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
+                .splitApks(PackageData.getParentDir(PackageData.mApplicationID, requireActivity())).size() > 1) {
+            mAPKPathTitle.setText(getString(R.string.bundle_path));
+            mAPKSize.setText(getString(R.string.size_bundle, PackageData.getBundleSize(PackageData.getParentDir(PackageData.mApplicationID, requireActivity()))));
+        } else {
+            mAPKPathTitle.setText(getString(R.string.apk_path));
+            mAPKSize.setText(getString(R.string.size_apk, PackageData.getAPKSize(PackageData.mDirSource)));
+        }
         mAPKPath.setText(PackageData.getParentDir(PackageData.mApplicationID, requireActivity()));
         mOpenApp.setVisibility(PackageData.isEnabled(PackageData.mApplicationID, requireActivity()) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {

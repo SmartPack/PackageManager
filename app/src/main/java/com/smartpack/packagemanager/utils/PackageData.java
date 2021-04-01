@@ -208,6 +208,19 @@ public class PackageData {
         }
     }
 
+    public static String getBundleSize(String path) {
+        long size = 0;
+        for (String mSplit : SplitAPKInstaller.splitApks(path)) {
+            size += new File(path, mSplit).length() / 1024;
+        }
+        long decimal = (size - 1024) / 1024;
+        if (size > 1024) {
+            return size / 1024 + "." + decimal + " MB";
+        } else {
+            return size  + " KB";
+        }
+    }
+
     public static String getBatchList() {
         return mBatchList.toString().substring(1, mBatchList.toString().length() - 1);
     }

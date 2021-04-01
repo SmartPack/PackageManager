@@ -24,6 +24,7 @@
     <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?</string>
     <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
     <string name="bundle_install_message">Please Note: In order to install multiple APK\'s (split APK\'s), please place all of them in a single folder and select one among them. Package Manager will pick and handle the rest.</string>
+    <string name="bundle_path">Bundle Path</string>
     <string name="bundles">Bundles</string>
     <string name="cancel">Cancel</string>
     <string name="certificate">Certificate</string>
@@ -192,6 +193,8 @@
     <string name="show_apps_all">All</string>
     <string name="show_apps_system">System</string>
     <string name="show_apps_user">User</string>
+    <string name="size_apk">APK Size: %s</string>
+    <string name="size_bundle">APK Bundle: %s</string>
     <string name="sort_by">Sort Apps</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Package Manager is an open-source application which is ready to accept contributions from the development community. Click here to check out the source code!</string>
