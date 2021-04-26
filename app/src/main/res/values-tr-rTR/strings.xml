@@ -2,7 +2,7 @@
 
     <string name="about">"Hakkında"</string>
     <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>"</string>
-    <string name="apk_path">"APK Konumu"</string>
+    <string name="apk_path">"APK Dizini"</string>
     <string name="app_info">"Uygulama bilgileri"</string>
     <string name="batch_list_clear">"Listeyi temizle"</string>
     <string name="batch_list_disable">"Seçili uygulamayı(ları) devre dışı bırakmak (etkin ise) veya aktif etmek (devre dışı ise) istediğinize emin misiniz?"</string>
@@ -213,4 +213,7 @@
     <string name="operations_write_sms">"Bir uygulamanın SMS mesajı göndermesine izin verir"</string>
     <string name="operations_write_storage">"Bir uygulamanın harici depolamaya yazmasına izin verir"</string>
     <string name="operations_write_wallpaper">"Bir uygulamanın duvar kağıdını değiştirmesine izin verir"</string>
+    <string name="bundle_path">"Toplu Paket Dizini"</string>
+    <string name="size_apk">"APK Boyutu: %s"</string>
+    <string name="size_bundle">"Toplu Paket Boyutu: %s"</string>
 </resources>

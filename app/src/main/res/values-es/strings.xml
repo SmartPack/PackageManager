@@ -212,4 +212,5 @@
     <string name="operations_write_sms">"Permite que una aplicación envíe mensajes SMS"</string>
     <string name="operations_write_storage">"Permite que una aplicación escriba en el almacenamiento externo."</string>
     <string name="operations_write_wallpaper">"Permite que una aplicación configure el fondo de pantalla"</string>
+    <string name="size_apk">"Tamaño de APK: %s"</string>
 </resources>
