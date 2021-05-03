@@ -1,0 +1,5 @@
+* Re-organized and improved code.
+* Now built using latest Gradle plugin.
+* Added Portuguese and hungarian translations.
+* Updated German, Spanish, Vietnamese & Turkish translations.
+* Miscellaneous changes.

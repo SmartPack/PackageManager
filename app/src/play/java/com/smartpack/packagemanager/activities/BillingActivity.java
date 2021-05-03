@@ -46,10 +46,10 @@ import java.util.List;
  */
 public class BillingActivity extends AppCompatActivity {
 
-    private ArrayList <RecycleViewItem> mData = new ArrayList<>();
+    private final ArrayList <RecycleViewItem> mData = new ArrayList<>();
     private BillingClient mBillingClient;
     private boolean mClientInitialized = false;
-    private List<String> mSkuList = new ArrayList<>();
+    private final List<String> mSkuList = new ArrayList<>();
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -283,8 +283,8 @@ public class BillingActivity extends AppCompatActivity {
     }
 
     private static class RecycleViewItem implements Serializable {
-        private String mTitle;
-        private Drawable mIcon;
+        private final String mTitle;
+        private final Drawable mIcon;
 
         public RecycleViewItem(String title, Drawable icon) {
             this.mTitle = title;

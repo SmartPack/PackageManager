@@ -1,5 +1,9 @@
 # Change-logs
 
+## 38. May 03, 2021
+*Release-tag: 4.5*<br>
+Re-organized and improved code. Now built using latest Gradle plugin. Added Portuguese and hungarian translations. Updated German, Spanish, Vietnamese & Turkish translations. Miscellaneous changes.
+
 ## 37. April 01, 2021
 *Release-tag: 4.4*<br>
 Improved Manifest and text view layouts. Added APK/Bundle size to Package Details page. Improved app searching. Updated Czech, Spanish, Vietnamese & Russian translations. Miscellaneous changes.
