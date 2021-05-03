@@ -65,7 +65,7 @@ public class RecycleViewManifestAdapter extends RecyclerView.Adapter<RecycleView
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private MaterialTextView mNumber, mText;
+        private final MaterialTextView mNumber, mText;
 
         public ViewHolder(View view) {
             super(view);

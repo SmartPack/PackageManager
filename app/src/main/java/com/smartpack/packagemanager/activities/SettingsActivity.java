@@ -40,9 +40,9 @@ import java.util.ArrayList;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    private ArrayList <RecycleViewItem> mData = new ArrayList<>();
+    private final ArrayList <RecycleViewItem> mData = new ArrayList<>();
 
-    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n", "StringFormatInvalid"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

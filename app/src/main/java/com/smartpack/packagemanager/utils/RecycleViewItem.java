@@ -17,8 +17,8 @@ import java.io.Serializable;
  */
 
 public class RecycleViewItem implements Serializable {
-    private String mTitle, mDescription, mUrl;
-    private Drawable mIcon;
+    private final String mTitle, mDescription, mUrl;
+    private final Drawable mIcon;
 
     public RecycleViewItem(String title, String description, Drawable icon, String url) {
         this.mTitle = title;

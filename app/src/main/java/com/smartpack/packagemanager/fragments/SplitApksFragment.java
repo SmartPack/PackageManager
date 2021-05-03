@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewSplitAPKsAdapter;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
@@ -39,7 +40,7 @@ public class SplitApksFragment extends Fragment {
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        RecycleViewSplitAPKsAdapter mRecycleViewAdapter = new RecycleViewSplitAPKsAdapter(SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, requireActivity())));
+        RecycleViewSplitAPKsAdapter mRecycleViewAdapter = new RecycleViewSplitAPKsAdapter(SplitAPKInstaller.splitApks(PackageData.getParentDir(Common.getApplicationID(), requireActivity())));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;

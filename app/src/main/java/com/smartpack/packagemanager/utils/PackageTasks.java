@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.google.android.material.card.MaterialCardView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageTasksActivity;
 
@@ -27,24 +26,15 @@ import java.util.List;
 
 public class PackageTasks {
 
-    public static boolean mReloadPage = true;
-    public static StringBuilder mOutput = null;
-    public static boolean mRunning = false;
-    public static MaterialCardView mBatchOptions;
-
     public static void batchDisableTask(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mRunning = true;
-                if (mOutput == null) {
-                    mOutput = new StringBuilder();
-                } else {
-                    mOutput.setLength(0);
-                }
-                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
+                Common.isRunning(true);
+                Common.getOutput().setLength(0);
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
                 Intent turnOffIntent = new Intent(activity, PackageTasksActivity.class);
                 turnOffIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 turnOffIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
@@ -57,7 +47,7 @@ public class PackageTasks {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".")) {
-                        mOutput.append(PackageData.isEnabled(packageID, activity) ? "** " +
+                        Common.getOutput().append(PackageData.isEnabled(packageID, activity) ? "** " +
                                 activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)) :
                                 "** " + activity.getString(R.string.enabling, PackageData.getAppName(packageID, activity)));
                         if (PackageData.isEnabled(packageID, activity)) {
@@ -65,7 +55,7 @@ public class PackageTasks {
                         } else {
                             Utils.runCommand("pm enable " + packageID);
                         }
-                        mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                        Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);
                     }
                 }
@@ -75,9 +65,9 @@ public class PackageTasks {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
-                mRunning = false;
-                PackageTasks.mReloadPage = true;
+                Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
+                Common.isRunning(false);
+                Common.reloadPage(true);
             }
         }.execute();
     }
@@ -87,14 +77,10 @@ public class PackageTasks {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mRunning = true;
-                if (mOutput == null) {
-                    mOutput = new StringBuilder();
-                } else {
-                    mOutput.setLength(0);
-                }
-                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
+                Common.isRunning(true);
+                Common.getOutput().setLength(0);
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
                 Intent removeIntent = new Intent(activity, PackageTasksActivity.class);
                 removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
@@ -107,9 +93,9 @@ public class PackageTasks {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
-                        mOutput.append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
+                        Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
                         Utils.runCommand("pm clear " + packageID);
-                        mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                        Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);
                     }
                 }
@@ -119,8 +105,8 @@ public class PackageTasks {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
-                mRunning = false;
+                Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
+                Common.isRunning(false);
             }
         }.execute();
     }
@@ -130,14 +116,10 @@ public class PackageTasks {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mRunning = true;
-                if (mOutput == null) {
-                    mOutput = new StringBuilder();
-                } else {
-                    mOutput.setLength(0);
-                }
-                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
+                Common.isRunning(true);
+                Common.getOutput().setLength(0);
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
                 Intent removeIntent = new Intent(activity, PackageTasksActivity.class);
                 removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
@@ -151,17 +133,17 @@ public class PackageTasks {
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
                         if (SplitAPKInstaller.isAppBundle(PackageData.getParentDir(packageID, activity))) {
-                            mOutput.append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
+                            Common.getOutput().append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
                             List<File> mFiles = new ArrayList<>();
                             for (final String splitApps : SplitAPKInstaller.splitApks(PackageData.getParentDir(packageID, activity))) {
                                 mFiles.add(new File(PackageData.getParentDir(packageID, activity) + "/" + splitApps));
                             }
                             Utils.zip(PackageData.getPackageDir() + "/" + packageID + ".apkm", mFiles);
                         } else {
-                            mOutput.append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
+                            Common.getOutput().append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
                             Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir() + "/" + packageID + ".apk");
                         }
-                        mOutput.append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                        Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);
                     }
                 }
@@ -171,8 +153,8 @@ public class PackageTasks {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
-                mRunning = false;
+                Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
+                Common.isRunning(false);
             }
         }.execute();
     }
@@ -182,14 +164,10 @@ public class PackageTasks {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                mRunning = true;
-                if (mOutput == null) {
-                    mOutput = new StringBuilder();
-                } else {
-                    mOutput.setLength(0);
-                }
-                mOutput.append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
-                mOutput.append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
+                Common.isRunning(true);
+                Common.getOutput().setLength(0);
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
+                Common.getOutput().append("** ").append(activity.getString(R.string.batch_list_summary)).append(PackageData.showBatchList()).append("\n\n");
                 Intent removeIntent = new Intent(activity, PackageTasksActivity.class);
                 removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
@@ -202,9 +180,9 @@ public class PackageTasks {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
-                        mOutput.append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
+                        Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
                         Utils.runCommand("pm uninstall --user 0 " + packageID);
-                        mOutput.append(Utils.isPackageInstalled(packageID, activity) ? ": " +
+                        Common.getOutput().append(Utils.isPackageInstalled(packageID, activity) ? ": " +
                                 activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
                         Utils.sleep(1);
                     }
@@ -215,8 +193,8 @@ public class PackageTasks {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mOutput.append("** ").append(activity.getString(R.string.everything_done)).append(" *");
-                mRunning = false;
+                Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
+                Common.isRunning(false);
             }
         }.execute();
     }

@@ -124,8 +124,8 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private AppCompatImageButton mAction, mIcon;
-        private MaterialTextView mTitle, mSize;
+        private final  AppCompatImageButton mAction, mIcon;
+        private final MaterialTextView mTitle, mSize;
 
         public ViewHolder(View view) {
             super(view);

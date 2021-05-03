@@ -22,9 +22,8 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.Utils;
 
 /*
@@ -97,7 +96,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
 
     private CharSequence getName() {
         CharSequence name = null;
-        for (String mAPKs : PackageExplorer.mAPKList) {
+        for (String mAPKs : Common.getAppList()) {
             if (PackageData.getAPKName(mAPKs, this) != null) {
                 name = PackageData.getAPKName(mAPKs, this);
             }
@@ -107,7 +106,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
 
     private String getPackageId() {
         String name = null;
-        for (String mAPKs : PackageExplorer.mAPKList) {
+        for (String mAPKs : Common.getAppList()) {
             if (PackageData.getAPKId(mAPKs, this) != null) {
                 name = PackageData.getAPKId(mAPKs, this);
             }
@@ -117,7 +116,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
 
     private Drawable getIcon() {
         Drawable icon = null;
-        for (String mAPKs : PackageExplorer.mAPKList) {
+        for (String mAPKs : Common.getAppList()) {
             if (PackageData.getAPKIcon(mAPKs, this) != null) {
                 icon = PackageData.getAPKIcon(mAPKs, this);
             }
@@ -131,7 +130,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
             return;
         }
         if (Utils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
-            PackageTasks.mReloadPage = true;
+            Common.reloadPage(true);
         }
         super.onBackPressed();
     }

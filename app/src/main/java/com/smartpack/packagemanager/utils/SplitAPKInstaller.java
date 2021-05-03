@@ -138,8 +138,8 @@ public class SplitAPKInstaller {
 
     private static long getTotalSize() {
         int totalSize = 0;
-        if (PackageExplorer.mAPKList.size() > 0) {
-            for (String string : PackageExplorer.mAPKList) {
+        if (Common.getAppList().size() > 0) {
+            for (String string : Common.getAppList()) {
                 if (Utils.exist(string)) {
                     File mFile = new File(string);
                     if (mFile.exists() && mFile.getName().endsWith(".apk")) {
@@ -180,16 +180,16 @@ public class SplitAPKInstaller {
                 super.onPostExecute(aVoid);
                 linearLayout.setVisibility(View.GONE);
                 if (Utils.getBoolean("filePicker", true, activity)) {
-                    PackageExplorer.mAPKList.clear();
-                    PackageData.mPath = activity.getCacheDir().getPath() + "/splits";
+                    Common.getAppList().clear();
+                    Common.setPath(activity.getCacheDir().getPath() + "/splits");
                     Intent filePicker = new Intent(activity, FilePickerActivity.class);
                     activity.startActivity(filePicker);
                 } else {
-                    PackageExplorer.mAPKList.clear();
+                    Common.getAppList().clear();
                     if (Utils.exist(activity.getCacheDir().getPath() + "/splits")) {
                         for (final String splitApps : splitApks(activity.getCacheDir().getPath() + "/splits")) {
                             if (splitApps.endsWith(".apk")) {
-                                PackageExplorer.mAPKList.add(activity.getCacheDir().getPath() + "/splits/" + splitApps);
+                                Common.getAppList().add(activity.getCacheDir().getPath() + "/splits/" + splitApps);
                             }
                         }
                     }
@@ -216,7 +216,7 @@ public class SplitAPKInstaller {
                 final InstallParams installParams = makeInstallParams(totalSize);
                 sessionId = runInstallCreate(installParams, activity);
                 try {
-                    for (String string : PackageExplorer.mAPKList) {
+                    for (String string : Common.getAppList()) {
                         if (Utils.exist(string) && string.endsWith(".apk")) {
                             File mFile = new File(string);
                             if (mFile.exists() && mFile.getName().endsWith(".apk")) {

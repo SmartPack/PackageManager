@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
@@ -48,21 +49,21 @@ public class ImageViewActivity extends AppCompatActivity {
             mTitle.setText(new File(path).getName());
             mImage.setImageURI(PackageExplorer.getIconFromPath(path));
         } else {
-            mTitle.setText(PackageData.mApplicationName);
-            mImage.setImageDrawable(PackageData.mApplicationIcon);
+            mTitle.setText(Common.getApplicationName());
+            mImage.setImageDrawable(Common.getApplicationIcon());
         }
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
-                .setMessage(getString(R.string.export_storage_message, path != null ? new File(path).getName() : PackageData.mApplicationName + " icon"))
+                .setMessage(getString(R.string.export_storage_message, path != null ? new File(path).getName() : Common.getApplicationName() + " icon"))
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
                     if (path != null) {
                         PackageExplorer.copyToStorage(path, PackageData.getPackageDir() + "/" +
-                                PackageData.mApplicationID, this);
+                                Common.getApplicationID(), this);
                     } else {
                         PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), PackageData.getPackageDir()
-                                + "/" + PackageData.mApplicationName.toString().replace(" ","_") + "_icon.png", this);
+                                + "/" + Common.getApplicationName().toString().replace(" ","_") + "_icon.png", this);
                     }
                 }).show());
 

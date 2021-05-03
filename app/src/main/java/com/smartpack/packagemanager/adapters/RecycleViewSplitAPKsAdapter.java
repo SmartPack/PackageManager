@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
@@ -51,11 +52,11 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     @Override
     public void onBindViewHolder(@NonNull RecycleViewSplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
-        holder.mSize.setText(PackageData.getAPKSize(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+        holder.mSize.setText(PackageData.getAPKSize(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position)));
-        if (PackageData.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+        if (PackageData.getAPKIcon(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
-            holder.mIcon.setImageDrawable(PackageData.getAPKIcon(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+            holder.mIcon.setImageDrawable(PackageData.getAPKIcon(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         } else {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
@@ -65,9 +66,9 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
                 .setNegativeButton(holder.mExport.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(holder.mExport.getContext().getString(R.string.export), (dialogInterface, i) -> {
-                    PackageExplorer.copyToStorage(PackageData.getParentDir(PackageData.mApplicationID, holder.mIcon
+                    PackageExplorer.copyToStorage(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
                             .getContext()) + "/" + data.get(position), PackageData.getPackageDir() + "/" +
-                            PackageData.mApplicationID, (Activity) holder.mExport.getContext());
+                            Common.getApplicationID(), (Activity) holder.mExport.getContext());
                 }).show());
     }
 
@@ -77,8 +78,8 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private AppCompatImageButton mExport, mIcon;
-        private MaterialTextView mName, mSize;
+        private final AppCompatImageButton mExport, mIcon;
+        private final MaterialTextView mName, mSize;
 
         public ViewHolder(View view) {
             super(view);

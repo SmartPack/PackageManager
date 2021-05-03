@@ -33,17 +33,6 @@ import java.util.Objects;
 
 public class PackageData {
 
-    public static boolean mSystemApp = true;
-    public static CharSequence mApplicationName;
-    public static Drawable mApplicationIcon;
-    public static List<String> mBatchList = new ArrayList<>();
-    public static String mApplicationID;
-    public static String mDirData;
-    public static String mDirNatLib;
-    public static String mDirSource;
-    public static String mPath;
-    public static String mSearchText;
-
     public static void makePackageFolder() {
         File file = new File(getPackageDir());
         if (file.exists() && file.isFile()) {
@@ -70,10 +59,10 @@ public class PackageData {
                 mAppType = true;
             }
             if (mAppType && packageInfo.packageName.contains(".")) {
-                if (mSearchText == null) {
+                if (Common.getSearchText() == null) {
                     mData.add(packageInfo.packageName);
-                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(mSearchText.toLowerCase())
-                        || packageInfo.packageName.toLowerCase().contains(mSearchText.toLowerCase())) {
+                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(Common.getSearchText().toLowerCase())
+                        || packageInfo.packageName.toLowerCase().contains(Common.getSearchText().toLowerCase())) {
                     mData.add(packageInfo.packageName);
                 }
             }
@@ -222,7 +211,7 @@ public class PackageData {
     }
 
     public static String getBatchList() {
-        return mBatchList.toString().substring(1, mBatchList.toString().length() - 1);
+        return Common.getBatchList().toString().substring(1, Common.getBatchList().toString().length() - 1);
     }
 
     public static String showBatchList() {

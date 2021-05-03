@@ -47,11 +47,11 @@ public class PackageDetails {
             ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
-        } else if (new File(PackageData.getSourceDir(PackageData.mApplicationID, activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(PackageData.mApplicationID, activity)).size() > 1) {
-            exportingBundleTask(linearLayout, textView, PackageData.getParentDir(PackageData.mApplicationID, activity), PackageData.mApplicationID,
-                    PackageData.mApplicationIcon, activity);
+        } else if (new File(PackageData.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
+            exportingBundleTask(linearLayout, textView, PackageData.getParentDir(Common.getApplicationID(), activity), Common.getApplicationID(),
+                    Common.getApplicationIcon(), activity);
         } else {
-            exportingTask(linearLayout, textView, PackageData.mDirSource, PackageData.mApplicationID, PackageData.mApplicationIcon, activity);
+            exportingTask(linearLayout, textView, Common.getSourceDir(), Common.getApplicationID(), Common.getApplicationIcon(), activity);
         }
     }
 
@@ -148,17 +148,17 @@ public class PackageDetails {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                showProgress(progressLayout, progressMessage, PackageData.isEnabled(PackageData.mApplicationID, activity) ?
-                        activity.getString(R.string.disabling, PackageData.mApplicationName) + "..." :
-                        activity.getString(R.string.enabling, PackageData.mApplicationName) + "...");
+                showProgress(progressLayout, progressMessage, PackageData.isEnabled(Common.getApplicationID(), activity) ?
+                        activity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
+                        activity.getString(R.string.enabling, Common.getApplicationName()) + "...");
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                if (PackageData.isEnabled(PackageData.mApplicationID, activity)) {
-                    Utils.runCommand("pm disable " + PackageData.mApplicationID);
+                if (PackageData.isEnabled(Common.getApplicationID(), activity)) {
+                    Utils.runCommand("pm disable " + Common.getApplicationID());
                 } else {
-                    Utils.runCommand("pm enable " + PackageData.mApplicationID);
+                    Utils.runCommand("pm enable " + Common.getApplicationID());
                 }
                 return null;
             }
@@ -166,28 +166,28 @@ public class PackageDetails {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 hideProgress(progressLayout, progressMessage);
-                statusMessage.setText(PackageData.isEnabled(PackageData.mApplicationID, activity) ? R.string.disable : R.string.enable);
-                openApp.setVisibility(PackageData.isEnabled(PackageData.mApplicationID, activity) ? View.VISIBLE : View.GONE);
-                PackageTasks.mReloadPage = true;
+                statusMessage.setText(PackageData.isEnabled(Common.getApplicationID(), activity) ? R.string.disable : R.string.enable);
+                openApp.setVisibility(PackageData.isEnabled(Common.getApplicationID(), activity) ? View.VISIBLE : View.GONE);
+                Common.reloadPage(true);
             }
         }.execute();
     }
 
     @SuppressLint("StringFormatInvalid")
     public static void uninstallApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (PackageData.mApplicationID.equals(BuildConfig.APPLICATION_ID)) {
+        if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.uninstall_nope));
-        } else if (!PackageData.mSystemApp) {
+        } else if (!Common.isSystemApp()) {
             Intent remove = new Intent(Intent.ACTION_DELETE);
-            remove.setData(Uri.parse("package:" + PackageData.mApplicationID));
+            remove.setData(Uri.parse("package:" + Common.getApplicationID()));
             activity.startActivity(remove);
-            PackageTasks.mReloadPage = true;
+            Common.reloadPage(true);
             activity.finish();
         } else {
             if (Utils.rootAccess()) {
                 new MaterialAlertDialogBuilder(activity)
-                        .setIcon(PackageData.mApplicationIcon)
-                        .setTitle(activity.getString(R.string.uninstall_title, PackageData.mApplicationName))
+                        .setIcon(Common.getApplicationIcon())
+                        .setTitle(activity.getString(R.string.uninstall_title, Common.getApplicationName()))
                         .setMessage(activity.getString(R.string.uninstall_warning))
                         .setCancelable(false)
                         .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
@@ -198,10 +198,10 @@ public class PackageDetails {
                         .show();
             } else {
                 new MaterialAlertDialogBuilder(activity)
-                        .setIcon(PackageData.mApplicationIcon)
+                        .setIcon(Common.getApplicationIcon())
                         .setTitle(activity.getString(R.string.uninstall_adb))
-                        .setMessage(activity.getString(R.string.uninstall_adb_summary, PackageData.mApplicationName) +
-                                "\n\nadb shell pm uninstall -k --user 0 " + PackageData.mApplicationID)
+                        .setMessage(activity.getString(R.string.uninstall_adb_summary, Common.getApplicationName()) +
+                                "\n\nadb shell pm uninstall -k --user 0 " + Common.getApplicationID())
                         .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) -> {
                             Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity);
                         })
@@ -218,12 +218,12 @@ public class PackageDetails {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, PackageData.mApplicationName));
+                showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                Utils.runCommand("pm uninstall --user 0 " + PackageData.mApplicationID);
+                Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
                 return null;
             }
             @Override
@@ -231,7 +231,7 @@ public class PackageDetails {
                 super.onPostExecute(aVoid);
                 hideProgress(linearLayout, textView);
                 activity.finish();
-                PackageTasks.mReloadPage = true;
+                Common.reloadPage(true);
             }
         }.execute();
     }

@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -49,8 +50,8 @@ import com.smartpack.packagemanager.activities.ExportedAppsActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -68,7 +69,8 @@ public class PackageTasksFragment extends Fragment {
     private AppCompatImageButton mSettings, mSort;
     private AsyncTask<Void, Void, List<String>> mLoader;
     private boolean mExit;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
+    private MaterialCardView mBatchOptions;
     private MaterialTextView mAppTitle;
     private LinearLayout mProgressLayout;
     private RecyclerView mRecyclerView;
@@ -83,7 +85,7 @@ public class PackageTasksFragment extends Fragment {
 
         mAppTitle = mRootView.findViewById(R.id.app_title);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
-        PackageTasks.mBatchOptions = mRootView.findViewById(R.id.batch_options);
+        mBatchOptions = Common.initializeBatchOptionsCard(mRootView, R.id.batch_options);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
         AppCompatImageButton mSearch = mRootView.findViewById(R.id.search_icon);
@@ -166,7 +168,7 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                PackageData.mSearchText = s.toString().toLowerCase();
+                Common.setSearchText(s.toString().toLowerCase());
                 loadUI(requireActivity());
             }
         });
@@ -175,14 +177,14 @@ public class PackageTasksFragment extends Fragment {
 
         mSort.setOnClickListener(v -> sortMenu(requireActivity()));
 
-        PackageTasks.mBatchOptions.setOnClickListener(v -> batchOptionsMenu(requireActivity()));
+        mBatchOptions.setOnClickListener(v -> batchOptionsMenu(requireActivity()));
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (PackageData.mSearchText != null) {
+                if (Common.getSearchText() != null) {
                     mSearchWord.setText(null);
-                    PackageData.mSearchText = null;
+                    Common.setSearchText(null);
                     return;
                 }
                 if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -265,11 +267,7 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 3:
-                    if (Utils.getBoolean("reverse_order", false, activity)) {
-                        Utils.saveBoolean("reverse_order", false, activity);
-                    } else {
-                        Utils.saveBoolean("reverse_order", true, activity);
-                    }
+                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
                     loadUI(activity);
                     break;
             }
@@ -293,9 +291,9 @@ public class PackageTasksFragment extends Fragment {
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                         Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
                     } else {
-                        PackageExplorer.mAPKList.clear();
+                        Common.getAppList().clear();
                         if (Utils.getBoolean("filePicker", true, requireActivity())) {
-                            PackageData.mPath = Environment.getExternalStorageDirectory().toString();
+                            Common.setPath(Environment.getExternalStorageDirectory().toString());
                             Intent filePicker = new Intent(activity, FilePickerActivity.class);
                             startActivity(filePicker);
                         } else {
@@ -340,7 +338,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private void batchOptionsMenu(Activity activity) {
-        PopupMenu popupMenu = new PopupMenu(activity, PackageTasks.mBatchOptions);
+        PopupMenu popupMenu = new PopupMenu(activity, mBatchOptions);
         Menu menu = popupMenu.getMenu();
         if (Utils.rootAccess()) {
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
@@ -400,7 +398,7 @@ public class PackageTasksFragment extends Fragment {
                     export.show();
                     break;
                 case 4:
-                    PackageData.mBatchList.clear();
+                    Common.getBatchList().clear();
                     loadUI(activity);
                     break;
             }
@@ -426,9 +424,9 @@ public class PackageTasksFragment extends Fragment {
                         protected void onPreExecute() {
                             super.onPreExecute();
                             mProgressLayout.setVisibility(View.VISIBLE);
-                            PackageTasks.mBatchOptions.setVisibility(View.GONE);
+                            mBatchOptions.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.GONE);
-                            PackageData.mBatchList.clear();
+                            Common.getBatchList().clear();
                             mRecyclerView.removeAllViews();
                         }
 
@@ -443,7 +441,7 @@ public class PackageTasksFragment extends Fragment {
                             super.onPostExecute(recyclerViewItems);
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mRecycleViewAdapter.notifyDataSetChanged();
-                            PackageTasks.mBatchOptions.setVisibility(View.GONE);
+                            mBatchOptions.setVisibility(View.GONE);
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mLoader = null;
@@ -491,12 +489,12 @@ public class PackageTasksFragment extends Fragment {
                                         .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                                         })
                                         .setPositiveButton(getString(R.string.install), (dialog, id) -> {
-                                            PackageExplorer.mAPKList.clear();
+                                            Common.getAppList().clear();
                                             if (new File(mPath).exists()) {
                                                 for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
                                                         .toString()).listFiles())) {
                                                     if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                                        PackageExplorer.mAPKList.add(mFile.getAbsolutePath());
+                                                        Common.getAppList().add(mFile.getAbsolutePath());
                                                     }
                                                 }
                                             }
@@ -507,12 +505,12 @@ public class PackageTasksFragment extends Fragment {
                     });
                     installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
                         if (mPath.endsWith(".apk")) {
-                            PackageExplorer.mAPKList.clear();
+                            Common.getAppList().clear();
                             if (new File(mPath).exists()) {
                                 for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
                                         .toString()).listFiles())) {
                                     if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                        PackageExplorer.mAPKList.add(mFile.getAbsolutePath());
+                                        Common.getAppList().add(mFile.getAbsolutePath());
                                     }
                                 }
                             }
@@ -535,8 +533,8 @@ public class PackageTasksFragment extends Fragment {
         if (Utils.getBoolean("welcomeMessage", true, getActivity())) {
             Utils.WelcomeDialog(getActivity());
         }
-        if (PackageTasks.mReloadPage) {
-            PackageTasks.mReloadPage = false;
+        if (Common.reloadPage()) {
+            Common.reloadPage(false);
             loadUI(requireActivity());
         }
     }
@@ -544,9 +542,9 @@ public class PackageTasksFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (PackageData.mSearchText != null) {
+        if (Common.getSearchText() != null) {
             mSearchWord.setText(null);
-            PackageData.mSearchText = null;
+            Common.setSearchText(null);
         }
     }
 

@@ -21,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewManifestAdapter;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
@@ -63,7 +64,7 @@ public class TextViewActivity extends AppCompatActivity {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
                     PackageExplorer.copyToStorage(mPath, PackageData.getPackageDir() + "/" +
-                            PackageData.mApplicationID, this);
+                            Common.getApplicationID(), this);
                 }).show());
 
         mBack.setOnClickListener(v -> finish());
@@ -72,8 +73,8 @@ public class TextViewActivity extends AppCompatActivity {
     private List<String> getData() {
         List<String> mData = new ArrayList<>();
         String text;
-        if (PackageData.mApplicationID != null && PackageExplorer.isBinaryXML(mPath)) {
-            text = PackageExplorer.readXMLFromAPK(PackageData.mDirSource, mPath.replace(getCacheDir().getPath() + "/apk/", ""));
+        if (Common.getApplicationID() != null && PackageExplorer.isBinaryXML(mPath)) {
+            text = PackageExplorer.readXMLFromAPK(Common.getSourceDir(), mPath.replace(getCacheDir().getPath() + "/apk/", ""));
         } else {
             text = Utils.read(mPath);
         }

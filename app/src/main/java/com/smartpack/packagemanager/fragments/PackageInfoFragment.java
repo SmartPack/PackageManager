@@ -27,6 +27,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -69,49 +70,49 @@ public class PackageInfoFragment extends Fragment {
         LinearLayout mOpenStore = mRootView.findViewById(R.id.playstore_app);
         LinearLayout mUninstallApp = mRootView.findViewById(R.id.remove_app);
         LinearLayout mOpenSettings = mRootView.findViewById(R.id.info_app);
-        mAppIcon.setImageDrawable(PackageData.mApplicationIcon);
-        mAppName.setText(PackageData.mApplicationName);
+        mAppIcon.setImageDrawable(Common.getApplicationIcon());
+        mAppName.setText(Common.getApplicationName());
 
         mProgressLayout.setBackgroundColor(Utils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
-        mLastUpdated.setText(getString(R.string.date_installed, PackageData.getInstalledDate(PackageData.mApplicationID, requireActivity())) +
-                "\n" + getString(R.string.date_updated, PackageData.getUpdatedDate(PackageData.mApplicationID, requireActivity())));
-        mCertificate.setText(PackageData.getCertificateDetails(PackageData.mDirSource));
-        mPackageID.setText(PackageData.mApplicationID);
-        mVersion.setText(getString(R.string.version, PackageData.getVersionName(PackageData.mDirSource, requireActivity())));
-        mDisableTitle.setText(PackageData.isEnabled(PackageData.mApplicationID, requireActivity()) ? R.string.disable : R.string.enable);
-        mDataDir.setText(PackageData.mDirData);
-        mNatLib.setText(PackageData.mDirNatLib);
-        if (new File(PackageData.getSourceDir(PackageData.mApplicationID, requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
-                .splitApks(PackageData.getParentDir(PackageData.mApplicationID, requireActivity())).size() > 1) {
+        mLastUpdated.setText(getString(R.string.date_installed, PackageData.getInstalledDate(Common.getApplicationID(), requireActivity())) +
+                "\n" + getString(R.string.date_updated, PackageData.getUpdatedDate(Common.getApplicationID(), requireActivity())));
+        mCertificate.setText(PackageData.getCertificateDetails(Common.getSourceDir()));
+        mPackageID.setText(Common.getApplicationID());
+        mVersion.setText(getString(R.string.version, PackageData.getVersionName(Common.getSourceDir(), requireActivity())));
+        mDisableTitle.setText(PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable);
+        mDataDir.setText(Common.getDataDir());
+        mNatLib.setText(Common.getNativeLibsDir());
+        if (new File(PackageData.getSourceDir(Common.getApplicationID(), requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
+                .splitApks(PackageData.getParentDir(Common.getApplicationID(), requireActivity())).size() > 1) {
             mAPKPathTitle.setText(getString(R.string.bundle_path));
-            mAPKSize.setText(getString(R.string.size_bundle, PackageData.getBundleSize(PackageData.getParentDir(PackageData.mApplicationID, requireActivity()))));
+            mAPKSize.setText(getString(R.string.size_bundle, PackageData.getBundleSize(PackageData.getParentDir(Common.getApplicationID(), requireActivity()))));
         } else {
             mAPKPathTitle.setText(getString(R.string.apk_path));
-            mAPKSize.setText(getString(R.string.size_apk, PackageData.getAPKSize(PackageData.mDirSource)));
+            mAPKSize.setText(getString(R.string.size_apk, PackageData.getAPKSize(Common.getSourceDir())));
         }
-        mAPKPath.setText(PackageData.getParentDir(PackageData.mApplicationID, requireActivity()));
-        mOpenApp.setVisibility(PackageData.isEnabled(PackageData.mApplicationID, requireActivity()) ? View.VISIBLE : View.GONE);
+        mAPKPath.setText(PackageData.getParentDir(Common.getApplicationID(), requireActivity()));
+        mOpenApp.setVisibility(PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {
-            if (PackageData.mApplicationID.equals(BuildConfig.APPLICATION_ID)) {
+            if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
                 Utils.snackbar(mProgressLayout, getString(R.string.open_message));
             } else {
-                Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(PackageData.mApplicationID);
+                Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
                 if (launchIntent != null) {
                     startActivity(launchIntent);
                     requireActivity().finish();
                 } else {
-                    Utils.snackbar(mProgressLayout, getString(R.string.open_failed, PackageData.mApplicationName));
+                    Utils.snackbar(mProgressLayout, getString(R.string.open_failed, Common.getApplicationName()));
                 }
             }
         });
         mClear.setOnClickListener(v -> new MaterialAlertDialogBuilder(requireActivity())
-                .setIcon(PackageData.mApplicationIcon)
-                .setTitle(PackageData.mApplicationName)
-                .setMessage(getString(R.string.reset_message, PackageData.mApplicationName))
+                .setIcon(Common.getApplicationIcon())
+                .setTitle(Common.getApplicationName())
+                .setMessage(getString(R.string.reset_message, Common.getApplicationName()))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                 })
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
-                    PackageData.clearAppSettings(PackageData.mApplicationID);
+                    PackageData.clearAppSettings(Common.getApplicationID());
                 }).show());
         mExplore.setOnClickListener(v -> {
             if (Utils.getBoolean("firstExploreAttempt", true, requireActivity())) {
@@ -122,19 +123,19 @@ public class PackageInfoFragment extends Fragment {
                         .setCancelable(false)
                         .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
                             Utils.saveBoolean("firstExploreAttempt", false, requireActivity());
-                            PackageExplorer.exploreAPK(mProgressLayout, PackageData.mDirSource, requireActivity());
+                            PackageExplorer.exploreAPK(mProgressLayout, Common.getSourceDir(), requireActivity());
                         }).show();
             } else {
-                PackageExplorer.exploreAPK(mProgressLayout, PackageData.mDirSource, requireActivity());
+                PackageExplorer.exploreAPK(mProgressLayout, Common.getSourceDir(), requireActivity());
             }
 
         });
         mExport.setOnClickListener(v -> PackageDetails.exportApp(mProgressLayout, mProgressMessage, requireActivity()));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(requireActivity())
-                .setIcon(PackageData.mApplicationIcon)
-                .setTitle(PackageData.mApplicationName)
-                .setMessage(PackageData.mApplicationName + " " + getString(R.string.disable_message,
-                        PackageData.isEnabled(PackageData.mApplicationID, requireActivity()) ?
+                .setIcon(Common.getApplicationIcon())
+                .setTitle(Common.getApplicationName())
+                .setMessage(Common.getApplicationName() + " " + getString(R.string.disable_message,
+                        PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ?
                                 getString(R.string.disabled) : getString(R.string.enabled)))
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
@@ -144,13 +145,13 @@ public class PackageInfoFragment extends Fragment {
                 })
                 .show());
         mOpenStore.setOnClickListener(v -> {
-            Utils.launchUrl("https://play.google.com/store/apps/details?id=" + PackageData.mApplicationID, requireActivity());
+            Utils.launchUrl("https://play.google.com/store/apps/details?id=" + Common.getApplicationID(), requireActivity());
         });
         mUninstallApp.setOnClickListener(v -> PackageDetails.uninstallApp(mProgressLayout, mProgressMessage, requireActivity()));
         mOpenSettings.setOnClickListener(v -> {
             Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Uri uri = Uri.fromParts("package", PackageData.mApplicationID, null);
+            Uri uri = Uri.fromParts("package", Common.getApplicationID(), null);
             settings.setData(uri);
             startActivity(settings);
             requireActivity().finish();

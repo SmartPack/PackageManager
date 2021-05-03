@@ -20,7 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppOps;
-import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.RecycleViewAppOpsItem;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -64,7 +64,7 @@ public class RecycleViewAppOpsAdapter extends RecyclerView.Adapter<RecycleViewAp
                             holder.mCheckBox.setChecked(data.get(position).isEnabled());
                         }).show();
             } else {
-                Utils.runCommand(AppOps.getCommandPrefix() + " appops set " + PackageData.mApplicationID + " " +
+                Utils.runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
                         data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
             }
         });
@@ -76,8 +76,8 @@ public class RecycleViewAppOpsAdapter extends RecyclerView.Adapter<RecycleViewAp
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private MaterialCheckBox mCheckBox;
-        private MaterialTextView mTitle, mDescription;
+        private final MaterialCheckBox mCheckBox;
+        private final MaterialTextView mDescription, mTitle;
 
         public ViewHolder(View view) {
             super(view);

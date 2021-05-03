@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewActivitiesAdapter;
-import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
 
 /*
@@ -37,7 +37,7 @@ public class ActivitiesFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecycleViewActivitiesAdapter mRecycleViewAdapter = new RecycleViewActivitiesAdapter(PackageDetails.getActivities(PackageData.mApplicationID, requireActivity()));
+        RecycleViewActivitiesAdapter mRecycleViewAdapter = new RecycleViewActivitiesAdapter(PackageDetails.getActivities(Common.getApplicationID(), requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;

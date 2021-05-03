@@ -24,7 +24,6 @@ import android.widget.LinearLayout;
 
 import androidx.core.app.ActivityCompat;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
@@ -35,17 +34,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
  */
 public class PackageExplorer {
-
-    public static List<String> mAPKList = new ArrayList<>();
-    public static MaterialCardView mSelect;
 
     public static boolean isTextFile(String path) {
         return path.endsWith(".txt") || path.endsWith(".xml") || path.endsWith(".json") || path.endsWith(".properties")
@@ -142,7 +136,7 @@ public class PackageExplorer {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 new MaterialAlertDialogBuilder(activity)
-                        .setMessage(PackageData.mApplicationName + " icon " +
+                        .setMessage(Common.getApplicationName() + " icon " +
                                 activity.getString(R.string.export_file_message, Objects.requireNonNull(
                                         new File(dest).getParentFile()).toString()))
                         .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
@@ -195,7 +189,7 @@ public class PackageExplorer {
                     Utils.delete(activity.getCacheDir().getPath() + "/apk");
                 }
                 Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
-                PackageData.mPath = activity.getCacheDir().getPath() + "/apk";
+                Common.setPath(activity.getCacheDir().getPath() + "/apk");
             }
 
             @Override

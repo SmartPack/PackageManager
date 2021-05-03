@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -35,7 +35,7 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
 
     private static ClickListener clickListener;
 
-    private List<String> data;
+    private final List<String> data;
 
     public RecycleViewFilePickerAdapter(List<String> data) {
         this.data = data;
@@ -67,14 +67,14 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
                 holder.mDescription.setText(PackageData.getAPKId(data.get(position), holder.mIcon.getContext()));
                 holder.mDescription.setVisibility(View.VISIBLE);
             }
-            holder.mCheckBox.setChecked(PackageExplorer.mAPKList.contains(this.data.get(position)));
+            holder.mCheckBox.setChecked(Common.getAppList().contains(this.data.get(position)));
             holder.mCheckBox.setOnClickListener(v -> {
-                if (PackageExplorer.mAPKList.contains(this.data.get(position))) {
-                    PackageExplorer.mAPKList.remove(this.data.get(position));
+                if (Common.getAppList().contains(this.data.get(position))) {
+                    Common.getAppList().remove(this.data.get(position));
                 } else {
-                    PackageExplorer.mAPKList.add(this.data.get(position));
+                    Common.getAppList().add(this.data.get(position));
                 }
-                PackageExplorer.mSelect.setVisibility(PackageExplorer.mAPKList.isEmpty() ? View.GONE : View.VISIBLE);
+                Common.getSelectCard().setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             });
             holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
             holder.mSize.setVisibility(View.VISIBLE);
@@ -95,9 +95,9 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private AppCompatImageButton mIcon;
-        private MaterialCheckBox mCheckBox;
-        private MaterialTextView mTitle, mDescription, mSize;
+        private final AppCompatImageButton mIcon;
+        private final MaterialCheckBox mCheckBox;
+        private final MaterialTextView mTitle, mDescription, mSize;
 
         public ViewHolder(View view) {
             super(view);

@@ -61,7 +61,7 @@ public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleV
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private MaterialTextView mName;
+        private final MaterialTextView mName;
 
         public ViewHolder(View view) {
             super(view);

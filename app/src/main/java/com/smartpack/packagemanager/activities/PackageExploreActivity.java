@@ -24,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExploreAdapter;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
@@ -38,7 +39,7 @@ import java.util.Objects;
  */
 public class PackageExploreActivity extends AppCompatActivity {
 
-    private List<String> mData = new ArrayList<>();
+    private final List<String> mData = new ArrayList<>();
     private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
     private RecycleViewExploreAdapter mRecycleViewAdapter;
@@ -54,7 +55,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         MaterialTextView mError = findViewById(R.id.error_status);
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        mTitle.setText(PackageData.mApplicationName);
+        mTitle.setText(Common.getApplicationName());
 
         mBack.setOnClickListener(v -> {
             Utils.delete(getCacheDir().getPath() + "/apk");
@@ -67,13 +68,13 @@ public class PackageExploreActivity extends AppCompatActivity {
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         } catch (NullPointerException ignored) {
             mRecyclerView.setVisibility(View.GONE);
-            mError.setText(getString(R.string.explore_error_status, PackageData.mApplicationName));
+            mError.setText(getString(R.string.explore_error_status, Common.getApplicationName()));
             mError.setVisibility(View.VISIBLE);
         }
 
         RecycleViewExploreAdapter.setOnItemClickListener((position, v) -> {
             if (new File(mData.get(position)).isDirectory()) {
-                PackageData.mPath = mData.get(position);
+                Common.setPath(mData.get(position));
                 reload();
             } else if (PackageExplorer.isTextFile(mData.get(position))) {
                 Intent textView = new Intent(this, TextViewActivity.class);
@@ -90,7 +91,7 @@ public class PackageExploreActivity extends AppCompatActivity {
                         })
                         .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
                                 .copyToStorage(mData.get(position), PackageData.getPackageDir() + "/" +
-                                        PackageData.mApplicationID,this)).show();
+                                        Common.getApplicationID(),this)).show();
             }
         });
     }
@@ -117,10 +118,10 @@ public class PackageExploreActivity extends AppCompatActivity {
     }
 
     private File[] getFilesList() {
-        if (!PackageData.mPath.endsWith(File.separator)) {
-            PackageData.mPath = PackageData.mPath + File.separator;
+        if (!Common.getPath().endsWith(File.separator)) {
+            Common.setPath(Common.getPath() + File.separator);
         }
-        return new File(PackageData.mPath).listFiles();
+        return new File(Common.getPath()).listFiles();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -135,8 +136,8 @@ public class PackageExploreActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                mTitle.setText(PackageData.mPath.equals(getCacheDir().toString() + "/apk/") ? PackageData.mApplicationName
-                        : new File(PackageData.mPath).getName());
+                mTitle.setText(Common.getPath().equals(getCacheDir().toString() + "/apk/") ? Common.getApplicationName()
+                        : new File(Common.getPath()).getName());
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
             }
         }.execute();
@@ -144,11 +145,11 @@ public class PackageExploreActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (PackageData.mPath.equals(getCacheDir().toString() + "/apk/")) {
+        if (Common.getPath().equals(getCacheDir().toString() + "/apk/")) {
             Utils.delete(getCacheDir().getPath() + "/apk");
             finish();
         } else {
-            PackageData.mPath = Objects.requireNonNull(new File(PackageData.mPath).getParentFile()).getPath();
+            Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());
             reload();
         }
     }

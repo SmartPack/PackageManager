@@ -16,8 +16,8 @@ import java.io.Serializable;
  */
 
 public class RecycleViewAppOpsItem implements Serializable {
-    private String mTitle, mDescription;
-    private boolean mEnabled;
+    private final String mTitle, mDescription;
+    private final boolean mEnabled;
 
     public RecycleViewAppOpsItem(String title, String description, boolean enabled) {
         this.mTitle = title;

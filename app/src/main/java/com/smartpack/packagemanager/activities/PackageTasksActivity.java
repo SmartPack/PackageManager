@@ -18,7 +18,7 @@ import androidx.core.widget.NestedScrollView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.Common;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on April 28, 2020
@@ -58,10 +58,10 @@ public class PackageTasksActivity extends AppCompatActivity {
                     while (!isInterrupted()) {
                         Thread.sleep(500);
                         runOnUiThread(() -> {
-                            if (PackageTasks.mOutput != null) {
-                                mOutput.setText(PackageTasks.mOutput.toString());
+                            if (Common.getOutput() != null) {
+                                mOutput.setText(Common.getOutput().toString());
                                 mOutput.setVisibility(View.VISIBLE);
-                                if (!PackageTasks.mRunning) {
+                                if (!Common.isRunning()) {
                                     mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
                                     mCancelButton.setVisibility(View.VISIBLE);
                                 } else {
@@ -77,7 +77,7 @@ public class PackageTasksActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (PackageTasks.mRunning) {
+        if (Common.isRunning()) {
             return;
         }
         super.onBackPressed();

@@ -21,11 +21,12 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
-import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -41,9 +42,10 @@ import java.util.Objects;
 public class FilePickerActivity extends AppCompatActivity {
 
     private AsyncTask<Void, Void, List<String>> mLoader;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
-    private List<String> mData = new ArrayList<>();
+    private final List<String> mData = new ArrayList<>();
+    private MaterialCardView mSelect;
     private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
     private RecycleViewFilePickerAdapter mRecycleViewAdapter;
@@ -56,18 +58,18 @@ public class FilePickerActivity extends AppCompatActivity {
 
         AppCompatImageButton mBack = findViewById(R.id.back);
         mTitle = findViewById(R.id.title);
-        PackageExplorer.mSelect = findViewById(R.id.select);
+        mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
         mProgressLayout = findViewById(R.id.progress_layout);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
         mRecycleViewAdapter = new RecycleViewFilePickerAdapter(getData());
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
-        mTitle.setText(PackageData.mPath.equals("/storage/emulated/0/") ? getString(R.string.sdcard) : new File(PackageData.mPath).getName());
+        mTitle.setText(Common.getPath().equals("/storage/emulated/0/") ? getString(R.string.sdcard) : new File(Common.getPath()).getName());
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             if (new File(mData.get(position)).isDirectory()) {
-                PackageData.mPath = mData.get(position);
+                Common.setPath(mData.get(position));
                 reload();
             } else if (mData.get(position).endsWith(".apks") || mData.get(position).endsWith(".apkm") || mData.get(position).endsWith(".xapk")) {
                 new MaterialAlertDialogBuilder(this)
@@ -79,19 +81,19 @@ public class FilePickerActivity extends AppCompatActivity {
                             finish();
                         }).show();
             } else if (mData.get(position).endsWith(".apk")) {
-                if (PackageExplorer.mAPKList.contains(mData.get(position))) {
-                    PackageExplorer.mAPKList.remove(mData.get(position));
+                if (Common.getAppList().contains(mData.get(position))) {
+                    Common.getAppList().remove(mData.get(position));
                 } else {
-                    PackageExplorer.mAPKList.add(mData.get(position));
+                    Common.getAppList().add(mData.get(position));
                 }
                 mRecycleViewAdapter.notifyItemChanged(position);
-                PackageExplorer.mSelect.setVisibility(PackageExplorer.mAPKList.isEmpty() ? View.GONE : View.VISIBLE);
+                mSelect.setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             } else {
                 Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk"));
             }
         });
 
-        PackageExplorer.mSelect.setOnClickListener(v -> {
+        mSelect.setOnClickListener(v -> {
             SplitAPKInstaller.installSplitAPKs(this);
             finish();
         });
@@ -127,10 +129,10 @@ public class FilePickerActivity extends AppCompatActivity {
     }
 
     private File[] getFilesList() {
-        if (!PackageData.mPath.endsWith(File.separator)) {
-            PackageData.mPath = PackageData.mPath + File.separator;
+        if (!Common.getPath().endsWith(File.separator)) {
+            Common.setPath(Common.getPath() + File.separator);
         }
-        return new File(PackageData.mPath).listFiles();
+        return new File(Common.getPath()).listFiles();
     }
 
     private void reload() {
@@ -158,12 +160,12 @@ public class FilePickerActivity extends AppCompatActivity {
                             super.onPostExecute(recyclerViewItems);
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mRecycleViewAdapter.notifyDataSetChanged();
-                            mTitle.setText(PackageData.mPath.equals("/storage/emulated/0/") ? getString(R.string.sdcard)
-                                    : new File(PackageData.mPath).getName());
-                            if (PackageExplorer.mAPKList.isEmpty()) {
-                                PackageExplorer.mSelect.setVisibility(View.GONE);
+                            mTitle.setText(Common.getPath().equals("/storage/emulated/0/") ? getString(R.string.sdcard)
+                                    : new File(Common.getPath()).getName());
+                            if (Common.getAppList().isEmpty()) {
+                                mSelect.setVisibility(View.GONE);
                             } else {
-                                PackageExplorer.mSelect.setVisibility(View.VISIBLE);
+                                mSelect.setVisibility(View.VISIBLE);
                             }
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mLoader = null;
@@ -177,7 +179,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (PackageData.mPath.equals(getCacheDir().getPath() + "/splits/")) {
+        if (Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
             new MaterialAlertDialogBuilder(this)
                     .setMessage(getString(R.string.installation_cancel_message))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
@@ -185,11 +187,11 @@ public class FilePickerActivity extends AppCompatActivity {
                     .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                         finish();
                     }).show();
-        } else if (PackageData.mPath.equals("/storage/emulated/0/")) {
+        } else if (Common.getPath().equals("/storage/emulated/0/")) {
             super.onBackPressed();
         } else {
-            PackageData.mPath = Objects.requireNonNull(new File(PackageData.mPath).getParentFile()).getPath();
-            PackageExplorer.mAPKList.clear();
+            Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());
+            Common.getAppList().clear();
             reload();
         }
     }
