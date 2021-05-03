@@ -2,9 +2,9 @@
 
     <string name="about">"Acerca de"</string>
     <string name="about_summary">"Simple pero poderosa aplicación para administrar tus aplicaciones"</string>
-    <string name="apk_path">"Ruta APK"</string>
-    <string name="app_info">"Información App"</string>
-    <string name="batch_list_clear">"Vaciar lista"</string>
+    <string name="apk_path">"Ruta del APK"</string>
+    <string name="app_info">"Información de la App"</string>
+    <string name="batch_list_clear">"Vaciar la lista"</string>
     <string name="batch_list_disable">"¿Estás seguro de deshabilitar (si habilitado) o habilitar (si deshabilitado) la(s) siguiente(s) aplicación(es)?"</string>
     <string name="batch_list_remove">"¿Estás seguro de desinstalar la siguiente(es) aplicación(es)?"</string>
     <string name="batch_list_reset">"¿Estás seguro de reiniciar la(s) siguiente(es) aplicación(es)?"</string>
@@ -48,8 +48,8 @@
     <string name="install">"Instalar"</string>
     <string name="install_bundle">"Instalar aplicaciones separadas"</string>
     <string name="installing_bundle">"Instalando paquete de aplicaciones"</string>
-    <string name="language">"Lenguaje"</string>
-    <string name="language_default">"por defecto"</string>
+    <string name="language">"Idioma"</string>
+    <string name="language_default">"Por defecto"</string>
     <string name="more_apps">"Más del desarrollador"</string>
     <string name="name">"Nombre"</string>
     <string name="native_lib">"Librería nativa"</string>
@@ -57,7 +57,7 @@
     <string name="open">"Abrir"</string>
     <string name="open_message">"Está aplicación se está ejecutando"</string>
     <string name="open_failed">"%s no es válida para ejecutar en espacio de usuario"</string>
-    <string name="package_id">"ID de paquete"</string>
+    <string name="package_id">"ID del paquete"</string>
     <string name="package_removed">"¡El paquete seleccionado ha sido eliminado! Abortando…"</string>
     <string name="permissions">"Permisos"</string>
     <string name="permission_denied_write_storage">"Permiso de escritura en almacenamiento denegado"</string>
@@ -68,7 +68,7 @@
     <string name="reset_message">"Reiniciar '%s'?"</string>
     <string name="reset_summary">"Reiniciando %s"</string>
     <string name="result">"Resultado: %s"</string>
-    <string name="search">"Buscando"</string>
+    <string name="search">"Buscar…"</string>
     <string name="share">"Compartir"</string>
     <string name="shared_by">"%s/compartido por Package Manager"</string>
     <string name="share_message">"Package Manager %s se puede descargar de Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -94,7 +94,7 @@
     <string name="uninstall_nope">"¡Lo siento!, no se puede hacer desde aquí"</string>
     <string name="uninstall_summary">"Eliminando %s"</string>
     <string name="uninstall_title">"¿Seguro de desinstalar %s?"</string>
-    <string name="uninstall_warning">"Aviso: ¡Eliminar una aplicación del sistema puede ser peligroso!\n\n***<b>ASUME EL RIESGO, ES TU RESPONSABILIDAD</b> ***"</string>
+    <string name="uninstall_warning">"Aviso: ¡Eliminar una aplicación del sistema puede ser peligroso!\n\n***<b>ASUME EL RIESGO, ES TU RESPONSABILIDAD</b>***"</string>
     <string name="version">"Versión: %s"</string>
     <string name="welcome_message">"Bienvenido a Package Manager, una aplicación simple pero poderosa para administrar sus aplicaciones."</string>
     <string name="wrong_extension">"Por favor, seleccione un fichero con extensión %s"</string>
@@ -106,7 +106,7 @@
     <string name="more_apps_summary">"Ver más aplicaciones del desarrollador en Google Play"</string>
     <string name="open_failed_export_message">"No se puede abrir %s!, ¿Quieres exportarla al almacenamiento de tu dispositivo?"</string>
     <string name="rate_us">"Califica la aplicación"</string>
-    <string name="rate_us_Summary">"Califica o/y revisa Package Manager en Google Play"</string>
+    <string name="rate_us_Summary">"Califica y/o mira Package Manager en Google Play"</string>
     <string name="report_issue_summary">"Plantear un problema en GitHub"</string>
     <string name="settings">"Configuración"</string>
     <string name="share_app">"Compartir aplicación"</string>
