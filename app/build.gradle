@@ -60,7 +60,7 @@ repositories {
 }
 
 dependencies {
-    playImplementation 'com.android.billingclient:billing:3.0.3'
+    playImplementation 'com.android.billingclient:billing:4.0.0'
     implementation "com.github.topjohnwu.libsu:core:3.1.2"
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'net.dongliu:apk-parser:2.6.10'
