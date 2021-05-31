@@ -117,7 +117,7 @@ public class PackageExplorer {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                PackageData.makePackageFolder();
+                PackageData.makePackageFolder(activity);
             }
             @Override
             protected Void doInBackground(Void... voids) {

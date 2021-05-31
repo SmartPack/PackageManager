@@ -33,6 +33,16 @@
             android:textColor="?attr/colorAccent"
             android:textIsSelectable="true"
             android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/sort"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:tint="@color/colorAccent"
+            android:layout_gravity="center|end"
+            android:gravity="center_vertical"
+            android:src="@drawable/ic_sort" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -65,11 +65,14 @@
     <string name="exporting_bundle">Exporting %s app bundle</string>
     <string name="everything_done">Everything Done!</string>
     <string name="failed">Failed</string>
+    <string name="file_permission_request_message">In order to get this feature working on newer Android versions (Android R or newer), it is necessary to grant \"All files access\" permission to Package Manager. Kindly grant the permission manually from the new screen opened after clicking the \"Grant\" button.</string>
     <string name="file_picker">File Picker</string>
     <string name="file_picker_external">External</string>
     <string name="file_picker_inbuilt">In-built</string>
     <string name="file_picker_message">Please Note: This feature is too experimental!</string>
     <string name="got_it">Got it</string>
+    <string name="grant">Grant</string>
+    <string name="important">Important</string>
     <string name="install">Install</string>
     <string name="install_bundle">Install Split APKs</string>
     <string name="install_question">Install \'%s\'?</string>

@@ -23,8 +23,7 @@ public class Downloads {
 
     public static List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
-        mData.clear();
-        for (File mFile : getDownloadList()) {
+        for (File mFile : getDownloadList(context)) {
             if (Utils.getString("downloadTypes", "apks", context).equals("bundles")) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
                     mData.add(mFile.getAbsolutePath());
@@ -38,11 +37,11 @@ public class Downloads {
         return mData;
     }
 
-    private static File[] getDownloadList() {
-        if (!Utils.exist(PackageData.getPackageDir())) {
-            Utils.mkdir(PackageData.getPackageDir());
+    private static File[] getDownloadList(Context context) {
+        if (!PackageData.getPackageDir(context).exists()) {
+            PackageData.getPackageDir(context).mkdirs();
         }
-        return new File(PackageData.getPackageDir()).listFiles();
+        return PackageData.getPackageDir(context).listFiles();
     }
 
     public static String getAppName(String packageName, Context context) {

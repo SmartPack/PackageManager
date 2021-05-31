@@ -59,10 +59,10 @@ public class ImageViewActivity extends AppCompatActivity {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
                     if (path != null) {
-                        PackageExplorer.copyToStorage(path, PackageData.getPackageDir() + "/" +
+                        PackageExplorer.copyToStorage(path, PackageData.getPackageDir(this) + "/" +
                                 Common.getApplicationID(), this);
                     } else {
-                        PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), PackageData.getPackageDir()
+                        PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), PackageData.getPackageDir(this)
                                 + "/" + Common.getApplicationName().toString().replace(" ","_") + "_icon.png", this);
                     }
                 }).show());

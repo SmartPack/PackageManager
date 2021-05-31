@@ -9,11 +9,16 @@
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +32,12 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +49,6 @@ public class FilePickerActivity extends AppCompatActivity {
     private AsyncTask<Void, Void, List<String>> mLoader;
     private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
-    private final List<String> mData = new ArrayList<>();
     private MaterialCardView mSelect;
     private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
@@ -57,40 +61,64 @@ public class FilePickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_filepicker);
 
         AppCompatImageButton mBack = findViewById(R.id.back);
+        AppCompatImageButton mSortButton = findViewById(R.id.sort);
         mTitle = findViewById(R.id.title);
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
         mProgressLayout = findViewById(R.id.progress_layout);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
-        mRecycleViewAdapter = new RecycleViewFilePickerAdapter(getData());
+        mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(this, true));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
-        mTitle.setText(Common.getPath().equals("/storage/emulated/0/") ? getString(R.string.sdcard) : new File(Common.getPath()).getName());
+        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied()) {
+            LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
+            MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
+            mPermissionLayout.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mPermissionGrant.setOnClickListener(v -> Utils.requestPermission(this));
+        }
+
+        mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard) : new File(Common.getPath()).getName());
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
-            if (new File(mData.get(position)).isDirectory()) {
-                Common.setPath(mData.get(position));
-                reload();
-            } else if (mData.get(position).endsWith(".apks") || mData.get(position).endsWith(".apkm") || mData.get(position).endsWith(".xapk")) {
+            String mPath = FilePicker.getData(this, true).get(position);
+            if (new File(mPath).isDirectory()) {
+                Common.setPath(mPath);
+                reload(this);
+            } else if (FilePicker.getExtFromPath(mPath).equals("apks") || FilePicker.getExtFromPath(mPath).equals("apkm")
+                    || FilePicker.getExtFromPath(mPath).equals("xapk")) {
                 new MaterialAlertDialogBuilder(this)
-                        .setMessage(getString(R.string.bundle_install_apks, new File(mData.get(position)).getName()))
+                        .setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                            SplitAPKInstaller.handleAppBundle(mProgressLayout, mData.get(position), this);
+                            SplitAPKInstaller.handleAppBundle(mProgressLayout, mPath, this);
                             finish();
                         }).show();
-            } else if (mData.get(position).endsWith(".apk")) {
-                if (Common.getAppList().contains(mData.get(position))) {
-                    Common.getAppList().remove(mData.get(position));
+            } else if (FilePicker.getExtFromPath(mPath).equals("apk")) {
+                if (Common.getAppList().contains(mPath)) {
+                    Common.getAppList().remove(mPath);
                 } else {
-                    Common.getAppList().add(mData.get(position));
+                    Common.getAppList().add(mPath);
                 }
                 mRecycleViewAdapter.notifyItemChanged(position);
                 mSelect.setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             } else {
                 Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk"));
             }
+        });
+
+        mSortButton.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(this, mSortButton);
+            Menu menu = popupMenu.getMenu();
+            menu.add(Menu.NONE, 0, Menu.NONE, "A-Z").setCheckable(true)
+                    .setChecked(Utils.getBoolean("az_order", true, this));
+            popupMenu.setOnMenuItemClickListener(item -> {
+                Utils.saveBoolean("az_order", !Utils.getBoolean("az_order", true, this), this);
+                reload(this);
+                return false;
+            });
+            popupMenu.show();
         });
 
         mSelect.setOnClickListener(v -> {
@@ -103,39 +131,7 @@ public class FilePickerActivity extends AppCompatActivity {
         });
     }
 
-    private List<String> getData() {
-        try {
-            mData.clear();
-            // Add directories
-            for (File mFile : getFilesList()) {
-                if (mFile.isDirectory()) {
-                    mData.add(mFile.getAbsolutePath());
-                }
-            }
-            // Add files
-            for (File mFile : getFilesList()) {
-                if (mFile.isFile() && isSupportedFile(mFile.getAbsolutePath())) {
-                    mData.add(mFile.getAbsolutePath());
-                }
-            }
-        } catch (NullPointerException ignored) {
-            finish();
-        }
-        return mData;
-    }
-
-    private boolean isSupportedFile(String path) {
-        return path.endsWith(".apk") || path.endsWith(".apks") || path.endsWith(".apkm") || path.endsWith(".xapk");
-    }
-
-    private File[] getFilesList() {
-        if (!Common.getPath().endsWith(File.separator)) {
-            Common.setPath(Common.getPath() + File.separator);
-        }
-        return new File(Common.getPath()).listFiles();
-    }
-
-    private void reload() {
+    private void reload(Activity activity) {
         if (mLoader == null) {
             mHandler.postDelayed(new Runnable() {
                 @SuppressLint("StaticFieldLeak")
@@ -145,13 +141,13 @@ public class FilePickerActivity extends AppCompatActivity {
                         @Override
                         protected void onPreExecute() {
                             super.onPreExecute();
-                            mData.clear();
+                            FilePicker.getData(activity, true).clear();
                             mRecyclerView.setVisibility(View.GONE);
                         }
 
                         @Override
                         protected List<String> doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewFilePickerAdapter(getData());
+                            mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(activity, true));
                             return null;
                         }
 
@@ -160,7 +156,7 @@ public class FilePickerActivity extends AppCompatActivity {
                             super.onPostExecute(recyclerViewItems);
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mRecycleViewAdapter.notifyDataSetChanged();
-                            mTitle.setText(Common.getPath().equals("/storage/emulated/0/") ? getString(R.string.sdcard)
+                            mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard)
                                     : new File(Common.getPath()).getName());
                             if (Common.getAppList().isEmpty()) {
                                 mSelect.setVisibility(View.GONE);
@@ -187,12 +183,12 @@ public class FilePickerActivity extends AppCompatActivity {
                     .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                         finish();
                     }).show();
-        } else if (Common.getPath().equals("/storage/emulated/0/")) {
+        } else if (Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator)) {
             super.onBackPressed();
         } else {
             Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());
             Common.getAppList().clear();
-            reload();
+            reload(this);
         }
     }
 

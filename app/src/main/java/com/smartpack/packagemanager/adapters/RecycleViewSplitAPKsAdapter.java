@@ -61,14 +61,14 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
         } else {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
         }
-        holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(holder.mExport.getContext())
-                .setMessage(holder.mExport.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
-                .setNegativeButton(holder.mExport.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
+        holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
+                .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
+                .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
                 })
-                .setPositiveButton(holder.mExport.getContext().getString(R.string.export), (dialogInterface, i) -> {
+                .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) -> {
                     PackageExplorer.copyToStorage(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
-                            .getContext()) + "/" + data.get(position), PackageData.getPackageDir() + "/" +
-                            Common.getApplicationID(), (Activity) holder.mExport.getContext());
+                            .getContext()) + "/" + data.get(position), PackageData.getPackageDir(v.getContext()) + "/" +
+                            Common.getApplicationID(), (Activity) v.getContext());
                 }).show());
     }
 

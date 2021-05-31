@@ -138,10 +138,10 @@ public class PackageTasks {
                             for (final String splitApps : SplitAPKInstaller.splitApks(PackageData.getParentDir(packageID, activity))) {
                                 mFiles.add(new File(PackageData.getParentDir(packageID, activity) + "/" + splitApps));
                             }
-                            Utils.zip(PackageData.getPackageDir() + "/" + packageID + ".apkm", mFiles);
+                            Utils.zip(PackageData.getPackageDir(activity) + "/" + packageID + ".apkm", mFiles);
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
-                            Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir() + "/" + packageID + ".apk");
+                            Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir(activity) + "/" + packageID + ".apk");
                         }
                         Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);

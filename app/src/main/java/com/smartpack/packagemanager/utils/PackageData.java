@@ -13,6 +13,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Environment;
 
 import net.dongliu.apk.parser.ApkFile;
@@ -33,12 +34,11 @@ import java.util.Objects;
 
 public class PackageData {
 
-    public static void makePackageFolder() {
-        File file = new File(getPackageDir());
-        if (file.exists() && file.isFile()) {
-            file.delete();
+    public static void makePackageFolder(Context context) {
+        if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
+            getPackageDir(context).delete();
         }
-        file.mkdirs();
+        getPackageDir(context).mkdirs();
     }
 
     public static List<String> getData(Context context) {
@@ -179,8 +179,12 @@ public class PackageData {
         }
     }
 
-    public static String getPackageDir() {
-        return Environment.getExternalStorageDirectory().toString() + "/Package_Manager";
+    public static File getPackageDir(Context context) {
+        if (Build.VERSION.SDK_INT >= 30) {
+            return context.getExternalFilesDir("");
+        } else {
+            return new File(Environment.getExternalStorageDirectory(), "Package_Manager");
+        }
     }
 
     public static void clearAppSettings(String packageID) {

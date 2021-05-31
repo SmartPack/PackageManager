@@ -9,10 +9,13 @@
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
+import android.widget.PopupMenu;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +28,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExploreAdapter;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
@@ -39,7 +43,6 @@ import java.util.Objects;
  */
 public class PackageExploreActivity extends AppCompatActivity {
 
-    private final List<String> mData = new ArrayList<>();
     private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
     private RecycleViewExploreAdapter mRecycleViewAdapter;
@@ -51,6 +54,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_packageexplorer);
 
         AppCompatImageButton mBack = findViewById(R.id.back);
+        AppCompatImageButton mSortButton = findViewById(R.id.sort);
         mTitle = findViewById(R.id.title);
         MaterialTextView mError = findViewById(R.id.error_status);
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -64,7 +68,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
         try {
-            mRecycleViewAdapter = new RecycleViewExploreAdapter(getData());
+            mRecycleViewAdapter = new RecycleViewExploreAdapter(FilePicker.getData(this, false));
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         } catch (NullPointerException ignored) {
             mRecyclerView.setVisibility(View.GONE);
@@ -73,63 +77,49 @@ public class PackageExploreActivity extends AppCompatActivity {
         }
 
         RecycleViewExploreAdapter.setOnItemClickListener((position, v) -> {
-            if (new File(mData.get(position)).isDirectory()) {
-                Common.setPath(mData.get(position));
-                reload();
-            } else if (PackageExplorer.isTextFile(mData.get(position))) {
+            String mPath = FilePicker.getData(this, false).get(position);
+            if (new File(mPath).isDirectory()) {
+                Common.setPath(mPath);
+                reload(this);
+            } else if (PackageExplorer.isTextFile(mPath)) {
                 Intent textView = new Intent(this, TextViewActivity.class);
-                textView.putExtra(TextViewActivity.PATH_INTENT, mData.get(position));
+                textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
                 startActivity(textView);
-            } else if (PackageExplorer.isImageFile(mData.get(position))) {
+            } else if (PackageExplorer.isImageFile(mPath)) {
                 Intent imageView = new Intent(this, ImageViewActivity.class);
-                imageView.putExtra(ImageViewActivity.PATH_INTENT, mData.get(position));
+                imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
                 startActivity(imageView);
             } else {
                 new MaterialAlertDialogBuilder(this)
-                        .setMessage(getString(R.string.open_failed_export_message, new File(mData.get(position)).getName()))
+                        .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
-                                .copyToStorage(mData.get(position), PackageData.getPackageDir() + "/" +
+                                .copyToStorage(mPath, PackageData.getPackageDir(this) + "/" +
                                         Common.getApplicationID(),this)).show();
             }
         });
-    }
 
-    private List<String> getData() {
-        try {
-            mData.clear();
-            // Add directories
-            for (File mFile : getFilesList()) {
-                if (mFile.isDirectory()) {
-                    mData.add(mFile.getAbsolutePath());
-                }
-            }
-            // Add files
-            for (File mFile : getFilesList()) {
-                if (mFile.isFile()) {
-                    mData.add(mFile.getAbsolutePath());
-                }
-            }
-        } catch (NullPointerException ignored) {
-            finish();
-        }
-        return mData;
-    }
-
-    private File[] getFilesList() {
-        if (!Common.getPath().endsWith(File.separator)) {
-            Common.setPath(Common.getPath() + File.separator);
-        }
-        return new File(Common.getPath()).listFiles();
+        mSortButton.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(this, mSortButton);
+            Menu menu = popupMenu.getMenu();
+            menu.add(Menu.NONE, 0, Menu.NONE, "A-Z").setCheckable(true)
+                    .setChecked(Utils.getBoolean("az_order", true, this));
+            popupMenu.setOnMenuItemClickListener(item -> {
+                Utils.saveBoolean("az_order", !Utils.getBoolean("az_order", true, this), this);
+                reload(this);
+                return false;
+            });
+            popupMenu.show();
+        });
     }
 
     @SuppressLint("StaticFieldLeak")
-    private void reload() {
+    private void reload(Activity activity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                mRecycleViewAdapter = new RecycleViewExploreAdapter(getData());
+                mRecycleViewAdapter = new RecycleViewExploreAdapter(FilePicker.getData(activity, false));
                 return null;
             }
 
@@ -150,7 +140,7 @@ public class PackageExploreActivity extends AppCompatActivity {
             finish();
         } else {
             Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());
-            reload();
+            reload(this);
         }
     }
 

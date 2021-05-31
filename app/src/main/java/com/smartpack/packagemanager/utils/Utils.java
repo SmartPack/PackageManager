@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -27,6 +28,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -344,6 +346,21 @@ public class Utils {
 
     public static boolean isDocumentsUI(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    @RequiresApi(30)
+    public static void requestPermission(Activity activity) {
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+        intent.setData(uri);
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    @RequiresApi(30)
+    public static boolean isPermissionDenied() {
+        return !Environment.isExternalStorageManager();
     }
 
     /*

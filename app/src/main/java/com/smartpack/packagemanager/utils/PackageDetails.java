@@ -62,12 +62,12 @@ public class PackageDetails {
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting, name) + "...");
-                PackageData.makePackageFolder();
+                PackageData.makePackageFolder(activity);
             }
             @Override
             protected Void doInBackground(Void... voids) {
                 Utils.sleep(1);
-                Utils.copy(apk, PackageData.getPackageDir() + "/" + name + ".apk");
+                Utils.copy(apk, PackageData.getPackageDir(activity) + "/" + name + ".apk");
                 return null;
             }
             @SuppressLint("StringFormatInvalid")
@@ -78,12 +78,12 @@ public class PackageDetails {
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
                         .setTitle(activity.getString(R.string.share) + " " + name + "?")
-                        .setMessage(name + " " + activity.getString(R.string.export_summary, PackageData.getPackageDir()))
+                        .setMessage(name + " " + activity.getString(R.string.export_summary, PackageData.getPackageDir(activity)))
                         .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                         })
                         .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
                             Uri uriFile = FileProvider.getUriForFile(activity,
-                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir() + "/" + name + ".apk"));
+                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(activity), name + ".apk"));
                             Intent shareScript = new Intent(Intent.ACTION_SEND);
                             shareScript.setType("application/java-archive");
                             shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
@@ -103,7 +103,7 @@ public class PackageDetails {
             protected void onPreExecute() {
                 super.onPreExecute();
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting_bundle, name) + "...");
-                PackageData.makePackageFolder();
+                PackageData.makePackageFolder(activity);
             }
             @Override
             protected Void doInBackground(Void... voids) {
@@ -112,7 +112,7 @@ public class PackageDetails {
                 for (final String splitApps : SplitAPKInstaller.splitApks(apk)) {
                     mFiles.add(new File(apk + "/" + splitApps));
                 }
-                Utils.zip(PackageData.getPackageDir() + "/" + name + ".apkm", mFiles);
+                Utils.zip(PackageData.getPackageDir(activity) + "/" + name + ".apkm", mFiles);
                 return null;
             }
             @SuppressLint("StringFormatInvalid")
@@ -123,12 +123,12 @@ public class PackageDetails {
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
                         .setTitle(name)
-                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir() + "/" + name + ".apkm"))
+                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir(activity) + "/" + name + ".apkm"))
                         .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                         })
                         .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
                             Uri uriFile = FileProvider.getUriForFile(activity,
-                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir() + "/" + name + ".apkm"));
+                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(activity) + "/" + name + ".apkm"));
                             Intent shareScript = new Intent(Intent.ACTION_SEND);
                             shareScript.setType("application/zip");
                             shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
