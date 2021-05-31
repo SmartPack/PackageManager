@@ -2,6 +2,10 @@
 
 ## 38. May 03, 2021
 *Release-tag: 4.5*<br>
+App will now target latest Android SDK. Now built using latest Gradle plugin. Updated Chinese (traditional & simplified) translations. Miscellaneous changes.
+
+## 38. May 03, 2021
+*Release-tag: 4.5*<br>
 Re-organized and improved code. Now built using latest Gradle plugin. Added Portuguese and hungarian translations. Updated German, Spanish, Vietnamese & Turkish translations. Miscellaneous changes.
 
 ## 37. April 01, 2021
