@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!--Author: jason5545 <jason5545@gmail.com>-->
 
     <string name="about">"关于"</string>
     <string name="about_summary">"<i>一款简单而强大的应用程序管理器。</i>"</string>
@@ -214,4 +213,7 @@
     <string name="operations_write_sms">"允许应用发送短信"</string>
     <string name="operations_write_storage">"允许应用写入外部存储"</string>
     <string name="operations_write_wallpaper">"允许应用设置壁纸"</string>
+    <string name="bundle_path">"捆绑包路径"</string>
+    <string name="size_apk">"APK 大小：%s"</string>
+    <string name="size_bundle">"捆绑包大小：%s"</string>
 </resources>
