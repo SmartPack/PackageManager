@@ -287,51 +287,39 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    if (Utils.isStorageWritePermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                        Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
+                    Common.getAppList().clear();
+                    if (Utils.getBoolean("filePicker", true, requireActivity())) {
+                        Common.setPath(Environment.getExternalStorageDirectory().toString());
+                        Intent filePicker = new Intent(activity, FilePickerActivity.class);
+                        startActivity(filePicker);
                     } else {
-                        Common.getAppList().clear();
-                        if (Utils.getBoolean("filePicker", true, requireActivity())) {
-                            Common.setPath(Environment.getExternalStorageDirectory().toString());
-                            Intent filePicker = new Intent(activity, FilePickerActivity.class);
-                            startActivity(filePicker);
+                        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied()) {
+                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(getString(R.string.important))
+                                    .setMessage(getString(R.string.file_permission_request_message))
+                                    .setCancelable(false)
+                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                    })
+                                    .setPositiveButton(getString(R.string.grant), (dialog, id) -> Utils.requestPermission(requireActivity())).show();
+                        } else if (Utils.getBoolean("firstAttempt", true, requireActivity())) {
+                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(getString(R.string.install_bundle))
+                                    .setMessage(getString(R.string.bundle_install_message))
+                                    .setCancelable(false)
+                                    .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+                                        Utils.saveBoolean("firstAttempt", false, requireActivity());
+                                        initializeSplitAPKInstallation();
+                                    }).show();
                         } else {
-                            if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied()) {
-                                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                        .setIcon(R.mipmap.ic_launcher)
-                                        .setTitle(getString(R.string.important))
-                                        .setMessage(getString(R.string.file_permission_request_message))
-                                        .setCancelable(false)
-                                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                        })
-                                        .setPositiveButton(getString(R.string.grant), (dialog, id) -> Utils.requestPermission(requireActivity())).show();
-                            } else if (Utils.getBoolean("firstAttempt", true, requireActivity())) {
-                                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                        .setIcon(R.mipmap.ic_launcher)
-                                        .setTitle(getString(R.string.install_bundle))
-                                        .setMessage(getString(R.string.bundle_install_message))
-                                        .setCancelable(false)
-                                        .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-                                            Utils.saveBoolean("firstAttempt", false, requireActivity());
-                                            initializeSplitAPKInstallation();
-                                        }).show();
-                            } else {
-                                initializeSplitAPKInstallation();
-                            }
+                            initializeSplitAPKInstallation();
                         }
                     }
                     break;
                 case 1:
-                    if (Utils.isStorageWritePermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                        Utils.snackbar(mRecyclerView, getString(R.string.permission_denied_write_storage));
-                    } else {
-                        Intent downloadsPage = new Intent(activity, ExportedAppsActivity.class);
-                        startActivity(downloadsPage);
-                    }
+                    Intent exportedApps = new Intent(activity, ExportedAppsActivity.class);
+                    startActivity(exportedApps);
                     break;
                 case 2:
                     Intent settingsPage = new Intent(activity, SettingsActivity.class);

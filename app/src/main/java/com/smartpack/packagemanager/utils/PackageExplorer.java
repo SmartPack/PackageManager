@@ -19,6 +19,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -107,7 +108,7 @@ public class PackageExplorer {
     }
 
     public static void saveIcon(Bitmap bitmap, String dest, Activity activity) {
-        if (Utils.isStorageWritePermissionDenied(activity)) {
+        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[] {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
@@ -146,7 +147,7 @@ public class PackageExplorer {
     }
 
     public static void copyToStorage(String path, String dest, Activity activity) {
-        if (Utils.isStorageWritePermissionDenied(activity)) {
+        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
             ActivityCompat.requestPermissions(activity, new String[] {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));

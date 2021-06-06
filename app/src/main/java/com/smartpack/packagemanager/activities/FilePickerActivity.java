@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.widget.PopupMenu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,21 +64,37 @@ public class FilePickerActivity extends AppCompatActivity {
 
         AppCompatImageButton mBack = findViewById(R.id.back);
         AppCompatImageButton mSortButton = findViewById(R.id.sort);
+        mProgressLayout = findViewById(R.id.progress_layout);
         mTitle = findViewById(R.id.title);
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
-        mProgressLayout = findViewById(R.id.progress_layout);
+
+        mBack.setOnClickListener(v -> {
+            super.onBackPressed();
+        });
+
+        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
+            LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
+            MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
+            MaterialTextView mPermissionText = findViewById(R.id.permission_text);
+            mPermissionText.setText(getString(Build.VERSION.SDK_INT >= 30 ? R.string.file_permission_request_message : R.string.permission_denied_write_storage));
+            mPermissionLayout.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mPermissionGrant.setOnClickListener(v -> {
+                if (Build.VERSION.SDK_INT >= 30) {
+                    Utils.requestPermission(this);
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[] {
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                    finish();
+                }
+            });
+            return;
+        }
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
         mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(this, true));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
-
-        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied()) {
-            LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
-            MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
-            mPermissionLayout.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-            mPermissionGrant.setOnClickListener(v -> Utils.requestPermission(this));
-        }
 
         mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard) : new File(Common.getPath()).getName());
 
@@ -124,10 +142,6 @@ public class FilePickerActivity extends AppCompatActivity {
         mSelect.setOnClickListener(v -> {
             SplitAPKInstaller.installSplitAPKs(this);
             finish();
-        });
-
-        mBack.setOnClickListener(v -> {
-            super.onBackPressed();
         });
     }
 

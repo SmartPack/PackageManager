@@ -60,5 +60,7 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
+    <include layout="@layout/permission_view_layout" />
+
     <include layout="@layout/progress_view_layout" />
 </RelativeLayout>

@@ -8,22 +8,28 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExportedAppsAdapter;
@@ -55,6 +61,24 @@ public class ExportedAppsActivity extends AppCompatActivity {
 
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apks)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.bundles)));
+
+        mBack.setOnClickListener(v -> onBackPressed());
+
+        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
+            LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
+            MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
+            MaterialTextView mPermissionText = findViewById(R.id.permission_text);
+            mPermissionText.setText(getString(R.string.permission_denied_write_storage));
+            mPermissionLayout.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mTabLayout.setVisibility(View.GONE);
+            mPermissionGrant.setOnClickListener(v -> {
+                ActivityCompat.requestPermissions(this, new String[] {
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                finish();
+            });
+            return;
+        }
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -113,7 +137,6 @@ public class ExportedAppsActivity extends AppCompatActivity {
                     }).show();
         });
 
-        mBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void loadUI() {

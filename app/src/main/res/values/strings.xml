@@ -172,7 +172,7 @@
     <string name="package_id">Package ID</string>
     <string name="package_removed">Selected package is just removed! Aborting…</string>
     <string name="permissions">Permissions</string>
-    <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
+    <string name="permission_denied_write_storage">Permission denied for accessing storage!</string>
     <string name="playstore">Google Play</string>
     <string name="press_back">Press back again to exit</string>
     <string name="rate_us">Rate App</string>
