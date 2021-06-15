@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.fragments;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -249,6 +247,8 @@ public class PackageTasksFragment extends Fragment {
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(Utils.getBoolean("reverse_order", false, activity));
+        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.select_all)).setCheckable(true)
+                .setChecked(Common.getBatchList().size() == PackageData.getData(activity).size());
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -269,6 +269,12 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 3:
                     Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
+                    loadUI(activity);
+                    break;
+                case 4:
+                    if (Common.getBatchList().size() != PackageData.getData(activity).size()) {
+                        Utils.saveBoolean("select_all", !Utils.getBoolean("select_all", false, activity), activity);
+                    }
                     loadUI(activity);
                     break;
             }
@@ -424,7 +430,13 @@ public class PackageTasksFragment extends Fragment {
                             mProgressLayout.setVisibility(View.VISIBLE);
                             mBatchOptions.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.GONE);
-                            Common.getBatchList().clear();
+                            if (Utils.getBoolean("select_all", false, activity)) {
+                                for (String mPackage : PackageData.getData(activity)) {
+                                    Common.getBatchList().add(mPackage);
+                                }
+                            } else {
+                                Common.getBatchList().clear();
+                            }
                             mRecyclerView.removeAllViews();
                         }
 
@@ -437,9 +449,14 @@ public class PackageTasksFragment extends Fragment {
                         @Override
                         protected void onPostExecute(List<String> recyclerViewItems) {
                             super.onPostExecute(recyclerViewItems);
+                            if (Utils.getBoolean("select_all", false, activity)) {
+                                Utils.saveBoolean("select_all", false, activity);
+                                mBatchOptions.setVisibility(View.VISIBLE);
+                            } else {
+                                mBatchOptions.setVisibility(View.GONE);
+                            }
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mRecycleViewAdapter.notifyDataSetChanged();
-                            mBatchOptions.setVisibility(View.GONE);
                             mProgressLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mLoader = null;
