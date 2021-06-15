@@ -45,7 +45,10 @@
     <string name="exporting_bundle">"%s toplu uygulama paketi dışa aktarılıyor"</string>
     <string name="everything_done">"Her Şey Tamam!"</string>
     <string name="failed">"Başarısız"</string>
+    <string name="file_permission_request_message">"Bu özelliğin yeni Android sürümlerinde (Android R veya üstü) çalışmasını sağlamak için Package Manager'a \"Tüm dosyalara eriş\" izninin verilmesi gerekmektedir. Lütfen \"Yetkilendir\" butonuna bastıktan sonra açılan ekrandan bu izni veriniz."</string>
     <string name="got_it">"Anlaşıldı"</string>
+    <string name="grant">"Yetkilendir"</string>
+    <string name="important">"Önemli"</string>
     <string name="install">"Yükle"</string>
     <string name="install_bundle">"Bölünmüş APK'leri yükle"</string>
     <string name="installing_bundle">"Toplu Uygulama Paketi yükleniyor!"</string>

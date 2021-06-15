@@ -45,7 +45,10 @@
     <string name="exporting_bundle">"正在导出 %s 应用捆绑包"</string>
     <string name="everything_done">"全部完成！"</string>
     <string name="failed">"失败"</string>
+    <string name="file_permission_request_message">"若要在较新 Android 版本上（Android R 或更新版本）正常使用此功能，您需要授予 Package Manager“访问所有文件”权限。您可以点击“授权”按钮，并在打开的新页面中手动授予此权限。"</string>
     <string name="got_it">"明白"</string>
+    <string name="grant">"授权"</string>
+    <string name="important">"重要"</string>
     <string name="install">"安装"</string>
     <string name="install_bundle">"安装拆分 APK"</string>
     <string name="installing_bundle">"安装应用捆绑包！"</string>
