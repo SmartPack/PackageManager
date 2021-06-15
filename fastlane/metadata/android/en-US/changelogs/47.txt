@@ -1,0 +1,5 @@
+* Improve permission handling.
+* Added "Select all" option.
+* Redirected exported items path into /sdcard/Package_Manager" if "All files Permission" is granted.
+* Updated Chinese & Turkish locale.
+* Miscellaneous changes.

@@ -1,7 +1,11 @@
 # Change-logs
 
-## 38. May 03, 2021
-*Release-tag: 4.5*<br>
+## 38. June 15, 2021
+*Release-tag: 4.7*<br>
+Improve permission handling. Added "Select all" option. Redirected exported items path into /sdcard/Package_Manager" if "All files Permission" is granted. Updated Chinese & Turkish locale. Miscellaneous changes.
+
+## 38. May 31, 2021
+*Release-tag: 4.6*<br>
 App will now target latest Android SDK. Now built using latest Gradle plugin. Updated Chinese (traditional & simplified) translations. Miscellaneous changes.
 
 ## 38. May 03, 2021

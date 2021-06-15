@@ -1,4 +1,0 @@
-* App will now target latest Android SDK.
-* Now built using latest Gradle plugin.
-* Updated Chinese (traditional & simplified) translations.
-* Miscellaneous changes.
