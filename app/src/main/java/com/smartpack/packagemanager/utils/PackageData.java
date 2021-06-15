@@ -180,7 +180,7 @@ public class PackageData {
     }
 
     public static File getPackageDir(Context context) {
-        if (Build.VERSION.SDK_INT >= 30) {
+        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied()) {
             return context.getExternalFilesDir("");
         } else {
             return new File(Environment.getExternalStorageDirectory(), "Package_Manager");
