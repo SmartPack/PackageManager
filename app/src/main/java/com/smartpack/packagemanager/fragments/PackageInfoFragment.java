@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -94,14 +95,14 @@ public class PackageInfoFragment extends Fragment {
         mOpenApp.setVisibility(PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {
             if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
-                Utils.snackbar(mProgressLayout, getString(R.string.open_message));
+                Utils.snackbar(mRootView, getString(R.string.open_message));
             } else {
                 Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
                 if (launchIntent != null) {
                     startActivity(launchIntent);
                     requireActivity().finish();
                 } else {
-                    Utils.snackbar(mProgressLayout, getString(R.string.open_failed, Common.getApplicationName()));
+                    Utils.snackbar(mRootView, getString(R.string.open_failed, Common.getApplicationName()));
                 }
             }
         });
@@ -111,9 +112,7 @@ public class PackageInfoFragment extends Fragment {
                 .setMessage(getString(R.string.reset_message, Common.getApplicationName()))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                 })
-                .setPositiveButton(R.string.yes, (dialog, id) -> {
-                    PackageData.clearAppSettings(Common.getApplicationID());
-                }).show());
+                .setPositiveButton(R.string.yes, (dialog, id) -> PackageData.clearAppSettings(Common.getApplicationID())).show());
         mExplore.setOnClickListener(v -> {
             if (Utils.getBoolean("firstExploreAttempt", true, requireActivity())) {
                 new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
@@ -140,14 +139,23 @@ public class PackageInfoFragment extends Fragment {
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                 })
-                .setPositiveButton(getString(R.string.yes), (dialog, id) -> {
-                    PackageDetails.disableApp(mProgressLayout, mOpenApp, mProgressMessage, mDisableTitle, requireActivity());
-                })
+                .setPositiveButton(getString(R.string.yes), (dialog, id) -> PackageDetails.disableApp(mProgressLayout,
+                        mOpenApp, mProgressMessage, mDisableTitle, requireActivity()))
                 .show());
-        mOpenStore.setOnClickListener(v -> {
-            Utils.launchUrl("https://play.google.com/store/apps/details?id=" + Common.getApplicationID(), requireActivity());
+        mOpenStore.setOnClickListener(v -> Utils.launchUrl("https://play.google.com/store/apps/details?id=" +
+                Common.getApplicationID(), requireActivity()));
+        mUninstallApp.setOnClickListener(v -> {
+            if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
+                Utils.snackbar(mRootView, getString(R.string.uninstall_nope));
+            } else if (!Common.isSystemApp()) {
+                Intent remove = new Intent(Intent.ACTION_DELETE);
+                remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
+                remove.setData(Uri.parse("package:" + Common.getApplicationID()));
+                startActivityForResult(remove, 0);
+            } else {
+                PackageDetails.uninstallSystemApp(mProgressLayout, mProgressMessage, requireActivity());
+            }
         });
-        mUninstallApp.setOnClickListener(v -> PackageDetails.uninstallApp(mProgressLayout, mProgressMessage, requireActivity()));
         mOpenSettings.setOnClickListener(v -> {
             Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -163,6 +171,16 @@ public class PackageInfoFragment extends Fragment {
         }
 
         return mRootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0 && data != null && resultCode == Activity.RESULT_OK) {
+            requireActivity().finish();
+            Common.reloadPage(true);
+        }
     }
 
 }

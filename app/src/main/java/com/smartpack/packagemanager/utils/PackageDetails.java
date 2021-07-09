@@ -175,66 +175,52 @@ public class PackageDetails {
     }
 
     @SuppressLint("StringFormatInvalid")
-    public static void uninstallApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
-            Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.uninstall_nope));
-        } else if (!Common.isSystemApp()) {
-            Intent remove = new Intent(Intent.ACTION_DELETE);
-            remove.setData(Uri.parse("package:" + Common.getApplicationID()));
-            activity.startActivity(remove);
-            Common.reloadPage(true);
-            activity.finish();
+    public static void uninstallSystemApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
+        if (Utils.rootAccess()) {
+            new MaterialAlertDialogBuilder(activity)
+                    .setIcon(Common.getApplicationIcon())
+                    .setTitle(activity.getString(R.string.uninstall_title, Common.getApplicationName()))
+                    .setMessage(activity.getString(R.string.uninstall_warning))
+                    .setCancelable(false)
+                    .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
+                    })
+                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> {
+                        new AsyncTask<Void, Void, Void>() {
+                            @SuppressLint("StringFormatInvalid")
+                            @Override
+                            protected void onPreExecute() {
+                                super.onPreExecute();
+                                showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+                            }
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+                                Utils.sleep(1);
+                                Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                                return null;
+                            }
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+                                hideProgress(linearLayout, textView);
+                                activity.finish();
+                                Common.reloadPage(true);
+                            }
+                        }.execute();
+                    })
+                    .show();
         } else {
-            if (Utils.rootAccess()) {
-                new MaterialAlertDialogBuilder(activity)
-                        .setIcon(Common.getApplicationIcon())
-                        .setTitle(activity.getString(R.string.uninstall_title, Common.getApplicationName()))
-                        .setMessage(activity.getString(R.string.uninstall_warning))
-                        .setCancelable(false)
-                        .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
-                        })
-                        .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> {
-                            removeSystemApp(linearLayout, textView, activity);
-                        })
-                        .show();
-            } else {
-                new MaterialAlertDialogBuilder(activity)
-                        .setIcon(Common.getApplicationIcon())
-                        .setTitle(activity.getString(R.string.uninstall_adb))
-                        .setMessage(activity.getString(R.string.uninstall_adb_summary, Common.getApplicationName()) +
-                                "\n\nadb shell pm uninstall -k --user 0 " + Common.getApplicationID())
-                        .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) -> {
-                            Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity);
-                        })
-                        .setPositiveButton(activity.getString(R.string.got_it), (dialog, id) -> {
-                        })
-                        .show();
-            }
+            new MaterialAlertDialogBuilder(activity)
+                    .setIcon(Common.getApplicationIcon())
+                    .setTitle(activity.getString(R.string.uninstall_adb))
+                    .setMessage(activity.getString(R.string.uninstall_adb_summary, Common.getApplicationName()) +
+                            "\n\nadb shell pm uninstall -k --user 0 " + Common.getApplicationID())
+                    .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) -> {
+                        Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity);
+                    })
+                    .setPositiveButton(activity.getString(R.string.got_it), (dialog, id) -> {
+                    })
+                    .show();
         }
-    }
-
-    public static void removeSystemApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
-            }
-            @Override
-            protected Void doInBackground(Void... voids) {
-                Utils.sleep(1);
-                Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
-                return null;
-            }
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                hideProgress(linearLayout, textView);
-                activity.finish();
-                Common.reloadPage(true);
-            }
-        }.execute();
     }
 
     public static List<String> getPermissions(String packageName, Context context) {
