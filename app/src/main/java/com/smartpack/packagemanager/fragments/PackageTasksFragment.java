@@ -197,9 +197,7 @@ public class PackageTasksFragment extends Fragment {
                             .setCancelable(false)
                             .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             })
-                            .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                                requireActivity().finish();
-                            })
+                            .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> requireActivity().finish())
                             .show();
                 } else if (mExit) {
                     mExit = false;
@@ -360,9 +358,8 @@ public class PackageTasksFragment extends Fragment {
                             .setMessage(getString(R.string.batch_list_disable) + "\n" + PackageData.showBatchList())
                             .setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             })
-                            .setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) -> {
-                                PackageTasks.batchDisableTask(activity);
-                            })
+                            .setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) ->
+                                    PackageTasks.batchDisableTask(activity))
                             .show();
                     break;
                 case 1:
@@ -372,9 +369,8 @@ public class PackageTasksFragment extends Fragment {
                     uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageData.showBatchList());
                     uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
-                    uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) -> {
-                        PackageTasks.batchUninstallTask(activity);
-                    });
+                    uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) ->
+                            PackageTasks.batchUninstallTask(activity));
                     uninstall.show();
                     break;
                 case 2:
@@ -384,9 +380,8 @@ public class PackageTasksFragment extends Fragment {
                     reset.setMessage(getString(R.string.batch_list_reset) + "\n" + PackageData.showBatchList());
                     reset.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
-                    reset.setPositiveButton(getString(R.string.reset), (dialogInterface, i) -> {
-                        PackageTasks.batchResetTask(activity);
-                    });
+                    reset.setPositiveButton(getString(R.string.reset), (dialogInterface, i) ->
+                            PackageTasks.batchResetTask(activity));
                     reset.show();
                     break;
                 case 3:
@@ -396,9 +391,8 @@ public class PackageTasksFragment extends Fragment {
                     export.setMessage(getString(R.string.batch_list_export) + "\n" + PackageData.showBatchList());
                     export.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
-                    export.setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                        PackageTasks.batchExportTask(activity);
-                    });
+                    export.setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
+                            PackageTasks.batchExportTask(activity));
                     export.show();
                     break;
                 case 4:

@@ -65,7 +65,7 @@ A list of people who contributed to this project is available [here](Credits.md)
 
 ## License
 
-    Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+    Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
 
     Package Manager is a free softwares: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published

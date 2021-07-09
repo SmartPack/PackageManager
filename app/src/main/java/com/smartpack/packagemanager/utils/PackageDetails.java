@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -184,29 +184,27 @@ public class PackageDetails {
                     .setCancelable(false)
                     .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     })
-                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> {
-                        new AsyncTask<Void, Void, Void>() {
-                            @SuppressLint("StringFormatInvalid")
-                            @Override
-                            protected void onPreExecute() {
-                                super.onPreExecute();
-                                showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
-                            }
-                            @Override
-                            protected Void doInBackground(Void... voids) {
-                                Utils.sleep(1);
-                                Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
-                                return null;
-                            }
-                            @Override
-                            protected void onPostExecute(Void aVoid) {
-                                super.onPostExecute(aVoid);
-                                hideProgress(linearLayout, textView);
-                                activity.finish();
-                                Common.reloadPage(true);
-                            }
-                        }.execute();
-                    })
+                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> new AsyncTask<Void, Void, Void>() {
+                        @SuppressLint("StringFormatInvalid")
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+                        }
+                        @Override
+                        protected Void doInBackground(Void... voids) {
+                            Utils.sleep(1);
+                            Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                            return null;
+                        }
+                        @Override
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
+                            hideProgress(linearLayout, textView);
+                            activity.finish();
+                            Common.reloadPage(true);
+                        }
+                    }.execute())
                     .show();
         } else {
             new MaterialAlertDialogBuilder(activity)
@@ -214,9 +212,8 @@ public class PackageDetails {
                     .setTitle(activity.getString(R.string.uninstall_adb))
                     .setMessage(activity.getString(R.string.uninstall_adb_summary, Common.getApplicationName()) +
                             "\n\nadb shell pm uninstall -k --user 0 " + Common.getApplicationID())
-                    .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) -> {
-                        Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity);
-                    })
+                    .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) ->
+                            Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity))
                     .setPositiveButton(activity.getString(R.string.got_it), (dialog, id) -> {
                     })
                     .show();

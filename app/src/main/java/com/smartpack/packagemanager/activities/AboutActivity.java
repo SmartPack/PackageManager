@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -44,12 +44,8 @@ public class AboutActivity extends AppCompatActivity {
 
         mAppName.setText(getString(R.string.app_name) + (Utils.isProUser(this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
         MaterialTextView mCancel = findViewById(R.id.cancel_button);
-        mCancel.setOnClickListener(v -> {
-            super.onBackPressed();
-        });
-        mDeveloper.setOnClickListener(v -> {
-            Utils.launchUrl("https://github.com/sunilpaulmathew", this);
-        });
+        mCancel.setOnClickListener(v -> finish());
+        mDeveloper.setOnClickListener(v -> Utils.launchUrl("https://github.com/sunilpaulmathew", this));
 
         String change_log = null;
         try {
@@ -59,11 +55,6 @@ public class AboutActivity extends AppCompatActivity {
         }
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         mForegroundText.setText(change_log);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -62,10 +62,9 @@ public class TextViewActivity extends AppCompatActivity {
                 .setMessage(getString(R.string.export_storage_message, new File(mPath).getName()))
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })
-                .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                    PackageExplorer.copyToStorage(mPath, PackageData.getPackageDir(this) + "/" +
-                            Common.getApplicationID(), this);
-                }).show());
+                .setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
+                        PackageExplorer.copyToStorage(mPath, PackageData.getPackageDir(this) + "/" +
+                        Common.getApplicationID(), this)).show());
 
         mBack.setOnClickListener(v -> finish());
     }

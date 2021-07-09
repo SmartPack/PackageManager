@@ -116,26 +116,24 @@ public class ExportedAppsActivity extends AppCompatActivity {
             }
         });
 
-        mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
-            new MaterialAlertDialogBuilder(this)
-                    .setMessage(getString(Downloads.getData(this).get(position).endsWith(".apkm") ? R.string.bundle_install_apks
-                            : R.string.install_question, new File(Downloads.getData(this).get(position)).getName()))
-                    .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                    })
-                    .setPositiveButton(R.string.install, (dialog, id) -> {
-                        if (Downloads.getData(this).get(position).endsWith(".apkm")) {
-                            SplitAPKInstaller.handleAppBundle(mProgressLayout, Downloads.getData(this).get(position), this);
-                        } else {
-                            Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            Uri uriFile;
-                            uriFile = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider",
-                                    new File(Downloads.getData(this).get(position)));
-                            intent.setDataAndType(uriFile, "application/vnd.android.package-archive");
-                            startActivity(Intent.createChooser(intent, ""));
-                        }
-                    }).show();
-        });
+        mRecycleViewAdapter.setOnItemClickListener((position, v) -> new MaterialAlertDialogBuilder(this)
+                .setMessage(getString(Downloads.getData(this).get(position).endsWith(".apkm") ? R.string.bundle_install_apks
+                        : R.string.install_question, new File(Downloads.getData(this).get(position)).getName()))
+                .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                })
+                .setPositiveButton(R.string.install, (dialog, id) -> {
+                    if (Downloads.getData(this).get(position).endsWith(".apkm")) {
+                        SplitAPKInstaller.handleAppBundle(mProgressLayout, Downloads.getData(this).get(position), this);
+                    } else {
+                        Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        Uri uriFile;
+                        uriFile = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider",
+                                new File(Downloads.getData(this).get(position)));
+                        intent.setDataAndType(uriFile, "application/vnd.android.package-archive");
+                        startActivity(Intent.createChooser(intent, ""));
+                    }
+                }).show());
 
     }
 

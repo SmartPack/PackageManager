@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -17,7 +17,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
 
 /*
- * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
+ * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2021
  * Based on the original work of nkalra0123 (Ref: https://github.com/nkalra0123/splitapkinstall)
  * & Aefyr (Ref: https://github.com/Aefyr/SAI)
  */

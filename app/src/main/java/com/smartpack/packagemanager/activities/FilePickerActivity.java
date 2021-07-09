@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -69,9 +69,7 @@ public class FilePickerActivity extends AppCompatActivity {
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        mBack.setOnClickListener(v -> {
-            super.onBackPressed();
-        });
+        mBack.setOnClickListener(v -> super.onBackPressed());
 
         if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
@@ -194,9 +192,7 @@ public class FilePickerActivity extends AppCompatActivity {
                     .setMessage(getString(R.string.installation_cancel_message))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     })
-                    .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                        finish();
-                    }).show();
+                    .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> finish()).show();
         } else if (Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator)) {
             super.onBackPressed();
         } else {
