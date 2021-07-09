@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.adapters;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,18 +56,17 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             return;
         }
         holder.appIcon.setImageDrawable(PackageData.getAppIcon(data.get(position), holder.appIcon.getContext()));
-        if (Common.getSearchText() != null && data.get(position).toLowerCase().contains(Common.getSearchText())) {
-            holder.appID.setText(Utils.fromHtml(data.get(position).toLowerCase().replace(Common.getSearchText(),"<b><i><font color=\"" +
+        if (Common.getSearchText() != null && Common.isTextMatched(data.get(position))) {
+            holder.appID.setTypeface(null, Typeface.BOLD);
+            holder.appID.setText(Utils.fromHtml(data.get(position).replace(Common.getSearchText(),"<b><i><font color=\"" +
                     Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
         } else {
             holder.appID.setText(data.get(position));
         }
-        if (Common.getSearchText() != null && PackageData.getAppName(data.get(position), holder.appName.getContext()).toLowerCase().contains(Common.getSearchText())) {
-            holder.appName.setText(Utils.fromHtml(PackageData.getAppName(data.get(position), holder.appName.getContext()).toLowerCase().replace(Common.getSearchText(),
-                    "<b><i><font color=\"" + Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
-        } else {
-            holder.appName.setText(PackageData.getAppName(data.get(position), holder.appName.getContext()));
+        if (Common.getSearchText() != null && Common.isTextMatched(PackageData.getAppName(data.get(position), holder.appName.getContext()))) {
+            holder.appName.setTypeface(null, Typeface.BOLD);
         }
+        holder.appName.setText(PackageData.getAppName(data.get(position), holder.appName.getContext()));
         holder.appIcon.setOnClickListener(v -> {
             Common.setApplicationName(PackageData.getAppName(data.get(position), holder.appIcon.getContext()));
             Common.setApplicationIcon(PackageData.getAppIcon(data.get(position), holder.appIcon.getContext()));

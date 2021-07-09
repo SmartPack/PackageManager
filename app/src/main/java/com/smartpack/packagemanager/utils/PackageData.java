@@ -61,8 +61,8 @@ public class PackageData {
             if (mAppType && packageInfo.packageName.contains(".")) {
                 if (Common.getSearchText() == null) {
                     mData.add(packageInfo.packageName);
-                } else if (getPackageManager(context).getApplicationLabel(packageInfo).toString().toLowerCase().contains(Common.getSearchText().toLowerCase())
-                        || packageInfo.packageName.toLowerCase().contains(Common.getSearchText().toLowerCase())) {
+                } else if (Common.isTextMatched(getPackageManager(context).getApplicationLabel(packageInfo).toString())
+                        || Common.isTextMatched(packageInfo.packageName)) {
                     mData.add(packageInfo.packageName);
                 }
             }
