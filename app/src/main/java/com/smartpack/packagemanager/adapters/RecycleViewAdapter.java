@@ -68,6 +68,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
         holder.appName.setText(PackageData.getAppName(data.get(position), holder.appName.getContext()));
         holder.appIcon.setOnClickListener(v -> {
+            if (!Utils.isPackageInstalled(data.get(position), v.getContext())) {
+                Utils.snackbar(v, v.getContext().getString(R.string.package_removed));
+                return;
+            }
             Common.setApplicationName(PackageData.getAppName(data.get(position), holder.appIcon.getContext()));
             Common.setApplicationIcon(PackageData.getAppIcon(data.get(position), holder.appIcon.getContext()));
             Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
@@ -75,14 +79,19 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         });
         holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position)));
         holder.checkBox.setOnClickListener(v -> {
+            if (!Utils.isPackageInstalled(data.get(position), v.getContext())) {
+                Utils.snackbar(v, v.getContext().getString(R.string.package_removed));
+                holder.checkBox.setChecked(false);
+                return;
+            }
             if (Common.getBatchList().contains(data.get(position))) {
                 Common.getBatchList().remove(data.get(position));
-                Utils.snackbar(holder.checkBox, holder.checkBox.getContext().getString(R.string.batch_list_removed, PackageData.getAppName(
-                        data.get(position), holder.checkBox.getContext())));
+                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_removed, PackageData.getAppName(
+                        data.get(position), v.getContext())));
             } else {
                 Common.getBatchList().add(data.get(position));
-                Utils.snackbar(holder.checkBox, holder.checkBox.getContext().getString(R.string.batch_list_added, PackageData.getAppName(
-                        data.get(position), holder.checkBox.getContext())));
+                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_added, PackageData.getAppName(
+                        data.get(position), v.getContext())));
             }
             Common.getBatchOptionsCard().setVisibility(PackageData.getBatchList().length() > 0 && PackageData
                     .getBatchList().contains(".") ? View.VISIBLE : View.GONE);
@@ -111,11 +120,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         @Override
         public void onClick(View view) {
-            if (!Utils.isPackageInstalled(this.appID.getText().toString(), view.getContext())) {
+            if (!Utils.isPackageInstalled(data.get(getAdapterPosition()), view.getContext())) {
                 Utils.snackbar(view, view.getContext().getString(R.string.package_removed));
                 return;
             }
-            Common.setApplicationID(this.appID.getText().toString());
+            Common.setApplicationID(data.get(getAdapterPosition()));
             Common.setApplicationName(PackageData.getAppName(Common.getApplicationID(), view.getContext()));
             Common.setApplicationIcon(PackageData.getAppIcon(Common.getApplicationID(), view.getContext()));
             Common.setSourceDir(PackageData.getSourceDir(Common.getApplicationID(), view.getContext()));
