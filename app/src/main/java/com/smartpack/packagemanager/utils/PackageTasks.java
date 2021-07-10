@@ -47,15 +47,20 @@ public class PackageTasks {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".")) {
-                        Common.getOutput().append(PackageData.isEnabled(packageID, activity) ? "** " +
-                                activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)) :
-                                "** " + activity.getString(R.string.enabling, PackageData.getAppName(packageID, activity)));
-                        if (PackageData.isEnabled(packageID, activity)) {
-                            Utils.runCommand("pm disable " + packageID);
+                        if (packageID.equals(activity.getPackageName())) {
+                            Common.getOutput().append("** ").append(activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)));
+                            Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
-                            Utils.runCommand("pm enable " + packageID);
+                            Common.getOutput().append(PackageData.isEnabled(packageID, activity) ? "** " +
+                                    activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)) :
+                                    "** " + activity.getString(R.string.enabling, PackageData.getAppName(packageID, activity)));
+                            if (PackageData.isEnabled(packageID, activity)) {
+                                Utils.runCommand("pm disable " + packageID);
+                            } else {
+                                Utils.runCommand("pm enable " + packageID);
+                            }
+                            Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
-                        Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         Utils.sleep(1);
                     }
                 }
@@ -93,9 +98,14 @@ public class PackageTasks {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
-                        Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
-                        Utils.runCommand("pm clear " + packageID);
-                        Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                        if (packageID.equals(activity.getPackageName())) {
+                            Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
+                            Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
+                        } else {
+                            Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
+                            Utils.runCommand("pm clear " + packageID);
+                            Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                        }
                         Utils.sleep(1);
                     }
                 }
@@ -180,10 +190,15 @@ public class PackageTasks {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
-                        Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
-                        Utils.runCommand("pm uninstall --user 0 " + packageID);
-                        Common.getOutput().append(Utils.isPackageInstalled(packageID, activity) ? ": " +
-                                activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
+                        if (packageID.equals(activity.getPackageName())) {
+                            Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
+                            Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
+                        } else {
+                            Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
+                            Utils.runCommand("pm uninstall --user 0 " + packageID);
+                            Common.getOutput().append(Utils.isPackageInstalled(packageID, activity) ? ": " +
+                                    activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
+                        }
                         Utils.sleep(1);
                     }
                 }
@@ -195,6 +210,7 @@ public class PackageTasks {
                 super.onPostExecute(aVoid);
                 Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 Common.isRunning(false);
+                Common.reloadPage(true);
             }
         }.execute();
     }
