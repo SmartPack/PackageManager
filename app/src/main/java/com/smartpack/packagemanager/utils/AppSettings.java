@@ -135,6 +135,12 @@ public class AppSettings {
                         Utils.restartApp(activity);
                     }
                     break;
+                case 17:
+                    if (!Utils.getLanguage(activity).equals("pl")) {
+                        Utils.saveString("appLanguage", "pl", activity);
+                        Utils.restartApp(activity);
+                    }
+                    break;
             }
         }).setOnDismissListener(dialogInterface -> {
         }).show();
@@ -174,6 +180,8 @@ public class AppSettings {
                 return activity.getString(R.string.language_zh);
             case "hu":
                 return activity.getString(R.string.language_hu);
+            case "pl":
+                return activity.getString(R.string.language_pl);
             default:
                 return activity.getString(R.string.language_default) + " (" + java.util.Locale.getDefault().getLanguage() + ")";
         }
