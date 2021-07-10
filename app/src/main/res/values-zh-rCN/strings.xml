@@ -45,10 +45,7 @@
     <string name="exporting_bundle">"正在导出 %s 应用捆绑包"</string>
     <string name="everything_done">"全部完成！"</string>
     <string name="failed">"失败"</string>
-    <string name="file_permission_request_message">"若要在较新 Android 版本上（Android R 或更新版本）正常使用此功能，您需要授予 Package Manager“访问所有文件”权限。您可以点击“授权”按钮，并在打开的新页面中手动授予此权限。"</string>
     <string name="got_it">"明白"</string>
-    <string name="grant">"授权"</string>
-    <string name="important">"重要"</string>
     <string name="install">"安装"</string>
     <string name="install_bundle">"安装拆分 APK"</string>
     <string name="installing_bundle">"安装应用捆绑包！"</string>
@@ -98,7 +95,7 @@
     <string name="uninstall_nope">"抱歉！您无法进行此操作！"</string>
     <string name="uninstall_summary">"正在删除 %s"</string>
     <string name="uninstall_title">"您确定要卸载 %s 吗？"</string>
-    <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！\n\n*** <b>您需要自担风险</b> ***"</string>
+    <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！\n\n*** <b>您需要自担风险</b> ***\n"</string>
     <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
     <string name="wrong_extension">"请选择一个带有 %s 扩展名的文件。"</string>
@@ -219,4 +216,8 @@
     <string name="bundle_path">"捆绑包路径"</string>
     <string name="size_apk">"APK 大小：%s"</string>
     <string name="size_bundle">"捆绑包大小：%s"</string>
+    <string name="file_permission_request_message">"若要在较新 Android 版本上（Android R 或更新版本）正常使用此功能，您需要授予 Package Manager“访问所有文件”权限。您可以点击“授权”按钮，并在打开的新页面中手动授予此权限。"</string>
+    <string name="grant">"授权"</string>
+    <string name="important">"重要"</string>
+    <string name="select_all">"全选"</string>
 </resources>

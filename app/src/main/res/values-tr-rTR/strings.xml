@@ -45,10 +45,7 @@
     <string name="exporting_bundle">"%s toplu uygulama paketi dışa aktarılıyor"</string>
     <string name="everything_done">"Her Şey Tamam!"</string>
     <string name="failed">"Başarısız"</string>
-    <string name="file_permission_request_message">"Bu özelliğin yeni Android sürümlerinde (Android R veya üstü) çalışmasını sağlamak için Package Manager'a \"Tüm dosyalara eriş\" izninin verilmesi gerekmektedir. Lütfen \"Yetkilendir\" butonuna bastıktan sonra açılan ekrandan bu izni veriniz."</string>
     <string name="got_it">"Anlaşıldı"</string>
-    <string name="grant">"Yetkilendir"</string>
-    <string name="important">"Önemli"</string>
     <string name="install">"Yükle"</string>
     <string name="install_bundle">"Bölünmüş APK'leri yükle"</string>
     <string name="installing_bundle">"Toplu Uygulama Paketi yükleniyor!"</string>
@@ -64,7 +61,7 @@
     <string name="package_id">"Paket Kimliği"</string>
     <string name="package_removed">"Seçili paket çoktan kaldırıldı! İptal ediliyor…"</string>
     <string name="permissions">"İzinler"</string>
-    <string name="permission_denied_write_storage">"Depolamaya yazma izni reddedildi!"</string>
+    <string name="permission_denied_write_storage">"Depolamaya erişim izni reddedildi!"</string>
     <string name="playstore">"Google Play"</string>
     <string name="press_back">"Çıkmak için tekrar geri tuşuna basınız"</string>
     <string name="report_issue">"Bir Sorun Bildirin"</string>
@@ -75,7 +72,7 @@
     <string name="search">"Ara…"</string>
     <string name="share">"Paylaş"</string>
     <string name="shared_by">"%s/Package Manager tarafından paylaşıldı"</string>
-    <string name="share_message">"Package Manager %s Google Play'den alınabilir: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
+    <string name="share_message">"Package Manager %s Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
     <string name="share_with">"Paylaşacak bir şey seçiniz"</string>
     <string name="sort_by">"Uygulamala Sıralaması"</string>
     <string name="source_code">"Kaynak Kodu"</string>
@@ -98,7 +95,7 @@
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
-    <string name="uninstall_warning">"Sakın unutmayın: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***"</string>
+    <string name="uninstall_warning">"Sakın unutmayın: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***\n"</string>
     <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>
@@ -186,7 +183,7 @@
     <string name="operations_read_clipboard">"Pano Hizmetine ait içerikleri okumasına izin verir"</string>
     <string name="operations_read_contacts">"Bir uygulamanın kullanıcıya ait telefon rehberi verilerini okumasına izin verir"</string>
     <string name="operations_read_storage">"Bir uygulamanın harici depolamadan okumasına izin verir"</string>
-    <string name="operations_read_phone_numbers">"Cihazın telefon numaralarını okumasına izin verir. READ_PHONE_STATE izninin verdiği yetkileri de kapsar fakat anında yüklenip açılan uygulamalar içindir."</string>
+    <string name="operations_read_phone_numbers">"Cihazın telefon numaralarını okumasına izin verir. READ_PHONE_STATE izninin verdiği yetkileri de kapsar fakat anında yüklenip açılan uygulamalar içindir"</string>
     <string name="operations_read_phone_state">"Cihazın telefon numarası, mevcut mobil veri bilgileri, yapılan aramaların durumları ve cihazda kayıtlı olan telefon hesapları dahil olmak üzere telefon durumuna sadece-okuma taraflı izin verir"</string>
     <string name="operations_read_sms">"Bir uygulamanın SMS mesajlarını okumasına izin verir"</string>
     <string name="operations_receive_mms">"Bir uygulamanın gelen MMS mesajlarını izlemesine izin verir"</string>
@@ -219,4 +216,8 @@
     <string name="bundle_path">"Toplu Paket Dizini"</string>
     <string name="size_apk">"APK Boyutu: %s"</string>
     <string name="size_bundle">"Toplu Paket Boyutu: %s"</string>
+    <string name="file_permission_request_message">"Bu özelliğin yeni Android sürümlerinde (Android R veya üstü) çalışmasını sağlamak için Package Manager'a \"Tüm dosyalara eriş\" izninin verilmesi gerekmektedir. Lütfen \"Yetkilendir\" butonuna bastıktan sonra açılan ekrandan bu izni veriniz."</string>
+    <string name="grant">"Yetkilendir"</string>
+    <string name="important">"Önemli"</string>
+    <string name="select_all">"Hepsini Seç"</string>
 </resources>
