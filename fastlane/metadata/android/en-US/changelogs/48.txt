@@ -1,0 +1,5 @@
+* Improve case-sensitivity while searching.
+* Fixed crashing app on certain situations.
+* Properly monitoring uninstalling user apps.
+* Added Polish locale and updated others.
+* Miscellaneous changes.

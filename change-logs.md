@@ -1,10 +1,14 @@
 # Change-logs
 
-## 38. June 15, 2021
+## 41. June 15, 2021
+*Release-tag: 4.8*<br>
+Improve case-sensitivity while searching. Fixed crashing on certain situations. Properly monitoring uninstalling user apps. Added Polish locale and updated others. Miscellaneous changes.
+
+## 40. June 15, 2021
 *Release-tag: 4.7*<br>
 Improve permission handling. Added "Select all" option. Redirected exported items path into /sdcard/Package_Manager" if "All files Permission" is granted. Updated Chinese & Turkish locale. Miscellaneous changes.
 
-## 38. May 31, 2021
+## 39. May 31, 2021
 *Release-tag: 4.6*<br>
 App will now target latest Android SDK. Now built using latest Gradle plugin. Updated Chinese (traditional & simplified) translations. Miscellaneous changes.
 
