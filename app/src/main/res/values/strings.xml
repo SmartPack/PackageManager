@@ -230,6 +230,7 @@
     <string name="uninstall_adb_summary">You\'ve selected \'%s\', which is a system application. Unfortunately, the Android ecosystem doesn\'t allow third-party user applications, such as Package Manager, to remove system applications in a non-rooted environment. Don\'t worry though! Package Manager will guide you to remove this application using the Android Debug Bridge (ADB) method. If you already have a fully working ADB, executing the following command from an ADB shell will uninstall this application. In order to configure a working ADB environment, please check out the linked Documentation page.</string>
     <string name="uninstall_nope">Sorry! You can\'t do this from here!</string>
     <string name="uninstall_summary">Removing %s</string>
+    <string name="uninstall_status_failed">Uninstalling %s is failed or cancelled by the user!</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="version">Version: %s</string>

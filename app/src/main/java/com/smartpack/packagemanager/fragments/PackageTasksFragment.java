@@ -263,6 +263,21 @@ public class PackageTasksFragment extends Fragment {
         loadUI(requireActivity());
     }
 
+    private void uninstallUserApp() {
+        Intent remove = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + Common.getBatchList().get(0)));
+        remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
+        startActivityForResult(remove, 1);
+    }
+
+    private void handleUninstallEvent() {
+        Common.getBatchList().remove(0);
+        if (Common.getBatchList().size() > 0) {
+            uninstallUserApp();
+        } else {
+            loadUI(requireActivity());
+        }
+    }
+
     private void sortMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mSort);
         Menu menu = popupMenu.getMenu();
@@ -364,7 +379,9 @@ public class PackageTasksFragment extends Fragment {
         Menu menu = popupMenu.getMenu();
         if (Utils.rootAccess()) {
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
-            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
+        }
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
+        if (Utils.rootAccess()) {
             menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
         }
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
@@ -383,15 +400,19 @@ public class PackageTasksFragment extends Fragment {
                             .show();
                     break;
                 case 1:
-                    MaterialAlertDialogBuilder uninstall = new MaterialAlertDialogBuilder(activity);
-                    uninstall.setIcon(R.mipmap.ic_launcher);
-                    uninstall.setTitle(R.string.sure_question);
-                    uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageData.showBatchList());
-                    uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                    });
-                    uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) ->
-                            PackageTasks.batchUninstallTask(activity));
-                    uninstall.show();
+                    if (Utils.rootAccess()) {
+                        MaterialAlertDialogBuilder uninstall = new MaterialAlertDialogBuilder(activity);
+                        uninstall.setIcon(R.mipmap.ic_launcher);
+                        uninstall.setTitle(R.string.sure_question);
+                        uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageData.showBatchList());
+                        uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        });
+                        uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) ->
+                                PackageTasks.batchUninstallTask(activity));
+                        uninstall.show();
+                    } else {
+                        uninstallUserApp();
+                    }
                     break;
                 case 2:
                     MaterialAlertDialogBuilder reset = new MaterialAlertDialogBuilder(activity);
@@ -489,19 +510,19 @@ public class PackageTasksFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            assert uri != null;
-            File file = new File(Objects.requireNonNull(uri.getPath()));
-            if (Utils.isDocumentsUI(uri)) {
-                @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
-                if (cursor != null && cursor.moveToFirst()) {
-                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
-                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                }
-            } else {
-                mPath = Utils.getPath(file);
-            }
             if (requestCode == 0) {
+                Uri uri = data.getData();
+                assert uri != null;
+                File file = new File(Objects.requireNonNull(uri.getPath()));
+                if (Utils.isDocumentsUI(uri)) {
+                    @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
+                    if (cursor != null && cursor.moveToFirst()) {
+                        mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
+                                cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                    }
+                } else {
+                    mPath = Utils.getPath(file);
+                }
                 if (mPath.endsWith(".apk") || mPath.endsWith(".apks") || mPath.endsWith(".apkm") || mPath.endsWith(".xapk")) {
                     MaterialAlertDialogBuilder installApp = new MaterialAlertDialogBuilder(requireActivity());
                     if (mPath.endsWith(".apks") || mPath.endsWith(".apkm") || mPath.endsWith(".xapk")) {
@@ -553,7 +574,14 @@ public class PackageTasksFragment extends Fragment {
                 } else {
                     Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk/.apks/.apkm/.xapk"));
                 }
+            } else {
+                // If uninstallation succeed
+                handleUninstallEvent();
             }
+        } else {
+            // If uninstallation cancelled or failed
+            Utils.snackbar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity())));
+            handleUninstallEvent();
         }
     }
 
