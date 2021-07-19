@@ -8,13 +8,16 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.fragments.ActivitiesFragment;
@@ -38,13 +41,21 @@ import java.io.File;
 
 public class PackageDetailsActivity extends AppCompatActivity {
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packagedetails);
 
+        AppCompatImageView mAppIcon = findViewById(R.id.app_image);
+        MaterialTextView mAppName = findViewById(R.id.app_title);
+        MaterialTextView mVersion = findViewById(R.id.version_text);
         TabLayout mTabLayout = findViewById(R.id.tab_Layout);
         ViewPager mViewPager = findViewById(R.id.view_pager);
+
+        mAppIcon.setImageDrawable(Common.getApplicationIcon());
+        mAppName.setText(Common.getApplicationName());
+        mVersion.setText(getString(R.string.version, PackageData.getVersionName(Common.getSourceDir(), this)));
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageInfoFragment(), getString(R.string.app_info));

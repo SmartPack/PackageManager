@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -43,7 +42,7 @@ import java.util.Objects;
  */
 public class PackageInfoFragment extends Fragment {
 
-    @SuppressLint({"SetTextI18n", "StringFormatInvalid"})
+    @SuppressLint({"StringFormatInvalid", "SetTextI18n"})
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,10 +50,7 @@ public class PackageInfoFragment extends Fragment {
 
         LinearLayout mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         MaterialTextView mProgressMessage = mRootView.findViewById(R.id.progress_message);
-        AppCompatImageView mAppIcon = mRootView.findViewById(R.id.app_image);
-        MaterialTextView mAppName = mRootView.findViewById(R.id.app_title);
         MaterialTextView mPackageID = mRootView.findViewById(R.id.package_id_text);
-        MaterialTextView mVersion = mRootView.findViewById(R.id.version_text);
         MaterialTextView mDataDir = mRootView.findViewById(R.id.data_dir_text);
         MaterialTextView mNatLib = mRootView.findViewById(R.id.native_lib_text);
         MaterialTextView mAPKPathTitle = mRootView.findViewById(R.id.apk_path);
@@ -71,15 +67,12 @@ public class PackageInfoFragment extends Fragment {
         LinearLayout mOpenStore = mRootView.findViewById(R.id.playstore_app);
         LinearLayout mUninstallApp = mRootView.findViewById(R.id.remove_app);
         LinearLayout mOpenSettings = mRootView.findViewById(R.id.info_app);
-        mAppIcon.setImageDrawable(Common.getApplicationIcon());
-        mAppName.setText(Common.getApplicationName());
 
         mProgressLayout.setBackgroundColor(Utils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
         mLastUpdated.setText(getString(R.string.date_installed, PackageData.getInstalledDate(Common.getApplicationID(), requireActivity())) +
                 "\n" + getString(R.string.date_updated, PackageData.getUpdatedDate(Common.getApplicationID(), requireActivity())));
         mCertificate.setText(PackageData.getCertificateDetails(Common.getSourceDir()));
         mPackageID.setText(Common.getApplicationID());
-        mVersion.setText(getString(R.string.version, PackageData.getVersionName(Common.getSourceDir(), requireActivity())));
         mDisableTitle.setText(PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable);
         mDataDir.setText(Common.getDataDir());
         mNatLib.setText(Common.getNativeLibsDir());
