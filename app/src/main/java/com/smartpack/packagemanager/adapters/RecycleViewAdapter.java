@@ -86,10 +86,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             }
             if (Common.getBatchList().contains(data.get(position))) {
                 Common.getBatchList().remove(data.get(position));
+                if (Common.getSelectAllCheckBox().isChecked()) {
+                    Common.getSelectAllCheckBox().setChecked(false);
+                }
                 Utils.snackbar(v, v.getContext().getString(R.string.batch_list_removed, PackageData.getAppName(
                         data.get(position), v.getContext())));
             } else {
                 Common.getBatchList().add(data.get(position));
+                Common.getSelectAllCheckBox().setChecked(Common.getBatchList().size() == PackageData.getData(v.getContext()).size());
                 Utils.snackbar(v, v.getContext().getString(R.string.batch_list_added, PackageData.getAppName(
                         data.get(position), v.getContext())));
             }

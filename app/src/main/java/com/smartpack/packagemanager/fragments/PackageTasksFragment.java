@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -85,6 +86,7 @@ public class PackageTasksFragment extends Fragment {
         mAppTitle = mRootView.findViewById(R.id.app_title);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mBatchOptions = Common.initializeBatchOptionsCard(mRootView, R.id.batch_options);
+        MaterialCheckBox mSelectAll = Common.initializeSelectAllCheckBox(mRootView, R.id.checkbox);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
         AppCompatImageButton mSearch = mRootView.findViewById(R.id.search_icon);
@@ -178,6 +180,27 @@ public class PackageTasksFragment extends Fragment {
 
         mBatchOptions.setOnClickListener(v -> batchOptionsMenu(requireActivity()));
 
+        mSelectAll.setChecked(Common.getBatchList().size() == PackageData.getData(requireActivity()).size());
+
+        mSelectAll.setOnClickListener(v -> {
+            if (Utils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
+                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(getString(R.string.sure_question))
+                        .setMessage(getString(R.string.select_all_summary))
+                        .setCancelable(false)
+                        .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
+                            mSelectAll.setChecked(Common.getBatchList().size() == PackageData.getData(requireActivity()).size());
+                        })
+                        .setPositiveButton(getString(R.string.select_all), (dialog, id) -> {
+                            selectAll(mSelectAll.isChecked());
+                            Utils.saveBoolean("select_all_firstAttempt", false, requireActivity());
+                        }).show();
+            } else {
+                selectAll(mSelectAll.isChecked());
+            }
+        });
+
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -235,6 +258,11 @@ public class PackageTasksFragment extends Fragment {
         }
     }
 
+    private void selectAll(boolean b) {
+        Utils.saveBoolean("select_all", b, requireActivity());
+        loadUI(requireActivity());
+    }
+
     private void sortMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mSort);
         Menu menu = popupMenu.getMenu();
@@ -245,8 +273,6 @@ public class PackageTasksFragment extends Fragment {
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(Utils.getBoolean("reverse_order", false, activity));
-        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.select_all)).setCheckable(true)
-                .setChecked(Common.getBatchList().size() == PackageData.getData(activity).size());
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -267,12 +293,6 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 3:
                     Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
-                    loadUI(activity);
-                    break;
-                case 4:
-                    if (Common.getBatchList().size() != PackageData.getData(activity).size()) {
-                        Utils.saveBoolean("select_all", !Utils.getBoolean("select_all", false, activity), activity);
-                    }
                     loadUI(activity);
                     break;
             }
@@ -425,6 +445,7 @@ public class PackageTasksFragment extends Fragment {
                             mBatchOptions.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.GONE);
                             if (Utils.getBoolean("select_all", false, activity)) {
+                                Common.getBatchList().clear();
                                 for (String mPackage : PackageData.getData(activity)) {
                                     Common.getBatchList().add(mPackage);
                                 }
