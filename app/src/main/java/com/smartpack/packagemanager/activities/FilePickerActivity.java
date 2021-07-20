@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -84,7 +86,6 @@ public class FilePickerActivity extends AppCompatActivity {
                 } else {
                     ActivityCompat.requestPermissions(this, new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-                    finish();
                 }
             });
             return;
@@ -183,6 +184,16 @@ public class FilePickerActivity extends AppCompatActivity {
                 }
             }, 250);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 1 && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            this.recreate();
+        }
+
     }
 
     @Override
