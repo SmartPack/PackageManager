@@ -1,6 +1,10 @@
 # Change-logs
 
-## 41. June 15, 2021
+## 42. July 20, 2021
+*Release-tag: 4.9*<br>
+Moved "Select All" option to Batch menu. Implemented batch uninstall option for non-root devices (need separate confirmation by user). Improved Package info page. Updated Polish locale. Miscellaneous changes.
+
+## 41. July 10, 2021
 *Release-tag: 4.8*<br>
 Improve case-sensitivity while searching. Fixed crashing on certain situations. Properly monitoring uninstalling user apps. Added Polish locale and updated others. Miscellaneous changes.
 
