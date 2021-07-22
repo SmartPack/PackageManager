@@ -57,6 +57,7 @@ public class PackageInfoFragment extends Fragment {
         MaterialTextView mAPKPath = mRootView.findViewById(R.id.apk_path_text);
         MaterialTextView mAPKSize = mRootView.findViewById(R.id.apk_size);
         MaterialTextView mLastUpdated = mRootView.findViewById(R.id.updated_text);
+        MaterialTextView mCertificateTitle = mRootView.findViewById(R.id.certificate_title);
         MaterialTextView mCertificate = mRootView.findViewById(R.id.certificate_text);
         MaterialTextView mDisableTitle = mRootView.findViewById(R.id.enable_title);
         LinearLayout mOpenApp = mRootView.findViewById(R.id.open_app);
@@ -71,7 +72,12 @@ public class PackageInfoFragment extends Fragment {
         mProgressLayout.setBackgroundColor(Utils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
         mLastUpdated.setText(getString(R.string.date_installed, PackageData.getInstalledDate(Common.getApplicationID(), requireActivity())) +
                 "\n" + getString(R.string.date_updated, PackageData.getUpdatedDate(Common.getApplicationID(), requireActivity())));
-        mCertificate.setText(PackageData.getCertificateDetails(Common.getSourceDir()));
+        if (PackageData.getCertificateDetails(Common.getSourceDir()).isEmpty()) {
+            mCertificateTitle.setVisibility(View.GONE);
+            mCertificate.setVisibility(View.GONE);
+        } else {
+            mCertificate.setText(PackageData.getCertificateDetails(Common.getSourceDir()));
+        }
         mPackageID.setText(Common.getApplicationID());
         mDisableTitle.setText(PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable);
         mDataDir.setText(Common.getDataDir());

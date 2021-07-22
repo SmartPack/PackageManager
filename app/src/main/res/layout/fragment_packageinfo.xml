@@ -400,6 +400,7 @@
                 android:textSize="12sp" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/certificate_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
