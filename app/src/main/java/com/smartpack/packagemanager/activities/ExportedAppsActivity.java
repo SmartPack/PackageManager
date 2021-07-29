@@ -74,10 +74,8 @@ public class ExportedAppsActivity extends AppCompatActivity {
             mPermissionLayout.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
             mTabLayout.setVisibility(View.GONE);
-            mPermissionGrant.setOnClickListener(v -> {
-                ActivityCompat.requestPermissions(this, new String[] {
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            });
+            mPermissionGrant.setOnClickListener(v -> ActivityCompat.requestPermissions(this, new String[] {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1));
             return;
         }
 

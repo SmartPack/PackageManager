@@ -41,7 +41,6 @@
     <string name="enabling">%s을(를) 활성화하는 중…</string>
     <string name="explore">탐색</string>
     <string name="export">내보내기</string>
-    <string name="export_summary">이(가) %s에 내보내졌어요. 공유할까요?</string>
     <string name="export_storage_message">%s을(를) 기기 저장소에 내보낼까요?</string>
     <string name="exporting">%s을(를) 내보내는 중…</string>
     <string name="exporting_bundle">%s을 Split Apks로 내보내는 중…</string>

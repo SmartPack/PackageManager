@@ -56,9 +56,9 @@
     <string name="explore">Explore</string>
     <string name="explore_error_status">Failed to explore %s!</string>
     <string name="export">Export</string>
+    <string name="export_apk_summary">The selected APK is exported into \'%s\'!</string>
     <string name="export_bundle_summary">The entire app bundle is exported into %s!</string>
     <string name="export_file_message">is successfully exported into %s!</string>
-    <string name="export_summary">is exported into %s. Do you want to share it?</string>
     <string name="export_storage_message">Export %s into device storage?</string>
     <string name="exported_apps">Exported Apps</string>
     <string name="exporting">Exporting %s</string>

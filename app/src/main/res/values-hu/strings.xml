@@ -39,7 +39,6 @@
     <string name="enabled">"engedélyezett"</string>
     <string name="enabling">"%s engedélyezése"</string>
     <string name="export">"Export"</string>
-    <string name="export_summary">"exportálva a %s-ba(be).  Meg akarja osztani?"</string>
     <string name="export_bundle_summary">"A teljes alkalmazás exportálódik a %s-ba(be)!"</string>
     <string name="exporting">"%s exportálása"</string>
     <string name="exporting_bundle">"%s alkalmazáscsomag exportálása"</string>

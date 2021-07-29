@@ -39,7 +39,6 @@
     <string name="enabled">"aktif"</string>
     <string name="enabling">"%s aktif ediliyor"</string>
     <string name="export">"Dışa aktar"</string>
-    <string name="export_summary">"%s klasörüne aktarıldı. Paylaşmak ister misiniz?"</string>
     <string name="export_bundle_summary">"Toplu uygulama paketinin tamamı %s klasörüne aktarıldı!"</string>
     <string name="exporting">"%s dışa aktarılıyor"</string>
     <string name="exporting_bundle">"%s toplu uygulama paketi dışa aktarılıyor"</string>

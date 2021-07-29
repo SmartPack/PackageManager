@@ -39,7 +39,6 @@
     <string name="enabled">"Bật"</string>
     <string name="enabling">"Đang bật %s"</string>
     <string name="export">"Xuất"</string>
-    <string name="export_summary">"được xuất thành %s.  Bạn có muốn chia sẻ nó không?"</string>
     <string name="export_bundle_summary">"Toàn bộ gói ứng dụng được xuất thành %s!"</string>
     <string name="exporting">"Đang xuất %s"</string>
     <string name="exporting_bundle">"Xuất gói ứng dụng %s"</string>

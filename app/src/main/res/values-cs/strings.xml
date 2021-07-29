@@ -38,7 +38,6 @@
     <string name="enabled">"Zapnuto"</string>
     <string name="enabling">"Zapínání %s"</string>
     <string name="export">"Export"</string>
-    <string name="export_summary">"Je exportováno do %s. Chcete jej sdílet?"</string>
     <string name="export_bundle_summary">"Celý balíček aplikace je exportován do %s!"</string>
     <string name="exporting">"Exportování %s"</string>
     <string name="exporting_bundle">"Exportování %s Apk bundle"</string>

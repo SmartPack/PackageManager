@@ -39,7 +39,6 @@
     <string name="enabled">"eingeschaltet"</string>
     <string name="enabling">"Schalte %s ein"</string>
     <string name="export">"Export"</string>
-    <string name="export_summary">"Wird in %s exportiert. Möchten sie es teilen?"</string>
     <string name="export_bundle_summary">"Das gesamte App-Bundle wird nach %s exportiert!"</string>
     <string name="exporting">"Exportiere %s"</string>
     <string name="exporting_bundle">"Exportiere App-Bundle %s"</string>

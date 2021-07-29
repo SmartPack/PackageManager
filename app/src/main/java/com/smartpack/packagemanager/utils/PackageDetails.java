@@ -79,7 +79,7 @@ public class PackageDetails {
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
                         .setTitle(activity.getString(R.string.share) + " " + name + "?")
-                        .setMessage(name + " " + activity.getString(R.string.export_summary, PackageData.getPackageDir(activity)))
+                        .setMessage(activity.getString(R.string.export_apk_summary, PackageData.getPackageDir(activity)))
                         .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                         })
                         .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {

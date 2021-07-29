@@ -32,7 +32,7 @@
     <string name="enabled">"പ്രവർത്തനക്ഷമമാണ്"</string>
     <string name="enabling">"%s നെ പ്രവർത്തനക്ഷമമാക്കുന്നു"</string>
     <string name="export">"എക്സ്പോർട്ട്"</string>
-    <string name="export_summary">"നെ %s ക്ക് എക്സ്പോർട്ട് ചെയ്തിരിക്കുന്നു. ഇത് 'share' ചെയ്യ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?"</string>
+    <string name="export_apk_summary">"APK \'%s\' ലേക്ക് എക്സ്പോർട്ട് ചെയ്തിരിക്കുന്നു"</string>
     <string name="export_bundle_summary">"അപ്ലിക്കേഷൻ ബണ്ടിൽ മുഴുവനായി %s ൽ എക്‌സ്‌പോർട്ടുചെയ്തിരിക്കുന്നു!"</string>
     <string name="exporting">"%s എക്സ്പോർട്ട് ചെയ്യുന്നു"</string>
     <string name="exporting_bundle">"%s അപ്ലിക്കേഷൻ ബണ്ടിലിനെ എക്സ്പോർട്ട് ചെയ്യുന്നു"</string>

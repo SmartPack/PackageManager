@@ -38,7 +38,6 @@
     <string name="enabled">"已啟用"</string>
     <string name="enabling">"啟用中％s"</string>
     <string name="export">"匯出"</string>
-    <string name="export_summary">"匯出至％s。您是否想分享它嗎？"</string>
     <string name="export_bundle_summary">"整個應用程式捆綁包已匯出至％s！"</string>
     <string name="exporting">"出口％s"</string>
     <string name="exporting_bundle">"匯出％s 應用程式捆綁包"</string>

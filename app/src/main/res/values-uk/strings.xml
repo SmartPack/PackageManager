@@ -38,7 +38,6 @@
     <string name="enabled">"розморожено"</string>
     <string name="enabling">"Розморозка %s"</string>
     <string name="export">"Експорт"</string>
-    <string name="export_summary">"експортується в %s. Ви хочете поділитися цим?"</string>
     <string name="export_bundle_summary">"Весь пакет додатків експортується в %s!"</string>
     <string name="exporting">"Експорт %s"</string>
     <string name="exporting_bundle">"Експорт %s пакету додатків"</string>

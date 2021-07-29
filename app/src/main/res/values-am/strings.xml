@@ -18,7 +18,6 @@
     <string name="enabled">በርቷል</string>
     <string name="enabling">%s በማብራት ላይ</string>
     <string name="export">ገልብጥ</string>
-    <string name="export_summary">ወደ %s ተገልብጧል። ለሚወዱት ሰው ማጋራት ይፈልጋሉ?</string>
     <string name="export_bundle_summary">ሁሉም ክፍልፍል መተግበሪያ ወደ %s ተገልብጧል!</string>
     <string name="exporting">%s በመገልበጥ ላይ</string>
     <string name="exporting_bundle">%s ክፍልፍል መተግበሪያ በመገልበጥ ላይ</string>

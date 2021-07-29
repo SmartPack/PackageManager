@@ -38,7 +38,6 @@
     <string name="enabled">"Habilitado"</string>
     <string name="enabling">"Habilitando %s"</string>
     <string name="export">"Exportar"</string>
-    <string name="export_summary">"exportado en %s. ¿Quieres compartirlo?"</string>
     <string name="export_bundle_summary">"Todo el paquete de aplicaciones ha sido exportado a %s!"</string>
     <string name="exporting">"Exportando %s"</string>
     <string name="exporting_bundle">"Exportando paquete %s"</string>

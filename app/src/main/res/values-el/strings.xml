@@ -24,7 +24,6 @@
     <string name="enabled">Ενεργό</string>
     <string name="enabling">Ενεργοποίηση %s</string>
     <string name="export">Εξαγωγή</string>
-    <string name="export_summary">έχει εξαχθεί στο %s. Θέλετε να το κοινοποιήσετε;</string>
     <string name="export_bundle_summary">Ολόκληρη η δεσμίδα εφαρμογής έχει εξαχθεί σε %s!</string>
     <string name="exporting">Εξαγωγή %s</string>
     <string name="exporting_bundle">Εξαγωγή %s εφαρμογή δεσμίδας</string>
