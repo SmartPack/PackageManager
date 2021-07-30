@@ -78,7 +78,7 @@ public class PackageDetails {
                 hideProgress(linearLayout, textView);
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
-                        .setTitle(activity.getString(R.string.share) + " " + name + "?")
+                        .setTitle(name)
                         .setMessage(activity.getString(R.string.export_apk_summary, PackageData.getPackageDir(activity)))
                         .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                         })
