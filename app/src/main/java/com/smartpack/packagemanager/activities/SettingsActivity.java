@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -128,7 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.saveBoolean("dark_theme", false, this);
                                 Utils.saveBoolean("light_theme", false, this);
                                 Utils.saveBoolean("theme_auto", true, this);
-                                Utils.restartApp(this);
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                             }
                             break;
                         case 1:
@@ -136,7 +137,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.saveBoolean("dark_theme", true, this);
                                 Utils.saveBoolean("light_theme", false, this);
                                 Utils.saveBoolean("theme_auto", false, this);
-                                Utils.restartApp(this);
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                             }
                             break;
                         case 2:
@@ -144,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 Utils.saveBoolean("dark_theme", false, this);
                                 Utils.saveBoolean("light_theme", true, this);
                                 Utils.saveBoolean("theme_auto", false, this);
-                                Utils.restartApp(this);
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                             }
                             break;
                     }
