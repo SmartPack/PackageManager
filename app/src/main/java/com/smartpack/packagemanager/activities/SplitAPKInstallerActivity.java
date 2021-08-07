@@ -10,6 +10,7 @@ package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -32,11 +33,11 @@ import com.smartpack.packagemanager.utils.Utils;
 public class SplitAPKInstallerActivity extends AppCompatActivity {
 
     private AppCompatImageButton mIcon;
-    private MaterialCardView mCancel;
+    private MaterialCardView mCancel, mOpen;
     private MaterialTextView mStatus, mTitle;
     private ProgressBar mProgress;
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "StringFormatInvalid"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
 
         mIcon = findViewById(R.id.icon);
         mProgress = findViewById(R.id.progress);
+        mOpen = findViewById(R.id.open);
         mCancel = findViewById(R.id.cancel);
         mTitle = findViewById(R.id.title);
         mStatus = findViewById(R.id.status);
@@ -58,6 +60,16 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
         } else {
             mIcon.setVisibility(View.GONE);
         }
+
+        mOpen.setOnClickListener(v -> {
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(getPackageId());
+            if (launchIntent != null) {
+                startActivity(launchIntent);
+                finish();
+            } else {
+                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(getPackageId(), this)));
+            }
+        });
 
         mCancel.setOnClickListener(v -> onBackPressed());
 
@@ -82,6 +94,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
                                     try {
                                         mTitle.setText(PackageData.getAppName(getPackageId(), activity));
                                         mIcon.setImageDrawable(PackageData.getAppIcon(getPackageId(), activity));
+                                        mOpen.setVisibility(View.VISIBLE);
                                     } catch (NullPointerException ignored) {}
                                 }
                                 mProgress.setVisibility(View.GONE);
