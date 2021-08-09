@@ -1,0 +1,22 @@
+<i>Package Manager</i> to bardzo wydajna aplikacja do zarządzania aplikacjami, zarówno systemowymi jak i użytkownika, zainstalowanymi na urządzeniu z systemem Android.
+
+<b>OSTRZEŻENIE: NIE JESTEM odpowiedzialny za jakiekolwiek uszkodzenia na Twoim urządzeniu!</b>
+
+Dostęp do <b>ROOTA</b> jest wymagany dla niektórych zaawansowanych funkcji.
+
+<b>Funkcje</b>
+
+<i>Package Manager</i> to prosta, ale potężna aplikacja, oferująca następujące funkcje:
+* Ładny widok listy aplikacji systemowych i użytkownika, razem lub osobno.
+* Pomaga wykonywać podstawowe zadania, takie jak otwieranie aplikacji, pokazywanie informacji o aplikacji, odwiedzanie strony Google Play, odinstalowywanie (aplikacji użytkownika) itd.
+* Instalowanie podzielonych APK/paczek aplikacji (obsługiwane formaty pakietów: .apks, .apkm, i .xapk) z pamięci urządzenia.
+* Przeglądanie i eksportowanie zawartości zainstalowanej aplikacji (eksperymentalne).
+* Eksportowanie pojedynczej lub zestawu aplikacji (w tym podzielonych APK) do pamięci urządzenia.
+* Wykonuj zaawansowane zadania (wymagany dostęp do roota), takie jak:
+  • Odinstalowywanie pojedynczej lub zestawu aplikacji systemowych (usuwanie śmieci).
+  • Kontrolowanie operacji (AppOps).
+  • Wyłączanie lub włączanie pojedynczej lub zestawu aplikacji.
+
+<b>Tłumaczenia</b>
+
+Pomóż mi przetłumaczyć tę aplikację przez <a href='https://poeditor.com/join/project?hash=0CitpyI1Oc'>POEditor</a>. Możesz również tłumaczyć po pobraniu oryginalnego ciągu językowego dostępnego na <a href='https://github.com/SmartPack/PackageManager/blob/master/app/src/main/res/values/strings.xml'>GitHubie</a>.
