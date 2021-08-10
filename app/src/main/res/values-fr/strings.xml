@@ -59,7 +59,9 @@
     <string name="open_failed">"%s n'est pas conçu pour fonctionner en mode utilisateur !"</string>
     <string name="package_id">"ID paquet"</string>
     <string name="package_removed">"Le paquet sélectionné est supprimé ! Annulation…"</string>
+    <string name="permissions">"Permissions"</string>
     <string name="permission_denied_write_storage">"Permission refusée d'écrire dans le stockage !"</string>
+    <string name="playstore">"Google Play"</string>
     <string name="press_back">"Réappuyer sur retour pour quitter"</string>
     <string name="report_issue">"Signaler un plantage"</string>
     <string name="reset">"Réinitialiser"</string>
@@ -124,6 +126,7 @@
     <string name="welcome_message_root">"AVERTISSEMENT : cette application est très puissante et peut endommager le système si elle est mal utilisée ; le développeur de cette application n'assumera aucune responsabilité en cas de problème avec votre appareil."</string>
     <string name="welcome_message_noroot">"Remarque : l'accès root est soit indisponible sur votre appareil, soit refusé pour Package Manager ! Les fonctionnalités de cette application sur votre appareil seront donc limitées."</string>
     <string name="activities">"Activités"</string>
+    <string name="documentation">"Documentation"</string>
     <string name="documentation_summary">"Consultez la documentation détaillée pour utiliser Package Manager"</string>
     <string name="file_picker">"Sélecteur de fichiers"</string>
     <string name="file_picker_external">"Externe"</string>
@@ -155,6 +158,7 @@
     <string name="show_apps_system">"Système"</string>
     <string name="show_apps_user">"Utilisateur"</string>
     <string name="exported_apps">"Application exportées"</string>
+    <string name="operations">"Opérations"</string>
     <string name="operations_access_notification">"Autoriser une application système à accéder aux notifications"</string>
     <string name="operations_accessibility_service">"Requis par un service d'accessibilité, pour assurer que seul le système peut s'y lier"</string>
     <string name="operations_audio_notification">"Changer le volume de notification"</string>
@@ -213,5 +217,6 @@
     <string name="size_bundle">"Taille du paquet : %s"</string>
     <string name="file_permission_request_message">"Pour que cette fonctionnalité marche sur les versions d'Android les plus récentes (Android R ou plus récent), il est nécessaire d'accorder l'autorisation \"Accès à tous les fichiers\" au Package Manager. Merci de valider manuellement depuis l'écran qui va s'ouvrir juste après avoir cliqué sur le bouton \"Accorder\"."</string>
     <string name="grant">"Accorder"</string>
+    <string name="important">"Important"</string>
     <string name="select_all">"Sélectionner tout"</string>
 </resources>

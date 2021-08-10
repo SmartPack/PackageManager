@@ -94,7 +94,9 @@
     <string name="uninstall_nope">"抱歉！您无法进行此操作！"</string>
     <string name="uninstall_summary">"正在删除 %s"</string>
     <string name="uninstall_title">"您确定要卸载 %s 吗？"</string>
-    <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！\n\n*** <b>您需要自担风险</b> ***\n"</string>
+    <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
+
+        *** <b>您需要自担风险</b> ***"</string>
     <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
     <string name="wrong_extension">"请选择一个带有 %s 扩展名的文件。"</string>

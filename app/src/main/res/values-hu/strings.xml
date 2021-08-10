@@ -4,7 +4,7 @@
     <string name="about_summary">"<i>Egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez.</i>"</string>
     <string name="apk_path">"APK Útvonal"</string>
     <string name="app_info">"App infó"</string>
-    <string name="batch_list_clear">"Lista törlés"</string>
+    <string name="batch_list_clear">"Lista törlése"</string>
     <string name="batch_list_disable">"Biztos hogy tiltja (ha engedélyezett), vagy engedélyezi (ha tiltott) a következő alkakmazás(oka)t."</string>
     <string name="batch_list_remove">"Biztos hogy eltávolítja a következő alkakmazás(oka)t."</string>
     <string name="batch_list_reset">"Biztosan visszaállítja a következő alkalmazás(oka)t?"</string>
@@ -46,7 +46,7 @@
     <string name="failed">"Sikertelen"</string>
     <string name="got_it">"Megvan"</string>
     <string name="install">"Telepít"</string>
-    <string name="install_bundle">"Telepítse a Felosztott APK-kat"</string>
+    <string name="install_bundle">"Felosztott APK-k telepítése"</string>
     <string name="installing_bundle">"Az Alkalmazáscsomag telepítése!"</string>
     <string name="language">"Nyelv"</string>
     <string name="language_default">"Alap"</string>
@@ -154,7 +154,7 @@
     <string name="delete_question">"Törli '%s'?"</string>
     <string name="install_question">"Telepíti '%s'?"</string>
     <string name="reverse_order">"Fordított sorrend"</string>
-    <string name="show_apps_all">"Mind"</string>
+    <string name="show_apps_all">"Összes"</string>
     <string name="show_apps_system">"Rendszer"</string>
     <string name="show_apps_user">"Felhasználó"</string>
     <string name="exported_apps">"Exportált Appok"</string>
@@ -198,7 +198,7 @@
     <string name="operations_toast_window">"Rövid ideig tartó üzenetek megjelenítése a képernyőn"</string>
     <string name="operations_unavailable">"A '%s' leírása nem érhető el"</string>
     <string name="operations_usage_status">"Használati statisztika gyűjtését engedélyezi az alkalmazásnak"</string>
-    <string name="operations_use_biometric">"Használja az eszköz által támogatott biometrikus módokat"</string>
+    <string name="operations_use_biometric">"Használja az eszköz által támogatott biometrikus módszereket"</string>
     <string name="operations_use_fingerprint">"Engedélyezi az alkalmazásnak az ujjlenyomatolvasó használatát"</string>
     <string name="operations_vibrate">"Engedélyezi a hozzáférést a vibrátorhoz"</string>
     <string name="operations_wake_lock">"Használja a PowerManager WakeLocks funkciót, hogy a processzor ne aludjon, vagy a képernyő ne sötétüljön el"</string>
@@ -212,11 +212,13 @@
     <string name="operations_write_sms">"Engedélyezi az alkalmazásnak, hogy SMS üzeneteket küldjön"</string>
     <string name="operations_write_storage">"Engedélyezi az alkalmazásnak, hogy külső tárhelyre írjon"</string>
     <string name="operations_write_wallpaper">"Engedélyezi az alkalmazásnak a háttérkép beállítását"</string>
-    <string name="bundle_path">"Csomagútvonal"</string>
+    <string name="bundle_path">"Csomag útvonala"</string>
     <string name="size_apk">"APK mérete: %s"</string>
     <string name="size_bundle">"Csomag mérete: %s"</string>
     <string name="file_permission_request_message">"Annak érdekében, hogy ez a funkció működjön az újabb Android-verziókon (Android R vagy újabb), meg kell adni az \"Összes fájlhoz való hozzáférés\" engedélyét a Package Manager számára.  Kérjük adja meg az engedélyt manuálisan az új képernyőn, amely a \"Megad\" gombra kattintás után nyilik meg."</string>
     <string name="grant">"Megad"</string>
     <string name="important">"Fontos"</string>
     <string name="select_all">"Mindet kiválasztja"</string>
+    <string name="select_all_summary">"Kiválasztja és hozzáadja az összes alkalmazást erről az oldalról a kötegelt listához?"</string>
+    <string name="uninstall_status_failed">"A(z) %s eltávolítása nem sikerült, vagy a felhasználó leállította!"</string>
 </resources>
