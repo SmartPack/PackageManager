@@ -1,5 +1,0 @@
-* Moved "Select All" option to Batch menu.
-* Implemented batch uninstall option for non-root devices (need separate confirmation by user).
-* Improved Package info page.
-* Updated Polish locale.
-* Miscellaneous changes.

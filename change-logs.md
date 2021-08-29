@@ -1,5 +1,9 @@
 # Change-logs
 
+## 43. August 29, 2021
+*Release-tag: 5.0*<br>
+App now shows a one-rime welcome page on the first app launch. App will now show an "Open" button after a successful installation session. Replaced deprecated AsyncTask used throughout the app with Executor. Updated translations. Miscellaneous changes.
+
 ## 42. July 20, 2021
 *Release-tag: 4.9*<br>
 Moved "Select All" option to Batch menu. Implemented batch uninstall option for non-root devices (need separate confirmation by user). Improved Package info page. Updated Polish locale. Miscellaneous changes.
