@@ -8,8 +8,11 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,6 +34,7 @@ import com.smartpack.packagemanager.utils.Utils;
 
 public class StartActivity extends AppCompatActivity {
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +49,18 @@ public class StartActivity extends AppCompatActivity {
         if (Utils.getBoolean("welcomeMessage", true, this)) {
             mMainText.setVisibility(View.VISIBLE);
             mBottomLayout.setVisibility(View.VISIBLE);
+
+            if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK)
+                <= Configuration.SCREENLAYOUT_SIZE_LARGE) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
             
             mDocumentationCard.setOnClickListener(v -> Utils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
 
             mStartCard.setOnClickListener(v -> {
                 mProgress.setVisibility(View.VISIBLE);
                 mMainText.setText(getString(R.string.initializing));
+                mBottomLayout.setVisibility(View.GONE);
                 loadData(this);
                 Utils.saveBoolean("welcomeMessage",false, this);
             });
