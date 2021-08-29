@@ -31,7 +31,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewSettingsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.Billing;
-import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.RecycleSettingsItem;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import java.util.ArrayList;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    private final ArrayList <RecycleViewItem> mData = new ArrayList<>();
+    private final ArrayList <RecycleSettingsItem> mData = new ArrayList<>();
 
     @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n", "StringFormatInvalid"})
     @Override
@@ -73,27 +73,27 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         });
 
-        mData.add(new RecycleViewItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null));
-        mData.add(new RecycleViewItem(getString(R.string.file_picker), getString(Utils.getBoolean("filePicker", true, this) ? R.string.file_picker_inbuilt
+        mData.add(new RecycleSettingsItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null));
+        mData.add(new RecycleSettingsItem(getString(R.string.file_picker), getString(Utils.getBoolean("filePicker", true, this) ? R.string.file_picker_inbuilt
                 : R.string.file_picker_external), getResources().getDrawable(R.drawable.ic_folder), null));
-        mData.add(new RecycleViewItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null));
-        mData.add(new RecycleViewItem(getString(R.string.source_code), getString(R.string.source_code_summary), getResources().getDrawable(
+        mData.add(new RecycleSettingsItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null));
+        mData.add(new RecycleSettingsItem(getString(R.string.source_code), getString(R.string.source_code_summary), getResources().getDrawable(
                 R.drawable.ic_github), "https://github.com/SmartPack/PackageManager"));
-        mData.add(new RecycleViewItem(getString(R.string.support), getString(R.string.support_summary), getResources().getDrawable(R.drawable.ic_support),
+        mData.add(new RecycleSettingsItem(getString(R.string.support), getString(R.string.support_summary), getResources().getDrawable(R.drawable.ic_support),
                 "https://t.me/smartpack_kmanager"));
-        mData.add(new RecycleViewItem(getString(R.string.report_issue), getString(R.string.report_issue_summary), getResources().getDrawable(R.drawable.ic_issue),
+        mData.add(new RecycleSettingsItem(getString(R.string.report_issue), getString(R.string.report_issue_summary), getResources().getDrawable(R.drawable.ic_issue),
                 "https://github.com/SmartPack/PackageManager/issues/new/choose"));
-        mData.add(new RecycleViewItem(getString(R.string.support_development), null, getResources().getDrawable(R.drawable.ic_donate), null));
-        mData.add(new RecycleViewItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(
+        mData.add(new RecycleSettingsItem(getString(R.string.support_development), null, getResources().getDrawable(R.drawable.ic_donate), null));
+        mData.add(new RecycleSettingsItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(
                 R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
-        mData.add(new RecycleViewItem(getString(R.string.documentation), getString(R.string.documentation_summary), getResources().getDrawable(
+        mData.add(new RecycleSettingsItem(getString(R.string.documentation), getString(R.string.documentation_summary), getResources().getDrawable(
                 R.drawable.ic_book), "https://smartpack.github.io/PackageManager/general/"));
-        mData.add(new RecycleViewItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(
+        mData.add(new RecycleSettingsItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(
                 R.drawable.ic_translate), "https://poeditor.com/join/project?hash=0CitpyI1Oc"));
-        mData.add(new RecycleViewItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
-        mData.add(new RecycleViewItem(getString(R.string.rate_us), getString(R.string.rate_us_Summary), getResources().getDrawable(R.drawable.ic_rate),
+        mData.add(new RecycleSettingsItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
+        mData.add(new RecycleSettingsItem(getString(R.string.rate_us), getString(R.string.rate_us_Summary), getResources().getDrawable(R.drawable.ic_rate),
                 "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"));
-        mData.add(new RecycleViewItem(getString(R.string.credits), getString(R.string.credits_summary), getResources().getDrawable(R.drawable.ic_credits),
+        mData.add(new RecycleSettingsItem(getString(R.string.credits), getString(R.string.credits_summary), getResources().getDrawable(R.drawable.ic_credits),
                 "https://github.com/SmartPack/PackageManager/blob/master/Credits.md"));
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
@@ -107,13 +107,13 @@ public class SettingsActivity extends AppCompatActivity {
                     switch (i) {
                         case 0:
                             Utils.saveBoolean("filePicker", true, this);
-                            mData.set(position, new RecycleViewItem(getString(R.string.file_picker), getString(R.string.file_picker_inbuilt),
+                            mData.set(position, new RecycleSettingsItem(getString(R.string.file_picker), getString(R.string.file_picker_inbuilt),
                                     getResources().getDrawable(R.drawable.ic_folder), null));
                             mRecycleViewAdapter.notifyItemChanged(position);
                             break;
                         case 1:
                             Utils.saveBoolean("filePicker", false, this);
-                            mData.set(position, new RecycleViewItem(getString(R.string.file_picker), getString(R.string.file_picker_external),
+                            mData.set(position, new RecycleSettingsItem(getString(R.string.file_picker), getString(R.string.file_picker_external),
                                     getResources().getDrawable(R.drawable.ic_folder), null));
                             mRecycleViewAdapter.notifyItemChanged(position);
                             break;

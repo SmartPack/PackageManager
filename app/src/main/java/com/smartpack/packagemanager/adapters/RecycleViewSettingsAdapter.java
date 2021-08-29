@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.RecycleSettingsItem;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -30,11 +30,11 @@ import java.util.ArrayList;
 
 public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleViewSettingsAdapter.ViewHolder> {
 
-    private static ArrayList<RecycleViewItem> data;
+    private static ArrayList<RecycleSettingsItem> data;
 
     private static ClickListener mClickListener;
 
-    public RecycleViewSettingsAdapter(ArrayList<RecycleViewItem> data) {
+    public RecycleViewSettingsAdapter(ArrayList<RecycleSettingsItem> data) {
         RecycleViewSettingsAdapter.data = data;
     }
 
