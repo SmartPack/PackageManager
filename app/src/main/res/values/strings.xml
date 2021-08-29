@@ -73,6 +73,7 @@
     <string name="got_it">Got it</string>
     <string name="grant">Grant</string>
     <string name="important">Important</string>
+    <string name="initializing">Initializing…</string>
     <string name="install">Install</string>
     <string name="install_bundle">Install Split APKs</string>
     <string name="install_question">Install \'%s\'?</string>
@@ -208,6 +209,7 @@
     <string name="split_apk">Split APKs</string>
     <string name="split_apk_installer">Split APK Installer</string>
     <string name="split_apk_list">List of split APKs</string>
+    <string name="start">Start</string>
     <string name="support">Support Group</string>
     <string name="support_acknowledged">Donation Acknowledged \u2665</string>
     <string name="support_app">Buy Donation App</string>

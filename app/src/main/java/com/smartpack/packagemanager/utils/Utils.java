@@ -31,7 +31,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.MainActivity;
@@ -101,6 +100,7 @@ public class Utils {
         }
     }
 
+    // This is unused, but let's keep it. We might need it in future.
     @NonNull
     public static String runAndGetError(String command) {
         StringBuilder sb = new StringBuilder();
@@ -369,23 +369,6 @@ public class Utils {
      */
     public static boolean isPermissionDenied(Context context) {
         return (context.checkCallingOrSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
-    }
-
-    /*
-     * The following code is partly taken from https://github.com/morogoku/MTweaks-KernelAdiutorMOD/
-     * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
-     */
-    public static void WelcomeDialog(Activity activity) {
-        new MaterialAlertDialogBuilder(Objects.requireNonNull(activity))
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(R.string.app_name)
-                .setMessage(activity.getString(R.string.welcome_message) + "\n\n" + activity.getString(rootAccess() ? R.string.welcome_message_root
-                        : R.string.welcome_message_noroot))
-                .setCancelable(false)
-                .setNeutralButton(R.string.documentation, (dialog, id) ->
-                        launchUrl("https://smartpack.github.io/PackageManager/general/", activity))
-                .setPositiveButton(R.string.got_it, (dialog, id) ->
-                        saveBoolean("welcomeMessage",false, activity)).show();
     }
 
     public static String readAssetFile(Context context, String file) {

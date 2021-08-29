@@ -188,9 +188,7 @@ public class PackageTasksFragment extends Fragment {
                         .setTitle(getString(R.string.sure_question))
                         .setMessage(getString(R.string.select_all_summary))
                         .setCancelable(false)
-                        .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
-                            mSelectAll.setChecked(Common.getBatchList().size() == PackageData.getData(requireActivity()).size());
-                        })
+                        .setNegativeButton(getString(R.string.cancel), (dialog, id) -> mSelectAll.setChecked(Common.getBatchList().size() == PackageData.getData(requireActivity()).size()))
                         .setPositiveButton(getString(R.string.select_all), (dialog, id) -> {
                             selectAll(mSelectAll.isChecked());
                             Utils.saveBoolean("select_all_firstAttempt", false, requireActivity());
@@ -584,9 +582,6 @@ public class PackageTasksFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (Utils.getBoolean("welcomeMessage", true, getActivity())) {
-            Utils.WelcomeDialog(getActivity());
-        }
         if (Common.reloadPage()) {
             Common.reloadPage(false);
             loadUI(requireActivity());
