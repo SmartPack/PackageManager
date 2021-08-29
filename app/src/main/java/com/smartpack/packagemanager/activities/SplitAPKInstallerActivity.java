@@ -28,6 +28,8 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.Utils;
 
+import java.io.File;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 06, 2021
  */
@@ -70,7 +72,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
             } else {
                 Utils.snackbar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(getPackageId(), this)));
             }
-            PackageData.getRawData().add(new RecycleViewItem(getPackageId(), getPackageName(), getIcon(), null));
+            PackageData.getRawData().add(new RecycleViewItem(getPackageId(), PackageData.getAppName(getPackageName(), this), PackageData.getAppIcon(getPackageName(), this), new File(PackageData.getSourceDir(getPackageName(), this)).length()));
             Common.reloadPage(true);
         });
 
@@ -146,7 +148,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
             return;
         }
         if (Utils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
-            PackageData.getRawData().add(new RecycleViewItem(getPackageId(), getPackageName(), getIcon(), null));
+            PackageData.getRawData().add(new RecycleViewItem(getPackageId(), PackageData.getAppName(getPackageName(), this), PackageData.getAppIcon(getPackageName(), this), new File(PackageData.getSourceDir(getPackageName(), this)).length()));
             Common.reloadPage(true);
         }
         super.onBackPressed();

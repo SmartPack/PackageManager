@@ -179,7 +179,7 @@ public class PackageInfoFragment extends Fragment {
 
         if (requestCode == 0 && data != null && resultCode == Activity.RESULT_OK) {
             for (RecycleViewItem item : PackageData.getRawData()) {
-                if (item.getTitle().equals(Common.getApplicationID())) {
+                if (item.getPackageName().equals(Common.getApplicationID())) {
                     PackageData.getRawData().remove(item);
                 }
             }

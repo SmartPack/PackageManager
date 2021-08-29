@@ -17,30 +17,32 @@ import java.io.Serializable;
  */
 
 public class RecycleViewItem implements Serializable {
-    private final String mTitle, mDescription, mUrl;
+
     private final Drawable mIcon;
+    private final long mAPKSize;
+    private final String mPackageName, mAppName;
 
-    public RecycleViewItem(String title, String description, Drawable icon, String url) {
-        this.mTitle = title;
-        this.mDescription = description;
+    public RecycleViewItem(String packageName, String appName, Drawable icon, long apkSize) {
+        this.mPackageName = packageName;
+        this.mAppName = appName;
         this.mIcon = icon;
-        this.mUrl = url;
+        this.mAPKSize = apkSize;
     }
 
-    public String getTitle() {
-        return mTitle;
+    public String getPackageName() {
+        return mPackageName;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getAppName() {
+        return mAppName;
     }
 
     public Drawable getIcon() {
         return mIcon;
     }
 
-    public String getUrl() {
-        return mUrl;
+    public long getAPKSize() {
+        return mAPKSize;
     }
 
 }

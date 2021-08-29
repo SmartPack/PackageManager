@@ -283,6 +283,10 @@ public class PackageTasksFragment extends Fragment {
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
         sort.add(Menu.NONE, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.size)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sort_size", true, activity));
+        }
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(Utils.getBoolean("reverse_order", false, activity));
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -293,19 +297,29 @@ public class PackageTasksFragment extends Fragment {
                     if (!Utils.getBoolean("sort_name", false, activity)) {
                         Utils.saveBoolean("sort_name", true, activity);
                         Utils.saveBoolean("sort_id", false, activity);
+                        Utils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 2:
                     if (!Utils.getBoolean("sort_id", true, activity)) {
-                        Utils.saveBoolean("sort_id", true, activity);
                         Utils.saveBoolean("sort_name", false, activity);
+                        Utils.saveBoolean("sort_id", true, activity);
+                        Utils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
                     Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
                     loadUI(activity);
+                    break;
+                case 4:
+                    if (!Utils.getBoolean("sort_size", true, activity)) {
+                        Utils.saveBoolean("sort_name", false, activity);
+                        Utils.saveBoolean("sort_id", false, activity);
+                        Utils.saveBoolean("sort_size", true, activity);
+                        loadUI(activity);
+                    }
                     break;
             }
             return false;
@@ -460,7 +474,7 @@ public class PackageTasksFragment extends Fragment {
                 if (Utils.getBoolean("select_all", false, activity)) {
                     Common.getBatchList().clear();
                     for (RecycleViewItem mPackage : PackageData.getData(activity)) {
-                        Common.getBatchList().add(mPackage.getTitle());
+                        Common.getBatchList().add(mPackage.getPackageName());
                     }
                 } else {
                     Common.getBatchList().clear();
@@ -562,7 +576,7 @@ public class PackageTasksFragment extends Fragment {
                 // If uninstallation succeed
                 try {
                     for (RecycleViewItem item : PackageData.getRawData()) {
-                        if (item.getTitle().equals(Common.getBatchList().get(0))) {
+                        if (item.getPackageName().equals(Common.getBatchList().get(0))) {
                             PackageData.getRawData().remove(item);
                             Common.getBatchList().remove(0);
                             if (!Common.reloadPage()) Common.reloadPage(true);

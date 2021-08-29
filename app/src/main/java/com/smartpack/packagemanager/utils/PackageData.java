@@ -25,6 +25,7 @@ import java.security.cert.CertificateException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,7 +48,7 @@ public class PackageData {
         List<RecycleViewItem> mRawData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
-            mRawData.add(new RecycleViewItem(packageInfo.packageName, getAppName(packageInfo.packageName, context), getAppIcon(packageInfo.packageName, context), null));
+            mRawData.add(new RecycleViewItem(packageInfo.packageName, getAppName(packageInfo.packageName, context), getAppIcon(packageInfo.packageName, context), new File(getSourceDir(packageInfo.packageName, context)).length()));
         }
         return mRawData;
     }
@@ -55,27 +56,28 @@ public class PackageData {
     public static List<RecycleViewItem> getData(Context context) {
         boolean mAppType;
         List<RecycleViewItem> mData = new ArrayList<>();
-        List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
-        if (Utils.getBoolean("sort_name", true, context)) {
-            Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
-        } else {
-            Collections.sort(packages, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.packageName, rhs.packageName));
-        }
         for (RecycleViewItem item : getRawData()) {
             if (Utils.getString("appTypes", "all", context).equals("system")) {
-                mAppType = (isSystemApp(item.getTitle(), context));
+                mAppType = (isSystemApp(item.getPackageName(), context));
             } else if (Utils.getString("appTypes", "all", context).equals("user")) {
-                mAppType = (!isSystemApp(item.getTitle(), context));
+                mAppType = (!isSystemApp(item.getPackageName(), context));
             } else {
                 mAppType = true;
             }
-            if (mAppType && item.getTitle().contains(".")) {
+            if (mAppType && item.getPackageName().contains(".")) {
                 if (Common.getSearchText() == null) {
                     mData.add(item);
-                } else if (Common.isTextMatched(item.getDescription())
-                        || Common.isTextMatched(item.getTitle())) {
+                } else if (Common.isTextMatched(item.getAppName())
+                        || Common.isTextMatched(item.getPackageName())) {
                     mData.add(item);
                 }
+            }
+            if (Utils.getBoolean("sort_name", true, context)) {
+                Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_size", true, context)) {
+                Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getAPKSize));
+            } else {
+                Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
             }
         }
         if (Utils.getBoolean("reverse_order", false, context)) {

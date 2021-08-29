@@ -201,6 +201,7 @@
     <string name="show_apps_all">All</string>
     <string name="show_apps_system">System</string>
     <string name="show_apps_user">User</string>
+    <string name="size">Size</string>
     <string name="size_apk">APK Size: %s</string>
     <string name="size_bundle">Bundle Size: %s</string>
     <string name="sort_by">Sort Apps</string>
