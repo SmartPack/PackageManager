@@ -19,14 +19,17 @@ import java.io.Serializable;
 public class RecycleViewItem implements Serializable {
 
     private final Drawable mIcon;
-    private final long mAPKSize;
+    private final long mAPKSize, mInstalledTime, mUpdatedTime;
     private final String mPackageName, mAppName;
 
-    public RecycleViewItem(String packageName, String appName, Drawable icon, long apkSize) {
+    public RecycleViewItem(String packageName, String appName, Drawable icon, long apkSize,
+                           long installedTime, long updatedTime) {
         this.mPackageName = packageName;
         this.mAppName = appName;
         this.mIcon = icon;
         this.mAPKSize = apkSize;
+        this.mInstalledTime = installedTime;
+        this.mUpdatedTime = updatedTime;
     }
 
     public String getPackageName() {
@@ -43,6 +46,14 @@ public class RecycleViewItem implements Serializable {
 
     public long getAPKSize() {
         return mAPKSize;
+    }
+
+    public long getInstalledTime() {
+        return mInstalledTime;
+    }
+
+    public long getUpdatedTime() {
+        return mUpdatedTime;
     }
 
 }

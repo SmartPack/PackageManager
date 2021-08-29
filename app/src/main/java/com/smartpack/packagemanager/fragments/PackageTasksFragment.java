@@ -284,10 +284,14 @@ public class PackageTasksFragment extends Fragment {
         sort.add(Menu.NONE, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.size)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("sort_size", true, activity));
+            sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sort_installed", false, activity));
+            sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sort_updated", false, activity));
+            sort.add(Menu.NONE, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("sort_size", false, activity));
         }
-        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
+        menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(Utils.getBoolean("reverse_order", false, activity));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
@@ -297,6 +301,8 @@ public class PackageTasksFragment extends Fragment {
                     if (!Utils.getBoolean("sort_name", false, activity)) {
                         Utils.saveBoolean("sort_name", true, activity);
                         Utils.saveBoolean("sort_id", false, activity);
+                        Utils.saveBoolean("sort_installed", false, activity);
+                        Utils.saveBoolean("sort_updated", false, activity);
                         Utils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
@@ -305,21 +311,45 @@ public class PackageTasksFragment extends Fragment {
                     if (!Utils.getBoolean("sort_id", true, activity)) {
                         Utils.saveBoolean("sort_name", false, activity);
                         Utils.saveBoolean("sort_id", true, activity);
+                        Utils.saveBoolean("sort_installed", false, activity);
+                        Utils.saveBoolean("sort_updated", false, activity);
                         Utils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
-                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
-                    loadUI(activity);
-                    break;
-                case 4:
-                    if (!Utils.getBoolean("sort_size", true, activity)) {
+                    if (!Utils.getBoolean("sort_installed", false, activity)) {
                         Utils.saveBoolean("sort_name", false, activity);
                         Utils.saveBoolean("sort_id", false, activity);
+                        Utils.saveBoolean("sort_installed", true, activity);
+                        Utils.saveBoolean("sort_updated", false, activity);
+                        Utils.saveBoolean("sort_size", false, activity);
+                        loadUI(activity);
+                    }
+                    break;
+                case 4:
+                    if (!Utils.getBoolean("sort_updated", false, activity)) {
+                        Utils.saveBoolean("sort_name", false, activity);
+                        Utils.saveBoolean("sort_id", false, activity);
+                        Utils.saveBoolean("sort_installed", false, activity);
+                        Utils.saveBoolean("sort_updated", true, activity);
+                        Utils.saveBoolean("sort_size", false, activity);
+                        loadUI(activity);
+                    }
+                    break;
+                case 5:
+                    if (!Utils.getBoolean("sort_size", false, activity)) {
+                        Utils.saveBoolean("sort_name", false, activity);
+                        Utils.saveBoolean("sort_id", false, activity);
+                        Utils.saveBoolean("sort_installed", false, activity);
+                        Utils.saveBoolean("sort_updated", false, activity);
                         Utils.saveBoolean("sort_size", true, activity);
                         loadUI(activity);
                     }
+                    break;
+                case 6:
+                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
+                    loadUI(activity);
                     break;
             }
             return false;

@@ -48,7 +48,13 @@ public class PackageData {
         List<RecycleViewItem> mRawData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
-            mRawData.add(new RecycleViewItem(packageInfo.packageName, getAppName(packageInfo.packageName, context), getAppIcon(packageInfo.packageName, context), new File(getSourceDir(packageInfo.packageName, context)).length()));
+            mRawData.add(new RecycleViewItem(
+                    packageInfo.packageName,
+                    getAppName(packageInfo.packageName, context),
+                    getAppIcon(packageInfo.packageName, context),
+                    new File(getSourceDir(packageInfo.packageName, context)).length(),
+                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).firstInstallTime,
+                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime));
         }
         return mRawData;
     }
@@ -72,10 +78,14 @@ public class PackageData {
                     mData.add(item);
                 }
             }
-            if (Utils.getBoolean("sort_name", true, context)) {
+            if (Utils.getBoolean("sort_name", false, context)) {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_size", true, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_size", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getAPKSize));
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_installed", false, context)) {
+                Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getInstalledTime));
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_updated", false, context)) {
+                Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getUpdatedTime));
             } else {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
             }
@@ -132,16 +142,17 @@ public class PackageData {
         return Objects.requireNonNull(getAppInfo(packageName, context)).dataDir;
     }
 
-    public static String getVersionName(String path, Context context) {
-        return Objects.requireNonNull(getPackageManager(context).getPackageArchiveInfo(path, 0)).versionName;
+    public static String getVersionName(String packageName, Context context) {
+        return Objects.requireNonNull(getPackageManager(context).getPackageArchiveInfo(packageName, 0)).versionName;
     }
 
-    public static String getInstalledDate(String path, Context context) {
-        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(path, context)).firstInstallTime);
+
+    public static String getInstalledDate(String packageName, Context context) {
+        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(packageName, context)).firstInstallTime);
     }
 
-    public static String getUpdatedDate(String path, Context context) {
-        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(path, context)).lastUpdateTime);
+    public static String getUpdatedDate(String packageName, Context context) {
+        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(packageName, context)).lastUpdateTime);
     }
 
     public static String getCertificateDetails(String apk) {

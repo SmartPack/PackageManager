@@ -225,6 +225,8 @@
     <string name="support_status_message">Thank you very much for your support!</string>
     <string name="support_summary">Join Telegram support group</string>
     <string name="sure_question">Are you sure?</string>
+    <string name="time_installed">Installed Time</string>
+    <string name="time_updated">Updated Time</string>
     <string name="translations">Translations</string>
     <string name="translations_summary">Help me to translate this app! Click here to visit POEditor localization project</string>
     <string name="turn_on_off">Turn-On/Off</string>
