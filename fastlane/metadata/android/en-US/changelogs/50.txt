@@ -1,5 +1,0 @@
-* App now shows a one-rime welcome page on the first app launch.
-* App will now show an "Open" button after a successful installation session.
-* Replaced deprecated AsyncTask used throughout the app with Executor.
-* Updated translations.
-* Miscellaneous changes.

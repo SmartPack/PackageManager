@@ -1,0 +1,4 @@
+* Fixed app sorting option.
+* Added more sorting (by APK size, installation, and update time) options.
+* Fixed a minor issue in Split APK Installation.
+* Fixed batch exporting issues in certain devices and situations.

@@ -1,5 +1,9 @@
 # Change-logs
 
+## 44. August 29, 2021
+*Release-tag: 5.1*<br>
+Fixed app sorting option. Added more sorting (by APK size, installation, and update time) options. Fixed a minor issue in Split APK Installation. Fixed batch exporting issues in certain devices and situations.
+
 ## 43. August 29, 2021
 *Release-tag: 5.0*<br>
 App now shows a one-rime welcome page on the first app launch. App will now show an "Open" button after a successful installation session. Replaced deprecated AsyncTask used throughout the app with Executor. Updated translations. Miscellaneous changes.
