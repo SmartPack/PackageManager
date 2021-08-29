@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -467,15 +469,22 @@ public class PackageTasksFragment extends Fragment {
                     reset.show();
                     break;
                 case 3:
-                    MaterialAlertDialogBuilder export = new MaterialAlertDialogBuilder(activity);
-                    export.setIcon(R.mipmap.ic_launcher);
-                    export.setTitle(R.string.sure_question);
-                    export.setMessage(getString(R.string.batch_list_export) + "\n" + PackageData.showBatchList());
-                    export.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                    });
-                    export.setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
-                            PackageTasks.batchExportTask(activity));
-                    export.show();
+                    if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
+                        ActivityCompat.requestPermissions(activity, new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
+                    } else {
+                        MaterialAlertDialogBuilder export = new MaterialAlertDialogBuilder(activity);
+                        export.setIcon(R.mipmap.ic_launcher);
+                        export.setTitle(R.string.sure_question);
+                        export.setMessage(getString(R.string.batch_list_export) + "\n" + PackageData.showBatchList());
+                        export.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        });
+                        export.setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
+                            PackageTasks.batchExportTask(activity);
+                        });
+                        export.show();
+                    }
                     break;
                 case 4:
                     Common.getBatchList().clear();
