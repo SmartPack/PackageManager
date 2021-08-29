@@ -221,4 +221,5 @@
     <string name="select_all">"Mindet kiválasztja"</string>
     <string name="select_all_summary">"Kiválasztja és hozzáadja az összes alkalmazást erről az oldalról a kötegelt listához?"</string>
     <string name="uninstall_status_failed">"A(z) %s eltávolítása nem sikerült, vagy a felhasználó leállította!"</string>
+    <string name="export_apk_summary">"A kiválasztott APK exportálva a(z) '%s' mappába!"</string>
 </resources>

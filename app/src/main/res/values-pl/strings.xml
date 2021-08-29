@@ -19,6 +19,7 @@
     <string name="cancel">"Anuluj"</string>
     <string name="change_logs">"Lista zmian"</string>
     <string name="credits">"Autorzy"</string>
+    <string name="credits_summary">"Lista osób, które przyczyniły się do powstania tego projektu"</string>
     <string name="dark_theme">"Ciemny motyw"</string>
     <string name="dark_theme_auto">"Automatyczny"</string>
     <string name="dark_theme_disable">"Wyłączony"</string>
@@ -85,7 +86,7 @@
     <string name="support_coffee">"Postaw mi kawę"</string>
     <string name="support_already_received_message">"Już wcześniej wsparłeś(-aś) rozwój w ten sposób!"</string>
     <string name="support_received_message">"Bardzo dziękuję za wsparcie \u2665
-        To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! Ponadto na górze tej strony otrzymasz odznakę wspierającego."</string>
+To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! Ponadto na górze tej strony otrzymasz odznakę wspierającego."</string>
     <string name="support_retry_message">"Proszę spróbować zakupić ponownie!"</string>
     <string name="support_status_message">"Bardzo dziękuję za wsparcie!"</string>
     <string name="sure_question">"Czy na pewno?"</string>
@@ -223,4 +224,5 @@
     <string name="select_all">"Wybierz wszystkie"</string>
     <string name="select_all_summary">"Wybrać i dodać wszystkie aplikacje z tej strony do listy wsadowej?"</string>
     <string name="uninstall_status_failed">"Odinstalowywanie %s nie powiodło się albo zostało anulowane przez użytkownika!"</string>
+    <string name="export_apk_summary">"Wybrane APK zostało wyeksportowane do „%s”!"</string>
 </resources>

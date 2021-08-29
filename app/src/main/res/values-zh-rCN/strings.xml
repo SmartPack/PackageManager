@@ -96,7 +96,9 @@
     <string name="uninstall_title">"您确定要卸载 %s 吗？"</string>
     <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
 
-        *** <b>您需要自担风险</b> ***"</string>
+        *** <b>您需要自担风险</b> ***
+
+"</string>
     <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
     <string name="wrong_extension">"请选择一个带有 %s 扩展名的文件。"</string>
@@ -221,4 +223,7 @@
     <string name="grant">"授权"</string>
     <string name="important">"重要"</string>
     <string name="select_all">"全选"</string>
+    <string name="select_all_summary">"选择此页面的所有应用并添加到批量处理列表吗？"</string>
+    <string name="uninstall_status_failed">"卸载 %s 失败或被用户取消！"</string>
+    <string name="export_apk_summary">"所选 APK 已导出至 '%s'！"</string>
 </resources>
