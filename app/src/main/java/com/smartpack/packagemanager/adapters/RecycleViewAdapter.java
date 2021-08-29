@@ -27,6 +27,7 @@ import com.smartpack.packagemanager.activities.ImageViewActivity;
 import com.smartpack.packagemanager.activities.PackageDetailsActivity;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
@@ -36,9 +37,9 @@ import java.util.List;
  */
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
-    private static List<String> data;
+    private static List<RecycleViewItem> data;
 
-    public RecycleViewAdapter (List<String> data) {
+    public RecycleViewAdapter (List<RecycleViewItem> data) {
         RecycleViewAdapter.data = data;
     }
 
@@ -52,50 +53,48 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
-        if (!Utils.isPackageInstalled(data.get(position), holder.appID.getContext())) {
+        if (!Utils.isPackageInstalled(data.get(position).getTitle(), holder.appID.getContext())) {
             return;
         }
-        holder.appIcon.setImageDrawable(PackageData.getAppIcon(data.get(position), holder.appIcon.getContext()));
-        if (Common.getSearchText() != null && Common.isTextMatched(data.get(position))) {
+        holder.appIcon.setImageDrawable(data.get(position).getIcon());
+        if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getTitle())) {
             holder.appID.setTypeface(null, Typeface.BOLD);
-            holder.appID.setText(Utils.fromHtml(data.get(position).replace(Common.getSearchText(),"<b><i><font color=\"" +
+            holder.appID.setText(Utils.fromHtml(data.get(position).getTitle().replace(Common.getSearchText(),"<b><i><font color=\"" +
                     Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
         } else {
-            holder.appID.setText(data.get(position));
+            holder.appID.setText(data.get(position).getTitle());
         }
-        if (Common.getSearchText() != null && Common.isTextMatched(PackageData.getAppName(data.get(position), holder.appName.getContext()))) {
+        if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getDescription())) {
             holder.appName.setTypeface(null, Typeface.BOLD);
         }
-        holder.appName.setText(PackageData.getAppName(data.get(position), holder.appName.getContext()));
+        holder.appName.setText(data.get(position).getDescription());
         holder.appIcon.setOnClickListener(v -> {
-            if (!Utils.isPackageInstalled(data.get(position), v.getContext())) {
+            if (!Utils.isPackageInstalled(data.get(position).getTitle(), v.getContext())) {
                 Utils.snackbar(v, v.getContext().getString(R.string.package_removed));
                 return;
             }
-            Common.setApplicationName(PackageData.getAppName(data.get(position), holder.appIcon.getContext()));
-            Common.setApplicationIcon(PackageData.getAppIcon(data.get(position), holder.appIcon.getContext()));
+            Common.setApplicationName(data.get(position).getDescription());
+            Common.setApplicationIcon(data.get(position).getIcon());
             Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
             holder.appIcon.getContext().startActivity(imageView);
         });
-        holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position)));
+        holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position).getTitle()));
         holder.checkBox.setOnClickListener(v -> {
-            if (!Utils.isPackageInstalled(data.get(position), v.getContext())) {
+            if (!Utils.isPackageInstalled(data.get(position).getTitle(), v.getContext())) {
                 Utils.snackbar(v, v.getContext().getString(R.string.package_removed));
                 holder.checkBox.setChecked(false);
                 return;
             }
-            if (Common.getBatchList().contains(data.get(position))) {
-                Common.getBatchList().remove(data.get(position));
+            if (Common.getBatchList().contains(data.get(position).getTitle())) {
+                Common.getBatchList().remove(data.get(position).getTitle());
                 if (Common.getSelectAllCheckBox().isChecked()) {
                     Common.getSelectAllCheckBox().setChecked(false);
                 }
-                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_removed, PackageData.getAppName(
-                        data.get(position), v.getContext())));
+                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getDescription()));
             } else {
-                Common.getBatchList().add(data.get(position));
+                Common.getBatchList().add(data.get(position).getTitle());
                 Common.getSelectAllCheckBox().setChecked(Common.getBatchList().size() == PackageData.getData(v.getContext()).size());
-                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_added, PackageData.getAppName(
-                        data.get(position), v.getContext())));
+                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getDescription()));
             }
             Common.getBatchOptionsCard().setVisibility(PackageData.getBatchList().length() > 0 && PackageData
                     .getBatchList().contains(".") ? View.VISIBLE : View.GONE);
@@ -124,13 +123,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         @Override
         public void onClick(View view) {
-            if (!Utils.isPackageInstalled(data.get(getAdapterPosition()), view.getContext())) {
+            if (!Utils.isPackageInstalled(data.get(getAdapterPosition()).getTitle(), view.getContext())) {
                 Utils.snackbar(view, view.getContext().getString(R.string.package_removed));
                 return;
             }
-            Common.setApplicationID(data.get(getAdapterPosition()));
-            Common.setApplicationName(PackageData.getAppName(Common.getApplicationID(), view.getContext()));
-            Common.setApplicationIcon(PackageData.getAppIcon(Common.getApplicationID(), view.getContext()));
+            Common.setApplicationID(data.get(getAdapterPosition()).getTitle());
+            Common.setApplicationName(data.get(getAdapterPosition()).getDescription());
+            Common.setApplicationIcon(data.get(getAdapterPosition()).getIcon());
             Common.setSourceDir(PackageData.getSourceDir(Common.getApplicationID(), view.getContext()));
             Common.setDataDir(PackageData.getDataDir(Common.getApplicationID(), view.getContext()));
             Common.setNativeLibsDir(PackageData.getNativeLibDir(Common.getApplicationID(), view.getContext()));

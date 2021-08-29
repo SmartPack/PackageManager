@@ -9,7 +9,6 @@
 package com.smartpack.packagemanager.utils;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,7 +17,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -114,14 +112,15 @@ public class PackageExplorer {
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
             return;
         }
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 PackageData.makePackageFolder(activity);
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 File file = new File(dest);
                 try {
                     OutputStream outStream = new FileOutputStream(file);
@@ -129,13 +128,10 @@ public class PackageExplorer {
                     outStream.flush();
                     outStream.close();
                 } catch (IOException ignored) {}
-                return null;
             }
 
-            @SuppressLint("StringFormatInvalid")
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 new MaterialAlertDialogBuilder(activity)
                         .setMessage(Common.getApplicationName() + " icon " +
                                 activity.getString(R.string.export_file_message, Objects.requireNonNull(
@@ -153,24 +149,22 @@ public class PackageExplorer {
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
             return;
         }
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 if (!Utils.exist(dest)) {
                     Utils.mkdir(dest);
                 }
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 Utils.copy(path, dest + "/" + new File(path).getName());
-                return null;
             }
 
-            @SuppressLint("StringFormatInvalid")
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 new MaterialAlertDialogBuilder(activity)
                         .setMessage(new File(path).getName() + " " +
                                 activity.getString(R.string.export_file_message, dest))
@@ -181,10 +175,10 @@ public class PackageExplorer {
     }
 
     public static void exploreAPK(LinearLayout linearLayout, String path, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 linearLayout.setVisibility(View.VISIBLE);
                 if (Utils.exist(activity.getCacheDir().getPath() + "/apk")) {
                     Utils.delete(activity.getCacheDir().getPath() + "/apk");
@@ -194,13 +188,12 @@ public class PackageExplorer {
             }
 
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 Utils.unzip(path,activity.getCacheDir().getPath() + "/apk");
-                return null;
             }
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 linearLayout.setVisibility(View.GONE);
                 Intent explorer = new Intent(activity, PackageExploreActivity.class);
                 activity.startActivity(explorer);

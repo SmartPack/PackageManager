@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -156,28 +155,28 @@ public class SplitAPKInstaller {
     }
 
     public static void handleAppBundle(LinearLayout linearLayout, String path, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 linearLayout.setVisibility(View.VISIBLE);
                 Utils.delete(activity.getCacheDir().getPath() + "/splits");
                 if (Utils.exist(activity.getCacheDir().getPath() + "/toc.pb")) {
                     Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
                 }
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 if (path.endsWith(".apks")) {
                     Utils.unzip(path,  activity.getCacheDir().getPath());
                 } else if (path.endsWith(".xapk") || path.endsWith(".apkm")) {
                     Utils.unzip(path,  activity.getCacheDir().getPath() + "/splits");
                 }
-                return null;
             }
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 linearLayout.setVisibility(View.GONE);
                 if (Utils.getBoolean("filePicker", true, activity)) {
                     Common.getAppList().clear();
@@ -196,21 +195,21 @@ public class SplitAPKInstaller {
                     installSplitAPKs(activity);
                 }
             }
-
         }.execute();
     }
 
     public static void installSplitAPKs(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 Intent installIntent = new Intent(activity, SplitAPKInstallerActivity.class);
                 Utils.saveString("installationStatus", "waiting", activity);
                 activity.startActivity(installIntent);
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 long totalSize = getTotalSize();
                 int sessionId;
                 final InstallParams installParams = makeInstallParams(totalSize);
@@ -226,11 +225,11 @@ public class SplitAPKInstaller {
                     }
                 } catch (NullPointerException ignored) {}
                 doCommitSession(sessionId, activity);
-                return null;
             }
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
+
             }
         }.execute();
     }

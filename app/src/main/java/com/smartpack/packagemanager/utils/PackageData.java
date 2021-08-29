@@ -34,6 +34,8 @@ import java.util.Objects;
 
 public class PackageData {
 
+    private static List<RecycleViewItem> mRawData = null;
+
     public static void makePackageFolder(Context context) {
         if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
             getPackageDir(context).delete();
@@ -41,29 +43,38 @@ public class PackageData {
         getPackageDir(context).mkdirs();
     }
 
-    public static List<String> getData(Context context) {
+    private static List<RecycleViewItem> getRawData(Context context) {
+        List<RecycleViewItem> mRawData = new ArrayList<>();
+        List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
+        for (ApplicationInfo packageInfo: packages) {
+            mRawData.add(new RecycleViewItem(packageInfo.packageName, getAppName(packageInfo.packageName, context), getAppIcon(packageInfo.packageName, context), null));
+        }
+        return mRawData;
+    }
+
+    public static List<RecycleViewItem> getData(Context context) {
         boolean mAppType;
-        List<String> mData = new ArrayList<>();
+        List<RecycleViewItem> mData = new ArrayList<>();
         List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
         if (Utils.getBoolean("sort_name", true, context)) {
             Collections.sort(packages, new ApplicationInfo.DisplayNameComparator(getPackageManager(context)));
         } else {
             Collections.sort(packages, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.packageName, rhs.packageName));
         }
-        for (ApplicationInfo packageInfo: packages) {
+        for (RecycleViewItem item : getRawData()) {
             if (Utils.getString("appTypes", "all", context).equals("system")) {
-                mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+                mAppType = (isSystemApp(item.getTitle(), context));
             } else if (Utils.getString("appTypes", "all", context).equals("user")) {
-                mAppType = (packageInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0;
+                mAppType = (!isSystemApp(item.getTitle(), context));
             } else {
                 mAppType = true;
             }
-            if (mAppType && packageInfo.packageName.contains(".")) {
+            if (mAppType && item.getTitle().contains(".")) {
                 if (Common.getSearchText() == null) {
-                    mData.add(packageInfo.packageName);
-                } else if (Common.isTextMatched(getPackageManager(context).getApplicationLabel(packageInfo).toString())
-                        || Common.isTextMatched(packageInfo.packageName)) {
-                    mData.add(packageInfo.packageName);
+                    mData.add(item);
+                } else if (Common.isTextMatched(item.getDescription())
+                        || Common.isTextMatched(item.getTitle())) {
+                    mData.add(item);
                 }
             }
         }
@@ -149,7 +160,10 @@ public class PackageData {
     }
 
     public static boolean isSystemApp(String packageName, Context context) {
-        return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+        try {
+            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+        } catch (NullPointerException ignored) {}
+        return false;
     }
 
     public static CharSequence getAPKName(String apkPath, Context context) {
@@ -226,6 +240,14 @@ public class PackageData {
                 sb.append(" - ").append(s.replaceAll(","," ")).append("\n");
         }
         return "\n" + sb.toString();
+    }
+
+    public static List<RecycleViewItem> getRawData() {
+        return mRawData;
+    }
+
+    public static void setRawData(Context context) {
+        mRawData = getRawData(context);
     }
 
 }

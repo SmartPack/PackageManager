@@ -31,6 +31,7 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
+import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -177,8 +178,13 @@ public class PackageInfoFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 0 && data != null && resultCode == Activity.RESULT_OK) {
-            requireActivity().finish();
+            for (RecycleViewItem item : PackageData.getRawData()) {
+                if (item.getTitle().equals(Common.getApplicationID())) {
+                    PackageData.getRawData().remove(item);
+                }
+            }
             Common.reloadPage(true);
+            requireActivity().finish();
         }
     }
 

@@ -12,11 +12,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -35,6 +33,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
+import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -42,7 +41,6 @@ import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
-import java.util.List;
 import java.util.Objects;
 
 /*
@@ -50,8 +48,6 @@ import java.util.Objects;
  */
 public class FilePickerActivity extends AppCompatActivity {
 
-    private AsyncTask<Void, Void, List<String>> mLoader;
-    private final Handler mHandler = new Handler();
     private LinearLayout mProgressLayout;
     private MaterialCardView mSelect;
     private MaterialTextView mTitle;
@@ -145,45 +141,32 @@ public class FilePickerActivity extends AppCompatActivity {
     }
 
     private void reload(Activity activity) {
-        if (mLoader == null) {
-            mHandler.postDelayed(new Runnable() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                public void run() {
-                    mLoader = new AsyncTask<Void, Void, List<String>>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            FilePicker.getData(activity, true).clear();
-                            mRecyclerView.setVisibility(View.GONE);
-                        }
+        new AsyncTasks() {
 
-                        @Override
-                        protected List<String> doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(activity, true));
-                            return null;
-                        }
+            @Override
+            public void onPreExecute() {
+                FilePicker.getData(activity, true).clear();
+                mRecyclerView.setVisibility(View.GONE);
+            }
 
-                        @Override
-                        protected void onPostExecute(List<String> recyclerViewItems) {
-                            super.onPostExecute(recyclerViewItems);
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mRecycleViewAdapter.notifyDataSetChanged();
-                            mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard)
-                                    : new File(Common.getPath()).getName());
-                            if (Common.getAppList().isEmpty()) {
-                                mSelect.setVisibility(View.GONE);
-                            } else {
-                                mSelect.setVisibility(View.VISIBLE);
-                            }
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mLoader = null;
-                        }
-                    };
-                    mLoader.execute();
+            @Override
+            public void doInBackground() {
+                mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(activity, true));
+            }
+
+            @Override
+            public void onPostExecute() {
+                mRecyclerView.setAdapter(mRecycleViewAdapter);
+                mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard)
+                        : new File(Common.getPath()).getName());
+                if (Common.getAppList().isEmpty()) {
+                    mSelect.setVisibility(View.GONE);
+                } else {
+                    mSelect.setVisibility(View.VISIBLE);
                 }
-            }, 250);
-        }
+                mRecyclerView.setVisibility(View.VISIBLE);
+            }
+        }.execute();
     }
 
     @Override

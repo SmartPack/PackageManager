@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageTasksActivity;
@@ -27,10 +26,10 @@ import java.util.List;
 public class PackageTasks {
 
     public static void batchDisableTask(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 Common.isRunning(true);
                 Common.getOutput().setLength(0);
                 Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
@@ -43,7 +42,7 @@ public class PackageTasks {
 
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".")) {
@@ -64,12 +63,10 @@ public class PackageTasks {
                         Utils.sleep(1);
                     }
                 }
-                return null;
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 Common.isRunning(false);
                 Common.reloadPage(true);
@@ -78,10 +75,10 @@ public class PackageTasks {
     }
 
     public static void batchResetTask(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 Common.isRunning(true);
                 Common.getOutput().setLength(0);
                 Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
@@ -94,7 +91,7 @@ public class PackageTasks {
 
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
@@ -109,12 +106,10 @@ public class PackageTasks {
                         Utils.sleep(1);
                     }
                 }
-                return null;
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 Common.isRunning(false);
             }
@@ -122,10 +117,10 @@ public class PackageTasks {
     }
 
     public static void batchExportTask(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 Common.isRunning(true);
                 Common.getOutput().setLength(0);
                 Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
@@ -138,7 +133,7 @@ public class PackageTasks {
 
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
@@ -157,12 +152,10 @@ public class PackageTasks {
                         Utils.sleep(1);
                     }
                 }
-                return null;
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 Common.isRunning(false);
             }
@@ -170,10 +163,10 @@ public class PackageTasks {
     }
 
     public static void batchUninstallTask(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 Common.isRunning(true);
                 Common.getOutput().setLength(0);
                 Common.getOutput().append("** ").append(activity.getString(R.string.batch_processing_initialized)).append("...\n\n");
@@ -186,7 +179,7 @@ public class PackageTasks {
 
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
                 for (String packageID : batchApps) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
@@ -202,12 +195,10 @@ public class PackageTasks {
                         Utils.sleep(1);
                     }
                 }
-                return null;
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 Common.isRunning(false);
                 Common.reloadPage(true);

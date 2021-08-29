@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -50,14 +49,16 @@ import com.smartpack.packagemanager.activities.ExportedAppsActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
+import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageTasks;
+import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
-import java.util.List;
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
 /*
@@ -67,7 +68,6 @@ public class PackageTasksFragment extends Fragment {
 
     private AppCompatEditText mSearchWord;
     private AppCompatImageButton mSettings, mSort;
-    private AsyncTask<Void, Void, List<String>> mLoader;
     private boolean mExit;
     private final Handler mHandler = new Handler();
     private MaterialCardView mBatchOptions;
@@ -77,7 +77,6 @@ public class PackageTasksFragment extends Fragment {
     private RecycleViewAdapter mRecycleViewAdapter;
     private String mPath;
 
-    @SuppressLint("StaticFieldLeak")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -267,10 +266,10 @@ public class PackageTasksFragment extends Fragment {
         Intent remove = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + Common.getBatchList().get(0)));
         remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
         startActivityForResult(remove, 1);
+        Common.reloadPage(true);
     }
 
     private void handleUninstallEvent() {
-        Common.getBatchList().remove(0);
         if (Common.getBatchList().size() > 0) {
             uninstallUserApp();
         } else {
@@ -453,55 +452,42 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private void loadUI(Activity activity) {
-        if (mLoader == null) {
-            mHandler.postDelayed(new Runnable() {
-                @SuppressLint("StaticFieldLeak")
-                @Override
-                public void run() {
-                    mLoader = new AsyncTask<Void, Void, List<String>>() {
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            mProgressLayout.setVisibility(View.VISIBLE);
-                            mBatchOptions.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.GONE);
-                            if (Utils.getBoolean("select_all", false, activity)) {
-                                Common.getBatchList().clear();
-                                for (String mPackage : PackageData.getData(activity)) {
-                                    Common.getBatchList().add(mPackage);
-                                }
-                            } else {
-                                Common.getBatchList().clear();
-                            }
-                            mRecyclerView.removeAllViews();
-                        }
+        new AsyncTasks() {
 
-                        @Override
-                        protected List<String> doInBackground(Void... voids) {
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(List<String> recyclerViewItems) {
-                            super.onPostExecute(recyclerViewItems);
-                            if (Utils.getBoolean("select_all", false, activity)) {
-                                Utils.saveBoolean("select_all", false, activity);
-                                mBatchOptions.setVisibility(View.VISIBLE);
-                            } else {
-                                mBatchOptions.setVisibility(View.GONE);
-                            }
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mRecycleViewAdapter.notifyDataSetChanged();
-                            mProgressLayout.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mLoader = null;
-                        }
-                    };
-                    mLoader.execute();
+            @Override
+            public void onPreExecute() {
+                mProgressLayout.setVisibility(View.VISIBLE);
+                mBatchOptions.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.GONE);
+                if (Utils.getBoolean("select_all", false, activity)) {
+                    Common.getBatchList().clear();
+                    for (RecycleViewItem mPackage : PackageData.getData(activity)) {
+                        Common.getBatchList().add(mPackage.getTitle());
+                    }
+                } else {
+                    Common.getBatchList().clear();
                 }
-            }, 250);
-        }
+                mRecyclerView.removeAllViews();
+            }
+
+            @Override
+            public void doInBackground() {
+                mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
+            }
+
+            @Override
+            public void onPostExecute() {
+                if (Utils.getBoolean("select_all", false, activity)) {
+                    Utils.saveBoolean("select_all", false, activity);
+                    mBatchOptions.setVisibility(View.VISIBLE);
+                } else {
+                    mBatchOptions.setVisibility(View.GONE);
+                }
+                mRecyclerView.setAdapter(mRecycleViewAdapter);
+                mProgressLayout.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+            }
+        }.execute();
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -576,11 +562,21 @@ public class PackageTasksFragment extends Fragment {
                 }
             } else {
                 // If uninstallation succeed
+                try {
+                    for (RecycleViewItem item : PackageData.getRawData()) {
+                        if (item.getTitle().equals(Common.getBatchList().get(0))) {
+                            PackageData.getRawData().remove(item);
+                            Common.getBatchList().remove(0);
+                            if (!Common.reloadPage()) Common.reloadPage(true);
+                        }
+                    }
+                } catch (ConcurrentModificationException ignored) {}
                 handleUninstallEvent();
             }
-        } else {
+        } else if (requestCode == 1) {
             // If uninstallation cancelled or failed
             Utils.snackbar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity())));
+            Common.getBatchList().remove(0);
             handleUninstallEvent();
         }
     }

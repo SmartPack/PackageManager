@@ -18,7 +18,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -57,24 +56,23 @@ public class PackageDetails {
     }
 
     public static void exportingTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting, name) + "...");
                 PackageData.makePackageFolder(activity);
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 Utils.sleep(1);
                 Utils.copy(apk, PackageData.getPackageDir(activity) + "/" + name + ".apk");
-                return null;
             }
-            @SuppressLint("StringFormatInvalid")
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 hideProgress(linearLayout, textView);
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
@@ -98,28 +96,27 @@ public class PackageDetails {
     }
 
     public static void exportingBundleTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting_bundle, name) + "...");
                 PackageData.makePackageFolder(activity);
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 Utils.sleep(1);
                 List<File> mFiles = new ArrayList<>();
                 for (final String splitApps : SplitAPKInstaller.splitApks(apk)) {
                     mFiles.add(new File(apk + "/" + splitApps));
                 }
                 Utils.zip(PackageData.getPackageDir(activity) + "/" + name + ".apkm", mFiles);
-                return null;
             }
-            @SuppressLint("StringFormatInvalid")
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 hideProgress(linearLayout, textView);
                 new MaterialAlertDialogBuilder(activity)
                         .setIcon(icon)
@@ -144,28 +141,28 @@ public class PackageDetails {
 
     public static void disableApp(LinearLayout progressLayout, LinearLayout openApp, MaterialTextView progressMessage,
                                   MaterialTextView statusMessage, Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @SuppressLint("StringFormatInvalid")
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onPreExecute() {
                 showProgress(progressLayout, progressMessage, PackageData.isEnabled(Common.getApplicationID(), activity) ?
                         activity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
                         activity.getString(R.string.enabling, Common.getApplicationName()) + "...");
             }
+
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void doInBackground() {
                 Utils.sleep(1);
                 if (PackageData.isEnabled(Common.getApplicationID(), activity)) {
                     Utils.runCommand("pm disable " + Common.getApplicationID());
                 } else {
                     Utils.runCommand("pm enable " + Common.getApplicationID());
                 }
-                return null;
             }
+
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void onPostExecute() {
                 hideProgress(progressLayout, progressMessage);
                 statusMessage.setText(PackageData.isEnabled(Common.getApplicationID(), activity) ? R.string.disable : R.string.enable);
                 openApp.setVisibility(PackageData.isEnabled(Common.getApplicationID(), activity) ? View.VISIBLE : View.GONE);
@@ -184,22 +181,21 @@ public class PackageDetails {
                     .setCancelable(false)
                     .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     })
-                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> new AsyncTask<Void, Void, Void>() {
-                        @SuppressLint("StringFormatInvalid")
+                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> new AsyncTasks() {
+
                         @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
+                        public void onPreExecute() {
                             showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
                         }
+
                         @Override
-                        protected Void doInBackground(Void... voids) {
+                        public void doInBackground() {
                             Utils.sleep(1);
                             Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
-                            return null;
                         }
+
                         @Override
-                        protected void onPostExecute(Void aVoid) {
-                            super.onPostExecute(aVoid);
+                        public void onPostExecute() {
                             hideProgress(linearLayout, textView);
                             activity.finish();
                             Common.reloadPage(true);

@@ -41,7 +41,8 @@
                 android:gravity="start"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:maxLines="1" />
         </FrameLayout>
 
         <com.google.android.material.tabs.TabLayout

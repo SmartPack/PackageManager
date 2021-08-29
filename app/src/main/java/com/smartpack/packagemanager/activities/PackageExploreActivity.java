@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -27,6 +26,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExploreAdapter;
+import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
@@ -34,8 +34,6 @@ import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /*
@@ -116,16 +114,19 @@ public class PackageExploreActivity extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
     private void reload(Activity activity) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTasks() {
+
             @Override
-            protected Void doInBackground(Void... voids) {
-                mRecycleViewAdapter = new RecycleViewExploreAdapter(FilePicker.getData(activity, false));
-                return null;
+            public void onPreExecute() {
             }
 
             @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+            public void doInBackground() {
+                mRecycleViewAdapter = new RecycleViewExploreAdapter(FilePicker.getData(activity, false));
+            }
+
+            @Override
+            public void onPostExecute() {
                 mTitle.setText(Common.getPath().equals(getCacheDir().toString() + "/apk/") ? Common.getApplicationName()
                         : new File(Common.getPath()).getName());
                 mRecyclerView.setAdapter(mRecycleViewAdapter);

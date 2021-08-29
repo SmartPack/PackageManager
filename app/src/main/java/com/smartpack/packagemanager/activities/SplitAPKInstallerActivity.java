@@ -25,6 +25,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.Utils;
 
 /*
@@ -69,6 +70,8 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
             } else {
                 Utils.snackbar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(getPackageId(), this)));
             }
+            PackageData.getRawData().add(new RecycleViewItem(getPackageId(), getPackageName(), getIcon(), null));
+            Common.reloadPage(true);
         });
 
         mCancel.setOnClickListener(v -> onBackPressed());
@@ -143,6 +146,7 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
             return;
         }
         if (Utils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
+            PackageData.getRawData().add(new RecycleViewItem(getPackageId(), getPackageName(), getIcon(), null));
             Common.reloadPage(true);
         }
         super.onBackPressed();
