@@ -281,20 +281,21 @@ public class PackageTasksFragment extends Fragment {
         PopupMenu popupMenu = new PopupMenu(activity, mSort);
         Menu menu = popupMenu.getMenu();
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
-        sort.add(Menu.NONE, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
+        sort.add(1, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_name", false, activity));
-        sort.add(Menu.NONE, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
+        sort.add(1, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(Utils.getBoolean("sort_id", true, activity));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            sort.add(Menu.NONE, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
+            sort.add(1, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sort_installed", false, activity));
-            sort.add(Menu.NONE, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
+            sort.add(1, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sort_updated", false, activity));
-            sort.add(Menu.NONE, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
+            sort.add(1, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
                     .setChecked(Utils.getBoolean("sort_size", false, activity));
         }
         menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(Utils.getBoolean("reverse_order", false, activity));
+        sort.setGroupCheckable(1, true, true);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
