@@ -27,6 +27,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.CertificateData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
@@ -73,12 +74,15 @@ public class PackageInfoFragment extends Fragment {
         mProgressLayout.setBackgroundColor(Utils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
         mLastUpdated.setText(getString(R.string.date_installed, PackageData.getInstalledDate(Common.getApplicationID(), requireActivity())) +
                 "\n" + getString(R.string.date_updated, PackageData.getUpdatedDate(Common.getApplicationID(), requireActivity())));
-        if (PackageData.getCertificateDetails(Common.getSourceDir()).isEmpty()) {
+
+        String certificate = CertificateData.getCertificateDetails(Common.getApplicationID(), requireActivity());
+        if (certificate == null) {
             mCertificateTitle.setVisibility(View.GONE);
             mCertificate.setVisibility(View.GONE);
         } else {
-            mCertificate.setText(PackageData.getCertificateDetails(Common.getSourceDir()));
+            mCertificate.setText(certificate);
         }
+
         mPackageID.setText(Common.getApplicationID());
         mDisableTitle.setText(PackageData.isEnabled(Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable);
         mDataDir.setText(Common.getDataDir());
