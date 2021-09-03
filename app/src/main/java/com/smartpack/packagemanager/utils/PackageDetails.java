@@ -71,6 +71,7 @@ public class PackageDetails {
                 Utils.copy(apk, PackageData.getPackageDir(activity) + "/" + name + ".apk");
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
                 hideProgress(linearLayout, textView);

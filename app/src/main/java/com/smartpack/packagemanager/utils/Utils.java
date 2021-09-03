@@ -49,6 +49,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -394,6 +395,20 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static void create(String text, File path) {
+        try {
+            if (!path.exists()) {
+                path.createNewFile();
+            }
+            FileOutputStream fOut = new FileOutputStream(path);
+            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+            myOutWriter.append(text);
+            myOutWriter.close();
+            fOut.close();
+        } catch (Exception ignored) {
+        }
     }
 
     public static void restartApp(Activity activity) {

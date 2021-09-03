@@ -16,11 +16,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -35,6 +37,10 @@ import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.Objects;
@@ -67,7 +73,7 @@ public class PackageInfoFragment extends Fragment {
         LinearLayout mExplore = mRootView.findViewById(R.id.explore_app);
         LinearLayout mExport = mRootView.findViewById(R.id.export_app);
         LinearLayout mDisable = mRootView.findViewById(R.id.disable_app);
-        LinearLayout mOpenStore = mRootView.findViewById(R.id.playstore_app);
+        LinearLayout mMore = mRootView.findViewById(R.id.more);
         LinearLayout mUninstallApp = mRootView.findViewById(R.id.remove_app);
         LinearLayout mOpenSettings = mRootView.findViewById(R.id.info_app);
 
@@ -146,8 +152,84 @@ public class PackageInfoFragment extends Fragment {
                 .setPositiveButton(getString(R.string.yes), (dialog, id) -> PackageDetails.disableApp(mProgressLayout,
                         mOpenApp, mProgressMessage, mDisableTitle, requireActivity()))
                 .show());
-        mOpenStore.setOnClickListener(v -> Utils.launchUrl("https://play.google.com/store/apps/details?id=" +
-                Common.getApplicationID(), requireActivity()));
+        mMore.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(requireActivity(), mMore);
+            Menu menu = popupMenu.getMenu();
+            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.search_market_message, getString(R.string.playstore)));
+            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.search_market_message, getString(R.string.fdroid)));
+            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.export_details));
+            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.share));
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case 0:
+                        Utils.launchUrl("https://play.google.com/store/apps/details?id=" + Common.getApplicationID(), requireActivity());
+                        break;
+                    case 1:
+                        Utils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
+                        break;
+                    case 2:
+                        File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + ".json");
+                        try {
+                            JSONObject obj = new JSONObject();
+                            obj.put("Name", Common.getApplicationName());
+                            obj.put("Package Name", Common.getApplicationID());
+                            obj.put("Version", PackageData.getVersionName(Common.getSourceDir(), requireActivity()));
+                            obj.put("Google Play", "https://play.google.com/store/apps/details?id=" + Common.getApplicationID());
+                            if (new File(PackageData.getSourceDir(Common.getApplicationID(), requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
+                                    .splitApks(PackageData.getParentDir(Common.getApplicationID(), requireActivity())).size() > 1) {
+                                obj.put("App Bundle", true);
+                                obj.put("Bundle Size", PackageData.getBundleSize(PackageData.getParentDir(Common.getApplicationID(), requireActivity())));
+
+
+                                JSONArray apks = new JSONArray();
+                                for (String apk : SplitAPKInstaller
+                                        .splitApks(PackageData.getParentDir(Common.getApplicationID(), requireActivity()))) {
+                                    apks.put(apk);
+                                }
+                                obj.put("Split APKs", apks);
+
+                            } else {
+                                obj.put("App Bundle", false);
+                                obj.put("APK Size", PackageData.getAPKSize(Common.getSourceDir()));
+                            }
+                            obj.put("Installed", PackageData.getInstalledDate(Common.getApplicationID(), requireActivity()));
+                            obj.put("Last updated", PackageData.getUpdatedDate(Common.getApplicationID(), requireActivity()));
+                            JSONObject permissions = new JSONObject();
+                            JSONArray granted = new JSONArray();
+                            for (String grantedPermissions : PackageDetails.getPermissionsGranted(Common.getApplicationID(), requireActivity())) {
+                                if (!grantedPermissions.equals("Granted")) {
+                                    granted.put(grantedPermissions);
+                                }
+                            }
+                            permissions.put("Granted", granted);
+                            JSONArray denied = new JSONArray();
+                            for (String deniedPermissions : PackageDetails.getPermissionsDenied(Common.getApplicationID(), requireActivity())) {
+                                if (!deniedPermissions.equals("Denied")) {
+                                    denied.put(deniedPermissions);
+                                }
+                            }
+                            permissions.put("Denied", denied);
+                            obj.put("Permissions", permissions);
+                            Utils.create(obj.toString(), mJSON);
+                            Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
+                        } catch (JSONException ignored) {
+                        }
+                        break;
+                    case 3:
+                        Intent shareLink = new Intent();
+                        shareLink.setAction(Intent.ACTION_SEND);
+                        shareLink.putExtra(Intent.EXTRA_SUBJECT, Common.getApplicationName());
+                        shareLink.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + Common.getApplicationID()
+                                + "\n\n" + getString(R.string.share_message, BuildConfig.VERSION_NAME));
+                        shareLink.setType("text/plain");
+                        Intent shareIntent = Intent.createChooser(shareLink, getString(R.string.share_with));
+                        startActivity(shareIntent);
+                        break;
+                }
+                return false;
+            });
+            popupMenu.show();
+        });
         mUninstallApp.setOnClickListener(v -> {
             if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
                 Utils.snackbar(mRootView, getString(R.string.uninstall_nope));

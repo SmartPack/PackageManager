@@ -204,7 +204,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/playstore_app"
+                    android:id="@+id/more"
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -214,20 +214,20 @@
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@null"
-                        android:clickable="false"
-                        android:layout_gravity="center_horizontal"
                         android:tint="?attr/colorAccent"
-                        android:src="@drawable/ic_playstore" />
+                        android:src="@drawable/ic_dots"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@null"
+                        android:clickable="false" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
                         android:textColor="?attr/colorAccent"
                         android:layout_gravity="center_horizontal"
-                        android:text="@string/playstore"
                         android:textIsSelectable="true"
+                        android:text="@string/more"
+                        android:textStyle="bold"
                         android:textSize="12sp" />
                 </LinearLayout>
             </FrameLayout>
