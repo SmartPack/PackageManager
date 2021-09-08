@@ -1,23 +1,23 @@
-<RelativeLayout android:layout_width="match_parent"
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center"
-    android:gravity="center">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="10dp" >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@mipmap/ic_launcher_round"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="25dp"
+            android:layout_margin="15dp"
             android:gravity="center" />
 
         <ProgressBar
@@ -42,89 +42,88 @@
             android:gravity="center"
             android:textSize="17sp"
             android:padding="10dp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="35dp"
-        android:orientation="horizontal"
-        android:visibility="gone" >
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/documentation_card"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layout_bottom"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorAccent"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp" >
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:visibility="gone" >
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/documentation_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center" >
+                app:cardBackgroundColor="@color/colorAccent"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp" >
 
-                <androidx.appcompat.widget.AppCompatImageButton
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_book"
-                    android:tint="@color/colorBlack"
-                    android:layout_marginStart="5dp"
-                    android:background="@null"
-                    android:clickable="false"
-                    android:rotation="180" />
+                    android:orientation="horizontal"
+                    android:gravity="center" >
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:text="@string/documentation"
-                    android:textStyle="bold|italic"
-                    android:clickable="false"
-                    android:textSize="16sp"
-                    android:padding="10dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_book"
+                        android:tint="@color/colorBlack"
+                        android:layout_marginStart="5dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:rotation="180" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/start_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorAccent"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp" >
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:text="@string/documentation"
+                        android:textStyle="bold|italic"
+                        android:clickable="false"
+                        android:textSize="16sp"
+                        android:padding="10dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/start_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center" >
+                app:cardBackgroundColor="@color/colorAccent"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp" >
 
-                <com.google.android.material.textview.MaterialTextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold|italic"
-                    android:text="@string/start"
-                    android:clickable="false"
-                    android:textSize="16sp"
-                    android:padding="10dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center" >
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_back"
-                    android:tint="@color/colorBlack"
-                    android:layout_marginEnd="5dp"
-                    android:background="@null"
-                    android:clickable="false"
-                    android:rotation="180" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold|italic"
+                        android:text="@string/start"
+                        android:clickable="false"
+                        android:textSize="16sp"
+                        android:padding="10dp" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_back"
+                        android:tint="@color/colorBlack"
+                        android:layout_marginEnd="5dp"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:rotation="180" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
