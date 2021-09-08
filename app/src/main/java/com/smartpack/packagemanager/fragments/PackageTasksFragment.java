@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -96,6 +97,8 @@ public class PackageTasksFragment extends Fragment {
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
         mSort = mRootView.findViewById(R.id.sort_icon);
         mSettings = mRootView.findViewById(R.id.settings_icon);
+
+        mSearchWord.setHintTextColor(Color.GRAY);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
