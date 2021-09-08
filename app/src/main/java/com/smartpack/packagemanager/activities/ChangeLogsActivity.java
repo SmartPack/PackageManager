@@ -8,16 +8,13 @@
 
 package com.smartpack.packagemanager.activities;
 
-import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -30,22 +27,17 @@ import java.util.Objects;
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020
  */
 
-public class AboutActivity extends AppCompatActivity {
+public class ChangeLogsActivity extends AppCompatActivity {
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aboutview);
+        setContentView(R.layout.activity_changelogs);
 
-        AppCompatImageView mDeveloper = findViewById(R.id.developer);
-        MaterialTextView mAppName = findViewById(R.id.app_title);
-        MaterialTextView mForegroundText = findViewById(R.id.foreground_text);
+        AppCompatImageButton mBack = findViewById(R.id.back);
+        MaterialTextView mChangeLogText = findViewById(R.id.changelog_text);
 
-        mAppName.setText(getString(R.string.app_name) + (Utils.isProUser(this) ? " Pro " : " ") + BuildConfig.VERSION_NAME);
-        MaterialTextView mCancel = findViewById(R.id.cancel_button);
-        mCancel.setOnClickListener(v -> finish());
-        mDeveloper.setOnClickListener(v -> Utils.launchUrl("https://github.com/sunilpaulmathew", this));
+        mBack.setOnClickListener(v -> finish());
 
         String change_log = null;
         try {
@@ -53,8 +45,7 @@ public class AboutActivity extends AppCompatActivity {
                     this, "changelogs.json"))).getString("releaseNotes");
         } catch (JSONException ignored) {
         }
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        mForegroundText.setText(change_log);
+        mChangeLogText.setText(change_log);
     }
 
 }

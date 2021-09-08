@@ -66,10 +66,10 @@
                 android:textSize="18sp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/description"
+                android:id="@+id/copyright"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
+                android:textStyle="bold|italic"
                 android:clickable="false" />
         </LinearLayout>
     </LinearLayout>

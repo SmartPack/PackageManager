@@ -29,6 +29,7 @@
     <string name="cancel">Cancel</string>
     <string name="certificate">Certificate</string>
     <string name="change_logs">Change-logs</string>
+    <string name="copyright">Copyright: © %s</string>
     <string name="credits">Credits</string>
     <string name="credits_summary">A list of people who contributed to this project</string>
     <string name="dark_theme">Dark Theme</string>

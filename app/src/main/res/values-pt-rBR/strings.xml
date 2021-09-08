@@ -9,6 +9,7 @@
     <string name="bundle_install">Você tem certeza de instalar os apks divididos em \'%s\'?</string>
     <string name="cancel">Cancelar</string>
     <string name="change_logs">Mudanças</string>
+    <string name="copyright">"Direitos autorais: © %s"</string>
     <string name="credits">Créditos</string>
     <string name="dark_theme">Tema escuro</string>
     <string name="disable_message">será %s! Tem certeza?</string>

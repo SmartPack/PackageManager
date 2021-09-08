@@ -18,6 +18,7 @@
     <string name="bundle_install_apks">"Opravdu chcete instalovat apk bundle (.aab) '%s'?"</string>
     <string name="cancel">"Storno"</string>
     <string name="change_logs">"Seznamy změn"</string>
+    <string name="copyright">"Autorské právo: ©%s"</string>
     <string name="credits">"Credits"</string>
     <string name="dark_theme">"Tmavé téma"</string>
     <string name="dark_theme_auto">"Automaticky"</string>

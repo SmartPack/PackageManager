@@ -18,6 +18,7 @@
     <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
     <string name="cancel">"Hủy"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
+    <string name="copyright">"Bản quyền: © %s"</string>
     <string name="credits">"Tín dụng"</string>
     <string name="credits_summary">"Danh sách những người đã đóng góp cho dự án này"</string>
     <string name="dark_theme">"Chủ đề tối"</string>

@@ -18,6 +18,7 @@
     <string name="bundle_install_apks">"您确定要安装应用捆绑包 '%s' 吗？"</string>
     <string name="cancel">"取消"</string>
     <string name="change_logs">"更新日志"</string>
+    <string name="copyright">"版权所有：©%s"</string>
     <string name="credits">"贡献者"</string>
     <string name="credits_summary">"此项目的贡献者名单"</string>
     <string name="dark_theme">"黑暗主题"</string>

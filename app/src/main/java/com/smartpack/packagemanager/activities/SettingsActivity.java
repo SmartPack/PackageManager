@@ -52,12 +52,12 @@ public class SettingsActivity extends AppCompatActivity {
         AppCompatImageButton mBack = findViewById(R.id.back_button);
         LinearLayout mAppInfo = findViewById(R.id.app_info);
         MaterialTextView mAppTitle = findViewById(R.id.title);
-        MaterialTextView mAppDescription = findViewById(R.id.description);
+        MaterialTextView mCopyright = findViewById(R.id.copyright);
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
 
         mAppTitle.setText(getString(R.string.app_name) + (Utils.isProUser(this) ? " Pro " :  " ") + BuildConfig.VERSION_NAME);
         mAppTitle.setTextColor(Utils.isDarkTheme(this) ? Color.WHITE : Color.BLACK);
-        mAppDescription.setText(BuildConfig.APPLICATION_ID);
+        mCopyright.setText(getString(R.string.copyright, "2021-2022, sunilpaulmathew"));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -90,6 +90,8 @@ public class SettingsActivity extends AppCompatActivity {
                 R.drawable.ic_book), "https://smartpack.github.io/PackageManager/general/"));
         mData.add(new RecycleSettingsItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(
                 R.drawable.ic_translate), "https://poeditor.com/join/project?hash=0CitpyI1Oc"));
+        mData.add(new RecycleSettingsItem(getString(R.string.change_logs), null, getResources().getDrawable(R.drawable.ic_change_logs),
+                null));
         mData.add(new RecycleSettingsItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
         mData.add(new RecycleSettingsItem(getString(R.string.rate_us), getString(R.string.rate_us_Summary), getResources().getDrawable(R.drawable.ic_rate),
                 "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"));
@@ -154,6 +156,9 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (position == 6) {
                 Billing.showDonateOption(this);
             } else if (position == 10) {
+                Intent changeLogs = new Intent(this, ChangeLogsActivity.class);
+                startActivity(changeLogs);
+            } else if (position == 11) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
