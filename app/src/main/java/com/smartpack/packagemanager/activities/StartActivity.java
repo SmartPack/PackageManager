@@ -37,7 +37,11 @@ public class StartActivity extends AppCompatActivity {
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Initialize App Theme
+        Utils.initializeAppTheme(this);
         super.onCreate(savedInstanceState);
+        // Set App Language
+        Utils.setLanguage(this);
         setContentView(R.layout.activity_start);
 
         LinearLayout mBottomLayout = findViewById(R.id.layout_bottom);
