@@ -1,5 +1,9 @@
 # Change-logs
 
+## 45. September 10, 2021
+*Release-tag: 5.2*<br>
+Improved UI & functionalities of in-built file picker. Added more certificate related data. Added options to export app (individual & batch) details as JSON file. Largely improved batch options. Updated translations. Several other UI changes suggested by users.
+
 ## 44. August 29, 2021
 *Release-tag: 5.1*<br>
 Fixed app sorting option. Added more sorting (by APK size, installation, and update time) options. Fixed a minor issue in Split APK Installation. Fixed batch exporting issues in certain devices and situations.

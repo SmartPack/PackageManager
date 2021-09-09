@@ -1,0 +1,6 @@
+* Improved UI & functionalities of in-built file picker.
+* Added more certificate related data.
+* Added options to export app (individual & batch) details as JSON file.
+* Largely improved batch options.
+* Several other UI changes suggested by users.
+* Updated translations.
