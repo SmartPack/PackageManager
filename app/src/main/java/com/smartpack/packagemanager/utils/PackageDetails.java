@@ -202,6 +202,7 @@ public class PackageDetails {
 
                         @Override
                         public void onPostExecute() {
+                            PackageData.setRawData(activity);
                             hideProgress(linearLayout, textView);
                             activity.finish();
                             Common.reloadPage(true);

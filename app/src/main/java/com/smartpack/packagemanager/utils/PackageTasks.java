@@ -195,6 +195,7 @@ public class PackageTasks {
 
             @Override
             public void onPostExecute() {
+                PackageData.setRawData(activity);
                 Common.getOutput().append("** ").append(activity.getString(R.string.everything_done)).append(" *");
                 Common.isRunning(false);
                 Common.reloadPage(true);
