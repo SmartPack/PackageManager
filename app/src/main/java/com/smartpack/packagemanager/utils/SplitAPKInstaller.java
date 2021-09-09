@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
+import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -53,6 +54,10 @@ public class SplitAPKInstaller {
 
     public static boolean isAppBundle(String path) {
         return splitApks(path).size() > 1;
+    }
+
+    public static boolean isPermissionDenied(Activity activity) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !PackageData.getPackageManager(activity).canRequestPackageInstalls();
     }
 
     private static int runInstallCreate(InstallParams installParams, Activity activity) {
