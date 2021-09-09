@@ -98,8 +98,7 @@ public class FilePickerActivity extends AppCompatActivity {
             if (new File(mPath).isDirectory()) {
                 Common.setPath(mPath);
                 reload(this);
-            } else if (FilePicker.getExtFromPath(mPath).equals("apks") || FilePicker.getExtFromPath(mPath).equals("apkm")
-                    || FilePicker.getExtFromPath(mPath).equals("xapk")) {
+            } else if (mPath.endsWith("apks") || mPath.endsWith("apkm") || mPath.endsWith("xapk")) {
                 new MaterialAlertDialogBuilder(this)
                         .setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
@@ -108,7 +107,7 @@ public class FilePickerActivity extends AppCompatActivity {
                             SplitAPKInstaller.handleAppBundle(mProgressLayout, mPath, this);
                             finish();
                         }).show();
-            } else if (FilePicker.getExtFromPath(mPath).equals("apk")) {
+            } else if (mPath.endsWith("apk")) {
                 if (Common.getAppList().contains(mPath)) {
                     Common.getAppList().remove(mPath);
                 } else {

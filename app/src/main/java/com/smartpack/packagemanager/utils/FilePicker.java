@@ -55,8 +55,7 @@ public class FilePicker {
     }
 
     private static boolean isSupportedFile(String path) {
-        return getExtFromPath(path).equals("apk") || getExtFromPath(path).equals("apks") || getExtFromPath(path)
-                .equals("apkm") || getExtFromPath(path).equals("xapk");
+        return path.endsWith("apk") || path.endsWith("apks") || path.endsWith("apkm") || path.endsWith("xapk");
     }
 
     private static File[] getFilesList() {
@@ -64,10 +63,6 @@ public class FilePicker {
             Common.setPath(Common.getPath() + File.separator);
         }
         return new File(Common.getPath()).listFiles();
-    }
-
-    public static String getExtFromPath(String path) {
-        return android.webkit.MimeTypeMap.getFileExtensionFromUrl(path);
     }
 
 }
