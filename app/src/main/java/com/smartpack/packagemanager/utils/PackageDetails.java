@@ -30,6 +30,10 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,6 +120,7 @@ public class PackageDetails {
                 Utils.zip(PackageData.getPackageDir(activity) + "/" + name + ".apkm", mFiles);
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
                 hideProgress(linearLayout, textView);
@@ -268,6 +273,52 @@ public class PackageDetails {
             }
         } catch (NullPointerException ignored) {}
         return activities;
+    }
+
+    public static JSONObject getPackageDetails(String packageName, Context context) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("Name", PackageData.getAppName(packageName, context));
+            obj.put("Package Name", packageName);
+            obj.put("Version", PackageData.getVersionName(PackageData.getSourceDir(packageName, context), context));
+            obj.put("Google Play", "https://play.google.com/store/apps/details?id=" + packageName);
+            if (new File(PackageData.getSourceDir(packageName, context)).getName().equals("base.apk") && SplitAPKInstaller
+                    .splitApks(PackageData.getParentDir(packageName, context)).size() > 1) {
+                obj.put("App Bundle", true);
+                obj.put("Bundle Size", PackageData.getBundleSize(PackageData.getParentDir(packageName, context)));
+                JSONArray apks = new JSONArray();
+                for (String apk : SplitAPKInstaller
+                        .splitApks(PackageData.getParentDir(packageName, context))) {
+                    apks.put(apk);
+                }
+                obj.put("Split APKs", apks);
+
+            } else {
+                obj.put("App Bundle", false);
+                obj.put("APK Size", PackageData.getAPKSize(PackageData.getSourceDir(packageName ,context)));
+            }
+            obj.put("Installed", PackageData.getInstalledDate(packageName, context));
+            obj.put("Last updated", PackageData.getUpdatedDate(packageName, context));
+            JSONObject permissions = new JSONObject();
+            JSONArray granted = new JSONArray();
+            for (String grantedPermissions : PackageDetails.getPermissionsGranted(packageName, context)) {
+                if (!grantedPermissions.equals("Granted")) {
+                    granted.put(grantedPermissions);
+                }
+            }
+            permissions.put("Granted", granted);
+            JSONArray denied = new JSONArray();
+            for (String deniedPermissions : PackageDetails.getPermissionsDenied(packageName, context)) {
+                if (!deniedPermissions.equals("Denied")) {
+                    denied.put(deniedPermissions);
+                }
+            }
+            permissions.put("Denied", denied);
+            obj.put("Permissions", permissions);
+            return obj;
+        } catch (JSONException ignored) {
+        }
+        return null;
     }
 
     private static void showProgress(LinearLayout linearLayout, MaterialTextView textView, String message) {

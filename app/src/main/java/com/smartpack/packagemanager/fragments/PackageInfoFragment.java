@@ -38,10 +38,6 @@ import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.util.Objects;
 
@@ -169,51 +165,8 @@ public class PackageInfoFragment extends Fragment {
                         break;
                     case 2:
                         File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + ".json");
-                        try {
-                            JSONObject obj = new JSONObject();
-                            obj.put("Name", Common.getApplicationName());
-                            obj.put("Package Name", Common.getApplicationID());
-                            obj.put("Version", PackageData.getVersionName(Common.getSourceDir(), requireActivity()));
-                            obj.put("Google Play", "https://play.google.com/store/apps/details?id=" + Common.getApplicationID());
-                            if (new File(PackageData.getSourceDir(Common.getApplicationID(), requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
-                                    .splitApks(PackageData.getParentDir(Common.getApplicationID(), requireActivity())).size() > 1) {
-                                obj.put("App Bundle", true);
-                                obj.put("Bundle Size", PackageData.getBundleSize(PackageData.getParentDir(Common.getApplicationID(), requireActivity())));
-
-
-                                JSONArray apks = new JSONArray();
-                                for (String apk : SplitAPKInstaller
-                                        .splitApks(PackageData.getParentDir(Common.getApplicationID(), requireActivity()))) {
-                                    apks.put(apk);
-                                }
-                                obj.put("Split APKs", apks);
-
-                            } else {
-                                obj.put("App Bundle", false);
-                                obj.put("APK Size", PackageData.getAPKSize(Common.getSourceDir()));
-                            }
-                            obj.put("Installed", PackageData.getInstalledDate(Common.getApplicationID(), requireActivity()));
-                            obj.put("Last updated", PackageData.getUpdatedDate(Common.getApplicationID(), requireActivity()));
-                            JSONObject permissions = new JSONObject();
-                            JSONArray granted = new JSONArray();
-                            for (String grantedPermissions : PackageDetails.getPermissionsGranted(Common.getApplicationID(), requireActivity())) {
-                                if (!grantedPermissions.equals("Granted")) {
-                                    granted.put(grantedPermissions);
-                                }
-                            }
-                            permissions.put("Granted", granted);
-                            JSONArray denied = new JSONArray();
-                            for (String deniedPermissions : PackageDetails.getPermissionsDenied(Common.getApplicationID(), requireActivity())) {
-                                if (!deniedPermissions.equals("Denied")) {
-                                    denied.put(deniedPermissions);
-                                }
-                            }
-                            permissions.put("Denied", denied);
-                            obj.put("Permissions", permissions);
-                            Utils.create(obj.toString(), mJSON);
-                            Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
-                        } catch (JSONException ignored) {
-                        }
+                        Utils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
+                        Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
                         break;
                     case 3:
                         Intent shareLink = new Intent();

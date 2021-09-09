@@ -139,16 +139,6 @@
                 android:textStyle="bold"
                 android:textSize="17sp"
                 android:gravity="start" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="end|bottom"
-                app:buttonTint="@color/colorBlack"
-                android:layout_marginEnd="-15dp"
-                android:background="@null" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

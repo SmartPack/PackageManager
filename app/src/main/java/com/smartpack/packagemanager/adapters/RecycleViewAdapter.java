@@ -87,17 +87,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             }
             if (Common.getBatchList().contains(data.get(position).getPackageName())) {
                 Common.getBatchList().remove(data.get(position).getPackageName());
-                if (Common.getSelectAllCheckBox().isChecked()) {
-                    Common.getSelectAllCheckBox().setChecked(false);
-                }
                 Utils.snackbar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName()));
             } else {
                 Common.getBatchList().add(data.get(position).getPackageName());
-                Common.getSelectAllCheckBox().setChecked(Common.getBatchList().size() == PackageData.getData(v.getContext()).size());
                 Utils.snackbar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName()));
             }
-            Common.getBatchOptionsCard().setVisibility(PackageData.getBatchList().length() > 0 && PackageData
-                    .getBatchList().contains(".") ? View.VISIBLE : View.GONE);
+            Common.getBatchOptionsCard().setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
         });
     }
 

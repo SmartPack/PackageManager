@@ -58,7 +58,7 @@
     <string name="export">Export</string>
     <string name="export_apk_summary">The selected APK is exported into \'%s\'!</string>
     <string name="export_bundle_summary">The entire app bundle is exported into %s!</string>
-    <string name="export_details">Export App Details</string>
+    <string name="export_details">Export Details</string>
     <string name="export_details_message">App details are exported as %s!</string>
     <string name="export_file_message">is successfully exported into %s!</string>
     <string name="export_storage_message">Export %s into device storage?</string>

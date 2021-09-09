@@ -41,7 +41,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -54,10 +53,15 @@ import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ConcurrentModificationException;
@@ -87,7 +91,6 @@ public class PackageTasksFragment extends Fragment {
         mAppTitle = mRootView.findViewById(R.id.app_title);
         mProgressLayout = mRootView.findViewById(R.id.progress_layout);
         mBatchOptions = Common.initializeBatchOptionsCard(mRootView, R.id.batch_options);
-        MaterialCheckBox mSelectAll = Common.initializeSelectAllCheckBox(mRootView, R.id.checkbox);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
         AppCompatImageButton mSearch = mRootView.findViewById(R.id.search_icon);
@@ -181,25 +184,6 @@ public class PackageTasksFragment extends Fragment {
 
         mBatchOptions.setOnClickListener(v -> batchOptionsMenu(requireActivity()));
 
-        mSelectAll.setChecked(Common.getBatchList().size() == PackageData.getData(requireActivity()).size());
-
-        mSelectAll.setOnClickListener(v -> {
-            if (Utils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
-                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(getString(R.string.sure_question))
-                        .setMessage(getString(R.string.select_all_summary))
-                        .setCancelable(false)
-                        .setNegativeButton(getString(R.string.cancel), (dialog, id) -> mSelectAll.setChecked(Common.getBatchList().size() == PackageData.getData(requireActivity()).size()))
-                        .setPositiveButton(getString(R.string.select_all), (dialog, id) -> {
-                            selectAll(mSelectAll.isChecked());
-                            Utils.saveBoolean("select_all_firstAttempt", false, requireActivity());
-                        }).show();
-            } else {
-                selectAll(mSelectAll.isChecked());
-            }
-        });
-
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -213,7 +197,7 @@ public class PackageTasksFragment extends Fragment {
                     mAppTitle.setVisibility(View.VISIBLE);
                     return;
                 }
-                if (!PackageData.getBatchList().isEmpty() && PackageData.getBatchList().contains(".")) {
+                if (Common.getBatchList().size() > 0) {
                     new MaterialAlertDialogBuilder(requireActivity())
                             .setMessage(R.string.batch_warning)
                             .setCancelable(false)
@@ -429,7 +413,12 @@ public class PackageTasksFragment extends Fragment {
             menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
         }
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
-        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.batch_list_clear));
+        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.export_details));
+        menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.select_all)).setCheckable(true)
+                .setChecked(PackageData.getData(activity).size() == Common.getBatchList().size());
+        if (PackageData.getData(activity).size() != Common.getBatchList().size()) {
+            menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.batch_list_clear));
+        }
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -481,13 +470,49 @@ public class PackageTasksFragment extends Fragment {
                         export.setMessage(getString(R.string.batch_list_export) + "\n" + PackageData.showBatchList());
                         export.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
-                        export.setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                            PackageTasks.batchExportTask(activity);
-                        });
+                        export.setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
+                                PackageTasks.batchExportTask(activity));
                         export.show();
                     }
                     break;
                 case 4:
+                    File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
+                    try {
+                        JSONObject obj = new JSONObject();
+                        JSONArray apps = new JSONArray();
+                        for (String packageID : Common.getBatchList()) {
+                            if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                                apps.put(PackageDetails.getPackageDetails(packageID, activity));
+                            }
+                        }
+                        obj.put("applications", apps);
+                        Utils.create(obj.toString(), mJSON);
+                        Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
+                    } catch (JSONException ignored) {
+                    }
+                    break;
+                case 5:
+                    if (PackageData.getData(activity).size() == Common.getBatchList().size()) {
+                        selectAll(false);
+                    } else {
+                        if (Utils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
+                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(getString(R.string.sure_question))
+                                    .setMessage(getString(R.string.select_all_summary))
+                                    .setCancelable(false)
+                                    .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
+                                    })
+                                    .setPositiveButton(getString(R.string.select_all), (dialog, id) -> {
+                                        selectAll(true);
+                                        Utils.saveBoolean("select_all_firstAttempt", false, requireActivity());
+                                    }).show();
+                        } else {
+                            selectAll(true);
+                        }
+                    }
+                    break;
+                case 6:
                     Common.getBatchList().clear();
                     loadUI(activity);
                     break;
@@ -535,6 +560,7 @@ public class PackageTasksFragment extends Fragment {
                 } else {
                     mBatchOptions.setVisibility(View.GONE);
                 }
+                mBatchOptions.setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgressLayout.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);

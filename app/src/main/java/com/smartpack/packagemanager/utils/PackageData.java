@@ -223,14 +223,9 @@ public class PackageData {
         }
     }
 
-    public static String getBatchList() {
-        return Common.getBatchList().toString().substring(1, Common.getBatchList().toString().length() - 1);
-    }
-
     public static String showBatchList() {
-        String[] array = getBatchList().trim().split("\\s+");
         StringBuilder sb = new StringBuilder();
-        for (String s : array) {
+        for (String s : Common.getBatchList()) {
             if (s != null && !s.isEmpty())
                 sb.append(" - ").append(s.replaceAll(","," ")).append("\n");
         }

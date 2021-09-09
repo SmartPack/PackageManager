@@ -43,8 +43,7 @@ public class PackageTasks {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void doInBackground() {
-                String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
-                for (String packageID : batchApps) {
+                for (String packageID : Common.getBatchList()) {
                     if (packageID.contains(".")) {
                         if (packageID.equals(activity.getPackageName())) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)));
@@ -92,8 +91,7 @@ public class PackageTasks {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void doInBackground() {
-                String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
-                for (String packageID : batchApps) {
+                for (String packageID : Common.getBatchList()) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
                         if (packageID.equals(activity.getPackageName())) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
@@ -134,8 +132,7 @@ public class PackageTasks {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void doInBackground() {
-                String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
-                for (String packageID : batchApps) {
+                for (String packageID : Common.getBatchList()) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
                         if (SplitAPKInstaller.isAppBundle(PackageData.getParentDir(packageID, activity))) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
@@ -180,8 +177,7 @@ public class PackageTasks {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void doInBackground() {
-                String[] batchApps = PackageData.getBatchList().replaceAll(","," ").split(" ");
-                for (String packageID : batchApps) {
+                for (String packageID : Common.getBatchList()) {
                     if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
                         if (packageID.equals(activity.getPackageName())) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));

@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.checkbox.MaterialCheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +30,6 @@ public class Common {
     private static final List<String> mAPKList = new ArrayList<>(), mBatchList = new ArrayList<>();
 
     private static MaterialCardView mBatchOptions = null, mSelect = null;
-
-    private static MaterialCheckBox mSelectAll = null;
 
     private static String mApplicationID, mDirData, mDirNatLib, mDirSource, mPath, mSearchText;
 
@@ -117,14 +114,6 @@ public class Common {
 
     public static MaterialCardView initializeBatchOptionsCard(View view, int id) {
         return mBatchOptions = view.findViewById(id);
-    }
-
-    public static MaterialCheckBox getSelectAllCheckBox() {
-        return mSelectAll;
-    }
-
-    public static MaterialCheckBox initializeSelectAllCheckBox(View view, int id) {
-        return mSelectAll = view.findViewById(id);
     }
 
     public static void reloadPage(boolean b) {
