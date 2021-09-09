@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,6 +52,7 @@ public class FilePickerActivity extends AppCompatActivity {
     private LinearLayout mProgressLayout;
     private MaterialCardView mSelect;
     private MaterialTextView mTitle;
+    private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private RecycleViewFilePickerAdapter mRecycleViewAdapter;
 
@@ -63,6 +65,7 @@ public class FilePickerActivity extends AppCompatActivity {
         AppCompatImageButton mBack = findViewById(R.id.back);
         AppCompatImageButton mSortButton = findViewById(R.id.sort);
         mProgressLayout = findViewById(R.id.progress_layout);
+        mProgress = findViewById(R.id.progress);
         mTitle = findViewById(R.id.title);
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -145,6 +148,7 @@ public class FilePickerActivity extends AppCompatActivity {
             @Override
             public void onPreExecute() {
                 FilePicker.getData(activity, true).clear();
+                mProgress.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(View.GONE);
             }
 
@@ -163,6 +167,7 @@ public class FilePickerActivity extends AppCompatActivity {
                 } else {
                     mSelect.setVisibility(View.VISIBLE);
                 }
+                mProgress.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
         }.execute();

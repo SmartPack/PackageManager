@@ -59,11 +59,7 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
             holder.mSize.setVisibility(View.GONE);
             holder.mCheckBox.setVisibility(View.GONE);
         } else if (this.data.get(position).endsWith(".apk")) {
-            if (PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()) != null) {
-                holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
-            } else {
-                holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
-            }
+            holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
             if (PackageData.getAPKId(data.get(position), holder.mIcon.getContext()) != null) {
                 holder.mDescription.setText(PackageData.getAPKId(data.get(position), holder.mIcon.getContext()));
                 holder.mDescription.setVisibility(View.VISIBLE);

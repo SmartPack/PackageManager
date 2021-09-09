@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -15,6 +16,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
+
+import com.smartpack.packagemanager.R;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -179,12 +182,15 @@ public class PackageData {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public static Drawable getAPKIcon(String apkPath, Context context) {
         PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
         if (pi != null) {
             return pi.applicationInfo.loadIcon(getPackageManager(context));
         } else {
-            return null;
+            Drawable drawable = context.getResources().getDrawable(R.drawable.ic_android);
+            drawable.setTint(context.getResources().getColor(R.color.colorAccent));
+            return drawable;
         }
     }
 
