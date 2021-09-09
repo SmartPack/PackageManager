@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"അപ്ലിക്കേഷനെക്കുറിച്ച്"</string>
-    <string name="about_summary">"<i>നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ മാനേജുചെയ്യുന്നതിനുള്ള ലളിതവും ശക്തവുമായ അപ്ലിക്കേഷൻ.</i>"</string>
     <string name="apk_path">"APK-യുടെ പാത"</string>
     <string name="app_info">"വിശദാംശങ്ങൾ"</string>
     <string name="batch_list_clear">"മായ്‌ക്കുക"</string>
@@ -23,7 +21,6 @@
     <string name="date_installation">"ഇൻസ്റ്റാളേഷൻ തീയതികൾ"</string>
     <string name="date_installed">"ആദ്യം ഇൻസ്റ്റാൾ ചെയ്തത്: %s"</string>
     <string name="date_updated">"അവസാനം അപ്ഡേറ്റ് ചെയ്തത്: %s"</string>
-    <string name="developed_by">"വികസിപ്പിച്ചെടുത്തത്"</string>
     <string name="disable_message">"%s ചെയ്യ്യപ്പെടും! ഉറപ്പാണോ?"</string>
     <string name="disabled">"പ്രവർത്തനരഹിതമാണ്"</string>
     <string name="disabling">"%s നെ പ്രവർത്തനരഹിതമാക്കുന്നു"</string>
@@ -104,8 +101,6 @@
     <string name="batch_list_removed">"%s നെ ബാച്ച് പട്ടികയിൽ നിന്ന് നീക്കം ചെയ്തു"</string>
     <string name="bundle_install_message">"ദയവായി ശ്രദ്ധിക്കുക: ഒന്നിലധികം APK-കൾ (സ്പ്ലിറ്റ് APK-കൾ) ഇൻസ്റ്റാൾ ചെയ്യുന്നതിന് അവയെല്ലാം ഒരൊറ്റ ഫോൾഡറിൽ സ്ഥാപിച്ചശേഷം  അവയിലൊന്ന് തിരഞ്ഞെടുക്കുക. പാക്കേജ് മാനേജർ ബാക്കിയുള്ളവ തിരഞ്ഞെടുത്ത് കൈകാര്യം ചെയ്യ്യുന്നതാണ്."</string>
     <string name="list">"പട്ടിക"</string>
-    <string name="welcome_message_root">"മുന്നറിയിപ്പ്: ഈ അപ്ലിക്കേഷൻ വളരെ ശക്തമാണ്. നിങ്ങളുടെ ഉപകരണത്തിന് എന്തെങ്കിലും സംഭവിച്ചാൽ ഈ അപ്ലിക്കേഷന്റെ ഡവലപ്പർ ഒരു ഉത്തരവാദിത്തവും ഏറ്റെടുക്കില്ല."</string>
-    <string name="welcome_message_noroot">"ദയവായി ശ്രദ്ധിക്കുക: റൂട്ട് ആക്സസ് നിങ്ങളുടെ ഉപകരണത്തിൽ ഒന്നുകിൽ ലഭ്യമല്ല, അല്ലെങ്കിൽ പാക്കേജ് മാനേജറിനു റൂട്ട് ആക്സസ് നിരസിച്ചിരിക്കുന്നു! അതിനാൽ, നിങ്ങളുടെ ഉപകരണത്തിലെ ഈ അപ്ലിക്കേഷന്റെ കഴിവുകൾ പരിമിതമായിരിക്കും."</string>
     <string name="activities">"Activities"</string>
     <string name="documentation_summary">"പാക്കേജ് മാനേജർ ഉപയോഗിക്കുന്നതിന് ആവശ്യമായ വിശദമായ ഡോക്യുമെന്റേഷൻ പരിശോധിക്കുക"</string>
     <string name="file_picker_external">"ബാഹ്യം"</string>

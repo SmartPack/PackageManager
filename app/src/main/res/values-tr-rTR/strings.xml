@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"Hakkında"</string>
-    <string name="about_summary">"<i>Uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama.</i>"</string>
     <string name="apk_path">"APK Dizini"</string>
     <string name="app_info">"Uygulama bilgileri"</string>
     <string name="batch_list_clear">"Listeyi temizle"</string>
@@ -28,7 +26,6 @@
     <string name="date_installation">"Yüklenme Tarihi"</string>
     <string name="date_installed">"İlk Yüklenme: %s"</string>
     <string name="date_updated">"Son Güncellenme: %s"</string>
-    <string name="developed_by">"Geliştirici"</string>
     <string name="disable_message">"%s olacak! İstediğinize emin misiniz?"</string>
     <string name="disable">"Devre Dışı Bırak"</string>
     <string name="disabled">"devre dışı"</string>
@@ -123,8 +120,6 @@
     <string name="explore_error_status">"%s keşfetme başarısız!"</string>
     <string name="list">"Liste"</string>
     <string name="split_apk">"Bölünmüş APK'ler"</string>
-    <string name="welcome_message_root">"UYARI: Bu uygulama, cihazınızı kurcalamak için fazla güçlüdür. Bu uygulamanın geliştiricisi, cihazınızın başına gelebilecek hiçbir şeyin sorumluluğunu kabul etmemektedir."</string>
-    <string name="welcome_message_noroot">"Sakın unutmayın: Cihazınızda Root Erişimi mevcut değildir veya Package Manager için reddedilmiştir! Bu nedenle uygulamanın cihazınıza yapabilecekleri sınırlıdır."</string>
     <string name="activities">"Aktiviteler"</string>
     <string name="documentation">"Dokümantasyon"</string>
     <string name="documentation_summary">"Package Manager'ı kullanmak için detaylı dokümantasyona bakınız"</string>
@@ -219,4 +214,12 @@
     <string name="grant">"Yetkilendir"</string>
     <string name="important">"Önemli"</string>
     <string name="select_all">"Hepsini Seç"</string>
+    <string name="select_all_summary">"Bu sayfadaki bütün uygulamaları seçip toplu işlem listesine ekleyecek misiniz?"</string>
+    <string name="uninstall_status_failed">"%s kaldırma işlemi başarısız oldu veya kullanıcı tarafından iptal edildi!"</string>
+    <string name="export_apk_summary">"Seçilen APK dosyası '%s' içerisine çıkartıldı!"</string>
+    <string name="initializing">"Hazırlanıyor…"</string>
+    <string name="start">"Başla"</string>
+    <string name="size">"Boyut"</string>
+    <string name="time_installed">"Yüklenme Zamanı"</string>
+    <string name="time_updated">"Güncellenme Zamanı"</string>
 </resources>

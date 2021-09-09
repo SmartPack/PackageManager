@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"Acerca de"</string>
-    <string name="about_summary">"Simple pero poderosa aplicación para administrar tus aplicaciones"</string>
     <string name="apk_path">"Ruta del APK"</string>
     <string name="app_info">"Información de la App"</string>
     <string name="batch_list_clear">"Vaciar la lista"</string>
@@ -27,7 +25,6 @@
     <string name="date_installation">"Fecha de instalación"</string>
     <string name="date_installed">"Primer instalado: %s"</string>
     <string name="date_updated">"Último actualizado: %s"</string>
-    <string name="developed_by">"Desarrollado por"</string>
     <string name="disable_message">"¡Será %s!, ¿Estás seguro?"</string>
     <string name="disable">"Deshabilitar"</string>
     <string name="disabled">"Deshabilitado"</string>
@@ -122,8 +119,6 @@
     <string name="explore_error_status">"Exploración de %s! fallida"</string>
     <string name="list">"Lista"</string>
     <string name="split_apk">"Dividir APKs"</string>
-    <string name="welcome_message_root">"ADVERTENCIA: esta aplicación es demasiado poderosa para estropear su dispositivo.  El desarrollador de esta aplicación no asumirá ninguna responsabilidad si algo malo le sucede a su dispositivo."</string>
-    <string name="welcome_message_noroot">"Tenga en cuenta: el acceso root no está disponible en su dispositivo o se ha rechazado para el Administrador de paquetes.  Las capacidades de esta aplicación en su dispositivo serán, por lo tanto, limitadas."</string>
     <string name="activities">"Actividades"</string>
     <string name="documentation">"Documentación"</string>
     <string name="documentation_summary">"Consulte la documentación detallada para usar el Administrador de paquetes"</string>

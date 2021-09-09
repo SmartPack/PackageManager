@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"Névjegy"</string>
-    <string name="about_summary">"<i>Egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez.</i>"</string>
     <string name="apk_path">"APK Útvonal"</string>
     <string name="app_info">"App infó"</string>
     <string name="batch_list_clear">"Lista törlése"</string>
@@ -28,7 +26,6 @@
     <string name="date_installation">"Telepítési Dátumok"</string>
     <string name="date_installed">"Első Telepítés: %s"</string>
     <string name="date_updated">"Utolsó Frissítés: %s"</string>
-    <string name="developed_by">"Fejlesztő"</string>
     <string name="disable_message">"%s lesz!  Biztos vagy ebben?"</string>
     <string name="disable">"Tilt"</string>
     <string name="disabled">"tiltott"</string>
@@ -123,8 +120,6 @@
     <string name="explore_error_status">"%s felfedezése sikertelen!"</string>
     <string name="list">"Lista"</string>
     <string name="split_apk">"Felosztott APK-k"</string>
-    <string name="welcome_message_root">"FIGYELEM: Ez az alkalmazás túl erős, elronthatja a készüléket. Az alkalmazás fejlesztője nem vállal felelősséget, ha hiba történik az eszközével."</string>
-    <string name="welcome_message_noroot">"Kérjük vegye figyelembe: A root hozzáférés vagy nem érhető el az eszközén, vagy a Package Manager számára elutasított!  Ezért az alkalmazás képességei az eszközön korlátozottak lesznek."</string>
     <string name="activities">"Aktivitások"</string>
     <string name="documentation">"Dokumentáció"</string>
     <string name="documentation_summary">"A Package Manager használatához olvassa el a részletes dokumentációt"</string>
@@ -222,4 +217,9 @@
     <string name="select_all_summary">"Kiválasztja és hozzáadja az összes alkalmazást erről az oldalról a kötegelt listához?"</string>
     <string name="uninstall_status_failed">"A(z) %s eltávolítása nem sikerült, vagy a felhasználó leállította!"</string>
     <string name="export_apk_summary">"A kiválasztott APK exportálva a(z) '%s' mappába!"</string>
+    <string name="initializing">"Indítás…"</string>
+    <string name="start">"Indul"</string>
+    <string name="size">"Méret"</string>
+    <string name="time_installed">"Telepítés ideje"</string>
+    <string name="time_updated">"Frissítés ideje"</string>
 </resources>

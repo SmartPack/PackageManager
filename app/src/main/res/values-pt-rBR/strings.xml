@@ -1,6 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="about">Sobre</string>
-    <string name="about_summary"><i>Um aplicativo simples e poderoso para gerenciar seus aplicativos.</i></string>
     <string name="app_info">Informações do app</string>
     <string name="batch_list_clear">Limpar lista</string>
     <string name="batch_list_disable">Tem certeza de que deseja desativar (se ativado) ou ativar (se desativado) o(s) seguinte (s) aplicativo(s)?</string>
@@ -53,7 +51,6 @@
     <string name="uninstall_title">Tem certeza de que deseja desinstalar %s?</string>
     <string name="uninstall_warning">Observe: A remoção de aplicativos do sistema às vezes é perigosa!\n\n *** <b>USE POR SUA CONTA E RISCO</b>> ***\n</string>
     <string name="welcome_message">Bem-vindo ao Package Manager, um simples mas poderoso aplicativo para gerenciar seus aplicativos.</string>
-    <string name="welcome_message_root">AVISO: Este aplicativo é muito poderoso e pode bagunçar o seu dispositivo. O desenvolvedor deste aplicativo não assumirá nenhuma responsabilidade se algo errado acontecer com o seu dispositivo.</string>
     <string name="wrong_extension">Por favor, selecione um aquivo com extansão %s.</string>
     <string name="yes">Sim</string>
     <string name="batch_list_summary">Os seguintes aplicativos foram adicionados à lista em lote</string>
@@ -87,7 +84,6 @@
     <string name="date_installation">Datas de instalação</string>
     <string name="date_installed">Instalado pela primeira vez: %s</string>
     <string name="date_updated">Atualizado: %s</string>
-    <string name="developed_by">Desenvolvido por</string>
     <string name="delete">Excluir</string>
     <string name="delete_question">Excluir \'%s\'?</string>
     <string name="disable">Desativar</string>
@@ -158,5 +154,4 @@
     <string name="uninstall_adb_summary">Você selecionou \'%s\', que é um app de sistema. Infelizmente, o ecossistema Android não permite que aplicativos de terceiros, como o Gerenciador de pacotes, removam aplicativos do sistema em um ambiente sem root. Não se preocupe! O Gerenciador de pacotes irá guiá-lo para remover este aplicativo usando o método Android Debug Bridge (ADB). Se você já tem um ADB totalmente funcional, a execução do seguinte comando em um shell ADB desinstalará este aplicativo. Para configurar um ambiente ADB funcional, verifique a página linkada de cocumentação.</string>
     <string name="version">Versão: %s</string>
     <string name="warning">Aviso</string>
-    <string name="welcome_message_noroot">Aviso: O acesso root não está disponível em seu dispositivo ou foi negado para o Gerenciador de Pacotes! Os recursos deste aplicativo em seu dispositivo serão, portanto, limitados.</string>
 </resources>

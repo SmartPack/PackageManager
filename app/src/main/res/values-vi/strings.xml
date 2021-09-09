@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"Giới thiệu"</string>
-    <string name="about_summary">"<i>Một ứng dụng đơn giản nhưng mạnh mẽ để quản lý các ứng dụng của bạn.</i>"</string>
     <string name="apk_path">"Đường dẫn APK"</string>
     <string name="app_info">"Thông tin ứng dụng"</string>
     <string name="batch_list_clear">"Dọn dẹp danh sách"</string>
@@ -29,7 +27,6 @@
     <string name="date_installation">"Ngày cài đặt"</string>
     <string name="date_installed">"Cài đặt lần đầu: %s"</string>
     <string name="date_updated">"Cập nhật lần cuối: %s"</string>
-    <string name="developed_by">"Được phát triển bởi"</string>
     <string name="disable_message">"sẽ là %s!  Bạn có chắc không?"</string>
     <string name="disable">"Tắt"</string>
     <string name="disabled">"tắt"</string>
@@ -124,8 +121,6 @@
     <string name="explore_error_status">"Không khám phá được %s!"</string>
     <string name="list">"Danh sách"</string>
     <string name="split_apk">"Phân chia APK"</string>
-    <string name="welcome_message_root">"CẢNH BÁO: Ứng dụng này quá mạnh để làm rối thiết bị của bạn.  Nhà phát triển ứng dụng này sẽ không chịu bất kỳ trách nhiệm nào nếu có sự cố xảy ra với thiết bị của bạn."</string>
-    <string name="welcome_message_noroot">"Xin lưu ý: Quyền truy cập gốc không khả dụng trong thiết bị của bạn hoặc bị từ chối đối với Package Manager! Do đó, các khả năng của ứng dụng này trên thiết bị của bạn sẽ bị hạn chế."</string>
     <string name="documentation">"Tài liệu"</string>
     <string name="documentation_summary">"Kiểm tra tài liệu chi tiết để sử dụng Package Manager"</string>
     <string name="file_picker">"Bộ chọn tệp"</string>

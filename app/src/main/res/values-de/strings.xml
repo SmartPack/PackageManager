@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"Über"</string>
-    <string name="about_summary">"<i>Eine einfache, aber leistungsfähige Anwendung zur Verwaltung Ihrer Apps.</i>"</string>
     <string name="apk_path">"Pfad zur APK"</string>
     <string name="app_info">"Appinformationen"</string>
     <string name="batch_list_clear">"Liste löschen"</string>
@@ -28,7 +26,6 @@
     <string name="date_installation">"Installationsdatum"</string>
     <string name="date_installed">"Installiert: %s"</string>
     <string name="date_updated">"Zuletzt geupdatet: %s"</string>
-    <string name="developed_by">"Entwickelt von"</string>
     <string name="disable_message">"Sind Sie sicher?"</string>
     <string name="disable">"Deaktivieren"</string>
     <string name="disabled">"deaktiviert"</string>
@@ -123,8 +120,6 @@
     <string name="explore_error_status">"Prüfung von %s fehlgeschlagen!"</string>
     <string name="list">"Liste"</string>
     <string name="split_apk">"splitte APKs"</string>
-    <string name="welcome_message_root">"WARNUNG: Diese Anwendung ist fähig, Ihr Gerät zu beschädigen. Der Entwickler dieser Anwendung übernimmt keine Verantwortung, wenn etwas mit Ihrem Gerät schiefgeht."</string>
-    <string name="welcome_message_noroot">"Bitte beachten Sie: Root-Zugriff ist auf Ihrem Gerät entweder nicht verfügbar oder für Package Manager abgelehnt! Die Möglichkeiten dieser Anwendung auf Ihrem Gerät sind daher eingeschränkt."</string>
     <string name="activities">"Aktivitäten"</string>
     <string name="documentation">"Dokumentation"</string>
     <string name="documentation_summary">"Schau Dir die Detaillierten Dokumente an wie man Package Manager benutzt"</string>

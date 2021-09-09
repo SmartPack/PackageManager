@@ -1,11 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"О программе"</string>
-    <string name="about_summary">"<i>Простое, но мощное приложение для управления вашими приложениями.</i>"</string>
     <string name="apk_path">"Путь к APK"</string>
-    <string name="app_info">"Инфо"</string>
+    <string name="app_info">"Информация о приложении"</string>
     <string name="batch_list_clear">"Очистить список"</string>
-    <string name="batch_list_disable">"Вы уверены, что хотите заморозить (если разморожено) или разморозить (если заморожено) следующие приложения?"</string>
+    <string name="batch_list_disable">"Вы уверены, что хотите отключить (если включено) или включить (если отключено) следующие приложения?"</string>
     <string name="batch_list_remove">"Вы уверены, что хотите удалить следующие приложения?"</string>
     <string name="batch_list_reset">"Вы уверены, что хотите сбросить следующие приложения?"</string>
     <string name="batch_list_summary">"Следующие приложения добавлены в список пакетной обработки"</string>
@@ -19,6 +17,7 @@
     <string name="cancel">"Отмена"</string>
     <string name="change_logs">"Список изменений"</string>
     <string name="credits">"Благодарности"</string>
+    <string name="credits_summary">"Список людей, которые поддержали этот проект"</string>
     <string name="dark_theme">"Тёмная тема"</string>
     <string name="dark_theme_auto">"Авто"</string>
     <string name="dark_theme_disable">"Включить"</string>
@@ -27,7 +26,6 @@
     <string name="date_installation">"Дата установки"</string>
     <string name="date_installed">"Впервые установлено: %s"</string>
     <string name="date_updated">"Последнее обновление: %s"</string>
-    <string name="developed_by">"Разработано"</string>
     <string name="disable_message">"будет %s! Вы уверены?"</string>
     <string name="disable">"Заморозить"</string>
     <string name="disabled">"заморожено"</string>
@@ -93,7 +91,7 @@
     <string name="uninstall_nope">"Сожалею! Вы не можете сделать это отсюда!"</string>
     <string name="uninstall_summary">"Удаление %s"</string>
     <string name="uninstall_title">"Вы уверены, что хотите удалить %s?"</string>
-    <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!\n\n*** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b>> ***"</string>
+    <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!\n\n*** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***"</string>
     <string name="version">"Версия: %s"</string>
     <string name="welcome_message">"Добро пожаловать в Package Manager, простое, но мощное приложение для управления вашими приложениями."</string>
     <string name="wrong_extension">"Пожалуйста, выберите файл с %s расширением."</string>
@@ -122,8 +120,6 @@
     <string name="explore_error_status">"Не удалось обозреть %s!"</string>
     <string name="list">"Список"</string>
     <string name="split_apk">"Split APK"</string>
-    <string name="welcome_message_root">"ПРЕДУПРЕЖДЕНИЕ: Это приложение слишком мощное, чтобы испортить ваше устройство. Разработчик этого приложения не несет никакой ответственности, если с вашим устройством что-то случилось."</string>
-    <string name="welcome_message_noroot">"Обратите внимание: рут-доступ либо недоступен на вашем устройстве, либо отклонен для Package Manager-а! Таким образом, возможности этого приложения на вашем устройстве будут ограничены."</string>
     <string name="activities">"Активити"</string>
     <string name="documentation">"Документация"</string>
     <string name="documentation_summary">"Ознакомьтесь с подробной документацией по использованию Package Manager"</string>
@@ -211,4 +207,15 @@
     <string name="operations_write_sms">"Позволяет приложению отправлять SMS-сообщения."</string>
     <string name="operations_write_storage">"Позволяет приложению записывать данные во внешнее хранилище."</string>
     <string name="operations_write_wallpaper">"Позволяет приложению устанавливать обои"</string>
+    <string name="bundle_path">"Путь к пакету"</string>
+    <string name="size_apk">"Размер APK: %s"</string>
+    <string name="size_bundle">"Размер пакета"</string>
+    <string name="file_permission_request_message">"Для работы этой функции в новых версиях Android (Android R и выше) необходимо предоставить Package Manager право \"Доступ ко всем данным\". Нажмите кнопку \"Предоставить\" и на открывшемся экране представьте право вручную."</string>
+    <string name="grant">"Предоставить"</string>
+    <string name="select_all">"Выбрать всё"</string>
+    <string name="uninstall_status_failed">"Произошла ошибка при удалении %s или операция была прервана пользователем!"</string>
+    <string name="export_apk_summary">"Выбранный APK экспортирован в '%s'!"</string>
+    <string name="initializing">"Инициализация…"</string>
+    <string name="start">"Начало"</string>
+    <string name="size">"Размер"</string>
 </resources>

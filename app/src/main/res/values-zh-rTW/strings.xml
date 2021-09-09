@@ -1,6 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="about">"關於"</string>
-    <string name="about_summary">"<i>一個麻雀雖小但五臟俱全，用於管理您的應用程式的管理器。</i>"</string>
     <string name="apk_path">"APK 路徑"</string>
     <string name="app_info">"應用程式資訊"</string>
     <string name="batch_list_clear">"清除清單"</string>
@@ -27,7 +25,6 @@
     <string name="date_installation">"安裝日期"</string>
     <string name="date_installed">"首次安裝：％s"</string>
     <string name="date_updated">"上次更新時間：％s"</string>
-    <string name="developed_by">"由開發"</string>
     <string name="disable_message">"會成為％s！是您確定嗎？"</string>
     <string name="disable">"停用"</string>
     <string name="disabled">"已停用"</string>
@@ -122,8 +119,6 @@
     <string name="explore_error_status">"無法探索％s！"</string>
     <string name="list">"清單"</string>
     <string name="split_apk">"拆分APK"</string>
-    <string name="welcome_message_root">"警告：此應用程式功能太強大，無法破壞您的裝置。如果您的裝置出了問題，此應用程式的開發人員將不承擔任何責任。"</string>
-    <string name="welcome_message_noroot">"請注意：Root Access在您的裝置中無法使用，或對於Package Manager而言被拒絕！因此，此應用程式在您的裝置上的功能將受到限制。"</string>
     <string name="activities">"活動"</string>
     <string name="documentation">"說明文件"</string>
     <string name="documentation_summary">"查看詳細文件以使用套件管理器"</string>

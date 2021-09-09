@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"Про додаток"</string>
-    <string name="about_summary">"<i>Простий, але потужний додаток для управління вашими програмами.</i>"</string>
     <string name="apk_path">"Шлях до APK"</string>
     <string name="app_info">"Інфо"</string>
     <string name="batch_list_clear">"Очистити список"</string>
@@ -27,7 +25,6 @@
     <string name="date_installation">"Дата встановлення"</string>
     <string name="date_installed">"Вперше встановлено: %s"</string>
     <string name="date_updated">"Останнє оновленя: %s"</string>
-    <string name="developed_by">"Розроблено"</string>
     <string name="disable_message">"буде %s! Ти впевнений?"</string>
     <string name="disable">"Заморозити"</string>
     <string name="disabled">"заморожено"</string>
@@ -122,8 +119,6 @@
     <string name="explore_error_status">"Не вдалося оглянути %s!"</string>
     <string name="list">"Список"</string>
     <string name="split_apk">"Розділені (split) apk"</string>
-    <string name="welcome_message_root">"ПОПЕРЕДЖЕННЯ: Цей додаток занадто потужний, щоб зіпсувати ваш пристрій. Розробник цього додатка не несе відповідальності, якщо з вашим пристроєм трапилося щось не так."</string>
-    <string name="welcome_message_noroot">"Зверніть увагу: root-доступ недоступний на вашому пристрої або відхилений для Package Manager! Отже, можливості цього додатку на вашому пристрої будуть обмеженими"</string>
     <string name="activities">"Актівіті"</string>
     <string name="documentation">"Документація"</string>
     <string name="documentation_summary">"Щоб використовувати Package Manager, ознайомтесь з детальною документацією"</string>

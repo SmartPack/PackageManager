@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"关于"</string>
-    <string name="about_summary">"<i>一款简单而强大的应用程序管理器。</i>"</string>
     <string name="apk_path">"APK 路径"</string>
     <string name="app_info">"应用信息"</string>
     <string name="batch_list_clear">"清空列表"</string>
@@ -18,7 +16,6 @@
     <string name="bundle_install_apks">"您确定要安装应用捆绑包 '%s' 吗？"</string>
     <string name="cancel">"取消"</string>
     <string name="change_logs">"更新日志"</string>
-    <string name="copyright">"版权所有：©%s"</string>
     <string name="credits">"贡献者"</string>
     <string name="credits_summary">"此项目的贡献者名单"</string>
     <string name="dark_theme">"黑暗主题"</string>
@@ -29,7 +26,6 @@
     <string name="date_installation">"安装日期"</string>
     <string name="date_installed">"首次安装：%s"</string>
     <string name="date_updated">"上次更新：%s"</string>
-    <string name="developed_by">"开发者"</string>
     <string name="disable_message">"将会被%s！您确定吗？"</string>
     <string name="disable">"禁用"</string>
     <string name="disabled">"禁用"</string>
@@ -97,7 +93,7 @@
     <string name="uninstall_title">"您确定要卸载 %s 吗？"</string>
     <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
 
-        *** <b>您需要自担风险</b> ***
+        *** <b>您需要自担风险</b>> ***
 
 "</string>
     <string name="version">"版本：%s"</string>
@@ -128,8 +124,6 @@
     <string name="explore_error_status">"无法浏览 %s！"</string>
     <string name="list">"列表"</string>
     <string name="split_apk">"拆分 APK"</string>
-    <string name="welcome_message_root">"警告：此应用功能过于强大，甚至可能破坏您的设备。如果您的设备出现问题，此应用的开发者将不承担任何责任。"</string>
-    <string name="welcome_message_noroot">"请注意：Root 权限在您的设备中不可用，或拒绝了 Package Manager 的请求！因此，此应用的功能将在您的设备上受到限制。"</string>
     <string name="activities">"Activity"</string>
     <string name="documentation">"文档"</string>
     <string name="documentation_summary">"查看 Package Manager 的详细使用文档"</string>
@@ -227,4 +221,9 @@
     <string name="select_all_summary">"选择此页面的所有应用并添加到批量处理列表吗？"</string>
     <string name="uninstall_status_failed">"卸载 %s 失败或被用户取消！"</string>
     <string name="export_apk_summary">"所选 APK 已导出至 '%s'！"</string>
+    <string name="initializing">"正在初始化…"</string>
+    <string name="start">"启动"</string>
+    <string name="size">"大小"</string>
+    <string name="time_installed">"安装时间"</string>
+    <string name="time_updated">"更新时间"</string>
 </resources>

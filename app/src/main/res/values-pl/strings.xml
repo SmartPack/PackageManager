@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"O aplikacji"</string>
-    <string name="about_summary">"<i>Prosta, ale potężna aplikacja do zarządzania Twoimi aplikacjami.</i>"</string>
     <string name="apk_path">"Ścieżka APK"</string>
     <string name="app_info">"Informacje"</string>
     <string name="batch_list_clear">"Wyczyść listę"</string>
@@ -28,7 +26,6 @@
     <string name="date_installation">"Daty instalacji"</string>
     <string name="date_installed">"Pierwsza instalacja: %s"</string>
     <string name="date_updated">"Ostatnia aktualizacja: %s"</string>
-    <string name="developed_by">"Stworzony przez"</string>
     <string name="disable_message">"będzie %s! Czy na pewno?"</string>
     <string name="disable">"Wyłącz"</string>
     <string name="disabled">"wyłączony"</string>
@@ -126,8 +123,6 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! P
     <string name="explore_error_status">"Nie udało się przejrzeć %s!"</string>
     <string name="list">"Lista"</string>
     <string name="split_apk">"Podzielone APK"</string>
-    <string name="welcome_message_root">"OSTRZEŻENIE: Ta aplikacja jest na tyle potężna, że jest w stanie zepsuć Twoje urządzenie. Twórca tej aplikacji nie ponosi żadnej odpowiedzialności, jeśli coś złego stanie się z Twoim urządzeniem."</string>
-    <string name="welcome_message_noroot">"Uwaga: Dostęp do roota jest niedostępny w Twoim urządzeniu albo odrzucony dla Package Manager! W związku z tym możliwości tej aplikacji na Twoim urządzeniu będą ograniczone."</string>
     <string name="activities">"Aktywności"</string>
     <string name="documentation">"Dokumentacja"</string>
     <string name="documentation_summary">"Sprawdź szczegółową dokumentację korzystania z Package Manager"</string>
@@ -225,4 +220,9 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! P
     <string name="select_all_summary">"Wybrać i dodać wszystkie aplikacje z tej strony do listy wsadowej?"</string>
     <string name="uninstall_status_failed">"Odinstalowywanie %s nie powiodło się albo zostało anulowane przez użytkownika!"</string>
     <string name="export_apk_summary">"Wybrane APK zostało wyeksportowane do „%s”!"</string>
+    <string name="initializing">"Inicjowanie…"</string>
+    <string name="start">"Rozpocznij"</string>
+    <string name="size">"Rozmiar"</string>
+    <string name="time_installed">"Data instalacji"</string>
+    <string name="time_updated">"Data aktualizacji"</string>
 </resources>

@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="about">"O aplikaci"</string>
-    <string name="about_summary">"<i>Jednoduše, mocná aplikace pro správu aplikací.</i>"</string>
     <string name="apk_path">"Cesta k apk souboru"</string>
     <string name="app_info">"Info o aplikaci"</string>
     <string name="batch_list_clear">"Vyčistit seznam"</string>
@@ -28,7 +26,6 @@
     <string name="date_installation">"Instalační data"</string>
     <string name="date_installed">"Prvně instalováno: %s"</string>
     <string name="date_updated">"Naposledy aktualizováno: %s"</string>
-    <string name="developed_by">"Vytvořeno"</string>
     <string name="disable_message">"Bude %s! Opravdu?"</string>
     <string name="disable">"Vypnout"</string>
     <string name="disabled">"Vyonuto"</string>
@@ -123,8 +120,6 @@
     <string name="explore_error_status">"Chyba procházení %s!"</string>
     <string name="list">"Seznam"</string>
     <string name="split_apk">"Splkt APK soubory"</string>
-    <string name="welcome_message_root">"UPOZORNĚNÍ: Tato aplikace je příliš silná na to, aby zařízení pokazila.  Vývojář této aplikace nepřebírá žádnou odpovědnost, pokud se ve vašem zařízení něco stalo."</string>
-    <string name="welcome_message_noroot">"UPOZORNĚNÍ: Tato aplikace je příliš silná na to, aby zařízení pokazila.  Vývojář této aplikace nepřebírá žádnou odpovědnost, pokud se ve vašem zařízení něco stalo."</string>
     <string name="activities">"Aktivity"</string>
     <string name="documentation">"Dokumentace"</string>
     <string name="documentation_summary">"Prohlédněte si dokumentaci pro použití Package Manager"</string>
