@@ -52,6 +52,7 @@ import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageTasks;
@@ -357,7 +358,7 @@ public class PackageTasksFragment extends Fragment {
                 case 0:
                     Common.getAppList().clear();
                     if (Utils.getBoolean("filePicker", true, requireActivity())) {
-                        Common.setPath(Environment.getExternalStorageDirectory().toString());
+                        Common.setPath(FilePicker.getLastDirPath(requireActivity()));
                         Intent filePicker = new Intent(activity, FilePickerActivity.class);
                         startActivity(filePicker);
                     } else {

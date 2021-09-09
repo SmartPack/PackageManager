@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
+import android.os.Environment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -63,6 +64,15 @@ public class FilePicker {
             Common.setPath(Common.getPath() + File.separator);
         }
         return new File(Common.getPath()).listFiles();
+    }
+
+    public static String getLastDirPath(Activity activity) {
+        String mDir = Utils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
+        if (Utils.exist(mDir)) {
+            return mDir;
+        } else {
+            return Environment.getExternalStorageDirectory().toString();
+        }
     }
 
 }

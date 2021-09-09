@@ -70,7 +70,7 @@ public class FilePickerActivity extends AppCompatActivity {
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        mBack.setOnClickListener(v -> super.onBackPressed());
+        mBack.setOnClickListener(v -> exitActivity());
 
         if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
@@ -108,7 +108,7 @@ public class FilePickerActivity extends AppCompatActivity {
                         })
                         .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
                             SplitAPKInstaller.handleAppBundle(mProgressLayout, mPath, this);
-                            finish();
+                            exitActivity();
                         }).show();
             } else if (mPath.endsWith("apk")) {
                 if (Common.getAppList().contains(mPath)) {
@@ -138,7 +138,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
         mSelect.setOnClickListener(v -> {
             SplitAPKInstaller.installSplitAPKs(this);
-            finish();
+            exitActivity();
         });
     }
 
@@ -173,6 +173,13 @@ public class FilePickerActivity extends AppCompatActivity {
         }.execute();
     }
 
+    private void exitActivity() {
+        if (!Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
+            Utils.saveString("lastDirPath", Common.getPath(), this);
+        }
+        finish();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -192,7 +199,7 @@ public class FilePickerActivity extends AppCompatActivity {
                     })
                     .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> finish()).show();
         } else if (Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator)) {
-            super.onBackPressed();
+            exitActivity();
         } else {
             Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());
             Common.getAppList().clear();
