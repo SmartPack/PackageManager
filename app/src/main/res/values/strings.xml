@@ -186,6 +186,10 @@
     <string name="reset">Reset</string>
     <string name="reset_message">Reset \'%s\'?</string>
     <string name="reset_summary">Resetting %s</string>
+    <string name="restore">Restore</string>
+    <string name="restore_message">Restore factory version of \'%s\'?</string>
+    <string name="restore_message_batch">Restore factory versions of the following apps?\n\n%s</string>
+    <string name="restore_success_message">Factory version of the selected app is successfully restored!</string>
     <string name="result">Result: %s</string>
     <string name="reverse_order">Reverse Order</string>
     <string name="search">Search…</string>
@@ -241,6 +245,7 @@
     <string name="uninstall_status_failed">Uninstalling %s is failed or cancelled by the user!</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
+    <string name="uninstalled_apps">Uninstalled Apps</string>
     <string name="version">Version: %s</string>
     <string name="warning">Warning</string>
     <string name="welcome_message">Welcome to Package Manager, a simple, yet powerful application to manage your apps.</string>

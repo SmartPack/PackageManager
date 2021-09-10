@@ -25,11 +25,13 @@ import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.packagemanager.BuildConfig;
@@ -101,7 +103,6 @@ public class Utils {
         }
     }
 
-    // This is unused, but let's keep it. We might need it in future.
     @NonNull
     public static String runAndGetError(String command) {
         StringBuilder sb = new StringBuilder();
@@ -245,6 +246,17 @@ public class Utils {
         Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
         snackbar.setAction(R.string.dismiss, v -> snackbar.dismiss());
         snackbar.show();
+    }
+
+    public static void toggleKeyboard(int mode, AppCompatEditText editText, Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (mode == 1) {
+            if (editText.requestFocus()) {
+                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+            }
+        } else {
+            imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        }
     }
 
     public static CharSequence fromHtml(String text) {

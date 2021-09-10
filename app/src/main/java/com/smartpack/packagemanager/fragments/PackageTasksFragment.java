@@ -27,7 +27,6 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import androidx.activity.OnBackPressedCallback;
@@ -49,6 +48,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ExportedAppsActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
+import com.smartpack.packagemanager.activities.UninstalledAppsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
 import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
@@ -151,16 +151,16 @@ public class PackageTasksFragment extends Fragment {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
                 mSearchWord.setVisibility(View.GONE);
                 mAppTitle.setVisibility(View.VISIBLE);
-                toggleKeyboard(0);
+                Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
                 mAppTitle.setVisibility(View.GONE);
-                toggleKeyboard(1);
+                Utils.toggleKeyboard(1, mSearchWord, requireActivity());
             }
         });
 
         mSearchWord.setOnEditorActionListener((v, actionId, event) -> {
-            toggleKeyboard(0);
+            Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             mSearchWord.clearFocus();
             return true;
         });
@@ -220,17 +220,6 @@ public class PackageTasksFragment extends Fragment {
         });
 
         return mRootView;
-    }
-
-    public void toggleKeyboard(int mode) {
-        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        if (mode == 1) {
-            if (mSearchWord.requestFocus()) {
-                imm.showSoftInput(mSearchWord, InputMethodManager.SHOW_IMPLICIT);
-            }
-        } else {
-            imm.hideSoftInputFromWindow(mSearchWord.getWindowToken(), 0);
-        }
     }
 
     private int getTabPosition(Activity activity) {
@@ -352,7 +341,10 @@ public class PackageTasksFragment extends Fragment {
         Menu menu = popupMenu.getMenu();
         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.install_bundle));
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.exported_apps));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.settings));
+        if (Utils.rootAccess()) {
+            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.uninstalled_apps));
+        }
+        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.settings));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
@@ -391,6 +383,10 @@ public class PackageTasksFragment extends Fragment {
                     startActivity(exportedApps);
                     break;
                 case 2:
+                    Intent uninstalledApps = new Intent(activity, UninstalledAppsActivity.class);
+                    startActivity(uninstalledApps);
+                    break;
+                case 3:
                     Intent settingsPage = new Intent(activity, SettingsActivity.class);
                     startActivity(settingsPage);
                     break;

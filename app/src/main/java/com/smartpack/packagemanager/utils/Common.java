@@ -27,9 +27,9 @@ public class Common {
 
     private static Drawable mApplicationIcon;
 
-    private static final List<String> mAPKList = new ArrayList<>(), mBatchList = new ArrayList<>();
+    private static final List<String> mAPKList = new ArrayList<>(), mBatchList = new ArrayList<>(), mRestoreList = new ArrayList<>();
 
-    private static MaterialCardView mBatchOptions = null, mSelect = null;
+    private static MaterialCardView mBatchOptions = null, mRestore = null, mSelect = null;
 
     private static String mApplicationID, mDirData, mDirNatLib, mDirSource, mPath, mSearchText;
 
@@ -98,6 +98,18 @@ public class Common {
 
     public static List<String> getBatchList() {
         return mBatchList;
+    }
+
+    public static List<String> getRestoreList() {
+        return mRestoreList;
+    }
+
+    public static MaterialCardView getRestoreCard() {
+        return mRestore;
+    }
+
+    public static MaterialCardView initializeRestoreCard(View view, int id) {
+        return mRestore = view.findViewById(id);
     }
 
     public static MaterialCardView getSelectCard() {

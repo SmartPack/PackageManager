@@ -51,6 +51,7 @@
         <activity android:name=".activities.SplitAPKInstallerActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.TextViewActivity" />
+        <activity android:name=".activities.UninstalledAppsActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
