@@ -36,8 +36,6 @@ public class StartActivity extends AppCompatActivity {
         // Initialize App Theme
         Utils.initializeAppTheme(this);
         super.onCreate(savedInstanceState);
-        // Set App Language
-        Utils.setLanguage(this);
         setContentView(R.layout.activity_start);
 
         LinearLayout mBottomLayout = findViewById(R.id.layout_bottom);
