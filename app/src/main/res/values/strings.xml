@@ -189,7 +189,7 @@
     <string name="restore">Restore</string>
     <string name="restore_message">Restore factory version of \'%s\'?</string>
     <string name="restore_message_batch">Restore factory versions of the following apps?\n\n%s</string>
-    <string name="restore_success_message">Factory version of the selected app is successfully restored!</string>
+    <string name="restore_success_message">Factory version of the selected app(s) restored successfully!</string>
     <string name="result">Result: %s</string>
     <string name="reverse_order">Reverse Order</string>
     <string name="search">Search…</string>

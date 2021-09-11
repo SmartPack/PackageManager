@@ -14,14 +14,22 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="5dp" >
 
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_circle"
+                    android:background="@null" />
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="50dp"
                     android:layout_marginEnd="50dp"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:maxLines="1" />
 
                 <com.google.android.material.checkbox.MaterialCheckBox

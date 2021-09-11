@@ -203,7 +203,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             public void doInBackground() {
                 if (batch) {
                     for (String packageName : Common.getRestoreList()) {
-                        mOutput = Utils.runAndGetError("cmd package install-existing " + packageName);
+                        Utils.runCommand("cmd package install-existing " + packageName);
                     }
                 } else {
                     mOutput = Utils.runAndGetError("cmd package install-existing " + getData(context).get(position));
@@ -216,6 +216,10 @@ public class UninstalledAppsActivity extends AppCompatActivity {
                 if (batch) {
                     Common.getRestoreCard().setVisibility(View.GONE);
                     Common.getRestoreList().clear();
+                    new MaterialAlertDialogBuilder(context)
+                            .setMessage(getString(R.string.restore_success_message))
+                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
+                            }).show();
                     loadUI();
                 } else {
                     new MaterialAlertDialogBuilder(context)
