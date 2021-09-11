@@ -51,6 +51,9 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
     public void onBindViewHolder(@NonNull RecycleViewExploreAdapter.ViewHolder holder, int position) {
         if (new File(data.get(position)).isDirectory()) {
             holder.mIcon.setImageDrawable(holder.mTitle.getContext().getResources().getDrawable(R.drawable.ic_folder));
+            if (Utils.isDarkTheme(holder.mIcon.getContext())) {
+                holder.mIcon.setBackground(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_background_circle));
+            }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
         } else if (PackageExplorer.isImageFile(data.get(position))) {
             if (PackageExplorer.getIconFromPath(data.get(position)) != null) {
@@ -58,10 +61,12 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
             } else {
                 holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file);
             }
+            holder.mIcon.setBackground(null);
         } else {
             holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file));
             holder.mIcon.setColorFilter(Utils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
                     .getResources().getColor(R.color.colorWhite) : holder.mIcon.getContext().getResources().getColor(R.color.colorBlack));
+            holder.mIcon.setBackground(null);
         }
         holder.mTitle.setText(new File(data.get(position)).getName());
     }
