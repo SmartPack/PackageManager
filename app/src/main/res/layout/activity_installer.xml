@@ -8,10 +8,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBlack"
-            android:textColor="?attr/colorAccent"
+            android:textColor="@color/colorAccent"
             android:text="@string/split_apk_installer"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:padding="10dp" />
 
         <LinearLayout
@@ -49,7 +49,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
                             style="?android:attr/progressBarStyleHorizontal"
-                            android:progressBackgroundTint="?attr/colorAccent"
+                            android:progressBackgroundTint="@color/colorAccent"
                             android:layout_gravity="center"
                             android:indeterminate="true" />
 
@@ -72,7 +72,7 @@
                     android:id="@+id/open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="?attr/colorAccent"
+                    app:cardBackgroundColor="@color/colorAccent"
                     android:layout_margin="50dp"
                     app:cardCornerRadius="15dp"
                     android:visibility="gone"
@@ -93,7 +93,7 @@
                     android:id="@+id/cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="?attr/colorAccent"
+                    app:cardBackgroundColor="@color/colorAccent"
                     android:layout_margin="50dp"
                     app:cardCornerRadius="15dp"
                     android:visibility="gone"

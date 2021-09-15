@@ -25,11 +25,11 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textColor="?attr/colorAccent"
+            android:textColor="@color/colorAccent"
             android:text="@string/change_logs"
             android:gravity="center_vertical"
             android:layout_marginStart="40dp"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
     </FrameLayout>
 

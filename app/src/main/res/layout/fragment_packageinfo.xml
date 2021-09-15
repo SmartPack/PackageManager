@@ -42,14 +42,14 @@
                             android:layout_height="50dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:tint="?attr/colorAccent"
+                            android:tint="@color/colorAccent"
                             android:gravity="start|center_vertical"
                             android:src="@drawable/ic_open" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="?attr/colorAccent"
+                            android:textColor="@color/colorAccent"
                             android:textStyle="bold"
                             android:text="@string/open"
                             android:textIsSelectable="true"
@@ -70,14 +70,14 @@
                             android:background="@null"
                             android:clickable="false"
                             android:layout_gravity="center_horizontal"
-                            android:tint="?attr/colorAccent"
+                            android:tint="@color/colorAccent"
                             android:src="@drawable/ic_explore" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textColor="?attr/colorAccent"
+                            android:textColor="@color/colorAccent"
                             android:layout_gravity="center_horizontal"
                             android:text="@string/explore"
                             android:textIsSelectable="true"
@@ -99,7 +99,7 @@
                             android:layout_height="50dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:tint="?attr/colorAccent"
+                            android:tint="@color/colorAccent"
                             android:gravity="start|center_vertical"
                             android:src="@drawable/ic_disable" />
 
@@ -107,7 +107,7 @@
                             android:id="@+id/enable_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="?attr/colorAccent"
+                            android:textColor="@color/colorAccent"
                             android:textStyle="bold"
                             android:text="@string/enable"
                             android:textIsSelectable="true"
@@ -128,14 +128,14 @@
                             android:layout_height="50dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:tint="?attr/colorAccent"
+                            android:tint="@color/colorAccent"
                             android:gravity="start|center_vertical"
                             android:src="@drawable/ic_delete" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="?attr/colorAccent"
+                            android:textColor="@color/colorAccent"
                             android:textStyle="bold"
                             android:text="@string/uninstall"
                             android:textIsSelectable="true"
@@ -156,14 +156,14 @@
                             android:layout_height="50dp"
                             android:background="@null"
                             android:clickable="false"
-                            android:tint="?attr/colorAccent"
+                            android:tint="@color/colorAccent"
                             android:gravity="start|center_vertical"
                             android:src="@drawable/ic_settings" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="?attr/colorAccent"
+                            android:textColor="@color/colorAccent"
                             android:textStyle="bold"
                             android:text="@string/app_info"
                             android:textIsSelectable="true"
@@ -189,7 +189,7 @@
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"
                         android:gravity="start"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:text="@string/package_id"
                         android:textIsSelectable="true"
                         android:textSize="18sp" />
@@ -214,7 +214,7 @@
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:tint="?attr/colorAccent"
+                        android:tint="@color/colorAccent"
                         android:src="@drawable/ic_dots"
                         android:layout_gravity="center_horizontal"
                         android:background="@null"
@@ -223,7 +223,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:layout_gravity="center_horizontal"
                         android:textIsSelectable="true"
                         android:text="@string/more"
@@ -250,7 +250,7 @@
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"
                         android:gravity="start"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:textIsSelectable="true"
                         android:textSize="18sp" />
 
@@ -285,14 +285,14 @@
                         android:background="@null"
                         android:clickable="false"
                         android:layout_gravity="center_horizontal"
-                        android:tint="?attr/colorAccent"
+                        android:tint="@color/colorAccent"
                         android:src="@drawable/ic_export" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:layout_gravity="center_horizontal"
                         android:text="@string/export"
                         android:textIsSelectable="true"
@@ -317,7 +317,7 @@
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"
                         android:gravity="start"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:text="@string/data_dir"
                         android:textIsSelectable="true"
                         android:textSize="18sp" />
@@ -346,14 +346,14 @@
                         android:background="@null"
                         android:clickable="false"
                         android:layout_gravity="center_horizontal"
-                        android:tint="?attr/colorAccent"
+                        android:tint="@color/colorAccent"
                         android:src="@drawable/ic_reset" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:layout_gravity="center_horizontal"
                         android:text="@string/reset"
                         android:textIsSelectable="true"
@@ -367,7 +367,7 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:gravity="start"
-                android:textColor="?attr/colorAccent"
+                android:textColor="@color/colorAccent"
                 android:text="@string/native_lib"
                 android:textIsSelectable="true"
                 android:textSize="18sp" />
@@ -386,7 +386,7 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:gravity="start"
-                android:textColor="?attr/colorAccent"
+                android:textColor="@color/colorAccent"
                 android:text="@string/date_installation"
                 android:textIsSelectable="true"
                 android:textSize="18sp" />
@@ -406,7 +406,7 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:gravity="start"
-                android:textColor="?attr/colorAccent"
+                android:textColor="@color/colorAccent"
                 android:text="@string/certificate"
                 android:textIsSelectable="true"
                 android:textSize="18sp" />

@@ -2,7 +2,6 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:orientation="vertical">
 
@@ -20,7 +19,7 @@
             android:background="@color/colorBlack"
             android:layout_gravity="start|center_vertical"
             android:src="@drawable/ic_back"
-            android:tint="?attr/colorAccent"
+            android:tint="@color/colorAccent"
             android:layout_marginEnd="10dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -29,9 +28,10 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:layout_marginStart="30dp"
-            android:textColor="?attr/colorAccent"
+            android:textColor="@color/colorAccent"
             android:layout_gravity="start"
-            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:padding="10dp"
             android:maxLines="1" />
 
@@ -43,7 +43,7 @@
             android:background="@color/colorBlack"
             android:layout_gravity="end|center_vertical"
             android:src="@drawable/ic_export"
-            android:tint="?attr/colorAccent"
+            android:tint="@color/colorAccent"
             android:layout_marginEnd="10dp" />
     </FrameLayout>
 

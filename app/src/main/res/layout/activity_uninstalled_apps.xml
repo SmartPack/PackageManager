@@ -45,7 +45,7 @@
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="?attr/colorAccent"
+                        android:textColor="@color/colorAccent"
                         android:text="@string/uninstalled_apps"
                         android:gravity="start"
                         android:textStyle="bold"

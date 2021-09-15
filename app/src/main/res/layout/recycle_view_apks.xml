@@ -47,7 +47,7 @@
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:src="@drawable/ic_export"
-            android:tint="?attr/colorAccent"
+            android:tint="@color/colorAccent"
             android:scaleType="fitCenter"
             android:background="@null" />
 </FrameLayout>

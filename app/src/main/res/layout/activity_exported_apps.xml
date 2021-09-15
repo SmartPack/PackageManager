@@ -27,14 +27,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_back"
-                android:tint="?attr/colorAccent"
+                android:tint="@color/colorAccent"
                 android:background="@null"
                 android:layout_gravity="start|center_vertical" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
+                android:textColor="@color/colorAccent"
                 android:layout_gravity="start|center_vertical"
                 android:layout_marginStart="50dp"
                 android:text="@string/exported_apps"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBlack"
-            app:tabSelectedTextColor="?attr/colorAccent"
+            app:tabSelectedTextColor="@color/colorAccent"
             app:tabTextColor="@color/colorWhite"
             app:tabGravity="fill"
             app:tabMode="fixed" />

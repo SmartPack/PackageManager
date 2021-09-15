@@ -18,7 +18,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:textColor="?attr/colorAccent"
+                    android:textColor="@color/colorAccent"
                     android:focusable="false"
                     android:textStyle="bold"
                     android:textSize="15sp" />

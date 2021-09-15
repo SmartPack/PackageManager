@@ -60,7 +60,6 @@ public class BillingActivity extends AppCompatActivity {
         AppCompatImageButton mBack = findViewById(R.id.back_button);
         AppCompatImageButton mSupporterIcon = findViewById(R.id.supporter_button);
         MaterialTextView mSupporterMessage = findViewById(R.id.supporter_message);
-        MaterialTextView mCancel = findViewById(R.id.cancel_button);
 
         if (Utils.getBoolean("support_received", false, this) || !Utils.isNotDonated(this)) {
             mSupporterIcon.setVisibility(View.VISIBLE);
@@ -91,7 +90,6 @@ public class BillingActivity extends AppCompatActivity {
         });
 
         mBack.setOnClickListener(v -> super.onBackPressed());
-        mCancel.setOnClickListener(v -> super.onBackPressed());
 
         mBillingClient = BillingClient.newBuilder(BillingActivity.this).enablePendingPurchases().setListener((billingResult, list) -> {
             if (list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {

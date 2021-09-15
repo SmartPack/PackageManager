@@ -25,7 +25,7 @@
             android:layout_width="175dp"
             android:layout_height="20dp"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressBackgroundTint="?attr/colorAccent"
+            android:progressBackgroundTint="@color/colorAccent"
             android:layout_gravity="center"
             android:indeterminate="true"
             android:paddingStart="15dp"

@@ -29,7 +29,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/app_title"
                 android:layout_width="match_parent"
-                android:textColor="?attr/colorAccent"
+                android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:gravity="start"
@@ -57,7 +57,7 @@
         android:textAlignment="center"
         android:background="@color/colorBlack"
         app:tabTextColor="@color/colorWhite"
-        app:tabSelectedTextColor="?attr/colorAccent"
+        app:tabSelectedTextColor="@color/colorAccent"
         android:id="@+id/tab_Layout" />
 
     <androidx.viewpager.widget.ViewPager
