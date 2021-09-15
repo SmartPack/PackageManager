@@ -1,0 +1,9 @@
+* Package Manager now allows restoring the factory version of uninstalled system apps (root-only feature).
+* Added a new installer instructions page.
+* Removed external file managers support for good reasons.
+* Largely improved apk/app bundle installation and uninstalling.
+* App settings has now a better layout and more options.
+* UI changes mainly for consistency.
+* Fixed language switch not working.
+* Updated translations.
+* Miscellaneous changes.
