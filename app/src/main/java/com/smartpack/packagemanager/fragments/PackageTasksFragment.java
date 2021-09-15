@@ -23,7 +23,7 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -75,7 +75,7 @@ public class PackageTasksFragment extends Fragment {
     private final Handler mHandler = new Handler();
     private MaterialCardView mBatchOptions;
     private MaterialTextView mAppTitle;
-    private LinearLayout mProgressLayout;
+    private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
 
@@ -85,7 +85,7 @@ public class PackageTasksFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_packagetasks, container, false);
 
         mAppTitle = mRootView.findViewById(R.id.app_title);
-        mProgressLayout = mRootView.findViewById(R.id.progress_layout);
+        mProgress = mRootView.findViewById(R.id.progress);
         mBatchOptions = Common.initializeBatchOptionsCard(mRootView, R.id.batch_options);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
@@ -185,6 +185,9 @@ public class PackageTasksFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+                if (mProgress.getVisibility() == View.VISIBLE) {
+                    return;
+                }
                 if (Common.getSearchText() != null) {
                     mSearchWord.setText(null);
                     Common.setSearchText(null);
@@ -500,7 +503,7 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void onPreExecute() {
-                mProgressLayout.setVisibility(View.VISIBLE);
+                mProgress.setVisibility(View.VISIBLE);
                 mBatchOptions.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.GONE);
                 if (Utils.getBoolean("select_all", false, activity)) {
@@ -529,7 +532,7 @@ public class PackageTasksFragment extends Fragment {
                 }
                 mBatchOptions.setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
-                mProgressLayout.setVisibility(View.GONE);
+                mProgress.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
         }.execute();

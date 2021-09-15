@@ -92,6 +92,18 @@
             app:tabGravity="fill"
             app:tabMode="fixed" />
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressBackgroundTint="@color/colorAccent"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -140,6 +152,4 @@
                 android:gravity="start" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-    <include layout="@layout/progress_view_layout" />
 </RelativeLayout>
