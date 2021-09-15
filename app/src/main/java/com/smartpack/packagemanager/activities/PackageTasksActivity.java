@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
@@ -26,9 +27,8 @@ import com.smartpack.packagemanager.utils.Common;
 public class PackageTasksActivity extends AppCompatActivity {
 
     public static final String TITLE_START = "start", TITLE_FINISH = "finish";
-
-    private MaterialTextView mCancelButton, mOutput, mPackageTitle;
-
+    private MaterialCardView mCancelButton;
+    private MaterialTextView mOutput, mPackageTitle;
     private NestedScrollView mScrollView;
 
     @Override
@@ -36,7 +36,7 @@ public class PackageTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packagetasks);
 
-        mCancelButton = findViewById(R.id.cancel_button);
+        mCancelButton = findViewById(R.id.cancel_card);
         mPackageTitle = findViewById(R.id.package_title);
         mOutput = findViewById(R.id.result_text);
 
