@@ -187,6 +187,10 @@ public class AppSettings {
         }
     }
 
+    public static String getExportedAPKNAme(Activity activity) {
+        return Utils.getString("exportedAPKName", activity.getString(R.string.package_id), activity);
+    }
+
     public static String getExitingStatus(Activity activity) {
         if (Utils.getBoolean("exit_confirmation", true, activity)) {
             return activity.getString(R.string.exit_confirmation);

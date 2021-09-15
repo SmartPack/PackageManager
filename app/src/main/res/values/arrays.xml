@@ -37,4 +37,9 @@
         <item>@string/installer_instructions</item>
         <item>@string/installer_file_picker</item>
     </string-array>
+
+    <string-array name="exported_name_options">
+        <item>@string/package_id</item>
+        <item>@string/name</item>
+    </string-array>
 </resources>

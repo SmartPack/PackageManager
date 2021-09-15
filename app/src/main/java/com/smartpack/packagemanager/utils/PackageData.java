@@ -140,6 +140,14 @@ public class PackageData {
         return Objects.requireNonNull(getAppInfo(packageName, context)).dataDir;
     }
 
+    public static String getFileName(String packageName, Context context) {
+        if (Utils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
+            return getAppName(packageName, context);
+        } else {
+            return packageName;
+        }
+    }
+
     public static String getVersionName(String packageName, Context context) {
         return Objects.requireNonNull(getPackageManager(context).getPackageArchiveInfo(packageName, 0)).versionName;
     }

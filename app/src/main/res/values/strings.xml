@@ -64,6 +64,7 @@
     <string name="export_file_message">is successfully exported into %s!</string>
     <string name="export_storage_message">Export %s into device storage?</string>
     <string name="exported_apps">Exported Apps</string>
+    <string name="exported_apps_name">Exported APK Name</string>
     <string name="exporting">Exporting %s</string>
     <string name="exporting_bundle">Exporting %s app bundle</string>
     <string name="everything_done">Everything Done!</string>

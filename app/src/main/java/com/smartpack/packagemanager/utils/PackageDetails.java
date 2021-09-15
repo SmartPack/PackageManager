@@ -52,10 +52,10 @@ public class PackageDetails {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
         } else if (new File(PackageData.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
-            exportingBundleTask(linearLayout, textView, PackageData.getParentDir(Common.getApplicationID(), activity), Common.getApplicationID(),
+            exportingBundleTask(linearLayout, textView, PackageData.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
                     Common.getApplicationIcon(), activity);
         } else {
-            exportingTask(linearLayout, textView, Common.getSourceDir(), Common.getApplicationID(), Common.getApplicationIcon(), activity);
+            exportingTask(linearLayout, textView, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity);
         }
     }
 
@@ -65,6 +65,7 @@ public class PackageDetails {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPreExecute() {
+
                 showProgress(linearLayout, textView, activity.getString(R.string.exporting, name) + "...");
                 PackageData.makePackageFolder(activity);
             }

@@ -78,8 +78,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         // General
         mData.add(new RecycleSettingsItem(getString(R.string.general), null, null, null, getResources().getColor(R.color.colorAccent), 15));
-        mData.add(new RecycleSettingsItem(getString(R.string.exiting_app), AppSettings.getExitingStatus(this), getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.exported_apps_name), AppSettings.getExportedAPKNAme(this), getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.installer_clicking), AppSettings.getInstallerStatus(this), getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.exiting_app), AppSettings.getExitingStatus(this), getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
 
         // Other
         mData.add(new RecycleSettingsItem(getString(R.string.other), null, null, null, getResources().getColor(R.color.colorAccent), 15));
@@ -142,21 +143,21 @@ public class SettingsActivity extends AppCompatActivity {
                 }).show();
             } else if (position == 4) {
                 new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.app_exit_options), (dialogInterface, i) -> {
+                        R.array.exported_name_options), (dialogInterface, i) -> {
                     switch (i) {
                         case 0:
-                            if (Utils.getBoolean("exit_confirmation", true, this)) {
-                                Utils.saveBoolean("exit_confirmation", false, this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_simple),
-                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                            if (!Utils.getString("exportedAPKName", getString(R.string.package_id), this).equals(getString(R.string.package_id))) {
+                                Utils.saveString("exportedAPKName", getString(R.string.package_id), this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.exported_apps_name), getString(R.string.package_id),
+                                        getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
                                 mRecycleViewAdapter.notifyItemChanged(position);
                             }
                             break;
                         case 1:
-                            if (!Utils.getBoolean("exit_confirmation", true, this)) {
-                                Utils.saveBoolean("exit_confirmation", true, this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_confirmation),
-                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                            if (!Utils.getString("exportedAPKName", getString(R.string.package_id), this).equals(getString(R.string.name))) {
+                                Utils.saveString("exportedAPKName", getString(R.string.name), this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.exported_apps_name), getString(R.string.name),
+                                        getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
                                 mRecycleViewAdapter.notifyItemChanged(position);
                             }
                             break;
@@ -186,12 +187,35 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();
-            } else if (position == 10) {
+            } else if (position == 6) {
+                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
+                        R.array.app_exit_options), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            if (Utils.getBoolean("exit_confirmation", true, this)) {
+                                Utils.saveBoolean("exit_confirmation", false, this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_simple),
+                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                            }
+                            break;
+                        case 1:
+                            if (!Utils.getBoolean("exit_confirmation", true, this)) {
+                                Utils.saveBoolean("exit_confirmation", true, this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_confirmation),
+                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                            }
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> {
+                }).show();
+            } else if (position == 11) {
                 Billing.showDonateOption(this);
-            } else if (position == 14) {
+            } else if (position == 15) {
                 Intent changeLogs = new Intent(this, ChangeLogsActivity.class);
                 startActivity(changeLogs);
-            } else if (position == 15) {
+            } else if (position == 16) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
