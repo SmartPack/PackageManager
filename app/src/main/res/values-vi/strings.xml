@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Khởi tạo quy trình hàng loạt"</string>
     <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa!  Bạn có chắc không?"</string>
     <string name="billing_client_disconnected">"Không kết nối được với ứng dụng Thanh toán của Google Play!"</string>
-    <string name="bundle_install">"Bạn có chắc chắn cài đặt apk được tách từ '%s' không?"</string>
     <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
     <string name="cancel">"Hủy"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
@@ -44,7 +43,6 @@
     <string name="failed">"Thất bại"</string>
     <string name="got_it">"Hiểu rồi"</string>
     <string name="install">"Tải về"</string>
-    <string name="install_bundle">"Cài đặt APK phân tách"</string>
     <string name="installing_bundle">"Cài đặt Gói ứng dụng!"</string>
     <string name="language">"Ngôn ngữ"</string>
     <string name="language_default">"Mặc định"</string>
@@ -73,7 +71,6 @@
     <string name="share_with">"Chia sẽ với"</string>
     <string name="sort_by">"Sắp xếp ứng dụng"</string>
     <string name="source_code">"Mã nguồn"</string>
-    <string name="split_apk_list">"Danh sách các APK phân tách"</string>
     <string name="support">"Nhóm hỗ trợ"</string>
     <string name="support_acknowledged">"Khoản đóng góp đã được công nhận \u2665"</string>
     <string name="support_app">"Mua ứng dụng quyên góp"</string>
@@ -117,15 +114,10 @@
     <string name="batch_list_added">"%s được thêm vào danh sách hàng loạt"</string>
     <string name="batch_list_export">"Bạn có chắc chắn xuất (các) ứng dụng sau sang bộ nhớ thiết bị không?"</string>
     <string name="batch_list_removed">"%s bị xóa khỏi danh sách hàng loạt"</string>
-    <string name="bundle_install_message">"Xin lưu ý: Để cài đặt nhiều APK (APK phân tách), vui lòng đặt tất cả chúng vào một thư mục duy nhất và chọn một trong số chúng. Package Manager sẽ chọn và xử lý phần còn lại."</string>
     <string name="explore_error_status">"Không khám phá được %s!"</string>
-    <string name="list">"Danh sách"</string>
     <string name="split_apk">"Phân chia APK"</string>
     <string name="documentation">"Tài liệu"</string>
     <string name="documentation_summary">"Kiểm tra tài liệu chi tiết để sử dụng Package Manager"</string>
-    <string name="file_picker">"Bộ chọn tệp"</string>
-    <string name="file_picker_external">"Bên ngoài"</string>
-    <string name="file_picker_inbuilt">"Trong xây dựng"</string>
     <string name="installation_cancel_message">"Bạn có chắc chắn hủy cài đặt không?"</string>
     <string name="installation_status_success">"Cài đặt hoàn tất thành công!"</string>
     <string name="sdcard">"Thẻ SD"</string>

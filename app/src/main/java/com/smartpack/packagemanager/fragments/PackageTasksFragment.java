@@ -9,17 +9,13 @@
 package com.smartpack.packagemanager.fragments;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -47,6 +43,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ExportedAppsActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
+import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.activities.UninstalledAppsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
@@ -57,7 +54,6 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import org.json.JSONArray;
@@ -82,7 +78,6 @@ public class PackageTasksFragment extends Fragment {
     private LinearLayout mProgressLayout;
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
-    private String mPath;
 
     @Nullable
     @Override
@@ -208,13 +203,17 @@ public class PackageTasksFragment extends Fragment {
                             })
                             .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> requireActivity().finish())
                             .show();
-                } else if (mExit) {
-                    mExit = false;
-                    requireActivity().finish();
+                } else if (Utils.getBoolean("exit_confirmation", true, requireActivity())) {
+                    if (mExit) {
+                        mExit = false;
+                        requireActivity().finish();
+                    } else {
+                        Utils.snackbar(mRootView, getString(R.string.press_back));
+                        mExit = true;
+                        mHandler.postDelayed(() -> mExit = false, 2000);
+                    }
                 } else {
-                    Utils.snackbar(mRootView, getString(R.string.press_back));
-                    mExit = true;
-                    mHandler.postDelayed(() -> mExit = false, 2000);
+                    requireActivity().finish();
                 }
             }
         });
@@ -241,7 +240,7 @@ public class PackageTasksFragment extends Fragment {
     private void uninstallUserApp() {
         Intent remove = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + Common.getBatchList().get(0)));
         remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-        startActivityForResult(remove, 1);
+        startActivityForResult(remove, 0);
         Common.reloadPage(true);
     }
 
@@ -339,7 +338,7 @@ public class PackageTasksFragment extends Fragment {
     private void settingsMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mSettings);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.install_bundle));
+        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.installer));
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.exported_apps));
         if (Utils.rootAccess()) {
             menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.uninstalled_apps));
@@ -348,34 +347,14 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    Common.getAppList().clear();
-                    if (Utils.getBoolean("filePicker", true, requireActivity())) {
-                        Common.setPath(FilePicker.getLastDirPath(requireActivity()));
+                    if (Utils.getBoolean("neverShow", false, requireActivity())) {
+                        Common.getAppList().clear();
+                        Common.setPath(FilePicker.getLastDirPath(activity));
                         Intent filePicker = new Intent(activity, FilePickerActivity.class);
-                        startActivity(filePicker);
+                        activity.startActivity(filePicker);
                     } else {
-                        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied()) {
-                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                    .setIcon(R.mipmap.ic_launcher)
-                                    .setTitle(getString(R.string.important))
-                                    .setMessage(getString(R.string.file_permission_request_message))
-                                    .setCancelable(false)
-                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                    })
-                                    .setPositiveButton(getString(R.string.grant), (dialog, id) -> Utils.requestPermission(requireActivity())).show();
-                        } else if (Utils.getBoolean("firstAttempt", true, requireActivity())) {
-                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                    .setIcon(R.mipmap.ic_launcher)
-                                    .setTitle(getString(R.string.install_bundle))
-                                    .setMessage(getString(R.string.bundle_install_message))
-                                    .setCancelable(false)
-                                    .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-                                        Utils.saveBoolean("firstAttempt", false, requireActivity());
-                                        initializeSplitAPKInstallation();
-                                    }).show();
-                        } else {
-                            initializeSplitAPKInstallation();
-                        }
+                        Intent installer = new Intent(activity, InstallerInstructionsActivity.class);
+                        startActivity(installer);
                     }
                     break;
                 case 1:
@@ -516,12 +495,6 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void initializeSplitAPKInstallation() {
-        Intent install = new Intent(Intent.ACTION_GET_CONTENT);
-        install.setType("*/*");
-        startActivityForResult(install, 0);
-    }
-
     private void loadUI(Activity activity) {
         new AsyncTasks() {
 
@@ -562,77 +535,12 @@ public class PackageTasksFragment extends Fragment {
         }.execute();
     }
 
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK && data != null) {
             if (requestCode == 0) {
-                Uri uri = data.getData();
-                assert uri != null;
-                File file = new File(Objects.requireNonNull(uri.getPath()));
-                if (Utils.isDocumentsUI(uri)) {
-                    @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
-                    if (cursor != null && cursor.moveToFirst()) {
-                        mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
-                                cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                    }
-                } else {
-                    mPath = Utils.getPath(file);
-                }
-                if (mPath.endsWith(".apk") || mPath.endsWith(".apks") || mPath.endsWith(".apkm") || mPath.endsWith(".xapk")) {
-                    MaterialAlertDialogBuilder installApp = new MaterialAlertDialogBuilder(requireActivity());
-                    if (mPath.endsWith(".apks") || mPath.endsWith(".apkm") || mPath.endsWith(".xapk")) {
-                        installApp.setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()));
-                    } else {
-                        installApp.setIcon(R.mipmap.ic_launcher);
-                        installApp.setTitle(getString(R.string.sure_question));
-                        installApp.setMessage(getString(R.string.bundle_install, Objects.requireNonNull(new File(mPath)
-                                .getParentFile()).toString()));
-                        installApp.setNeutralButton(getString(R.string.list), (dialogInterface, i) ->
-                                new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                        .setIcon(R.mipmap.ic_launcher)
-                                        .setTitle(R.string.split_apk_list)
-                                        .setMessage(SplitAPKInstaller.listSplitAPKs(Objects.requireNonNull(new File(mPath).getParentFile()).toString()))
-                                        .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
-                                        })
-                                        .setPositiveButton(getString(R.string.install), (dialog, id) -> {
-                                            Common.getAppList().clear();
-                                            if (new File(mPath).exists()) {
-                                                for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
-                                                        .toString()).listFiles())) {
-                                                    if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                                        Common.getAppList().add(mFile.getAbsolutePath());
-                                                    }
-                                                }
-                                            }
-                                            SplitAPKInstaller.installSplitAPKs(requireActivity());
-                                        }).show());
-                    }
-                    installApp.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                    });
-                    installApp.setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                        if (mPath.endsWith(".apk")) {
-                            Common.getAppList().clear();
-                            if (new File(mPath).exists()) {
-                                for (File mFile : Objects.requireNonNull(new File(Objects.requireNonNull(new File(mPath).getParentFile())
-                                        .toString()).listFiles())) {
-                                    if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                        Common.getAppList().add(mFile.getAbsolutePath());
-                                    }
-                                }
-                            }
-                            SplitAPKInstaller.installSplitAPKs(requireActivity());
-                        } else {
-                            SplitAPKInstaller.handleAppBundle(mProgressLayout, mPath, requireActivity());
-                        }
-                    });
-                    installApp.show();
-                } else {
-                    Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apk/.apks/.apkm/.xapk"));
-                }
-            } else {
                 // If uninstallation succeed
                 try {
                     for (RecycleViewItem item : PackageData.getRawData()) {
@@ -644,8 +552,31 @@ public class PackageTasksFragment extends Fragment {
                     }
                 } catch (ConcurrentModificationException ignored) {}
                 handleUninstallEvent();
+            } else {
+                new AsyncTasks() {
+
+                    @Override
+                    public void onPreExecute() {
+                    }
+
+                    @Override
+                    public void doInBackground() {
+                        try {
+                            for (RecycleViewItem item : PackageData.getRawData()) {
+                                if (item.getPackageName().equals(Common.getApplicationID())) {
+                                    PackageData.getRawData().remove(item);
+                                }
+                            }
+                        } catch (ConcurrentModificationException ignored) {}
+                    }
+
+                    @Override
+                    public void onPostExecute() {
+                        loadUI(requireActivity());
+                    }
+                }.execute();
             }
-        } else if (requestCode == 1) {
+        } else if (requestCode == 0) {
             // If uninstallation cancelled or failed
             Utils.snackbar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity())));
             Common.getBatchList().remove(0);
@@ -656,7 +587,13 @@ public class PackageTasksFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (Common.reloadPage()) {
+        if (Common.isUninstall()) {
+            Intent remove = new Intent(Intent.ACTION_DELETE);
+            remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
+            remove.setData(Uri.parse("package:" + Common.getApplicationID()));
+            startActivityForResult(remove, 1);
+            Common.isUninstall(false);
+        } else if (Common.reloadPage()) {
             Common.reloadPage(false);
             loadUI(requireActivity());
         }

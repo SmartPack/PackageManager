@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Ініціалізація пакетного процесу"</string>
     <string name="batch_warning">"Ваші пакетні налаштування  буде видалено! Ви впевнені?"</string>
     <string name="billing_client_disconnected">"Не вдалося підключитися до клієнта Google Play Billing!"</string>
-    <string name="bundle_install">"Ви впевнені, що хочете встановити split apks з '%s'?"</string>
     <string name="bundle_install_apks">"Ви впевнені що хочете встановити пакетний (split) додаток?"</string>
     <string name="cancel">"Скасувати"</string>
     <string name="change_logs">"Зміни"</string>
@@ -42,7 +41,6 @@
     <string name="failed">"Невдача"</string>
     <string name="got_it">"Зрозумів"</string>
     <string name="install">"Встановити"</string>
-    <string name="install_bundle">"Встановити Split APKs"</string>
     <string name="installing_bundle">"Встановлення пакету додатків!"</string>
     <string name="language">"Мова"</string>
     <string name="language_default">"За замовчуванням"</string>
@@ -71,7 +69,6 @@
     <string name="share_with">"Поділитися з"</string>
     <string name="sort_by">"Сортувати програми за"</string>
     <string name="source_code">"Вихідний код"</string>
-    <string name="split_apk_list">"Список split APK"</string>
     <string name="support">"Група підтримки"</string>
     <string name="support_acknowledged">"Пожертва підтверджена \u2665"</string>
     <string name="support_app">"Купити додаток для пожертв"</string>
@@ -115,16 +112,11 @@
     <string name="batch_list_added">"%s додано до списку пакетної обробки"</string>
     <string name="batch_list_export">"Ви впевнені, що хочете експортувати вказані нижче додатки в пам’ять пристрою?"</string>
     <string name="batch_list_removed">"%s видалено зі списку пакетної обробки"</string>
-    <string name="bundle_install_message">"Зверніть увагу: Щоб встановити декілька файлів .apk (split .apk), розмістіть їх усі в одній папці та виберіть один із них. Package Manager підбере та впорається з рештою."</string>
     <string name="explore_error_status">"Не вдалося оглянути %s!"</string>
-    <string name="list">"Список"</string>
     <string name="split_apk">"Розділені (split) apk"</string>
     <string name="activities">"Актівіті"</string>
     <string name="documentation">"Документація"</string>
     <string name="documentation_summary">"Щоб використовувати Package Manager, ознайомтесь з детальною документацією"</string>
-    <string name="file_picker">"Вибір файлів"</string>
-    <string name="file_picker_external">"Зовнішній"</string>
-    <string name="file_picker_inbuilt">"Вбудований"</string>
     <string name="installation_cancel_message">"Ви впевнені що хочете відмінити встановлення?"</string>
     <string name="installation_status_success">"Встановлення успішно завершено"</string>
     <string name="sdcard">"SD карта"</string>

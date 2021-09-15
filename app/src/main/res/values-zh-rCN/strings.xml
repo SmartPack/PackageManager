@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"初始化批量处理"</string>
     <string name="batch_warning">"您的批量处理设置将被删除！您确定吗？"</string>
     <string name="billing_client_disconnected">"Google Play 结算客户端无法连接！"</string>
-    <string name="bundle_install">"您确定要安装来自 '%s' 的拆分 APK 吗？"</string>
     <string name="bundle_install_apks">"您确定要安装应用捆绑包 '%s' 吗？"</string>
     <string name="cancel">"取消"</string>
     <string name="change_logs">"更新日志"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"失败"</string>
     <string name="got_it">"明白"</string>
     <string name="install">"安装"</string>
-    <string name="install_bundle">"安装拆分 APK"</string>
     <string name="installing_bundle">"安装应用捆绑包！"</string>
     <string name="language">"语言"</string>
     <string name="language_default">"默认"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"分享到"</string>
     <string name="sort_by">"排序应用"</string>
     <string name="source_code">"源代码"</string>
-    <string name="split_apk_list">"拆分 APK 列表"</string>
     <string name="support">"反馈群组"</string>
     <string name="support_acknowledged">"捐赠已确认 \u2665"</string>
     <string name="support_app">"购买捐赠应用"</string>
@@ -120,16 +117,11 @@
     <string name="batch_list_added">"%s 已被添加到批量处理列表中"</string>
     <string name="batch_list_export">"您确定要将以下应用导出到设备存储吗？"</string>
     <string name="batch_list_removed">"%s 已从批量处理列表中移除"</string>
-    <string name="bundle_install_message">"请注意：要安装多个 APK（拆分 APK），请将所有文件放在相同文件夹中，然后选择其中一个。Package Manager 将选择并处理其余文件。"</string>
     <string name="explore_error_status">"无法浏览 %s！"</string>
-    <string name="list">"列表"</string>
     <string name="split_apk">"拆分 APK"</string>
     <string name="activities">"Activity"</string>
     <string name="documentation">"文档"</string>
     <string name="documentation_summary">"查看 Package Manager 的详细使用文档"</string>
-    <string name="file_picker">"文件选择器"</string>
-    <string name="file_picker_external">"外部"</string>
-    <string name="file_picker_inbuilt">"内置"</string>
     <string name="installation_cancel_message">"您确定要取消安装吗？"</string>
     <string name="installation_status_success">"安装成功完成！"</string>
     <string name="sdcard">"SD 卡"</string>
@@ -216,7 +208,6 @@
     <string name="size_bundle">"捆绑包大小：%s"</string>
     <string name="file_permission_request_message">"若要在较新 Android 版本上（Android R 或更新版本）正常使用此功能，您需要授予 Package Manager“访问所有文件”权限。您可以点击“授权”按钮，并在打开的新页面中手动授予此权限。"</string>
     <string name="grant">"授权"</string>
-    <string name="important">"重要"</string>
     <string name="select_all">"全选"</string>
     <string name="select_all_summary">"选择此页面的所有应用并添加到批量处理列表吗？"</string>
     <string name="uninstall_status_failed">"卸载 %s 失败或被用户取消！"</string>

@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -46,10 +47,6 @@ public class SplitAPKInstaller {
             }
         }
         return list;
-    }
-
-    public static String listSplitAPKs(String path) {
-        return splitApks(path).toString().substring(1, splitApks(path).toString().length() - 1).replace(", ", "\n");
     }
 
     public static boolean isAppBundle(String path) {
@@ -117,6 +114,7 @@ public class SplitAPKInstaller {
             } catch (IOException ignored) {
             }
             Intent callbackIntent = new Intent(activity, SplitAPKInstallService.class);
+            @SuppressLint("UnspecifiedImmutableFlag")
             PendingIntent pendingIntent = PendingIntent.getService(activity, 0, callbackIntent, 0);
             assert session != null;
             session.commit(pendingIntent.getIntentSender());
@@ -183,22 +181,10 @@ public class SplitAPKInstaller {
             @Override
             public void onPostExecute() {
                 linearLayout.setVisibility(View.GONE);
-                if (Utils.getBoolean("filePicker", true, activity)) {
-                    Common.getAppList().clear();
-                    Common.setPath(activity.getCacheDir().getPath() + "/splits");
-                    Intent filePicker = new Intent(activity, FilePickerActivity.class);
-                    activity.startActivity(filePicker);
-                } else {
-                    Common.getAppList().clear();
-                    if (Utils.exist(activity.getCacheDir().getPath() + "/splits")) {
-                        for (final String splitApps : splitApks(activity.getCacheDir().getPath() + "/splits")) {
-                            if (splitApps.endsWith(".apk")) {
-                                Common.getAppList().add(activity.getCacheDir().getPath() + "/splits/" + splitApps);
-                            }
-                        }
-                    }
-                    installSplitAPKs(activity);
-                }
+                Common.getAppList().clear();
+                Common.setPath(activity.getCacheDir().getPath() + "/splits");
+                Intent filePicker = new Intent(activity, FilePickerActivity.class);
+                activity.startActivity(filePicker);
             }
         }.execute();
     }
@@ -234,7 +220,6 @@ public class SplitAPKInstaller {
 
             @Override
             public void onPostExecute() {
-
             }
         }.execute();
     }

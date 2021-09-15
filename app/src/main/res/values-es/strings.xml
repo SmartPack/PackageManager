@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Iniciando proceso por lotes"</string>
     <string name="batch_warning">"¡Tu configuración de cola por lotes va a ser eliminado!, ¿estás seguro?"</string>
     <string name="billing_client_disconnected">"¡Ha fallado la conexión con el servicio de pago de Google Play!"</string>
-    <string name="bundle_install">"¿Estás seguro de instalar las aplicaciones separadas desde '%s'?"</string>
     <string name="bundle_install_apks">"¿Estás seguro de instalar el paquete de aplicaciones '%s'?"</string>
     <string name="cancel">"Cancelar"</string>
     <string name="change_logs">"Registro de cambios"</string>
@@ -42,7 +41,6 @@
     <string name="failed">"Fallido"</string>
     <string name="got_it">"Obtener"</string>
     <string name="install">"Instalar"</string>
-    <string name="install_bundle">"Instalar aplicaciones separadas"</string>
     <string name="installing_bundle">"Instalando paquete de aplicaciones"</string>
     <string name="language">"Idioma"</string>
     <string name="language_default">"Por defecto"</string>
@@ -71,7 +69,6 @@
     <string name="share_with">"Compartir con"</string>
     <string name="sort_by">"Ordenar aplicaciones"</string>
     <string name="source_code">"Código fuente"</string>
-    <string name="split_apk_list">"Lista de aplicaciones separadas"</string>
     <string name="support">"Grupo de soporte"</string>
     <string name="support_acknowledged">"Donación reconocida \u2665"</string>
     <string name="support_app">"Compra aplicación donación"</string>
@@ -115,16 +112,11 @@
     <string name="batch_list_added">"%s se ha añadido a la lista por lotes"</string>
     <string name="batch_list_export">"¿Estás seguro de exportar las siguientes aplicaciones al almacenamiento de tu dispositivo?"</string>
     <string name="batch_list_removed">"%s ha sido eliminado de la lista por lotes"</string>
-    <string name="bundle_install_message">"Nota: Para instalar varios APK (APKs divididos), colóquelos en una sola carpeta y seleccione uno de ellos.  Package Manager seleccionará y se encargará del resto."</string>
     <string name="explore_error_status">"Exploración de %s! fallida"</string>
-    <string name="list">"Lista"</string>
     <string name="split_apk">"Dividir APKs"</string>
     <string name="activities">"Actividades"</string>
     <string name="documentation">"Documentación"</string>
     <string name="documentation_summary">"Consulte la documentación detallada para usar el Administrador de paquetes"</string>
-    <string name="file_picker">"Selector de archivos"</string>
-    <string name="file_picker_external">"Externo"</string>
-    <string name="file_picker_inbuilt">"Incorporado"</string>
     <string name="installation_cancel_message">"¿Estás seguro de cancelar la instalación?"</string>
     <string name="installation_status_success">"Instalación completada correctamente"</string>
     <string name="sdcard">"SDCard"</string>

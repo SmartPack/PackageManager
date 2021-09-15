@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"A iniciar o processamento de lotes"</string>
     <string name="batch_warning">"As suas definições de lote vão ser eliminadas! Tem a certeza?"</string>
     <string name="billing_client_disconnected">"Erro de ligação ao cliente de faturação do Google Play!"</string>
-    <string name="bundle_install">"Tem a certeza que deseja instalar as apks separadas a partir de '%s'?"</string>
     <string name="bundle_install_apks">"Tem a certeza que deseja instalar o pacote de aplicação '%s'?"</string>
     <string name="cancel">"Cancelar"</string>
     <string name="change_logs">"Registo de alterações"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"Erro"</string>
     <string name="got_it">"Feito"</string>
     <string name="install">"Instalar"</string>
-    <string name="install_bundle">"Instalar APKs separadas"</string>
     <string name="installing_bundle">"A instalar o pacote de aplicação"</string>
     <string name="language">"Idioma"</string>
     <string name="language_default">"Predefinido"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"Partilhar com"</string>
     <string name="sort_by">"Ordenar aplicações"</string>
     <string name="source_code">"Código-fonte"</string>
-    <string name="split_apk_list">"Lista de APKs separadas"</string>
     <string name="support">"Grupo de apoio"</string>
     <string name="support_acknowledged">"Obrigado pelo donativo \u2665"</string>
     <string name="support_app">"Comprar a aplicação de donativo"</string>
@@ -118,16 +115,11 @@
     <string name="batch_list_added">"%s foi adicionado à lista de lotes"</string>
     <string name="batch_list_export">"Tem a certeza que deseja exportar as seguintes aplicações para o armazenamento do dispositivo?"</string>
     <string name="batch_list_removed">"%s foi removido da lista de lotes"</string>
-    <string name="bundle_install_message">"Aviso: para instalar múltiplas APKs (APKs separadas), por favor insira-as na mesma pasta e selecione uma delas. O Gestor de Pacotes vai escolher e tratar do resto. "</string>
     <string name="explore_error_status">"Erro ao explorar %s!"</string>
-    <string name="list">"Lista"</string>
     <string name="split_apk">"APKs separadas"</string>
     <string name="activities">"Atividades"</string>
     <string name="documentation">"Documentação"</string>
     <string name="documentation_summary">"Veja a documentação detalhada para utilizar o Gestor de Pacotes"</string>
-    <string name="file_picker">"Selecionar ficheiros"</string>
-    <string name="file_picker_external">"Externo"</string>
-    <string name="file_picker_inbuilt">"Interno"</string>
     <string name="installation_cancel_message">"Tem a certeza que deseja cancelar a instalação?"</string>
     <string name="installation_status_success">"Instalação feita com sucesso!"</string>
     <string name="sdcard">"Cartão SD"</string>
@@ -214,7 +206,6 @@
     <string name="size_bundle">"Tamanho do pacote: %s"</string>
     <string name="file_permission_request_message">"Para que esta funcionalidade funcione em versões do Android recentes (Android R ou mais recente), é necessário conceder permissão \"Acesso a todos os ficheiros\" ao Gestor de Pacotes. Forneça a permissão manualmente no novo ecrã aberto após pressionar o botão \"Conceder\"."</string>
     <string name="grant">"Conceder"</string>
-    <string name="important">"Importante"</string>
     <string name="select_all">"Selecionar tudo"</string>
     <string name="select_all_summary">"Selecione e adicione todas as aplicações desta página à lista de lote?"</string>
     <string name="uninstall_status_failed">"A desinstalação de %s falhou ou foi cancelada pelo utilizador!"</string>

@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Starte Stapelverarbeitung"</string>
     <string name="batch_warning">"Ihre Stapeleinstellungen werden entfernt! Fortfahren?"</string>
     <string name="billing_client_disconnected">"Verbindung mit Google Play fehlgeschlagen!"</string>
-    <string name="bundle_install">"Sind Sie sich sicher, die gesplitteten APK's von \"%s\" zu installieren?"</string>
     <string name="bundle_install_apks">"Sind Sie sich sicher, das App-Bunde \"%s\" zu installieren?"</string>
     <string name="cancel">"Abbrechen"</string>
     <string name="change_logs">"Änderungsprotokolle"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"Fehlgeschlagen"</string>
     <string name="got_it">"Verstanden"</string>
     <string name="install">"Installieren"</string>
-    <string name="install_bundle">"Installiere gesplittete APKs"</string>
     <string name="installing_bundle">"Installiere App-Bundle!"</string>
     <string name="language">"Sprache"</string>
     <string name="language_default">"Standard"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"Teilen mit"</string>
     <string name="sort_by">"Apps sortieren"</string>
     <string name="source_code">"Quellcode"</string>
-    <string name="split_apk_list">"Liste der gesplitteten APKs"</string>
     <string name="support">"Supportgruppe"</string>
     <string name="support_acknowledged">"Spende bestätigt \u2665"</string>
     <string name="support_app">"Kaufe Spenden-App"</string>
@@ -116,16 +113,11 @@
     <string name="batch_list_added">"%s wurde zum Stapel hinzugefügt"</string>
     <string name="batch_list_export">"Sind Sie sicher, dass Sie die folgende(n) App(s) in den Gerätespeicher exportieren möchten?"</string>
     <string name="batch_list_removed">"%s wurde vom Stapel entfernt"</string>
-    <string name="bundle_install_message">"Bitte beachten Sie: Um mehrere APKs (geteilte APKs) zu installieren, legen Sie bitte alle in einen einzigen Ordner und wählen Sie eine davon aus. Der Paket-Manager wird dann auch die anderen auswählen und verarbeiten."</string>
     <string name="explore_error_status">"Prüfung von %s fehlgeschlagen!"</string>
-    <string name="list">"Liste"</string>
     <string name="split_apk">"splitte APKs"</string>
     <string name="activities">"Aktivitäten"</string>
     <string name="documentation">"Dokumentation"</string>
     <string name="documentation_summary">"Schau Dir die Detaillierten Dokumente an wie man Package Manager benutzt"</string>
-    <string name="file_picker">"Datei auswählen"</string>
-    <string name="file_picker_external">"Extern"</string>
-    <string name="file_picker_inbuilt">"Intern"</string>
     <string name="installation_cancel_message">"Willst Du die Installation abbrechen?"</string>
     <string name="installation_status_success">"Erfolgreich Installiert"</string>
     <string name="sdcard">"SD Karte"</string>

@@ -187,10 +187,8 @@ public class PackageInfoFragment extends Fragment {
             if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
                 Utils.snackbar(mRootView, getString(R.string.uninstall_nope));
             } else if (!Common.isSystemApp()) {
-                Intent remove = new Intent(Intent.ACTION_DELETE);
-                remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-                remove.setData(Uri.parse("package:" + Common.getApplicationID()));
-                startActivityForResult(remove, 0);
+                Common.isUninstall(true);
+                requireActivity().finish();
             } else {
                 PackageDetails.uninstallSystemApp(mProgressLayout, mProgressMessage, requireActivity());
             }

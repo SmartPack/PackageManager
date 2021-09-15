@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Toplu İşlemler Başlatılıyor"</string>
     <string name="batch_warning">"Toplu İşlem ayarlarınız silinecek! İstediğinize emin misiniz?"</string>
     <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
-    <string name="bundle_install">"'%s' içerisindeki bölünmüş APK'leri yüklemek istediğinize emin misiniz?"</string>
     <string name="bundle_install_apks">"'%s' toplu APK paketini yüklemek istediğinize emin misiniz?"</string>
     <string name="cancel">"Vazgeç"</string>
     <string name="change_logs">"Değişiklik Günlüğü"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"Başarısız"</string>
     <string name="got_it">"Anlaşıldı"</string>
     <string name="install">"Yükle"</string>
-    <string name="install_bundle">"Bölünmüş APK'leri yükle"</string>
     <string name="installing_bundle">"Toplu Uygulama Paketi yükleniyor!"</string>
     <string name="language">"Dil"</string>
     <string name="language_default">"Varsayılan"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"Paylaşacak bir şey seçiniz"</string>
     <string name="sort_by">"Uygulamala Sıralaması"</string>
     <string name="source_code">"Kaynak Kodu"</string>
-    <string name="split_apk_list">"Bölünmüş APK'lerin listesi"</string>
     <string name="support">"Destek Grubu"</string>
     <string name="support_acknowledged">"Bağış Onaylandı \u2665"</string>
     <string name="support_app">"Bağış Uygulamasını Satın Al"</string>
@@ -116,16 +113,11 @@
     <string name="batch_list_added">"%s toplu işlem listesine eklendi"</string>
     <string name="batch_list_export">"Seçili uygulamayı(ları) cihaz depolamasına aktarmak istediğinize emin misiniz?"</string>
     <string name="batch_list_removed">"%s toplu işlem listesinden kaldırıldı"</string>
-    <string name="bundle_install_message">"Sakın unutmayın: Birden fazla APK'yi (bölünmüş APK'leri) yüklemek için lütfen hepsini tek bir klasörün içerisine koyup herhangi birini seçiniz. Package Manager gerisini sizin yerinize halledecektir."</string>
     <string name="explore_error_status">"%s keşfetme başarısız!"</string>
-    <string name="list">"Liste"</string>
     <string name="split_apk">"Bölünmüş APK'ler"</string>
     <string name="activities">"Aktiviteler"</string>
     <string name="documentation">"Dokümantasyon"</string>
     <string name="documentation_summary">"Package Manager'ı kullanmak için detaylı dokümantasyona bakınız"</string>
-    <string name="file_picker">"Dosya Seçici"</string>
-    <string name="file_picker_external">"Harici"</string>
-    <string name="file_picker_inbuilt">"Dahili"</string>
     <string name="installation_cancel_message">"Yüklemeyi iptal etmek istediğinize emin misiniz?"</string>
     <string name="installation_status_success">"Yükleme başarıyla tamamlandı!"</string>
     <string name="sdcard">"SD Kart"</string>
@@ -212,7 +204,6 @@
     <string name="size_bundle">"Toplu Paket Boyutu: %s"</string>
     <string name="file_permission_request_message">"Bu özelliğin yeni Android sürümlerinde (Android R veya üstü) çalışmasını sağlamak için Package Manager'a \"Tüm dosyalara eriş\" izninin verilmesi gerekmektedir. Lütfen \"Yetkilendir\" butonuna bastıktan sonra açılan ekrandan bu izni veriniz."</string>
     <string name="grant">"Yetkilendir"</string>
-    <string name="important">"Önemli"</string>
     <string name="select_all">"Hepsini Seç"</string>
     <string name="select_all_summary">"Bu sayfadaki bütün uygulamaları seçip toplu işlem listesine ekleyecek misiniz?"</string>
     <string name="uninstall_status_failed">"%s kaldırma işlemi başarısız oldu veya kullanıcı tarafından iptal edildi!"</string>

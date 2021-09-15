@@ -28,8 +28,13 @@
         <item>@string/language_pl</item>
     </string-array>
 
-    <string-array name="file_picker">
-        <item>@string/file_picker_inbuilt</item>
-        <item>@string/file_picker_external</item>
+    <string-array name="app_exit_options">
+        <item>@string/exit_simple</item>
+        <item>@string/exit_confirmation</item>
+    </string-array>
+
+    <string-array name="installer_options">
+        <item>@string/installer_instructions</item>
+        <item>@string/installer_file_picker</item>
     </string-array>
 </resources>

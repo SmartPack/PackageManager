@@ -67,19 +67,19 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
         }
 
         mOpen.setOnClickListener(v -> {
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(getPackageId());
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
             if (launchIntent != null) {
                 startActivity(launchIntent);
                 finish();
             } else {
-                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(getPackageId(), this)));
+                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this)));
             }
-            PackageData.getRawData().add(new RecycleViewItem(getPackageId(),
-                    PackageData.getAppName(getPackageId(), this),
-                    PackageData.getAppIcon(getPackageId(), this),
-                    new File(PackageData.getSourceDir(getPackageId(), this)).length(),
-                    Objects.requireNonNull(PackageData.getPackageInfo(getPackageId(), this)).firstInstallTime,
-                    Objects.requireNonNull(PackageData.getPackageInfo(getPackageId(), this)).lastUpdateTime));
+            PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
+                    PackageData.getAppName(Common.getApplicationID(), this),
+                    PackageData.getAppIcon(Common.getApplicationID(), this),
+                    new File(PackageData.getSourceDir(Common.getApplicationID(), this)).length(),
+                    Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).firstInstallTime,
+                    Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).lastUpdateTime));
             Common.reloadPage(true);
         });
 
@@ -104,8 +104,8 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
                                 mStatus.setText(getString(R.string.result, installationStatus));
                                 if (installationStatus.equals(getString(R.string.installation_status_success))) {
                                     try {
-                                        mTitle.setText(PackageData.getAppName(getPackageId(), activity));
-                                        mIcon.setImageDrawable(PackageData.getAppIcon(getPackageId(), activity));
+                                        mTitle.setText(PackageData.getAppName(Common.getApplicationID(), activity));
+                                        mIcon.setImageDrawable(PackageData.getAppIcon(Common.getApplicationID(), activity));
                                         mOpen.setVisibility(View.VISIBLE);
                                     } catch (NullPointerException ignored) {}
                                 }
@@ -129,16 +129,6 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
         return name;
     }
 
-    private String getPackageId() {
-        String name = null;
-        for (String mAPKs : Common.getAppList()) {
-            if (PackageData.getAPKId(mAPKs, this) != null) {
-                name = PackageData.getAPKId(mAPKs, this);
-            }
-        }
-        return name;
-    }
-
     private Drawable getIcon() {
         Drawable icon = null;
         for (String mAPKs : Common.getAppList()) {
@@ -155,13 +145,17 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
             return;
         }
         if (Utils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
-            PackageData.getRawData().add(new RecycleViewItem(getPackageId(),
-                    PackageData.getAppName(getPackageId(), this),
-                    PackageData.getAppIcon(getPackageId(), this),
-                    new File(PackageData.getSourceDir(getPackageId(), this)).length(),
-                    Objects.requireNonNull(PackageData.getPackageInfo(getPackageId(), this)).firstInstallTime,
-                    Objects.requireNonNull(PackageData.getPackageInfo(getPackageId(), this)).lastUpdateTime));
-            Common.reloadPage(true);
+            if (!Common.isUpdating()) {
+                PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
+                        PackageData.getAppName(Common.getApplicationID(), this),
+                        PackageData.getAppIcon(Common.getApplicationID(), this),
+                        new File(PackageData.getSourceDir(Common.getApplicationID(), this)).length(),
+                        Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).firstInstallTime,
+                        Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).lastUpdateTime));
+                Common.reloadPage(true);
+            } else {
+                Common.isUpdating(false);
+            }
         }
         super.onBackPressed();
     }

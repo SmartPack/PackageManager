@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Připravuji dávkový proces"</string>
     <string name="batch_warning">"Váše dávkové nastavení bude odstraněno! Opravdu?"</string>
     <string name="billing_client_disconnected">"Chyba spojení s Google Play platebním klientem!"</string>
-    <string name="bundle_install">"Opravdu chcete instalovat split apk soubory z '%s'?"</string>
     <string name="bundle_install_apks">"Opravdu chcete instalovat apk bundle (.aab) '%s'?"</string>
     <string name="cancel">"Storno"</string>
     <string name="change_logs">"Seznamy změn"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"Chyba"</string>
     <string name="got_it">"Mám to"</string>
     <string name="install">"Instalovat"</string>
-    <string name="install_bundle">"Instalovat Split APK soubory"</string>
     <string name="installing_bundle">"Instalování App Budle!"</string>
     <string name="language">"Jazyk"</string>
     <string name="language_default">"Výchozí (default)"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"Sdiket pomocí"</string>
     <string name="sort_by">"Třídit aplikace"</string>
     <string name="source_code">"Zdroj kódu"</string>
-    <string name="split_apk_list">"Seznam Split APK souborů"</string>
     <string name="support">"Skupina podpory"</string>
     <string name="support_acknowledged">"Dsr uznán \2665"</string>
     <string name="support_app">"Kupte podporu aplikace"</string>
@@ -116,16 +113,11 @@
     <string name="batch_list_added">"%s bylo přidáno na dávkový seznam"</string>
     <string name="batch_list_export">"Opravdu chcete exportovat následující aplikaci(e) do interního úložiště zařízení?"</string>
     <string name="batch_list_removed">"%s bylo odebráno z hromadného seznamu"</string>
-    <string name="bundle_install_message">"Poznámka: Chcete-li nainstalovat více APK (split APK), umístěte je všechny do jedné složky a vyberte jeden z nich.  Správce balíků zbytek vybere a zpracuje."</string>
     <string name="explore_error_status">"Chyba procházení %s!"</string>
-    <string name="list">"Seznam"</string>
     <string name="split_apk">"Splkt APK soubory"</string>
     <string name="activities">"Aktivity"</string>
     <string name="documentation">"Dokumentace"</string>
     <string name="documentation_summary">"Prohlédněte si dokumentaci pro použití Package Manager"</string>
-    <string name="file_picker">"Výběr souboru z"</string>
-    <string name="file_picker_external">"Externí úložiště"</string>
-    <string name="file_picker_inbuilt">"Interní úložiště"</string>
     <string name="installation_cancel_message">"Opravdu chcete stornovat instalaci?"</string>
     <string name="installation_status_success">"Instalace dokončena úspěšně!"</string>
     <string name="sdcard">"SD karta"</string>

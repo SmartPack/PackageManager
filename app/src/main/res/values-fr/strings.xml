@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Initialisation du traitement des lots"</string>
     <string name="batch_warning">"Les configurations de votre lot vont être supprimés ! Êtes vous sûr ?"</string>
     <string name="billing_client_disconnected">"Échec de connexion avec le client de facturation Google Play !"</string>
-    <string name="bundle_install">"Êtes-vous sûr d'installer les apk modulaires de '%s' ?"</string>
     <string name="bundle_install_apks">"Êtes-vous sûr d'installer le paquet '%s' ?"</string>
     <string name="cancel">"Annuler"</string>
     <string name="change_logs">"Notes de version"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"Échec"</string>
     <string name="got_it">"J'ai compris"</string>
     <string name="install">"Install"</string>
-    <string name="install_bundle">"Installer des APKs modulaires"</string>
     <string name="installing_bundle">"Installation des paquets !"</string>
     <string name="language">"Langue"</string>
     <string name="language_default">"Défaut"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"Partager avec"</string>
     <string name="sort_by">"Trier apps"</string>
     <string name="source_code">"Code Source"</string>
-    <string name="split_apk_list">"Liste des APKs modulaires"</string>
     <string name="support">"Groupe de Support"</string>
     <string name="support_acknowledged">"Don reconnu \u2665"</string>
     <string name="support_app">"Acheter l'application pour faire un don"</string>
@@ -116,16 +113,11 @@
     <string name="batch_list_added">"%s est ajouté dans la liste du traitement par lots"</string>
     <string name="batch_list_export">"Êtes-vous sûr d'exporter l(es) application(s) suivante(s) vers le stockage de l'appareil ?"</string>
     <string name="batch_list_removed">"%s est supprimé de la liste du traitement par lots"</string>
-    <string name="bundle_install_message">"Remarque : pour installer plusieurs APK (fichiers APK modulaires), veuillez tous les placer dans un seul dossier et en sélectionner un. Package Manager s'occupera du reste."</string>
     <string name="explore_error_status">"Échec de l'exploration de %s !"</string>
-    <string name="list">"Liste"</string>
     <string name="split_apk">"APKs modulaires (split APKs)"</string>
     <string name="activities">"Activités"</string>
     <string name="documentation">"Documentation"</string>
     <string name="documentation_summary">"Consultez la documentation détaillée pour utiliser Package Manager"</string>
-    <string name="file_picker">"Sélecteur de fichiers"</string>
-    <string name="file_picker_external">"Externe"</string>
-    <string name="file_picker_inbuilt">"Intégré"</string>
     <string name="installation_cancel_message">"Êtes-vous sûr d'annuler l'installation ?"</string>
     <string name="installation_status_success">"Installation terminée avec succès !"</string>
     <string name="sdcard">"Carte SD"</string>
@@ -212,6 +204,5 @@
     <string name="size_bundle">"Taille du paquet : %s"</string>
     <string name="file_permission_request_message">"Pour que cette fonctionnalité marche sur les versions d'Android les plus récentes (Android R ou plus récent), il est nécessaire d'accorder l'autorisation \"Accès à tous les fichiers\" au Package Manager. Merci de valider manuellement depuis l'écran qui va s'ouvrir juste après avoir cliqué sur le bouton \"Accorder\"."</string>
     <string name="grant">"Accorder"</string>
-    <string name="important">"Important"</string>
     <string name="select_all">"Sélectionner tout"</string>
 </resources>

@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"ബാച്ച് പ്രോസസ്സ് ആരംഭിക്കുന്നു"</string>
     <string name="batch_warning">"നിങ്ങളുടെ ബാച്ച് ക്രമീകരണങ്ങൾ നീക്കംചെയ്യും! നിങ്ങള്ക്ക് ഉറപ്പാണോ?"</string>
     <string name="billing_client_disconnected">"ഗൂഗിൾ പ്ലേ ബില്ലിംഗ് ക്ലയന്റുമായി ബന്ധിപ്പിക്കുന്നതിൽ പരാജയപ്പെട്ടു!"</string>
-    <string name="bundle_install">"'%s' ൽ ഉള്ള സ്പ്ലിറ്റ് APKകൾ ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="bundle_install_apks">"അപ്ലിക്കേഷൻ ബണ്ടിൽ '%s' ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന്‌ ഉറപ്പാണോ?"</string>
     <string name="cancel">"റദ്ദാക്കുക"</string>
     <string name="credits">"ക്രെഡിറ്റുകൾ"</string>
@@ -37,7 +36,6 @@
     <string name="failed">"പരാജയപ്പെട്ടു"</string>
     <string name="got_it">"മനസ്സിലായി"</string>
     <string name="install">"ഇൻസ്റ്റാൾ"</string>
-    <string name="install_bundle">"Split APK ഇൻസ്റ്റാൾ"</string>
     <string name="installing_bundle">"അപ്ലിക്കേഷൻ ബണ്ടിൽ ഇൻസ്റ്റാളുചെയ്യുന്നു!"</string>
     <string name="language">"ഭാഷ"</string>
     <string name="more_apps">"കൂടുതൽ അപ്ലിക്കേഷനുകൾ"</string>
@@ -61,7 +59,6 @@
     <string name="share_message">"Package Manager %s താഴെ ലഭിക്കുന്നതിനായി കാണുന്ന എതെകിലും ലിങ്കിൽ ക്ലിക്ക് ചെയ്യ്യുക\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
     <string name="share_with">"പങ്കിടുക"</string>
     <string name="sort_by">"അടുക്കുക"</string>
-    <string name="split_apk_list">"സ്പ്ലിറ്റ് APK-കളുടെ പട്ടിക"</string>
     <string name="support_acknowledged">"സംഭാവന ലഭിച്ചതായി അംഗീകരിക്കുന്നു \u2665"</string>
     <string name="support_app">"Donation ആപ്പ് വാങ്ങുക"</string>
     <string name="support_development">"വികസനത്തിന് പിന്തുണ നൽകുക"</string>
@@ -99,12 +96,8 @@
     <string name="batch_list_added">"%s നെ ബാച്ച് പട്ടികയിൽ ചേർത്തു"</string>
     <string name="batch_list_export">"ഇനിപ്പറയുന്ന അപ്ലിക്കേഷൻ (കൾ) ഫോൺ  സംഭരണത്തിലേക്ക് എക്‌സ്‌പോർട്ടുചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="batch_list_removed">"%s നെ ബാച്ച് പട്ടികയിൽ നിന്ന് നീക്കം ചെയ്തു"</string>
-    <string name="bundle_install_message">"ദയവായി ശ്രദ്ധിക്കുക: ഒന്നിലധികം APK-കൾ (സ്പ്ലിറ്റ് APK-കൾ) ഇൻസ്റ്റാൾ ചെയ്യുന്നതിന് അവയെല്ലാം ഒരൊറ്റ ഫോൾഡറിൽ സ്ഥാപിച്ചശേഷം  അവയിലൊന്ന് തിരഞ്ഞെടുക്കുക. പാക്കേജ് മാനേജർ ബാക്കിയുള്ളവ തിരഞ്ഞെടുത്ത് കൈകാര്യം ചെയ്യ്യുന്നതാണ്."</string>
-    <string name="list">"പട്ടിക"</string>
     <string name="activities">"Activities"</string>
     <string name="documentation_summary">"പാക്കേജ് മാനേജർ ഉപയോഗിക്കുന്നതിന് ആവശ്യമായ വിശദമായ ഡോക്യുമെന്റേഷൻ പരിശോധിക്കുക"</string>
-    <string name="file_picker_external">"ബാഹ്യം"</string>
-    <string name="file_picker_inbuilt">"സ്വന്തം"</string>
     <string name="installation_cancel_message">"ഇൻസ്റ്റാളേഷൻ റദ്ദാക്കണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="installation_status_success">"ഇൻസ്റ്റാളേഷൻ വിജയകരമായി പൂർത്തിയായി!"</string>
     <string name="sdcard">"SD കാർഡ്"</string>

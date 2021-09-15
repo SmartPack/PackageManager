@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class Common {
 
-    private static boolean mReloadPage = false, mRunning = false,  mSystemApp = false;
+    private static boolean mReloadPage = false, mRunning = false,  mSystemApp = false, mUninstall = false, mUpdating = false;
 
     private static CharSequence mApplicationName;
 
@@ -37,6 +37,14 @@ public class Common {
 
     public static boolean isSystemApp() {
         return mSystemApp;
+    }
+
+    public static boolean isUninstall() {
+        return mUninstall;
+    }
+
+    public static boolean isUpdating() {
+        return mUpdating;
     }
 
     public static boolean reloadPage() {
@@ -138,6 +146,14 @@ public class Common {
 
     public static void isSystemApp(boolean b) {
         mSystemApp = b;
+    }
+
+    public static void isUninstall(boolean b) {
+        mUninstall = b;
+    }
+
+    public static void isUpdating(boolean b) {
+        mUpdating = b;
     }
 
     public static void setApplicationName(CharSequence name) {

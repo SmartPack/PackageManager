@@ -12,7 +12,6 @@
     <string name="batch_processing_initialized">"Inicjowanie procesu wsadowego"</string>
     <string name="batch_warning">"Twoje ustawienia wsadu zostaną usunięte! Czy na pewno?"</string>
     <string name="billing_client_disconnected">"Nie udało się połączyć z klientem rozliczeń Google Play!"</string>
-    <string name="bundle_install">"Czy na pewno zainstalować podzielone APK z „%s”?"</string>
     <string name="bundle_install_apks">"Czy na pewno zainstalować paczkę aplikacji „%s”?"</string>
     <string name="cancel">"Anuluj"</string>
     <string name="change_logs">"Lista zmian"</string>
@@ -43,7 +42,6 @@
     <string name="failed">"Nieudane"</string>
     <string name="got_it">"Rozumiem"</string>
     <string name="install">"Zainstaluj"</string>
-    <string name="install_bundle">"Zainstaluj podzielone APK"</string>
     <string name="installing_bundle">"Instalowanie paczki aplikacji!"</string>
     <string name="language">"Język"</string>
     <string name="language_default">"Domyślny"</string>
@@ -72,7 +70,6 @@
     <string name="share_with">"Udostępnij w"</string>
     <string name="sort_by">"Sortuj aplikacje"</string>
     <string name="source_code">"Kod źródłowy"</string>
-    <string name="split_apk_list">"Lista podzielonych APK"</string>
     <string name="support">"Grupa wsparcia"</string>
     <string name="support_acknowledged">"Darowizna przyjęta \u2665"</string>
     <string name="support_app">"Kup aplikację-dotację"</string>
@@ -119,16 +116,11 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! P
     <string name="batch_list_added">"%s został dodany do listy wsadowej"</string>
     <string name="batch_list_export">"Czy na pewno wyeksportować następujące aplikacje do pamięci urządzenia?"</string>
     <string name="batch_list_removed">"%s został usunięty z listy wsadowej"</string>
-    <string name="bundle_install_message">"Uwaga: W celu zainstalowania wielu APK (podzielonego APK) należy umieścić je w jednym folderze i wybrać jeden z nich. Package Manager zajmie się resztą."</string>
     <string name="explore_error_status">"Nie udało się przejrzeć %s!"</string>
-    <string name="list">"Lista"</string>
     <string name="split_apk">"Podzielone APK"</string>
     <string name="activities">"Aktywności"</string>
     <string name="documentation">"Dokumentacja"</string>
     <string name="documentation_summary">"Sprawdź szczegółową dokumentację korzystania z Package Manager"</string>
-    <string name="file_picker">"Przeglądarka plików"</string>
-    <string name="file_picker_external">"Zewnętrzna"</string>
-    <string name="file_picker_inbuilt">"Wbudowana"</string>
     <string name="installation_cancel_message">"Czy na pewno anulować instalację?"</string>
     <string name="installation_status_success">"Instalacja zakończona pomyślnie!"</string>
     <string name="sdcard">"Karta SD"</string>
@@ -215,7 +207,6 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! P
     <string name="size_bundle">"Rozmiar paczki: %s"</string>
     <string name="file_permission_request_message">"Aby ta funkcja działała na nowszych wersjach Androida (Android R lub nowszy), konieczne jest przyznanie uprawnienia „Dostęp do wszystkich plików” dla Package Manager. Powinieneś/Powinnaś przyznać uprawnienie ręcznie z nowo otwartego ekranu po naciśnięciu przycisku „Przyznaj”."</string>
     <string name="grant">"Przyznaj"</string>
-    <string name="important">"Ważne"</string>
     <string name="select_all">"Wybierz wszystkie"</string>
     <string name="select_all_summary">"Wybrać i dodać wszystkie aplikacje z tej strony do listy wsadowej?"</string>
     <string name="uninstall_status_failed">"Odinstalowywanie %s nie powiodło się albo zostało anulowane przez użytkownika!"</string>

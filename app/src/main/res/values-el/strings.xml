@@ -10,7 +10,6 @@
     <string name="batch_processing_finished">Η Επεξεργασία Ομάδας ολοκληρώθηκε!</string>
     <string name="batch_processing_initialized">Αρχικοποίηση Διεργασίας Ομάδας</string>
     <string name="batch_warning">Οι ρυθμίσεις ομάδας σας θα αφαιρεθούν! Είστε σίγουρος;</string>
-    <string name="bundle_install">Είστε σίγουρος ότι θέλετε να εγκαταστήσετε τα διαιρεμένα apk\'s από \'%s\'?</string>
     <string name="cancel">Ακύρωση</string>
     <string name="change_logs">Λίστα αλλαγών</string>
     <string name="credits">Ευχαριστίες</string>
@@ -29,7 +28,6 @@
     <string name="failed">Αποτυχία</string>
     <string name="got_it">Το κατάλαβα</string>
     <string name="install">Εγκατάσταση</string>
-    <string name="install_bundle">Εγκατάσταση διαιρεμένων APKs</string>
     <string name="installing_bundle">Εγκατάσταση εφαρμογής δεσμίδας!</string>
     <string name="language">Γλώσσα</string>
     <string name="language_default">Προεπιλογή</string>
@@ -51,7 +49,6 @@
     <string name="share_with">Κοινοποίηση σε</string>
     <string name="sort_by">Ταξινόμηση Εφαρμογών Κατά</string>
     <string name="source_code">Πηγαίος Κώδικας</string>
-    <string name="split_apk_list">Λίστα Διαιρεμένων APKs</string>
     <string name="support">Ομάδα υποστήριξης</string>
     <string name="sure_question">Είστε σίγουρος;</string>
     <string name="turn_on_off">Ενεργοποίηση/απενεργοποίηση</string>

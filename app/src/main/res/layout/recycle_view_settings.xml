@@ -1,35 +1,47 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp" >
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="start|center"
-            android:background="@null" />
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:orientation="vertical" >
+            android:gravity="center" >
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="start|center"
+                    android:background="@null" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:layout_marginStart="35dp"
+                    android:orientation="vertical" >
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="italic"
-                    android:visibility="gone" />
-        </LinearLayout>
-</FrameLayout>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textStyle="italic"
+                            android:visibility="gone" />
+                </LinearLayout>
+        </FrameLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            style="@style/Divider"/>
+</LinearLayout>

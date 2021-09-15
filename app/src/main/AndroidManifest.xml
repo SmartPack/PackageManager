@@ -41,6 +41,8 @@
         <activity android:name=".activities.ExportedAppsActivity" />
         <activity android:name=".activities.FilePickerActivity" />
         <activity android:name=".activities.ImageViewActivity" />
+        <activity android:name=".activities.InstallerInstructionsActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.PackageDetailsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.PackageExploreActivity"

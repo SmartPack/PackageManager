@@ -19,12 +19,15 @@ import java.io.Serializable;
 public class RecycleSettingsItem implements Serializable {
     private final String mTitle, mDescription, mUrl;
     private final Drawable mIcon;
+    private final int mColor, mSize;
 
-    public RecycleSettingsItem(String title, String description, Drawable icon, String url) {
+    public RecycleSettingsItem(String title, String description, Drawable icon, String url, int color, int size) {
         this.mTitle = title;
         this.mDescription = description;
         this.mIcon = icon;
         this.mUrl = url;
+        this.mColor = color;
+        this.mSize = size;
     }
 
     public String getTitle() {
@@ -41,6 +44,14 @@ public class RecycleSettingsItem implements Serializable {
 
     public String getUrl() {
         return mUrl;
+    }
+
+    public int getColor() {
+        return mColor;
+    }
+
+    public int getSize() {
+        return mSize;
     }
 
 }

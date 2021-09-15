@@ -4,7 +4,6 @@
     <string name="batch_list_disable">Tem certeza de que deseja desativar (se ativado) ou ativar (se desativado) o(s) seguinte (s) aplicativo(s)?</string>
     <string name="batch_list_remove">Deseja remover os seguintes aplicativos?</string>
     <string name="batch_warning">Suas configurações em lote serão removidas! Você tem certeza?</string>
-    <string name="bundle_install">Você tem certeza de instalar os apks divididos em \'%s\'?</string>
     <string name="cancel">Cancelar</string>
     <string name="change_logs">Mudanças</string>
     <string name="copyright">"Direitos autorais: © %s"</string>
@@ -21,7 +20,6 @@
     <string name="exporting_bundle">Exportando o pacote de %s</string>
     <string name="got_it">Beleza</string>
     <string name="install">Instalar</string>
-    <string name="install_bundle">Instalar APKs divididos</string>
     <string name="language">Idioma</string>
     <string name="language_default">Padrão</string>
     <string name="more_apps">Mais do desenvolvedor</string>
@@ -62,7 +60,6 @@
     <string name="failed">Falhou</string>
     <string name="installing_bundle">Instalando App Bundle!</string>
     <string name="result">Resultado: %s</string>
-    <string name="split_apk_list">Lista de APKs divididos</string>
     <string name="activities">Atividades</string>
     <string name="apk_path">Caminho do APK</string>
     <string name="apks">APKs</string>
@@ -73,7 +70,6 @@
     <string name="batch_list_reset">Tem certeza de que deseja redefinir o(s) seguinte(s) aplicativo(s)?</string>
     <string name="billing_client_disconnected">Falha ao conectar com o Cliente de Faturamento do Google Play!</string>
     <string name="bundle_install_apks">Tem certeza de que deseja instalar o app bundle \'%s\'?</string>
-    <string name="bundle_install_message">Por favor, note: Para instalar vários APKs (APKs divididos), por favor, coloque todos eles em uma única pasta e selecione um entre eles. O Gerenciador de Pacotes selecionará e tratará do resto.</string>
     <string name="bundles">Bundles</string>
     <string name="certificate">Certificado</string>
     <string name="credits_summary">Uma lista de pessoas que contribuíram para o projeto</string>
@@ -96,9 +92,6 @@
     <string name="export_file_message">foi exportado com sucesso para %s!</string>
     <string name="export_storage_message">Exportar \'%s\' para o armazenamento do dispositivo?</string>
     <string name="exported_apps">Aplicativos exportados</string>
-    <string name="file_picker">Seletor de arquivos</string>
-    <string name="file_picker_external">Externo</string>
-    <string name="file_picker_inbuilt">Embutido</string>
     <string name="file_picker_message">Nota: este recurso é muito experimental!</string>
     <string name="install_question">Instalar \'%s\'?</string>
     <string name="installation_cancel_message">Tem certeza de que deseja cancelar a instalação?</string>
@@ -110,7 +103,6 @@
     <string name="installation_status_incompatible">O aplicativo é incompatível com este dispositivo</string>
     <string name="installation_status_success">Instalação concluída com sucesso!</string>
     <string name="installation_status_storage">Espaço de armazenamento insuficiente para instalar o aplicativo</string>
-    <string name="list">Lista</string>
     <string name="manifest">Manifesto</string>
     <string name="more_apps_summary">Confira mais aplicativos do desenvolvedor no Google Play</string>
     <string name="native_lib">Biblioteca nativa</string>

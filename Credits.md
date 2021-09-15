@@ -9,6 +9,10 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * [Hsiafan](https://github.com/hsiafan/): apk-parser, the library in which Package Manager depending to generate the manifest file of other applications as well as to read binary XML files from APK's
 * [Lennoard Silva](https://github.com/Lennoard): contributed code to this project, especially in its early stage of development
 
+## UI improvements
+* [Valdnet](https://github.com/Valdnet)
+* [Agnieszka C](https://github.com/Aga-C)
+
 ## Icon
 * [Toxinpiper](https://t.me/toxinpiper), App Icon
 

@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">Package Manager</string>
 
     <string name="activities">Activities</string>
+    <string name="apk_installer_description">An individual APK file</string>
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
     <string name="apks">APK\'s</string>
@@ -19,9 +20,8 @@
     <string name="batch_processing_initialized">Initializing Batch Process</string>
     <string name="batch_warning">Your batch settings will be removed! Are you sure?</string>
     <string name="billing_client_disconnected">Failed to connect with Google Play Billing client!</string>
-    <string name="bundle_install">Are you sure to install the split apk\'s from \'%s\'?</string>
     <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
-    <string name="bundle_install_message">Please Note: In order to install multiple APK\'s (split APK\'s), please place all of them in a single folder and select one among them. Package Manager will pick and handle the rest.</string>
+    <string name="bundle_installer_description">App bundles of \'apkm\', \'apks\', and \'xapk\' format</string>
     <string name="bundle_path">Bundle Path</string>
     <string name="bundles">Bundles</string>
     <string name="cancel">Cancel</string>
@@ -51,6 +51,9 @@
     <string name="enable">Enable</string>
     <string name="enabled">enabled</string>
     <string name="enabling">Enabling %s</string>
+    <string name="exit_confirmation">Show Confirmation</string>
+    <string name="exit_simple">Simply Exit</string>
+    <string name="exiting_app">On Exiting App</string>
     <string name="explore">Explore</string>
     <string name="explore_error_status">Failed to explore %s!</string>
     <string name="export">Export</string>
@@ -67,16 +70,12 @@
     <string name="failed">Failed</string>
     <string name="fdroid">F-Droid</string>
     <string name="file_permission_request_message">In order to get this feature working on newer Android versions (Android R or newer), it is necessary to grant \"All files access\" permission to Package Manager. Kindly grant the permission manually from the new screen opened after clicking the \"Grant\" button.</string>
-    <string name="file_picker">File Picker</string>
-    <string name="file_picker_external">External</string>
-    <string name="file_picker_inbuilt">In-built</string>
     <string name="file_picker_message">Please Note: This feature is too experimental!</string>
-    <string name="got_it">Got it</string>
     <string name="grant">Grant</string>
-    <string name="important">Important</string>
+    <string name="general">General</string>
+    <string name="got_it">Got it</string>
     <string name="initializing">Initializing…</string>
     <string name="install">Install</string>
-    <string name="install_bundle">Install Split APKs</string>
     <string name="install_question">Install \'%s\'?</string>
     <string name="installation_cancel_message">Are you sure to cancel the installation?</string>
     <string name="installation_status_aborted">Installation was cancelled by user</string>
@@ -87,6 +86,11 @@
     <string name="installation_status_incompatible">Application is incompatible with this device</string>
     <string name="installation_status_storage">Not enough storage space to install the app</string>
     <string name="installation_status_success">Installation Completed Successfully!</string>
+    <string name="installer">Installer</string>
+    <string name="installer_clicking">On Clicking Installer</string>
+    <string name="installer_file_picker">Launch File Picker</string>
+    <string name="installer_instructions">Show Instructions</string>
+    <string name="installer_summary">You can select installation file(s) by clicking the plus button at the top of this page. The installer supports the following packages.</string>
     <string name="installing_bundle">Installing App Bundle!</string>
     <string name="language">Language</string>
     <string name="language_am" translatable="false">አማርኛ</string>
@@ -107,13 +111,13 @@
     <string name="language_uk" translatable="false">Українська</string>
     <string name="language_vi" translatable="false">Tiếng Việt</string>
     <string name="language_zh" translatable="false">中文（简体）</string>
-    <string name="list">List</string>
     <string name="manifest">Manifest</string>
     <string name="more">More</string>
     <string name="more_apps">More from Developer</string>
     <string name="more_apps_summary">Checkout more applications provided by the developer in Google Play</string>
     <string name="name">Name</string>
     <string name="native_lib">Native Library</string>
+    <string name="never_show_page">Do not show this again!</string>
     <string name="no_internet">Please check your internet connection!</string>
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
@@ -173,6 +177,7 @@
     <string name="operations_write_sms">Allows an application to send SMS messages</string>
     <string name="operations_write_storage">Allows an application to write to external storage</string>
     <string name="operations_write_wallpaper">Allows an application to set the wallpaper</string>
+    <string name="other">Other</string>
     <string name="package_id">Package ID</string>
     <string name="package_removed">Selected package is just removed! Aborting…</string>
     <string name="permissions">Permissions</string>
@@ -216,7 +221,7 @@
     <string name="source_code_summary">Package Manager is an open-source application which is ready to accept contributions from the development community. Click here to check out the source code!</string>
     <string name="split_apk">Split APKs</string>
     <string name="split_apk_installer">Split APK Installer</string>
-    <string name="split_apk_list">List of split APKs</string>
+    <string name="split_apk_installer_description">Split APK\'s (multiple APK files with the same package name)</string>
     <string name="start">Start</string>
     <string name="support">Support Group</string>
     <string name="support_acknowledged">Donation Acknowledged \u2665</string>
@@ -246,6 +251,7 @@
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous!\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="uninstalled_apps">Uninstalled Apps</string>
+    <string name="user_interface">User Interface</string>
     <string name="version">Version: %s</string>
     <string name="warning">Warning</string>
     <string name="welcome_message">Welcome to Package Manager, a simple, yet powerful application to manage your apps.</string>

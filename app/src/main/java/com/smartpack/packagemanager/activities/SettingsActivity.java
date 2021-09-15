@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +59,6 @@ public class SettingsActivity extends AppCompatActivity {
         mCopyright.setText(getString(R.string.copyright, "2021-2022, sunilpaulmathew"));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         RecycleViewSettingsAdapter mRecycleViewAdapter = new RecycleViewSettingsAdapter(mData);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
@@ -73,55 +71,44 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         });
 
-        mData.add(new RecycleSettingsItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null));
-        mData.add(new RecycleSettingsItem(getString(R.string.file_picker), getString(Utils.getBoolean("filePicker", true, this) ? R.string.file_picker_inbuilt
-                : R.string.file_picker_external), getResources().getDrawable(R.drawable.ic_folder), null));
-        mData.add(new RecycleSettingsItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null));
+        // User interface
+        mData.add(new RecycleSettingsItem(getString(R.string.user_interface), null, null, null, getResources().getColor(R.color.colorAccent), 15));
+        mData.add(new RecycleSettingsItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null, 0, 18));
+
+        // General
+        mData.add(new RecycleSettingsItem(getString(R.string.general), null, null, null, getResources().getColor(R.color.colorAccent), 15));
+        mData.add(new RecycleSettingsItem(getString(R.string.exiting_app), AppSettings.getExitingStatus(this), getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.installer_clicking), AppSettings.getInstallerStatus(this), getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
+
+        // Other
+        mData.add(new RecycleSettingsItem(getString(R.string.other), null, null, null, getResources().getColor(R.color.colorAccent), 15));
         mData.add(new RecycleSettingsItem(getString(R.string.source_code), getString(R.string.source_code_summary), getResources().getDrawable(
-                R.drawable.ic_github), "https://github.com/SmartPack/PackageManager"));
+                R.drawable.ic_github), "https://github.com/SmartPack/PackageManager", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.support), getString(R.string.support_summary), getResources().getDrawable(R.drawable.ic_support),
-                "https://t.me/smartpack_kmanager"));
+                "https://t.me/smartpack_kmanager", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.report_issue), getString(R.string.report_issue_summary), getResources().getDrawable(R.drawable.ic_issue),
-                "https://github.com/SmartPack/PackageManager/issues/new/choose"));
-        mData.add(new RecycleSettingsItem(getString(R.string.support_development), null, getResources().getDrawable(R.drawable.ic_donate), null));
+                "https://github.com/SmartPack/PackageManager/issues/new/choose", 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.support_development), null, getResources().getDrawable(R.drawable.ic_donate), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.more_apps), getString(R.string.more_apps_summary), getResources().getDrawable(
-                R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
+                R.drawable.ic_playstore), "https://play.google.com/store/apps/dev?id=5836199813143882901", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.documentation), getString(R.string.documentation_summary), getResources().getDrawable(
-                R.drawable.ic_book), "https://smartpack.github.io/PackageManager/general/"));
+                R.drawable.ic_book), "https://smartpack.github.io/PackageManager/general/", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.translations), getString(R.string.translations_summary), getResources().getDrawable(
-                R.drawable.ic_translate), "https://poeditor.com/join/project?hash=0CitpyI1Oc"));
+                R.drawable.ic_translate), "https://poeditor.com/join/project?hash=0CitpyI1Oc", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.change_logs), null, getResources().getDrawable(R.drawable.ic_change_logs),
-                null));
-        mData.add(new RecycleSettingsItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null));
+                null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.share_app), getString(R.string.share_app_Summary), getResources().getDrawable(R.drawable.ic_share), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.rate_us), getString(R.string.rate_us_Summary), getResources().getDrawable(R.drawable.ic_rate),
-                "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"));
+                "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.credits), getString(R.string.credits_summary), getResources().getDrawable(R.drawable.ic_credits),
-                "https://github.com/SmartPack/PackageManager/blob/master/Credits.md"));
+                "https://github.com/SmartPack/PackageManager/blob/master/Credits.md", 0, 18));
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             if (mData.get(position).getUrl() != null) {
                 Utils.launchUrl(mData.get(position).getUrl(), this);
-            } else if (position == 0) {
-                AppSettings.setLanguage(this);
             } else if (position == 1) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.file_picker), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            Utils.saveBoolean("filePicker", true, this);
-                            mData.set(position, new RecycleSettingsItem(getString(R.string.file_picker), getString(R.string.file_picker_inbuilt),
-                                    getResources().getDrawable(R.drawable.ic_folder), null));
-                            mRecycleViewAdapter.notifyItemChanged(position);
-                            break;
-                        case 1:
-                            Utils.saveBoolean("filePicker", false, this);
-                            mData.set(position, new RecycleSettingsItem(getString(R.string.file_picker), getString(R.string.file_picker_external),
-                                    getResources().getDrawable(R.drawable.ic_folder), null));
-                            mRecycleViewAdapter.notifyItemChanged(position);
-                            break;
-                    }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
+                AppSettings.setLanguage(this);
             } else if (position == 2) {
                 new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
                         R.array.app_theme), (dialogInterface, i) -> {
@@ -153,12 +140,58 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }).setOnDismissListener(dialogInterface -> {
                 }).show();
-            } else if (position == 6) {
-                Billing.showDonateOption(this);
+            } else if (position == 4) {
+                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
+                        R.array.app_exit_options), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            if (Utils.getBoolean("exit_confirmation", true, this)) {
+                                Utils.saveBoolean("exit_confirmation", false, this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_simple),
+                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                            }
+                            break;
+                        case 1:
+                            if (!Utils.getBoolean("exit_confirmation", true, this)) {
+                                Utils.saveBoolean("exit_confirmation", true, this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_confirmation),
+                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                            }
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> {
+                }).show();
+            } else if (position == 5) {
+                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
+                        R.array.installer_options), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            if (Utils.getBoolean("neverShow", false, this)) {
+                                Utils.saveBoolean("neverShow", false, this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.installer_clicking), getString(R.string.installer_instructions),
+                                        getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                            }
+                            break;
+                        case 1:
+                            if (!Utils.getBoolean("neverShow", false, this)) {
+                                Utils.saveBoolean("neverShow", true, this);
+                                mData.set(position, new RecycleSettingsItem(getString(R.string.installer_clicking), getString(R.string.installer_file_picker),
+                                        getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                            }
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> {
+                }).show();
             } else if (position == 10) {
+                Billing.showDonateOption(this);
+            } else if (position == 14) {
                 Intent changeLogs = new Intent(this, ChangeLogsActivity.class);
                 startActivity(changeLogs);
-            } else if (position == 11) {
+            } else if (position == 15) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));

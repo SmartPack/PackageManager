@@ -11,7 +11,6 @@
     <string name="batch_processing_initialized">"初始化批次處理"</string>
     <string name="batch_warning">"您的批次處理設定將被刪除！你確定嗎？"</string>
     <string name="billing_client_disconnected">"無法連線至 Google Play 結算客戶端！"</string>
-    <string name="bundle_install">"您是否可以確定要從'％s'拆分 apk's 安裝？"</string>
     <string name="bundle_install_apks">"您確定要安裝應用程式捆綁包'％s'嗎？"</string>
     <string name="cancel">"取消"</string>
     <string name="change_logs">"變更日誌"</string>
@@ -42,7 +41,6 @@
     <string name="failed">"失敗的"</string>
     <string name="got_it">"知道了"</string>
     <string name="install">"安裝"</string>
-    <string name="install_bundle">"安裝拆分APK"</string>
     <string name="installing_bundle">"安裝App Bundle！"</string>
     <string name="language">"語言"</string>
     <string name="language_default">"預設"</string>
@@ -71,7 +69,6 @@
     <string name="share_with">"與某人分享"</string>
     <string name="sort_by">"排序應用程式"</string>
     <string name="source_code">"原始碼"</string>
-    <string name="split_apk_list">"拆分APK清單"</string>
     <string name="support">"支援團隊"</string>
     <string name="support_acknowledged">"捐贈已確認\u2665"</string>
     <string name="support_app">"購買捐贈應用程式"</string>
@@ -115,16 +112,11 @@
     <string name="batch_list_added">"％s 已新增到批次清單"</string>
     <string name="batch_list_export">"您確定要將以下應用程式匯出到裝置儲存空間嗎？"</string>
     <string name="batch_list_removed">"從批次清單中刪除了％s"</string>
-    <string name="bundle_install_message">"請注意：為了安裝多個APK（拆分的APK），請將它們全部放置在一個資料夾中，然後在其中選擇一個。套件管理器將選擇並處理其餘部分。"</string>
     <string name="explore_error_status">"無法探索％s！"</string>
-    <string name="list">"清單"</string>
     <string name="split_apk">"拆分APK"</string>
     <string name="activities">"活動"</string>
     <string name="documentation">"說明文件"</string>
     <string name="documentation_summary">"查看詳細文件以使用套件管理器"</string>
-    <string name="file_picker">"文件選取器"</string>
-    <string name="file_picker_external">"外部的"</string>
-    <string name="file_picker_inbuilt">"內建"</string>
     <string name="installation_cancel_message">"您確定要取消安裝嗎？"</string>
     <string name="installation_status_success">"安裝成功完成！"</string>
     <string name="sdcard">"SD卡"</string>

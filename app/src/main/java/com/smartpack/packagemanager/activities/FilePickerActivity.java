@@ -37,6 +37,7 @@ import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
 import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -137,8 +138,32 @@ public class FilePickerActivity extends AppCompatActivity {
         });
 
         mSelect.setOnClickListener(v -> {
-            SplitAPKInstaller.installSplitAPKs(this);
-            exitActivity();
+            new AsyncTasks() {
+
+                @Override
+                public void onPreExecute() {
+                }
+
+                @Override
+                public void doInBackground() {
+                    for (String mAPKs : Common.getAppList()) {
+                        if (PackageData.getAPKId(mAPKs, FilePickerActivity.this) != null) {
+                            Common.setApplicationID(Objects.requireNonNull(PackageData.getAPKId(mAPKs, FilePickerActivity.this)));
+                        }
+                    }
+                }
+
+                @Override
+                public void onPostExecute() {
+                    Common.isUpdating(Utils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
+                    if (Common.getApplicationID() != null) {
+                        SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
+                        exitActivity();
+                    } else {
+                        Utils.snackbar(mRecyclerView, getString(R.string.installation_status_bad_apks));
+                    }
+                }
+            }.execute();
         });
     }
 

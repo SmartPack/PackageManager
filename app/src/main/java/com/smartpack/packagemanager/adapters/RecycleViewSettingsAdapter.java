@@ -49,19 +49,30 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
     public void onBindViewHolder(@NonNull RecycleViewSettingsAdapter.ViewHolder holder, int position) {
         if (data.get(position).getTitle() != null) {
             holder.mTitle.setText(data.get(position).getTitle());
-            holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         }
+        if (data.get(position).getColor() != 0) {
+            holder.mTitle.setTextColor(data.get(position).getColor());
+            holder.mDivider.setVisibility(View.VISIBLE);
+        } else {
+            holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mDivider.setVisibility(View.GONE);
+        }
+        holder.mTitle.setTextSize(data.get(position).getSize());
         if (data.get(position).getDescription() != null) {
             holder.mDescription.setText(data.get(position).getDescription());
             holder.mDescription.setVisibility(View.VISIBLE);
             holder.mDescription.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+        } else {
+            holder.mDescription.setVisibility(View.GONE);
         }
         if (data.get(position).getIcon() != null) {
             holder.mIcon.setImageDrawable(data.get(position).getIcon());
             holder.mIcon.setVisibility(View.VISIBLE);
-            if (position != 9 && !Utils.isDarkTheme(holder.mIcon.getContext())) {
+            if (!Utils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setColorFilter(Color.BLACK);
             }
+        } else {
+            holder.mIcon.setVisibility(View.GONE);
         }
     }
 
@@ -73,6 +84,7 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final AppCompatImageView mIcon;
         private final MaterialTextView mDescription, mTitle;
+        private final View mDivider;
 
         public ViewHolder(View view) {
             super(view);
@@ -80,6 +92,7 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
             this.mIcon = view.findViewById(R.id.icon);
             this.mTitle = view.findViewById(R.id.title);
             this.mDescription = view.findViewById(R.id.description);
+            this.mDivider = view.findViewById(R.id.divider);
         }
 
         @Override
