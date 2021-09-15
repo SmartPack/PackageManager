@@ -213,4 +213,10 @@
     <string name="size">"Méret"</string>
     <string name="time_installed">"Telepítés ideje"</string>
     <string name="time_updated">"Frissítés ideje"</string>
+    <string name="copyright">"Szerzőijog: © %s"</string>
+    <string name="export_details">"Exportálás részletei"</string>
+    <string name="export_details_message">"Az App részletei mint %s lett exportálva!"</string>
+    <string name="fdroid">"F-Droid"</string>
+    <string name="more">"Több"</string>
+    <string name="search_market_message">"Keresés itt: %s"</string>
 </resources>

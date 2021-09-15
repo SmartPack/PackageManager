@@ -208,7 +208,7 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! P
     <string name="file_permission_request_message">"Aby ta funkcja działała na nowszych wersjach Androida (Android R lub nowszy), konieczne jest przyznanie uprawnienia „Dostęp do wszystkich plików” dla Package Manager. Powinieneś/Powinnaś przyznać uprawnienie ręcznie z nowo otwartego ekranu po naciśnięciu przycisku „Przyznaj”."</string>
     <string name="grant">"Przyznaj"</string>
     <string name="select_all">"Wybierz wszystkie"</string>
-    <string name="select_all_summary">"Wybrać i dodać wszystkie aplikacje z tej strony do listy wsadowej?"</string>
+    <string name="select_all_summary">"Czy wybrać i dodać wszystkie aplikacje z tej strony do listy wsadowej?"</string>
     <string name="uninstall_status_failed">"Odinstalowywanie %s nie powiodło się albo zostało anulowane przez użytkownika!"</string>
     <string name="export_apk_summary">"Wybrane APK zostało wyeksportowane do „%s”!"</string>
     <string name="initializing">"Inicjowanie…"</string>
@@ -216,4 +216,33 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie! P
     <string name="size">"Rozmiar"</string>
     <string name="time_installed">"Data instalacji"</string>
     <string name="time_updated">"Data aktualizacji"</string>
+    <string name="copyright">"Copyright: © %s"</string>
+    <string name="export_details">"Eksportuj szczegóły"</string>
+    <string name="export_details_message">"Szczegóły aplikacji zostały wyeksportowane jako %s!"</string>
+    <string name="fdroid">"F-Droid"</string>
+    <string name="more">"Więcej"</string>
+    <string name="search_market_message">"Szukaj w %s"</string>
+    <string name="apk_installer_description">"Pojedynczy plik APK"</string>
+    <string name="bundle_installer_description">"Paczki aplikacji w formatach „apkm”, „apks” i „xapk”"</string>
+    <string name="exit_confirmation">"Pokaż potwierdzenie"</string>
+    <string name="exit_simple">"Po prostu wyjdź"</string>
+    <string name="exiting_app">"Przy wychodzeniu z aplikacji"</string>
+    <string name="exported_apps_name">"Nazwa wyeksportowanego APK"</string>
+    <string name="general">"Ogólne"</string>
+    <string name="installer">"Instalator"</string>
+    <string name="installer_clicking">"Przy włączaniu instalatora"</string>
+    <string name="installer_file_picker">"Uruchom selektor plików"</string>
+    <string name="installer_instructions">"Pokaż instrukcję"</string>
+    <string name="installer_summary">"Możesz wybrać pliki instalacyjne, naciskając przycisk plusa na górze tej strony. Instalator obsługuje następujące pakiety:"</string>
+    <string name="never_show_page">"Nie pokazuj tego ponownie!"</string>
+    <string name="other">"Inne"</string>
+    <string name="restore">"Przywróć"</string>
+    <string name="restore_message">"Czy przywrócić ustawienia fabryczne „%s”?"</string>
+    <string name="restore_message_batch">"Czy przywrócić ustawienia fabryczne następujących aplikacji?
+
+%s"</string>
+    <string name="restore_success_message">"Przywrócono ustawienia fabryczne wybranej/wybranych aplikacji!"</string>
+    <string name="split_apk_installer_description">"Podzielone APK (wiele plików APK z tą samą nazwą pakietu)"</string>
+    <string name="uninstalled_apps">"Odinstalowane aplikacje"</string>
+    <string name="user_interface">"Interfejs użytkownika"</string>
 </resources>

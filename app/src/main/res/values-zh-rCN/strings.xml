@@ -90,7 +90,7 @@
     <string name="uninstall_title">"您确定要卸载 %s 吗？"</string>
     <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
 
-        *** <b>您需要自担风险</b>> ***
+        *** <b>您需要自担风险</b> ***
 
 "</string>
     <string name="version">"版本：%s"</string>
@@ -217,4 +217,33 @@
     <string name="size">"大小"</string>
     <string name="time_installed">"安装时间"</string>
     <string name="time_updated">"更新时间"</string>
+    <string name="copyright">"版权所有 © %s"</string>
+    <string name="export_details">"导出详情"</string>
+    <string name="export_details_message">"应用详情已导出为 %s！"</string>
+    <string name="fdroid">"F-Droid"</string>
+    <string name="more">"更多"</string>
+    <string name="search_market_message">"在 %s 中搜索"</string>
+    <string name="apk_installer_description">"独立 APK 文件"</string>
+    <string name="bundle_installer_description">"apkm、apks 与 xapk 捆绑包格式"</string>
+    <string name="exit_confirmation">"显示确认"</string>
+    <string name="exit_simple">"直接退出"</string>
+    <string name="exiting_app">"退出应用时"</string>
+    <string name="exported_apps_name">"导出的 APK 名称"</string>
+    <string name="general">"常规"</string>
+    <string name="installer">"安装器"</string>
+    <string name="installer_clicking">"点击安装器时"</string>
+    <string name="installer_file_picker">"启动文件选择器"</string>
+    <string name="installer_instructions">"显示说明"</string>
+    <string name="installer_summary">"您可以点击页面顶部的加号按钮选择安装文件。安装器支持下列安装包。"</string>
+    <string name="never_show_page">"不要再显示此页面！"</string>
+    <string name="other">"其他"</string>
+    <string name="restore">"恢复"</string>
+    <string name="restore_message">"恢复 '%s' 到出厂版本吗？"</string>
+    <string name="restore_message_batch">"恢复下列应用到出厂版本吗？
+
+%s"</string>
+    <string name="restore_success_message">"成功恢复所选应用到出厂版本！"</string>
+    <string name="split_apk_installer_description">"拆分 APK（多个相同包名的 APK 文件）"</string>
+    <string name="uninstalled_apps">"已卸载应用"</string>
+    <string name="user_interface">"用户界面"</string>
 </resources>

@@ -91,7 +91,7 @@
     <string name="installer_clicking">On Clicking Installer</string>
     <string name="installer_file_picker">Launch File Picker</string>
     <string name="installer_instructions">Show Instructions</string>
-    <string name="installer_summary">You can select installation file(s) by clicking the plus button at the top of this page. The installer supports the following packages.</string>
+    <string name="installer_summary">You can select installation file(s) by clicking the plus button at the top of this page. The installer supports the following packages:</string>
     <string name="installing_bundle">Installing App Bundle!</string>
     <string name="language">Language</string>
     <string name="language_am" translatable="false">አማርኛ</string>
