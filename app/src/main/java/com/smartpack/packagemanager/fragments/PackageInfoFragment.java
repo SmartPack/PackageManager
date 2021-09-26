@@ -107,7 +107,6 @@ public class PackageInfoFragment extends Fragment {
                 Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
                 if (launchIntent != null) {
                     startActivity(launchIntent);
-                    requireActivity().finish();
                 } else {
                     Utils.snackbar(mRootView, getString(R.string.open_failed, Common.getApplicationName()));
                 }
@@ -200,7 +199,6 @@ public class PackageInfoFragment extends Fragment {
             Uri uri = Uri.fromParts("package", Common.getApplicationID(), null);
             settings.setData(uri);
             startActivity(settings);
-            requireActivity().finish();
         });
         if (Utils.rootAccess()) {
             mClear.setVisibility(View.VISIBLE);
