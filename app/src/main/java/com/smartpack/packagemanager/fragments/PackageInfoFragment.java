@@ -107,7 +107,6 @@ public class PackageInfoFragment extends Fragment {
                 Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
                 if (launchIntent != null) {
                     startActivity(launchIntent);
-                    requireActivity().finish();
                 } else {
                     Utils.snackbar(mRootView, getString(R.string.open_failed, Common.getApplicationName()));
                 }
