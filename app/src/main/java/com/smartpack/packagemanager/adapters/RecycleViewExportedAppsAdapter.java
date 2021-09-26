@@ -27,7 +27,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -55,29 +54,24 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
         return new RecycleViewExportedAppsAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint({"UseCompatLoadingForDrawables", "StringFormatInvalid"})
+    @SuppressLint({"UseCompatLoadingForDrawables", "StringFormatInvalid", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull RecycleViewExportedAppsAdapter.ViewHolder holder, int position) {
         if (data.get(position).endsWith(".apk")) {
-            if (PackageData.getAPKName(data.get(position), holder.mIcon.getContext()) != null) {
-                holder.mTitle.setText(PackageData.getAPKName(data.get(position), holder.mTitle.getContext()));
+            if (Utils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
+                holder.mIcon.setImageDrawable(PackageData.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
             } else {
-                holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
-            }
-            if (PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()) != null) {
                 holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
-            } else {
-                holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             }
+            holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
         } else {
             if (Utils.isPackageInstalled(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext())) {
                 holder.mIcon.setImageDrawable(PackageData.getAppIcon(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext()));
-                holder.mTitle.setText(Downloads.getAppName(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext()));
             } else {
                 holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_bundle));
                 holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
-                holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
             }
+            holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
         }
         holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         holder.mSize.setText(PackageData.getAPKSize(data.get(position)));

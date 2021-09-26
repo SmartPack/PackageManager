@@ -15,13 +15,18 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -47,7 +52,9 @@ import java.util.Objects;
  */
 public class ExportedAppsActivity extends AppCompatActivity {
 
+    private AppCompatEditText mSearchWord;
     private LinearLayout mProgressLayout;
+    private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
     private RecycleViewExportedAppsAdapter mRecycleViewAdapter;
 
@@ -56,8 +63,12 @@ public class ExportedAppsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exported_apps);
 
+        mSearchWord = findViewById(R.id.search_word);
         AppCompatImageButton mBack = findViewById(R.id.back_button);
+        AppCompatImageButton mSearch = findViewById(R.id.search_icon);
+        AppCompatImageButton mSort = findViewById(R.id.sort_icon);
         mProgressLayout = findViewById(R.id.progress_layout);
+        mTitle = findViewById(R.id.title);
         mRecyclerView = findViewById(R.id.recycler_view);
         TabLayout mTabLayout = findViewById(R.id.tab_layout);
 
@@ -65,6 +76,21 @@ public class ExportedAppsActivity extends AppCompatActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.bundles)));
 
         mBack.setOnClickListener(v -> onBackPressed());
+
+        mSort.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(this, mSort);
+            Menu menu = popupMenu.getMenu();
+            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
+                    .setChecked(Utils.getBoolean("reverse_order", false, this));
+            popupMenu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == 0) {
+                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, this), this);
+                    loadUI();
+                }
+                return false;
+            });
+            popupMenu.show();
+        });
 
         if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
@@ -115,6 +141,40 @@ public class ExportedAppsActivity extends AppCompatActivity {
             }
         });
 
+        mSearch.setOnClickListener(v -> {
+            if (mSearchWord.getVisibility() == View.VISIBLE) {
+                mSearchWord.setVisibility(View.GONE);
+                mTitle.setVisibility(View.VISIBLE);
+                Utils.toggleKeyboard(0, mSearchWord, this);
+            } else {
+                mSearchWord.setVisibility(View.VISIBLE);
+                mTitle.setVisibility(View.GONE);
+                Utils.toggleKeyboard(1, mSearchWord, this);
+            }
+        });
+
+        mSearchWord.setOnEditorActionListener((v, actionId, event) -> {
+            Utils.toggleKeyboard(0, mSearchWord, this);
+            mSearchWord.clearFocus();
+            return true;
+        });
+
+        mSearchWord.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Downloads.setSearchText(s.toString());
+                loadUI();
+            }
+        });
+
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> new MaterialAlertDialogBuilder(this)
                 .setMessage(getString(Downloads.getData(this).get(position).endsWith(".apkm") ? R.string.bundle_install_apks
                         : R.string.install_question, new File(Downloads.getData(this).get(position)).getName()))
@@ -157,6 +217,21 @@ public class ExportedAppsActivity extends AppCompatActivity {
             this.recreate();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Downloads.getSearchText() != null) {
+            mSearchWord.setText(null);
+            Downloads.setSearchText(null);
+            return;
+        }
+        if (mSearchWord.getVisibility() == View.VISIBLE) {
+            mSearchWord.setVisibility(View.GONE);
+            mTitle.setVisibility(View.VISIBLE);
+            return;
+        }
+        finish();
     }
 
 }

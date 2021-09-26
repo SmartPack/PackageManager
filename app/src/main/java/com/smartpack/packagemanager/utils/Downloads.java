@@ -12,8 +12,8 @@ import android.content.Context;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
@@ -21,20 +21,44 @@ import java.util.Objects;
 
 public class Downloads {
 
+    private static String mSearchText;
+
     public static List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
         for (File mFile : getDownloadList(context)) {
             if (Utils.getString("downloadTypes", "apks", context).equals("bundles")) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
-                    mData.add(mFile.getAbsolutePath());
+                    if (mSearchText == null) {
+                        mData.add(mFile.getAbsolutePath());
+                    } else if (isTextMatched(mFile.getName())) {
+                        mData.add(mFile.getAbsolutePath());
+                    }
                 }
             } else {
                 if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                    mData.add(mFile.getAbsolutePath());
+                    if (mSearchText == null) {
+                        mData.add(mFile.getAbsolutePath());
+                    } else if (isTextMatched(mFile.getName())) {
+                        mData.add(mFile.getAbsolutePath());
+                    }
                 }
             }
         }
+        if (Utils.getBoolean("reverse_order", false, context)) {
+            Collections.reverse(mData);
+        } else {
+            Collections.sort(mData);
+        }
         return mData;
+    }
+
+    private static boolean isTextMatched(String searchText) {
+        for (int a = 0; a < searchText.length() - mSearchText.length() + 1; a++) {
+            if (mSearchText.equalsIgnoreCase(searchText.substring(a, a + mSearchText.length()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static File[] getDownloadList(Context context) {
@@ -44,9 +68,12 @@ public class Downloads {
         return PackageData.getPackageDir(context).listFiles();
     }
 
-    public static String getAppName(String packageName, Context context) {
-        return PackageData.getPackageManager(context).getApplicationLabel(Objects.requireNonNull(
-                PackageData.getAppInfo(packageName, context))).toString();
+    public static String getSearchText() {
+        return mSearchText;
+    }
+
+    public static void setSearchText(String searchText) {
+        mSearchText = searchText;
     }
 
 }
