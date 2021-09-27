@@ -452,19 +452,25 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 4:
-                    File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
-                    try {
-                        JSONObject obj = new JSONObject();
-                        JSONArray apps = new JSONArray();
-                        for (String packageID : Common.getBatchList()) {
-                            if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
-                                apps.put(PackageDetails.getPackageDetails(packageID, activity));
+                    if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(requireActivity())) {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage));
+                    } else {
+                        File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
+                        try {
+                            JSONObject obj = new JSONObject();
+                            JSONArray apps = new JSONArray();
+                            for (String packageID : Common.getBatchList()) {
+                                if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                                    apps.put(PackageDetails.getPackageDetails(packageID, activity));
+                                }
                             }
+                            obj.put("applications", apps);
+                            Utils.create(obj.toString(), mJSON);
+                            Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
+                        } catch (JSONException ignored) {
                         }
-                        obj.put("applications", apps);
-                        Utils.create(obj.toString(), mJSON);
-                        Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
-                    } catch (JSONException ignored) {
                     }
                     break;
                 case 5:

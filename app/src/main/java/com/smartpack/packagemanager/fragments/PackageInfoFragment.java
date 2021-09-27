@@ -8,11 +8,13 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import android.widget.LinearLayout;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -164,9 +167,15 @@ public class PackageInfoFragment extends Fragment {
                         Utils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
                         break;
                     case 2:
-                        File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + ".json");
-                        Utils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
-                        Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
+                        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(requireActivity())) {
+                            ActivityCompat.requestPermissions(requireActivity(), new String[] {
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                            Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage));
+                        } else {
+                            File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + ".json");
+                            Utils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
+                            Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
+                        }
                         break;
                     case 3:
                         Intent shareLink = new Intent();
