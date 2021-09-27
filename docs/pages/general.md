@@ -18,7 +18,7 @@ This article is organized into a few categories and are
 <ol>
     <li><a href="{{ site.github.url }}/ui/">User Interface</a></li>
     <li><a href="{{ site.github.url }}/batch/">Batch Options</a></li>
-    <li><a href="{{ site.github.url }}/sai/">Split APK Installer</a></li>
+    <li><a href="{{ site.github.url }}/sai/">Installer</a></li>
     <li><a href="{{ site.github.url }}/exports/">Exported Apps</a></li>
     <li><a href="{{ site.github.url }}/settings/">Settings</a></li>
     <li><a href="{{ site.github.url }}/permissions/">Permissions</a></li>
