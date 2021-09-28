@@ -146,12 +146,14 @@ public class SplitAPKInstallerActivity extends AppCompatActivity {
         }
         if (Utils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
             if (!Common.isUpdating()) {
-                PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
-                        PackageData.getAppName(Common.getApplicationID(), this),
-                        PackageData.getAppIcon(Common.getApplicationID(), this),
-                        new File(PackageData.getSourceDir(Common.getApplicationID(), this)).length(),
-                        Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).firstInstallTime,
-                        Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).lastUpdateTime));
+                try {
+                    PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
+                            PackageData.getAppName(Common.getApplicationID(), this),
+                            PackageData.getAppIcon(Common.getApplicationID(), this),
+                            new File(PackageData.getSourceDir(Common.getApplicationID(), this)).length(),
+                            Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).firstInstallTime,
+                            Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).lastUpdateTime));
+                } catch (NullPointerException ignored) {}
                 Common.reloadPage(true);
             } else {
                 Common.isUpdating(false);

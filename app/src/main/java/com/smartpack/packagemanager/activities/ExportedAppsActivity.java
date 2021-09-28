@@ -10,9 +10,7 @@ package com.smartpack.packagemanager.activities;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,7 +26,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,10 +34,11 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExportedAppsAdapter;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -184,13 +182,10 @@ public class ExportedAppsActivity extends AppCompatActivity {
                     if (Downloads.getData(this).get(position).endsWith(".apkm")) {
                         SplitAPKInstaller.handleAppBundle(mProgressLayout, Downloads.getData(this).get(position), this);
                     } else {
-                        Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        Uri uriFile;
-                        uriFile = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider",
-                                new File(Downloads.getData(this).get(position)));
-                        intent.setDataAndType(uriFile, "application/vnd.android.package-archive");
-                        startActivity(Intent.createChooser(intent, ""));
+                        Common.getAppList().clear();
+                        Common.getAppList().add(Downloads.getData(this).get(position));
+                        Common.isUpdating(Utils.isPackageInstalled(PackageData.getAPKId(Downloads.getData(this).get(position), this), this));
+                        SplitAPKInstaller.installSplitAPKs(this);
                     }
                 }).show());
 
