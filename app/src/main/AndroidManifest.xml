@@ -36,11 +36,15 @@
 
         <activity android:name=".MainActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+        <activity android:name=".activities.ADBUninstallActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.ChangeLogsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.ExportedAppsActivity" />
         <activity android:name=".activities.FilePickerActivity" />
         <activity android:name=".activities.ImageViewActivity" />
+        <activity android:name=".activities.InstallerActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.InstallerInstructionsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.PackageDetailsActivity"
@@ -50,8 +54,6 @@
         <activity android:name=".activities.PackageTasksActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.SplitAPKInstallerActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".activities.TextViewActivity" />
         <activity android:name=".activities.UninstalledAppsActivity" />
 

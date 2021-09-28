@@ -172,6 +172,13 @@ public class PackageData {
         return false;
     }
 
+    public static boolean isUpdatedSystemApp(String packageName, Context context) {
+        try {
+            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
+        } catch (NullPointerException ignored) {}
+        return false;
+    }
+
     public static CharSequence getAPKName(String apkPath, Context context) {
         PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
         if (pi != null) {

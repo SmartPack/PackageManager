@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.smartpack.packagemanager.activities.FilePickerActivity;
-import com.smartpack.packagemanager.activities.SplitAPKInstallerActivity;
+import com.smartpack.packagemanager.activities.InstallerActivity;
 import com.smartpack.packagemanager.services.SplitAPKInstallService;
 
 import java.io.File;
@@ -194,7 +194,7 @@ public class SplitAPKInstaller {
 
             @Override
             public void onPreExecute() {
-                Intent installIntent = new Intent(activity, SplitAPKInstallerActivity.class);
+                Intent installIntent = new Intent(activity, InstallerActivity.class);
                 Utils.saveString("installationStatus", "waiting", activity);
                 activity.startActivity(installIntent);
             }

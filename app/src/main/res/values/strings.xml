@@ -250,6 +250,7 @@
     <string name="uninstall_summary">Removing %s</string>
     <string name="uninstall_status_failed">Uninstalling %s is failed or cancelled by the user</string>
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
+    <string name="uninstall_updates_message">A local update of \'%s\' is, however, installed, which can be freely removed by clicking the \"Uninstall\" button.</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="uninstalled_apps">Uninstalled Apps</string>
     <string name="user_interface">User Interface</string>

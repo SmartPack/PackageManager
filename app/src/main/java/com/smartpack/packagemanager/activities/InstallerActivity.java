@@ -35,7 +35,7 @@ import java.util.Objects;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 06, 2021
  */
-public class SplitAPKInstallerActivity extends AppCompatActivity {
+public class InstallerActivity extends AppCompatActivity {
 
     private AppCompatImageButton mIcon;
     private MaterialCardView mCancel, mOpen;

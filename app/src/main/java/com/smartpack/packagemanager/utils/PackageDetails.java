@@ -29,6 +29,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.ADBUninstallActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -211,16 +212,8 @@ public class PackageDetails {
                     }.execute())
                     .show();
         } else {
-            new MaterialAlertDialogBuilder(activity)
-                    .setIcon(Common.getApplicationIcon())
-                    .setTitle(activity.getString(R.string.uninstall_adb))
-                    .setMessage(activity.getString(R.string.uninstall_adb_summary, Common.getApplicationName()) +
-                            "\n\nadb shell pm uninstall -k --user 0 " + Common.getApplicationID())
-                    .setNegativeButton(activity.getString(R.string.documentation), (dialog, id) ->
-                            Utils.launchUrl("https://smartpack.github.io/adb-debloating/", activity))
-                    .setPositiveButton(activity.getString(R.string.got_it), (dialog, id) -> {
-                    })
-                    .show();
+            Intent details = new Intent(activity, ADBUninstallActivity.class);
+            activity.startActivity(details);
         }
     }
 
