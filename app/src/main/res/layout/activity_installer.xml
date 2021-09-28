@@ -9,7 +9,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorBlack"
             android:textColor="@color/colorAccent"
-            android:text="@string/split_apk_installer"
+            android:text="@string/installer"
             android:textStyle="bold"
             android:textSize="20sp"
             android:padding="10dp" />
