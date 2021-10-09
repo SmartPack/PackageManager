@@ -1,0 +1,5 @@
+* Exported Apps: Added searching & sorting option.
+* Moved uninstall with ADB in to a separate page.
+* Package Manager now supports uninstalling the local updates of system apps.
+* Updated translations.
+* Miscellaneous changes.

@@ -1,5 +1,9 @@
 # Change-logs
 
+## 47. October 10, 2021
+*Release-tag: 5.4*<br>
+Exported Apps: Added searching & sorting option. Moved uninstall with ADB in to a separate page. Package Manager now supports uninstalling the local updates of system apps. Updated translations. Miscellaneous changes.
+
 ## 46. September 15, 2021
 *Release-tag: 5.3*<br>
 Package Manager now allows restoring the factory version of uninstalled system apps (root-only feature). Added a new installer instructions page. Removed external file managers support for good reasons. Largely improved APK/app bundle installation and uninstalling. App settings has now a better layout and more options. UI changes mainly for consistency. Fixed language switch not working. Updated translations. Miscellaneous changes.
