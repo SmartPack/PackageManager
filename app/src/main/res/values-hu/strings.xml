@@ -219,4 +219,27 @@
     <string name="fdroid">"F-Droid"</string>
     <string name="more">"Több"</string>
     <string name="search_market_message">"Keresés itt: %s"</string>
+    <string name="apk_installer_description">"Egyedi APK fájl"</string>
+    <string name="bundle_installer_description">"Kötegelt, 'apkm', 'apks' és 'xapk' formátumú app"</string>
+    <string name="exit_confirmation">"Mutatja a megerősítést"</string>
+    <string name="exit_simple">"Egyszerűen kilép"</string>
+    <string name="exiting_app">"Az alkalmazás kilépése"</string>
+    <string name="exported_apps_name">"Exportált APK neve"</string>
+    <string name="general">"Általános"</string>
+    <string name="installer">"Telepítő"</string>
+    <string name="installer_clicking">"A telepítőre kattintáskor"</string>
+    <string name="installer_file_picker">"Indítsa a fájlválasztót"</string>
+    <string name="installer_instructions">"Utasítások megjelenítése"</string>
+    <string name="installer_summary">"A telepítendő fájlokat kiválaszthatja az oldal tetején lévő plusz gombra kattintva. A telepítő támogatja a következő csomagokat:"</string>
+    <string name="never_show_page">"Ne jelenítse meg újra!"</string>
+    <string name="other">"Egyéb"</string>
+    <string name="restore">"Visszaállítás"</string>
+    <string name="restore_message">"Visszaállítja a '%s' gyári verzióját?"</string>
+    <string name="restore_message_batch">"A visszaállítja a következő alkalmazásokat a gyári verzióra?
+
+%s"</string>
+    <string name="restore_success_message">"A kiválasztott alkalmazás(ok) sikeresen visszaálltak a gyári verzióra!"</string>
+    <string name="split_apk_installer_description">"Osztott APK-k (több APK fájl, azonos csomagnévvel)"</string>
+    <string name="uninstalled_apps">"Eltávolított alkalmazások"</string>
+    <string name="user_interface">"Felhasználói felület"</string>
 </resources>

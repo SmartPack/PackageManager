@@ -246,4 +246,5 @@
     <string name="split_apk_installer_description">"拆分 APK（多个相同包名的 APK 文件）"</string>
     <string name="uninstalled_apps">"已卸载应用"</string>
     <string name="user_interface">"用户界面"</string>
+    <string name="uninstall_updates_message">"一个 '%s' 的本地更新已安装，但您可以点击“卸载”按钮来移除。"</string>
 </resources>

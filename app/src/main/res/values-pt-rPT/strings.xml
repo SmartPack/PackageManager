@@ -215,4 +215,34 @@
     <string name="size">"Tamanho"</string>
     <string name="time_installed">"Data de instalação"</string>
     <string name="time_updated">"Data de atualização"</string>
+    <string name="copyright">"Direitos de autor: © %s"</string>
+    <string name="export_details">"Detalhes da exportação"</string>
+    <string name="export_details_message">"Os detalhes da aplicação são exportados como %s"</string>
+    <string name="fdroid">"F-Droid"</string>
+    <string name="more">"Mais"</string>
+    <string name="search_market_message">"Pesquisar em %s"</string>
+    <string name="apk_installer_description">"Um ficheiro APK individual"</string>
+    <string name="bundle_installer_description">"Lotes de aplicações do formato 'apkm', 'apks' e 'xapk'"</string>
+    <string name="exit_confirmation">"Mostrar confirmação"</string>
+    <string name="exit_simple">"Sair simplesmente"</string>
+    <string name="exiting_app">"Ao sair da aplicação"</string>
+    <string name="exported_apps_name">"Nome da APK exportada"</string>
+    <string name="general">"Geral"</string>
+    <string name="installer">"Instalador"</string>
+    <string name="installer_clicking">"Ao clicar no instalador"</string>
+    <string name="installer_file_picker">"Executar o selecionador de ficheiro"</string>
+    <string name="installer_instructions">"Mostrar instruções"</string>
+    <string name="installer_summary">"Pode selecionar os ficheiros de instalação ao clicar no botão mais no topo desta página. O instalador suporta os seguintes pacotes:"</string>
+    <string name="never_show_page">"Não mostrar isto novamente"</string>
+    <string name="other">"Outro"</string>
+    <string name="restore">"Restaurar"</string>
+    <string name="restore_message">"Restaurar a versão de fábrica de '%s'?"</string>
+    <string name="restore_message_batch">"Restaurar a versão de fábrica das seguintes aplicações?
+
+%s"</string>
+    <string name="restore_success_message">"As versões de fábrica das aplicações selecionadas foram restauradas com sucesso"</string>
+    <string name="split_apk_installer_description">"Dividir APK's (vários ficheiros APK como o mesmo nome de pacote)"</string>
+    <string name="uninstalled_apps">"Aplicações desinstaladas"</string>
+    <string name="user_interface">"Interface de utilizador"</string>
+    <string name="uninstall_updates_message">"No entanto é instalado uma atualização local de '%s' que pode ser removida clicando no botão \"Desinstalar\" ."</string>
 </resources>

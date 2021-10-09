@@ -12,7 +12,7 @@
     <string name="batch_processing_initialized">"Toplu İşlemler Başlatılıyor"</string>
     <string name="batch_warning">"Toplu İşlem ayarlarınız silinecek! İstediğinize emin misiniz?"</string>
     <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
-    <string name="bundle_install_apks">"'%s' toplu APK paketini yüklemek istediğinize emin misiniz?"</string>
+    <string name="bundle_install_apks">"'%s' toplu uygulama paketini yüklemek istediğinize emin misiniz?"</string>
     <string name="cancel">"Vazgeç"</string>
     <string name="change_logs">"Değişiklik Günlüğü"</string>
     <string name="credits">"Katkılar"</string>
@@ -219,4 +219,27 @@
     <string name="fdroid">"F-Droid"</string>
     <string name="more">"Dahası"</string>
     <string name="search_market_message">"%s içerisinde ara"</string>
+    <string name="apk_installer_description">"Tekli APK dosyası"</string>
+    <string name="bundle_installer_description">"'apkm', 'apks' ve 'xapk' formatındaki toplu uygulama paketleri"</string>
+    <string name="exit_confirmation">"Onay İste"</string>
+    <string name="exit_simple">"Direkt Çık"</string>
+    <string name="exiting_app">"Uygulamadan Çıkarken"</string>
+    <string name="exported_apps_name">"Dışa Aktarılan APK Adı"</string>
+    <string name="general">"Genel"</string>
+    <string name="installer">"Yükleyici"</string>
+    <string name="installer_clicking">"Yükleyiciye Tıklayınca"</string>
+    <string name="installer_file_picker">"Dosya Seçiciyi Başlat"</string>
+    <string name="installer_instructions">"Talimatları Göster"</string>
+    <string name="installer_summary">"Bu sayfanın en üstündeki artı butonuna basarak yükleme dosyalarını seçebilirsiniz. Yükleyici aşağıdaki paketleri desteklemektedir:"</string>
+    <string name="never_show_page">"Bunu tekrar gösterme!"</string>
+    <string name="other">"Diğer"</string>
+    <string name="restore">"Geri Yükle"</string>
+    <string name="restore_message">"'%s' fabrika sürümüne geri yükleyecek misiniz?"</string>
+    <string name="restore_message_batch">"Aşağıdaki uygulamaları fabrika sürümüne geri yükleyecek misiniz?
+
+%s"</string>
+    <string name="restore_success_message">"Seçilen uygulamalar başarıyla fabrika sürümüne geri yüklendi!"</string>
+    <string name="split_apk_installer_description">"Bölünmüş APK'ler (aynı paket adındaki çoklu APK dosyaları)"</string>
+    <string name="uninstalled_apps">"Kaldırılan Uygulamalar"</string>
+    <string name="user_interface">"Kullanıcı Arayüzü"</string>
 </resources>
