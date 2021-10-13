@@ -44,7 +44,7 @@ public class Downloads {
                 }
             }
         }
-        if (Utils.getBoolean("reverse_order", false, context)) {
+        if (Utils.getBoolean("reverse_order_exports", false, context)) {
             Collections.reverse(mData);
         } else {
             Collections.sort(mData);

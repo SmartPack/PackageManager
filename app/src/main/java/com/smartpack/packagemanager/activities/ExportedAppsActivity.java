@@ -79,10 +79,10 @@ public class ExportedAppsActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSort);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("reverse_order", false, this));
+                    .setChecked(Utils.getBoolean("reverse_order_exports", false, this));
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
-                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, this), this);
+                    Utils.saveBoolean("reverse_order_exports", !Utils.getBoolean("reverse_order_exports", false, this), this);
                     loadUI();
                 }
                 return false;
