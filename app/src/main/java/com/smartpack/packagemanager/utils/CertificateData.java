@@ -81,18 +81,18 @@ public class CertificateData {
         X509Certificate cert = certs[0];
 
         PublicKey publickey = cert.getPublicKey();
-
-        sb.append("Subject: ").append(cert.getSubjectDN().getName()).append("\n");
-        sb.append("Issuer: ").append(cert.getIssuerDN().getName()).append("\n");
-        sb.append("Issued Date: ").append(cert.getNotBefore().toString()).append("\n");
-        sb.append("Expiry Date: ").append(cert.getNotAfter().toString()).append("\n");
-        sb.append("Algorithm: ").append(cert.getSigAlgName()).append(", Type: ").append(publickey.getFormat()).append(", Version: ").append(cert.getVersion()).append("\n");
-        sb.append("Serial Number: ").append(cert.getSerialNumber().toString(16)).append("\n");
-        sb.append("\nChecksums\n").append("MD5: ").append(getCertificateFingerprint(cert, "MD5").toLowerCase(Locale.ENGLISH)).append("\n");
-        sb.append("SHA1: ").append(getCertificateFingerprint(cert, "SHA1").toLowerCase(Locale.ENGLISH)).append("\n");
-        sb.append("SHA-256: ").append(getCertificateFingerprint(cert, "SHA-256").toLowerCase(Locale.ENGLISH)).append("\n");
-        sb.append("\nPublic Key\n").append(publickey.toString().split("=")[1].split(",")[0]).append("\n");
-
+        try {
+            sb.append("Subject: ").append(cert.getSubjectDN().getName()).append("\n");
+            sb.append("Issuer: ").append(cert.getIssuerDN().getName()).append("\n");
+            sb.append("Issued Date: ").append(cert.getNotBefore().toString()).append("\n");
+            sb.append("Expiry Date: ").append(cert.getNotAfter().toString()).append("\n");
+            sb.append("Algorithm: ").append(cert.getSigAlgName()).append(", Type: ").append(publickey.getFormat()).append(", Version: ").append(cert.getVersion()).append("\n");
+            sb.append("Serial Number: ").append(cert.getSerialNumber().toString(16)).append("\n");
+            sb.append("\nChecksums\n").append("MD5: ").append(getCertificateFingerprint(cert, "MD5").toLowerCase(Locale.ENGLISH)).append("\n");
+            sb.append("SHA1: ").append(getCertificateFingerprint(cert, "SHA1").toLowerCase(Locale.ENGLISH)).append("\n");
+            sb.append("SHA-256: ").append(getCertificateFingerprint(cert, "SHA-256").toLowerCase(Locale.ENGLISH)).append("\n");
+            sb.append("\nPublic Key\n").append(publickey.toString().split("=")[1].split(",")[0]).append("\n");
+        } catch (Exception ignored) {}
         return sb.toString();
     }
 
