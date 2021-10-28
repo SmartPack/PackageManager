@@ -1,5 +1,9 @@
 # Change-logs
 
+## 48. October 28, 2021
+*Release-tag: 5.5*<br>
+Improved and fixed sorting Exported Apps page. Fixed crashing when attempting to open certain apps. Update gradle plugin to latest. Removed ACCESS_NETWORK_STATE permission from app. Updated translations. Miscellaneous changes.
+
 ## 47. October 10, 2021
 *Release-tag: 5.4*<br>
 Exported Apps: Added searching & sorting option. Moved uninstall with ADB in to a separate page. Package Manager now supports uninstalling the local updates of system apps. Updated translations. Miscellaneous changes.

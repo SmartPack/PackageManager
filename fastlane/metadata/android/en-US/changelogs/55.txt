@@ -1,0 +1,6 @@
+* Improved and fixed sorting Exported Apps page.
+* Fixed crashing when attempting to open certain apps.
+* Update gradle plugin to latest.
+* Removed ACCESS_NETWORK_STATE permission from app.
+* Updated translations.
+* Miscellaneous changes.
