@@ -48,7 +48,6 @@
     <string name="more_apps">"Więcej od programisty"</string>
     <string name="name">"Nazwa"</string>
     <string name="native_lib">"Biblioteka natywna"</string>
-    <string name="no_internet">"Sprawdź swoje połączenie z Internetem"</string>
     <string name="open">"Otwórz"</string>
     <string name="open_message">"Ta aplikacja jest już uruchomiona."</string>
     <string name="open_failed">"%s nie jest przeznaczony do uruchamiana w przestrzeni użytkownika"</string>

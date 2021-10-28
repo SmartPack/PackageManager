@@ -24,7 +24,6 @@
     <string name="language_default">Padrão</string>
     <string name="more_apps">Mais do desenvolvedor</string>
     <string name="name">Nome</string>
-    <string name="no_internet">Por favor, verifique sua conexão à internet!</string>
     <string name="open">Abrir</string>
     <string name="open_message">Você já está executando este aplicativo.</string>
     <string name="open_failed">%s não foi projetado para ser executado no espaço do usuário!</string>

@@ -47,7 +47,6 @@
     <string name="more_apps">"開發人員提供的更多內容"</string>
     <string name="name">"Name"</string>
     <string name="native_lib">"本機資料庫"</string>
-    <string name="no_internet">"請檢查您的網際網路連接！"</string>
     <string name="open">"開啟"</string>
     <string name="open_message">"您已經在執行此應用程式。"</string>
     <string name="open_failed">"％s 並非旨在在使用者空間中執行！"</string>

@@ -49,7 +49,6 @@
     <string name="more_apps">"Thêm từ Nhà phát triển"</string>
     <string name="name">"Tên"</string>
     <string name="native_lib">"Thư viện gốc"</string>
-    <string name="no_internet">"Xin vui lòng kiểm tra kết nối Internet của bạn!"</string>
     <string name="open">"Mở"</string>
     <string name="open_message">"Bạn đã chạy ứng dụng này."</string>
     <string name="open_failed">"%s không được thiết kế để chạy trong không gian người dùng!"</string>

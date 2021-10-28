@@ -48,7 +48,6 @@
     <string name="more_apps">"Plus de la part du développeur"</string>
     <string name="name">"Nom"</string>
     <string name="native_lib">"Librairie native"</string>
-    <string name="no_internet">"Verifiez votre connexion internet !"</string>
     <string name="open">"Ouvrir"</string>
     <string name="open_message">"Vous êtes déjà entrain de faire fonctionner cette appli."</string>
     <string name="open_failed">"%s n'est pas conçu pour fonctionner en mode utilisateur !"</string>

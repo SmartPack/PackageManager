@@ -48,7 +48,6 @@
     <string name="more_apps">"Více od vývojáře"</string>
     <string name="name">"Jméno"</string>
     <string name="native_lib">"Název knihovny"</string>
-    <string name="no_internet">"Prosím ověřte vaše internetové připojení!"</string>
     <string name="open">"Otevřít"</string>
     <string name="open_message">"Tato aplikace již běží."</string>
     <string name="open_failed">"%s není určen pro chod v nesystémovém oddílu!"</string>

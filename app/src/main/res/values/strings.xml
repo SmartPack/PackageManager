@@ -119,7 +119,6 @@
     <string name="name">Name</string>
     <string name="native_lib">Native Library</string>
     <string name="never_show_page">Do not show this again</string>
-    <string name="no_internet">Please check your internet connection</string>
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
     <string name="open_failed">%s is not designed to run in user space</string>

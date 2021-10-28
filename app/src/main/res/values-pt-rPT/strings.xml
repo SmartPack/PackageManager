@@ -48,7 +48,6 @@
     <string name="more_apps">"Mais sobre o criador"</string>
     <string name="name">"Nome"</string>
     <string name="native_lib">"Biblioteca nativa"</string>
-    <string name="no_internet">"Por favor verifique se está ligado à Internet!"</string>
     <string name="open">"Abrir"</string>
     <string name="open_message">"Esta aplicação já está em execução."</string>
     <string name="open_failed">"%s não pode ser executado no espaço do utilizador!"</string>

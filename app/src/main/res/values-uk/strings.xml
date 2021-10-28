@@ -47,7 +47,6 @@
     <string name="more_apps">"Більше від розробника"</string>
     <string name="name">"Ім'я"</string>
     <string name="native_lib">"Внутрішня бібліотека"</string>
-    <string name="no_internet">"Будь ласка, перевірте своє інтернет-з'єднання!"</string>
     <string name="open">"Відкрити"</string>
     <string name="open_message">"Ви вже працюєте з цим додатком."</string>
     <string name="open_failed">"%s не розроблено для роботи в просторі користувача!"</string>

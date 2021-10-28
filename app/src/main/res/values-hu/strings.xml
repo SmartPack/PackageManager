@@ -48,7 +48,6 @@
     <string name="more_apps">"Továbbiak a fejlesztőtől"</string>
     <string name="name">"Név"</string>
     <string name="native_lib">"Natív Könyvtár"</string>
-    <string name="no_internet">"Kérjük ellenőrizze internetkapcsolatát!"</string>
     <string name="open">"Megnyit"</string>
     <string name="open_message">"Már futtatja ezt az alkalmazást."</string>
     <string name="open_failed">"%s nem a felhasználói térben való futtatásra készült!"</string>

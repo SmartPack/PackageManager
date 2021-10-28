@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -268,16 +267,11 @@ public class Utils {
     }
 
     public static void launchUrl(String url, Activity activity) {
-        if (isNetworkUnavailable(activity)) {
-            snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.no_internet));
-        } else {
-            try {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                activity.startActivity(i);
-            } catch (ActivityNotFoundException e) {
-                e.printStackTrace();
-            }
+        try {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            activity.startActivity(i);
+        } catch (ActivityNotFoundException ignored) {
         }
     }
 
@@ -324,12 +318,6 @@ public class Utils {
             new ZipFile(zip).addFiles(files);
         } catch (ZipException ignored) {
         }
-    }
-
-    public static boolean isNetworkUnavailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        assert cm != null;
-        return (cm.getActiveNetworkInfo() == null) || !cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
     @RequiresApi(30)

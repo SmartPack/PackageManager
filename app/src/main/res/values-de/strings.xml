@@ -48,7 +48,6 @@
     <string name="more_apps">"Weitere Apps des Entwicklers"</string>
     <string name="name">"Name"</string>
     <string name="native_lib">"systemeigene Bibliothek"</string>
-    <string name="no_internet">"Bitte überprüfen Sie ihre Internetverbindung!"</string>
     <string name="open">"Öffnen"</string>
     <string name="open_message">"Die App läuft bereits."</string>
     <string name="open_failed">"%s wurde nicht entwickelt um im Vordergrund zu laufen!"</string>

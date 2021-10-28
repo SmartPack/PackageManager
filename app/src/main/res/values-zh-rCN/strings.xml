@@ -48,7 +48,6 @@
     <string name="more_apps">"来自开发者的其他作品"</string>
     <string name="name">"名称"</string>
     <string name="native_lib">"本机库文件"</string>
-    <string name="no_internet">"请检查您的互联网连接！"</string>
     <string name="open">"打开"</string>
     <string name="open_message">"您已经运行此应用。"</string>
     <string name="open_failed">"%s 并非设计为在用户空间中运行！"</string>

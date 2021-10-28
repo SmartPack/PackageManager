@@ -24,7 +24,6 @@
     <string name="language">ቋንቋ</string>
     <string name="language_default">ነባር</string>
     <string name="more_apps">ከ አበልፃጊዉ ተጨማሪ መተግበሪያ</string>
-    <string name="no_internet">እባክዎን የኢንተርኔት አገልግሎት መኖሩን ያረጋግጡ!</string>
     <string name="open">ክፈት</string>
     <string name="open_message">ይህን መተግበሪያ በአሁኑ ሰዐት እየተጠቀሙበት ይገኛሉ!</string>
     <string name="open_failed">%s በ ተጠቃሚ ማከማቻ ላይ ለመጠቀም ተብሎ አልተሰራም!</string>

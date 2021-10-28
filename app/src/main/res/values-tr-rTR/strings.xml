@@ -48,7 +48,6 @@
     <string name="more_apps">"Geliştiriciden Daha Fazlası"</string>
     <string name="name">"İsim"</string>
     <string name="native_lib">"Native Kütüphane"</string>
-    <string name="no_internet">"Lütfen internet bağlantınızı kontrol ediniz!"</string>
     <string name="open">"Aç"</string>
     <string name="open_message">"Bu uygulamayı zaten çalıştırmaktasınız."</string>
     <string name="open_failed">"%s, kullanıcı alanında çalışmak için tasarlanmadı!"</string>

@@ -47,7 +47,6 @@
     <string name="more_apps">"Más del desarrollador"</string>
     <string name="name">"Nombre"</string>
     <string name="native_lib">"Librería nativa"</string>
-    <string name="no_internet">"Por favor, compruebe su conexión a Internet"</string>
     <string name="open">"Abrir"</string>
     <string name="open_message">"Está aplicación se está ejecutando"</string>
     <string name="open_failed">"%s no es válida para ejecutar en espacio de usuario"</string>
