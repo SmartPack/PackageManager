@@ -89,9 +89,7 @@
     <string name="uninstall_title">"您确定要卸载 %s 吗？"</string>
     <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
 
-        *** <b>您需要自担风险</b> ***
-
-"</string>
+        *** <b>您需要自担风险</b> ***"</string>
     <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
     <string name="wrong_extension">"请选择一个带有 %s 扩展名的文件。"</string>
@@ -240,7 +238,7 @@
     <string name="restore_message">"恢复 '%s' 到出厂版本吗？"</string>
     <string name="restore_message_batch">"恢复下列应用到出厂版本吗？
 
-%s"</string>
+        %s"</string>
     <string name="restore_success_message">"成功恢复所选应用到出厂版本！"</string>
     <string name="split_apk_installer_description">"拆分 APK（多个相同包名的 APK 文件）"</string>
     <string name="uninstalled_apps">"已卸载应用"</string>

@@ -238,7 +238,7 @@
     <string name="restore_message">"Restaurar a versão de fábrica de '%s'?"</string>
     <string name="restore_message_batch">"Restaurar a versão de fábrica das seguintes aplicações?
 
-%s"</string>
+        %s"</string>
     <string name="restore_success_message">"As versões de fábrica das aplicações selecionadas foram restauradas com sucesso"</string>
     <string name="split_apk_installer_description">"Dividir APK's (vários ficheiros APK como o mesmo nome de pacote)"</string>
     <string name="uninstalled_apps">"Aplicações desinstaladas"</string>

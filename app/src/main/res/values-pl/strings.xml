@@ -29,7 +29,7 @@
     <string name="disable">"Wyłącz"</string>
     <string name="disabled">"wyłączony"</string>
     <string name="disabling">"Wyłączanie %s"</string>
-    <string name="dismiss">"OK"</string>
+    <string name="dismiss">"Odrzuć"</string>
     <string name="done">"Zrobione"</string>
     <string name="enable">"Włącz"</string>
     <string name="enabled">"włączony"</string>
@@ -71,7 +71,7 @@
     <string name="source_code">"Kod źródłowy"</string>
     <string name="support">"Grupa wsparcia"</string>
     <string name="support_acknowledged">"Darowizna przyjęta \u2665"</string>
-    <string name="support_app">"Kup aplikację-dotację"</string>
+    <string name="support_app">"Kup aplikację Donation"</string>
     <string name="support_development">"Wesprzyj rozwój"</string>
     <string name="support_development_summary">"Jeśli chcesz docenić wkład programisty w stworzenie tego narzędzia całkowicie za darmo, rozważ małe wsparcie przez naciśnięcie jednej z poniżej dostępnych opcji. Za zakup któregokolwiek z tych produktów otrzymasz tutaj odznakę wspierającego."</string>
     <string name="support_dinner">"Postaw mi obiad"</string>
@@ -79,7 +79,7 @@
     <string name="support_coffee">"Postaw mi kawę"</string>
     <string name="support_already_received_message">"Już wcześniej wsparłeś(-aś) rozwój w ten sposób"</string>
     <string name="support_received_message">"Bardzo dziękuję za wsparcie \u2665
-To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie. Ponadto na górze tej strony otrzymasz odznakę wspierającego."</string>
+        To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie. Ponadto na górze tej strony otrzymasz odznakę wspierającego."</string>
     <string name="support_retry_message">"Proszę spróbować zakupić ponownie"</string>
     <string name="support_status_message">"Bardzo dziękuję za wsparcie"</string>
     <string name="sure_question">"Czy na pewno?"</string>
@@ -239,7 +239,7 @@ To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie. P
     <string name="restore_message">"Czy przywrócić ustawienia fabryczne „%s”?"</string>
     <string name="restore_message_batch">"Czy przywrócić ustawienia fabryczne następujących aplikacji?
 
-%s"</string>
+        %s"</string>
     <string name="restore_success_message">"Przywrócono ustawienia fabryczne wybranej/wybranych aplikacji"</string>
     <string name="split_apk_installer_description">"Podzielone APK (wiele plików APK z tą samą nazwą pakietu)"</string>
     <string name="uninstalled_apps">"Odinstalowane aplikacje"</string>

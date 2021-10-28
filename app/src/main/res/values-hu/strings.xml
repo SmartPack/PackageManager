@@ -87,7 +87,9 @@
     <string name="uninstall_nope">"Sajnálom! Innen nem lehet ezt megtenni!"</string>
     <string name="uninstall_summary">"%s eltávolítása"</string>
     <string name="uninstall_title">"Biztosan eltávolítja a(z) %s?"</string>
-    <string name="uninstall_warning">"Kérjük vegye figyelembe: A rendszeralkalmazások eltávolítása néha veszélyes lehet!\n\n***<b>HASZNÁLJA FELELŐSÉGGEL</b>***\n"</string>
+    <string name="uninstall_warning">"Kérjük vegye figyelembe: A rendszeralkalmazások eltávolítása néha veszélyes lehet!
+
+        ***<b>HASZNÁLJA FELELŐSÉGGEL</b>***\n"</string>
     <string name="version">"Verzió: %s"</string>
     <string name="welcome_message">"Üdvözöljük a Package Manager-ben, amely egy egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez."</string>
     <string name="wrong_extension">"Válasszon %s kiterjesztésű fájlt."</string>
@@ -236,9 +238,10 @@
     <string name="restore_message">"Visszaállítja a '%s' gyári verzióját?"</string>
     <string name="restore_message_batch">"A visszaállítja a következő alkalmazásokat a gyári verzióra?
 
-%s"</string>
+        %s"</string>
     <string name="restore_success_message">"A kiválasztott alkalmazás(ok) sikeresen visszaálltak a gyári verzióra!"</string>
     <string name="split_apk_installer_description">"Osztott APK-k (több APK fájl, azonos csomagnévvel)"</string>
     <string name="uninstalled_apps">"Eltávolított alkalmazások"</string>
     <string name="user_interface">"Felhasználói felület"</string>
+    <string name="uninstall_updates_message">"A '%s' egy helyi frissítése azonban telepítve van, amelyet az \"Eltávolítás\" gombra kattintva szabadon eltávolíthat."</string>
 </resources>

@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="apk_path">"APK Dizini"</string>
-    <string name="app_info">"Uygulama bilgileri"</string>
+    <string name="app_info">"UYGULAMA BİLGİLERİ"</string>
     <string name="batch_list_clear">"Listeyi temizle"</string>
     <string name="batch_list_disable">"Seçili uygulamayı(ları) devre dışı bırakmak (etkin ise) veya aktif etmek (devre dışı ise) istediğinize emin misiniz?"</string>
     <string name="batch_list_remove">"Seçili uygulamayı(ları) kaldırmak istediğinize emin misiniz?"</string>
@@ -53,7 +53,7 @@
     <string name="open_failed">"%s, kullanıcı alanında çalışmak için tasarlanmadı!"</string>
     <string name="package_id">"Paket Kimliği"</string>
     <string name="package_removed">"Seçili paket çoktan kaldırıldı! İptal ediliyor…"</string>
-    <string name="permissions">"İzinler"</string>
+    <string name="permissions">"İZİNLER"</string>
     <string name="permission_denied_write_storage">"Depolamaya erişim izni reddedildi!"</string>
     <string name="playstore">"Google Play"</string>
     <string name="press_back">"Çıkmak için tekrar geri tuşuna basınız"</string>
@@ -113,8 +113,8 @@
     <string name="batch_list_export">"Seçili uygulamayı(ları) cihaz depolamasına aktarmak istediğinize emin misiniz?"</string>
     <string name="batch_list_removed">"%s toplu işlem listesinden kaldırıldı"</string>
     <string name="explore_error_status">"%s keşfetme başarısız!"</string>
-    <string name="split_apk">"Bölünmüş APK'ler"</string>
-    <string name="activities">"Aktiviteler"</string>
+    <string name="split_apk">"BÖLÜNMÜŞ APK'LER"</string>
+    <string name="activities">"AKTİVİTELER"</string>
     <string name="documentation">"Dokümantasyon"</string>
     <string name="documentation_summary">"Package Manager'ı kullanmak için detaylı dokümantasyona bakınız"</string>
     <string name="installation_cancel_message">"Yüklemeyi iptal etmek istediğinize emin misiniz?"</string>
@@ -133,16 +133,16 @@
     <string name="installation_status_storage">"Uygulamayı yüklemeye yetecek kadar boş depolama alanı yok"</string>
     <string name="split_apk_installer">"Bölünmüş APK Yükleyici"</string>
     <string name="certificate">"Sertifika"</string>
-    <string name="manifest">"Manifest"</string>
+    <string name="manifest">"MANIFEST"</string>
     <string name="apks">"APK'ler"</string>
     <string name="bundles">"Toplu Paketler"</string>
     <string name="delete">"Sil"</string>
     <string name="delete_question">"'%s' silinsin mi?"</string>
     <string name="install_question">"'%s' yüklensin mi?"</string>
     <string name="reverse_order">"Sıralamayı Ters Çevir"</string>
-    <string name="show_apps_all">"Hepsi"</string>
-    <string name="show_apps_system">"Sistem"</string>
-    <string name="show_apps_user">"Kullanıcı"</string>
+    <string name="show_apps_all">"HEPSİ"</string>
+    <string name="show_apps_system">"SİSTEM"</string>
+    <string name="show_apps_user">"KULLANICI"</string>
     <string name="exported_apps">"Dışa Aktarılmış Uygulamalar"</string>
     <string name="operations">"Operasyonlar"</string>
     <string name="operations_access_notification">"Bir sistem uygulamasının bildirimlere erişmesine izin verir"</string>
@@ -236,9 +236,10 @@
     <string name="restore_message">"'%s' fabrika sürümüne geri yükleyecek misiniz?"</string>
     <string name="restore_message_batch">"Aşağıdaki uygulamaları fabrika sürümüne geri yükleyecek misiniz?
 
-%s"</string>
+        %s"</string>
     <string name="restore_success_message">"Seçilen uygulamalar başarıyla fabrika sürümüne geri yüklendi!"</string>
     <string name="split_apk_installer_description">"Bölünmüş APK'ler (aynı paket adındaki çoklu APK dosyaları)"</string>
     <string name="uninstalled_apps">"Kaldırılan Uygulamalar"</string>
     <string name="user_interface">"Kullanıcı Arayüzü"</string>
+    <string name="uninstall_updates_message">"'%s' yüklü bir güncellemesi ancak \"Kaldır\" butonuna basarak kolaylıkla kaldırılabilir."</string>
 </resources>
