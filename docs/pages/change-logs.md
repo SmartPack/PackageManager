@@ -1,0 +1,343 @@
+---
+layout: default
+title: What's New
+permalink: /change-logs/
+---
+
+## What's New
+
+### 48. v5.5 *(October 28, 2021)*
+- Improved and fixed sorting Exported Apps page.
+- Fixed crashing when attempting to open certain apps.
+- Update gradle plugin to latest.
+- Removed ACCESS_NETWORK_STATE permission from app.
+- Updated translations.
+- Miscellaneous changes.
+
+### 47. v5.4 *(October 10, 2021)*
+- Exported Apps: Added searching & sorting option.
+- Moved uninstall with ADB in to a separate page.
+- Package Manager now supports uninstalling the local updates of system apps.
+- Updated translations.
+- Miscellaneous changes.
+
+### 46. v5.3 *(September 15, 2021)*
+- Package Manager now allows restoring the factory version of uninstalled system apps (root-only feature).
+- Added a new installer instructions page.
+- Removed external file managers support for good reasons.
+- Largely improved APK/app bundle installation and uninstalling.
+- App settings has now a better layout and more options.
+- UI changes mainly for consistency.
+- Fixed language switch not working.
+- Updated translations.
+- Miscellaneous changes.
+
+### 45. v5.2 *(September 10, 2021)*
+- Improved UI & functionalities of in-built file picker.
+- Added more certificate related data.
+- Added options to export app (individual & batch) details as JSON file.
+- Largely improved batch options.
+- Updated translations.
+- Several other UI changes suggested by users.
+
+### 44. v5.1 *(August 29, 2021)*
+- Fixed app sorting option.
+- Added more sorting (by APK size, installation, and update time) options.
+- Fixed a minor issue in Split APK Installation.
+- Fixed batch exporting issues in certain devices and situations.
+
+### 43. v5.0 *(August 29, 2021)*
+- App now shows a one-rime welcome page on the first app launch.
+- App will now show an "Open" button after a successful installation session.
+- Replaced deprecated AsyncTask used throughout the app with Executor.
+- Updated translations.
+- Miscellaneous changes.
+
+### 42. v4.9 *(July 20, 2021)*
+- Moved "Select All" option to Batch menu.
+- Implemented batch uninstall option for non-root devices (need separate confirmation by user).
+- Improved Package info page.
+- Updated Polish locale.
+- Miscellaneous changes.
+
+### 41. v4.8 *(July 10, 2021)*
+- Improve case-sensitivity while searching.
+- Fixed crashing on certain situations.
+- Properly monitoring uninstalling user apps.
+- Added Polish locale and updated others.
+- Miscellaneous changes.
+
+### 40. v4.7 *(June 15, 2021)*
+- Improve permission handling.
+- Added "Select all" option.
+- Redirected exported items path into /sdcard/Package_Manager" if "All files Permission" is granted.
+- Updated Chinese & Turkish locale.
+- Miscellaneous changes.
+
+### 39. v4.6 *(May 31, 2021)*
+- App will now target latest Android SDK.
+- Now built using latest Gradle plugin.
+- Updated Chinese (traditional & simplified) translations.
+- Miscellaneous changes.
+
+### 38. v4.5 *(May 03, 2021)*
+- Re-organized and improved code.
+- Now built using latest Gradle plugin.
+- Added Portuguese and hungarian translations.
+- Updated German, Spanish, Vietnamese & Turkish translations.
+- Miscellaneous changes.
+
+### 37. v4.4 *(April 01, 2021)*
+- Improved Manifest and text view layouts.
+- Added APK/Bundle size to Package Details page.
+- Improved app searching.
+- Updated Czech, Spanish, Vietnamese & Russian translations.
+- Miscellaneous changes.
+
+### 36. v4.3 *(March 24, 2021)*
+- Updated Czech, Spanish, French, Turkish, Vietnamese & Chinese simplified translations.
+- Improved sorting apps by package name.
+- Improved documentation and linked to app.
+- Miscellaneous changes.
+
+### 35. v4.2 *March 17, 2021)*
+- Added Operations (AppOps) page with enable/disable options (root-only).
+- Improved app searching.
+- Updated Turkish, Portuguese (Brazilian), Russian, Ukrainian, and Malayalam translations.
+- Miscellaneous changes.
+
+### 34. v4.1 *(March 14, 2021)*
+- Renamed (to more appropriate "Exported Apps") and enhanced downloads page.
+- Improved in-built file picker.
+- Updated Portuguese (Brazilian) and Turkish translations.
+- Miscellaneous changes.
+
+### 33. v4.0 *(March 14, 2021)*
+- Added tabs at page top to easily switch app types.
+- Added Downloads page to easily manage APK's/bundles.
+- Updated Chinese, French, German and Turkish translations.
+- Fixed language names in Settings page.
+- Miscellaneous changes.
+
+### 32. v3.9 *(March 09, 2021)*
+- Added Manifest page to Package Info.
+- Package Explorer will now handle binary xml files.
+- Added app certificate information to Package Info page.
+- Fixed layout issues happened on some pages in landscape mode.
+- Switched to blue (Pixel) accent color.
+- Updated Turkish translations.
+- Miscellaneous changes.
+
+### 31. v3.8 *(March 06, 2021)*
+- Largely improved Split APK Installation with a Brand New installer view.
+- Split APK installer now always proceed non-root method.
+- Improved app bundle detection.
+- App will now export app bundles as a single apkm file.
+- App will now allow to share bundles after exporting.
+- Updated Ukrainian translations.
+- Miscellaneous changes.
+
+### 30. v3.7 *(March 03, 2021)*
+- Improved package explorer.
+- App will now load (and also allowed to save) app icon when clicking the icon on each entry.
+- Added Czech, Spanish, Vietnamese, & Chinese translations.
+- Updated French, German & Russian translations.
+- Improved language switch on Settings page.
+- Credits are now moved as a separate entry into Settings page.
+- Miscellaneous changes.
+
+### 29. v3.6 *(February 26, 2021)*
+- Split APK installation will now work on non-rooted devices.
+- App will now use own file picker (by default: configurable in Settings) for split apk installation.
+- Updated Turkish translations.
+- Fixed possible crashes on Permission and Activity page.
+- Miscellaneous changes.
+
+### 28. v3.5 *(February 23, 2021)*
+- Added activity page to Package info.
+- Updated app explorer to avoid possible crashes.
+- Fixed minor issues in light mode.
+- Added documentation to Settings page and welcome dialog.
+- Added German & Turkish translations.
+- Updated Russian translation.
+- Miscellaneous changes.
+
+### 27. v3.4 *(February 20, 2021)*
+- Partly re-designed app UI and menu options.
+- More options are added to package details page.
+- Split APK Installer now handles "apkm" bundles (root-only).
+- App now allow exporting individual split apks.
+- Improved app exploring.
+- Added French translations.
+- Updated Korean translations.
+- Miscellaneous changes.
+
+### 26. v3.3 *(February 14, 2021)*
+- Batch APK (not Bundle) exports now work on non-rooted devices.
+- Fixed some layout issues.
+- Improved split apk installation.
+- Miscellaneous changes.
+
+### 25. v3.2 *(February 13, 2021)*
+- Initial support to explore and export contents of APK files.
+- Updated storage permission for latest android versions.
+- APK/Bundle exports now work on non-rooted devices.
+- Moved top pop-up menu items into a new Settings page.
+- Updated Russian, Ukrainian & Malayalam translations.
+- Miscellaneous changes.
+
+### 25. v3.1 *(January 31, 2021)*
+- Package Manager now supports installing .apks and .xapk bundles.
+- Removed backup and restore app data (too buggy).
+- Temporarily fix storage related issues on Android 11.
+- Added installed & last updated information to Package Details page.
+- Miscellaneous changes.
+
+### 24. v3.0 *(January 16, 2021)*
+- Updated overall app to use material libraries.
+- App will now show a supporter badge for those who supported development.
+- Updated Russian & Ukraine translations.
+- Miscellaneous changes.
+
+### 24. v2.9 *(November 13, 2020)*
+- Completely removed Ads from the app.
+- Switched to use Material Alert Dialogs.
+- Added donation option.
+- Miscellaneous changes.
+
+### 23. v2.8 (November 07, 2020)*
+- Option to reset (individual & batch) apps.
+- Updated Russian & Ukraine translations.
+
+### 22. v2.7 *(October 25, 2020)*
+- Improved batch processing.
+- Updated build tools.
+
+### 21. v2.6 *(October 13, 2020)*
+- Fixed a minor issue.
+
+### 20. v2.5 *(October 12, 2020)*
+- Re-built from (nearly) scratch.
+- Added Brand-New progress view.
+- Sort apps by package id by default (much more responsive).
+- Search by app name (instead of package id).
+- Improved app sorting.
+- App should be much more response now.
+- Updated Russian & Ukrainian translations.
+- Miscellaneous changes.
+
+### 19. v2.4 *(September 28, 2020)*
+- Brand new package details view.
+- Largely improved app interface.
+- About and change-logs are now in a single place.
+- Updated Russian & Ukrainian translations.
+- Miscellaneous changes.
+
+### 18. v2.3 *(September 05, 2020)*
+- Fixed a bug on app closing when search word is entered.
+
+### 17. v2.2 *(September 03, 2020)*
+- Slightly improved app searching.
+- Improved AdView and layout.
+- Removed copyright text.
+- Miscellaneous changes.
+
+### 16. v2.1 *(August 29, 2020)*
+- Updated about dialog.
+- Updated libsu to v3.0.2.
+- Updated gradle build tools.
+- Miscellaneous changes.
+
+### 15. v2.0 *(June 14, 2020)*
+- Updated description view (now more beautiful).
+- Added an Auto-Mode (default) to app theme.
+- Updated gradle build tools.
+- Miscellaneous changes.
+
+### 14. v1.9 *(June 09, 2020)*
+- Added option to sort apps by OEM.
+- Fixed minor issues for About & Change-logs view.
+- Updated Russian and Ukrainian translations.
+- Miscellaneous changes.
+
+### 13. v1.8 *(May 17, 2020)*
+- Brand New About & Change-log view.
+- Updated Korean translations (Credits: @SmgKhOaRn).
+- Miscellaneous changes.
+
+### 12. v1.7 *(May 09, 2020)*
+- Removed interstitial ads from app.
+- Replace toast messages with snackbar.
+- Miscellaneous changes.
+
+### 11. v1.6 *(May 07, 2020)*
+- Added Russian and Ukrainian translations.
+- Improved Greek translations.
+- Miscellaneous changes.
+
+### 10. v1.5 *(May 02, 2020)*
+- Migrated to libsu (Credits: @Lennoard).
+- Improved app UI.
+- Moved batch options and app settings to the top description.
+- Fixed rarely occurring item duplication.
+- Simplified batch app tasks.
+- Added a more detailed view for batch options and split apk installation.
+- Added Portuguese (Brazilian) translations (Credits: @Lennoard).
+- Improved Korean translations (Credits: @SmgKhOaRn).
+- Updated malayalam translations.
+- Miscellaneous changes.
+
+### 9. v1.4 *(March 26, 2020)*
+- Added option to sort apps by Name (default) & Package ID.
+- Fixed creating app folder on Android 10.
+- Added Amharic (credits: @Mikesew1320), Greek (credits: @tsiflimagas) and Malayalam (credits: me) translations.
+- Improved Korean translations (Credits: @SmgKhOaRn).
+- Miscellaneous changes.
+
+### 8. v1.3 *(March 24, 2020)*
+- Added batch (uninstall/disable/enable/backup) options (root only).
+- Overall improvements & code clean-ups.
+- Added dark & light themes.
+- Added an option to change app language.
+- Improved Korean translations (Credits: @SmgKhOaRn).
+- Improved split apk installation.
+- gradle: Update build tools & dependencies.
+- Miscellaneous changes.
+
+### 7. v1.2 *(March 10, 2020)*
+- Main: Disable Ads if SmartPack Donation Package is installed.
+- Misc: Added Korean translations (Credits: @SmgKhOaRn).
+- gradle: Update build tools & dependencies.
+- Miscellaneous changes.
+
+### 6. v1.1 *(March 04, 2020)*
+- Main: Implemented option to install Split APK's (Root-only).
+- Main: Fixed exporting app split APK's.
+- gradle: Updated build tools.
+- Misc: Slightly updated UI.
+- Miscellaneous changes.
+
+### 5. v1.0 *(March 01, 2020)*
+- Main: Fixed (hopefully) welcome dialogue not showing properly on some devices.
+- gradle: Updated build tools.
+- Main: Exit app only after pressing back button twice.
+- Miscellaneous changes.
+
+### 4. beta-v0.7 *(February 23, 2020)*
+- Main: Improved App UI.
+- Main: Improved coding quality and cleaned un-resourced resources.
+- build: gradle: Updated dependencies.
+- Misc: Ads: Replaced Banner with a event based Interstitial Ad.
+- Miscellaneous changes.
+
+### 3. beta-v0.6 *(February 20, 2020)*
+- Initial Play-Store release.
+
+### 2. beta-v0.5 *(February 19, 2020)*
+- Main: Converted into a simple one page App.
+- File picking: Updated to work with Documents UI.
+- Main: Improved app searching.
+- Miscellaneous changes.
+
+### 1. beta-v0.4 *(February 15, 2020)*
+- First public release of Package Manager, a simple, yet powerful application to manage the apps installed on an android device.
