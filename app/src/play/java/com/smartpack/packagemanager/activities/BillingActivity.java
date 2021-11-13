@@ -68,10 +68,10 @@ public class BillingActivity extends AppCompatActivity {
             mSupporterMessage.setText(getString(R.string.support_status_message));
         }
 
-        mData.add(new RecycleViewItem(getString(R.string.support_app), getResources().getDrawable(R.drawable.ic_donation_app)));
-        mData.add(new RecycleViewItem(getString(R.string.support_coffee), getResources().getDrawable(R.drawable.ic_coffee)));
-        mData.add(new RecycleViewItem(getString(R.string.support_meal), getResources().getDrawable(R.drawable.ic_meal)));
-        mData.add(new RecycleViewItem(getString(R.string.support_dinner), getResources().getDrawable(R.drawable.ic_dinner)));
+        mData.add(new RecycleViewItem(getString(R.string.support_app), sUtils.getDrawable(R.drawable.ic_donation_app,this)));
+        mData.add(new RecycleViewItem(getString(R.string.support_coffee), sUtils.getDrawable(R.drawable.ic_coffee,this)));
+        mData.add(new RecycleViewItem(getString(R.string.support_meal), sUtils.getDrawable(R.drawable.ic_meal,this)));
+        mData.add(new RecycleViewItem(getString(R.string.support_dinner), sUtils.getDrawable(R.drawable.ic_dinner,this)));
 
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -227,7 +227,7 @@ public class BillingActivity extends AppCompatActivity {
 
     private static class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
-        private ArrayList<RecycleViewItem> data;
+        private final ArrayList<RecycleViewItem> data;
 
         private static ClickListener clickListener;
 
@@ -256,8 +256,8 @@ public class BillingActivity extends AppCompatActivity {
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            private AppCompatImageView mIcon;
-            private MaterialTextView mTitle;
+            private final AppCompatImageView mIcon;
+            private final MaterialTextView mTitle;
 
             public ViewHolder(View view) {
                 super(view);
