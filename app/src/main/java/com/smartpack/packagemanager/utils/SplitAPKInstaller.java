@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sInstallerParams;
 import in.sunilpaulmathew.sCommon.Utils.sInstallerUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -64,7 +65,7 @@ public class SplitAPKInstaller {
     }
 
     public static void handleAppBundle(LinearLayout linearLayout, String path, Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
@@ -96,7 +97,7 @@ public class SplitAPKInstaller {
     }
 
     public static void installSplitAPKs(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {

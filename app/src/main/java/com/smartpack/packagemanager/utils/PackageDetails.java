@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -63,8 +64,9 @@ public class PackageDetails {
         }
     }
 
-    public static void exportingTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
-        new AsyncTasks() {
+    public static void exportingTask(LinearLayout linearLayout, MaterialTextView textView, String apk,
+                                     String name,Drawable icon, Activity activity) {
+        new sExecutor() {
 
             @SuppressLint("StringFormatInvalid")
             @Override
@@ -106,7 +108,7 @@ public class PackageDetails {
     }
 
     public static void exportingBundleTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @SuppressLint("StringFormatInvalid")
             @Override
@@ -152,7 +154,7 @@ public class PackageDetails {
 
     public static void disableApp(LinearLayout progressLayout, LinearLayout openApp, MaterialTextView progressMessage,
                                   MaterialTextView statusMessage, Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @SuppressLint("StringFormatInvalid")
             @Override
@@ -192,27 +194,28 @@ public class PackageDetails {
                     .setCancelable(false)
                     .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     })
-                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) -> new AsyncTasks() {
+                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) ->
+                            new sExecutor() {
 
-                        @Override
-                        public void onPreExecute() {
-                            showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
-                        }
+                                @Override
+                                public void onPreExecute() {
+                                    showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+                                }
 
-                        @Override
-                        public void doInBackground() {
-                            sUtils.sleep(1);
-                            Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
-                        }
+                                @Override
+                                public void doInBackground() {
+                                    sUtils.sleep(1);
+                                    Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                                }
 
-                        @Override
-                        public void onPostExecute() {
-                            PackageData.setRawData(activity);
-                            hideProgress(linearLayout, textView);
-                            activity.finish();
-                            Common.reloadPage(true);
-                        }
-                    }.execute())
+                                @Override
+                                public void onPostExecute() {
+                                    PackageData.setRawData(activity);
+                                    hideProgress(linearLayout, textView);
+                                    activity.finish();
+                                    Common.reloadPage(true);
+                                }
+                            }.execute())
                     .show();
         } else {
             Intent details = new Intent(activity, ADBUninstallActivity.class);

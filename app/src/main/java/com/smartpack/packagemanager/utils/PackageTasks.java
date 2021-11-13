@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -28,7 +29,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class PackageTasks {
 
     public static void batchDisableTask(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
@@ -76,7 +77,7 @@ public class PackageTasks {
     }
 
     public static void batchResetTask(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
@@ -117,7 +118,7 @@ public class PackageTasks {
     }
 
     public static void batchExportTask(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
@@ -162,7 +163,7 @@ public class PackageTasks {
     }
 
     public static void batchUninstallTask(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {

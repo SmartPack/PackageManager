@@ -33,7 +33,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
-import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -44,6 +43,7 @@ import java.io.File;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -141,37 +141,37 @@ public class FilePickerActivity extends AppCompatActivity {
         });
 
         mSelect.setOnClickListener(v ->
-                        new AsyncTasks() {
+                new sExecutor() {
 
-                            @Override
-                            public void onPreExecute() {
-                            }
+                    @Override
+                    public void onPreExecute() {
+                    }
 
-                            @Override
-                            public void doInBackground() {
-                                for (String mAPKs : Common.getAppList()) {
-                                    if (sAPKUtils.getPackageName(mAPKs, FilePickerActivity.this) != null) {
-                                        Common.setApplicationID(Objects.requireNonNull(sAPKUtils.getPackageName(mAPKs, FilePickerActivity.this)));
-                                    }
-                                }
+                    @Override
+                    public void doInBackground() {
+                        for (String mAPKs : Common.getAppList()) {
+                            if (sAPKUtils.getPackageName(mAPKs, FilePickerActivity.this) != null) {
+                                Common.setApplicationID(Objects.requireNonNull(sAPKUtils.getPackageName(mAPKs, FilePickerActivity.this)));
                             }
+                        }
+                    }
 
-                            @Override
-                            public void onPostExecute() {
-                                Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
-                                if (Common.getApplicationID() != null) {
-                                    SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
-                                    exitActivity();
-                                } else {
-                                    sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
-                                }
-                            }
-                        }.execute()
-                );
+                    @Override
+                    public void onPostExecute() {
+                        Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
+                        if (Common.getApplicationID() != null) {
+                            SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
+                            exitActivity();
+                        } else {
+                            sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
+                        }
+                    }
+                }.execute()
+        );
     }
 
     private void reload(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {

@@ -21,9 +21,9 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.PackageData;
 
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -64,7 +64,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private static void loadData(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
             @Override
             public void onPreExecute() {
             }

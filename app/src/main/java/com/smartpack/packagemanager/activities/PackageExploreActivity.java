@@ -26,7 +26,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExploreAdapter;
-import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
@@ -35,6 +34,7 @@ import com.smartpack.packagemanager.utils.PackageExplorer;
 import java.io.File;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -113,9 +113,8 @@ public class PackageExploreActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("StaticFieldLeak")
     private void reload(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {

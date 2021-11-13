@@ -46,7 +46,6 @@ import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.activities.UninstalledAppsActivity;
 import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
-import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
@@ -63,6 +62,7 @@ import java.io.File;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -509,7 +509,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private void loadUI(Activity activity) {
-        new AsyncTasks() {
+        new sExecutor() {
 
             @Override
             public void onPreExecute() {
@@ -566,7 +566,7 @@ public class PackageTasksFragment extends Fragment {
                 } catch (ConcurrentModificationException ignored) {}
                 handleUninstallEvent();
             } else {
-                new AsyncTasks() {
+                new sExecutor() {
 
                     @Override
                     public void onPreExecute() {
