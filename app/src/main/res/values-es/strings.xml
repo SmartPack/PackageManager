@@ -16,10 +16,6 @@
     <string name="cancel">"Cancelar"</string>
     <string name="change_logs">"Registro de cambios"</string>
     <string name="credits">"Créditos"</string>
-    <string name="dark_theme">"Tema oscuro"</string>
-    <string name="dark_theme_auto">"Auto"</string>
-    <string name="dark_theme_disable">"Deshabilitar"</string>
-    <string name="dark_theme_enable">"Habilitar"</string>
     <string name="data_dir">"Directorio de datos"</string>
     <string name="date_installation">"Fecha de instalación"</string>
     <string name="date_installed">"Primer instalado: %s"</string>

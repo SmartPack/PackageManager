@@ -29,10 +29,12 @@ import com.smartpack.packagemanager.utils.Utils;
 import java.io.File;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-
 public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleViewSplitAPKsAdapter.ViewHolder> {
 
     private static List<String> data;
@@ -52,11 +54,11 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
     @Override
     public void onBindViewHolder(@NonNull RecycleViewSplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
-        holder.mSize.setText(PackageData.getAPKSize(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
+        holder.mSize.setText(sAPKUtils.getAPKSize(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position)));
-        if (PackageData.getAPKIcon(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
+        if (sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
-            holder.mIcon.setImageDrawable(PackageData.getAPKIcon(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
+            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         } else {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
@@ -66,7 +68,7 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) -> {
-                    PackageExplorer.copyToStorage(PackageData.getParentDir(Common.getApplicationID(), holder.mIcon
+                    PackageExplorer.copyToStorage(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                             .getContext()) + "/" + data.get(position), PackageData.getPackageDir(v.getContext()) + "/" +
                             Common.getApplicationID(), (Activity) v.getContext());
                 }).show());

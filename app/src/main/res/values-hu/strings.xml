@@ -17,10 +17,6 @@
     <string name="change_logs">"Változáslista"</string>
     <string name="credits">"Hitelek"</string>
     <string name="credits_summary">"A projektben közreműködők listája"</string>
-    <string name="dark_theme">"Sötét Téma"</string>
-    <string name="dark_theme_auto">"Auto"</string>
-    <string name="dark_theme_disable">"Tilt"</string>
-    <string name="dark_theme_enable">"Engedélyez"</string>
     <string name="data_dir">"Adatkönyvtár"</string>
     <string name="date_installation">"Telepítési Dátumok"</string>
     <string name="date_installed">"Első Telepítés: %s"</string>

@@ -17,10 +17,6 @@
     <string name="change_logs">"Lista zmian"</string>
     <string name="credits">"Autorzy"</string>
     <string name="credits_summary">"Lista osób, które przyczyniły się do powstania tego projektu"</string>
-    <string name="dark_theme">"Ciemny motyw"</string>
-    <string name="dark_theme_auto">"Automatyczny"</string>
-    <string name="dark_theme_disable">"Wyłączony"</string>
-    <string name="dark_theme_enable">"Włączony"</string>
     <string name="data_dir">"Katalog danych"</string>
     <string name="date_installation">"Daty instalacji"</string>
     <string name="date_installed">"Pierwsza instalacja: %s"</string>

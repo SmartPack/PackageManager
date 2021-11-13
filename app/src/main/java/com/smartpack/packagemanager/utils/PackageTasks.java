@@ -19,10 +19,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 12, 2020
  */
-
 public class PackageTasks {
 
     public static void batchDisableTask(Activity activity) {
@@ -49,17 +51,17 @@ public class PackageTasks {
                             Common.getOutput().append("** ").append(activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)));
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
-                            Common.getOutput().append(PackageData.isEnabled(packageID, activity) ? "** " +
+                            Common.getOutput().append(sPackageUtils.isEnabled(packageID, activity) ? "** " +
                                     activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)) :
                                     "** " + activity.getString(R.string.enabling, PackageData.getAppName(packageID, activity)));
-                            if (PackageData.isEnabled(packageID, activity)) {
+                            if (sPackageUtils.isEnabled(packageID, activity)) {
                                 Utils.runCommand("pm disable " + packageID);
                             } else {
                                 Utils.runCommand("pm enable " + packageID);
                             }
                             Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
-                        Utils.sleep(1);
+                        sUtils.sleep(1);
                     }
                 }
             }
@@ -92,7 +94,7 @@ public class PackageTasks {
             @Override
             public void doInBackground() {
                 for (String packageID : Common.getBatchList()) {
-                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                    if (packageID.contains(".") && sPackageUtils.isPackageInstalled(packageID, activity)) {
                         if (packageID.equals(activity.getPackageName())) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
@@ -101,7 +103,7 @@ public class PackageTasks {
                             Utils.runCommand("pm clear " + packageID);
                             Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
-                        Utils.sleep(1);
+                        sUtils.sleep(1);
                     }
                 }
             }
@@ -133,20 +135,20 @@ public class PackageTasks {
             @Override
             public void doInBackground() {
                 for (String packageID : Common.getBatchList()) {
-                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
-                        if (SplitAPKInstaller.isAppBundle(PackageData.getParentDir(packageID, activity))) {
+                    if (packageID.contains(".") && sPackageUtils.isPackageInstalled(packageID, activity)) {
+                        if (SplitAPKInstaller.isAppBundle(sPackageUtils.getParentDir(packageID, activity))) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.exporting_bundle, PackageData.getAppName(packageID, activity)));
                             List<File> mFiles = new ArrayList<>();
-                            for (final String splitApps : SplitAPKInstaller.splitApks(PackageData.getParentDir(packageID, activity))) {
-                                mFiles.add(new File(PackageData.getParentDir(packageID, activity) + "/" + splitApps));
+                            for (final String splitApps : SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageID, activity))) {
+                                mFiles.add(new File(sPackageUtils.getParentDir(packageID, activity) + "/" + splitApps));
                             }
                             Utils.zip(PackageData.getPackageDir(activity) + "/" + PackageData.getFileName(packageID, activity) + ".apkm", mFiles);
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
-                            Utils.copy(PackageData.getSourceDir(packageID, activity), PackageData.getPackageDir(activity) + "/" + PackageData.getFileName(packageID, activity) + ".apk");
+                            sUtils.copy(new File(sPackageUtils.getSourceDir(packageID, activity)), new File(PackageData.getPackageDir(activity), PackageData.getFileName(packageID, activity) + ".apk"));
                         }
                         Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
-                        Utils.sleep(1);
+                        sUtils.sleep(1);
                     }
                 }
             }
@@ -178,17 +180,17 @@ public class PackageTasks {
             @Override
             public void doInBackground() {
                 for (String packageID : Common.getBatchList()) {
-                    if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                    if (packageID.contains(".") && sPackageUtils.isPackageInstalled(packageID, activity)) {
                         if (packageID.equals(activity.getPackageName())) {
                             Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
                             Utils.runCommand("pm uninstall --user 0 " + packageID);
-                            Common.getOutput().append(Utils.isPackageInstalled(packageID, activity) ? ": " +
+                            Common.getOutput().append(sPackageUtils.isPackageInstalled(packageID, activity) ? ": " +
                                     activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
                         }
-                        Utils.sleep(1);
+                        sUtils.sleep(1);
                     }
                 }
             }

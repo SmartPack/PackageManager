@@ -17,10 +17,6 @@
     <string name="change_logs">"Seznamy změn"</string>
     <string name="copyright">"Autorské právo: ©%s"</string>
     <string name="credits">"Credits"</string>
-    <string name="dark_theme">"Tmavé téma"</string>
-    <string name="dark_theme_auto">"Automaticky"</string>
-    <string name="dark_theme_disable">"Vypnuto"</string>
-    <string name="dark_theme_enable">"Zapnuto"</string>
     <string name="data_dir">"Adresář dat"</string>
     <string name="date_installation">"Instalační data"</string>
     <string name="date_installed">"Prvně instalováno: %s"</string>

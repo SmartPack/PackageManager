@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
  * Based on the original work of nkalra0123 (Ref: https://github.com/nkalra0123/splitapkinstall)
@@ -54,7 +56,7 @@ public class SplitAPKInstaller {
     }
 
     public static boolean isPermissionDenied(Activity activity) {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !PackageData.getPackageManager(activity).canRequestPackageInstalls();
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.getPackageManager().canRequestPackageInstalls();
     }
 
     private static int runInstallCreate(InstallParams installParams, Activity activity) {
@@ -135,14 +137,14 @@ public class SplitAPKInstaller {
     }
 
     private static PackageInstaller getPackageInstaller(Activity activity) {
-        return PackageData.getPackageManager(activity).getPackageInstaller();
+        return activity.getPackageManager().getPackageInstaller();
     }
 
     private static long getTotalSize() {
         int totalSize = 0;
         if (Common.getAppList().size() > 0) {
             for (String string : Common.getAppList()) {
-                if (Utils.exist(string)) {
+                if (sUtils.exist(new File(string))) {
                     File mFile = new File(string);
                     if (mFile.exists() && mFile.getName().endsWith(".apk")) {
                         totalSize += mFile.length();
@@ -163,9 +165,9 @@ public class SplitAPKInstaller {
             @Override
             public void onPreExecute() {
                 linearLayout.setVisibility(View.VISIBLE);
-                Utils.delete(activity.getCacheDir().getPath() + "/splits");
-                if (Utils.exist(activity.getCacheDir().getPath() + "/toc.pb")) {
-                    Utils.delete(activity.getCacheDir().getPath() + "/toc.pb");
+                sUtils.delete(new File(activity.getCacheDir().getPath(), "splits"));
+                if (sUtils.exist(new File(activity.getCacheDir().getPath(), "toc.pb"))) {
+                    sUtils.delete(new File(activity.getCacheDir().getPath(), "toc.pb"));
                 }
             }
 
@@ -195,7 +197,7 @@ public class SplitAPKInstaller {
             @Override
             public void onPreExecute() {
                 Intent installIntent = new Intent(activity, InstallerActivity.class);
-                Utils.saveString("installationStatus", "waiting", activity);
+                sUtils.saveString("installationStatus", "waiting", activity);
                 activity.startActivity(installIntent);
             }
 
@@ -207,7 +209,7 @@ public class SplitAPKInstaller {
                 sessionId = runInstallCreate(installParams, activity);
                 try {
                     for (String string : Common.getAppList()) {
-                        if (Utils.exist(string) && string.endsWith(".apk")) {
+                        if (sUtils.exist(new File(string)) && string.endsWith(".apk")) {
                             File mFile = new File(string);
                             if (mFile.exists() && mFile.getName().endsWith(".apk")) {
                                 runInstallWrite(mFile.length(), sessionId, mFile.getName(), mFile.toString(), activity);

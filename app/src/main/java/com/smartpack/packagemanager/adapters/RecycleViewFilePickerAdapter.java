@@ -21,16 +21,17 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
  */
-
 public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleViewFilePickerAdapter.ViewHolder> {
 
     private static ClickListener clickListener;
@@ -53,7 +54,7 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
     public void onBindViewHolder(@NonNull RecycleViewFilePickerAdapter.ViewHolder holder, int position) {
         if (new File(this.data.get(position)).isDirectory()) {
             holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_folder));
-            if (Utils.isDarkTheme(holder.mIcon.getContext())) {
+            if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setBackground(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_background_circle));
             }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
@@ -61,9 +62,9 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
             holder.mSize.setVisibility(View.GONE);
             holder.mCheckBox.setVisibility(View.GONE);
         } else if (this.data.get(position).endsWith(".apk")) {
-            holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
-            if (PackageData.getAPKId(data.get(position), holder.mIcon.getContext()) != null) {
-                holder.mDescription.setText(PackageData.getAPKId(data.get(position), holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
+            if (sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()) != null) {
+                holder.mDescription.setText(sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()));
                 holder.mDescription.setVisibility(View.VISIBLE);
             }
             holder.mCheckBox.setChecked(Common.getAppList().contains(this.data.get(position)));
@@ -75,14 +76,14 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
                 }
                 Common.getSelectCard().setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             });
-            holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
+            holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
             holder.mSize.setVisibility(View.VISIBLE);
             holder.mCheckBox.setVisibility(View.VISIBLE);
         } else {
             holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_bundle));
-            holder.mIcon.setColorFilter(Utils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
+            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
                     .getResources().getColor(R.color.colorWhite) : holder.mIcon.getContext().getResources().getColor(R.color.colorBlack));
-            holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
+            holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
             holder.mSize.setVisibility(View.VISIBLE);
         }
         holder.mTitle.setText(new File(this.data.get(position)).getName());

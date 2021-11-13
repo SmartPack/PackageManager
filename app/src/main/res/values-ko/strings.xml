@@ -18,10 +18,6 @@
     <string name="cancel">취소</string>
     <string name="change_logs">변경사항</string>
     <string name="credits">도움을 주신 분들</string>
-    <string name="dark_theme">테마</string>
-    <string name="dark_theme_auto">자동</string>
-    <string name="dark_theme_disable">밝은 테마</string>
-    <string name="dark_theme_enable">어두운 테마</string>
     <string name="data_dir">데이터 경로</string>
     <string name="date_installation">설치 날짜</string>
     <string name="date_installed">초기 버전: %s</string>

@@ -16,10 +16,6 @@
     <string name="change_logs">"變更日誌"</string>
     <string name="credits">"貢獻者"</string>
     <string name="credits_summary">"貢獻者名單"</string>
-    <string name="dark_theme">"黑暗主題"</string>
-    <string name="dark_theme_auto">"自動"</string>
-    <string name="dark_theme_disable">"停用"</string>
-    <string name="dark_theme_enable">"啟用"</string>
     <string name="data_dir">"資料目錄"</string>
     <string name="date_installation">"安裝日期"</string>
     <string name="date_installed">"首次安裝：％s"</string>

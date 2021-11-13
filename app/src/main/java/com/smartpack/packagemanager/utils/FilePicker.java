@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on May 30, 2021
  */
@@ -31,7 +33,7 @@ public class FilePicker {
                 }
             }
             Collections.sort(mDir, String.CASE_INSENSITIVE_ORDER);
-            if (!Utils.getBoolean("az_order", true, activity)) {
+            if (!sUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mDir);
             }
             mData.addAll(mDir);
@@ -45,7 +47,7 @@ public class FilePicker {
                 }
             }
             Collections.sort(mFiles, String.CASE_INSENSITIVE_ORDER);
-            if (!Utils.getBoolean("az_order", true, activity)) {
+            if (!sUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mFiles);
             }
             mData.addAll(mFiles);
@@ -67,8 +69,8 @@ public class FilePicker {
     }
 
     public static String getLastDirPath(Activity activity) {
-        String mDir = Utils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
-        if (Utils.exist(mDir)) {
+        String mDir = sUtils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
+        if (sUtils.exist(new File(mDir))) {
             return mDir;
         } else {
             return Environment.getExternalStorageDirectory().toString();

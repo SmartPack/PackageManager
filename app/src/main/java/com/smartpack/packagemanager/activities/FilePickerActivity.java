@@ -25,7 +25,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,13 +36,16 @@ import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
 import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
@@ -73,7 +75,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
         mBack.setOnClickListener(v -> exitActivity());
 
-        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
+        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = findViewById(R.id.permission_text);
@@ -81,11 +83,12 @@ public class FilePickerActivity extends AppCompatActivity {
             mPermissionLayout.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
             mPermissionGrant.setOnClickListener(v -> {
-                if (Build.VERSION.SDK_INT >= 30) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     Utils.requestPermission(this);
                 } else {
-                    ActivityCompat.requestPermissions(this, new String[] {
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+                    sUtils.requestPermission(new String[] {
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },this);
                 }
             });
             return;
@@ -120,7 +123,7 @@ public class FilePickerActivity extends AppCompatActivity {
                 mRecycleViewAdapter.notifyItemChanged(position);
                 mSelect.setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             } else {
-                Utils.snackbar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk"));
+                sUtils.snackBar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk")).show();
             }
         });
 
@@ -128,43 +131,43 @@ public class FilePickerActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSortButton);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, "A-Z").setCheckable(true)
-                    .setChecked(Utils.getBoolean("az_order", true, this));
+                    .setChecked(sUtils.getBoolean("az_order", true, this));
             popupMenu.setOnMenuItemClickListener(item -> {
-                Utils.saveBoolean("az_order", !Utils.getBoolean("az_order", true, this), this);
+                sUtils.saveBoolean("az_order", !sUtils.getBoolean("az_order", true, this), this);
                 reload(this);
                 return false;
             });
             popupMenu.show();
         });
 
-        mSelect.setOnClickListener(v -> {
-            new AsyncTasks() {
+        mSelect.setOnClickListener(v ->
+                        new AsyncTasks() {
 
-                @Override
-                public void onPreExecute() {
-                }
+                            @Override
+                            public void onPreExecute() {
+                            }
 
-                @Override
-                public void doInBackground() {
-                    for (String mAPKs : Common.getAppList()) {
-                        if (PackageData.getAPKId(mAPKs, FilePickerActivity.this) != null) {
-                            Common.setApplicationID(Objects.requireNonNull(PackageData.getAPKId(mAPKs, FilePickerActivity.this)));
-                        }
-                    }
-                }
+                            @Override
+                            public void doInBackground() {
+                                for (String mAPKs : Common.getAppList()) {
+                                    if (sAPKUtils.getPackageName(mAPKs, FilePickerActivity.this) != null) {
+                                        Common.setApplicationID(Objects.requireNonNull(sAPKUtils.getPackageName(mAPKs, FilePickerActivity.this)));
+                                    }
+                                }
+                            }
 
-                @Override
-                public void onPostExecute() {
-                    Common.isUpdating(Utils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
-                    if (Common.getApplicationID() != null) {
-                        SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
-                        exitActivity();
-                    } else {
-                        Utils.snackbar(mRecyclerView, getString(R.string.installation_status_bad_apks));
-                    }
-                }
-            }.execute();
-        });
+                            @Override
+                            public void onPostExecute() {
+                                Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
+                                if (Common.getApplicationID() != null) {
+                                    SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
+                                    exitActivity();
+                                } else {
+                                    sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
+                                }
+                            }
+                        }.execute()
+                );
     }
 
     private void reload(Activity activity) {
@@ -200,7 +203,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
     private void exitActivity() {
         if (!Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
-            Utils.saveString("lastDirPath", Common.getPath(), this);
+            sUtils.saveString("lastDirPath", Common.getPath(), this);
         }
         finish();
     }
@@ -208,7 +211,7 @@ public class FilePickerActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode == 1 && grantResults.length > 0
+        if (requestCode == 0 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             this.recreate();
         }

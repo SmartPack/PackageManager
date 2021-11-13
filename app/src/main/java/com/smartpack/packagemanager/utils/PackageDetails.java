@@ -22,7 +22,6 @@ import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -41,19 +40,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2020
  */
 public class PackageDetails {
 
-    @SuppressLint("StringFormatInvalid")
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
-            ActivityCompat.requestPermissions(activity, new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
-        } else if (new File(PackageData.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
-            exportingBundleTask(linearLayout, textView, PackageData.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
+        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+            sUtils.requestPermission(new String[] {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, activity);
+            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+        } else if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
+            exportingBundleTask(linearLayout, textView, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
                     Common.getApplicationIcon(), activity);
         } else {
             exportingTask(linearLayout, textView, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity);
@@ -73,8 +76,8 @@ public class PackageDetails {
 
             @Override
             public void doInBackground() {
-                Utils.sleep(1);
-                Utils.copy(apk, PackageData.getPackageDir(activity) + "/" + name + ".apk");
+                sUtils.sleep(1);
+                sUtils.copy(new File(apk), new File(PackageData.getPackageDir(activity), name + ".apk"));
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -114,7 +117,7 @@ public class PackageDetails {
 
             @Override
             public void doInBackground() {
-                Utils.sleep(1);
+                sUtils.sleep(1);
                 List<File> mFiles = new ArrayList<>();
                 for (final String splitApps : SplitAPKInstaller.splitApks(apk)) {
                     mFiles.add(new File(apk + "/" + splitApps));
@@ -154,15 +157,15 @@ public class PackageDetails {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPreExecute() {
-                showProgress(progressLayout, progressMessage, PackageData.isEnabled(Common.getApplicationID(), activity) ?
+                showProgress(progressLayout, progressMessage, sPackageUtils.isEnabled(Common.getApplicationID(), activity) ?
                         activity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
                         activity.getString(R.string.enabling, Common.getApplicationName()) + "...");
             }
 
             @Override
             public void doInBackground() {
-                Utils.sleep(1);
-                if (PackageData.isEnabled(Common.getApplicationID(), activity)) {
+                sUtils.sleep(1);
+                if (sPackageUtils.isEnabled(Common.getApplicationID(), activity)) {
                     Utils.runCommand("pm disable " + Common.getApplicationID());
                 } else {
                     Utils.runCommand("pm enable " + Common.getApplicationID());
@@ -172,8 +175,8 @@ public class PackageDetails {
             @Override
             public void onPostExecute() {
                 hideProgress(progressLayout, progressMessage);
-                statusMessage.setText(PackageData.isEnabled(Common.getApplicationID(), activity) ? R.string.disable : R.string.enable);
-                openApp.setVisibility(PackageData.isEnabled(Common.getApplicationID(), activity) ? View.VISIBLE : View.GONE);
+                statusMessage.setText(sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? R.string.disable : R.string.enable);
+                openApp.setVisibility(sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? View.VISIBLE : View.GONE);
                 Common.reloadPage(true);
             }
         }.execute();
@@ -198,7 +201,7 @@ public class PackageDetails {
 
                         @Override
                         public void doInBackground() {
-                            Utils.sleep(1);
+                            sUtils.sleep(1);
                             Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
                         }
 
@@ -262,7 +265,7 @@ public class PackageDetails {
         List<ActivityInfo> activities = new ArrayList<>();
         try {
             try {
-                ActivityInfo[] list = PackageData.getPackageManager(context).getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
+                ActivityInfo[] list = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
                 activities.addAll(Arrays.asList(list));
             } catch (PackageManager.NameNotFoundException ignored) {
             }
@@ -275,25 +278,25 @@ public class PackageDetails {
             JSONObject obj = new JSONObject();
             obj.put("Name", PackageData.getAppName(packageName, context));
             obj.put("Package Name", packageName);
-            obj.put("Version", PackageData.getVersionName(PackageData.getSourceDir(packageName, context), context));
+            obj.put("Version", sAPKUtils.getVersionName(sPackageUtils.getSourceDir(packageName, context), context));
             obj.put("Google Play", "https://play.google.com/store/apps/details?id=" + packageName);
-            if (new File(PackageData.getSourceDir(packageName, context)).getName().equals("base.apk") && SplitAPKInstaller
-                    .splitApks(PackageData.getParentDir(packageName, context)).size() > 1) {
+            if (new File(sPackageUtils.getSourceDir(packageName, context)).getName().equals("base.apk") && SplitAPKInstaller
+                    .splitApks(sPackageUtils.getParentDir(packageName, context)).size() > 1) {
                 obj.put("App Bundle", true);
-                obj.put("Bundle Size", PackageData.getBundleSize(PackageData.getParentDir(packageName, context)));
+                obj.put("Bundle Size", PackageData.getBundleSize(sPackageUtils.getParentDir(packageName, context)));
                 JSONArray apks = new JSONArray();
                 for (String apk : SplitAPKInstaller
-                        .splitApks(PackageData.getParentDir(packageName, context))) {
+                        .splitApks(sPackageUtils.getParentDir(packageName, context))) {
                     apks.put(apk);
                 }
                 obj.put("Split APKs", apks);
 
             } else {
                 obj.put("App Bundle", false);
-                obj.put("APK Size", PackageData.getAPKSize(PackageData.getSourceDir(packageName ,context)));
+                obj.put("APK Size", sAPKUtils.getAPKSize(sPackageUtils.getSourceDir(packageName ,context)));
             }
-            obj.put("Installed", PackageData.getInstalledDate(packageName, context));
-            obj.put("Last updated", PackageData.getUpdatedDate(packageName, context));
+            obj.put("Installed", sPackageUtils.getInstalledDate(packageName, context));
+            obj.put("Last updated", sPackageUtils.getUpdatedDate(packageName, context));
             JSONObject permissions = new JSONObject();
             JSONArray granted = new JSONArray();
             for (String grantedPermissions : PackageDetails.getPermissionsGranted(packageName, context)) {

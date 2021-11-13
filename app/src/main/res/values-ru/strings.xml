@@ -17,10 +17,6 @@
     <string name="change_logs">"Список изменений"</string>
     <string name="credits">"Благодарности"</string>
     <string name="credits_summary">"Список людей, которые поддержали этот проект"</string>
-    <string name="dark_theme">"Тёмная тема"</string>
-    <string name="dark_theme_auto">"Авто"</string>
-    <string name="dark_theme_disable">"Включить"</string>
-    <string name="dark_theme_enable">"Выключить"</string>
     <string name="data_dir">"Каталог данных"</string>
     <string name="date_installation">"Дата установки"</string>
     <string name="date_installed">"Впервые установлено: %s"</string>

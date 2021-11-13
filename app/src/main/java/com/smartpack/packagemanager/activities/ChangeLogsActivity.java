@@ -16,17 +16,13 @@ import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Utils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Objects;
+import in.sunilpaulmathew.sCommon.Utils.sJSONUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020
  */
-
 public class ChangeLogsActivity extends AppCompatActivity {
 
     @Override
@@ -38,14 +34,8 @@ public class ChangeLogsActivity extends AppCompatActivity {
         MaterialTextView mChangeLogText = findViewById(R.id.changelog_text);
 
         mBack.setOnClickListener(v -> finish());
-
-        String change_log = null;
-        try {
-            change_log = new JSONObject(Objects.requireNonNull(Utils.readAssetFile(
-                    this, "changelogs.json"))).getString("releaseNotes");
-        } catch (JSONException ignored) {
-        }
-        mChangeLogText.setText(change_log);
+        mChangeLogText.setText(sJSONUtils.getString(sJSONUtils.getJSONObject(sUtils.readAssetFile(
+                "changelogs.json", this)), "releaseNotes"));
     }
 
 }

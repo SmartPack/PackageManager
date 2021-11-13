@@ -17,10 +17,6 @@
     <string name="change_logs">"Değişiklik Günlüğü"</string>
     <string name="credits">"Katkılar"</string>
     <string name="credits_summary">"Bu projeye katkı sağlamış insanların bir listesi"</string>
-    <string name="dark_theme">"Karanlık Tema"</string>
-    <string name="dark_theme_auto">"Otomatik"</string>
-    <string name="dark_theme_disable">"Devre Dışı Bırak"</string>
-    <string name="dark_theme_enable">"Aktif Et"</string>
     <string name="data_dir">"Veri Dizini"</string>
     <string name="date_installation">"Yüklenme Tarihi"</string>
     <string name="date_installed">"İlk Yüklenme: %s"</string>

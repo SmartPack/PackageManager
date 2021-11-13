@@ -13,7 +13,6 @@
     <string name="cancel">Ακύρωση</string>
     <string name="change_logs">Λίστα αλλαγών</string>
     <string name="credits">Ευχαριστίες</string>
-    <string name="dark_theme">Σκούρο Θέμα</string>
     <string name="disable_message">θα είναι %s! Είστε σίγουρος;</string>
     <string name="disabled">Ανενεργό</string>
     <string name="disabling">Απενεργοποίηση %s</string>

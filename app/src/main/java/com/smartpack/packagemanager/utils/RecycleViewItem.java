@@ -15,7 +15,6 @@ import java.io.Serializable;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-
 public class RecycleViewItem implements Serializable {
 
     private final Drawable mIcon;

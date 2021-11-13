@@ -19,7 +19,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.fragments.ActivitiesFragment;
 import com.smartpack.packagemanager.fragments.AppOpsFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
@@ -28,17 +27,19 @@ import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.fragments.SplitApksFragment;
 import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 
+import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020
  */
-
 public class PackageDetailsActivity extends AppCompatActivity {
 
     @SuppressLint("StringFormatInvalid")
@@ -55,11 +56,11 @@ public class PackageDetailsActivity extends AppCompatActivity {
 
         mAppIcon.setImageDrawable(Common.getApplicationIcon());
         mAppName.setText(Common.getApplicationName());
-        mVersion.setText(getString(R.string.version, PackageData.getVersionName(Common.getSourceDir(), this)));
+        mVersion.setText(getString(R.string.version, sAPKUtils.getVersionName(Common.getSourceDir(), this)));
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
+        sPagerAdapter adapter = new sPagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new PackageInfoFragment(), getString(R.string.app_info));
-        if (new File(PackageData.getSourceDir(Common.getApplicationID(), this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(PackageData.getParentDir(Common.getApplicationID(), this)).size() > 1) {
+        if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), this)).size() > 1) {
             adapter.AddFragment(new SplitApksFragment(), getString(R.string.split_apk));
         }
         if (PackageDetails.getPermissions(Common.getApplicationID(), this).size() > 0) {

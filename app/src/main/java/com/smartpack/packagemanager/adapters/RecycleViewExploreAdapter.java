@@ -25,10 +25,11 @@ import com.smartpack.packagemanager.utils.Utils;
 import java.io.File;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-
 public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewExploreAdapter.ViewHolder> {
 
     private static ClickListener clickListener;
@@ -51,7 +52,7 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
     public void onBindViewHolder(@NonNull RecycleViewExploreAdapter.ViewHolder holder, int position) {
         if (new File(data.get(position)).isDirectory()) {
             holder.mIcon.setImageDrawable(holder.mTitle.getContext().getResources().getDrawable(R.drawable.ic_folder));
-            if (Utils.isDarkTheme(holder.mIcon.getContext())) {
+            if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setBackground(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_background_circle));
             }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
@@ -64,7 +65,7 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
             holder.mIcon.setBackground(null);
         } else {
             holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file));
-            holder.mIcon.setColorFilter(Utils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
+            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
                     .getResources().getColor(R.color.colorWhite) : holder.mIcon.getContext().getResources().getColor(R.color.colorBlack));
             holder.mIcon.setBackground(null);
         }

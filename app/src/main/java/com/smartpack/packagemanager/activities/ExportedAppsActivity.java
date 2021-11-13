@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,12 +37,15 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExportedAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
@@ -79,10 +81,10 @@ public class ExportedAppsActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSort);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("reverse_order_exports", false, this));
+                    .setChecked(sUtils.getBoolean("reverse_order_exports", false, this));
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
-                    Utils.saveBoolean("reverse_order_exports", !Utils.getBoolean("reverse_order_exports", false, this), this);
+                    sUtils.saveBoolean("reverse_order_exports", !sUtils.getBoolean("reverse_order_exports", false, this), this);
                     loadUI();
                 }
                 return false;
@@ -90,7 +92,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
             popupMenu.show();
         });
 
-        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(this)) {
+        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = findViewById(R.id.permission_text);
@@ -98,8 +100,10 @@ public class ExportedAppsActivity extends AppCompatActivity {
             mPermissionLayout.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
             mTabLayout.setVisibility(View.GONE);
-            mPermissionGrant.setOnClickListener(v -> ActivityCompat.requestPermissions(this, new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1));
+            mPermissionGrant.setOnClickListener(v -> sUtils.requestPermission(new String[] {
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },this)
+            );
             return;
         }
 
@@ -113,17 +117,17 @@ public class ExportedAppsActivity extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = Utils.getString("downloadTypes", "apks", ExportedAppsActivity.this);
+                String mStatus = sUtils.getString("downloadTypes", "apks", ExportedAppsActivity.this);
                 switch (tab.getPosition()) {
                     case 0:
                         if (!mStatus.equals("apks")) {
-                            Utils.saveString("downloadTypes", "apks", ExportedAppsActivity.this);
+                            sUtils.saveString("downloadTypes", "apks", ExportedAppsActivity.this);
                             loadUI();
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("bundles")) {
-                            Utils.saveString("downloadTypes", "bundles", ExportedAppsActivity.this);
+                            sUtils.saveString("downloadTypes", "bundles", ExportedAppsActivity.this);
                             loadUI();
                         }
                         break;
@@ -184,7 +188,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
                     } else {
                         Common.getAppList().clear();
                         Common.getAppList().add(Downloads.getData(this).get(position));
-                        Common.isUpdating(Utils.isPackageInstalled(PackageData.getAPKId(Downloads.getData(this).get(position), this), this));
+                        Common.isUpdating(sPackageUtils.isPackageInstalled(sAPKUtils.getPackageName(Downloads.getData(this).get(position), this), this));
                         SplitAPKInstaller.installSplitAPKs(this);
                     }
                 }).show());
@@ -197,7 +201,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
     }
 
     private int getTabPosition(Activity activity) {
-        if (Utils.getString("downloadTypes", "apks", activity).equals("bundles")) {
+        if (sUtils.getString("downloadTypes", "apks", activity).equals("bundles")) {
             return 1;
         } else {
             return 0;
@@ -207,7 +211,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode == 1 && grantResults.length > 0
+        if (requestCode == 0 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             this.recreate();
         }

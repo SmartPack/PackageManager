@@ -40,6 +40,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 10, 2021
  */
@@ -125,10 +128,10 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSort);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("reverse_order", false, this));
+                    .setChecked(sUtils.getBoolean("reverse_order", false, this));
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
-                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, this), this);
+                    sUtils.saveBoolean("reverse_order", !sUtils.getBoolean("reverse_order", false, this), this);
                     loadUI();
                 }
                 return false;
@@ -174,9 +177,9 @@ public class UninstalledAppsActivity extends AppCompatActivity {
 
     private List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
-        List<ApplicationInfo> packages = PackageData.getPackageManager(context).getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+        List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
         for (ApplicationInfo packageInfo : packages) {
-            if (!Utils.isPackageInstalled(packageInfo.packageName, context)) {
+            if (!sPackageUtils.isPackageInstalled(packageInfo.packageName, context)) {
                 if (mSearchText == null) {
                     mData.add(packageInfo.packageName);
                 } else if (packageInfo.packageName.contains(mSearchText)) {
@@ -184,7 +187,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
                 }
             }
         }
-        if (Utils.getBoolean("reverse_order", false, context)) {
+        if (sUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;

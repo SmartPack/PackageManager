@@ -41,6 +41,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 12, 2020
  */
@@ -61,7 +63,7 @@ public class BillingActivity extends AppCompatActivity {
         AppCompatImageButton mSupporterIcon = findViewById(R.id.supporter_button);
         MaterialTextView mSupporterMessage = findViewById(R.id.supporter_message);
 
-        if (Utils.getBoolean("support_received", false, this) || !Utils.isNotDonated(this)) {
+        if (sUtils.getBoolean("support_received", false, this) || !Utils.isNotDonated(this)) {
             mSupporterIcon.setVisibility(View.VISIBLE);
             mSupporterMessage.setText(getString(R.string.support_status_message));
         }
@@ -97,9 +99,9 @@ public class BillingActivity extends AppCompatActivity {
                     handlePurchases(purchase);
                 }
             } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.support_retry_message));
+                sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.support_retry_message)).show();
             } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
-                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.support_already_received_message));
+                sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.support_already_received_message)).show();
             }
         }).build();
 
@@ -113,22 +115,22 @@ public class BillingActivity extends AppCompatActivity {
 
             @Override
             public void onBillingServiceDisconnected() {
-                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected));
+                sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected)).show();
             }
         });
     }
 
     private void buyDonationApp() {
         if (!Utils.isNotDonated(this)) {
-            Utils.snackbar(findViewById(android.R.id.content), getString(R.string.support_already_received_message));
+            sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.support_already_received_message)).show();
             return;
         }
-        Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.donate", this);
+        sUtils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.donate", this);
     }
 
     private void buyMeACoffee() {
         if (!mClientInitialized) {
-            Utils.snackbar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected));
+            sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected)).show();
             return;
         }
         mSkuList.clear();
@@ -153,7 +155,7 @@ public class BillingActivity extends AppCompatActivity {
 
     private void buyMeADinner() {
         if (!mClientInitialized) {
-            Utils.snackbar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected));
+            sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected)).show();
             return;
         }
         mSkuList.clear();
@@ -178,7 +180,7 @@ public class BillingActivity extends AppCompatActivity {
 
     private void buyMeAMeal() {
         if (!mClientInitialized) {
-            Utils.snackbar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected));
+            sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.billing_client_disconnected)).show();
             return;
         }
         mSkuList.clear();
@@ -209,7 +211,7 @@ public class BillingActivity extends AppCompatActivity {
                             .setPurchaseToken(purchase.getPurchaseToken())
                             .build();
 
-                    ConsumeResponseListener mConsumeResponseListener = (billingResult, s) -> Utils.snackbar(findViewById(android.R.id.content), getString(R.string.support_acknowledged));
+                    ConsumeResponseListener mConsumeResponseListener = (billingResult, s) -> sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.support_acknowledged)).show();
 
                     mBillingClient.consumeAsync(consumeParams, mConsumeResponseListener);
                     new MaterialAlertDialogBuilder(this)
@@ -217,7 +219,7 @@ public class BillingActivity extends AppCompatActivity {
                             .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             }).show();
 
-                    Utils.saveBoolean("support_received", true, this);
+                    sUtils.saveBoolean("support_received", true, this);
                 }
             }
         } catch (Exception ignored) {}

@@ -18,12 +18,10 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
@@ -34,6 +32,10 @@ import com.smartpack.packagemanager.utils.RecycleSettingsItem;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
+
+import in.sunilpaulmathew.sCommon.Utils.sSingleChoiceDialog;
+import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
@@ -55,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
 
         mAppTitle.setText(getString(R.string.app_name) + (Utils.isProUser(this) ? " Pro " :  " ") + BuildConfig.VERSION_NAME);
-        mAppTitle.setTextColor(Utils.isDarkTheme(this) ? Color.WHITE : Color.BLACK);
+        mAppTitle.setTextColor(sUtils.isDarkTheme(this) ? Color.WHITE : Color.BLACK);
         mCopyright.setText(getString(R.string.copyright, "2021-2022, sunilpaulmathew"));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,11 +76,11 @@ public class SettingsActivity extends AppCompatActivity {
         // User interface
         mData.add(new RecycleSettingsItem(getString(R.string.user_interface), null, null, null, getResources().getColor(R.color.colorAccent), 15));
         mData.add(new RecycleSettingsItem(getString(R.string.language), AppSettings.getLanguage(this), getResources().getDrawable(R.drawable.ic_language), null, 0, 18));
-        mData.add(new RecycleSettingsItem(getString(R.string.dark_theme), AppSettings.getAppThemeDescription(this), getResources().getDrawable(R.drawable.ic_theme), null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.app_theme), sThemeUtils.getAppTheme(this), getResources().getDrawable(R.drawable.ic_theme), null, 0, 18));
 
         // General
         mData.add(new RecycleSettingsItem(getString(R.string.general), null, null, null, getResources().getColor(R.color.colorAccent), 15));
-        mData.add(new RecycleSettingsItem(getString(R.string.exported_apps_name), AppSettings.getExportedAPKNAme(this), getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.exported_apps_name), AppSettings.getExportedAPKName(this), getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.installer_clicking), AppSettings.getInstallerStatus(this), getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.exiting_app), AppSettings.getExitingStatus(this), getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
 
@@ -107,109 +109,89 @@ public class SettingsActivity extends AppCompatActivity {
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             if (mData.get(position).getUrl() != null) {
-                Utils.launchUrl(mData.get(position).getUrl(), this);
+                sUtils.launchUrl(mData.get(position).getUrl(), this);
             } else if (position == 1) {
                 AppSettings.setLanguage(this);
             } else if (position == 2) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.app_theme), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            if (!Utils.getBoolean("theme_auto", true, this)) {
-                                Utils.saveBoolean("dark_theme", false, this);
-                                Utils.saveBoolean("light_theme", false, this);
-                                Utils.saveBoolean("theme_auto", true, this);
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                            }
-                            break;
-                        case 1:
-                            if (!Utils.getBoolean("dark_theme", false, this)) {
-                                Utils.saveBoolean("dark_theme", true, this);
-                                Utils.saveBoolean("light_theme", false, this);
-                                Utils.saveBoolean("theme_auto", false, this);
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                            }
-                            break;
-                        case 2:
-                            if (!Utils.getBoolean("light_theme", false, this)) {
-                                Utils.saveBoolean("dark_theme", false, this);
-                                Utils.saveBoolean("light_theme", true, this);
-                                Utils.saveBoolean("theme_auto", false, this);
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            }
-                            break;
-                    }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
+                sThemeUtils.setAppTheme(this);
             } else if (position == 4) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.exported_name_options), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            if (!Utils.getString("exportedAPKName", getString(R.string.package_id), this).equals(getString(R.string.package_id))) {
-                                Utils.saveString("exportedAPKName", getString(R.string.package_id), this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.exported_apps_name), getString(R.string.package_id),
-                                        getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 1:
-                            if (!Utils.getString("exportedAPKName", getString(R.string.package_id), this).equals(getString(R.string.name))) {
-                                Utils.saveString("exportedAPKName", getString(R.string.name), this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.exported_apps_name), getString(R.string.name),
-                                        getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
+                new sSingleChoiceDialog(R.drawable.ic_pencil, getString(R.string.exported_apps_name),
+                        AppSettings.getAPKNameOptionsMenu(this), AppSettings.getAPKNameOptionsPosition(this), this) {
+
+                    @Override
+                    public void onItemSelected(int itemPosition) {
+                        switch (itemPosition) {
+                            case 0:
+                                if (!sUtils.getString("exportedAPKName", getString(R.string.package_id), SettingsActivity.this).equals(getString(R.string.package_id))) {
+                                    sUtils.saveString("exportedAPKName", getString(R.string.package_id), SettingsActivity.this);
+                                    mData.set(position, new RecycleSettingsItem(getString(R.string.exported_apps_name), getString(R.string.package_id),
+                                            getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
+                                    mRecycleViewAdapter.notifyItemChanged(position);
+                                }
+                                break;
+                            case 1:
+                                if (!sUtils.getString("exportedAPKName", getString(R.string.package_id), SettingsActivity.this).equals(getString(R.string.name))) {
+                                    sUtils.saveString("exportedAPKName", getString(R.string.name), SettingsActivity.this);
+                                    mData.set(position, new RecycleSettingsItem(getString(R.string.exported_apps_name), getString(R.string.name),
+                                            getResources().getDrawable(R.drawable.ic_pencil), null, 0, 18));
+                                    mRecycleViewAdapter.notifyItemChanged(position);
+                                }
+                                break;
+                        }
                     }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
+                }.show();
             } else if (position == 5) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.installer_options), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            if (Utils.getBoolean("neverShow", false, this)) {
-                                Utils.saveBoolean("neverShow", false, this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.installer_clicking), getString(R.string.installer_instructions),
-                                        getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 1:
-                            if (!Utils.getBoolean("neverShow", false, this)) {
-                                Utils.saveBoolean("neverShow", true, this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.installer_clicking), getString(R.string.installer_file_picker),
-                                        getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
+                new sSingleChoiceDialog(R.drawable.ic_install, getString(R.string.installer_clicking),
+                        AppSettings.getInstallerOptionsMenu(this), AppSettings.getInstallerOptionsPosition(this), this) {
+
+                    @Override
+                    public void onItemSelected(int itemPosition) {
+                        switch (itemPosition) {
+                            case 0:
+                                if (sUtils.getBoolean("neverShow", false, SettingsActivity.this)) {
+                                    sUtils.saveBoolean("neverShow", false, SettingsActivity.this);
+                                    mData.set(position, new RecycleSettingsItem(getString(R.string.installer_clicking), getString(R.string.installer_instructions),
+                                            getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
+                                    mRecycleViewAdapter.notifyItemChanged(position);
+                                }
+                                break;
+                            case 1:
+                                if (!sUtils.getBoolean("neverShow", false, SettingsActivity.this)) {
+                                    sUtils.saveBoolean("neverShow", true, SettingsActivity.this);
+                                    mData.set(position, new RecycleSettingsItem(getString(R.string.installer_clicking), getString(R.string.installer_file_picker),
+                                            getResources().getDrawable(R.drawable.ic_install), null, 0, 18));
+                                    mRecycleViewAdapter.notifyItemChanged(position);
+                                }
+                                break;
+                        }
                     }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
+                }.show();
             } else if (position == 6) {
-                new MaterialAlertDialogBuilder(this).setItems(getResources().getStringArray(
-                        R.array.app_exit_options), (dialogInterface, i) -> {
-                    switch (i) {
-                        case 0:
-                            if (Utils.getBoolean("exit_confirmation", true, this)) {
-                                Utils.saveBoolean("exit_confirmation", false, this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_simple),
-                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
-                        case 1:
-                            if (!Utils.getBoolean("exit_confirmation", true, this)) {
-                                Utils.saveBoolean("exit_confirmation", true, this);
-                                mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_confirmation),
-                                        getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
-                                mRecycleViewAdapter.notifyItemChanged(position);
-                            }
-                            break;
+                new sSingleChoiceDialog(R.drawable.ic_exit, getString(R.string.exiting_app),
+                        AppSettings.getExitOptionsMenu(this), AppSettings.getExitMenuPosition(this), this) {
+
+                    @Override
+                    public void onItemSelected(int itemPosition) {
+                        switch (itemPosition) {
+                            case 0:
+                                if (sUtils.getBoolean("exit_confirmation", true, SettingsActivity.this)) {
+                                    sUtils.saveBoolean("exit_confirmation", false, SettingsActivity.this);
+                                    mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_simple),
+                                            getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                                    mRecycleViewAdapter.notifyItemChanged(position);
+                                }
+                                break;
+                            case 1:
+                                if (!sUtils.getBoolean("exit_confirmation", true, SettingsActivity.this)) {
+                                    sUtils.saveBoolean("exit_confirmation", true, SettingsActivity.this);
+                                    mData.set(position, new RecycleSettingsItem(getString(R.string.exiting_app), getString(R.string.exit_confirmation),
+                                            getResources().getDrawable(R.drawable.ic_exit), null, 0, 18));
+                                    mRecycleViewAdapter.notifyItemChanged(position);
+                                }
+                                break;
+                        }
                     }
-                }).setOnDismissListener(dialogInterface -> {
-                }).show();
+                }.show();
             } else if (position == 11) {
                 Billing.showDonateOption(this);
             } else if (position == 15) {

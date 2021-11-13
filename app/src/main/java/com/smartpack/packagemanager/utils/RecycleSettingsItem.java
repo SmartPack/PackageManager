@@ -15,7 +15,6 @@ import java.io.Serializable;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-
 public class RecycleSettingsItem implements Serializable {
     private final String mTitle, mDescription, mUrl;
     private final Drawable mIcon;

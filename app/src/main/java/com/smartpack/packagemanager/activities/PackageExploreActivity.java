@@ -31,10 +31,11 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2020
@@ -60,7 +61,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         mTitle.setText(Common.getApplicationName());
 
         mBack.setOnClickListener(v -> {
-            Utils.delete(getCacheDir().getPath() + "/apk");
+            sUtils.delete(new File(getCacheDir().getPath(), "apk"));
             super.onBackPressed();
         });
 
@@ -102,9 +103,9 @@ public class PackageExploreActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSortButton);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, "A-Z").setCheckable(true)
-                    .setChecked(Utils.getBoolean("az_order", true, this));
+                    .setChecked(sUtils.getBoolean("az_order", true, this));
             popupMenu.setOnMenuItemClickListener(item -> {
-                Utils.saveBoolean("az_order", !Utils.getBoolean("az_order", true, this), this);
+                sUtils.saveBoolean("az_order", !sUtils.getBoolean("az_order", true, this), this);
                 reload(this);
                 return false;
             });
@@ -137,7 +138,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (Common.getPath().equals(getCacheDir().toString() + "/apk/")) {
-            Utils.delete(getCacheDir().getPath() + "/apk");
+            sUtils.delete(new File(getCacheDir().getPath(),"apk"));
             finish();
         } else {
             Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());

@@ -27,10 +27,13 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 06, 2021
@@ -72,12 +75,12 @@ public class InstallerActivity extends AppCompatActivity {
                 startActivity(launchIntent);
                 finish();
             } else {
-                Utils.snackbar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this)));
+                sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this))).show();
             }
             PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
-                    PackageData.getAppName(Common.getApplicationID(), this),
-                    PackageData.getAppIcon(Common.getApplicationID(), this),
-                    new File(PackageData.getSourceDir(Common.getApplicationID(), this)).length(),
+                    sPackageUtils.getAppName(Common.getApplicationID(), this).toString(),
+                    sPackageUtils.getAppIcon(Common.getApplicationID(), this),
+                    new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).length(),
                     Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).firstInstallTime,
                     Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).lastUpdateTime));
             Common.reloadPage(true);
@@ -97,7 +100,7 @@ public class InstallerActivity extends AppCompatActivity {
                     while (!isInterrupted()) {
                         Thread.sleep(500);
                         runOnUiThread(() -> {
-                            String installationStatus = Utils.getString("installationStatus", "waiting", activity);
+                            String installationStatus = sUtils.getString("installationStatus", "waiting", activity);
                             if (installationStatus.equals("waiting")) {
                                 mStatus.setText(getString(R.string.installing_bundle));
                             } else {
@@ -105,7 +108,7 @@ public class InstallerActivity extends AppCompatActivity {
                                 if (installationStatus.equals(getString(R.string.installation_status_success))) {
                                     try {
                                         mTitle.setText(PackageData.getAppName(Common.getApplicationID(), activity));
-                                        mIcon.setImageDrawable(PackageData.getAppIcon(Common.getApplicationID(), activity));
+                                        mIcon.setImageDrawable(sPackageUtils.getAppIcon(Common.getApplicationID(), activity));
                                         mOpen.setVisibility(View.VISIBLE);
                                     } catch (NullPointerException ignored) {}
                                 }
@@ -122,8 +125,8 @@ public class InstallerActivity extends AppCompatActivity {
     private CharSequence getName() {
         CharSequence name = null;
         for (String mAPKs : Common.getAppList()) {
-            if (PackageData.getAPKName(mAPKs, this) != null) {
-                name = PackageData.getAPKName(mAPKs, this);
+            if (sAPKUtils.getAPKName(mAPKs, this) != null) {
+                name = sAPKUtils.getAPKName(mAPKs, this);
             }
         }
         return name;
@@ -132,8 +135,8 @@ public class InstallerActivity extends AppCompatActivity {
     private Drawable getIcon() {
         Drawable icon = null;
         for (String mAPKs : Common.getAppList()) {
-            if (PackageData.getAPKIcon(mAPKs, this) != null) {
-                icon = PackageData.getAPKIcon(mAPKs, this);
+            if (sAPKUtils.getAPKIcon(mAPKs, this) != null) {
+                icon = sAPKUtils.getAPKIcon(mAPKs, this);
             }
         }
         return icon;
@@ -141,16 +144,16 @@ public class InstallerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!SplitAPKInstaller.isPermissionDenied(this) && Utils.getString("installationStatus", "waiting", this).equals("waiting")) {
+        if (!SplitAPKInstaller.isPermissionDenied(this) && sUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
         }
-        if (Utils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
+        if (sUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
             if (!Common.isUpdating()) {
                 try {
                     PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
                             PackageData.getAppName(Common.getApplicationID(), this),
-                            PackageData.getAppIcon(Common.getApplicationID(), this),
-                            new File(PackageData.getSourceDir(Common.getApplicationID(), this)).length(),
+                            sPackageUtils.getAppIcon(Common.getApplicationID(), this),
+                            new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).length(),
                             Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).firstInstallTime,
                             Objects.requireNonNull(PackageData.getPackageInfo(Common.getApplicationID(), this)).lastUpdateTime));
                 } catch (NullPointerException ignored) {}

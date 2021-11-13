@@ -8,29 +8,28 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
 
 import java.io.File;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 12, 2020
  */
-
 public class PackageData {
 
     private static List<RecycleViewItem> mRawData = null;
@@ -44,15 +43,16 @@ public class PackageData {
 
     private static List<RecycleViewItem> getRawData(Context context) {
         List<RecycleViewItem> mRawData = new ArrayList<>();
-        List<ApplicationInfo> packages = getPackageManager(context).getInstalledApplications(PackageManager.GET_META_DATA);
+        List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
             mRawData.add(new RecycleViewItem(
                     packageInfo.packageName,
                     getAppName(packageInfo.packageName, context),
-                    getAppIcon(packageInfo.packageName, context),
-                    new File(getSourceDir(packageInfo.packageName, context)).length(),
+                    sPackageUtils.getAppIcon(packageInfo.packageName, context),
+                    new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(),
                     Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).firstInstallTime,
-                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime));
+                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime)
+            );
         }
         return mRawData;
     }
@@ -61,10 +61,10 @@ public class PackageData {
         boolean mAppType;
         List<RecycleViewItem> mData = new ArrayList<>();
         for (RecycleViewItem item : getRawData()) {
-            if (Utils.getString("appTypes", "all", context).equals("system")) {
-                mAppType = (isSystemApp(item.getPackageName(), context));
-            } else if (Utils.getString("appTypes", "all", context).equals("user")) {
-                mAppType = (!isSystemApp(item.getPackageName(), context));
+            if (sUtils.getString("appTypes", "all", context).equals("system")) {
+                mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
+            } else if (sUtils.getString("appTypes", "all", context).equals("user")) {
+                mAppType = (!sPackageUtils.isSystemApp(item.getPackageName(), context));
             } else {
                 mAppType = true;
             }
@@ -76,26 +76,22 @@ public class PackageData {
                     mData.add(item);
                 }
             }
-            if (Utils.getBoolean("sort_name", false, context)) {
+            if (sUtils.getBoolean("sort_name", false, context)) {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_size", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_size", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getAPKSize));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_installed", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_installed", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getInstalledTime));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Utils.getBoolean("sort_updated", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_updated", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getUpdatedTime));
             } else {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
             }
         }
-        if (Utils.getBoolean("reverse_order", false, context)) {
+        if (sUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;
-    }
-
-    public static PackageManager getPackageManager(Context context) {
-        return context.getApplicationContext().getPackageManager();
     }
 
     public static PackageInfo getPackageInfo(String packageName, Context context) {
@@ -106,106 +102,15 @@ public class PackageData {
         return null;
     }
 
-    public static ApplicationInfo getAppInfo(String packageName, Context context) {
-        try {
-            return getPackageManager(context).getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-        } catch (Exception ignored) {
-        }
-        return null;
-    }
-
     public static String getAppName(String packageName, Context context) {
-        return getPackageManager(context).getApplicationLabel(Objects.requireNonNull(getAppInfo(
-                packageName, context))) + (isEnabled(packageName, context) ? "" : " (Disabled)");
-    }
-
-    public static Drawable getAppIcon(String packageName, Context context) {
-        return getPackageManager(context).getApplicationIcon(Objects.requireNonNull(getAppInfo(packageName, context)));
-    }
-
-    public static String getSourceDir(String packageName, Context context) {
-        return Objects.requireNonNull(getAppInfo(packageName, context)).sourceDir;
-    }
-
-    public static String getParentDir(String packageName, Context context) {
-        return Objects.requireNonNull(new File(Objects.requireNonNull(getAppInfo(packageName, context))
-                .sourceDir).getParentFile()).toString();
-    }
-
-    public static String getNativeLibDir(String packageName, Context context) {
-        return Objects.requireNonNull(getAppInfo(packageName, context)).nativeLibraryDir;
-    }
-
-    public static String getDataDir(String packageName, Context context) {
-        return Objects.requireNonNull(getAppInfo(packageName, context)).dataDir;
+        return sPackageUtils.getAppName(packageName, context) + (sPackageUtils.isEnabled(packageName, context) ? "" : " (Disabled)");
     }
 
     public static String getFileName(String packageName, Context context) {
-        if (Utils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
+        if (sUtils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
             return getAppName(packageName, context);
         } else {
             return packageName;
-        }
-    }
-
-    public static String getVersionName(String packageName, Context context) {
-        return Objects.requireNonNull(getPackageManager(context).getPackageArchiveInfo(packageName, 0)).versionName;
-    }
-
-
-    public static String getInstalledDate(String packageName, Context context) {
-        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(packageName, context)).firstInstallTime);
-    }
-
-    public static String getUpdatedDate(String packageName, Context context) {
-        return DateFormat.getDateTimeInstance().format(Objects.requireNonNull(getPackageInfo(packageName, context)).lastUpdateTime);
-    }
-
-    public static boolean isEnabled(String packageName, Context context) {
-        return Objects.requireNonNull(getAppInfo(packageName, context)).enabled;
-    }
-
-    public static boolean isSystemApp(String packageName, Context context) {
-        try {
-            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-        } catch (NullPointerException ignored) {}
-        return false;
-    }
-
-    public static boolean isUpdatedSystemApp(String packageName, Context context) {
-        try {
-            return (Objects.requireNonNull(getAppInfo(packageName, context)).flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
-        } catch (NullPointerException ignored) {}
-        return false;
-    }
-
-    public static CharSequence getAPKName(String apkPath, Context context) {
-        PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
-        if (pi != null) {
-            return pi.applicationInfo.loadLabel(getPackageManager(context));
-        } else {
-            return null;
-        }
-    }
-
-    public static String getAPKId(String apkPath, Context context) {
-        PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
-        if (pi != null) {
-            return pi.applicationInfo.packageName;
-        } else {
-            return null;
-        }
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    public static Drawable getAPKIcon(String apkPath, Context context) {
-        PackageInfo pi = getPackageManager(context).getPackageArchiveInfo(apkPath, 0);
-        if (pi != null) {
-            return pi.applicationInfo.loadIcon(getPackageManager(context));
-        } else {
-            Drawable drawable = context.getResources().getDrawable(R.drawable.ic_android);
-            drawable.setTint(context.getResources().getColor(R.color.colorAccent));
-            return drawable;
         }
     }
 
@@ -219,16 +124,6 @@ public class PackageData {
 
     public static void clearAppSettings(String packageID) {
         Utils.runCommand("pm clear " + packageID);
-    }
-
-    public static String getAPKSize(String path) {
-        long size = new File(path).length() / 1024;
-        long decimal = (size - 1024) / 1024;
-        if (size > 1024) {
-            return size / 1024 + "." + decimal + " MB";
-        } else {
-            return size  + " KB";
-        }
     }
 
     public static String getBundleSize(String path) {

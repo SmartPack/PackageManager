@@ -21,8 +21,6 @@ import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.core.app.ActivityCompat;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
@@ -34,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
@@ -55,7 +55,7 @@ public class PackageExplorer {
     }
 
     public static int getSpanCount(Activity activity) {
-        return Utils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
+        return sUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
     }
 
     public static String readManifest(String apk) {
@@ -106,10 +106,11 @@ public class PackageExplorer {
     }
 
     public static void saveIcon(Bitmap bitmap, String dest, Activity activity) {
-        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
-            ActivityCompat.requestPermissions(activity, new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
+        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+            sUtils.requestPermission(new String[] {
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    activity);
+            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
             return;
         }
         new AsyncTasks() {
@@ -143,24 +144,25 @@ public class PackageExplorer {
     }
 
     public static void copyToStorage(String path, String dest, Activity activity) {
-        if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
-            ActivityCompat.requestPermissions(activity, new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
+        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+            sUtils.requestPermission(new String[] {
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    activity);
+            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
             return;
         }
         new AsyncTasks() {
 
             @Override
             public void onPreExecute() {
-                if (!Utils.exist(dest)) {
-                    Utils.mkdir(dest);
+                if (!sUtils.exist(new File(dest))) {
+                    sUtils.mkdir(new File(dest));
                 }
             }
 
             @Override
             public void doInBackground() {
-                Utils.copy(path, dest + "/" + new File(path).getName());
+                sUtils.copy(new File(path), new File(dest, new File(path).getName()));
             }
 
             @Override
@@ -180,10 +182,10 @@ public class PackageExplorer {
             @Override
             public void onPreExecute() {
                 linearLayout.setVisibility(View.VISIBLE);
-                if (Utils.exist(activity.getCacheDir().getPath() + "/apk")) {
-                    Utils.delete(activity.getCacheDir().getPath() + "/apk");
+                if (sUtils.exist(new File(activity.getCacheDir().getPath(), "apk"))) {
+                    sUtils.delete(new File(activity.getCacheDir().getPath(), "apk"));
                 }
-                Utils.mkdir(activity.getCacheDir().getPath() + "/apk");
+                sUtils.mkdir(new File(activity.getCacheDir().getPath(), "apk"));
                 Common.setPath(activity.getCacheDir().getPath() + "/apk");
             }
 

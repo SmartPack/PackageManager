@@ -30,10 +30,6 @@
     <string name="copyright">Copyright: © %s</string>
     <string name="credits">Credits</string>
     <string name="credits_summary">A list of people who contributed to this project</string>
-    <string name="dark_theme">Dark Theme</string>
-    <string name="dark_theme_auto">Auto</string>
-    <string name="dark_theme_disable">Disable</string>
-    <string name="dark_theme_enable">Enable</string>
     <string name="data_dir">Data Directory</string>
     <string name="date_installation">Installation Dates</string>
     <string name="date_installed">First Installed: %s</string>
@@ -94,24 +90,7 @@
     <string name="installer_summary">You can select installation file(s) by clicking the plus button at the top of this page. The installer supports the following packages:</string>
     <string name="installing_bundle">Installing App Bundle</string>
     <string name="language">Language</string>
-    <string name="language_am" translatable="false">አማርኛ</string>
-    <string name="language_cs" translatable="false">čeština</string>
     <string name="language_default">Default</string>
-    <string name="language_el" translatable="false">Ελληνικά</string>
-    <string name="language_en" translatable="false">English</string>
-    <string name="language_es" translatable="false">Español</string>
-    <string name="language_fr" translatable="false">français</string>
-    <string name="language_de" translatable="false">Deutsch</string>
-    <string name="language_hu" translatable="false">Magyar</string>
-    <string name="language_ko" translatable="false">한국어</string>
-    <string name="language_ml" translatable="false">മലയാളം</string>
-    <string name="language_pl" translatable="false">Polski"</string>
-    <string name="language_pt" translatable="false">Português</string>
-    <string name="language_ru" translatable="false">русский</string>
-    <string name="language_tr" translatable="false">Türkçe</string>
-    <string name="language_uk" translatable="false">Українська</string>
-    <string name="language_vi" translatable="false">Tiếng Việt</string>
-    <string name="language_zh" translatable="false">中文（简体）</string>
     <string name="manifest">Manifest</string>
     <string name="more">More</string>
     <string name="more_apps">More from Developer</string>

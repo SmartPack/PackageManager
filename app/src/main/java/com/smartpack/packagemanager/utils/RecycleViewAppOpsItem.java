@@ -14,7 +14,6 @@ import java.io.Serializable;
  * Created by Lennoard <lennoardrai@gmail.com> on Mar 14, 2021
  * Modified by sunilpaulmathew <sunil.kde@gmail.com> on Mar 17, 2021
  */
-
 public class RecycleViewAppOpsItem implements Serializable {
     private final String mTitle, mDescription;
     private final boolean mEnabled;

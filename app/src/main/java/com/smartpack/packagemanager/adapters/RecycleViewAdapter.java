@@ -26,11 +26,13 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ImageViewActivity;
 import com.smartpack.packagemanager.activities.PackageDetailsActivity;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
+
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
@@ -53,7 +55,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
-        if (!Utils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
+        if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
             return;
         }
         holder.appIcon.setImageDrawable(data.get(position).getIcon());
@@ -69,8 +71,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
         holder.appName.setText(data.get(position).getAppName());
         holder.appIcon.setOnClickListener(v -> {
-            if (!Utils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                Utils.snackbar(v, v.getContext().getString(R.string.package_removed));
+            if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
+                sUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
                 return;
             }
             Common.setApplicationName(data.get(position).getAppName());
@@ -80,17 +82,17 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         });
         holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position).getPackageName()));
         holder.checkBox.setOnClickListener(v -> {
-            if (!Utils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                Utils.snackbar(v, v.getContext().getString(R.string.package_removed));
+            if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
+                sUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
                 holder.checkBox.setChecked(false);
                 return;
             }
             if (Common.getBatchList().contains(data.get(position).getPackageName())) {
                 Common.getBatchList().remove(data.get(position).getPackageName());
-                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName()));
+                sUtils.snackBar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName())).show();
             } else {
                 Common.getBatchList().add(data.get(position).getPackageName());
-                Utils.snackbar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName()));
+                sUtils.snackBar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName())).show();
             }
             Common.getBatchOptionsCard().setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
         });
@@ -118,17 +120,17 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         @Override
         public void onClick(View view) {
-            if (!Utils.isPackageInstalled(data.get(getAdapterPosition()).getPackageName(), view.getContext())) {
-                Utils.snackbar(view, view.getContext().getString(R.string.package_removed));
+            if (!sPackageUtils.isPackageInstalled(data.get(getAdapterPosition()).getPackageName(), view.getContext())) {
+                sUtils.snackBar(view, view.getContext().getString(R.string.package_removed)).show();
                 return;
             }
             Common.setApplicationID(data.get(getAdapterPosition()).getPackageName());
             Common.setApplicationName(data.get(getAdapterPosition()).getAppName());
             Common.setApplicationIcon(data.get(getAdapterPosition()).getIcon());
-            Common.setSourceDir(PackageData.getSourceDir(Common.getApplicationID(), view.getContext()));
-            Common.setDataDir(PackageData.getDataDir(Common.getApplicationID(), view.getContext()));
-            Common.setNativeLibsDir(PackageData.getNativeLibDir(Common.getApplicationID(), view.getContext()));
-            Common.isSystemApp(PackageData.isSystemApp(Common.getApplicationID(), view.getContext()));
+            Common.setSourceDir(sPackageUtils.getSourceDir(Common.getApplicationID(), view.getContext()));
+            Common.setDataDir(sPackageUtils.getDataDir(Common.getApplicationID(), view.getContext()));
+            Common.setNativeLibsDir(sPackageUtils.getNativeLibDir(Common.getApplicationID(), view.getContext()));
+            Common.isSystemApp(sPackageUtils.isSystemApp(Common.getApplicationID(), view.getContext()));
             Intent details = new Intent(view.getContext(), PackageDetailsActivity.class);
             view.getContext().startActivity(details);
         }

@@ -19,7 +19,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 12, 2021
@@ -35,9 +36,9 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
         AppCompatImageButton mAdd = findViewById(R.id.add_button);
         SwitchMaterial mHideSwitch = findViewById(R.id.hide_switch);
 
-        mHideSwitch.setChecked(Utils.getBoolean("neverShow", false, this));
+        mHideSwitch.setChecked(sUtils.getBoolean("neverShow", false, this));
 
-        mHideSwitch.setOnClickListener(v -> Utils.saveBoolean("neverShow", !Utils.getBoolean(
+        mHideSwitch.setOnClickListener(v -> sUtils.saveBoolean("neverShow", !sUtils.getBoolean(
                 "neverShow",false, this), this));
 
         mBack.setOnClickListener(v -> finish());

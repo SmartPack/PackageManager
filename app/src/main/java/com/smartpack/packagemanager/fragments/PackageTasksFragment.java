@@ -30,7 +30,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,6 +62,9 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
+
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
@@ -110,23 +112,23 @@ public class PackageTasksFragment extends Fragment {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = Utils.getString("appTypes", "all", requireActivity());
+                String mStatus = sUtils.getString("appTypes", "all", requireActivity());
                 switch (tab.getPosition()) {
                     case 0:
                         if (!mStatus.equals("all")) {
-                            Utils.saveString("appTypes", "all", requireActivity());
+                            sUtils.saveString("appTypes", "all", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("system")) {
-                            Utils.saveString("appTypes", "system", requireActivity());
+                            sUtils.saveString("appTypes", "system", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 2:
                         if (!mStatus.equals("user")) {
-                            Utils.saveString("appTypes", "user", requireActivity());
+                            sUtils.saveString("appTypes", "user", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
@@ -206,12 +208,12 @@ public class PackageTasksFragment extends Fragment {
                             })
                             .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> requireActivity().finish())
                             .show();
-                } else if (Utils.getBoolean("exit_confirmation", true, requireActivity())) {
+                } else if (sUtils.getBoolean("exit_confirmation", true, requireActivity())) {
                     if (mExit) {
                         mExit = false;
                         requireActivity().finish();
                     } else {
-                        Utils.snackbar(mRootView, getString(R.string.press_back));
+                        sUtils.snackBar(mRootView, getString(R.string.press_back)).show();
                         mExit = true;
                         mHandler.postDelayed(() -> mExit = false, 2000);
                     }
@@ -225,7 +227,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private int getTabPosition(Activity activity) {
-        String mStatus = Utils.getString("appTypes", "all", activity);
+        String mStatus = sUtils.getString("appTypes", "all", activity);
         if (mStatus.equals("user")) {
             return 2;
         } else if (mStatus.equals("system")) {
@@ -236,7 +238,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private void selectAll(boolean b) {
-        Utils.saveBoolean("select_all", b, requireActivity());
+        sUtils.saveBoolean("select_all", b, requireActivity());
         loadUI(requireActivity());
     }
 
@@ -260,76 +262,76 @@ public class PackageTasksFragment extends Fragment {
         Menu menu = popupMenu.getMenu();
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
         sort.add(0, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sort_name", false, activity));
+                .setChecked(sUtils.getBoolean("sort_name", false, activity));
         sort.add(0, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(Utils.getBoolean("sort_id", true, activity));
+                .setChecked(sUtils.getBoolean("sort_id", true, activity));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sort.add(0, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("sort_installed", false, activity));
+                    .setChecked(sUtils.getBoolean("sort_installed", false, activity));
             sort.add(0, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("sort_updated", false, activity));
+                    .setChecked(sUtils.getBoolean("sort_updated", false, activity));
             sort.add(0, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
-                    .setChecked(Utils.getBoolean("sort_size", false, activity));
+                    .setChecked(sUtils.getBoolean("sort_size", false, activity));
         }
         menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                .setChecked(Utils.getBoolean("reverse_order", false, activity));
+                .setChecked(sUtils.getBoolean("reverse_order", false, activity));
         sort.setGroupCheckable(0, true, true);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
                     break;
                 case 1:
-                    if (!Utils.getBoolean("sort_name", false, activity)) {
-                        Utils.saveBoolean("sort_name", true, activity);
-                        Utils.saveBoolean("sort_id", false, activity);
-                        Utils.saveBoolean("sort_installed", false, activity);
-                        Utils.saveBoolean("sort_updated", false, activity);
-                        Utils.saveBoolean("sort_size", false, activity);
+                    if (!sUtils.getBoolean("sort_name", false, activity)) {
+                        sUtils.saveBoolean("sort_name", true, activity);
+                        sUtils.saveBoolean("sort_id", false, activity);
+                        sUtils.saveBoolean("sort_installed", false, activity);
+                        sUtils.saveBoolean("sort_updated", false, activity);
+                        sUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 2:
-                    if (!Utils.getBoolean("sort_id", true, activity)) {
-                        Utils.saveBoolean("sort_name", false, activity);
-                        Utils.saveBoolean("sort_id", true, activity);
-                        Utils.saveBoolean("sort_installed", false, activity);
-                        Utils.saveBoolean("sort_updated", false, activity);
-                        Utils.saveBoolean("sort_size", false, activity);
+                    if (!sUtils.getBoolean("sort_id", true, activity)) {
+                        sUtils.saveBoolean("sort_name", false, activity);
+                        sUtils.saveBoolean("sort_id", true, activity);
+                        sUtils.saveBoolean("sort_installed", false, activity);
+                        sUtils.saveBoolean("sort_updated", false, activity);
+                        sUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
-                    if (!Utils.getBoolean("sort_installed", false, activity)) {
-                        Utils.saveBoolean("sort_name", false, activity);
-                        Utils.saveBoolean("sort_id", false, activity);
-                        Utils.saveBoolean("sort_installed", true, activity);
-                        Utils.saveBoolean("sort_updated", false, activity);
-                        Utils.saveBoolean("sort_size", false, activity);
+                    if (!sUtils.getBoolean("sort_installed", false, activity)) {
+                        sUtils.saveBoolean("sort_name", false, activity);
+                        sUtils.saveBoolean("sort_id", false, activity);
+                        sUtils.saveBoolean("sort_installed", true, activity);
+                        sUtils.saveBoolean("sort_updated", false, activity);
+                        sUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 4:
-                    if (!Utils.getBoolean("sort_updated", false, activity)) {
-                        Utils.saveBoolean("sort_name", false, activity);
-                        Utils.saveBoolean("sort_id", false, activity);
-                        Utils.saveBoolean("sort_installed", false, activity);
-                        Utils.saveBoolean("sort_updated", true, activity);
-                        Utils.saveBoolean("sort_size", false, activity);
+                    if (!sUtils.getBoolean("sort_updated", false, activity)) {
+                        sUtils.saveBoolean("sort_name", false, activity);
+                        sUtils.saveBoolean("sort_id", false, activity);
+                        sUtils.saveBoolean("sort_installed", false, activity);
+                        sUtils.saveBoolean("sort_updated", true, activity);
+                        sUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 5:
-                    if (!Utils.getBoolean("sort_size", false, activity)) {
-                        Utils.saveBoolean("sort_name", false, activity);
-                        Utils.saveBoolean("sort_id", false, activity);
-                        Utils.saveBoolean("sort_installed", false, activity);
-                        Utils.saveBoolean("sort_updated", false, activity);
-                        Utils.saveBoolean("sort_size", true, activity);
+                    if (!sUtils.getBoolean("sort_size", false, activity)) {
+                        sUtils.saveBoolean("sort_name", false, activity);
+                        sUtils.saveBoolean("sort_id", false, activity);
+                        sUtils.saveBoolean("sort_installed", false, activity);
+                        sUtils.saveBoolean("sort_updated", false, activity);
+                        sUtils.saveBoolean("sort_size", true, activity);
                         loadUI(activity);
                     }
                     break;
                 case 6:
-                    Utils.saveBoolean("reverse_order", !Utils.getBoolean("reverse_order", false, activity), activity);
+                    sUtils.saveBoolean("reverse_order", !sUtils.getBoolean("reverse_order", false, activity), activity);
                     loadUI(activity);
                     break;
             }
@@ -350,7 +352,7 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    if (Utils.getBoolean("neverShow", false, requireActivity())) {
+                    if (sUtils.getBoolean("neverShow", false, requireActivity())) {
                         Common.getAppList().clear();
                         Common.setPath(FilePicker.getLastDirPath(activity));
                         Intent filePicker = new Intent(activity, FilePickerActivity.class);
@@ -435,10 +437,11 @@ public class PackageTasksFragment extends Fragment {
                     reset.show();
                     break;
                 case 3:
-                    if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(activity)) {
-                        ActivityCompat.requestPermissions(activity, new String[] {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                        Utils.snackbar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage));
+                    if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+                        sUtils.requestPermission(new String[] {
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                activity);
+                        sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
                     } else {
                         MaterialAlertDialogBuilder export = new MaterialAlertDialogBuilder(activity);
                         export.setIcon(R.mipmap.ic_launcher);
@@ -452,23 +455,24 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 4:
-                    if (Build.VERSION.SDK_INT < 30 && Utils.isPermissionDenied(requireActivity())) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[] {
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                        Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage));
+                    if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
+                        sUtils.requestPermission(new String[] {
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                activity);
+                        sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                     } else {
                         File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
                         try {
                             JSONObject obj = new JSONObject();
                             JSONArray apps = new JSONArray();
                             for (String packageID : Common.getBatchList()) {
-                                if (packageID.contains(".") && Utils.isPackageInstalled(packageID, activity)) {
+                                if (packageID.contains(".") && sPackageUtils.isPackageInstalled(packageID, activity)) {
                                     apps.put(PackageDetails.getPackageDetails(packageID, activity));
                                 }
                             }
                             obj.put("applications", apps);
-                            Utils.create(obj.toString(), mJSON);
-                            Utils.snackbar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName()));
+                            sUtils.create(obj.toString(), mJSON);
+                            sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
                         } catch (JSONException ignored) {
                         }
                     }
@@ -477,7 +481,7 @@ public class PackageTasksFragment extends Fragment {
                     if (PackageData.getData(activity).size() == Common.getBatchList().size()) {
                         selectAll(false);
                     } else {
-                        if (Utils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
+                        if (sUtils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
                             new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
                                     .setIcon(R.mipmap.ic_launcher)
                                     .setTitle(getString(R.string.sure_question))
@@ -487,7 +491,7 @@ public class PackageTasksFragment extends Fragment {
                                     })
                                     .setPositiveButton(getString(R.string.select_all), (dialog, id) -> {
                                         selectAll(true);
-                                        Utils.saveBoolean("select_all_firstAttempt", false, requireActivity());
+                                        sUtils.saveBoolean("select_all_firstAttempt", false, requireActivity());
                                     }).show();
                         } else {
                             selectAll(true);
@@ -512,7 +516,7 @@ public class PackageTasksFragment extends Fragment {
                 mProgress.setVisibility(View.VISIBLE);
                 mBatchOptions.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.GONE);
-                if (Utils.getBoolean("select_all", false, activity)) {
+                if (sUtils.getBoolean("select_all", false, activity)) {
                     Common.getBatchList().clear();
                     for (RecycleViewItem mPackage : PackageData.getData(activity)) {
                         Common.getBatchList().add(mPackage.getPackageName());
@@ -530,8 +534,8 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void onPostExecute() {
-                if (Utils.getBoolean("select_all", false, activity)) {
-                    Utils.saveBoolean("select_all", false, activity);
+                if (sUtils.getBoolean("select_all", false, activity)) {
+                    sUtils.saveBoolean("select_all", false, activity);
                     mBatchOptions.setVisibility(View.VISIBLE);
                 } else {
                     mBatchOptions.setVisibility(View.GONE);
@@ -587,7 +591,7 @@ public class PackageTasksFragment extends Fragment {
             }
         } else if (requestCode == 0) {
             // If uninstallation cancelled or failed
-            Utils.snackbar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity())));
+            sUtils.snackBar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity()))).show();
             Common.getBatchList().remove(0);
             handleUninstallEvent();
         }

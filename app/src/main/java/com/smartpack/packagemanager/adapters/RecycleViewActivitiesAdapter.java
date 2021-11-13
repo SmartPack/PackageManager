@@ -25,7 +25,6 @@ import java.util.List;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-
 public class RecycleViewActivitiesAdapter extends RecyclerView.Adapter<RecycleViewActivitiesAdapter.ViewHolder> {
 
     private static List<ActivityInfo> data;

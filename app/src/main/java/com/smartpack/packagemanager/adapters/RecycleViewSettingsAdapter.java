@@ -20,14 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.RecycleSettingsItem;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
+
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-
 public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleViewSettingsAdapter.ViewHolder> {
 
     private static ArrayList<RecycleSettingsItem> data;
@@ -54,21 +54,21 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
             holder.mTitle.setTextColor(data.get(position).getColor());
             holder.mDivider.setVisibility(View.VISIBLE);
         } else {
-            holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mTitle.setTextColor(sUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
             holder.mDivider.setVisibility(View.GONE);
         }
         holder.mTitle.setTextSize(data.get(position).getSize());
         if (data.get(position).getDescription() != null) {
             holder.mDescription.setText(data.get(position).getDescription());
             holder.mDescription.setVisibility(View.VISIBLE);
-            holder.mDescription.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mDescription.setTextColor(sUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         } else {
             holder.mDescription.setVisibility(View.GONE);
         }
         if (data.get(position).getIcon() != null) {
             holder.mIcon.setImageDrawable(data.get(position).getIcon());
             holder.mIcon.setVisibility(View.VISIBLE);
-            if (!Utils.isDarkTheme(holder.mIcon.getContext())) {
+            if (!sUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setColorFilter(Color.BLACK);
             }
         } else {

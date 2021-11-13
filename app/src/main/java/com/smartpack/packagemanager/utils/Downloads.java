@@ -15,10 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
  */
-
 public class Downloads {
 
     private static String mSearchText;
@@ -26,7 +27,7 @@ public class Downloads {
     public static List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
         for (File mFile : getDownloadList(context)) {
-            if (Utils.getString("downloadTypes", "apks", context).equals("bundles")) {
+            if (sUtils.getString("downloadTypes", "apks", context).equals("bundles")) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
                     if (mSearchText == null) {
                         mData.add(mFile.getAbsolutePath());
@@ -44,7 +45,7 @@ public class Downloads {
                 }
             }
         }
-        if (Utils.getBoolean("reverse_order_exports", false, context)) {
+        if (sUtils.getBoolean("reverse_order_exports", false, context)) {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(rhs, lhs));
         } else {
             Collections.sort(mData, String.CASE_INSENSITIVE_ORDER);

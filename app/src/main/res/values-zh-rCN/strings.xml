@@ -17,10 +17,6 @@
     <string name="change_logs">"更新日志"</string>
     <string name="credits">"贡献者"</string>
     <string name="credits_summary">"此项目的贡献者名单"</string>
-    <string name="dark_theme">"黑暗主题"</string>
-    <string name="dark_theme_auto">"自动"</string>
-    <string name="dark_theme_disable">"禁用"</string>
-    <string name="dark_theme_enable">"启用"</string>
     <string name="data_dir">"数据目录"</string>
     <string name="date_installation">"安装日期"</string>
     <string name="date_installed">"首次安装：%s"</string>

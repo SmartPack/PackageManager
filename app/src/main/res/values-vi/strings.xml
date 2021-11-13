@@ -18,10 +18,6 @@
     <string name="copyright">"Bản quyền: © %s"</string>
     <string name="credits">"Tín dụng"</string>
     <string name="credits_summary">"Danh sách những người đã đóng góp cho dự án này"</string>
-    <string name="dark_theme">"Chủ đề tối"</string>
-    <string name="dark_theme_auto">"Tự động"</string>
-    <string name="dark_theme_disable">"Tắt"</string>
-    <string name="dark_theme_enable">"Bật"</string>
     <string name="data_dir">"Thư mục dữ liệu"</string>
     <string name="date_installation">"Ngày cài đặt"</string>
     <string name="date_installed">"Cài đặt lần đầu: %s"</string>

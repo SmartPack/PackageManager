@@ -17,10 +17,6 @@
     <string name="change_logs">"Änderungsprotokolle"</string>
     <string name="credits">"Impressum"</string>
     <string name="credits_summary">"Eine Liste an Personen die zu diesem Projekt beigetragen haben"</string>
-    <string name="dark_theme">"Dunkles Design"</string>
-    <string name="dark_theme_auto">"Automatisch"</string>
-    <string name="dark_theme_disable">"Ausschalten"</string>
-    <string name="dark_theme_enable">"Einschalten"</string>
     <string name="data_dir">"Verzeichnis"</string>
     <string name="date_installation">"Installationsdatum"</string>
     <string name="date_installed">"Installiert: %s"</string>

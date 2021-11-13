@@ -27,16 +27,18 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
  */
-
 public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<RecycleViewExportedAppsAdapter.ViewHolder> {
 
     private static List<String> data;
@@ -58,23 +60,23 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
     @Override
     public void onBindViewHolder(@NonNull RecycleViewExportedAppsAdapter.ViewHolder holder, int position) {
         if (data.get(position).endsWith(".apk")) {
-            if (Utils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
-                holder.mIcon.setImageDrawable(PackageData.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
+            if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
+                holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
             } else {
-                holder.mIcon.setImageDrawable(PackageData.getAPKIcon(data.get(position), holder.mIcon.getContext()));
+                holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
             }
             holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
         } else {
-            if (Utils.isPackageInstalled(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext())) {
-                holder.mIcon.setImageDrawable(PackageData.getAppIcon(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext()));
+            if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext())) {
+                holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext()));
             } else {
                 holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_bundle));
                 holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             }
             holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
         }
-        holder.mTitle.setTextColor(Utils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
-        holder.mSize.setText(PackageData.getAPKSize(data.get(position)));
+        holder.mTitle.setTextColor(sUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+        holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
         holder.mAction.setImageDrawable(holder.mAction.getContext().getResources().getDrawable(R.drawable.ic_settings));
         holder.mAction.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
@@ -100,7 +102,7 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
                                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialog, id) -> {
                                 })
                                 .setPositiveButton(v.getContext().getString(R.string.delete), (dialog, id) -> {
-                                    Utils.delete(data.get(position));
+                                    sUtils.delete(new File(data.get(position)));
                                     data.remove(position);
                                     notifyDataSetChanged();
                                 }).show();

@@ -22,6 +22,8 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on April 01, 2021
  */
@@ -49,13 +51,13 @@ public class RecycleViewManifestAdapter extends RecyclerView.Adapter<RecycleView
         } else if (data.get(position).contains("<uses-permission")) {
             holder.mText.setTextColor(Color.RED);
         } else if (data.get(position).contains("<activity")) {
-            holder.mText.setTextColor(Utils.isDarkTheme(holder.mText.getContext()) ? Color.GREEN : Color.MAGENTA);
+            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.GREEN : Color.MAGENTA);
         } else if (data.get(position).contains("<service")) {
-            holder.mText.setTextColor(Utils.isDarkTheme(holder.mText.getContext()) ? Color.MAGENTA : Color.BLUE);
+            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.MAGENTA : Color.BLUE);
         } else if (data.get(position).contains("<provider") || data.get(position).contains("</provider>")) {
-            holder.mText.setTextColor(Utils.isDarkTheme(holder.mText.getContext()) ? Color.LTGRAY : Color.DKGRAY);
+            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.LTGRAY : Color.DKGRAY);
         } else {
-            holder.mText.setTextColor(Utils.isDarkTheme(holder.mText.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.WHITE : Color.BLACK);
         }
     }
 

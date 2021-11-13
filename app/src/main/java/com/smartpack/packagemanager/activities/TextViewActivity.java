@@ -24,12 +24,13 @@ import com.smartpack.packagemanager.adapters.RecycleViewManifestAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
@@ -75,7 +76,7 @@ public class TextViewActivity extends AppCompatActivity {
         if (Common.getApplicationID() != null && PackageExplorer.isBinaryXML(mPath)) {
             text = PackageExplorer.readXMLFromAPK(Common.getSourceDir(), mPath.replace(getCacheDir().getPath() + "/apk/", ""));
         } else {
-            text = Utils.read(mPath);
+            text = sUtils.read(new File(mPath));
         }
         if (text != null) {
             mData.addAll(Arrays.asList(text.split("\\r?\\n")));

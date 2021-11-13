@@ -24,10 +24,11 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-
 public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleViewPermissionsAdapter.ViewHolder> {
 
     private static List<String> data;
@@ -50,7 +51,7 @@ public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleV
             holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
             holder.mName.setTypeface(Typeface.DEFAULT_BOLD);
         } else {
-            holder.mName.setTextColor(Utils.isDarkTheme(holder.mName.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mName.setTextColor(sUtils.isDarkTheme(holder.mName.getContext()) ? Color.WHITE : Color.BLACK);
         }
         holder.mName.setText(data.get(position));
     }

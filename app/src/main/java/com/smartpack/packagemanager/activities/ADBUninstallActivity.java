@@ -23,13 +23,13 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 28, 2021
  */
-
 public class ADBUninstallActivity extends AppCompatActivity {
 
     @SuppressLint({"StringFormatInvalid", "SetTextI18n"})
@@ -49,7 +49,7 @@ public class ADBUninstallActivity extends AppCompatActivity {
 
         mMainMessage.setText(getString(R.string.uninstall_adb_summary, Common.getApplicationName()));
         mADBCommand.setText("adb shell pm uninstall -k --user 0 " + Common.getApplicationID());
-        if (PackageData.isUpdatedSystemApp(Common.getApplicationID(), this)) {
+        if (sPackageUtils.isUpdatedSystemApp(Common.getApplicationID(), this)) {
             mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, Common.getApplicationName()));
             mUninstall.setVisibility(View.VISIBLE);
         }
@@ -60,7 +60,7 @@ public class ADBUninstallActivity extends AppCompatActivity {
 
         mGotIt.setOnClickListener(v -> finish());
 
-        mDocumentation.setOnClickListener(v -> Utils.launchUrl("https://smartpack.github.io/adb-debloating/", this));
+        mDocumentation.setOnClickListener(v -> sUtils.launchUrl("https://smartpack.github.io/adb-debloating/", this));
 
         mUninstallButton.setOnClickListener(v -> {
             Intent remove = new Intent(Intent.ACTION_DELETE);

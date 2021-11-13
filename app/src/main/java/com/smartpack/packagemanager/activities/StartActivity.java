@@ -23,18 +23,19 @@ import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AsyncTasks;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.Utils;
+
+import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 1, 2020
  */
-
 public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Initialize App Theme
-        Utils.initializeAppTheme(this);
+        sThemeUtils.initializeAppTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
@@ -44,18 +45,18 @@ public class StartActivity extends AppCompatActivity {
         MaterialTextView mMainText = findViewById(R.id.main_text);
         ProgressBar mProgress = findViewById(R.id.progress);
 
-        if (Utils.getBoolean("welcomeMessage", true, this)) {
+        if (sUtils.getBoolean("welcomeMessage", true, this)) {
             mMainText.setVisibility(View.VISIBLE);
             mBottomLayout.setVisibility(View.VISIBLE);
 
-            mDocumentationCard.setOnClickListener(v -> Utils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
+            mDocumentationCard.setOnClickListener(v -> sUtils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
 
             mStartCard.setOnClickListener(v -> {
                 mProgress.setVisibility(View.VISIBLE);
                 mMainText.setText(getString(R.string.initializing));
                 mBottomLayout.setVisibility(View.GONE);
                 loadData(this);
-                Utils.saveBoolean("welcomeMessage",false, this);
+                sUtils.saveBoolean("welcomeMessage",false, this);
             });
         } else {
             loadData(this);
