@@ -73,15 +73,15 @@ public class UninstalledAppsActivity extends AppCompatActivity {
         mRecycleViewAdapter = new RecycleViewUninstalledAppsAdapter(getData(this));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
-        mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
-            new MaterialAlertDialogBuilder(this)
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(R.string.sure_question)
-                    .setMessage(getString(R.string.restore_message, getData(this).get(position)))
-                    .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                    })
-                    .setPositiveButton(R.string.restore, (dialog, id) -> restore(position, false,this)).show();
-        });
+        mRecycleViewAdapter.setOnItemClickListener((position, v) ->
+                new MaterialAlertDialogBuilder(this)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(R.string.sure_question)
+                        .setMessage(getString(R.string.restore_message, getData(this).get(position)))
+                        .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                        })
+                        .setPositiveButton(R.string.restore, (dialog, id) -> restore(position, false,this)).show()
+        );
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {

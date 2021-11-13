@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.adapters;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,26 +46,25 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
         return new RecycleViewExploreAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewExploreAdapter.ViewHolder holder, int position) {
         if (new File(data.get(position)).isDirectory()) {
-            holder.mIcon.setImageDrawable(holder.mTitle.getContext().getResources().getDrawable(R.drawable.ic_folder));
+            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
             if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
-                holder.mIcon.setBackground(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_background_circle));
+                holder.mIcon.setBackground(sUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
             }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
         } else if (PackageExplorer.isImageFile(data.get(position))) {
             if (PackageExplorer.getIconFromPath(data.get(position)) != null) {
                 holder.mIcon.setImageURI(PackageExplorer.getIconFromPath(data.get(position)));
             } else {
-                holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file);
+                holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
             }
             holder.mIcon.setBackground(null);
         } else {
-            holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_file));
-            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
-                    .getResources().getColor(R.color.colorWhite) : holder.mIcon.getContext().getResources().getColor(R.color.colorBlack));
+            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
+            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? sUtils.getColor(R.color.colorWhite,
+                    holder.mIcon.getContext()) : sUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
             holder.mIcon.setBackground(null);
         }
         holder.mTitle.setText(new File(data.get(position)).getName());

@@ -45,7 +45,7 @@ public class InstallerActivity extends AppCompatActivity {
     private MaterialTextView mStatus, mTitle;
     private ProgressBar mProgress;
 
-    @SuppressLint({"UseCompatLoadingForDrawables", "StringFormatInvalid"})
+    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

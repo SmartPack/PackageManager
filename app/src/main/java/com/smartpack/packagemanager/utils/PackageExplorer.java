@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -131,6 +132,7 @@ public class PackageExplorer {
                 } catch (IOException ignored) {}
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
                 new MaterialAlertDialogBuilder(activity)

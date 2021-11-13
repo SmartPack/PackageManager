@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.adapters;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +48,12 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
         return new RecycleViewFilePickerAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewFilePickerAdapter.ViewHolder holder, int position) {
         if (new File(this.data.get(position)).isDirectory()) {
-            holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_folder));
+            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_folder, holder.mIcon.getContext()));
             if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
-                holder.mIcon.setBackground(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_background_circle));
+                holder.mIcon.setBackground(sUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
             }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mDescription.setVisibility(View.GONE);
@@ -80,9 +78,9 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
             holder.mSize.setVisibility(View.VISIBLE);
             holder.mCheckBox.setVisibility(View.VISIBLE);
         } else {
-            holder.mIcon.setImageDrawable(holder.mIcon.getContext().getResources().getDrawable(R.drawable.ic_bundle));
-            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? holder.mIcon.getContext()
-                    .getResources().getColor(R.color.colorWhite) : holder.mIcon.getContext().getResources().getColor(R.color.colorBlack));
+            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
+            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? sUtils.getColor(R.color.colorWhite, holder.mIcon.getContext()) :
+                    sUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
             holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
             holder.mSize.setVisibility(View.VISIBLE);
         }

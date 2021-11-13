@@ -67,11 +67,11 @@ public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleVie
                 .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
                 })
-                .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) -> {
-                    PackageExplorer.copyToStorage(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                            .getContext()) + "/" + data.get(position), PackageData.getPackageDir(v.getContext()) + "/" +
-                            Common.getApplicationID(), (Activity) v.getContext());
-                }).show());
+                .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
+                        PackageExplorer.copyToStorage(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
+                                .getContext()) + "/" + data.get(position), PackageData.getPackageDir(v.getContext()) + "/" +
+                                Common.getApplicationID(), (Activity) v.getContext())).show()
+        );
     }
 
     @Override
