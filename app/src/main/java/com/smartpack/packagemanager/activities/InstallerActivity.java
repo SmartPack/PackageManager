@@ -26,12 +26,12 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
 import java.io.File;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.Utils.sInstallerUtils;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -144,7 +144,7 @@ public class InstallerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!SplitAPKInstaller.isPermissionDenied(this) && sUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
+        if (!sInstallerUtils.isPermissionDenied(this) && sUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
         }
         if (sUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
