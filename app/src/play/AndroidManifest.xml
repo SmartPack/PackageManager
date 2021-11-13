@@ -3,6 +3,7 @@
     package="com.smartpack.packagemanager">
 
     <application >
-        <activity android:name=".activities.BillingActivity" />
+        <activity android:name=".activities.BillingActivity"
+            android:exported="false" />
     </application>
 </manifest>

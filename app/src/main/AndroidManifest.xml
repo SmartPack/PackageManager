@@ -26,7 +26,7 @@
         tools:targetApi="q" >
 
         <activity android:name=".activities.StartActivity"
-            tools:ignore="IntentFilterExportedReceiver" >
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,27 +34,41 @@
         </activity>
 
         <activity android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
         <activity android:name=".activities.ADBUninstallActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
         <activity android:name=".activities.ChangeLogsActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity android:name=".activities.ExportedAppsActivity" />
-        <activity android:name=".activities.FilePickerActivity" />
-        <activity android:name=".activities.ImageViewActivity" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
+        <activity android:name=".activities.ExportedAppsActivity"
+            android:exported="false" />
+        <activity android:name=".activities.FilePickerActivity"
+            android:exported="false" />
+        <activity android:name=".activities.ImageViewActivity"
+            android:exported="false" />
         <activity android:name=".activities.InstallerActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
         <activity android:name=".activities.InstallerInstructionsActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
         <activity android:name=".activities.PackageDetailsActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
         <activity android:name=".activities.PackageExploreActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
         <activity android:name=".activities.PackageTasksActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.TextViewActivity" />
-        <activity android:name=".activities.UninstalledAppsActivity" />
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
+        <activity android:name=".activities.SettingsActivity"
+            android:exported="false" />
+        <activity android:name=".activities.TextViewActivity"
+            android:exported="false" />
+        <activity android:name=".activities.UninstalledAppsActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -66,6 +80,7 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
-        <service android:name=".services.SplitAPKInstallService" />
+        <service android:name=".services.SplitAPKInstallService"
+            android:exported="false" />
     </application>
 </manifest>
