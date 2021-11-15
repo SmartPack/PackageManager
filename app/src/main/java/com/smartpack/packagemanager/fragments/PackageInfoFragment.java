@@ -47,6 +47,7 @@ import java.util.Objects;
 import in.sunilpaulmathew.sCommon.Utils.sAPKCertificateUtils;
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -171,8 +172,8 @@ public class PackageInfoFragment extends Fragment {
                         sUtils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
                         break;
                     case 2:
-                        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
-                            sUtils.requestPermission(new String[] {
+                        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
+                            sPermissionUtils.requestPermission(new String[] {
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     requireActivity());
                             sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();

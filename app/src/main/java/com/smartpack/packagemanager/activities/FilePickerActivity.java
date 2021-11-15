@@ -45,6 +45,7 @@ import java.util.Objects;
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -75,7 +76,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
         mBack.setOnClickListener(v -> exitActivity());
 
-        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
+        if (Build.VERSION.SDK_INT >= 30 && Utils.isPermissionDenied() || Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = findViewById(R.id.permission_text);
@@ -86,7 +87,7 @@ public class FilePickerActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     Utils.requestPermission(this);
                 } else {
-                    sUtils.requestPermission(new String[] {
+                    sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
                     },this);
                 }

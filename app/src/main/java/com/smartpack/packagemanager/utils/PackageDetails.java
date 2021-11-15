@@ -43,6 +43,7 @@ import java.util.Objects;
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -51,8 +52,8 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class PackageDetails {
 
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
-            sUtils.requestPermission(new String[] {
+        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+            sPermissionUtils.requestPermission(new String[] {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
             }, activity);
             sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();

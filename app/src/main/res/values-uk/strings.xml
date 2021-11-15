@@ -24,7 +24,6 @@
     <string name="disable">"Заморозити"</string>
     <string name="disabled">"заморожено"</string>
     <string name="disabling">"Заморозка %s"</string>
-    <string name="dismiss">"Закрити"</string>
     <string name="done">"Готово"</string>
     <string name="enable">"Розморозити"</string>
     <string name="enabled">"розморожено"</string>
@@ -113,19 +112,11 @@
     <string name="documentation">"Документація"</string>
     <string name="documentation_summary">"Щоб використовувати Package Manager, ознайомтесь з детальною документацією"</string>
     <string name="installation_cancel_message">"Ви впевнені що хочете відмінити встановлення?"</string>
-    <string name="installation_status_success">"Встановлення успішно завершено"</string>
     <string name="sdcard">"SD карта"</string>
     <string name="select">"Обрати"</string>
     <string name="uninstall_adb">"Видалили з ADB"</string>
     <string name="uninstall_adb_summary">"Ви вибрали '%s', що є системним додатком. На жаль, Android не дозволяє стороннім користувацьким програмам, таким як Package Manager, видаляти системні програми в некореневих середовищах. Не хвилюйся! Package Manager допоможе вам видалити цю програму за допомогою методу Android Debug Bridge (ADB). Якщо у вас вже є повністю робочий ADB, виконавши наступну команду з ADB, ви видалите цю програму. Для того, щоб налаштувати робоче середовище ADB, перегляньте пов'язану сторінку Документація."</string>
     <string name="warning">"Попередження"</string>
-    <string name="installation_status_aborted">"Встановленя"</string>
-    <string name="installation_status_bad_apks">"Встановлення було скасовано користувачем"</string>
-    <string name="installation_status_blocked">"Встановлення заблоковано"</string>
-    <string name="installation_status_conflict">"Не вдається встановити додаток, оскільки він конфліктує з уже встановленим додатком з тим самим іменем пакета"</string>
-    <string name="installation_status_failed">"Помилка встановлення!"</string>
-    <string name="installation_status_incompatible">"Додаток несумісний з цим пристроєм"</string>
-    <string name="installation_status_storage">"Недостатньо памяті для встановлення додатку"</string>
     <string name="split_apk_installer">"Встановник split АРК"</string>
     <string name="certificate">"Сертифікат"</string>
     <string name="manifest">"Маніфест"</string>

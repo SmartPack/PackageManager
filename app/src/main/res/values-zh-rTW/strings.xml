@@ -24,7 +24,6 @@
     <string name="disable">"停用"</string>
     <string name="disabled">"已停用"</string>
     <string name="disabling">"停用中％s"</string>
-    <string name="dismiss">"忽略"</string>
     <string name="done">"完畢"</string>
     <string name="enable">"啟用"</string>
     <string name="enabled">"已啟用"</string>
@@ -113,26 +112,15 @@
     <string name="documentation">"說明文件"</string>
     <string name="documentation_summary">"查看詳細文件以使用套件管理器"</string>
     <string name="installation_cancel_message">"您確定要取消安裝嗎？"</string>
-    <string name="installation_status_success">"安裝成功完成！"</string>
     <string name="sdcard">"SD卡"</string>
     <string name="select">"選擇"</string>
     <string name="uninstall_adb">"使用ADB解除安裝"</string>
     <string name="uninstall_adb_summary">"您'被選擇'％s'，是一個系統應用程式。不幸的是， android 生態系統沒有't allow 第三方使用者應用程式，例如 Package Manager，刪除系統應用程式無根目錄環境唐't worry though！ Package Manager will guide you 使用 Android Debug Bridge （ADB）方法刪除此應用程式。如果您已經擁有完全可以使用 ADB，執行以下命令 ADB 將解除安裝此應用程式。In 順序以配置 工作中 ADB 環境，請結帳鏈接文件頁面。"</string>
     <string name="warning">"警告"</string>
-    <string name="installation_status_aborted">"安裝被用戶取消"</string>
-    <string name="installation_status_bad_apks">"已選無效的APK檔"</string>
-    <string name="installation_status_failed">"安裝失敗！"</string>
-    <string name="installation_status_incompatible">"應用程式與本裝置不相容"</string>
-    <string name="installation_status_storage">"沒有足夠空間安裝此應用程式"</string>
     <string name="certificate">"證書"</string>
     <string name="delete">"删除"</string>
     <string name="install_question">"安裝 %s"</string>
     <string name="show_apps_all">"全部"</string>
     <string name="show_apps_system">"系統"</string>
     <string name="show_apps_user">"用戶"</string>
-    <string name="operations_access_notification">"允許系統應用程式存取通知"</string>
-    <string name="operations_audio_notification">"改變通知音量"</string>
-    <string name="operations_change_wifi">"允許應用程式改變Wi-Fi連接狀態"</string>
-    <string name="operations_coarse_location">"允許應用程式存取大概的位置"</string>
-    <string name="operations_fine_location">"允許應用程式"</string>
 </resources>

@@ -25,7 +25,6 @@
     <string name="disable">"Deaktivieren"</string>
     <string name="disabled">"deaktiviert"</string>
     <string name="disabling">"Deaktiviere %s"</string>
-    <string name="dismiss">"Verwerfen"</string>
     <string name="done">"Fertig"</string>
     <string name="enable">"Einschalten"</string>
     <string name="enabled">"eingeschaltet"</string>
@@ -114,18 +113,11 @@
     <string name="documentation">"Dokumentation"</string>
     <string name="documentation_summary">"Schau Dir die Detaillierten Dokumente an wie man Package Manager benutzt"</string>
     <string name="installation_cancel_message">"Willst Du die Installation abbrechen?"</string>
-    <string name="installation_status_success">"Erfolgreich Installiert"</string>
     <string name="sdcard">"SD Karte"</string>
     <string name="select">"Wählen"</string>
     <string name="uninstall_adb">"Mit ADB entfernen"</string>
     <string name="uninstall_adb_summary">"Deine Auswahl ist eine System App. Unglücklicherweise, erlaubt das Android Ökosystem keine Fremden Apps wie Package Manager das löschen auf Geräten ohne Root Rechten. Keine Panik deswegen! Package Manager führt Dich durch eine Anleitung um diese Applikation mit der Android Debug Bridge (ADB) zu entfernen. Wenn ADB Funktioniert, führe den folgenden Befehl aus und ADB löscht diese Applikation. Im Fall das ADB noch nicht eingerichtet ist, schau Dir die verlinkte Dokumentationen an"</string>
     <string name="warning">"Warnung"</string>
-    <string name="installation_status_aborted">"Die Installation wurde vom Benutzer abgebrochen"</string>
-    <string name="installation_status_bad_apks">"ungültige APK Dateien ausgewählt"</string>
-    <string name="installation_status_blocked">"Installation wird blockiert "</string>
-    <string name="installation_status_failed">"Installation Fehlgeschlagen"</string>
-    <string name="installation_status_incompatible">"Diese App ist nicht mit Deinem Gerät kompatibel"</string>
-    <string name="installation_status_storage">"Nicht genügend Speicherplatz um die App zu installieren"</string>
     <string name="certificate">"Zertifikat"</string>
     <string name="manifest">"Manifest"</string>
     <string name="delete">"Löschen"</string>

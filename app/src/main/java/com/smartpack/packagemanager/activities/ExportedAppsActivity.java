@@ -45,6 +45,7 @@ import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -92,7 +93,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
             popupMenu.show();
         });
 
-        if (Build.VERSION.SDK_INT < 29 && sUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
+        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = findViewById(R.id.permission_text);
@@ -100,7 +101,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
             mPermissionLayout.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
             mTabLayout.setVisibility(View.GONE);
-            mPermissionGrant.setOnClickListener(v -> sUtils.requestPermission(new String[] {
+            mPermissionGrant.setOnClickListener(v -> sPermissionUtils.requestPermission(new String[] {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                     },this)
             );

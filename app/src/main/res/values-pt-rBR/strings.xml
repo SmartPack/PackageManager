@@ -78,7 +78,6 @@
     <string name="delete">Excluir</string>
     <string name="delete_question">Excluir \'%s\'?</string>
     <string name="disable">Desativar</string>
-    <string name="dismiss">Dispensar</string>
     <string name="documentation">Documentação</string>
     <string name="documentation_summary">Confira a documentação detalhada para usar o Gerenciador de Pacotes</string>
     <string name="enable">Ativar</string>
@@ -90,14 +89,6 @@
     <string name="file_picker_message">Nota: este recurso é muito experimental!</string>
     <string name="install_question">Instalar \'%s\'?</string>
     <string name="installation_cancel_message">Tem certeza de que deseja cancelar a instalação?</string>
-    <string name="installation_status_aborted">A instalação foi cancelada pelo usuário</string>
-    <string name="installation_status_bad_apks">Arquivos APK inválidos selecionados</string>
-    <string name="installation_status_blocked">A instalação foi bloqueada</string>
-    <string name="installation_status_conflict">Não foi possível instalar o aplicativo porque ele está em conflito com um aplicativo já instalado com o mesmo nome de pacote</string>
-    <string name="installation_status_failed">A instalação falhou!</string>
-    <string name="installation_status_incompatible">O aplicativo é incompatível com este dispositivo</string>
-    <string name="installation_status_success">Instalação concluída com sucesso!</string>
-    <string name="installation_status_storage">Espaço de armazenamento insuficiente para instalar o aplicativo</string>
     <string name="manifest">Manifesto</string>
     <string name="more_apps_summary">Confira mais aplicativos do desenvolvedor no Google Play</string>
     <string name="native_lib">Biblioteca nativa</string>
