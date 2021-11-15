@@ -1,0 +1,5 @@
+* Package manager now target Android 12.
+* Replaced almost all the deprecated functions with the supported ones.
+* Internal improvements.
+* Updated translations.
+* Miscellaneous changes.

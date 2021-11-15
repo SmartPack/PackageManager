@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 49. v5.6 *(November 15, 2021)*
+- Package manager now target Android 12.
+- Replaced almost all the deprecated functions with the supported ones.
+- Internal improvements.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 48. v5.5 *(October 28, 2021)*
 - Improved and fixed sorting Exported Apps page.
 - Fixed crashing when attempting to open certain apps.

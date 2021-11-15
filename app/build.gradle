@@ -18,8 +18,8 @@ android {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 55
-        versionName "v5.5"
+        versionCode 56
+        versionName "v5.6"
         vectorDrawables.useSupportLibrary = true
         archivesBaseName = "$applicationId-$versionName"
         signingConfig signingConfigs.release
