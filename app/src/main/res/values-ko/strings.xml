@@ -15,7 +15,6 @@
     <string name="batch_warning">모음집 목록을 지울까요?</string>
     <string name="billing_client_disconnected">Google Play 결제 시스템에 연결하지 못했어요!</string>
     <string name="bundle_install_apks">Split Apks인 \'%s\'을(를) 설치할까요?</string>
-    <string name="cancel">취소</string>
     <string name="change_logs">변경사항</string>
     <string name="credits">도움을 주신 분들</string>
     <string name="data_dir">데이터 경로</string>
@@ -86,8 +85,6 @@
     <string name="support_status_message">후원해주셔서 정말 감사합니다!</string>
     <string name="support_summary">텔레그램 지원 그룹에 참여하세요.</string>
     <string name="sure_question">계속하시겠어요?</string>
-    <string name="translations">번역</string>
-    <string name="translations_summary">이 앱을 번역하는 것을 도와주세요!</string>
     <string name="turn_on_off">활성화/비활성화</string>
     <string name="uninstall">제거</string>
     <string name="uninstall_nope">이 앱은 제거할 수 없어요!</string>

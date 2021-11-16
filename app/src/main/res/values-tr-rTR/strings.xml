@@ -13,7 +13,6 @@
     <string name="batch_warning">"Toplu İşlem ayarlarınız silinecek! İstediğinize emin misiniz?"</string>
     <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
     <string name="bundle_install_apks">"'%s' toplu uygulama paketini yüklemek istediğinize emin misiniz?"</string>
-    <string name="cancel">"Vazgeç"</string>
     <string name="change_logs">"Değişiklik Günlüğü"</string>
     <string name="credits">"Katkılar"</string>
     <string name="credits_summary">"Bu projeye katkı sağlamış insanların bir listesi"</string>
@@ -101,8 +100,6 @@
     <string name="share_app_Summary">"Arkadaşlarınızı Package Manager kullanmaya davet edin"</string>
     <string name="source_code_summary">"Package Manager, geliştirici topluluğundan gelecek katkılara açık olan açık kaynaklı bir uygulamadır. Kaynak koduna bakmak için buraya tıklayınız!"</string>
     <string name="support_summary">"Telegram destek grubuna katılın"</string>
-    <string name="translations">"Çeviriler"</string>
-    <string name="translations_summary">"Bu uygulamayı çevirmemde bana yardım edin! Buraya tıklayarak POEditor yerelleştirme projesine ulaşabilirsiniz"</string>
     <string name="batch_options">"Toplu İşlem Seçenekleri"</string>
     <string name="batch_list_added">"%s toplu işlem listesine eklendi"</string>
     <string name="batch_list_export">"Seçili uygulamayı(ları) cihaz depolamasına aktarmak istediğinize emin misiniz?"</string>

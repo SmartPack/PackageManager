@@ -13,7 +13,6 @@
     <string name="batch_warning">"Ihre Stapeleinstellungen werden entfernt! Fortfahren?"</string>
     <string name="billing_client_disconnected">"Verbindung mit Google Play fehlgeschlagen!"</string>
     <string name="bundle_install_apks">"Sind Sie sich sicher, das App-Bunde \"%s\" zu installieren?"</string>
-    <string name="cancel">"Abbrechen"</string>
     <string name="change_logs">"Änderungsprotokolle"</string>
     <string name="credits">"Impressum"</string>
     <string name="credits_summary">"Eine Liste an Personen die zu diesem Projekt beigetragen haben"</string>
@@ -101,8 +100,6 @@
     <string name="share_app_Summary">"Laden Sie Ihre Freunde zur Verwendung von Package Manager ein"</string>
     <string name="source_code_summary">"Package Manager ist eine Open-Source-Anwendung, die bereit ist, Beiträge aus der Entwicklergemeinschaft anzunehmen. Klicken Sie hier, um sich den Quellcode anzusehen!"</string>
     <string name="support_summary">"Telegram-Supportgruppe beitreten"</string>
-    <string name="translations">"Übersetzungen"</string>
-    <string name="translations_summary">"Helfen Sie mir, diese App zu übersetzen! Klicken Sie hier, um die Original-Sprachzeichenfolgen in Englisch zu erhalten"</string>
     <string name="batch_options">"Stapeloptionen"</string>
     <string name="batch_list_added">"%s wurde zum Stapel hinzugefügt"</string>
     <string name="batch_list_export">"Sind Sie sicher, dass Sie die folgende(n) App(s) in den Gerätespeicher exportieren möchten?"</string>

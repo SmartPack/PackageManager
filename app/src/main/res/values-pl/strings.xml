@@ -13,7 +13,6 @@
     <string name="batch_warning">"Twoje ustawienia wsadu zostaną usunięte. Czy na pewno?"</string>
     <string name="billing_client_disconnected">"Nie udało się połączyć z klientem rozliczeń Google Play"</string>
     <string name="bundle_install_apks">"Czy na pewno zainstalować paczkę aplikacji „%s”?"</string>
-    <string name="cancel">"Anuluj"</string>
     <string name="change_logs">"Lista zmian"</string>
     <string name="credits">"Autorzy"</string>
     <string name="credits_summary">"Lista osób, które przyczyniły się do powstania tego projektu"</string>
@@ -104,8 +103,6 @@
     <string name="share_app_Summary">"Zaproś znajomych do korzystania z Package Manager"</string>
     <string name="source_code_summary">"Package Manager to otwartoźródłowa aplikacja gotowa na przyjęcie wsparcia ze społeczności deweloperów. Naciśnij tutaj, aby sprawdzić kod źródłowy"</string>
     <string name="support_summary">"Dołącz do grupy wsparcia na Telegramie"</string>
-    <string name="translations">"Tłumaczenia"</string>
-    <string name="translations_summary">"Pomóż mi przetłumaczyć tę aplikację. Naciśnij tutaj, aby odwiedzić projekt lokalizacji w POEditor"</string>
     <string name="batch_options">"Opcje wsadowe"</string>
     <string name="batch_list_added">"%s został dodany do listy wsadowej"</string>
     <string name="batch_list_export">"Czy na pewno wyeksportować następujące aplikacje do pamięci urządzenia?"</string>

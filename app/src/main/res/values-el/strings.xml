@@ -10,7 +10,6 @@
     <string name="batch_processing_finished">Η Επεξεργασία Ομάδας ολοκληρώθηκε!</string>
     <string name="batch_processing_initialized">Αρχικοποίηση Διεργασίας Ομάδας</string>
     <string name="batch_warning">Οι ρυθμίσεις ομάδας σας θα αφαιρεθούν! Είστε σίγουρος;</string>
-    <string name="cancel">Ακύρωση</string>
     <string name="change_logs">Λίστα αλλαγών</string>
     <string name="credits">Ευχαριστίες</string>
     <string name="disable_message">θα είναι %s! Είστε σίγουρος;</string>

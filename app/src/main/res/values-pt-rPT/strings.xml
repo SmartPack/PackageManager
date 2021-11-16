@@ -13,7 +13,6 @@
     <string name="batch_warning">"As suas definições de lote vão ser eliminadas! Tem a certeza?"</string>
     <string name="billing_client_disconnected">"Erro de ligação ao cliente de faturação do Google Play!"</string>
     <string name="bundle_install_apks">"Tem a certeza que deseja instalar o pacote de aplicação '%s'?"</string>
-    <string name="cancel">"Cancelar"</string>
     <string name="change_logs">"Registo de alterações"</string>
     <string name="credits">"Créditos"</string>
     <string name="credits_summary">"Uma lista de pessoas que contribuíram para este projeto"</string>
@@ -103,8 +102,6 @@
     <string name="share_app_Summary">"Convidar amigos para utilizar o Gestor de Pacotes"</string>
     <string name="source_code_summary">"O Gestor de Pacotes é uma aplicação de código-aberto que aceita contribuições da comunidade de programação. Clique aqui para ver o código-fonte!"</string>
     <string name="support_summary">"Aderir ao grupo do Telegram"</string>
-    <string name="translations">"Traduções"</string>
-    <string name="translations_summary">"Ajude-me a traduzir esta aplicação! Clique aqui para visitar o projeto de localização no POEditor"</string>
     <string name="batch_options">"Opções de lote"</string>
     <string name="batch_list_added">"%s foi adicionado à lista de lotes"</string>
     <string name="batch_list_export">"Tem a certeza que deseja exportar as seguintes aplicações para o armazenamento do dispositivo?"</string>

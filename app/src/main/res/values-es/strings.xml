@@ -13,7 +13,6 @@
     <string name="batch_warning">"¡Tu configuración de cola por lotes va a ser eliminado!, ¿estás seguro?"</string>
     <string name="billing_client_disconnected">"¡Ha fallado la conexión con el servicio de pago de Google Play!"</string>
     <string name="bundle_install_apks">"¿Estás seguro de instalar el paquete de aplicaciones '%s'?"</string>
-    <string name="cancel">"Cancelar"</string>
     <string name="change_logs">"Registro de cambios"</string>
     <string name="credits">"Créditos"</string>
     <string name="data_dir">"Directorio de datos"</string>
@@ -100,8 +99,6 @@
     <string name="share_app_Summary">"Invita a tus amigos a usar Package Manager"</string>
     <string name="source_code_summary">"Package Manager es una aplicación de código abierto que está lista para aceptar contribuciones de la comunidad de desarrolladores.  ¡Haga clic aquí para ver el código fuente!"</string>
     <string name="support_summary">"Únete al grupo de soporte en Telegram"</string>
-    <string name="translations">"Traducciones"</string>
-    <string name="translations_summary">"Ayúdame a traducir esta aplicación. Click aquí para visitar POEditor proyecto de localización"</string>
     <string name="batch_options">"Opciones por lotes"</string>
     <string name="batch_list_added">"%s se ha añadido a la lista por lotes"</string>
     <string name="batch_list_export">"¿Estás seguro de exportar las siguientes aplicaciones al almacenamiento de tu dispositivo?"</string>

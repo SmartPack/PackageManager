@@ -13,7 +13,6 @@
     <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa!  Bạn có chắc không?"</string>
     <string name="billing_client_disconnected">"Không kết nối được với ứng dụng Thanh toán của Google Play!"</string>
     <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
-    <string name="cancel">"Hủy"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
     <string name="copyright">"Bản quyền: © %s"</string>
     <string name="credits">"Tín dụng"</string>
@@ -102,8 +101,6 @@
     <string name="share_app_Summary">"Mời bạn bè của bạn sử dụng Package Manager"</string>
     <string name="source_code_summary">"Package Manager là một ứng dụng mã nguồn mở sẵn sàng chấp nhận các đóng góp từ cộng đồng phát triển. Bấm vào đây để kiểm tra mã nguồn!"</string>
     <string name="support_summary">"Tham gia nhóm hỗ trợ Telegram"</string>
-    <string name="translations">"Bản dịch"</string>
-    <string name="translations_summary">"Giúp tôi dịch ứng dụng này!  Nhấp vào đây để truy cập dự án bản địa hóa POEditor"</string>
     <string name="batch_options">"Tùy chọn hàng loạt"</string>
     <string name="batch_list_added">"%s được thêm vào danh sách hàng loạt"</string>
     <string name="batch_list_export">"Bạn có chắc chắn xuất (các) ứng dụng sau sang bộ nhớ thiết bị không?"</string>

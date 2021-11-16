@@ -24,7 +24,6 @@
     <string name="bundle_installer_description">App bundles of \'apkm\', \'apks\', and \'xapk\' format</string>
     <string name="bundle_path">Bundle Path</string>
     <string name="bundles">Bundles</string>
-    <string name="cancel">Cancel</string>
     <string name="certificate">Certificate</string>
     <string name="change_logs">Change-logs</string>
     <string name="copyright">Copyright: © %s</string>
@@ -157,8 +156,6 @@
     <string name="sure_question">Are you sure?</string>
     <string name="time_installed">Installed Time</string>
     <string name="time_updated">Updated Time</string>
-    <string name="translations">Translations</string>
-    <string name="translations_summary">Help me to translate this app. Click here to visit POEditor localization project</string>
     <string name="turn_on_off">Turn-On/Off</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_adb">Uninstall with ADB</string>

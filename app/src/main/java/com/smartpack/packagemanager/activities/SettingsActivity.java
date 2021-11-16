@@ -35,6 +35,7 @@ import java.util.ArrayList;
 
 import in.sunilpaulmathew.sCommon.Utils.sSingleChoiceDialog;
 import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
+import in.sunilpaulmathew.sCommon.Utils.sTranslatorUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -98,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
         mData.add(new RecycleSettingsItem(getString(R.string.documentation), getString(R.string.documentation_summary), sUtils.getDrawable(
                 R.drawable.ic_book, this), "https://smartpack.github.io/PackageManager/general/", 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.translations), getString(R.string.translations_summary), sUtils.getDrawable(
-                R.drawable.ic_translate, this), "https://poeditor.com/join/project?hash=0CitpyI1Oc", 0, 18));
+                R.drawable.ic_translate, this), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.change_logs), null, sUtils.getDrawable(R.drawable.ic_change_logs, this),
                 null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.share_app), getString(R.string.share_app_Summary), sUtils.getDrawable(R.drawable.ic_share, this), null, 0, 18));
@@ -194,6 +195,8 @@ public class SettingsActivity extends AppCompatActivity {
                 }.show();
             } else if (position == 11) {
                 Billing.showDonateOption(this);
+            } else if (position == 14) {
+                sTranslatorUtils.showTranslationMessage(getString(R.string.app_name), "https://poeditor.com/join/project?hash=0CitpyI1Oc", this).show();
             } else if (position == 15) {
                 Intent changeLogs = new Intent(this, ChangeLogsActivity.class);
                 startActivity(changeLogs);

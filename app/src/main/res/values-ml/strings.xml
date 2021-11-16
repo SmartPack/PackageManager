@@ -13,7 +13,6 @@
     <string name="batch_warning">"നിങ്ങളുടെ ബാച്ച് ക്രമീകരണങ്ങൾ നീക്കംചെയ്യും! നിങ്ങള്ക്ക് ഉറപ്പാണോ?"</string>
     <string name="billing_client_disconnected">"ഗൂഗിൾ പ്ലേ ബില്ലിംഗ് ക്ലയന്റുമായി ബന്ധിപ്പിക്കുന്നതിൽ പരാജയപ്പെട്ടു!"</string>
     <string name="bundle_install_apks">"അപ്ലിക്കേഷൻ ബണ്ടിൽ '%s' ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന്‌ ഉറപ്പാണോ?"</string>
-    <string name="cancel">"റദ്ദാക്കുക"</string>
     <string name="credits">"ക്രെഡിറ്റുകൾ"</string>
     <string name="data_dir">"ഡാറ്റ ഡയറക്ടറി"</string>
     <string name="date_installation">"ഇൻസ്റ്റാളേഷൻ തീയതികൾ"</string>
@@ -87,8 +86,6 @@
     <string name="share_app_Summary">"പാക്കേജ് മാനേജർ ഉപയോഗിക്കാൻ നിങ്ങളുടെ സുഹൃത്തുക്കളെ ക്ഷണിക്കുക"</string>
     <string name="source_code_summary">"പാക്കേജ് മാനേജർ ഒരു ഓപ്പൺ സോഴ്‌സ് അപ്ലിക്കേഷനാണ്. സോഴ്സ്  കോഡ് പരിശോധിക്കാൻ ഇവിടെ ക്ലിക്കുചെയ്യുക!"</string>
     <string name="support_summary">"ടെലിഗ്രാം സപ്പോർട്ട് ഗ്രൂപ്പിൽ ചേരുക"</string>
-    <string name="translations">"വിവർത്തനങ്ങൾ"</string>
-    <string name="translations_summary">"ഈ അപ്ലിക്കേഷൻ വിവർത്തനം ചെയ്യാൻ എന്നെ സഹായിക്കൂ!"</string>
     <string name="batch_options">"ബാച്ച് ഓപ്ഷനുകൾ"</string>
     <string name="batch_list_added">"%s നെ ബാച്ച് പട്ടികയിൽ ചേർത്തു"</string>
     <string name="batch_list_export">"ഇനിപ്പറയുന്ന അപ്ലിക്കേഷൻ (കൾ) ഫോൺ  സംഭരണത്തിലേക്ക് എക്‌സ്‌പോർട്ടുചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>

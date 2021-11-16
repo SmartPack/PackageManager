@@ -13,7 +13,6 @@
     <string name="batch_warning">"Настройки пакетной обработки будут удалены! Вы уверены?"</string>
     <string name="billing_client_disconnected">"Не удалось подключиться к клиенту Google Play Billing!"</string>
     <string name="bundle_install_apks">"Вы точно хотите установить пакетное приложение(split) '%s'?"</string>
-    <string name="cancel">"Отмена"</string>
     <string name="change_logs">"Список изменений"</string>
     <string name="credits">"Благодарности"</string>
     <string name="credits_summary">"Список людей, которые поддержали этот проект"</string>
@@ -101,8 +100,6 @@
     <string name="share_app_Summary">"Предложить друзьям использовать Package Manager"</string>
     <string name="source_code_summary">"Package Manage- это приложение с открытым исходным кодом, которое готово принимать вклад сообщества разработчиков. Щелкните здесь, чтобы ознакомиться с исходным кодом!"</string>
     <string name="support_summary">"Присоединиться к группе поддержки в Telegram"</string>
-    <string name="translations">"Переводы"</string>
-    <string name="translations_summary">"Помогите мне перевести это приложение! Нажмите здесь, чтобы получить исходные языковые строки на английском"</string>
     <string name="batch_options">"Пакетные операции"</string>
     <string name="batch_list_added">"%s добавлен в список пакетной обработки"</string>
     <string name="batch_list_export">"Вы точно хотите экспортировать следующие приложения в хранилище устройства?"</string>

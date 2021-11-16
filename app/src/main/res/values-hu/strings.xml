@@ -13,7 +13,6 @@
     <string name="batch_warning">"A kötegelés beállításait eltávolítjuk!  Biztos vagy ebben?"</string>
     <string name="billing_client_disconnected">"Nem sikerült csatlakozni a Google Play Számlázási klienshez!"</string>
     <string name="bundle_install_apks">"Biztosan telepíti a(z) '%s' alkalmazáscsomagot?"</string>
-    <string name="cancel">"Mégse"</string>
     <string name="change_logs">"Változáslista"</string>
     <string name="credits">"Hitelek"</string>
     <string name="credits_summary">"A projektben közreműködők listája"</string>
@@ -101,8 +100,6 @@
     <string name="share_app_Summary">"Hívja meg barátait a Package Manager használatára"</string>
     <string name="source_code_summary">"A Package Manager egy nyílt-forráskódú alkalmazás, amely készen áll a fejlesztők közreműködésének elfogadására.  Kattintson ide a forráskód megtekintéséhez!"</string>
     <string name="support_summary">"Csatlakozzon a Telegram támogató csoporthoz"</string>
-    <string name="translations">"Fordítások"</string>
-    <string name="translations_summary">"Segítsen lefordítani ezt az alkalmazást!  Kattintson ide a POEditor lokalizációs projekt meglátogatásához."</string>
     <string name="batch_options">"Kötegelt opciók"</string>
     <string name="batch_list_added">"%s hozzáadódik a kötegelt listához"</string>
     <string name="batch_list_export">"Biztosan exportálja a következő alkalmazás(oka)t az eszköz tárhelyére?"</string>

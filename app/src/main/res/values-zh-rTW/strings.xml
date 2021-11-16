@@ -12,7 +12,6 @@
     <string name="batch_warning">"您的批次處理設定將被刪除！你確定嗎？"</string>
     <string name="billing_client_disconnected">"無法連線至 Google Play 結算客戶端！"</string>
     <string name="bundle_install_apks">"您確定要安裝應用程式捆綁包'％s'嗎？"</string>
-    <string name="cancel">"取消"</string>
     <string name="change_logs">"變更日誌"</string>
     <string name="credits">"貢獻者"</string>
     <string name="credits_summary">"貢獻者名單"</string>
@@ -100,8 +99,6 @@
     <string name="share_app_Summary">"邀請您的朋友使用套件管理器"</string>
     <string name="source_code_summary">"Package Manager是一個開放原始碼應用程式，可以隨時接受開發社區的貢獻。點擊此處檢視原始碼！"</string>
     <string name="support_summary">"加入電報支持小組"</string>
-    <string name="translations">"筆譯"</string>
-    <string name="translations_summary">"幫我翻譯這個程序！單擊此處訪問POEditor本地化項目"</string>
     <string name="batch_options">"批次選項"</string>
     <string name="batch_list_added">"％s 已新增到批次清單"</string>
     <string name="batch_list_export">"您確定要將以下應用程式匯出到裝置儲存空間嗎？"</string>
