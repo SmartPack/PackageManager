@@ -24,6 +24,7 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -44,16 +45,17 @@ public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleV
         return new RecycleViewPermissionsAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewPermissionsAdapter.ViewHolder holder, int position) {
         if (data.get(position).equals("Granted") || data.get(position).equals("Denied")) {
             holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
             holder.mName.setTypeface(Typeface.DEFAULT_BOLD);
+            holder.mName.setText(data.get(position));
         } else {
             holder.mName.setTextColor(sUtils.isDarkTheme(holder.mName.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mName.setText(data.get(position) + "\n" + sPermissionUtils.getDescription(data.get(position).replace("android.permission.",""), holder.mName.getContext()));
         }
-        holder.mName.setText(data.get(position));
     }
 
     @Override
