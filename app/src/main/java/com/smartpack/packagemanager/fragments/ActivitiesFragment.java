@@ -33,7 +33,7 @@ public class ActivitiesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_general, container, false);
+        View mRootView = inflater.inflate(R.layout.layout_recyclerview, container, false);
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

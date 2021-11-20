@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_gravity="start"
+    android:layout_margin="2dp"
     android:gravity="start" >
 
     <com.google.android.material.textview.MaterialTextView

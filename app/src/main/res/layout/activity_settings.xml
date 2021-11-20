@@ -10,18 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorBlack"
+        android:orientation="horizontal"
         android:layout_gravity="start"
-        android:gravity="start"
-        android:orientation="horizontal" >
+        android:gravity="start" >
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/back_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_back"
+            android:layout_gravity="start|center_vertical"
             android:tint="@color/colorAccent"
-            android:background="@null"
-            android:layout_gravity="start|center_vertical" />
+            android:background="@null" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -75,9 +75,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-10dp" />
+    <include layout="@layout/layout_recyclerview" />
 </LinearLayout>
