@@ -16,7 +16,6 @@
     <string name="billing_client_disconnected">Google Play 결제 시스템에 연결하지 못했어요!</string>
     <string name="bundle_install_apks">Split Apks인 \'%s\'을(를) 설치할까요?</string>
     <string name="change_logs">변경사항</string>
-    <string name="credits">도움을 주신 분들</string>
     <string name="data_dir">데이터 경로</string>
     <string name="date_installation">설치 날짜</string>
     <string name="date_installed">초기 버전: %s</string>

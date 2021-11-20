@@ -14,8 +14,6 @@
     <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
     <string name="bundle_install_apks">"'%s' toplu uygulama paketini yüklemek istediğinize emin misiniz?"</string>
     <string name="change_logs">"Değişiklik Günlüğü"</string>
-    <string name="credits">"Katkılar"</string>
-    <string name="credits_summary">"Bu projeye katkı sağlamış insanların bir listesi"</string>
     <string name="data_dir">"Veri Dizini"</string>
     <string name="date_installation">"Yüklenme Tarihi"</string>
     <string name="date_installed">"İlk Yüklenme: %s"</string>

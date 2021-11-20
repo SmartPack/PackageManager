@@ -14,8 +14,6 @@
     <string name="billing_client_disconnected">"Verbindung mit Google Play fehlgeschlagen!"</string>
     <string name="bundle_install_apks">"Sind Sie sich sicher, das App-Bunde \"%s\" zu installieren?"</string>
     <string name="change_logs">"Änderungsprotokolle"</string>
-    <string name="credits">"Impressum"</string>
-    <string name="credits_summary">"Eine Liste an Personen die zu diesem Projekt beigetragen haben"</string>
     <string name="data_dir">"Verzeichnis"</string>
     <string name="date_installation">"Installationsdatum"</string>
     <string name="date_installed">"Installiert: %s"</string>

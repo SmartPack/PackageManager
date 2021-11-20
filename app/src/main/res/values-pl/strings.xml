@@ -14,8 +14,6 @@
     <string name="billing_client_disconnected">"Nie udało się połączyć z klientem rozliczeń Google Play"</string>
     <string name="bundle_install_apks">"Czy na pewno zainstalować paczkę aplikacji „%s”?"</string>
     <string name="change_logs">"Lista zmian"</string>
-    <string name="credits">"Autorzy"</string>
-    <string name="credits_summary">"Lista osób, które przyczyniły się do powstania tego projektu"</string>
     <string name="data_dir">"Katalog danych"</string>
     <string name="date_installation">"Daty instalacji"</string>
     <string name="date_installed">"Pierwsza instalacja: %s"</string>

@@ -14,7 +14,6 @@
     <string name="billing_client_disconnected">"¡Ha fallado la conexión con el servicio de pago de Google Play!"</string>
     <string name="bundle_install_apks">"¿Estás seguro de instalar el paquete de aplicaciones '%s'?"</string>
     <string name="change_logs">"Registro de cambios"</string>
-    <string name="credits">"Créditos"</string>
     <string name="data_dir">"Directorio de datos"</string>
     <string name="date_installation">"Fecha de instalación"</string>
     <string name="date_installed">"Primer instalado: %s"</string>

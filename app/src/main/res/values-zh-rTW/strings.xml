@@ -13,8 +13,6 @@
     <string name="billing_client_disconnected">"無法連線至 Google Play 結算客戶端！"</string>
     <string name="bundle_install_apks">"您確定要安裝應用程式捆綁包'％s'嗎？"</string>
     <string name="change_logs">"變更日誌"</string>
-    <string name="credits">"貢獻者"</string>
-    <string name="credits_summary">"貢獻者名單"</string>
     <string name="data_dir">"資料目錄"</string>
     <string name="date_installation">"安裝日期"</string>
     <string name="date_installed">"首次安裝：％s"</string>

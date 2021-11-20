@@ -6,7 +6,6 @@
     <string name="batch_warning">Suas configurações em lote serão removidas! Você tem certeza?</string>
     <string name="change_logs">Mudanças</string>
     <string name="copyright">"Direitos autorais: © %s"</string>
-    <string name="credits">Créditos</string>
     <string name="disable_message">será %s! Tem certeza?</string>
     <string name="disabled">desativado</string>
     <string name="disabling">Desativando %s</string>
@@ -69,7 +68,6 @@
     <string name="bundle_install_apks">Tem certeza de que deseja instalar o app bundle \'%s\'?</string>
     <string name="bundles">Bundles</string>
     <string name="certificate">Certificado</string>
-    <string name="credits_summary">Uma lista de pessoas que contribuíram para o projeto</string>
     <string name="data_dir">Diretório de dados</string>
     <string name="date_installation">Datas de instalação</string>
     <string name="date_installed">Instalado pela primeira vez: %s</string>

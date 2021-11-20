@@ -14,8 +14,6 @@
     <string name="billing_client_disconnected">"Erro de ligação ao cliente de faturação do Google Play!"</string>
     <string name="bundle_install_apks">"Tem a certeza que deseja instalar o pacote de aplicação '%s'?"</string>
     <string name="change_logs">"Registo de alterações"</string>
-    <string name="credits">"Créditos"</string>
-    <string name="credits_summary">"Uma lista de pessoas que contribuíram para este projeto"</string>
     <string name="data_dir">"Diretório de dados"</string>
     <string name="date_installation">"Datas de instalação"</string>
     <string name="date_installed">"Instalado pela primeira vez: %s"</string>

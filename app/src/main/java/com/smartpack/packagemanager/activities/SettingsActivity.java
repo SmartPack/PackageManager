@@ -33,6 +33,7 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
 
+import in.sunilpaulmathew.sCommon.Utils.sCreditsUtils;
 import in.sunilpaulmathew.sCommon.Utils.sSingleChoiceDialog;
 import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
 import in.sunilpaulmathew.sCommon.Utils.sTranslatorUtils;
@@ -105,8 +106,7 @@ public class SettingsActivity extends AppCompatActivity {
         mData.add(new RecycleSettingsItem(getString(R.string.share_app), getString(R.string.share_app_Summary), sUtils.getDrawable(R.drawable.ic_share, this), null, 0, 18));
         mData.add(new RecycleSettingsItem(getString(R.string.rate_us), getString(R.string.rate_us_Summary), sUtils.getDrawable(R.drawable.ic_rate, this),
                 "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager", 0, 18));
-        mData.add(new RecycleSettingsItem(getString(R.string.credits), getString(R.string.credits_summary), sUtils.getDrawable(R.drawable.ic_credits, this),
-                "https://github.com/SmartPack/PackageManager/blob/master/Credits.md", 0, 18));
+        mData.add(new RecycleSettingsItem(getString(R.string.credits), getString(R.string.credits_summary), sUtils.getDrawable(R.drawable.ic_credits, this),null, 0, 18));
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             if (mData.get(position).getUrl() != null) {
@@ -196,7 +196,7 @@ public class SettingsActivity extends AppCompatActivity {
             } else if (position == 11) {
                 Billing.showDonateOption(this);
             } else if (position == 14) {
-                sTranslatorUtils.showTranslationMessage(getString(R.string.app_name), "https://poeditor.com/join/project?hash=0CitpyI1Oc", this).show();
+                new sTranslatorUtils(getString(R.string.app_name), "https://poeditor.com/join/project?hash=0CitpyI1Oc", this).show();
             } else if (position == 15) {
                 Intent changeLogs = new Intent(this, ChangeLogsActivity.class);
                 startActivity(changeLogs);
@@ -208,6 +208,13 @@ public class SettingsActivity extends AppCompatActivity {
                 share_app.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(share_app, getString(R.string.share_with));
                 startActivity(shareIntent);
+            } else if (position == 18) {
+                new sCreditsUtils(AppSettings.getCredits(),
+                        sUtils.getDrawable(R.mipmap.ic_launcher, v.getContext()),
+                        sUtils.getDrawable(R.drawable.ic_back, v.getContext()),
+                        sUtils.getColor(R.color.colorAccent, v.getContext()),
+                        20, v.getContext().getString(R.string.app_name), "2021-2022, sunilpaulmathew",
+                        BuildConfig.VERSION_NAME).launchCredits(v.getContext());
             }
         });
 

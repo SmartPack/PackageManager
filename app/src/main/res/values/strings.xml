@@ -27,8 +27,6 @@
     <string name="certificate">Certificate</string>
     <string name="change_logs">Change-logs</string>
     <string name="copyright">Copyright: © %s</string>
-    <string name="credits">Credits</string>
-    <string name="credits_summary">A list of people who contributed to this project</string>
     <string name="data_dir">Data Directory</string>
     <string name="date_installation">Installation Dates</string>
     <string name="date_installed">First Installed: %s</string>

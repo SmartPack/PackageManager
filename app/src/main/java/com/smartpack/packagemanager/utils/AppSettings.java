@@ -13,6 +13,10 @@ import android.content.Context;
 
 import com.smartpack.packagemanager.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
 import in.sunilpaulmathew.sCommon.Utils.sSingleChoiceDialog;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -53,6 +57,36 @@ public class AppSettings {
             }
         }
         return 0;
+    }
+
+    public static List<sSerializableItems> getCredits() {
+        List<sSerializableItems> mData = new ArrayList<>();
+        mData.add(new sSerializableItems(null, "Willi Ye", "Kernel Adiutor", "https://github.com/Grarak/KernelAdiutor"));
+        mData.add(new sSerializableItems(null, "topjohnwu", "libsu", "https://github.com/topjohnwu/libsu"));
+        mData.add(new sSerializableItems(null, "Srikanth Reddy Lingala", "zip4j", "https://github.com/srikanth-lingala"));
+        mData.add(new sSerializableItems(null, "Aefyr", "SAI", "https://github.com/Aefyr/SAI"));
+        mData.add(new sSerializableItems(null, "Nitin Kalra", "Split Apk Install", "https://github.com/nkalra0123/"));
+        mData.add(new sSerializableItems(null, "Hsiafan", "apk-parser", "https://github.com/hsiafan/apk-parser"));
+        mData.add(new sSerializableItems(null, "Lennoard Silva", "Code Contributions & Portuguese (Brazilian) Translations", "https://github.com/Lennoard"));
+        mData.add(new sSerializableItems(null, "Agnieszka C","Code Contributions, Testing & Polish Translations", "https://github.com/Aga-C"));
+        mData.add(new sSerializableItems(null, "Toxinpiper", "App Icon", "https://t.me/toxinpiper"));
+        mData.add(new sSerializableItems(null, "Valdnet", "Testing", "https://github.com/Valdnet"));
+        mData.add(new sSerializableItems(null, "FiestaLake", "Korean Translations", "https://github.com/FiestaLake"));
+        mData.add(new sSerializableItems(null, "Mikesew1320", "Amharic Translations", "https://github.com/Mikesew1320"));
+        mData.add(new sSerializableItems(null, "tsiflimagas", "Greek Translations", "https://github.com/tsiflimagas"));
+        mData.add(new sSerializableItems(null, "Nikita", "Russian & Ukrainian Translations", "https://t.me/MONSTER_PC"));
+        mData.add(new sSerializableItems(null, "tommynok", "Ukrainian Translations", null));
+        mData.add(new sSerializableItems(null, "B3Nd2R & Reno", "French Translations", null));
+        mData.add(new sSerializableItems(null, "Jan & Ray", "German Translations", null));
+        mData.add(new sSerializableItems(null, "omerakgoz34 (BSÇE)", "Turkish Translations", "https://github.com/omerakgoz34"));
+        mData.add(new sSerializableItems(null, "Emrehelvaci83", "Turkish Translations", null));
+        mData.add(new sSerializableItems(null, "Woytazzer", "Czech Translations", null));
+        mData.add(new sSerializableItems(null, "Javi", "Spanish Translations", null));
+        mData.add(new sSerializableItems(null, "Hoa Gia Đại Thiếu", "Vietnamese Translations", null));
+        mData.add(new sSerializableItems(null, "jason5545", "Chinese (Simplified & Traditional) Translations", "https://github.com/jason5545"));
+        mData.add(new sSerializableItems(null, "Cláudia Sebastião", "Portuguese (Portugal) Translations", null));
+        mData.add(new sSerializableItems(null, "Erős Pista", "Hungarian Translations", null));
+        return mData;
     }
 
     public static String getLanguage(Activity activity) {

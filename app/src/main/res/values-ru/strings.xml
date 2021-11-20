@@ -14,8 +14,6 @@
     <string name="billing_client_disconnected">"Не удалось подключиться к клиенту Google Play Billing!"</string>
     <string name="bundle_install_apks">"Вы точно хотите установить пакетное приложение(split) '%s'?"</string>
     <string name="change_logs">"Список изменений"</string>
-    <string name="credits">"Благодарности"</string>
-    <string name="credits_summary">"Список людей, которые поддержали этот проект"</string>
     <string name="data_dir">"Каталог данных"</string>
     <string name="date_installation">"Дата установки"</string>
     <string name="date_installed">"Впервые установлено: %s"</string>
