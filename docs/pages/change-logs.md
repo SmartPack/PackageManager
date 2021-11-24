@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 50. v5.7 *(November 24, 2021)*
+- Improved some layouts.
+- Enhance Permissions page.
+- Added Brand-New credits page.
+- Update translation request.
+- Miscellaneous changes.
+
 ### 49. v5.6 *(November 15, 2021)*
 - Package manager now target Android 12.
 - Replaced almost all the deprecated functions with the supported ones.
