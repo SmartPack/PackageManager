@@ -1,5 +1,0 @@
-* Improved some layouts.
-* Enhance Permissions page.
-* Added Brand-New credits page.
-* Update translation request.
-* Miscellaneous changes.

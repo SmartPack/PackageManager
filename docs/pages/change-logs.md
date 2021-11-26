@@ -6,6 +6,10 @@ permalink: /change-logs/
 
 ## What's New
 
+### 51. v5.8 *(November 26, 2021)*
+- Fixed crashes on Installer/Exported apps page on API 29.
+- Miscellaneous changes.
+
 ### 50. v5.7 *(November 24, 2021)*
 - Improved some layouts.
 - Enhance Permissions page.
