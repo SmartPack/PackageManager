@@ -26,6 +26,7 @@
     <string name="bundles">Bundles</string>
     <string name="certificate">Certificate</string>
     <string name="change_logs">Change-logs</string>
+    <string name="close">Close</string>
     <string name="copyright">Copyright: © %s</string>
     <string name="data_dir">Data Directory</string>
     <string name="date_installation">Installation Dates</string>

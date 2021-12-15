@@ -41,7 +41,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class InstallerActivity extends AppCompatActivity {
 
     private AppCompatImageButton mIcon;
-    private MaterialCardView mCancel, mOpen;
+    private MaterialCardView mClose, mOpen;
     private MaterialTextView mStatus, mTitle;
     private ProgressBar mProgress;
 
@@ -54,7 +54,7 @@ public class InstallerActivity extends AppCompatActivity {
         mIcon = findViewById(R.id.icon);
         mProgress = findViewById(R.id.progress);
         mOpen = findViewById(R.id.open);
-        mCancel = findViewById(R.id.cancel);
+        mClose = findViewById(R.id.close);
         mTitle = findViewById(R.id.title);
         mStatus = findViewById(R.id.status);
 
@@ -86,7 +86,7 @@ public class InstallerActivity extends AppCompatActivity {
             Common.reloadPage(true);
         });
 
-        mCancel.setOnClickListener(v -> onBackPressed());
+        mClose.setOnClickListener(v -> onBackPressed());
 
         refreshStatus(this);
     }
@@ -113,7 +113,7 @@ public class InstallerActivity extends AppCompatActivity {
                                     } catch (NullPointerException ignored) {}
                                 }
                                 mProgress.setVisibility(View.GONE);
-                                mCancel.setVisibility(View.VISIBLE);
+                                mClose.setVisibility(View.VISIBLE);
                             }
                         });
                     }

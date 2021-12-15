@@ -27,7 +27,7 @@ import com.smartpack.packagemanager.utils.Common;
 public class PackageTasksActivity extends AppCompatActivity {
 
     public static final String TITLE_START = "start", TITLE_FINISH = "finish";
-    private MaterialCardView mCancelButton;
+    private MaterialCardView mCloseButton;
     private MaterialTextView mOutput, mPackageTitle;
     private NestedScrollView mScrollView;
 
@@ -36,7 +36,7 @@ public class PackageTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packagetasks);
 
-        mCancelButton = findViewById(R.id.cancel_card);
+        mCloseButton = findViewById(R.id.close_card);
         mPackageTitle = findViewById(R.id.package_title);
         mOutput = findViewById(R.id.result_text);
 
@@ -44,7 +44,7 @@ public class PackageTasksActivity extends AppCompatActivity {
 
         mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
 
-        mCancelButton.setOnClickListener(v -> onBackPressed());
+        mCloseButton.setOnClickListener(v -> onBackPressed());
 
         refreshStatus();
     }
@@ -63,7 +63,7 @@ public class PackageTasksActivity extends AppCompatActivity {
                                 mOutput.setVisibility(View.VISIBLE);
                                 if (!Common.isRunning()) {
                                     mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
-                                    mCancelButton.setVisibility(View.VISIBLE);
+                                    mCloseButton.setVisibility(View.VISIBLE);
                                 } else {
                                     mScrollView.fullScroll(NestedScrollView.FOCUS_DOWN);
                                 }

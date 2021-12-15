@@ -90,7 +90,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cancel"
+                    android:id="@+id/close"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/colorAccent"
@@ -105,7 +105,7 @@
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/colorBlack"
                             android:textStyle="bold|italic"
-                            android:text="@string/cancel"
+                            android:text="@string/close"
                             android:layout_margin="10dp"
                             android:textSize="17sp" />
                 </com.google.android.material.card.MaterialCardView>
