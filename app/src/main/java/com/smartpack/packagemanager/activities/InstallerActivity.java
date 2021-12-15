@@ -31,7 +31,6 @@ import java.io.File;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sInstallerUtils;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -144,7 +143,7 @@ public class InstallerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!sInstallerUtils.isPermissionDenied(this) && sUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
+        if (sUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
         }
         if (sUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
