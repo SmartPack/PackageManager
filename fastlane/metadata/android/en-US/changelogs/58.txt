@@ -1,2 +1,0 @@
-* Fixed crashes on Installer/Exported apps page onAPI 29.
-* Miscellaneous changes.
