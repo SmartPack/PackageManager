@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
 
-import java.io.File;
-
 import in.sunilpaulmathew.sCommon.Utils.sCrashReporterUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -32,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Record crashes
-        new sCrashReporterUtils(sUtils.getDrawable(R.drawable.ic_back, this), new File(getExternalFilesDir("log"), "crashLog"),
-                sUtils.getColor(R.color.colorAccent, this), 20).initialize(this);
+        new sCrashReporterUtils(sUtils.getColor(R.color.colorAccent, this), 20, this).initialize();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new PackageTasksFragment()).commit();
