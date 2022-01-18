@@ -53,9 +53,9 @@ android {
 
 dependencies {
     playImplementation 'com.android.billingclient:billing:4.0.0'
-    implementation 'com.github.sunilpaulmathew:sCommon:4d81497317'
-    implementation "com.github.topjohnwu.libsu:core:3.1.2"
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.github.sunilpaulmathew:sCommon:b4e18d04ae'
+    implementation "com.github.topjohnwu.libsu:core:3.2.1"
+    implementation 'com.google.android.material:material:1.5.0'
     implementation 'net.dongliu:apk-parser:2.6.10'
     implementation 'net.lingala.zip4j:zip4j:2.9.0'
 }
