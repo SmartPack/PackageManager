@@ -50,7 +50,11 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewFilePickerAdapter.ViewHolder holder, int position) {
-        if (new File(this.data.get(position)).isDirectory()) {
+        if (position == 0) {
+            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
+            holder.mIcon.setRotation(90);
+        } else if (new File(this.data.get(position)).isDirectory()) {
             holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_folder, holder.mIcon.getContext()));
             if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setBackground(sUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));

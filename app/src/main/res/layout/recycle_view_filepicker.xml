@@ -12,7 +12,8 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_android"
             android:scaleType="fitCenter"
-            android:background="@null" />
+            android:background="@null"
+            android:clickable="false" />
 
         <LinearLayout
             android:layout_width="match_parent"

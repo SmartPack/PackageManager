@@ -104,7 +104,9 @@ public class FilePickerActivity extends AppCompatActivity {
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             String mPath = FilePicker.getData(this, true).get(position);
-            if (new File(mPath).isDirectory()) {
+            if (position == 0) {
+                onBackPressed();
+            } else if (new File(mPath).isDirectory()) {
                 Common.setPath(mPath);
                 reload(this);
             } else if (mPath.endsWith("apks") || mPath.endsWith("apkm") || mPath.endsWith("xapk")) {

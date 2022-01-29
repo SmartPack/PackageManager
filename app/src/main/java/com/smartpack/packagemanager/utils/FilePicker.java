@@ -25,6 +25,7 @@ public class FilePicker {
 
     public static List<String> getData(Activity activity, boolean supported) {
         List<String> mData = new ArrayList<>(), mDir = new ArrayList<>(), mFiles = new ArrayList<>();
+        mData.add("");
         try {
             // Add directories
             for (File mFile : getFilesList()) {
