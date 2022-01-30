@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 55. [v6.0](https://github.com/SmartPack/PackageManager/releases/tag/v6.0) *(January 30, 2021)*
+- Fixed APK installer crashing in Android S.
+- Added new back option in file manager.
+- Updated build tools and dependencies.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 54. [v5.9](https://github.com/SmartPack/PackageManager/releases/tag/v5.9) *(December 18, 2021)*
 - Fixed some issues related with file picking in Android R.
 - App will now monitor & prompt to report crashes.

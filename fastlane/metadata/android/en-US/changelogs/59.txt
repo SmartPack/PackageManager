@@ -1,4 +1,0 @@
-* Fixed some issues related with file picking in Android R.
-* App will now monitor & prompt to report crashes.
-* Some titles are updated for better clarity.
-* Miscellaneous changes.
