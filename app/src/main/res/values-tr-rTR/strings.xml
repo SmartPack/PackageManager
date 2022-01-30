@@ -172,4 +172,5 @@
     <string name="uninstalled_apps">"Kaldırılan Uygulamalar"</string>
     <string name="user_interface">"Kullanıcı Arayüzü"</string>
     <string name="uninstall_updates_message">"'%s' yüklü bir güncellemesi ancak \"Kaldır\" butonuna basarak kolaylıkla kaldırılabilir."</string>
+    <string name="close">"Kapat"</string>
 </resources>

@@ -175,4 +175,5 @@
     <string name="uninstalled_apps">"Odinstalowane aplikacje"</string>
     <string name="user_interface">"Interfejs użytkownika"</string>
     <string name="uninstall_updates_message">"Zainstalowana jest jednak lokalna aktualizacja „%s”, którą można swobodnie usunąć, naciskając przycisk „Odinstaluj”."</string>
+    <string name="close">"Zamknij"</string>
 </resources>

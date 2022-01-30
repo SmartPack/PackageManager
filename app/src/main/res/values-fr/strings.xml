@@ -165,10 +165,12 @@
     <string name="restore">"Restaurer"</string>
     <string name="restore_message">"Restaurer la version d'usine de '%s' ?"</string>
     <string name="restore_message_batch">"Restaurer les versions d'usine des applications suivantes ?
+
         %s"</string>
     <string name="restore_success_message">"La version d'usine des applications sélectionnées a été restaurée avec succès"</string>
     <string name="split_apk_installer_description">"Diviser les APK (plusieurs fichiers APK avec le même nom de package)"</string>
     <string name="uninstalled_apps">"Applications désinstallées"</string>
     <string name="user_interface">"Interface utilisateur"</string>
     <string name="uninstall_updates_message">"Une mise à jour locale de '%s' est cependant installée, qui peut être librement supprimée en cliquant sur le bouton \"Désinstaller\"."</string>
+    <string name="close">"Fermer"</string>
 </resources>

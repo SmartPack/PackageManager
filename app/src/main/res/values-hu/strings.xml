@@ -172,4 +172,5 @@
     <string name="uninstalled_apps">"Eltávolított alkalmazások"</string>
     <string name="user_interface">"Felhasználói felület"</string>
     <string name="uninstall_updates_message">"A '%s' egy helyi frissítése azonban telepítve van, amelyet az \"Eltávolítás\" gombra kattintva szabadon eltávolíthat."</string>
+    <string name="close">"Bezárás"</string>
 </resources>
