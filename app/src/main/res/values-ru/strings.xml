@@ -134,9 +134,43 @@
     <string name="file_permission_request_message">"Для работы этой функции в новых версиях Android (Android R и выше) необходимо предоставить Package Manager право \"Доступ ко всем данным\". Нажмите кнопку \"Предоставить\" и на открывшемся экране представьте право вручную."</string>
     <string name="grant">"Предоставить"</string>
     <string name="select_all">"Выбрать всё"</string>
+    <string name="select_all_summary">"Выбрать и добавить все приложения с этой страницы в пакетный список?"</string>
     <string name="uninstall_status_failed">"Произошла ошибка при удалении %s или операция была прервана пользователем!"</string>
     <string name="export_apk_summary">"Выбранный APK экспортирован в '%s'!"</string>
     <string name="initializing">"Инициализация…"</string>
     <string name="start">"Начало"</string>
     <string name="size">"Размер"</string>
+    <string name="time_installed">"Установленное время"</string>
+    <string name="time_updated">"Обновленное время"</string>
+    <string name="copyright">"Авторское право: © %s"</string>
+    <string name="export_details">"Детали экспорта"</string>
+    <string name="export_details_message">"Сведения о приложении экспортируются как %s"</string>
+    <string name="fdroid">"F-дроид"</string>
+    <string name="more">"Более"</string>
+    <string name="search_market_message">"Искать в %s"</string>
+    <string name="apk_installer_description">"Отдельный APK-файл"</string>
+    <string name="bundle_installer_description">"Пакеты приложений в формате «apkm», «apks» и «xapk»."</string>
+    <string name="exit_confirmation">"Показать подтверждение"</string>
+    <string name="exit_simple">"Просто выйти"</string>
+    <string name="exiting_app">"При выходе из приложения"</string>
+    <string name="exported_apps_name">"Имя экспортированного APK"</string>
+    <string name="general">"Общий"</string>
+    <string name="installer">"Установщик"</string>
+    <string name="installer_clicking">"При нажатии на установщик"</string>
+    <string name="installer_file_picker">"Запустить средство выбора файлов"</string>
+    <string name="installer_instructions">"Показать инструкции"</string>
+    <string name="installer_summary">"Вы можете выбрать установочные файлы, нажав кнопку «плюс» в верхней части этой страницы. Программа установки поддерживает следующие пакеты:"</string>
+    <string name="never_show_page">"Не показывай это снова"</string>
+    <string name="other">"Другой"</string>
+    <string name="restore">"Восстановить"</string>
+    <string name="restore_message">"Восстановить заводскую версию '%s'?"</string>
+    <string name="restore_message_batch">"Восстановить заводские версии следующих приложений?
+
+        %s"</string>
+    <string name="restore_success_message">"Заводская версия выбранных приложений успешно восстановлена"</string>
+    <string name="split_apk_installer_description">"Разделить APK (несколько файлов APK с одинаковым именем пакета)"</string>
+    <string name="uninstalled_apps">"Удаленные приложения"</string>
+    <string name="user_interface">"Пользовательский интерфейс"</string>
+    <string name="uninstall_updates_message">"Однако установлено локальное обновление «%s», которое можно свободно удалить, нажав кнопку «Удалить»."</string>
+    <string name="close">"Закрыть"</string>
 </resources>
