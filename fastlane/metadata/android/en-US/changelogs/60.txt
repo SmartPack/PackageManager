@@ -1,5 +1,0 @@
-* Fixed APK installer crashing in Android S.
-* Added new back option in file manager.
-* Updated build tools and dependencies.
-* Updated translations.
-* Miscellaneous changes.

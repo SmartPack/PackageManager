@@ -6,7 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
-### 55. [v6.0](https://github.com/SmartPack/PackageManager/releases/tag/v6.0) *(January 30, 2021)*
+### 56. [v6.1](https://github.com/SmartPack/PackageManager/releases/tag/v6.1) *(February 22, 2022)*
+- Removed "All files" permission from Google Play version.
+- Exported Apps: Added "Save To Downloads" option for Google Play version.
+- Updated Russian translation.
+- Miscellaneous changes.
+
+### 55. [v6.0](https://github.com/SmartPack/PackageManager/releases/tag/v6.0) *(January 30, 2022)*
 - Fixed APK installer crashing in Android S.
 - Added new back option in file manager.
 - Updated build tools and dependencies.

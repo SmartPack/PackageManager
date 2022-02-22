@@ -1,0 +1,4 @@
+* Removed "All files" permission from Google Play version.
+* Exported Apps: Added "Save To Downloads" option for Google Play version.
+* Updated Russian translation.
+* Miscellaneous changes.
