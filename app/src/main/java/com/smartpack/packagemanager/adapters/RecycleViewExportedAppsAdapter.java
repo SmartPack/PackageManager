@@ -27,6 +27,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Downloads;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
@@ -82,7 +84,10 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, v.getContext().getString(R.string.share));
-            menu.add(Menu.NONE, 1, Menu.NONE, v.getContext().getString(R.string.delete));
+            if (PackageData.getPackageDir(v.getContext()).equals(v.getContext().getExternalFilesDir(""))) {
+                menu.add(Menu.NONE, 1, Menu.NONE, R.string.save_to_downloads);
+            }
+            menu.add(Menu.NONE, 2, Menu.NONE, v.getContext().getString(R.string.delete));
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case 0:
@@ -97,6 +102,9 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
                         v.getContext().startActivity(Intent.createChooser(shareScript, v.getContext().getString(R.string.share_with)));
                         break;
                     case 1:
+                        Downloads.saveToDownloads(new File(data.get(position)), v.getContext()).execute();
+                        break;
+                    case 2:
                         new MaterialAlertDialogBuilder(v.getContext())
                                 .setMessage(v.getContext().getString(R.string.delete_question, new File(data.get(position)).getName()))
                                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialog, id) -> {

@@ -8,13 +8,22 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -67,6 +76,48 @@ public class Downloads {
             PackageData.getPackageDir(context).mkdirs();
         }
         return PackageData.getPackageDir(context).listFiles();
+    }
+
+    public static sExecutor saveToDownloads(File source, Context context) {
+        return new sExecutor() {
+            private ProgressDialog mProgressDialog;
+
+            @Override
+            public void onPreExecute() {
+                mProgressDialog = new ProgressDialog(context);
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.show();
+            }
+
+            @Override
+            public void doInBackground() {
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        FileInputStream inputStream = new FileInputStream(source);
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.MediaColumns.DISPLAY_NAME, source.getName());
+                        values.put(MediaStore.MediaColumns.MIME_TYPE, "*/*");
+                        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
+                        Uri uri = context.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
+                        OutputStream outStream = context.getContentResolver().openOutputStream(uri);
+                        sUtils.copyStream(inputStream, outStream);
+                        inputStream.close();
+                        outStream.close();
+                    }
+                } catch(Exception ignored) {
+                }
+            }
+
+            @Override
+            public void onPostExecute() {
+                try {
+                    mProgressDialog.dismiss();
+                } catch (IllegalArgumentException ignored) {
+                }
+            }
+        };
     }
 
     public static String getSearchText() {
