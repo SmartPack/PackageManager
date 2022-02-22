@@ -35,6 +35,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -76,24 +77,26 @@ public class FilePickerActivity extends AppCompatActivity {
 
         mBack.setOnClickListener(v -> exitActivity());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() || Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q &&
-                sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
-            LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
-            MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
-            MaterialTextView mPermissionText = findViewById(R.id.permission_text);
-            mPermissionText.setText(getString(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ? R.string.file_permission_request_message : R.string.permission_denied_write_storage));
-            mPermissionLayout.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-            mPermissionGrant.setOnClickListener(v -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    Utils.requestPermission(this);
-                } else {
-                    sPermissionUtils.requestPermission(new String[] {
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    },this);
-                }
-            });
-            return;
+        if (!Common.getPath().contains(getCacheDir().getPath())) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() || Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q &&
+                    sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
+                LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
+                MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
+                MaterialTextView mPermissionText = findViewById(R.id.permission_text);
+                mPermissionText.setText(getString(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ? R.string.file_permission_request_message : R.string.permission_denied_write_storage));
+                mPermissionLayout.setVisibility(View.VISIBLE);
+                mRecyclerView.setVisibility(View.GONE);
+                mPermissionGrant.setOnClickListener(v -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        Utils.requestPermission(this);
+                    } else {
+                        sPermissionUtils.requestPermission(new String[]{
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        }, this);
+                    }
+                });
+                return;
+            }
         }
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
