@@ -209,7 +209,7 @@ public class FilePickerActivity extends AppCompatActivity {
     }
 
     private void exitActivity() {
-        if (!Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
+        if (!Common.getPath().contains(getCacheDir().getPath())) {
             sUtils.saveString("lastDirPath", Common.getPath(), this);
         }
         finish();
