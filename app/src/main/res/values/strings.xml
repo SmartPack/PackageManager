@@ -21,6 +21,7 @@
     <string name="batch_warning">Your batch settings will be removed. Are you sure?</string>
     <string name="billing_client_disconnected">Failed to connect with Google Play Billing client</string>
     <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
+    <string name="bundle_install_question">Are you sure to install selected app bundle?</string>
     <string name="bundle_installer_description">App bundles of \'apkm\', \'apks\', and \'xapk\' format</string>
     <string name="bundle_path">Bundle Path</string>
     <string name="bundles">Bundles</string>
@@ -99,6 +100,7 @@
     <string name="permissions">Permissions</string>
     <string name="permission_denied_write_storage">Permission denied for accessing storage</string>
     <string name="playstore">Google Play</string>
+    <string name="preparing_message">Preparing…</string>
     <string name="press_back">Press back again to exit</string>
     <string name="rate_us">Rate App</string>
     <string name="rate_us_Summary">Rate or/and Review Package Manager in Google Play</string>

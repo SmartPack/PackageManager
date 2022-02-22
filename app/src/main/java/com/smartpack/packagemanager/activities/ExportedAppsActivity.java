@@ -37,6 +37,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewExportedAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
+import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -93,8 +94,8 @@ public class ExportedAppsActivity extends AppCompatActivity {
             popupMenu.show();
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() || Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q &&
-                sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
+        if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() || Build.VERSION.SDK_INT <=
+                Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = findViewById(R.id.permission_text);
