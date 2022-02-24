@@ -86,6 +86,10 @@ public class SplitAPKInstaller {
                 } else {
                     mProgressDialog = new ProgressDialog(activity);
                     mProgressDialog.setMessage(activity.getString(R.string.preparing_message));
+                    mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    mProgressDialog.setIcon(R.mipmap.ic_launcher);
+                    mProgressDialog.setTitle(R.string.app_name);
+                    mProgressDialog.setIndeterminate(true);
                     mProgressDialog.setCancelable(false);
                     mProgressDialog.show();
                 }
@@ -132,6 +136,8 @@ public class SplitAPKInstaller {
             public void onPreExecute() {
                 mProgressDialog = new ProgressDialog(activity);
                 mProgressDialog.setMessage(activity.getString(R.string.preparing_message));
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
                 sUtils.delete(activity.getExternalFilesDir("APK"));

@@ -16,6 +16,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import com.smartpack.packagemanager.R;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
@@ -86,6 +88,8 @@ public class Downloads {
             public void onPreExecute() {
                 mProgressDialog = new ProgressDialog(context);
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mProgressDialog.setIcon(R.mipmap.ic_launcher);
+                mProgressDialog.setTitle(R.string.app_name);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
