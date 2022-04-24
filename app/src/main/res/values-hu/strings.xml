@@ -173,4 +173,7 @@
     <string name="user_interface">"Felhasználói felület"</string>
     <string name="uninstall_updates_message">"A '%s' egy helyi frissítése azonban telepítve van, amelyet az \"Eltávolítás\" gombra kattintva szabadon eltávolíthat."</string>
     <string name="close">"Bezárás"</string>
+    <string name="bundle_install_question">"Biztosan telepíti a kiválasztott alkalmazáscsomagot?"</string>
+    <string name="preparing_message">"Előkészítés…"</string>
+    <string name="save_to_downloads">"Mentés a Letöltések közé"</string>
 </resources>

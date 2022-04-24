@@ -173,4 +173,7 @@
     <string name="user_interface">"Kullanıcı Arayüzü"</string>
     <string name="uninstall_updates_message">"'%s' yüklü bir güncellemesi ancak \"Kaldır\" butonuna basarak kolaylıkla kaldırılabilir."</string>
     <string name="close">"Kapat"</string>
+    <string name="bundle_install_question">"Seçilen toplu uygulama paketini yüklemek istediğine emin misiniz?"</string>
+    <string name="preparing_message">"Hazırlanıyor…"</string>
+    <string name="save_to_downloads">"İndirilenler'e kaydet"</string>
 </resources>

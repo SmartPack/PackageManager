@@ -176,4 +176,7 @@
     <string name="user_interface">"用户界面"</string>
     <string name="uninstall_updates_message">"一个 '%s' 的本地更新已安装，但您可以点击“卸载”按钮来移除。"</string>
     <string name="close">"关闭"</string>
+    <string name="bundle_install_question">"您确定要安装选中的应用捆绑包吗？"</string>
+    <string name="preparing_message">"正在准备…"</string>
+    <string name="save_to_downloads">"保存到下载目录"</string>
 </resources>

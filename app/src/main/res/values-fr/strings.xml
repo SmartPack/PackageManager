@@ -173,4 +173,7 @@
     <string name="user_interface">"Interface utilisateur"</string>
     <string name="uninstall_updates_message">"Une mise à jour locale de '%s' est cependant installée, qui peut être librement supprimée en cliquant sur le bouton \"Désinstaller\"."</string>
     <string name="close">"Fermer"</string>
+    <string name="bundle_install_question">"Êtes-vous sûr d'installer le groupe d'applications sélectionné ?"</string>
+    <string name="preparing_message">"Préparation…"</string>
+    <string name="save_to_downloads">"Enregistrer dans les téléchargements"</string>
 </resources>

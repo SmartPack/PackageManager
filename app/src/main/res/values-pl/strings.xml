@@ -176,4 +176,7 @@
     <string name="user_interface">"Interfejs użytkownika"</string>
     <string name="uninstall_updates_message">"Zainstalowana jest jednak lokalna aktualizacja „%s”, którą można swobodnie usunąć, naciskając przycisk „Odinstaluj”."</string>
     <string name="close">"Zamknij"</string>
+    <string name="bundle_install_question">"Czy na pewno zainstalować wybraną paczkę aplikacji?"</string>
+    <string name="preparing_message">"Przygotowywanie…"</string>
+    <string name="save_to_downloads">"Zapisz w Pobranych"</string>
 </resources>
