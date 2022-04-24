@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,9 +34,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
+import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
@@ -165,12 +166,19 @@ public class FilePickerActivity extends AppCompatActivity {
 
                     @Override
                     public void onPostExecute() {
-                        Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
-                        if (Common.getApplicationID() != null) {
-                            SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
+                        if (Common.getAppList().size() == 1) {
+                            APKData.setAPKFile(new File(Common.getAppList().get(0)));
+                            Intent apkDetails = new Intent(FilePickerActivity.this, APKPickerActivity.class);
+                            startActivity(apkDetails);
                             exitActivity();
                         } else {
-                            sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
+                            Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
+                            if (Common.getApplicationID() != null) {
+                                SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
+                                exitActivity();
+                            } else {
+                                sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
+                            }
                         }
                     }
                 }.execute()

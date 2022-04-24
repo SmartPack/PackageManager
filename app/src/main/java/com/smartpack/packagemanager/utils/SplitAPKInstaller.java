@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.APKPickerActivity;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.InstallerActivity;
 import com.smartpack.packagemanager.services.SplitAPKInstallService;
@@ -32,11 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sInstallerParams;
 import in.sunilpaulmathew.sCommon.Utils.sInstallerUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
@@ -135,7 +134,9 @@ public class SplitAPKInstaller {
             @Override
             public void onPreExecute() {
                 mProgressDialog = new ProgressDialog(activity);
-                mProgressDialog.setMessage(activity.getString(R.string.preparing_message));
+                mProgressDialog.setIcon(R.mipmap.ic_launcher);
+                mProgressDialog.setTitle(R.string.app_name);
+                mProgressDialog.setMessage("\n" + activity.getString(R.string.preparing_message));
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(false);
@@ -147,7 +148,7 @@ public class SplitAPKInstaller {
             @Override
             public void doInBackground() {
                 mExtension = Utils.getExtension(uriFile, activity);
-                mFile = new File(activity.getExternalFilesDir("APK"), "tmp." + mExtension);
+                mFile = new File(activity.getExternalFilesDir("APK"), "APK." + mExtension);
                 sUtils.copy(uriFile, mFile, activity);
             }
 
@@ -159,32 +160,9 @@ public class SplitAPKInstaller {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (mExtension.equals("apk")) {
-                    new sExecutor() {
-
-                        @Override
-                        public void onPreExecute() {
-                            Common.getAppList().add(mFile.getAbsolutePath());
-                        }
-
-                        @Override
-                        public void doInBackground() {
-                            for (String mAPKs : Common.getAppList()) {
-                                if (sAPKUtils.getPackageName(mAPKs, activity) != null) {
-                                    Common.setApplicationID(Objects.requireNonNull(sAPKUtils.getPackageName(mAPKs, activity)));
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onPostExecute() {
-                            Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), activity));
-                            if (Common.getApplicationID() != null) {
-                                SplitAPKInstaller.installSplitAPKs(activity);
-                            } else {
-                                sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.installation_status_bad_apks)).show();
-                            }
-                        }
-                    }.execute();
+                    APKData.setAPKFile(mFile);
+                    Intent apkDetails = new Intent(activity, APKPickerActivity.class);
+                    activity.startActivity(apkDetails);
                 } else if (mExtension.equals("apkm") || mExtension.equals("apks") || mExtension.equals("xapk")) {
                     new MaterialAlertDialogBuilder(activity)
                             .setIcon(R.mipmap.ic_launcher)
@@ -250,7 +228,7 @@ public class SplitAPKInstaller {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {
                 }
-                SplitAPKInstaller.installSplitAPKs(activity);
+                installSplitAPKs(activity);
             }
         };
     }

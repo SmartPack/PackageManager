@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewManifestAdapter;
+import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
@@ -46,8 +47,8 @@ public class ManifestFragment extends Fragment {
     }
 
     private List<String> getData() {
-        return new ArrayList<>(Arrays.asList(Objects.requireNonNull(PackageExplorer.readManifest(
-                Common.getSourceDir())).split("\\r?\\n")));
+        return new ArrayList<>(Arrays.asList(Objects.requireNonNull(APKData.getManifest() != null
+                ? APKData.getManifest() : PackageExplorer.readManifest(Common.getSourceDir())).split("\\r?\\n")));
     }
 
 }

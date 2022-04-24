@@ -12,7 +12,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -86,7 +85,7 @@ public class PackageInfoFragment extends Fragment {
         mLastUpdated.setText(getString(R.string.date_installed, sPackageUtils.getInstalledDate(Common.getApplicationID(), requireActivity())) +
                 "\n" + getString(R.string.date_updated, sPackageUtils.getUpdatedDate(Common.getApplicationID(), requireActivity())));
 
-        String certificate = new sAPKCertificateUtils(null, Common.getApplicationID(), requireActivity()).getCertificateDetails();;
+        String certificate = new sAPKCertificateUtils(null, Common.getApplicationID(), requireActivity()).getCertificateDetails();
         if (certificate == null) {
             mCertificateTitle.setVisibility(View.GONE);
             mCertificate.setVisibility(View.GONE);

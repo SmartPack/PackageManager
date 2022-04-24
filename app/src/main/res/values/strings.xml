@@ -6,6 +6,7 @@
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
     <string name="apks">APK\'s</string>
+    <string name="android_version">Android %s</string>
     <string name="batch_options">Batch Options</string>
     <string name="batch_list_added">%s is added to the batch list</string>
     <string name="batch_list_clear">Clear list</string>
@@ -119,6 +120,8 @@
     <string name="search">Search…</string>
     <string name="search_market_message">Search in %s</string>
     <string name="sdcard">SDCard</string>
+    <string name="sdk_compile">Compile SDK: %s</string>
+    <string name="sdk_minimum">Minimum SDK: %s</string>
     <string name="select">Select</string>
     <string name="select_all">Select All</string>
     <string name="select_all_summary">Select and add all applications from this page to the batch list?</string>
@@ -169,6 +172,7 @@
     <string name="uninstall_updates_message">A local update of \'%s\' is, however, installed, which can be freely removed by clicking the \"Uninstall\" button.</string>
     <string name="uninstall_warning">Please note: Removing system apps will be sometimes dangerous\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
     <string name="uninstalled_apps">Uninstalled Apps</string>
+    <string name="update">Update</string>
     <string name="user_interface">User Interface</string>
     <string name="version">Version: %s</string>
     <string name="warning">Warning</string>

@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,29 +19,43 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewPermissionsAdapter;
+import com.smartpack.packagemanager.adapters.APKDetailsAdapter;
 import com.smartpack.packagemanager.utils.APKData;
-import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageDetails;
+
+import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 
 /*
- * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
+ * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 26, 2022
  */
-public class PermissionsFragment extends Fragment {
+public class APKDetailsFragment extends Fragment {
 
-    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.layout_recyclerview, container, false);
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecycleViewPermissionsAdapter mRecycleViewAdapter = new RecycleViewPermissionsAdapter(APKData.getPermissions()
-                != null ? APKData.getPermissions() : PackageDetails.getPermissions(Common.getApplicationID(), requireActivity()));
-        mRecyclerView.setAdapter(mRecycleViewAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        
+        new sExecutor() {
+            private APKDetailsAdapter mAdapter;
+            @Override
+            public void onPreExecute() {
+            }
+
+            @Override
+            public void doInBackground() {
+                mAdapter = new APKDetailsAdapter(APKData.getData());
+            }
+
+            @Override
+            public void onPostExecute() {
+                mRecyclerView.setAdapter(mAdapter);
+
+            }
+        }.execute();
 
         return mRootView;
     }
-
+    
 }
