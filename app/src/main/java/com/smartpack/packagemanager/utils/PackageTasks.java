@@ -135,6 +135,9 @@ public class PackageTasks {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void doInBackground() {
+                if (!PackageData.getPackageDir(activity).exists()) {
+                    PackageData.getPackageDir(activity).mkdirs();
+                }
                 for (String packageID : Common.getBatchList()) {
                     if (packageID.contains(".") && sPackageUtils.isPackageInstalled(packageID, activity)) {
                         if (SplitAPKInstaller.isAppBundle(sPackageUtils.getParentDir(packageID, activity))) {

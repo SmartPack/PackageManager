@@ -99,7 +99,8 @@ public class ExportedAppsActivity extends AppCompatActivity {
             LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = findViewById(R.id.permission_text);
-            mPermissionText.setText(getString(R.string.permission_denied_write_storage));
+            mPermissionText.setText(getString(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ?
+                    R.string.file_permission_request_message : R.string.permission_denied_write_storage));
             mPermissionLayout.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
             mTabLayout.setVisibility(View.GONE);

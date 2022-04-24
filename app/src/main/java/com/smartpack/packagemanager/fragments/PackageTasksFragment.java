@@ -415,7 +415,7 @@ public class PackageTasksFragment extends Fragment {
                             .setIcon(R.mipmap.ic_launcher)
                             .setTitle(R.string.sure_question)
                             .setMessage(getString(R.string.batch_list_disable) + "\n" + PackageData.showBatchList())
-                            .setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                            .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             })
                             .setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) ->
                                     PackageTasks.batchDisableTask(activity))
@@ -427,7 +427,7 @@ public class PackageTasksFragment extends Fragment {
                         uninstall.setIcon(R.mipmap.ic_launcher);
                         uninstall.setTitle(R.string.sure_question);
                         uninstall.setMessage(getString(R.string.batch_list_remove) + "\n" + PackageData.showBatchList());
-                        uninstall.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        uninstall.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
                         uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) ->
                                 PackageTasks.batchUninstallTask(activity));
@@ -441,24 +441,37 @@ public class PackageTasksFragment extends Fragment {
                     reset.setIcon(R.mipmap.ic_launcher);
                     reset.setTitle(R.string.sure_question);
                     reset.setMessage(getString(R.string.batch_list_reset) + "\n" + PackageData.showBatchList());
-                    reset.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                    reset.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
                     reset.setPositiveButton(getString(R.string.reset), (dialogInterface, i) ->
                             PackageTasks.batchResetTask(activity));
                     reset.show();
                     break;
                 case 3:
-                    if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
-                        sPermissionUtils.requestPermission(new String[] {
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                activity);
+                    if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
+                            Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            new MaterialAlertDialogBuilder(activity)
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(getString(R.string.file_permission_request_message))
+                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                    })
+                                    .setPositiveButton(getString(R.string.grant), (dialogInterface, i) ->
+                                            Utils.requestPermission(requireActivity()))
+                                    .show();
+                        } else {
+                            sPermissionUtils.requestPermission(new String[]{
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    activity);
+                        }
                         sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
                     } else {
                         MaterialAlertDialogBuilder export = new MaterialAlertDialogBuilder(activity);
                         export.setIcon(R.mipmap.ic_launcher);
                         export.setTitle(R.string.sure_question);
                         export.setMessage(getString(R.string.batch_list_export) + "\n" + PackageData.showBatchList());
-                        export.setNeutralButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        export.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
                         export.setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
                                 PackageTasks.batchExportTask(activity));
@@ -472,6 +485,9 @@ public class PackageTasksFragment extends Fragment {
                                 activity);
                         sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                     } else {
+                        if (!PackageData.getPackageDir(activity).exists()) {
+                            PackageData.getPackageDir(activity).mkdirs();
+                        }
                         File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
                         try {
                             JSONObject obj = new JSONObject();

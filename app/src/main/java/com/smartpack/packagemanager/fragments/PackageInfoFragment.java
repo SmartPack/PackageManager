@@ -177,6 +177,9 @@ public class PackageInfoFragment extends Fragment {
                                     requireActivity());
                             sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                         } else {
+                            if (!PackageData.getPackageDir(requireActivity()).exists()) {
+                                PackageData.getPackageDir(requireActivity()).mkdirs();
+                            }
                             File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + ".json");
                             sUtils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
                             sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
