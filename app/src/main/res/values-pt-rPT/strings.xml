@@ -100,7 +100,7 @@
     <string name="share_app_Summary">"Convidar amigos para utilizar o Gestor de Pacotes"</string>
     <string name="source_code_summary">"O Gestor de Pacotes é uma aplicação de código-aberto que aceita contribuições da comunidade de programação. Clique aqui para ver o código-fonte!"</string>
     <string name="support_summary">"Aderir ao grupo do Telegram"</string>
-    <string name="batch_options">"Opções de lote"</string>
+    <string name="batch_options">"Opções de lote (%s)"</string>
     <string name="batch_list_added">"%s foi adicionado à lista de lotes"</string>
     <string name="batch_list_export">"Tem a certeza que deseja exportar as seguintes aplicações para o armazenamento do dispositivo?"</string>
     <string name="batch_list_removed">"%s foi removido da lista de lotes"</string>

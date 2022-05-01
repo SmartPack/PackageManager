@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Invita a tus amigos a usar Package Manager"</string>
     <string name="source_code_summary">"Package Manager es una aplicación de código abierto que está lista para aceptar contribuciones de la comunidad de desarrolladores.  ¡Haga clic aquí para ver el código fuente!"</string>
     <string name="support_summary">"Únete al grupo de soporte en Telegram"</string>
-    <string name="batch_options">"Opciones por lotes"</string>
+    <string name="batch_options">"Opciones por lotes (%s)"</string>
     <string name="batch_list_added">"%s se ha añadido a la lista por lotes"</string>
     <string name="batch_list_export">"¿Estás seguro de exportar las siguientes aplicaciones al almacenamiento de tu dispositivo?"</string>
     <string name="batch_list_removed">"%s ha sido eliminado de la lista por lotes"</string>

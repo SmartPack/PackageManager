@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Laden Sie Ihre Freunde zur Verwendung von Package Manager ein"</string>
     <string name="source_code_summary">"Package Manager ist eine Open-Source-Anwendung, die bereit ist, Beiträge aus der Entwicklergemeinschaft anzunehmen. Klicken Sie hier, um sich den Quellcode anzusehen!"</string>
     <string name="support_summary">"Telegram-Supportgruppe beitreten"</string>
-    <string name="batch_options">"Stapeloptionen"</string>
+    <string name="batch_options">"Stapeloptionen (%s)"</string>
     <string name="batch_list_added">"%s wurde zum Stapel hinzugefügt"</string>
     <string name="batch_list_export">"Sind Sie sicher, dass Sie die folgende(n) App(s) in den Gerätespeicher exportieren möchten?"</string>
     <string name="batch_list_removed">"%s wurde vom Stapel entfernt"</string>

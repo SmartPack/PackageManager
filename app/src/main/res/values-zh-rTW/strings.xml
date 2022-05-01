@@ -97,7 +97,7 @@
     <string name="share_app_Summary">"邀請您的朋友使用套件管理器"</string>
     <string name="source_code_summary">"Package Manager是一個開放原始碼應用程式，可以隨時接受開發社區的貢獻。點擊此處檢視原始碼！"</string>
     <string name="support_summary">"加入電報支持小組"</string>
-    <string name="batch_options">"批次選項"</string>
+    <string name="batch_options">"批次選項 (%s)"</string>
     <string name="batch_list_added">"％s 已新增到批次清單"</string>
     <string name="batch_list_export">"您確定要將以下應用程式匯出到裝置儲存空間嗎？"</string>
     <string name="batch_list_removed">"從批次清單中刪除了％s"</string>

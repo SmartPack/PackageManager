@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -79,7 +80,7 @@ public class PackageTasksFragment extends Fragment {
     private boolean mExit;
     private final Handler mHandler = new Handler();
     private MaterialCardView mBatchOptions;
-    private MaterialTextView mAppTitle;
+    private MaterialTextView mAppTitle, mBatchOptionTitle;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
@@ -90,6 +91,7 @@ public class PackageTasksFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_packagetasks, container, false);
 
         mAppTitle = mRootView.findViewById(R.id.app_title);
+        mBatchOptionTitle = Common.initializeBatchOptionTitle(mRootView, R.id.batch_option_title);
         mProgress = mRootView.findViewById(R.id.progress);
         mBatchOptions = Common.initializeBatchOptionsCard(mRootView, R.id.batch_options);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
@@ -572,6 +574,7 @@ public class PackageTasksFragment extends Fragment {
                 mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
             }
 
+            @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
             @Override
             public void onPostExecute() {
                 if (sUtils.getBoolean("select_all", false, activity)) {
@@ -581,6 +584,7 @@ public class PackageTasksFragment extends Fragment {
                     mBatchOptions.setVisibility(View.GONE);
                 }
                 mBatchOptions.setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
+                mBatchOptionTitle.setText(getString(R.string.batch_options, Common.getBatchList().size()));
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);

@@ -52,7 +52,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return new ViewHolder(rowItem);
     }
 
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
         if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
@@ -95,6 +95,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 sUtils.snackBar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName())).show();
             }
             Common.getBatchOptionsCard().setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
+            Common.getBatchOptionTitle().setText(v.getContext().getString(R.string.batch_options, Common.getBatchList().size()));
         });
     }
 

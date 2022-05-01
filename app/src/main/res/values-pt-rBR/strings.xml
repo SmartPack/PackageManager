@@ -59,7 +59,7 @@
     <string name="activities">Atividades</string>
     <string name="apk_path">Caminho do APK</string>
     <string name="apks">APKs</string>
-    <string name="batch_options">Operações em lote</string>
+    <string name="batch_options">Operações em lote (%s)</string>
     <string name="batch_list_added">%s foi adicionado ao lote</string>
     <string name="batch_list_export">Tem certeza de que deseja exportar o(s) seguinte(s) aplicativo(s) para o armazenamento do dispositivo?</string>
     <string name="batch_list_removed">%s foi removido do lote</string>

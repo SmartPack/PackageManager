@@ -7,7 +7,7 @@
     <string name="app_info">App info</string>
     <string name="apks">APK\'s</string>
     <string name="android_version">Android %s</string>
-    <string name="batch_options">Batch Options</string>
+    <string name="batch_options">Batch Options (%s)</string>
     <string name="batch_list_added">%s is added to the batch list</string>
     <string name="batch_list_clear">Clear list</string>
     <string name="batch_list_disable">Are you sure to disable (if enabled) or enable (if disabled) the following app(s)?</string>

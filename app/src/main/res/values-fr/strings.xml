@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Inviter un ami à utiliser Package Manager"</string>
     <string name="source_code_summary">"Package Manager est une application open source qui peut être améliorée grâce aux contributions de la communauté de développement. Cliquez ici pour consulter le code source !"</string>
     <string name="support_summary">"Rejoindre le groupe de support Telegram"</string>
-    <string name="batch_options">"Options pour le traitement par lots"</string>
+    <string name="batch_options">"Options pour le traitement par lots (%s)"</string>
     <string name="batch_list_added">"%s est ajouté dans la liste du traitement par lots"</string>
     <string name="batch_list_export">"Êtes-vous sûr d'exporter l(es) application(s) suivante(s) vers le stockage de l'appareil ?"</string>
     <string name="batch_list_removed">"%s est supprimé de la liste du traitement par lots"</string>

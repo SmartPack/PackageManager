@@ -99,7 +99,7 @@
     <string name="share_app_Summary">"Mời bạn bè của bạn sử dụng Package Manager"</string>
     <string name="source_code_summary">"Package Manager là một ứng dụng mã nguồn mở sẵn sàng chấp nhận các đóng góp từ cộng đồng phát triển. Bấm vào đây để kiểm tra mã nguồn!"</string>
     <string name="support_summary">"Tham gia nhóm hỗ trợ Telegram"</string>
-    <string name="batch_options">"Tùy chọn hàng loạt"</string>
+    <string name="batch_options">"Tùy chọn hàng loạt (%s)"</string>
     <string name="batch_list_added">"%s được thêm vào danh sách hàng loạt"</string>
     <string name="batch_list_export">"Bạn có chắc chắn xuất (các) ứng dụng sau sang bộ nhớ thiết bị không?"</string>
     <string name="batch_list_removed">"%s bị xóa khỏi danh sách hàng loạt"</string>

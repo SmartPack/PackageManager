@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Запропонувати Package Manager вашим друзям"</string>
     <string name="source_code_summary">"Package Manager - це програма з відкритим кодом, яка готова прийняти внески від спільноти розробників. Клацніть тут, щоб оглянути вихідний код!"</string>
     <string name="support_summary">"Приєднатися до групи підтримки в Telegram"</string>
-    <string name="batch_options">"Пакетні операції"</string>
+    <string name="batch_options">"Пакетні операції (%s)"</string>
     <string name="batch_list_added">"%s додано до списку пакетної обробки"</string>
     <string name="batch_list_export">"Ви впевнені, що хочете експортувати вказані нижче додатки в пам’ять пристрою?"</string>
     <string name="batch_list_removed">"%s видалено зі списку пакетної обробки"</string>

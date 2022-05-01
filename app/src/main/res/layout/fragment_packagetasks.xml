@@ -138,10 +138,10 @@
                 android:clickable="false" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/batch_option_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:text="@string/batch_options"
                 android:layout_gravity="center"
                 android:clickable="false"
                 android:textStyle="bold"

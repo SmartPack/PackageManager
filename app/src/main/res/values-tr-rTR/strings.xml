@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Arkadaşlarınızı Package Manager kullanmaya davet edin"</string>
     <string name="source_code_summary">"Package Manager, geliştirici topluluğundan gelecek katkılara açık olan açık kaynaklı bir uygulamadır. Kaynak koduna bakmak için buraya tıklayınız!"</string>
     <string name="support_summary">"Telegram destek grubuna katılın"</string>
-    <string name="batch_options">"Toplu İşlem Seçenekleri"</string>
+    <string name="batch_options">"Toplu İşlem Seçenekleri (%s)"</string>
     <string name="batch_list_added">"%s toplu işlem listesine eklendi"</string>
     <string name="batch_list_export">"Seçili uygulamayı(ları) cihaz depolamasına aktarmak istediğinize emin misiniz?"</string>
     <string name="batch_list_removed">"%s toplu işlem listesinden kaldırıldı"</string>

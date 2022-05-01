@@ -6,7 +6,7 @@
     <string name="app_info">Informazioni App</string>
     <string name="apks">APK\'s</string>
     <string name="android_version">Android %s</string>
-    <string name="batch_options">Opzioni di gruppo</string>
+    <string name="batch_options">Opzioni di gruppo (%s)</string>
     <string name="batch_list_added">%s è aggiunta alla lista</string>
     <string name="batch_list_clear">Pulisci lista</string>
     <string name="batch_list_disable">Sei sicuro di disabilitare (se abilitate) o abilitare (se disabilitate) le seguenti app(s)?</string>

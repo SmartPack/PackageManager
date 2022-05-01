@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Hívja meg barátait a Package Manager használatára"</string>
     <string name="source_code_summary">"A Package Manager egy nyílt-forráskódú alkalmazás, amely készen áll a fejlesztők közreműködésének elfogadására.  Kattintson ide a forráskód megtekintéséhez!"</string>
     <string name="support_summary">"Csatlakozzon a Telegram támogató csoporthoz"</string>
-    <string name="batch_options">"Kötegelt opciók"</string>
+    <string name="batch_options">"Kötegelt opciók (%s)"</string>
     <string name="batch_list_added">"%s hozzáadódik a kötegelt listához"</string>
     <string name="batch_list_export">"Biztosan exportálja a következő alkalmazás(oka)t az eszköz tárhelyére?"</string>
     <string name="batch_list_removed">"%s eltávolítva a kötegelt listából"</string>

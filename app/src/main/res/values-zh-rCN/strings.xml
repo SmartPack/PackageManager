@@ -101,7 +101,7 @@
     <string name="share_app_Summary">"邀请您的朋友使用 Package Manager"</string>
     <string name="source_code_summary">"Package Manager 是一款开放源代码应用，可以随时接受开发社区的贡献。点击此处查看源代码！"</string>
     <string name="support_summary">"加入 Telegram 支持群组"</string>
-    <string name="batch_options">"批量处理选项"</string>
+    <string name="batch_options">"批量处理选项 (%s)"</string>
     <string name="batch_list_added">"%s 已被添加到批量处理列表中"</string>
     <string name="batch_list_export">"您确定要将以下应用导出到设备存储吗？"</string>
     <string name="batch_list_removed">"%s 已从批量处理列表中移除"</string>
