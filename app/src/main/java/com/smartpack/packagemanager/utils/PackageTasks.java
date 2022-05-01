@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -146,10 +147,12 @@ public class PackageTasks {
                             for (final String splitApps : SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageID, activity))) {
                                 mFiles.add(new File(sPackageUtils.getParentDir(packageID, activity) + "/" + splitApps));
                             }
-                            Utils.zip(PackageData.getPackageDir(activity) + "/" + PackageData.getFileName(packageID, activity) + ".apkm", mFiles);
+                            Utils.zip(PackageData.getPackageDir(activity) + "/" + PackageData.getFileName(packageID, activity) + "_" +
+                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apkm", mFiles);
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
-                            sUtils.copy(new File(sPackageUtils.getSourceDir(packageID, activity)), new File(PackageData.getPackageDir(activity), PackageData.getFileName(packageID, activity) + ".apk"));
+                            sUtils.copy(new File(sPackageUtils.getSourceDir(packageID, activity)), new File(PackageData.getPackageDir(activity), PackageData.getFileName(packageID, activity) + "_" +
+                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apk"));
                         }
                         Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         sUtils.sleep(1);

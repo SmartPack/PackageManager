@@ -194,7 +194,8 @@ public class PackageInfoFragment extends Fragment {
                             if (!PackageData.getPackageDir(requireActivity()).exists()) {
                                 PackageData.getPackageDir(requireActivity()).mkdirs();
                             }
-                            File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + ".json");
+                            File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + "_" + sAPKUtils.getVersionCode(
+                                    sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()) + ".json");
                             sUtils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
                             sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
                         }
