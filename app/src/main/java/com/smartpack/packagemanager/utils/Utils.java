@@ -172,7 +172,6 @@ public class Utils {
         Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
         intent.setData(uri);
         activity.startActivity(intent);
-        activity.finish();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)

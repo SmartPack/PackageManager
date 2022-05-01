@@ -33,6 +33,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -171,10 +172,23 @@ public class PackageInfoFragment extends Fragment {
                         sUtils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
                         break;
                     case 2:
-                        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
-                            sPermissionUtils.requestPermission(new String[] {
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                    requireActivity());
+                        if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
+                                Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                new MaterialAlertDialogBuilder(requireActivity())
+                                        .setIcon(R.mipmap.ic_launcher)
+                                        .setTitle(R.string.app_name)
+                                        .setMessage(getString(R.string.file_permission_request_message))
+                                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                        })
+                                        .setPositiveButton(getString(R.string.grant), (dialogInterface, i) ->
+                                                Utils.requestPermission(requireActivity()))
+                                        .show();
+                            } else {
+                                sPermissionUtils.requestPermission(new String[]{
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        requireActivity());
+                            }
                             sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                         } else {
                             if (!PackageData.getPackageDir(requireActivity()).exists()) {

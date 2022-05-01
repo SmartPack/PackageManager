@@ -52,10 +52,23 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class PackageDetails {
 
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
-            sPermissionUtils.requestPermission(new String[] {
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }, activity);
+        if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
+                Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                new MaterialAlertDialogBuilder(activity)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(R.string.app_name)
+                        .setMessage(activity.getString(R.string.file_permission_request_message))
+                        .setNegativeButton(activity.getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+                        .setPositiveButton(activity.getString(R.string.grant), (dialogInterface, i) ->
+                                Utils.requestPermission(activity))
+                        .show();
+            } else {
+                sPermissionUtils.requestPermission(new String[]{
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        activity);
+            }
             sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
         } else if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
             exportingBundleTask(linearLayout, textView, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),

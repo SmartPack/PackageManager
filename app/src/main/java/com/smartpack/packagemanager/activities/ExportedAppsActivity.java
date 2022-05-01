@@ -107,6 +107,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
             mPermissionGrant.setOnClickListener(v -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     Utils.requestPermission(this);
+                    finish();
                 } else {
                     sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE
