@@ -18,8 +18,8 @@ android {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 61
-        versionName "v6.1"
+        versionCode 62
+        versionName "v6.2"
         vectorDrawables.useSupportLibrary = true
         archivesBaseName = "$applicationId-$versionName"
         signingConfig signingConfigs.release
@@ -52,9 +52,9 @@ android {
 }
 
 dependencies {
-    playImplementation 'com.android.billingclient:billing:4.0.0'
-    implementation 'com.github.sunilpaulmathew:sCommon:8cdcaa6116'
-    implementation "com.github.topjohnwu.libsu:core:3.2.1"
+    playImplementation 'com.android.billingclient:billing:4.1.0'
+    implementation 'com.github.sunilpaulmathew:sCommon:ad4874d423'
+    implementation "com.github.topjohnwu.libsu:core:4.0.3"
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'net.dongliu:apk-parser:2.6.10'
     implementation 'net.lingala.zip4j:zip4j:2.9.0'

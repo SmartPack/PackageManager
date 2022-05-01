@@ -1,0 +1,6 @@
+* App now allow directly pick & install APK files from SDCard.
+* Improved storage permission management.
+* Exporting apps and app details now append version code with file name.
+* Batch options now display number of selected apps.
+* Added Italian Translation & updated other translation.
+* Miscellaneous changes.

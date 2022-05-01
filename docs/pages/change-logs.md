@@ -6,6 +6,14 @@ permalink: /change-logs/
 
 ## What's New
 
+### 57. [v6.2](https://github.com/SmartPack/PackageManager/releases/tag/v6.2) *(May 01, 2022)*
+- App now allow directly pick & install APK files from SDCard.
+- Improved storage permission management.
+- Exporting apps and app details now append version code with file name.
+- Batch options now display number of selected apps.
+- Added Italian Translation & updated other translation.
+- Miscellaneous changes.
+
 ### 56. [v6.1](https://github.com/SmartPack/PackageManager/releases/tag/v6.1) *(February 22, 2022)*
 - Removed "All files" permission from Google Play version.
 - Exported Apps: Added "Save To Downloads" option for Google Play version.

@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         mAppTitle.setText(getString(R.string.app_name) + (Utils.isProUser(this) ? " Pro " :  " ") + BuildConfig.VERSION_NAME);
         mAppTitle.setTextColor(sUtils.isDarkTheme(this) ? Color.WHITE : Color.BLACK);
-        mCopyright.setText(getString(R.string.copyright, "2021-2022, sunilpaulmathew"));
+        mCopyright.setText(getString(R.string.copyright, "2022-2023, sunilpaulmathew"));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecycleViewSettingsAdapter mRecycleViewAdapter = new RecycleViewSettingsAdapter(mData);
@@ -213,7 +213,7 @@ public class SettingsActivity extends AppCompatActivity {
                         sUtils.getDrawable(R.mipmap.ic_launcher, v.getContext()),
                         sUtils.getDrawable(R.drawable.ic_back, v.getContext()),
                         sUtils.getColor(R.color.colorAccent, v.getContext()),
-                        20, v.getContext().getString(R.string.app_name), "2021-2022, sunilpaulmathew",
+                        20, v.getContext().getString(R.string.app_name), "2022-2023, sunilpaulmathew",
                         BuildConfig.VERSION_NAME).launchCredits(v.getContext());
             }
         });
