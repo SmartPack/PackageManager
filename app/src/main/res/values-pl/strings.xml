@@ -101,7 +101,7 @@
     <string name="share_app_Summary">"Zaproś znajomych do korzystania z Package Manager"</string>
     <string name="source_code_summary">"Package Manager to otwartoźródłowa aplikacja gotowa na przyjęcie wsparcia ze społeczności deweloperów. Naciśnij tutaj, aby sprawdzić kod źródłowy"</string>
     <string name="support_summary">"Dołącz do grupy wsparcia na Telegramie"</string>
-    <string name="batch_options">"Opcje wsadowe (%s)"</string>
+    <string name="batch_options">"Opcje wsadowe"</string>
     <string name="batch_list_added">"%s został dodany do listy wsadowej"</string>
     <string name="batch_list_export">"Czy na pewno wyeksportować następujące aplikacje do pamięci urządzenia?"</string>
     <string name="batch_list_removed">"%s został usunięty z listy wsadowej"</string>
@@ -179,4 +179,8 @@
     <string name="bundle_install_question">"Czy na pewno zainstalować wybraną paczkę aplikacji?"</string>
     <string name="preparing_message">"Przygotowywanie…"</string>
     <string name="save_to_downloads">"Zapisz w Pobranych"</string>
+    <string name="android_version">"Android %s"</string>
+    <string name="sdk_compile">"SDK kompilacji: %s"</string>
+    <string name="sdk_minimum">"Minimalne SDK: %s"</string>
+    <string name="update">"Zaktualizuj"</string>
 </resources>
