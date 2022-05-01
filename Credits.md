@@ -32,6 +32,7 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * Cláudia Sebastião, Portuguese (Portugal) Translations
 * Erős Pista, Hungarian Translations
 * [Agnieszka C](https://github.com/Aga-C), Polish Translations
+* [AbsurdUsername](https://github.com/AbsurdUsername), Italian Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc)
 
 _If you think I missed your name, please let me know._
