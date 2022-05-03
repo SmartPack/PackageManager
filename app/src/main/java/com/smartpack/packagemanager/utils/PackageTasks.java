@@ -148,11 +148,11 @@ public class PackageTasks {
                                 mFiles.add(new File(sPackageUtils.getParentDir(packageID, activity) + "/" + splitApps));
                             }
                             Utils.zip(PackageData.getPackageDir(activity) + "/" + PackageData.getFileName(packageID, activity) + "_" +
-                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apkm", mFiles);
+                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(packageID, activity), activity) + ".apkm", mFiles);
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.exporting, PackageData.getAppName(packageID, activity)));
                             sUtils.copy(new File(sPackageUtils.getSourceDir(packageID, activity)), new File(PackageData.getPackageDir(activity), PackageData.getFileName(packageID, activity) + "_" +
-                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apk"));
+                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(packageID, activity), activity) + ".apk"));
                         }
                         Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         sUtils.sleep(1);
