@@ -6,6 +6,10 @@ permalink: /change-logs/
 
 ## What's New
 
+### 58. [v6.3](https://github.com/SmartPack/PackageManager/releases/tag/v6.3) *(May 03, 2022)*
+- Fixed crashing on batch exporting apps.
+- Miscellaneous changes.
+
 ### 57. [v6.2](https://github.com/SmartPack/PackageManager/releases/tag/v6.2) *(May 01, 2022)*
 - App now allow directly pick & install APK files from SDCard.
 - Improved storage permission management.

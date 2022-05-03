@@ -1,0 +1,2 @@
+* Fixed crashing on batch exporting apps.
+* Miscellaneous changes.
