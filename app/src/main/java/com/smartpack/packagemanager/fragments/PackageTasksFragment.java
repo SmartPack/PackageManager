@@ -584,7 +584,9 @@ public class PackageTasksFragment extends Fragment {
                     mBatchOptions.setVisibility(View.GONE);
                 }
                 mBatchOptions.setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
-                mBatchOptionTitle.setText(getString(R.string.batch_options, Common.getBatchList().size()));
+                if (Common.getBatchList().size() > 0) {
+                    mBatchOptionTitle.setText(getString(R.string.batch_options, Common.getBatchList().size()));
+                }
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
