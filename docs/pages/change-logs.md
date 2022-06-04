@@ -6,6 +6,12 @@ permalink: /change-logs/
 
 ## What's New
 
+### 59. [v6.4](https://github.com/SmartPack/PackageManager/releases/tag/v6.4) *(June 08, 2022)*
+- Fixed crashing app when changing app theme.
+- Improved APK picker.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 58. [v6.3](https://github.com/SmartPack/PackageManager/releases/tag/v6.3) *(May 03, 2022)*
 - Fixed crashing on batch exporting apps.
 - Miscellaneous changes.

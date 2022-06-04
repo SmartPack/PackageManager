@@ -1,0 +1,4 @@
+* Fixed crashing app when changing app theme.
+* Improved APK picker.
+* Updated translations.
+* Miscellaneous changes.
