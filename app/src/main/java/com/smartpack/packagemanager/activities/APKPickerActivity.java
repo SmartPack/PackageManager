@@ -100,6 +100,9 @@ public class APKPickerActivity extends AppCompatActivity {
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
 
+                // Nullify previously acquired certificates, if any
+                APKData.setCertificate(null);
+
                 if (APKData.getAPKFile() != null) {
                     mFile = APKData.getAPKFile();
                 } else if (uri != null) {
