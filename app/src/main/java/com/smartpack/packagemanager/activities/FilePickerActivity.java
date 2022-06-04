@@ -116,6 +116,8 @@ public class FilePickerActivity extends AppCompatActivity {
                 reload(this);
             } else if (mPath.endsWith("apks") || mPath.endsWith("apkm") || mPath.endsWith("xapk")) {
                 new MaterialAlertDialogBuilder(this)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(getString(R.string.app_name))
                         .setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
@@ -238,6 +240,8 @@ public class FilePickerActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
             new MaterialAlertDialogBuilder(this)
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setTitle(getString(R.string.warning))
                     .setMessage(getString(R.string.installation_cancel_message))
                     .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     })
