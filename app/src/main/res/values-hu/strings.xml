@@ -176,4 +176,8 @@
     <string name="bundle_install_question">"Biztosan telepíti a kiválasztott alkalmazáscsomagot?"</string>
     <string name="preparing_message">"Előkészítés…"</string>
     <string name="save_to_downloads">"Mentés a Letöltések közé"</string>
+    <string name="android_version">"Android %s"</string>
+    <string name="sdk_compile">"Compile SDK: %s"</string>
+    <string name="sdk_minimum">"Minimum SDK: %s"</string>
+    <string name="update">"Frissítés"</string>
 </resources>

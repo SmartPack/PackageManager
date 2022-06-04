@@ -82,6 +82,7 @@
     <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
 
         *** <b>您需要自担风险</b> ***
+
         "</string>
     <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
@@ -179,4 +180,8 @@
     <string name="bundle_install_question">"您确定要安装选中的应用捆绑包吗？"</string>
     <string name="preparing_message">"正在准备…"</string>
     <string name="save_to_downloads">"保存到下载目录"</string>
+    <string name="android_version">"Android %s"</string>
+    <string name="sdk_compile">"编译 SDK：%s"</string>
+    <string name="sdk_minimum">"最低 SDK：%s"</string>
+    <string name="update">"更新"</string>
 </resources>
