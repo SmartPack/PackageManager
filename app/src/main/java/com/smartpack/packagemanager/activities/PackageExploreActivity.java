@@ -77,7 +77,9 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         RecycleViewExploreAdapter.setOnItemClickListener((position, v) -> {
             String mPath = FilePicker.getData(this, false).get(position);
-            if (new File(mPath).isDirectory()) {
+            if (position == 0) {
+                onBackPressed();
+            } else if (new File(mPath).isDirectory()) {
                 Common.setPath(mPath);
                 reload(this);
             } else if (PackageExplorer.isTextFile(mPath)) {

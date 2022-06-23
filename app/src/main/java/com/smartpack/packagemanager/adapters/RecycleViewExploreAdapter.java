@@ -48,7 +48,12 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewExploreAdapter.ViewHolder holder, int position) {
-        if (new File(data.get(position)).isDirectory()) {
+        if (position == 0) {
+            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
+            holder.mIcon.setRotation(90);
+            holder.mTitle.setText(null);
+        } else if (new File(data.get(position)).isDirectory()) {
             holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
             if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setBackground(sUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
