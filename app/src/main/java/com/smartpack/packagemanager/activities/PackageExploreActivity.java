@@ -92,6 +92,8 @@ public class PackageExploreActivity extends AppCompatActivity {
                 startActivity(imageView);
             } else {
                 new MaterialAlertDialogBuilder(this)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(R.string.app_name)
                         .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
