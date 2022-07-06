@@ -348,15 +348,19 @@ public class PackageTasksFragment extends Fragment {
     private void settingsMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mSettings);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.installer));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.exported_apps));
+        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reload));
+        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.installer));
+        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.exported_apps));
         if (Utils.rootAccess()) {
-            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.uninstalled_apps));
+            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.uninstalled_apps));
         }
-        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.settings));
+        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.settings));
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
+                    loadUI(activity);
+                    break;
+                case 1:
                     if (sUtils.getBoolean("neverShow", false, requireActivity())) {
                         if (Flavor.isFullVersion()) {
                             Common.getAppList().clear();
@@ -375,15 +379,15 @@ public class PackageTasksFragment extends Fragment {
                         startActivity(installer);
                     }
                     break;
-                case 1:
+                case 2:
                     Intent exportedApps = new Intent(activity, ExportedAppsActivity.class);
                     startActivity(exportedApps);
                     break;
-                case 2:
+                case 3:
                     Intent uninstalledApps = new Intent(activity, UninstalledAppsActivity.class);
                     startActivity(uninstalledApps);
                     break;
-                case 3:
+                case 4:
                     Intent settingsPage = new Intent(activity, SettingsActivity.class);
                     startActivity(settingsPage);
                     break;

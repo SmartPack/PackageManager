@@ -105,6 +105,7 @@
     <string name="press_back">Press back again to exit</string>
     <string name="rate_us">Rate App</string>
     <string name="rate_us_Summary">Rate or/and Review Package Manager in Google Play</string>
+    <string name="reload">Reload</string>
     <string name="report_issue">Report an Issue</string>
     <string name="report_issue_summary">Raise an issue at GitHub</string>
     <string name="reset">Reset</string>
