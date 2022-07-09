@@ -3,7 +3,7 @@
     <string name="apk_path">"Pfad zur APK"</string>
     <string name="app_info">"Appinformationen"</string>
     <string name="batch_list_clear">"Liste löschen"</string>
-    <string name="batch_list_disable">"Sind Sie sicher, dass Sie die folgende(n) App(s) deaktivieren (falls aktiviert) oder aktivieren (falls deaktiviert)?"</string>
+    <string name="batch_list_disable">"Sind Sie sicher, dass Sie die folgende(n) App(s) deaktivieren (falls aktiviert) oder aktivieren (falls deaktiviert) wollen?"</string>
     <string name="batch_list_remove">"Sind Sie sicher, dass Sie die folgende(n) App(s) entfernen wollen?"</string>
     <string name="batch_list_reset">"Sind Sie sicher, dass Sie die folgende(n) App(s) zurücksetzen wollen?"</string>
     <string name="batch_list_summary">"Die folgenden Anwendungen werden in den Stapel aufgenommen"</string>
@@ -51,7 +51,7 @@
     <string name="press_back">"erneut \"zurück\" tippen um zu beenden"</string>
     <string name="report_issue">"Fehler melden"</string>
     <string name="reset">"Zurücksetzen"</string>
-    <string name="reset_message">"\'%s\' zurücksetzen?"</string>
+    <string name="reset_message">"&amp;s zurücksetzen?"</string>
     <string name="reset_summary">"Setze %s zurück"</string>
     <string name="result">"Ergebnis: %s"</string>
     <string name="search">"Suchen…"</string>
@@ -98,7 +98,7 @@
     <string name="share_app_Summary">"Laden Sie Ihre Freunde zur Verwendung von Package Manager ein"</string>
     <string name="source_code_summary">"Package Manager ist eine Open-Source-Anwendung, die bereit ist, Beiträge aus der Entwicklergemeinschaft anzunehmen. Klicken Sie hier, um sich den Quellcode anzusehen!"</string>
     <string name="support_summary">"Telegram-Supportgruppe beitreten"</string>
-    <string name="batch_options">"Stapeloptionen (%s)"</string>
+    <string name="batch_options">"Stapeloptionen"</string>
     <string name="batch_list_added">"%s wurde zum Stapel hinzugefügt"</string>
     <string name="batch_list_export">"Sind Sie sicher, dass Sie die folgende(n) App(s) in den Gerätespeicher exportieren möchten?"</string>
     <string name="batch_list_removed">"%s wurde vom Stapel entfernt"</string>
@@ -115,10 +115,33 @@
     <string name="warning">"Warnung"</string>
     <string name="certificate">"Zertifikat"</string>
     <string name="manifest">"Manifest"</string>
+    <string name="apks">"APKs"</string>
+    <string name="bundles">"Bündel"</string>
     <string name="delete">"Löschen"</string>
     <string name="delete_question">"Lösche '%s'?"</string>
     <string name="install_question">"Installiere '%s'?"</string>
+    <string name="reverse_order">"Reihenfolge umkehren"</string>
     <string name="show_apps_all">"Alle"</string>
     <string name="show_apps_system">"System"</string>
     <string name="show_apps_user">"Benutzer"</string>
+    <string name="exported_apps">"Exportierte Apps"</string>
+    <string name="select_all">"Alle auswählen"</string>
+    <string name="export_apk_summary">"Die gewählte APK wird hierhin exportiert: '%s'!"</string>
+    <string name="start">"Start"</string>
+    <string name="size">"Größe"</string>
+    <string name="export_details">"Details exportieren"</string>
+    <string name="export_details_message">"App-Details werden exportiert als %s"</string>
+    <string name="more">"Mehr"</string>
+    <string name="search_market_message">"Suche in %s"</string>
+    <string name="general">"Allgemein"</string>
+    <string name="installer_instructions">"Anleitung anzeigen"</string>
+    <string name="never_show_page">"Nicht mehr anzeigen"</string>
+    <string name="other">"Andere"</string>
+    <string name="restore">"Wiederherstellen"</string>
+    <string name="restore_message">"Werkeinstellung von '%s' wiederherstellen?"</string>
+    <string name="restore_message_batch">"Werkeinstellungen der folgenden Apps wiederherstellen?
+
+        %s"</string>
+    <string name="restore_success_message">"Werkeinstellung der ausgewählten App(s) erfolgreich wiederhergestellt"</string>
+    <string name="close">"Schließen"</string>
 </resources>
