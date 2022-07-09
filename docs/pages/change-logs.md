@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 60. [v6.5](https://github.com/SmartPack/PackageManager/releases/tag/v6.5) *(July 09, 2022)*
+- Added an option to manually reload app list.
+- Improved APK explorer file manager.
+- Improved app bundle handling.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 59. [v6.4](https://github.com/SmartPack/PackageManager/releases/tag/v6.4) *(June 08, 2022)*
 - Fixed crashing app when changing app theme.
 - Improved APK picker.

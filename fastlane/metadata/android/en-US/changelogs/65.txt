@@ -1,0 +1,5 @@
+* Added an option to manually reload app list.
+* Improved APK explorer file manager.
+* Improved app bundle handling.
+* Updated translations.
+* Miscellaneous changes.
