@@ -358,7 +358,42 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    loadUI(activity);
+                    new sExecutor() {
+
+                        @Override
+                        public void onPreExecute() {
+                            mProgress.setVisibility(View.VISIBLE);
+                            mBatchOptions.setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.GONE);
+
+                            if (Common.getSearchText() != null) {
+                                mSearchWord.setText(null);
+                                Common.setSearchText(null);
+                            }
+                            if (mSearchWord.getVisibility() == View.VISIBLE) {
+                                mSearchWord.setVisibility(View.GONE);
+                                mAppTitle.setVisibility(View.VISIBLE);
+                                Utils.toggleKeyboard(0, mSearchWord, requireActivity());
+                            }
+
+                            Common.getBatchList().clear();
+                            mRecyclerView.removeAllViews();
+                        }
+
+                        @Override
+                        public void doInBackground() {
+                            PackageData.setRawData(activity);
+                            mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
+                        }
+
+                        @Override
+                        public void onPostExecute() {
+                            mBatchOptions.setVisibility(View.GONE);
+                            mRecyclerView.setAdapter(mRecycleViewAdapter);
+                            mProgress.setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                        }
+                    }.execute();
                     break;
                 case 1:
                     if (sUtils.getBoolean("neverShow", false, requireActivity())) {
