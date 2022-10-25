@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.activities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,6 +19,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
+
+import java.lang.ref.WeakReference;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on April 28, 2020
@@ -46,33 +47,39 @@ public class PackageTasksActivity extends AppCompatActivity {
 
         mCloseButton.setOnClickListener(v -> onBackPressed());
 
-        refreshStatus();
+        Thread mRefreshThread = new RefreshThread(this);
+        mRefreshThread.start();
     }
 
-    public void refreshStatus() {
-        new Thread() {
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
-                        Thread.sleep(500);
-                        runOnUiThread(() -> {
-                            if (Common.getOutput() != null) {
-                                mOutput.setText(Common.getOutput().toString());
-                                mOutput.setVisibility(View.VISIBLE);
-                                if (!Common.isRunning()) {
-                                    mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
-                                    mCloseButton.setVisibility(View.VISIBLE);
-                                } else {
-                                    mScrollView.fullScroll(NestedScrollView.FOCUS_DOWN);
-                                }
-                            }
-                        });
+    private class RefreshThread extends Thread {
+        WeakReference<PackageTasksActivity> mInstallerActivityRef;
+        RefreshThread(PackageTasksActivity activity) {
+            mInstallerActivityRef = new WeakReference<>(activity);
+        }
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupted()) {
+                    Thread.sleep(250);
+                    final PackageTasksActivity activity = mInstallerActivityRef.get();
+                    if(activity == null){
+                        break;
                     }
-                } catch (InterruptedException ignored) {}
-            }
-        }.start();
+                    activity.runOnUiThread(() -> {
+                        if (Common.getOutput() != null) {
+                            mOutput.setText(Common.getOutput().toString());
+                            mOutput.setVisibility(View.VISIBLE);
+                            if (!Common.isRunning()) {
+                                mPackageTitle.setText(getIntent().getStringExtra(TITLE_FINISH));
+                                mCloseButton.setVisibility(View.VISIBLE);
+                            } else {
+                                mScrollView.fullScroll(NestedScrollView.FOCUS_DOWN);
+                            }
+                        }
+                    });
+                }
+            } catch (InterruptedException ignored) {}
+        }
     }
 
     @Override

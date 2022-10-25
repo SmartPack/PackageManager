@@ -9,7 +9,6 @@
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,6 +27,7 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
@@ -43,6 +43,7 @@ public class InstallerActivity extends AppCompatActivity {
     private MaterialCardView mClose, mOpen;
     private MaterialTextView mStatus, mTitle;
     private ProgressBar mProgress;
+    private Thread mRefreshThread = null;
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -90,35 +91,9 @@ public class InstallerActivity extends AppCompatActivity {
         refreshStatus(this);
     }
 
-    public void refreshStatus(Activity activity) {
-        new Thread() {
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
-                        Thread.sleep(500);
-                        runOnUiThread(() -> {
-                            String installationStatus = sUtils.getString("installationStatus", "waiting", activity);
-                            if (installationStatus.equals("waiting")) {
-                                mStatus.setText(getString(R.string.installing_bundle));
-                            } else {
-                                mStatus.setText(getString(R.string.result, installationStatus));
-                                if (installationStatus.equals(getString(R.string.installation_status_success))) {
-                                    try {
-                                        mTitle.setText(PackageData.getAppName(Common.getApplicationID(), activity));
-                                        mIcon.setImageDrawable(sPackageUtils.getAppIcon(Common.getApplicationID(), activity));
-                                        mOpen.setVisibility(View.VISIBLE);
-                                    } catch (NullPointerException ignored) {}
-                                }
-                                mProgress.setVisibility(View.GONE);
-                                mClose.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }
-                } catch (InterruptedException ignored) {}
-            }
-        }.start();
+    public void refreshStatus(InstallerActivity activity) {
+        mRefreshThread = new RefreshThread(activity);
+        mRefreshThread.start();
     }
 
     private CharSequence getName() {
@@ -162,6 +137,53 @@ public class InstallerActivity extends AppCompatActivity {
             }
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mRefreshThread != null) {
+            try {
+                mRefreshThread.interrupt();
+            } catch(Exception ignored) {}
+        }
+        super.onDestroy();
+    }
+
+    private static class RefreshThread extends Thread {
+        WeakReference<InstallerActivity> mInstallerActivityRef;
+        RefreshThread(InstallerActivity activity) {
+            mInstallerActivityRef = new WeakReference<>(activity);
+        }
+        @SuppressLint("StringFormatInvalid")
+        @Override
+        public void run() {
+            try {
+                while (!isInterrupted()) {
+                    Thread.sleep(500);
+                    final InstallerActivity activity = mInstallerActivityRef.get();
+                    if(activity == null){
+                        break;
+                    }
+                    activity.runOnUiThread(() -> {
+                        String installationStatus = sUtils.getString("installationStatus", "waiting", activity);
+                        if (installationStatus.equals("waiting")) {
+                            activity.mStatus.setText(activity.getString(R.string.installing_bundle));
+                        } else {
+                            activity.mStatus.setText(activity.getString(R.string.result, installationStatus));
+                            if (installationStatus.equals(activity.getString(R.string.installation_status_success))) {
+                                try {
+                                    activity.mTitle.setText(PackageData.getAppName(Common.getApplicationID(), activity));
+                                    activity.mIcon.setImageDrawable(sPackageUtils.getAppIcon(Common.getApplicationID(), activity));
+                                    activity.mOpen.setVisibility(View.VISIBLE);
+                                } catch (NullPointerException ignored) {}
+                            }
+                            activity.mProgress.setVisibility(View.GONE);
+                            activity.mClose.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
+            } catch (InterruptedException ignored) {}
+        }
     }
 
 }
