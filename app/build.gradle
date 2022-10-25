@@ -11,13 +11,13 @@ android {
         }
     }
 
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 65
         versionName "v6.5"
         vectorDrawables.useSupportLibrary = true
@@ -45,17 +45,18 @@ android {
             dimension "release"
         }
     }
-
-    lintOptions {
+    lint {
         abortOnError false
     }
+    namespace 'com.smartpack.packagemanager'
+
 }
 
 dependencies {
     playImplementation 'com.android.billingclient:billing:5.0.0'
     implementation 'com.github.sunilpaulmathew:sCommon:f741dad243'
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'net.dongliu:apk-parser:2.6.10'
     implementation 'net.lingala.zip4j:zip4j:2.9.0'
 }
