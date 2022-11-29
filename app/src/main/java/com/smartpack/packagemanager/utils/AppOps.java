@@ -23,7 +23,7 @@ public class AppOps {
 
     public static ArrayList<RecycleViewAppOpsItem> getOps(Context context) {
         ArrayList<RecycleViewAppOpsItem> mData = new ArrayList<>();
-        for (String line : Utils.runAndGetOutput(getCommandPrefix() + " appops get " +
+        for (String line : new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
                 Common.getApplicationID()).split("\\r?\\n")) {
             String[] splitOp = line.split(":");
             String name = splitOp[0];

@@ -123,7 +123,7 @@ public class PackageData {
     }
 
     public static void clearAppSettings(String packageID) {
-        Utils.runCommand("pm clear " + packageID);
+        new RootShell().runCommand("pm clear " + packageID);
     }
 
     public static String getBundleSize(String path) {

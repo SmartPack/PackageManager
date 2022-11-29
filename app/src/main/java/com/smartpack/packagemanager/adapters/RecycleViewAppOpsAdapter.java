@@ -22,6 +22,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.RecycleViewAppOpsItem;
+import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class RecycleViewAppOpsAdapter extends RecyclerView.Adapter<RecycleViewAp
                             holder.mCheckBox.setChecked(data.get(position).isEnabled());
                         }).show();
             } else {
-                Utils.runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
+                new RootShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
                         data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
             }
         });

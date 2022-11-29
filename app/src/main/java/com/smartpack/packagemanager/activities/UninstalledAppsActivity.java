@@ -33,6 +33,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.RecycleViewUninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -206,10 +207,10 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             public void doInBackground() {
                 if (batch) {
                     for (String packageName : Common.getRestoreList()) {
-                        Utils.runCommand("cmd package install-existing " + packageName);
+                        new RootShell().runCommand("cmd package install-existing " + packageName);
                     }
                 } else {
-                    mOutput = Utils.runAndGetError("cmd package install-existing " + getData(context).get(position));
+                    mOutput = new RootShell().runAndGetError("cmd package install-existing " + getData(context).get(position));
                 }
             }
 

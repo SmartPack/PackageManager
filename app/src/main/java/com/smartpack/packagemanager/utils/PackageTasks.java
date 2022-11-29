@@ -29,6 +29,8 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class PackageTasks {
 
+    private static RootShell mRootShell = null;
+
     public static void batchDisableTask(Activity activity) {
         new sExecutor() {
 
@@ -42,6 +44,9 @@ public class PackageTasks {
                 turnOffIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 turnOffIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
                 activity.startActivity(turnOffIntent);
+                if (mRootShell == null) {
+                    mRootShell = new RootShell();
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -57,9 +62,9 @@ public class PackageTasks {
                                     activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)) :
                                     "** " + activity.getString(R.string.enabling, PackageData.getAppName(packageID, activity)));
                             if (sPackageUtils.isEnabled(packageID, activity)) {
-                                Utils.runCommand("pm disable " + packageID);
+                                mRootShell.runCommand("pm disable " + packageID);
                             } else {
-                                Utils.runCommand("pm enable " + packageID);
+                                mRootShell.runCommand("pm enable " + packageID);
                             }
                             Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
@@ -90,6 +95,9 @@ public class PackageTasks {
                 removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
                 activity.startActivity(removeIntent);
+                if (mRootShell == null) {
+                    mRootShell = new RootShell();
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -102,7 +110,7 @@ public class PackageTasks {
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
-                            Utils.runCommand("pm clear " + packageID);
+                            mRootShell.runCommand("pm clear " + packageID);
                             Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
                         sUtils.sleep(1);
@@ -181,6 +189,9 @@ public class PackageTasks {
                 removeIntent.putExtra(PackageTasksActivity.TITLE_START, activity.getString(R.string.batch_processing));
                 removeIntent.putExtra(PackageTasksActivity.TITLE_FINISH, activity.getString(R.string.batch_processing_finished));
                 activity.startActivity(removeIntent);
+                if (mRootShell == null) {
+                    mRootShell = new RootShell();
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -193,7 +204,7 @@ public class PackageTasks {
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
-                            Utils.runCommand("pm uninstall --user 0 " + packageID);
+                            mRootShell.runCommand("pm uninstall --user 0 " + packageID);
                             Common.getOutput().append(sPackageUtils.isPackageInstalled(packageID, activity) ? ": " +
                                     activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
                         }

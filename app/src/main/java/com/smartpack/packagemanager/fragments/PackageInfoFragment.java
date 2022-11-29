@@ -38,6 +38,7 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -233,7 +234,7 @@ public class PackageInfoFragment extends Fragment {
             startActivity(settings);
             requireActivity().finish();
         });
-        if (Utils.rootAccess()) {
+        if (new RootShell().rootAccess()) {
             mClear.setVisibility(View.VISIBLE);
             mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);

@@ -51,6 +51,8 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class PackageDetails {
 
+    private static RootShell mRootShell = null;
+
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
         if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
                 Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
@@ -180,15 +182,18 @@ public class PackageDetails {
                 showProgress(progressLayout, progressMessage, sPackageUtils.isEnabled(Common.getApplicationID(), activity) ?
                         activity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
                         activity.getString(R.string.enabling, Common.getApplicationName()) + "...");
+                if (mRootShell == null) {
+                    mRootShell = new RootShell();
+                }
             }
 
             @Override
             public void doInBackground() {
                 sUtils.sleep(1);
                 if (sPackageUtils.isEnabled(Common.getApplicationID(), activity)) {
-                    Utils.runCommand("pm disable " + Common.getApplicationID());
+                    mRootShell.runCommand("pm disable " + Common.getApplicationID());
                 } else {
-                    Utils.runCommand("pm enable " + Common.getApplicationID());
+                    mRootShell.runCommand("pm enable " + Common.getApplicationID());
                 }
             }
 
@@ -204,7 +209,7 @@ public class PackageDetails {
 
     @SuppressLint("StringFormatInvalid")
     public static void uninstallSystemApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (Utils.rootAccess()) {
+        if (new RootShell().rootAccess()) {
             new MaterialAlertDialogBuilder(activity)
                     .setIcon(Common.getApplicationIcon())
                     .setTitle(activity.getString(R.string.uninstall_title, Common.getApplicationName()))
@@ -218,12 +223,15 @@ public class PackageDetails {
                                 @Override
                                 public void onPreExecute() {
                                     showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+                                    if (mRootShell == null) {
+                                        mRootShell = new RootShell();
+                                    }
                                 }
 
                                 @Override
                                 public void doInBackground() {
                                     sUtils.sleep(1);
-                                    Utils.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                                    mRootShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
                                 }
 
                                 @Override

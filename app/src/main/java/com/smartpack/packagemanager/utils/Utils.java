@@ -23,22 +23,16 @@ import android.util.TypedValue;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
-import com.topjohnwu.superuser.Shell;
-import com.topjohnwu.superuser.ShellUtils;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
@@ -49,76 +43,10 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class Utils {
 
-    static {
-        Shell.enableVerboseLogging = BuildConfig.DEBUG;
-    }
-
-    /*
-     * The following code is partly taken from https://github.com/SmartPack/SmartPack-Kernel-Manager
-     * Ref: https://github.com/SmartPack/SmartPack-Kernel-Manager/blob/beta/app/src/main/java/com/smartpack/kernelmanager/utils/root/RootUtils.java
-     */
-    public static boolean rootAccess() {
-        return Shell.rootAccess();
-    }
-
-    public static void runCommand(String command) {
-        if (rootAccess()) {
-            Shell.su(command).exec();
-        } else {
-            try {
-                Runtime.getRuntime().exec(command);
-            } catch (Exception ignored) {
-            }
-        }
-    }
-
-    @NonNull
-    static String runAndGetOutput(String command) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            List<String> outputs = Shell.su(command).exec().getOut();
-            if (ShellUtils.isValidOutput(outputs)) {
-                for (String output : outputs) {
-                    sb.append(output).append("\n");
-                }
-            }
-            return removeSuffix(sb.toString()).trim();
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    @NonNull
-    public static String runAndGetError(String command) {
-        StringBuilder sb = new StringBuilder();
-        List<String> outputs = new ArrayList<>();
-        List<String> stderr = new ArrayList<>();
-        try {
-            Shell.su(command).to(outputs, stderr).exec();
-            outputs.addAll(stderr);
-            if (ShellUtils.isValidOutput(outputs)) {
-                for (String output : outputs) {
-                    sb.append(output).append("\n");
-                }
-            }
-            return removeSuffix(sb.toString()).trim();
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    private static String removeSuffix(@Nullable String s) {
-        if (s != null && s.endsWith("\n")) {
-            return s.substring(0, s.length() - "\n".length());
-        }
-        return s;
-    }
-
     /*
      * The following code is partly taken from https://github.com/Grarak/KernelAdiutor
      * Ref: https://github.com/Grarak/KernelAdiutor/blob/master/app/src/main/java/com/grarak/kerneladiutor/utils/ViewUtils.java
      */
-
     public static int getThemeAccentColor(Context context) {
         TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);

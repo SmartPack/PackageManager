@@ -54,6 +54,7 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -84,6 +85,7 @@ public class PackageTasksFragment extends Fragment {
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
+    private RootShell mRootShell = null;
 
     @Nullable
     @Override
@@ -105,6 +107,8 @@ public class PackageTasksFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+
+        mRootShell = new RootShell();
 
         loadUI(requireActivity());
 
@@ -351,7 +355,7 @@ public class PackageTasksFragment extends Fragment {
         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reload));
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.installer));
         menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.exported_apps));
-        if (Utils.rootAccess()) {
+        if (mRootShell.rootAccess()) {
             menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.uninstalled_apps));
         }
         menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.settings));
@@ -435,11 +439,11 @@ public class PackageTasksFragment extends Fragment {
     private void batchOptionsMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mBatchOptions);
         Menu menu = popupMenu.getMenu();
-        if (Utils.rootAccess()) {
+        if (mRootShell.rootAccess()) {
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
         }
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
-        if (Utils.rootAccess()) {
+        if (mRootShell.rootAccess()) {
             menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
         }
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
@@ -463,7 +467,7 @@ public class PackageTasksFragment extends Fragment {
                             .show();
                     break;
                 case 1:
-                    if (Utils.rootAccess()) {
+                    if (mRootShell.rootAccess()) {
                         MaterialAlertDialogBuilder uninstall = new MaterialAlertDialogBuilder(activity);
                         uninstall.setIcon(R.mipmap.ic_launcher);
                         uninstall.setTitle(R.string.sure_question);
@@ -713,6 +717,9 @@ public class PackageTasksFragment extends Fragment {
         if (Common.getSearchText() != null) {
             mSearchWord.setText(null);
             Common.setSearchText(null);
+        }
+        if (mRootShell != null) {
+            mRootShell.closeSU();
         }
     }
 
