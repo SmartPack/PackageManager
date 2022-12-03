@@ -6,6 +6,14 @@ permalink: /change-logs/
 
 ## What's New
 
+### 61. [v6.6](https://github.com/SmartPack/PackageManager/releases/tag/v6.6) *(July 09, 2022)*
+- Integrated with Shizuku API.
+- Improved APK installer.
+- Improved reload option.
+- Added Arabic and updated other translations.
+- Updated build tools.
+- Miscellaneous changes.
+- 
 ### 60. [v6.5](https://github.com/SmartPack/PackageManager/releases/tag/v6.5) *(July 09, 2022)*
 - Added an option to manually reload app list.
 - Improved APK explorer file manager.
