@@ -36,6 +36,7 @@
     <string name="date_updated">Last Updated: %s</string>
     <string name="delete">Delete</string>
     <string name="delete_question">Delete \'%s\'?</string>
+    <string name="disable_failed_message">Failed to change the component state of %s.</string>
     <string name="disable_message">will be %s. Are you sure?</string>
     <string name="disable">Disable</string>
     <string name="disabled">disabled</string>
@@ -88,6 +89,7 @@
     <string name="more_apps_summary">Checkout more applications provided by the developer in Google Play</string>
     <string name="name">Name</string>
     <string name="native_lib">Native Library</string>
+    <string name="never_show">Never Show</string>
     <string name="never_show_page">Do not show this again</string>
     <string name="open">Open</string>
     <string name="open_message">You\'re already running this app.</string>
@@ -108,6 +110,7 @@
     <string name="reload">Reload</string>
     <string name="report_issue">Report an Issue</string>
     <string name="report_issue_summary">Raise an issue at GitHub</string>
+    <string name="request">Request</string>
     <string name="reset">Reset</string>
     <string name="reset_message">Reset \'%s\'?</string>
     <string name="reset_summary">Resetting %s</string>
@@ -133,6 +136,7 @@
     <string name="shared_by">%s/shared by Package Manager</string>
     <string name="share_message">Package Manager %s can be obtained from\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">Share with</string>
+    <string name="shizuku_integration_message">Package Manager can now integrate with Shizuku API for doing advanced tasks. If you like to go ahead with Shizuku integration, kindly grant the permission (one-time) by clicking the button provided below.</string>
     <string name="show_apps_all">All</string>
     <string name="show_apps_system">System</string>
     <string name="show_apps_user">User</string>

@@ -34,6 +34,7 @@ import com.smartpack.packagemanager.adapters.RecycleViewUninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -196,21 +197,33 @@ public class UninstalledAppsActivity extends AppCompatActivity {
 
     private void restore(int position, boolean batch, Context context) {
         new sExecutor() {
-            String mOutput = null;
+            private RootShell mRootShell = null;
+            private ShizukuShell mShizukuShell = null;
+            private String mOutput = null;
 
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(View.VISIBLE);
+                mRootShell = new RootShell();
+                mShizukuShell = new ShizukuShell();
             }
 
             @Override
             public void doInBackground() {
                 if (batch) {
                     for (String packageName : Common.getRestoreList()) {
-                        new RootShell().runCommand("cmd package install-existing " + packageName);
+                        if (mRootShell.rootAccess()) {
+                            mRootShell.runCommand("cmd package install-existing " + packageName);
+                        } else {
+                            mShizukuShell.runCommand("cmd package install-existing " + packageName);
+                        }
                     }
                 } else {
-                    mOutput = new RootShell().runAndGetError("cmd package install-existing " + getData(context).get(position));
+                    if (mRootShell.rootAccess()) {
+                        mOutput = mRootShell.runAndGetError("cmd package install-existing " + getData(context).get(position));
+                    } else {
+                        mOutput = mShizukuShell.runAndGetOutput("cmd package install-existing " + getData(context).get(position));
+                    }
                 }
             }
 

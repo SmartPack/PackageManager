@@ -55,6 +55,7 @@ import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageTasks;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -86,6 +87,7 @@ public class PackageTasksFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecycleViewAdapter mRecycleViewAdapter;
     private RootShell mRootShell = null;
+    private ShizukuShell mShizukuShell = null;
 
     @Nullable
     @Override
@@ -109,6 +111,20 @@ public class PackageTasksFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
         mRootShell = new RootShell();
+        mShizukuShell = new ShizukuShell();
+
+        if (!mRootShell.rootAccess() && mShizukuShell.isSupported() && mShizukuShell.isPermissionDenied()
+                && sUtils.getBoolean("request_shizuku", true, requireActivity())) {
+            new MaterialAlertDialogBuilder(requireActivity())
+                    .setCancelable(false)
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setTitle(getString(R.string.app_name))
+                    .setMessage(getString(R.string.shizuku_integration_message))
+                    .setNegativeButton(getString(R.string.never_show), (dialogInterface, i) -> sUtils.saveBoolean(
+                            "request_shizuku", false, requireActivity()))
+                    .setPositiveButton(getString(R.string.request), (dialogInterface, i) -> mShizukuShell.requestPermission()
+                    ).show();
+        }
 
         loadUI(requireActivity());
 
@@ -215,19 +231,19 @@ public class PackageTasksFragment extends Fragment {
                             .setCancelable(false)
                             .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             })
-                            .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> requireActivity().finish())
-                            .show();
+                            .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> exit(requireActivity())
+                            ).show();
                 } else if (sUtils.getBoolean("exit_confirmation", true, requireActivity())) {
                     if (mExit) {
                         mExit = false;
-                        requireActivity().finish();
+                        exit(requireActivity());
                     } else {
                         sUtils.snackBar(mRootView, getString(R.string.press_back)).show();
                         mExit = true;
                         mHandler.postDelayed(() -> mExit = false, 2000);
                     }
                 } else {
-                    requireActivity().finish();
+                    exit(requireActivity());
                 }
             }
         });
@@ -244,6 +260,12 @@ public class PackageTasksFragment extends Fragment {
         } else {
             return 0;
         }
+    }
+
+    private void exit(Activity activity) {
+        if (mRootShell.rootAccess() && mRootShell != null) mRootShell.closeSU();
+        if (mShizukuShell.isReady() && mShizukuShell != null) mShizukuShell.destroy();
+        activity.finish();
     }
 
     private void selectAll(boolean b) {
@@ -355,7 +377,7 @@ public class PackageTasksFragment extends Fragment {
         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reload));
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.installer));
         menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.exported_apps));
-        if (mRootShell.rootAccess()) {
+        if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
             menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.uninstalled_apps));
         }
         menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.settings));
@@ -439,11 +461,11 @@ public class PackageTasksFragment extends Fragment {
     private void batchOptionsMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mBatchOptions);
         Menu menu = popupMenu.getMenu();
-        if (mRootShell.rootAccess()) {
+        if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.turn_on_off));
         }
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.uninstall));
-        if (mRootShell.rootAccess()) {
+        if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
             menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.reset));
         }
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
@@ -467,7 +489,7 @@ public class PackageTasksFragment extends Fragment {
                             .show();
                     break;
                 case 1:
-                    if (mRootShell.rootAccess()) {
+                    if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
                         MaterialAlertDialogBuilder uninstall = new MaterialAlertDialogBuilder(activity);
                         uninstall.setIcon(R.mipmap.ic_launcher);
                         uninstall.setTitle(R.string.sure_question);
@@ -718,9 +740,8 @@ public class PackageTasksFragment extends Fragment {
             mSearchWord.setText(null);
             Common.setSearchText(null);
         }
-        if (mRootShell != null) {
-            mRootShell.closeSU();
-        }
+        if (mRootShell.rootAccess() && mRootShell != null) mRootShell.closeSU();
+        if (mShizukuShell.isReady() && mShizukuShell != null) mShizukuShell.destroy();
     }
 
 }

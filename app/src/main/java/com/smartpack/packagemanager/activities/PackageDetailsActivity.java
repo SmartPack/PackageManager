@@ -29,8 +29,8 @@ import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 
@@ -67,7 +67,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         if (PackageDetails.getPermissions(Common.getApplicationID(), this).size() > 0) {
             adapter.AddFragment(new PermissionsFragment(), getString(R.string.permissions));
         }
-        if (new RootShell().rootAccess() && AppOps.getOps(this).size() > 0) {
+        if ((new RootShell().rootAccess() || new ShizukuShell().isReady()) && AppOps.getOps(this).size() > 0) {
             adapter.AddFragment(new AppOpsFragment(), getString(R.string.operations));
         }
         if (PackageDetails.getActivities(Common.getApplicationID(), this).size() > 0) {

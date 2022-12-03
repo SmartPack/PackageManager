@@ -39,6 +39,7 @@ import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -154,8 +155,7 @@ public class PackageInfoFragment extends Fragment {
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                 })
-                .setPositiveButton(getString(R.string.yes), (dialog, id) -> PackageDetails.disableApp(mProgressLayout,
-                        mOpenApp, mProgressMessage, mDisableTitle, requireActivity()))
+                .setPositiveButton(getString(R.string.yes), (dialog, id) -> PackageDetails.disableApp(mProgressLayout, mProgressMessage, requireActivity()))
                 .show());
         mMore.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mMore);
@@ -234,9 +234,8 @@ public class PackageInfoFragment extends Fragment {
             startActivity(settings);
             requireActivity().finish();
         });
-        if (new RootShell().rootAccess()) {
+        if (new RootShell().rootAccess() || new ShizukuShell().isReady()) {
             mClear.setVisibility(View.VISIBLE);
-            mExport.setVisibility(View.VISIBLE);
             mDisable.setVisibility(View.VISIBLE);
         }
 

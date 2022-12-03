@@ -52,6 +52,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class PackageDetails {
 
     private static RootShell mRootShell = null;
+    private static ShizukuShell mShizukuShell = null;
 
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
         if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
@@ -172,9 +173,9 @@ public class PackageDetails {
         }.execute();
     }
 
-    public static void disableApp(LinearLayout progressLayout, LinearLayout openApp, MaterialTextView progressMessage,
-                                  MaterialTextView statusMessage, Activity activity) {
+    public static void disableApp(LinearLayout progressLayout, MaterialTextView progressMessage, Activity activity) {
         new sExecutor() {
+            private String mResult = null;
 
             @SuppressLint("StringFormatInvalid")
             @Override
@@ -185,31 +186,37 @@ public class PackageDetails {
                 if (mRootShell == null) {
                     mRootShell = new RootShell();
                 }
+                if (mShizukuShell == null) {
+                    mShizukuShell = new ShizukuShell();
+                }
             }
 
             @Override
             public void doInBackground() {
                 sUtils.sleep(1);
-                if (sPackageUtils.isEnabled(Common.getApplicationID(), activity)) {
-                    mRootShell.runCommand("pm disable " + Common.getApplicationID());
+                if (mRootShell.rootAccess()) {
+                    mResult = mRootShell.runAndGetError((sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? "pm disable " : "pm enable ") + Common.getApplicationID());
                 } else {
-                    mRootShell.runCommand("pm enable " + Common.getApplicationID());
+                    mResult = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? "pm disable " : "pm enable ") + Common.getApplicationID());
                 }
             }
 
             @Override
             public void onPostExecute() {
                 hideProgress(progressLayout, progressMessage);
-                statusMessage.setText(sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? R.string.disable : R.string.enable);
-                openApp.setVisibility(sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? View.VISIBLE : View.GONE);
-                Common.reloadPage(true);
+                if (mResult != null && (mResult.contains("new state: disabled") || mResult.contains("new state: enabled"))) {
+                    Common.reloadPage(true);
+                    activity.recreate();
+                } else {
+                    sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.disable_failed_message, Common.getApplicationName())).show();
+                }
             }
         }.execute();
     }
 
     @SuppressLint("StringFormatInvalid")
     public static void uninstallSystemApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        if (new RootShell().rootAccess()) {
+        if (new RootShell().rootAccess() || new ShizukuShell().isReady()) {
             new MaterialAlertDialogBuilder(activity)
                     .setIcon(Common.getApplicationIcon())
                     .setTitle(activity.getString(R.string.uninstall_title, Common.getApplicationName()))
@@ -226,12 +233,19 @@ public class PackageDetails {
                                     if (mRootShell == null) {
                                         mRootShell = new RootShell();
                                     }
+                                    if (mShizukuShell == null) {
+                                        mShizukuShell = new ShizukuShell();
+                                    }
                                 }
 
                                 @Override
                                 public void doInBackground() {
                                     sUtils.sleep(1);
-                                    mRootShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                                    if (mRootShell.rootAccess()) {
+                                        mRootShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                                    } else {
+                                        mShizukuShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+                                    }
                                 }
 
                                 @Override

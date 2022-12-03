@@ -30,6 +30,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class PackageTasks {
 
     private static RootShell mRootShell = null;
+    private static ShizukuShell mShizukuShell = null;
 
     public static void batchDisableTask(Activity activity) {
         new sExecutor() {
@@ -47,6 +48,9 @@ public class PackageTasks {
                 if (mRootShell == null) {
                     mRootShell = new RootShell();
                 }
+                if (mShizukuShell == null) {
+                    mShizukuShell = new ShizukuShell();
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -61,12 +65,14 @@ public class PackageTasks {
                             Common.getOutput().append(sPackageUtils.isEnabled(packageID, activity) ? "** " +
                                     activity.getString(R.string.disabling, PackageData.getAppName(packageID, activity)) :
                                     "** " + activity.getString(R.string.enabling, PackageData.getAppName(packageID, activity)));
-                            if (sPackageUtils.isEnabled(packageID, activity)) {
-                                mRootShell.runCommand("pm disable " + packageID);
+                            String result;
+                            if (mRootShell.rootAccess()) {
+                                result = mRootShell.runAndGetError((sPackageUtils.isEnabled(packageID, activity) ? "pm disable " : "pm enable ") + packageID);
                             } else {
-                                mRootShell.runCommand("pm enable " + packageID);
+                                result = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(packageID, activity) ? "pm disable " : "pm enable ") + packageID);
                             }
-                            Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
+                            Common.getOutput().append(": ").append(activity.getString(result != null && (result.contains("new state: disabled")
+                                    || result.contains("new state: enabled")) ? R.string.done : R.string.failed)).append(" *\n\n");
                         }
                         sUtils.sleep(1);
                     }
@@ -98,6 +104,9 @@ public class PackageTasks {
                 if (mRootShell == null) {
                     mRootShell = new RootShell();
                 }
+                if (mShizukuShell == null) {
+                    mShizukuShell = new ShizukuShell();
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -110,7 +119,11 @@ public class PackageTasks {
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.reset_summary, PackageData.getAppName(packageID, activity)));
-                            mRootShell.runCommand("pm clear " + packageID);
+                            if (mRootShell.rootAccess()) {
+                                mRootShell.runCommand("pm clear " + packageID);
+                            } else {
+                                mShizukuShell.runCommand("pm clear " + packageID);
+                            }
                             Common.getOutput().append(": ").append(activity.getString(R.string.done)).append(" *\n\n");
                         }
                         sUtils.sleep(1);
@@ -192,6 +205,9 @@ public class PackageTasks {
                 if (mRootShell == null) {
                     mRootShell = new RootShell();
                 }
+                if (mShizukuShell == null) {
+                    mShizukuShell = new ShizukuShell();
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -204,7 +220,11 @@ public class PackageTasks {
                             Common.getOutput().append(": ").append(activity.getString(R.string.uninstall_nope)).append(" *\n\n");
                         } else {
                             Common.getOutput().append("** ").append(activity.getString(R.string.uninstall_summary, PackageData.getAppName(packageID, activity)));
-                            mRootShell.runCommand("pm uninstall --user 0 " + packageID);
+                            if (mRootShell.rootAccess()) {
+                                mRootShell.runCommand("pm uninstall --user 0 " + packageID);
+                            } else {
+                                mShizukuShell.runCommand("pm uninstall --user 0 " + packageID);
+                            }
                             Common.getOutput().append(sPackageUtils.isPackageInstalled(packageID, activity) ? ": " +
                                     activity.getString(R.string.failed) + " *\n\n" : ": " + activity.getString(R.string.done) + " *\n\n");
                         }

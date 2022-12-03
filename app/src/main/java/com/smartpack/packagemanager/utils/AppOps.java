@@ -23,8 +23,15 @@ public class AppOps {
 
     public static ArrayList<RecycleViewAppOpsItem> getOps(Context context) {
         ArrayList<RecycleViewAppOpsItem> mData = new ArrayList<>();
-        for (String line : new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
-                Common.getApplicationID()).split("\\r?\\n")) {
+        String[] appOpsList = null;
+        if (new RootShell().rootAccess()) {
+            appOpsList = new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
+                    Common.getApplicationID()).trim().split("\\r?\\n");
+        } else {
+            appOpsList = new ShizukuShell().runAndGetOutput(getCommandPrefix() + " appops get " +
+                    Common.getApplicationID()).trim().split("\\r?\\n");
+        }
+        for (String line : appOpsList) {
             String[] splitOp = line.split(":");
             String name = splitOp[0];
             /*

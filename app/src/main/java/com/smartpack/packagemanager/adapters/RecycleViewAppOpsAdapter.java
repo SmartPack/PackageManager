@@ -23,7 +23,7 @@ import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.RecycleViewAppOpsItem;
 import com.smartpack.packagemanager.utils.RootShell;
-import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.ShizukuShell;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -67,8 +67,13 @@ public class RecycleViewAppOpsAdapter extends RecyclerView.Adapter<RecycleViewAp
                             holder.mCheckBox.setChecked(data.get(position).isEnabled());
                         }).show();
             } else {
-                new RootShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
-                        data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
+                if (new RootShell().rootAccess()) {
+                    new RootShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
+                            data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
+                } else {
+                    new ShizukuShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
+                            data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
+                }
             }
         });
     }

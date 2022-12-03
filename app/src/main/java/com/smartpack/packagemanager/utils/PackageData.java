@@ -123,7 +123,11 @@ public class PackageData {
     }
 
     public static void clearAppSettings(String packageID) {
-        new RootShell().runCommand("pm clear " + packageID);
+        if (new RootShell().rootAccess()) {
+            new RootShell().runCommand("pm clear " + packageID);
+        } else {
+            new ShizukuShell().runCommand("pm clear " + packageID);
+        }
     }
 
     public static String getBundleSize(String path) {

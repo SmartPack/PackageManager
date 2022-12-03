@@ -228,6 +228,7 @@ public class SplitAPKInstaller {
                         if (Objects.equals(mExtension, "apk")) {
                             Common.getAppList().add(mFile.getAbsolutePath());
                         }
+                        inputStream.close();
                     } catch (IOException ignored) {
                     }
                 }
@@ -262,14 +263,13 @@ public class SplitAPKInstaller {
                 sessionId = sInstallerUtils.runInstallCreate(installParams, activity);
                 try {
                     for (String string : Common.getAppList()) {
-                        if (sUtils.exist(new File(string)) && string.endsWith(".apk")) {
-                            File mFile = new File(string);
-                            if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                                sInstallerUtils.runInstallWrite(mFile.length(), sessionId, mFile.getName(), mFile.toString(), activity);
-                            }
+                        File mFile = new File(string);
+                        if (mFile.exists() && mFile.getName().endsWith(".apk")) {
+                            sInstallerUtils.runInstallWrite(mFile.length(), sessionId, mFile.getName(), mFile.toString(), activity);
                         }
                     }
-                } catch (NullPointerException ignored) {}
+                } catch (NullPointerException ignored) {
+                }
                 sInstallerUtils.doCommitSession(sessionId, getInstallerCallbackIntent(activity), activity);
             }
 
