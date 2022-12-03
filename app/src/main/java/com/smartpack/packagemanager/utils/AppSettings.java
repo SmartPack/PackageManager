@@ -74,6 +74,7 @@ public class AppSettings {
         mData.add(new sSerializableItems(null, "FiestaLake", "Korean Translations", "https://github.com/FiestaLake"));
         mData.add(new sSerializableItems(null, "Mikesew1320", "Amharic Translations", "https://github.com/Mikesew1320"));
         mData.add(new sSerializableItems(null, "tsiflimagas", "Greek Translations", "https://github.com/tsiflimagas"));
+        mData.add(new sSerializableItems(null, "741™", "Greek Translations", null));
         mData.add(new sSerializableItems(null, "Nikita", "Russian & Ukrainian Translations", "https://t.me/MONSTER_PC"));
         mData.add(new sSerializableItems(null, "tommynok", "Ukrainian Translations", null));
         mData.add(new sSerializableItems(null, "B3Nd2R & Reno", "French Translations", null));
@@ -85,8 +86,10 @@ public class AppSettings {
         mData.add(new sSerializableItems(null, "Hoa Gia Đại Thiếu", "Vietnamese Translations", null));
         mData.add(new sSerializableItems(null, "jason5545", "Chinese (Simplified & Traditional) Translations", "https://github.com/jason5545"));
         mData.add(new sSerializableItems(null, "Cláudia Sebastião", "Portuguese (Portugal) Translations", null));
+        mData.add(new sSerializableItems(null, "Carnum", "Portuguese (Portugal) Translations", null));
         mData.add(new sSerializableItems(null, "Erős Pista", "Hungarian Translations", null));
         mData.add(new sSerializableItems(null, "AbsurdUsername", "Italian Translations", "https://github.com/AbsurdUsername"));
+        mData.add(new sSerializableItems(null, "rotid™", "Arabic Translations", null));
         return mData;
     }
 

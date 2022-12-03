@@ -81,7 +81,8 @@
     <string name="uninstall_title">"Tem a certeza que deseja desinstalar %s?"</string>
     <string name="uninstall_warning">"Aviso: remover aplicações do sistema pode ser perigoso!
 
-        *** <b>USE POR SUA CONTA E RISCO</b> ***"</string>
+        *** <b>USE POR SUA CONTA E RISCO</b> ***
+        "</string>
     <string name="version">"Versão: %s"</string>
     <string name="welcome_message">"Bem-vindo(a) ao Gestor de Pacotes, uma aplicação simples mas poderosa para gerir as suas aplicações."</string>
     <string name="wrong_extension">"Por favor, selecione um ficheiro com a extensão %s. "</string>
@@ -100,7 +101,7 @@
     <string name="share_app_Summary">"Convidar amigos para utilizar o Gestor de Pacotes"</string>
     <string name="source_code_summary">"O Gestor de Pacotes é uma aplicação de código-aberto que aceita contribuições da comunidade de programação. Clique aqui para ver o código-fonte!"</string>
     <string name="support_summary">"Aderir ao grupo do Telegram"</string>
-    <string name="batch_options">"Opções de lote (%s)"</string>
+    <string name="batch_options">"Opções de lote"</string>
     <string name="batch_list_added">"%s foi adicionado à lista de lotes"</string>
     <string name="batch_list_export">"Tem a certeza que deseja exportar as seguintes aplicações para o armazenamento do dispositivo?"</string>
     <string name="batch_list_removed">"%s foi removido da lista de lotes"</string>
@@ -174,4 +175,13 @@
     <string name="uninstalled_apps">"Aplicações desinstaladas"</string>
     <string name="user_interface">"Interface de utilizador"</string>
     <string name="uninstall_updates_message">"No entanto é instalado uma atualização local de '%s' que pode ser removida clicando no botão \"Desinstalar\" ."</string>
+    <string name="close">"Fechar"</string>
+    <string name="bundle_install_question">"Tem a certeza que quer instalar o pacote da aplicação selecionada?"</string>
+    <string name="preparing_message">"A preparar…"</string>
+    <string name="save_to_downloads">"Guardar em Descarregamentos"</string>
+    <string name="android_version">"Android %s"</string>
+    <string name="sdk_compile">"Compile SDK: %s"</string>
+    <string name="sdk_minimum">"SDK mínimo: %s"</string>
+    <string name="update">"Atualizar"</string>
+    <string name="reload">"Recarregar"</string>
 </resources>
