@@ -8,9 +8,6 @@
 
 package com.smartpack.packagemanager.adapters;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,57 +15,70 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.PermissionsItems;
+import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
-
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
 public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleViewPermissionsAdapter.ViewHolder> {
 
-    private static List<String> data;
+    private static List<PermissionsItems> mData;
+    private static final RootShell mRootShell = new RootShell();
+    private static final ShizukuShell mShizukuShell = new ShizukuShell();
 
-    public RecycleViewPermissionsAdapter(List<String> data) {
-        RecycleViewPermissionsAdapter.data = data;
+    public RecycleViewPermissionsAdapter(List<PermissionsItems> data) {
+        RecycleViewPermissionsAdapter.mData = data;
     }
 
     @NonNull
     @Override
     public RecycleViewPermissionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_permissions, parent, false);
+        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
         return new RecycleViewPermissionsAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecycleViewPermissionsAdapter.ViewHolder holder, int position) {
-        if (data.get(position).equals("Granted") || data.get(position).equals("Denied")) {
-            holder.mName.setTextColor(Utils.getThemeAccentColor(holder.mName.getContext()));
-            holder.mName.setTypeface(Typeface.DEFAULT_BOLD);
-            holder.mName.setText(data.get(position));
-        } else {
-            holder.mName.setTextColor(sUtils.isDarkTheme(holder.mName.getContext()) ? Color.WHITE : Color.BLACK);
-            holder.mName.setText(data.get(position) + "\n" + sPermissionUtils.getDescription(data.get(position).replace("android.permission.",""), holder.mName.getContext()));
-        }
+        holder.mTitle.setTextColor(Utils.getThemeAccentColor(holder.mTitle.getContext()));
+        holder.mTitle.setText(mData.get(position).getTitle().replace("android.permission.",""));
+        holder.mDescription.setText(mData.get(position).getDescription());
+        holder.mGranted.setChecked(mData.get(position).isGranted());
+        holder.mGranted.setOnClickListener(v -> {
+            if (mRootShell.rootAccess()) {
+                mRootShell.runCommand("pm " + (mData.get(position).isGranted() ? "revoke " : "grant ") +
+                        Common.getApplicationID() + " " + mData.get(position).getTitle());
+            } else {
+                mShizukuShell.runCommand("pm " + (mData.get(position).isGranted() ? "revoke " : "grant ") +
+                        Common.getApplicationID() + " " + mData.get(position).getTitle());
+            }
+        });
+        holder.mGranted.setEnabled(!Common.isAPKPicker() && (mRootShell.rootAccess() || mShizukuShell.isReady()));
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final MaterialTextView mName;
+
+        private final MaterialCheckBox mGranted;
+        private final MaterialTextView mTitle, mDescription;
 
         public ViewHolder(View view) {
             super(view);
-            this.mName = view.findViewById(R.id.name);
+            this.mGranted = view.findViewById(R.id.checkbox);
+            this.mTitle = view.findViewById(R.id.title);
+            this.mDescription = view.findViewById(R.id.description);
         }
     }
 

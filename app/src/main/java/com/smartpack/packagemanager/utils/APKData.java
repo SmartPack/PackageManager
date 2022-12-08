@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.smartpack.packagemanager.R;
@@ -28,7 +29,7 @@ import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 public class APKData {
 
     private static File mAPK = null;
-    private static List<String> mPermissions = null;
+    private static List<PermissionsItems> mPermissions = null;
     private static String mCertificate = null, mManifest = null, mMinSDKVersion = null, mSDKVersion = null,
             mSize = null, mVersion = null;
 
@@ -71,7 +72,7 @@ public class APKData {
         return mData;
     }
 
-    public static List<String> getPermissions() {
+    public static List<PermissionsItems> getPermissions() {
         return mPermissions;
     }
 
@@ -83,6 +84,7 @@ public class APKData {
         return mManifest;
     }
 
+    @SuppressLint("StringFormatInvalid")
     private static String sdkToAndroidVersion(String sdkVersion, Context context) {
         int sdk = Integer.parseInt(sdkVersion);
         switch (sdk) {
@@ -165,14 +167,16 @@ public class APKData {
         mManifest = manifest;
     }
 
+    @SuppressLint("StringFormatInvalid")
     public static void setMinSDKVersion(String minSDKVersion, Context context) {
         mMinSDKVersion = context.getString(R.string.sdk_minimum, sdkToAndroidVersion(minSDKVersion, context));
     }
 
-    public static void setPermissions(List<String> permissions) {
+    public static void setPermissions(List<PermissionsItems> permissions) {
         mPermissions = permissions;
     }
 
+    @SuppressLint("StringFormatInvalid")
     public static void setSDKVersion(String sdkVersion, Context context) {
         mSDKVersion = context.getString(R.string.sdk_compile, sdkToAndroidVersion(sdkVersion, context));
     }

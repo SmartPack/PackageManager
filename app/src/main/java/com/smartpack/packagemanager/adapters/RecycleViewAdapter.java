@@ -132,6 +132,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             Common.setDataDir(sPackageUtils.getDataDir(Common.getApplicationID(), view.getContext()));
             Common.setNativeLibsDir(sPackageUtils.getNativeLibDir(Common.getApplicationID(), view.getContext()));
             Common.isSystemApp(sPackageUtils.isSystemApp(Common.getApplicationID(), view.getContext()));
+            Common.isAPKPicker(false);
             Intent details = new Intent(view.getContext(), PackageDetailsActivity.class);
             view.getContext().startActivity(details);
         }

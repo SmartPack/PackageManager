@@ -22,7 +22,8 @@ import java.util.List;
  */
 public class Common {
 
-    private static boolean mReloadPage = false, mRunning = false,  mSystemApp = false, mUninstall = false, mUpdating = false;
+    private static boolean mAPKPicker = false, mReloadPage = false, mRunning = false,
+            mSystemApp = false, mUninstall = false, mUpdating = false;
 
     private static CharSequence mApplicationName;
 
@@ -37,6 +38,10 @@ public class Common {
     private static String mApplicationID, mDirData, mDirNatLib, mDirSource, mPath, mSearchText;
 
     private static final StringBuilder mOutput = new StringBuilder();
+
+    public static boolean isAPKPicker() {
+        return mAPKPicker;
+    }
 
     public static boolean isSystemApp() {
         return mSystemApp;
@@ -149,6 +154,10 @@ public class Common {
 
     public static void reloadPage(boolean b) {
         mReloadPage = b;
+    }
+
+    public static void isAPKPicker(boolean b) {
+        mAPKPicker = b;
     }
 
     public static void isRunning(boolean b) {

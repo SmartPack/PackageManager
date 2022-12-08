@@ -53,7 +53,7 @@ android {
 
 dependencies {
     playImplementation 'com.android.billingclient:billing:5.1.0'
-    implementation 'com.github.sunilpaulmathew:sCommon:c587439348'
+    implementation 'com.github.sunilpaulmathew:sCommon:ed84559b58'
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
     implementation 'com.google.android.material:material:1.7.0'
     implementation "dev.rikka.shizuku:api:12.1.0"

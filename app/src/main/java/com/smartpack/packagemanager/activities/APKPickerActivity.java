@@ -33,15 +33,19 @@ import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.APKItems;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.PermissionsItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
 import in.sunilpaulmathew.sCommon.Utils.sAPKCertificateUtils;
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -109,6 +113,7 @@ public class APKPickerActivity extends AppCompatActivity {
                     sUtils.delete(getExternalFilesDir("APK"));
                     mFile = new File(getExternalFilesDir("APK"), "APK.apk");
                 }
+                Common.isAPKPicker(true);
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -130,7 +135,12 @@ public class APKPickerActivity extends AppCompatActivity {
                             mIcon = mAPKData.getIcon();
                         }
                         if (mAPKData.getPermissions() != null) {
-                            APKData.setPermissions(mAPKData.getPermissions());
+                            List<PermissionsItems> mPerms = new ArrayList<>();
+                            for (int i = 0; i < mAPKData.getPermissions().size(); i++) {
+                                mPerms.add(new PermissionsItems(false, mAPKData.getPermissions().get(i), sPermissionUtils.getDescription(
+                                        mAPKData.getPermissions().get(i).replace("android.permission.",""), activity)));
+                            }
+                            APKData.setPermissions(mPerms);
                         }
                         if (mAPKData.getManifest() != null) {
                             APKData.setManifest(mAPKData.getManifest());

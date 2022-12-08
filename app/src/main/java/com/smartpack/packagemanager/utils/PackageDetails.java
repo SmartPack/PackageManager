@@ -263,44 +263,19 @@ public class PackageDetails {
         }
     }
 
-    public static List<String> getPermissions(String packageName, Context context) {
-        List<String> perms = new ArrayList<>();
+    public static List<PermissionsItems> getPermissions(String packageName, Context context) {
+        List<PermissionsItems> perms = new ArrayList<>();
         try {
-            if (getPermissionsGranted(packageName, context).size() > 1) {
-                perms.addAll(getPermissionsGranted(packageName, context));
-            }
-            if (getPermissionsDenied(packageName, context).size() > 1) {
-                perms.addAll(getPermissionsDenied(packageName, context));
+            try {
+                for (int i = 0; i < Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions.length; i++) {
+                    PackageInfo perm = Objects.requireNonNull(PackageData.getPackageInfo(packageName, context));
+                    perms.add(new PermissionsItems((perm.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0,
+                            perm.requestedPermissions[i], sPermissionUtils.getDescription(perm.requestedPermissions[i]
+                            .replace("android.permission.",""), context)));
+                }
+            } catch (NullPointerException ignored) {
             }
         } catch (NullPointerException ignored) {}
-        return perms;
-    }
-
-    public static List<String> getPermissionsGranted(String packageName, Context context) {
-        List<String> perms = new ArrayList<>();
-        try {
-            perms.add("Granted");
-            for (int i = 0; i < Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions.length; i++) {
-                if ((Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0) {
-                    perms.add(Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions[i]);
-                }
-            }
-        } catch (NullPointerException ignored) {
-        }
-        return perms;
-    }
-
-    public static List<String> getPermissionsDenied(String packageName, Context context) {
-        List<String> perms = new ArrayList<>();
-        try {
-            perms.add("Denied");
-            for (int i = 0; i < Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions.length; i++) {
-                if ((Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0) {
-                    perms.add(Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions[i]);
-                }
-            }
-        } catch (NullPointerException ignored) {
-        }
         return perms;
     }
 
@@ -342,16 +317,16 @@ public class PackageDetails {
             obj.put("Last updated", sPackageUtils.getUpdatedDate(packageName, context));
             JSONObject permissions = new JSONObject();
             JSONArray granted = new JSONArray();
-            for (String grantedPermissions : PackageDetails.getPermissionsGranted(packageName, context)) {
-                if (!grantedPermissions.equals("Granted")) {
-                    granted.put(grantedPermissions);
+            for (PermissionsItems grantedPermissions : PackageDetails.getPermissions(packageName, context)) {
+                if (grantedPermissions.isGranted()) {
+                    granted.put(grantedPermissions.getTitle());
                 }
             }
             permissions.put("Granted", granted);
             JSONArray denied = new JSONArray();
-            for (String deniedPermissions : PackageDetails.getPermissionsDenied(packageName, context)) {
-                if (!deniedPermissions.equals("Denied")) {
-                    denied.put(deniedPermissions);
+            for (PermissionsItems grantedPermissions : PackageDetails.getPermissions(packageName, context)) {
+                if (!grantedPermissions.isGranted()) {
+                    granted.put(grantedPermissions.getTitle());
                 }
             }
             permissions.put("Denied", denied);
