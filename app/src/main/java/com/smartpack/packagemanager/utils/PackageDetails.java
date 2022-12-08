@@ -282,12 +282,10 @@ public class PackageDetails {
     public static List<ActivityInfo> getActivities(String packageName, Context context) {
         List<ActivityInfo> activities = new ArrayList<>();
         try {
-            try {
-                ActivityInfo[] list = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
-                activities.addAll(Arrays.asList(list));
-            } catch (PackageManager.NameNotFoundException ignored) {
-            }
-        } catch (NullPointerException ignored) {}
+            ActivityInfo[] list = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
+            activities.addAll(Arrays.asList(list));
+        } catch (PackageManager.NameNotFoundException | NullPointerException ignored) {
+        }
         return activities;
     }
 

@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_gravity="start"
-    android:layout_margin="2dp"
+    android:layout_margin="1dp"
     android:gravity="start" >
 
     <com.google.android.material.textview.MaterialTextView
@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="10dp"
-        android:focusable="false"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        android:focusable="false" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
@@ -23,6 +23,5 @@
         android:textIsSelectable="true"
         android:focusable="true"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:padding="3dp" />
+        android:textSize="14sp" />
 </LinearLayout>
