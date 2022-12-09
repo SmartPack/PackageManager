@@ -163,6 +163,7 @@ public class APKPickerActivity extends AppCompatActivity {
                 }
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
                 try {
@@ -172,6 +173,9 @@ public class APKPickerActivity extends AppCompatActivity {
                 if (mFile.exists()) {
                     if (mName != null || mPackageName != null || mIcon != null) {
                         loadAPKDetails(activity);
+                    } else {
+                        sUtils.toast(getString(R.string.wrong_extension, ".apk"), activity).show();
+                        activity.finish();
                     }
                 }
             }
