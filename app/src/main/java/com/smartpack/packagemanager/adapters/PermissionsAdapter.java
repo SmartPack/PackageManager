@@ -26,6 +26,8 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.Utils.sUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
@@ -42,8 +44,12 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
     @NonNull
     @Override
     public PermissionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
-        return new PermissionsAdapter.ViewHolder(rowItem);
+        View mRootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
+        if (!Common.isAPKPicker() && (!mRootShell.rootAccess() && !mShizukuShell.isReady())) {
+            mRootView.setOnClickListener(v -> sUtils.snackBar(mRootView, mRootView
+                    .getContext().getString(R.string.feature_unavailable_message)).show());
+        }
+        return new PermissionsAdapter.ViewHolder(mRootView);
     }
 
     @Override
@@ -61,7 +67,12 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
                         Common.getApplicationID() + " " + mData.get(position).getTitle());
             }
         });
-        holder.mGranted.setEnabled(!Common.isAPKPicker() && (mRootShell.rootAccess() || mShizukuShell.isReady()));
+        if (!Common.isAPKPicker() && (mRootShell.rootAccess() || mShizukuShell.isReady())) {
+            holder.mGranted.setEnabled(true);
+        } else {
+            holder.mGranted.setEnabled(false);
+            holder.mGranted.setClickable(false);
+        }
     }
 
     @Override

@@ -66,6 +66,7 @@
     <string name="everything_done">Everything Done</string>
     <string name="failed">Failed</string>
     <string name="fdroid">F-Droid</string>
+    <string name="feature_unavailable_message">This feature requires Root or Shizuku support</string>
     <string name="file_permission_request_message">In order to get this feature working on newer Android versions (Android R or newer), it is necessary to grant \"All files access\" permission to Package Manager. Kindly grant the permission manually from the new screen opened after clicking the \"Grant\" button.</string>
     <string name="file_picker_message">Please Note: This feature is too experimental</string>
     <string name="grant">Grant</string>
