@@ -79,7 +79,10 @@
     <string name="uninstall_nope">"Entschuldigung! Sie können dies nicht von hier aus tun!"</string>
     <string name="uninstall_summary">"Entferne %s"</string>
     <string name="uninstall_title">"Sind Sie sich sicher, dass sie %s deinstallieren wollen?"</string>
-    <string name="uninstall_warning">"Bitte beachten Sie: Das Entfernen von System-Apps ist manchmal gefährlich!\n\n*** <b>VERWENDEN AUF EIGENES RISIKO</b> ***"</string>
+    <string name="uninstall_warning">"Bitte beachten Sie: Das Entfernen von System-Apps ist manchmal gefährlich!
+
+        *** <b>VERWENDEN AUF EIGENES RISIKO</b> ***
+        "</string>
     <string name="version">"Version: %s"</string>
     <string name="welcome_message">"Willkommen bei Package Manager, einer einfachen, aber leistungsstarken Anwendung zur Verwaltung Ihrer Apps."</string>
     <string name="wrong_extension">"Bitte wählen Sie eine Datei mit der Erweiterung %s."</string>
@@ -113,6 +116,7 @@
     <string name="uninstall_adb">"Mit ADB entfernen"</string>
     <string name="uninstall_adb_summary">"Deine Auswahl ist eine System App. Unglücklicherweise, erlaubt das Android Ökosystem keine Fremden Apps wie Package Manager das löschen auf Geräten ohne Root Rechten. Keine Panik deswegen! Package Manager führt Dich durch eine Anleitung um diese Applikation mit der Android Debug Bridge (ADB) zu entfernen. Wenn ADB Funktioniert, führe den folgenden Befehl aus und ADB löscht diese Applikation. Im Fall das ADB noch nicht eingerichtet ist, schau Dir die verlinkte Dokumentationen an"</string>
     <string name="warning">"Warnung"</string>
+    <string name="split_apk_installer">"Split APK-Installer"</string>
     <string name="certificate">"Zertifikat"</string>
     <string name="manifest">"Manifest"</string>
     <string name="apks">"APKs"</string>
@@ -125,16 +129,40 @@
     <string name="show_apps_system">"System"</string>
     <string name="show_apps_user">"Benutzer"</string>
     <string name="exported_apps">"Exportierte Apps"</string>
+    <string name="operations">"Vorgänge"</string>
+    <string name="operations_warning">"Das Ändern einiger Vorgänge ist gefährlich. Bitte tun Sie es nur, wenn Sie wissen, was Sie tun. Bitte beachten Sie auch, dass einige Vorgänge einfach nicht geändert werden können (schließen Sie diese Seite und besuchen Sie sie erneut, um den neuen Status zu erfahren)."</string>
+    <string name="bundle_path">"Bundle Pfad"</string>
+    <string name="size_apk">"APK Größe: %s"</string>
+    <string name="size_bundle">"Bundle Größe: %s"</string>
+    <string name="file_permission_request_message">"Damit diese Funktion auf neueren Android-Versionen (Android R oder neuer) funktioniert, müssen Sie dem Package Manager die Berechtigung \"Zugriff auf alle Dateien\" erteilen. Bitte erteilen Sie diese Berechtigung manuell auf dem neuen Bildschirm, der sich nach dem Klicken auf die Schaltfläche \"Erlauben\" öffnet."</string>
+    <string name="grant">"Erlauben"</string>
     <string name="select_all">"Alle auswählen"</string>
+    <string name="select_all_summary">"Alle Anwendungen dieser Seite auswählen und zur Batchliste hinzufügen?"</string>
+    <string name="uninstall_status_failed">"Deinstallation %s fehlgeschlagen oder durch den Benutzer abgebrochen"</string>
     <string name="export_apk_summary">"Die gewählte APK wird hierhin exportiert: '%s'!"</string>
+    <string name="initializing">"Initialisierung…"</string>
     <string name="start">"Start"</string>
     <string name="size">"Größe"</string>
+    <string name="time_installed">"Installiert"</string>
+    <string name="time_updated">"Letztes Update"</string>
+    <string name="copyright">"Copyright: © %s"</string>
     <string name="export_details">"Details exportieren"</string>
     <string name="export_details_message">"App-Details werden exportiert als %s"</string>
+    <string name="fdroid">"F-Droid"</string>
     <string name="more">"Mehr"</string>
     <string name="search_market_message">"Suche in %s"</string>
+    <string name="apk_installer_description">"Eine eigene APK-Datei"</string>
+    <string name="bundle_installer_description">"App bundles im 'apkm', 'apks', und 'xapk' Format"</string>
+    <string name="exit_confirmation">"Bestätigung anzeigen"</string>
+    <string name="exit_simple">"Direkt beenden"</string>
+    <string name="exiting_app">"Beim Verlassen der App"</string>
+    <string name="exported_apps_name">"Exportierte APK Name"</string>
     <string name="general">"Allgemein"</string>
+    <string name="installer">"Installer"</string>
+    <string name="installer_clicking">"Bei Klick auf Installer"</string>
+    <string name="installer_file_picker">"Start Dateiauswahl"</string>
     <string name="installer_instructions">"Anleitung anzeigen"</string>
+    <string name="installer_summary">"Sie können die Installationsdatei(en) auswählen, indem Sie auf die Plus-Schaltfläche oben auf dieser Seite klicken. Das Installationsprogramm unterstützt die folgenden Pakete:"</string>
     <string name="never_show_page">"Nicht mehr anzeigen"</string>
     <string name="other">"Andere"</string>
     <string name="restore">"Wiederherstellen"</string>
@@ -143,5 +171,21 @@
 
         %s"</string>
     <string name="restore_success_message">"Werkeinstellung der ausgewählten App(s) erfolgreich wiederhergestellt"</string>
+    <string name="split_apk_installer_description">"Split APKs (mehrere APK-Dateien mit demselben Paketnamen)"</string>
+    <string name="uninstalled_apps">"Deinstallierte Apps"</string>
+    <string name="user_interface">"Benutzeroberfläche"</string>
+    <string name="uninstall_updates_message">"Es ist jedoch ein lokales Update von '%s' installiert, das durch Klicken auf die Schaltfläche \"Deinstallieren\" entfernt werden kann."</string>
     <string name="close">"Schließen"</string>
+    <string name="bundle_install_question">"Sind Sie sicher, dass Sie das ausgewählte App-Bundle installieren möchten?"</string>
+    <string name="preparing_message">"Vorbereiten…"</string>
+    <string name="save_to_downloads">"In Downloads speichern"</string>
+    <string name="android_version">"Android %s"</string>
+    <string name="sdk_compile">"SDK kompilieren: %s"</string>
+    <string name="sdk_minimum">"Minimum SDK: %s"</string>
+    <string name="update">"Aktualisierung"</string>
+    <string name="reload">"Neu laden"</string>
+    <string name="disable_failed_message">"Der Komponentenstatus von %s konnte nicht geändert werden."</string>
+    <string name="never_show">"Nie anzeigen"</string>
+    <string name="request">"Anfrage"</string>
+    <string name="shizuku_integration_message">"Der Paketmanager kann jetzt mit der Shizuku-API integriert werden, um erweiterte Aufgaben durchzuführen. Wenn Sie mit der Shizuku-Integration fortfahren möchten, erteilen Sie bitte die Erlaubnis (einmalig), indem Sie auf die unten angegebene Schaltfläche klicken."</string>
 </resources>

@@ -79,7 +79,10 @@
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
-    <string name="uninstall_warning">"Sakın unutmayın: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!\n\n*** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***\n"</string>
+    <string name="uninstall_warning">"Sakın unutmayın: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!
+
+        *** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***
+        "</string>
     <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>
@@ -98,7 +101,7 @@
     <string name="share_app_Summary">"Arkadaşlarınızı Package Manager kullanmaya davet edin"</string>
     <string name="source_code_summary">"Package Manager, geliştirici topluluğundan gelecek katkılara açık olan açık kaynaklı bir uygulamadır. Kaynak koduna bakmak için buraya tıklayınız!"</string>
     <string name="support_summary">"Telegram destek grubuna katılın"</string>
-    <string name="batch_options">"Toplu İşlem Seçenekleri (%s)"</string>
+    <string name="batch_options">"Toplu İşlem Seçenekleri"</string>
     <string name="batch_list_added">"%s toplu işlem listesine eklendi"</string>
     <string name="batch_list_export">"Seçili uygulamayı(ları) cihaz depolamasına aktarmak istediğinize emin misiniz?"</string>
     <string name="batch_list_removed">"%s toplu işlem listesinden kaldırıldı"</string>
@@ -176,4 +179,13 @@
     <string name="bundle_install_question">"Seçilen toplu uygulama paketini yüklemek istediğine emin misiniz?"</string>
     <string name="preparing_message">"Hazırlanıyor…"</string>
     <string name="save_to_downloads">"İndirilenler'e kaydet"</string>
+    <string name="android_version">"Android %s"</string>
+    <string name="sdk_compile">"SDK Derleme: %s"</string>
+    <string name="sdk_minimum">"Minimum SDK: %s"</string>
+    <string name="update">"Güncelle"</string>
+    <string name="reload">"Tekrar yükle"</string>
+    <string name="disable_failed_message">"%s bileşeninin durumu değiştirilemedi."</string>
+    <string name="never_show">"Bir daha gösterme"</string>
+    <string name="request">"Talep"</string>
+    <string name="shizuku_integration_message">"PAcket Manager artık gelişmiş görevleri gerçekleştirmek için Shizuku API ile entegre olabilir. Shizuku entegrasyonuna devam etmek istiyorsanız, lütfen aşağıda sağlanan düğmeye tıklayarak (bir defalık) izin verin."</string>
 </resources>

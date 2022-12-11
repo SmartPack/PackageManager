@@ -81,7 +81,7 @@
     <string name="uninstall_title">"Biztosan eltávolítja a(z) %s -t?"</string>
     <string name="uninstall_warning">"Kérjük vegye figyelembe: A rendszeralkalmazások eltávolítása néha veszélyes lehet
 
-        ***<b>HASZNÁLJA FELELŐSÉGGEL</b>***
+        *** <b>HASZNÁLJA FELELŐSÉGGEL</b> ***
         "</string>
     <string name="version">"Verzió: %s"</string>
     <string name="welcome_message">"Üdvözöljük a Package Managerben, amely egy egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez."</string>
@@ -145,7 +145,7 @@
     <string name="size">"Méret"</string>
     <string name="time_installed">"Telepítés ideje"</string>
     <string name="time_updated">"Frissítés ideje"</string>
-    <string name="copyright">"Szerzőijog: © %s"</string>
+    <string name="copyright">"Szerzői jog: © %s"</string>
     <string name="export_details">"Részletek exportálása"</string>
     <string name="export_details_message">"Az App részletei mint %s lett exportálva"</string>
     <string name="fdroid">"F-Droid"</string>
@@ -184,4 +184,8 @@
     <string name="sdk_minimum">"Minimum SDK: %s"</string>
     <string name="update">"Frissítés"</string>
     <string name="reload">"Újratöltés"</string>
+    <string name="disable_failed_message">"%s komponens állapotát mem sikerült megváltoztatni."</string>
+    <string name="never_show">"Ne mutassa"</string>
+    <string name="request">"Kérés"</string>
+    <string name="shizuku_integration_message">"A Package Manager most már integrálhatja a Shizuku API-t a fejlett feladatok elvégzéséhez. Ha használni szeretné a Shizuku integrációt, kérjük adja meg az engedélyt (egyszeri) az alábbi gombra kattintva."</string>
 </resources>
