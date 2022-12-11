@@ -30,7 +30,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewUninstalledAppsAdapter;
+import com.smartpack.packagemanager.adapters.UninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
@@ -54,7 +54,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
     private MaterialTextView mTitle;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
-    private RecycleViewUninstalledAppsAdapter mRecycleViewAdapter;
+    private UninstalledAppsAdapter mRecycleViewAdapter;
     private String mSearchText = null;
 
     @Override
@@ -72,7 +72,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecycleViewAdapter = new RecycleViewUninstalledAppsAdapter(getData(this));
+        mRecycleViewAdapter = new UninstalledAppsAdapter(getData(this));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) ->
@@ -166,7 +166,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new RecycleViewUninstalledAppsAdapter(getData(UninstalledAppsActivity.this));
+                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(UninstalledAppsActivity.this));
             }
 
             @Override

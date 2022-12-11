@@ -37,24 +37,24 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
  */
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
+public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapter.ViewHolder> {
 
     private static List<RecycleViewItem> data;
 
-    public RecycleViewAdapter (List<RecycleViewItem> data) {
-        RecycleViewAdapter.data = data;
+    public PackageTasksAdapter(List<RecycleViewItem> data) {
+        PackageTasksAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PackageTasksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view, parent, false);
         return new ViewHolder(rowItem);
     }
 
     @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PackageTasksAdapter.ViewHolder holder, int position) {
         if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
             return;
         }

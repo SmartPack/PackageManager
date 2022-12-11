@@ -29,25 +29,25 @@ import java.util.List;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-public class RecycleViewPermissionsAdapter extends RecyclerView.Adapter<RecycleViewPermissionsAdapter.ViewHolder> {
+public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.ViewHolder> {
 
     private static List<PermissionsItems> mData;
     private static final RootShell mRootShell = new RootShell();
     private static final ShizukuShell mShizukuShell = new ShizukuShell();
 
-    public RecycleViewPermissionsAdapter(List<PermissionsItems> data) {
-        RecycleViewPermissionsAdapter.mData = data;
+    public PermissionsAdapter(List<PermissionsItems> data) {
+        PermissionsAdapter.mData = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewPermissionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PermissionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
-        return new RecycleViewPermissionsAdapter.ViewHolder(rowItem);
+        return new PermissionsAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewPermissionsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PermissionsAdapter.ViewHolder holder, int position) {
         holder.mTitle.setTextColor(Utils.getThemeAccentColor(holder.mTitle.getContext()));
         holder.mTitle.setText(mData.get(position).getTitle().replace("android.permission.",""));
         holder.mDescription.setText(mData.get(position).getDescription());

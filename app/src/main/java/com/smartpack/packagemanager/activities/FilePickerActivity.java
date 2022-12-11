@@ -33,7 +33,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewFilePickerAdapter;
+import com.smartpack.packagemanager.adapters.FilePickerAdapter;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
@@ -60,7 +60,7 @@ public class FilePickerActivity extends AppCompatActivity {
     private MaterialTextView mTitle;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
-    private RecycleViewFilePickerAdapter mRecycleViewAdapter;
+    private FilePickerAdapter mRecycleViewAdapter;
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -102,7 +102,7 @@ public class FilePickerActivity extends AppCompatActivity {
         }
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
-        mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(this, true));
+        mRecycleViewAdapter = new FilePickerAdapter(FilePicker.getData(this, true));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard) : new File(Common.getPath()).getName());
@@ -200,7 +200,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new RecycleViewFilePickerAdapter(FilePicker.getData(activity, true));
+                mRecycleViewAdapter = new FilePickerAdapter(FilePicker.getData(activity, true));
             }
 
             @Override

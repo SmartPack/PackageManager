@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewManifestAdapter;
+import com.smartpack.packagemanager.adapters.ManifestAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -56,7 +56,7 @@ public class TextViewActivity extends AppCompatActivity {
         if (mPath != null) {
             mTitle.setText(new File(mPath).getName());
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mRecyclerView.setAdapter(new RecycleViewManifestAdapter(getData()));
+            mRecyclerView.setAdapter(new ManifestAdapter(getData()));
         }
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)

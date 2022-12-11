@@ -27,23 +27,23 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on April 01, 2021
  */
-public class RecycleViewManifestAdapter extends RecyclerView.Adapter<RecycleViewManifestAdapter.ViewHolder> {
+public class ManifestAdapter extends RecyclerView.Adapter<ManifestAdapter.ViewHolder> {
 
     private static List<String> data;
 
-    public RecycleViewManifestAdapter(List<String> data) {
-        RecycleViewManifestAdapter.data = data;
+    public ManifestAdapter(List<String> data) {
+        ManifestAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewManifestAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ManifestAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_textview, parent, false);
-        return new RecycleViewManifestAdapter.ViewHolder(rowItem);
+        return new ManifestAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewManifestAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ManifestAdapter.ViewHolder holder, int position) {
         holder.mNumber.setText(String.valueOf(position + 1));
         holder.mText.setText(data.get(position));
         if (data.get(position).contains("<manifest") || data.get(position).contains("</manifest>")) {

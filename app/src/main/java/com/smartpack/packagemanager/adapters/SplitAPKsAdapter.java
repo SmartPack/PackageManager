@@ -35,24 +35,24 @@ import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-public class RecycleViewSplitAPKsAdapter extends RecyclerView.Adapter<RecycleViewSplitAPKsAdapter.ViewHolder> {
+public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.ViewHolder> {
 
     private static List<String> data;
 
-    public RecycleViewSplitAPKsAdapter(List<String> data) {
-        RecycleViewSplitAPKsAdapter.data = data;
+    public SplitAPKsAdapter(List<String> data) {
+        SplitAPKsAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewSplitAPKsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SplitAPKsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_apks, parent, false);
-        return new RecycleViewSplitAPKsAdapter.ViewHolder(rowItem);
+        return new SplitAPKsAdapter.ViewHolder(rowItem);
     }
 
     @SuppressLint("StringFormatInvalid")
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewSplitAPKsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
         holder.mSize.setText(sAPKUtils.getAPKSize(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position)));

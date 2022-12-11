@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewSettingsAdapter;
+import com.smartpack.packagemanager.adapters.SettingsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.Billing;
 import com.smartpack.packagemanager.utils.RecycleSettingsItem;
@@ -63,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
         mCopyright.setText(getString(R.string.copyright, "2022-2023, sunilpaulmathew"));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        RecycleViewSettingsAdapter mRecycleViewAdapter = new RecycleViewSettingsAdapter(mData);
+        SettingsAdapter mRecycleViewAdapter = new SettingsAdapter(mData);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mAppInfo.setOnClickListener(v -> {

@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewPermissionsAdapter;
+import com.smartpack.packagemanager.adapters.PermissionsAdapter;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
@@ -38,7 +38,7 @@ public class PermissionsFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RecycleViewPermissionsAdapter mRecycleViewAdapter = new RecycleViewPermissionsAdapter(APKData.getPermissions()
+        PermissionsAdapter mRecycleViewAdapter = new PermissionsAdapter(APKData.getPermissions()
                 != null ? APKData.getPermissions() : PackageDetails.getPermissions(Common.getApplicationID(), requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 

@@ -41,26 +41,26 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
  */
-public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<RecycleViewExportedAppsAdapter.ViewHolder> {
+public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapter.ViewHolder> {
 
     private static List<String> data;
 
     private static ClickListener mClickListener;
 
-    public RecycleViewExportedAppsAdapter(List<String> data) {
-        RecycleViewExportedAppsAdapter.data = data;
+    public ExportedAppsAdapter(List<String> data) {
+        ExportedAppsAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewExportedAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ExportedAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_apks, parent, false);
-        return new RecycleViewExportedAppsAdapter.ViewHolder(rowItem);
+        return new ExportedAppsAdapter.ViewHolder(rowItem);
     }
 
     @SuppressLint({"StringFormatInvalid", "NotifyDataSetChanged"})
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewExportedAppsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ExportedAppsAdapter.ViewHolder holder, int position) {
         if (data.get(position).endsWith(".apk")) {
             if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
                 holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
@@ -147,7 +147,7 @@ public class RecycleViewExportedAppsAdapter extends RecyclerView.Adapter<Recycle
     }
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecycleViewExportedAppsAdapter.mClickListener = clickListener;
+        ExportedAppsAdapter.mClickListener = clickListener;
     }
 
     public interface ClickListener {

@@ -46,7 +46,7 @@ import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
 import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.activities.UninstalledAppsActivity;
-import com.smartpack.packagemanager.adapters.RecycleViewAdapter;
+import com.smartpack.packagemanager.adapters.PackageTasksAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.Flavor;
@@ -85,7 +85,7 @@ public class PackageTasksFragment extends Fragment {
     private MaterialTextView mAppTitle, mBatchOptionTitle;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
-    private RecycleViewAdapter mRecycleViewAdapter;
+    private PackageTasksAdapter mRecycleViewAdapter;
     private RootShell mRootShell = null;
     private ShizukuShell mShizukuShell = null;
 
@@ -409,7 +409,7 @@ public class PackageTasksFragment extends Fragment {
                         @Override
                         public void doInBackground() {
                             PackageData.setRawData(activity);
-                            mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
+                            mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity));
                         }
 
                         @Override
@@ -458,6 +458,7 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.show();
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void batchOptionsMenu(Activity activity) {
         PopupMenu popupMenu = new PopupMenu(activity, mBatchOptions);
         Menu menu = popupMenu.getMenu();
@@ -636,7 +637,7 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new RecycleViewAdapter(PackageData.getData(activity));
+                mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity));
             }
 
             @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})

@@ -25,24 +25,24 @@ import java.util.List;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-public class RecycleViewActivitiesAdapter extends RecyclerView.Adapter<RecycleViewActivitiesAdapter.ViewHolder> {
+public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.ViewHolder> {
 
     private static List<ActivityInfo> data;
 
-    public RecycleViewActivitiesAdapter(List<ActivityInfo> data) {
-        RecycleViewActivitiesAdapter.data = data;
+    public ActivitiesAdapter(List<ActivityInfo> data) {
+        ActivitiesAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewActivitiesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ActivitiesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_activities, parent, false);
-        return new RecycleViewActivitiesAdapter.ViewHolder(rowItem);
+        return new ActivitiesAdapter.ViewHolder(rowItem);
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewActivitiesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ActivitiesAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position).name);
     }
 

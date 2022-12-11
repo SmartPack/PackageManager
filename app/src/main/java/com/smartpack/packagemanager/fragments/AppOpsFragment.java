@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewAppOpsAdapter;
+import com.smartpack.packagemanager.adapters.AppOpsAdapter;
 import com.smartpack.packagemanager.utils.AppOps;
 
 /*
@@ -39,7 +39,7 @@ public class AppOpsFragment extends Fragment {
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        RecycleViewAppOpsAdapter mRecycleViewAdapter = new RecycleViewAppOpsAdapter(AppOps.getOps(requireActivity()));
+        AppOpsAdapter mRecycleViewAdapter = new AppOpsAdapter(AppOps.getOps(requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;

@@ -29,25 +29,25 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
-public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewExploreAdapter.ViewHolder> {
+public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAdapter.ViewHolder> {
 
     private static ClickListener clickListener;
 
     private static List<String> data;
 
-    public RecycleViewExploreAdapter(List<String> data) {
-        RecycleViewExploreAdapter.data = data;
+    public PackageExploreAdapter(List<String> data) {
+        PackageExploreAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewExploreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PackageExploreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_packageexplorer, parent, false);
-        return new RecycleViewExploreAdapter.ViewHolder(rowItem);
+        return new PackageExploreAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewExploreAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PackageExploreAdapter.ViewHolder holder, int position) {
         if (position == 0) {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
@@ -98,7 +98,7 @@ public class RecycleViewExploreAdapter extends RecyclerView.Adapter<RecycleViewE
     }
 
     public static void setOnItemClickListener(ClickListener clickListener) {
-        RecycleViewExploreAdapter.clickListener = clickListener;
+        PackageExploreAdapter.clickListener = clickListener;
     }
 
     public interface ClickListener {

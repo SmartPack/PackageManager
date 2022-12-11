@@ -28,25 +28,25 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleViewSettingsAdapter.ViewHolder> {
+public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
 
     private static ArrayList<RecycleSettingsItem> data;
 
     private static ClickListener mClickListener;
 
-    public RecycleViewSettingsAdapter(ArrayList<RecycleSettingsItem> data) {
-        RecycleViewSettingsAdapter.data = data;
+    public SettingsAdapter(ArrayList<RecycleSettingsItem> data) {
+        SettingsAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewSettingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SettingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_settings, parent, false);
-        return new RecycleViewSettingsAdapter.ViewHolder(rowItem);
+        return new SettingsAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewSettingsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SettingsAdapter.ViewHolder holder, int position) {
         if (data.get(position).getTitle() != null) {
             holder.mTitle.setText(data.get(position).getTitle());
         }
@@ -102,7 +102,7 @@ public class RecycleViewSettingsAdapter extends RecyclerView.Adapter<RecycleView
     }
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecycleViewSettingsAdapter.mClickListener = clickListener;
+        SettingsAdapter.mClickListener = clickListener;
     }
 
     public interface ClickListener {

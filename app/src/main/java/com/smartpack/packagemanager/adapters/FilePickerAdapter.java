@@ -31,25 +31,25 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
  */
-public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleViewFilePickerAdapter.ViewHolder> {
+public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.ViewHolder> {
 
     private static ClickListener clickListener;
 
     private final List<String> data;
 
-    public RecycleViewFilePickerAdapter(List<String> data) {
+    public FilePickerAdapter(List<String> data) {
         this.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewFilePickerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FilePickerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_filepicker, parent, false);
-        return new RecycleViewFilePickerAdapter.ViewHolder(rowItem);
+        return new FilePickerAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewFilePickerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FilePickerAdapter.ViewHolder holder, int position) {
         if (position == 0) {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
@@ -120,7 +120,7 @@ public class RecycleViewFilePickerAdapter extends RecyclerView.Adapter<RecycleVi
     }
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecycleViewFilePickerAdapter.clickListener = clickListener;
+        FilePickerAdapter.clickListener = clickListener;
     }
 
     public interface ClickListener {

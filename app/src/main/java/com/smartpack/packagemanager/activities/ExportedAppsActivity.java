@@ -34,7 +34,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewExportedAppsAdapter;
+import com.smartpack.packagemanager.adapters.ExportedAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.Flavor;
@@ -58,7 +58,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
     private LinearLayout mProgressLayout;
     private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
-    private RecycleViewExportedAppsAdapter mRecycleViewAdapter;
+    private ExportedAppsAdapter mRecycleViewAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -206,7 +206,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
     }
 
     private void loadUI() {
-        mRecycleViewAdapter = new RecycleViewExportedAppsAdapter(Downloads.getData(this));
+        mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(this));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
     }
 

@@ -35,23 +35,23 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  * Created by Lennoard <lennoardrai@gmail.com> on Mar 14, 2021
  * Modified by sunilpaulmathew <sunil.kde@gmail.com> on Mar 17, 2021
  */
-public class RecycleViewAppOpsAdapter extends RecyclerView.Adapter<RecycleViewAppOpsAdapter.ViewHolder> {
+public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder> {
 
     private static ArrayList<RecycleViewAppOpsItem> data;
 
-    public RecycleViewAppOpsAdapter(ArrayList<RecycleViewAppOpsItem> data) {
-        RecycleViewAppOpsAdapter.data = data;
+    public AppOpsAdapter(ArrayList<RecycleViewAppOpsItem> data) {
+        AppOpsAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewAppOpsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AppOpsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
-        return new RecycleViewAppOpsAdapter.ViewHolder(rowItem);
+        return new AppOpsAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewAppOpsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AppOpsAdapter.ViewHolder holder, int position) {
         holder.mTitle.setText(data.get(position).getTitle().toUpperCase(Locale.getDefault()));
         holder.mDescription.setText(data.get(position).getDescription());
         holder.mCheckBox.setChecked(data.get(position).isEnabled());

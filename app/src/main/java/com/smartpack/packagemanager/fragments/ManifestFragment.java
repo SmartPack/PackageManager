@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewManifestAdapter;
+import com.smartpack.packagemanager.adapters.ManifestAdapter;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -41,7 +41,7 @@ public class ManifestFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        mRecyclerView.setAdapter(new RecycleViewManifestAdapter(getData()));
+        mRecyclerView.setAdapter(new ManifestAdapter(getData()));
 
         return mRootView;
     }

@@ -25,25 +25,25 @@ import java.util.List;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 10, 2021
  */
-public class RecycleViewUninstalledAppsAdapter extends RecyclerView.Adapter<RecycleViewUninstalledAppsAdapter.ViewHolder> {
+public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledAppsAdapter.ViewHolder> {
 
     private static List<String> data;
 
     private static ClickListener mClickListener;
 
-    public RecycleViewUninstalledAppsAdapter(List<String> data) {
-        RecycleViewUninstalledAppsAdapter.data = data;
+    public UninstalledAppsAdapter(List<String> data) {
+        UninstalledAppsAdapter.data = data;
     }
 
     @NonNull
     @Override
-    public RecycleViewUninstalledAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UninstalledAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_uninstlled_apps, parent, false);
-        return new RecycleViewUninstalledAppsAdapter.ViewHolder(rowItem);
+        return new UninstalledAppsAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewUninstalledAppsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UninstalledAppsAdapter.ViewHolder holder, int position) {
         holder.mTitle.setText(data.get(position));
         holder.mCheckBox.setChecked(Common.getRestoreList().contains(data.get(position)));
         holder.mCheckBox.setOnClickListener(v -> {
@@ -79,7 +79,7 @@ public class RecycleViewUninstalledAppsAdapter extends RecyclerView.Adapter<Recy
     }
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecycleViewUninstalledAppsAdapter.mClickListener = clickListener;
+        UninstalledAppsAdapter.mClickListener = clickListener;
     }
 
     public interface ClickListener {

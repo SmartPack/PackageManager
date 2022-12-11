@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.RecycleViewExploreAdapter;
+import com.smartpack.packagemanager.adapters.PackageExploreAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageData;
@@ -44,7 +44,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
     private MaterialTextView mTitle;
     private RecyclerView mRecyclerView;
-    private RecycleViewExploreAdapter mRecycleViewAdapter;
+    private PackageExploreAdapter mRecycleViewAdapter;
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -67,7 +67,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
         try {
-            mRecycleViewAdapter = new RecycleViewExploreAdapter(FilePicker.getData(this, false));
+            mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(this, false));
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         } catch (NullPointerException ignored) {
             mRecyclerView.setVisibility(View.GONE);
@@ -75,7 +75,7 @@ public class PackageExploreActivity extends AppCompatActivity {
             mError.setVisibility(View.VISIBLE);
         }
 
-        RecycleViewExploreAdapter.setOnItemClickListener((position, v) -> {
+        PackageExploreAdapter.setOnItemClickListener((position, v) -> {
             String mPath = FilePicker.getData(this, false).get(position);
             if (position == 0) {
                 onBackPressed();
@@ -126,7 +126,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new RecycleViewExploreAdapter(FilePicker.getData(activity, false));
+                mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(activity, false));
             }
 
             @Override
