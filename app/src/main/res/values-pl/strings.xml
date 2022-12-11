@@ -183,4 +183,9 @@
     <string name="sdk_compile">"SDK kompilacji: %s"</string>
     <string name="sdk_minimum">"Minimalne SDK: %s"</string>
     <string name="update">"Zaktualizuj"</string>
+    <string name="reload">"Odśwież"</string>
+    <string name="disable_failed_message">"Nie udało się zmienić stanu komponentu %s"</string>
+    <string name="never_show">"Nigdy nie pokazuj"</string>
+    <string name="request">"Przyznaj"</string>
+    <string name="shizuku_integration_message">"Menedżer pakietów może teraz integrować się z interfejsem API Shizuku w celu wykonywania zaawansowanych zadań. Jeśli chcesz skorzystać z integracji z Shizuku, przyznaj uprawnienie (jednorazowo), naciskając poniższy przycisk."</string>
 </resources>
