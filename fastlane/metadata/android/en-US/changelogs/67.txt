@@ -1,0 +1,5 @@
+* Allow tweaking permissions on Root or Shizuku supported devices.
+* Improved APK picker.
+* Improved manifest view.
+* Updated translations.
+* Miscellaneous changes.

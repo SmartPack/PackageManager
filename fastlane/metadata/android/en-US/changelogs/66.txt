@@ -1,6 +1,0 @@
-* Integrated with Shizuku API.
-* Improved APK installer.
-* Improved reload option.
-* Added Arabic and updated other translations.
-* Updated build tools.
-* Miscellaneous changes.

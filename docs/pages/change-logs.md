@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 62. [v6.7](https://github.com/SmartPack/PackageManager/releases/tag/v6.7) *(December 12, 2022)*
+- Allow tweaking permissions on Root or Shizuku supported devices.
+- Improved APK picker.
+- Improved manifest view.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 61. [v6.6](https://github.com/SmartPack/PackageManager/releases/tag/v6.6) *(July 09, 2022)*
 - Integrated with Shizuku API.
 - Improved APK installer.
