@@ -131,6 +131,8 @@ public class AppSettings {
                 return activity.getString(R.string.language_pl);
             case "it":
                 return activity.getString(R.string.language_it);
+            case "ar":
+                return activity.getString(R.string.language_ar);
             default:
                 return activity.getString(R.string.language_default) + " (" + java.util.Locale.getDefault().getLanguage() + ")";
         }
@@ -197,7 +199,8 @@ public class AppSettings {
                 context.getString(R.string.language_zh),
                 context.getString(R.string.language_hu),
                 context.getString(R.string.language_pl),
-                context.getString(R.string.language_it)
+                context.getString(R.string.language_it),
+                context.getString(R.string.language_ar)
         };
     }
 
@@ -319,6 +322,12 @@ public class AppSettings {
                     case 18:
                         if (!sUtils.getLanguage(activity).equals("it")) {
                             sUtils.saveString("appLanguage", "it", activity);
+                            Utils.restartApp(activity);
+                        }
+                        break;
+                    case 19:
+                        if (!sUtils.getLanguage(activity).equals("ar")) {
+                            sUtils.saveString("appLanguage", "ar", activity);
                             Utils.restartApp(activity);
                         }
                         break;
