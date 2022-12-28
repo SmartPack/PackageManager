@@ -27,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -273,16 +275,15 @@ public class PackageTasksFragment extends Fragment {
         loadUI(requireActivity());
     }
 
-    private void uninstallUserApp() {
-        Intent remove = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + Common.getBatchList().get(0)));
+    private void uninstallUserApp(String packageName) {
+        Intent remove = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + packageName));
         remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-        startActivityForResult(remove, 0);
-        Common.reloadPage(true);
+        uninstallApps.launch(remove);
     }
 
     private void handleUninstallEvent() {
         if (Common.getBatchList().size() > 0) {
-            uninstallUserApp();
+            uninstallUserApp(Common.getBatchList().get(0));
         } else {
             loadUI(requireActivity());
         }
@@ -430,10 +431,10 @@ public class PackageTasksFragment extends Fragment {
                             activity.startActivity(filePicker);
                         } else {
                             Intent installer = new Intent(Intent.ACTION_GET_CONTENT);
-                            installer.setType("*/*");
+                            installer.setType("application/*");
                             installer.addCategory(Intent.CATEGORY_OPENABLE);
                             installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                            startActivityForResult(installer, 2);
+                            installApp.launch(installer);
                         }
                     } else {
                         Intent installer = new Intent(activity, InstallerInstructionsActivity.class);
@@ -501,7 +502,7 @@ public class PackageTasksFragment extends Fragment {
                                 PackageTasks.batchUninstallTask(activity));
                         uninstall.show();
                     } else {
-                        uninstallUserApp();
+                        uninstallUserApp(Common.getBatchList().get(0));
                     }
                     break;
                 case 2:
@@ -660,75 +661,63 @@ public class PackageTasksFragment extends Fragment {
         }.execute();
     }
 
-    @SuppressLint("StringFormatInvalid")
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    Uri uriFile = data.getData();
 
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            if (requestCode == 2) {
-                Uri uriFile = data.getData();
-
-                if (data.getClipData() != null) {
-                    SplitAPKInstaller.handleMultipleAPKs(data.getClipData(), requireActivity()).execute();
-                } else if (uriFile != null) {
-                    SplitAPKInstaller.handleSingleInstallationEvent(uriFile, requireActivity()).execute();
+                    if (data.getClipData() != null) {
+                        SplitAPKInstaller.handleMultipleAPKs(data.getClipData(), requireActivity()).execute();
+                    } else if (uriFile != null) {
+                        SplitAPKInstaller.handleSingleInstallationEvent(uriFile, requireActivity()).execute();
+                    }
                 }
-            } else {
-                if (requestCode == 1) {
-                    new sExecutor() {
+            }
+    );
 
-                        @Override
-                        public void onPreExecute() {
-                        }
-
-                        @Override
-                        public void doInBackground() {
-                            try {
-                                for (RecycleViewItem item : PackageData.getRawData()) {
-                                    if (item.getPackageName().equals(Common.getApplicationID())) {
-                                        PackageData.getRawData().remove(item);
-                                    }
-                                }
-                            } catch (ConcurrentModificationException ignored) {}
-                        }
-
-                        @Override
-                        public void onPostExecute() {
-                            loadUI(requireActivity());
-                        }
-                    }.execute();
-                } else if (requestCode == 0) {
+    @SuppressLint("StringFormatInvalid")
+    ActivityResultLauncher<Intent> uninstallApps = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
                     // If uninstallation succeed
                     try {
                         for (RecycleViewItem item : PackageData.getRawData()) {
-                            if (item.getPackageName().equals(Common.getBatchList().get(0))) {
+                            if (item.getPackageName().equals(Common.isUninstall() ? Common.getApplicationID() : Common.getBatchList().get(0))) {
                                 PackageData.getRawData().remove(item);
-                                Common.getBatchList().remove(0);
+                                if (!Common.isUninstall()) {
+                                    Common.getBatchList().remove(0);
+                                }
                                 if (!Common.reloadPage()) Common.reloadPage(true);
                             }
                         }
                     } catch (ConcurrentModificationException ignored) {}
-                    handleUninstallEvent();
+                    if (Common.isUninstall()) {
+                        Common.isUninstall(false);
+                        loadUI(requireActivity());
+                    } else {
+                        handleUninstallEvent();
+                    }
+                } else {
+                    if (Common.isUninstall()) {
+                        Common.isUninstall(false);
+                    } else {
+                        // If uninstallation cancelled or failed
+                        sUtils.snackBar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity()))).show();
+                        Common.getBatchList().remove(0);
+                        handleUninstallEvent();
+                    }
                 }
             }
-        } else if (requestCode == 0) {
-            // If uninstallation cancelled or failed
-            sUtils.snackBar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity()))).show();
-            Common.getBatchList().remove(0);
-            handleUninstallEvent();
-        }
-    }
+    );
 
     @Override
     public void onStart() {
         super.onStart();
         if (Common.isUninstall()) {
-            Intent remove = new Intent(Intent.ACTION_DELETE);
-            remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-            remove.setData(Uri.parse("package:" + Common.getApplicationID()));
-            startActivityForResult(remove, 1);
-            Common.isUninstall(false);
+            uninstallUserApp(Common.getApplicationID());
         } else if (Common.reloadPage()) {
             Common.reloadPage(false);
             loadUI(requireActivity());
