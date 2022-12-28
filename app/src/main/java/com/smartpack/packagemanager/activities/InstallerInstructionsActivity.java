@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -59,27 +61,25 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
                 installer.setType("*/*");
                 installer.addCategory(Intent.CATEGORY_OPENABLE);
                 installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                startActivityForResult(installer, 0);
+                installApp.launch(installer);
             }
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    Uri uriFile = data.getData();
 
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            if (requestCode == 0) {
-                Uri uriFile = data.getData();
-
-                if (data.getClipData() != null) {
-                    SplitAPKInstaller.handleMultipleAPKs(data.getClipData(), this).execute();
-                } else if (uriFile != null) {
-                    SplitAPKInstaller.handleSingleInstallationEvent(uriFile, this).execute();
+                    if (data.getClipData() != null) {
+                        SplitAPKInstaller.handleMultipleAPKs(data.getClipData(), this).execute();
+                    } else if (uriFile != null) {
+                        SplitAPKInstaller.handleSingleInstallationEvent(uriFile, this).execute();
+                    }
                 }
-                finish();
             }
-        }
-    }
+    );
 
 }
