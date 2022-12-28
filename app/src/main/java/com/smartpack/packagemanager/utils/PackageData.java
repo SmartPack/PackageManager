@@ -149,7 +149,7 @@ public class PackageData {
             if (s != null && !s.isEmpty())
                 sb.append(" - ").append(s.replaceAll(","," ")).append("\n");
         }
-        return "\n" + sb.toString();
+        return "\n" + sb;
     }
 
     public static List<RecycleViewItem> getRawData() {

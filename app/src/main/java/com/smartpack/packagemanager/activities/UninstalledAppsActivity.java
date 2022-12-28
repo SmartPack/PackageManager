@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -57,6 +58,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
     private UninstalledAppsAdapter mRecycleViewAdapter;
     private String mSearchText = null;
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

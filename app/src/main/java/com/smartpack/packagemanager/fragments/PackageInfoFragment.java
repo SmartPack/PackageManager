@@ -10,7 +10,6 @@ package com.smartpack.packagemanager.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -37,7 +36,6 @@ import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.RecycleViewItem;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
@@ -249,21 +247,6 @@ public class PackageInfoFragment extends Fragment {
         });
 
         return mRootView;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 0 && data != null && resultCode == Activity.RESULT_OK) {
-            for (RecycleViewItem item : PackageData.getRawData()) {
-                if (item.getPackageName().equals(Common.getApplicationID())) {
-                    PackageData.getRawData().remove(item);
-                }
-            }
-            Common.reloadPage(true);
-            requireActivity().finish();
-        }
     }
 
 }

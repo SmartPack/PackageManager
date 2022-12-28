@@ -23,7 +23,7 @@ public class AppOps {
 
     public static ArrayList<RecycleViewAppOpsItem> getOps(Context context) {
         ArrayList<RecycleViewAppOpsItem> mData = new ArrayList<>();
-        String[] appOpsList = null;
+        String[] appOpsList;
         if (new RootShell().rootAccess()) {
             appOpsList = new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
                     Common.getApplicationID()).trim().split("\\r?\\n");
