@@ -78,7 +78,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
         }
         holder.mTitle.setTextColor(sUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
-        holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
+        holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
         holder.mAction.setImageDrawable(sUtils.getDrawable(R.drawable.ic_settings, holder.mAction.getContext()));
         holder.mAction.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);

@@ -104,7 +104,7 @@ public class PackageInfoFragment extends Fragment {
             mAPKSize.setText(getString(R.string.size_bundle, PackageData.getBundleSize(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity()))));
         } else {
             mAPKPathTitle.setText(getString(R.string.apk_path));
-            mAPKSize.setText(getString(R.string.size_apk, sAPKUtils.getAPKSize(Common.getSourceDir())));
+            mAPKSize.setText(getString(R.string.size_apk, sAPKUtils.getAPKSize(new File(Common.getSourceDir()).length())));
         }
         mAPKPath.setText(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity()));
         mOpenApp.setVisibility(sPackageUtils.isEnabled(Common.getApplicationID(), requireActivity()) ? View.VISIBLE : View.GONE);
@@ -191,7 +191,7 @@ public class PackageInfoFragment extends Fragment {
                             sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                         } else {
                             if (!PackageData.getPackageDir(requireActivity()).exists()) {
-                                PackageData.getPackageDir(requireActivity()).mkdirs();
+                                sUtils.mkdir(PackageData.getPackageDir(requireActivity()));
                             }
                             File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + "_" + sAPKUtils.getVersionCode(
                                     sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()) + ".json");

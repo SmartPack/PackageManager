@@ -266,16 +266,14 @@ public class PackageDetails {
     public static List<PermissionsItems> getPermissions(String packageName, Context context) {
         List<PermissionsItems> perms = new ArrayList<>();
         try {
-            try {
-                for (int i = 0; i < Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions.length; i++) {
-                    PackageInfo perm = Objects.requireNonNull(PackageData.getPackageInfo(packageName, context));
-                    perms.add(new PermissionsItems((perm.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0,
-                            perm.requestedPermissions[i], sPermissionUtils.getDescription(perm.requestedPermissions[i]
-                            .replace("android.permission.",""), context)));
-                }
-            } catch (NullPointerException ignored) {
+            for (int i = 0; i < Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions.length; i++) {
+                PackageInfo perm = Objects.requireNonNull(PackageData.getPackageInfo(packageName, context));
+                perms.add(new PermissionsItems((perm.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0,
+                        perm.requestedPermissions[i], sPermissionUtils.getDescription(perm.requestedPermissions[i]
+                        .replace("android.permission.",""), context)));
             }
-        } catch (NullPointerException ignored) {}
+        } catch (NullPointerException ignored) {
+        }
         return perms;
     }
 
@@ -309,7 +307,7 @@ public class PackageDetails {
 
             } else {
                 obj.put("App Bundle", false);
-                obj.put("APK Size", sAPKUtils.getAPKSize(sPackageUtils.getSourceDir(packageName ,context)));
+                obj.put("APK Size", sAPKUtils.getAPKSize(new File(sPackageUtils.getSourceDir(packageName ,context)).length()));
             }
             obj.put("Installed", sPackageUtils.getInstalledDate(packageName, context));
             obj.put("Last updated", sPackageUtils.getUpdatedDate(packageName, context));

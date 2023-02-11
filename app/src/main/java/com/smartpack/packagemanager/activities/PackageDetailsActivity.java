@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.apk.axml.APKParser;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
@@ -73,7 +74,9 @@ public class PackageDetailsActivity extends AppCompatActivity {
         if (PackageDetails.getActivities(Common.getApplicationID(), this).size() > 0) {
             adapter.AddFragment(new ActivitiesFragment(), getString(R.string.activities));
         }
-        adapter.AddFragment(new ManifestFragment(), getString(R.string.manifest));
+        if (new APKParser().getManifest() != null) {
+            adapter.AddFragment(new ManifestFragment(), getString(R.string.manifest));
+        }
 
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);

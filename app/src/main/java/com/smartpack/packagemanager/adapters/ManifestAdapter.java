@@ -48,13 +48,13 @@ public class ManifestAdapter extends RecyclerView.Adapter<ManifestAdapter.ViewHo
         holder.mText.setText(data.get(position));
         if (data.get(position).contains("<manifest") || data.get(position).contains("</manifest>")) {
             holder.mText.setTextColor(Utils.getThemeAccentColor(holder.mText.getContext()));
-        } else if (data.get(position).contains("<uses-permission")) {
+        } else if (data.get(position).trim().matches("<uses-permission|</uses-permission>")) {
             holder.mText.setTextColor(Color.RED);
-        } else if (data.get(position).contains("<activity")) {
+        } else if (data.get(position).trim().matches("<activity|</activity>") || data.get(position).startsWith(".method") || data.get(position).startsWith(".annotation")) {
             holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.GREEN : Color.MAGENTA);
-        } else if (data.get(position).contains("<service")) {
+        } else if (data.get(position).trim().matches("<service|</service>") || data.get(position).startsWith(".end method") || data.get(position).startsWith(".end annotation")) {
             holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.MAGENTA : Color.BLUE);
-        } else if (data.get(position).contains("<provider") || data.get(position).contains("</provider>")) {
+        } else if (data.get(position).trim().matches("<provider|</provider>")) {
             holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.LTGRAY : Color.DKGRAY);
         } else {
             holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.WHITE : Color.BLACK);

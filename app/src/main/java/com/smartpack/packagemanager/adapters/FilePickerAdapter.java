@@ -80,14 +80,14 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
                 }
                 Common.getSelectCard().setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             });
-            holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
+            holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
             holder.mSize.setVisibility(View.VISIBLE);
             holder.mCheckBox.setVisibility(View.VISIBLE);
         } else {
             holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
             holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? sUtils.getColor(R.color.colorWhite, holder.mIcon.getContext()) :
                     sUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
-            holder.mSize.setText(sAPKUtils.getAPKSize(data.get(position)));
+            holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
             holder.mSize.setVisibility(View.VISIBLE);
         }
         holder.mTitle.setText(new File(this.data.get(position)).getName());

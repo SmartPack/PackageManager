@@ -54,8 +54,8 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull SplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
-        holder.mSize.setText(sAPKUtils.getAPKSize(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                .getContext()) + "/" + data.get(position)));
+        holder.mSize.setText(sAPKUtils.getAPKSize(new File(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
+                .getContext()) + "/" + data.get(position)).length()));
         if (sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon

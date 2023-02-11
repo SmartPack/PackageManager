@@ -66,7 +66,7 @@ public class AppSettings {
         mData.add(new sSerializableItems(null, "Srikanth Reddy Lingala", "zip4j", "https://github.com/srikanth-lingala"));
         mData.add(new sSerializableItems(null, "Aefyr", "SAI", "https://github.com/Aefyr/SAI"));
         mData.add(new sSerializableItems(null, "Nitin Kalra", "Split Apk Install", "https://github.com/nkalra0123/"));
-        mData.add(new sSerializableItems(null, "Hsiafan", "apk-parser", "https://github.com/hsiafan/apk-parser"));
+        mData.add(new sSerializableItems(null, "APK Explorer & Editor", "aXML", "https://github.com/apk-editor/aXML"));
         mData.add(new sSerializableItems(null, "Lennoard Silva", "Code Contributions & Portuguese (Brazilian) Translations", "https://github.com/Lennoard"));
         mData.add(new sSerializableItems(null, "Agnieszka C","Code Contributions, Testing & Polish Translations", "https://github.com/Aga-C"));
         mData.add(new sSerializableItems(null, "Toxinpiper", "App Icon", "https://t.me/toxinpiper"));

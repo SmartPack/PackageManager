@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +20,24 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apk.axml.APKParser;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PermissionsAdapter;
-import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
+import com.smartpack.packagemanager.utils.PermissionsItems;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
 public class PermissionsFragment extends Fragment {
+
+    private static final APKParser mAPKParser = new APKParser();
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -38,11 +47,23 @@ public class PermissionsFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        PermissionsAdapter mRecycleViewAdapter = new PermissionsAdapter(APKData.getPermissions()
-                != null ? APKData.getPermissions() : PackageDetails.getPermissions(Common.getApplicationID(), requireActivity()));
+        PermissionsAdapter mRecycleViewAdapter = new PermissionsAdapter(mAPKParser.getPermissions()
+                != null ? getPermissions(requireActivity()) : PackageDetails.getPermissions(Common.getApplicationID(), requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;
+    }
+
+    private List<PermissionsItems> getPermissions(Context context) {
+        List<PermissionsItems> perms = new ArrayList<>();
+        try {
+            for (String permissions : mAPKParser.getPermissions()) {
+                perms.add(new PermissionsItems(false, permissions, sPermissionUtils.getDescription(permissions
+                        .replace("android.permission.",""), context)));
+            }
+        } catch (NullPointerException ignored) {
+        }
+        return perms;
     }
 
 }

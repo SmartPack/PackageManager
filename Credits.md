@@ -6,7 +6,7 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * [topjohnwu](https://github.com/topjohnwu): libsu, the library in which Package Manager depending to handle root related tasks
 * [Srikanth Reddy Lingala](https://github.com/srikanth-lingala): zip4j, the library in which Package Manager depending for zipping/unzipping tasks
 * [Aefyr](https://github.com/Aefyr/) & [nkalra0123](https://github.com/nkalra0123/): a part of Split APK Installer code is taken from their work
-* [Hsiafan](https://github.com/hsiafan/): apk-parser, the library in which Package Manager depending to generate the manifest file of other applications as well as to read binary XML files from APK's
+* [APK Explorer & Editor](https://github.com/apk-editor): aXML, the library in which Package Manager depending to generate the manifest file of other applications as well as to read binary XML files from APK's
 * [Lennoard Silva](https://github.com/Lennoard): contributed code to this project, especially in its early stage of development
 
 ## UI improvements

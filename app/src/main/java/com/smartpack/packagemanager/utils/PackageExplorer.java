@@ -22,17 +22,18 @@ import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.apk.axml.aXMLDecoder;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 
-import net.dongliu.apk.parser.ApkFile;
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
 import java.util.Objects;
+import java.util.zip.ZipFile;
 
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
@@ -62,21 +63,19 @@ public class PackageExplorer {
     }
 
     public static String readManifest(String apk) {
-        try (ApkFile apkFile = new ApkFile(new File(apk))) {
-            String manifest = apkFile.getManifestXml();
-            apkFile.close();
-            return manifest;
-        } catch (IOException ignored) {
+        try (ZipFile zipFile = new ZipFile(apk)) {
+            InputStream inputStream = zipFile.getInputStream(zipFile.getEntry("AndroidManifest.xml"));
+            return new aXMLDecoder().decode(inputStream).trim();
+        } catch (Exception ignored) {
         }
         return null;
     }
 
-    public static String readXMLFromAPK(String apk, String path) {
-        try (ApkFile apkFile = new ApkFile(new File(apk))) {
-            String xnkData = apkFile.transBinaryXml(path);
-            apkFile.close();
-            return xnkData;
-        } catch (IOException ignored) {
+    public static String readXMLFromAPK(String path, Activity activity) {
+        try (FileInputStream inputStream = new FileInputStream(path)) {
+            return new aXMLDecoder().decode(inputStream);
+        } catch (Exception e) {
+            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.failed_decode_xml, new File(path).getName())).show();
         }
         return null;
     }
@@ -127,7 +126,7 @@ public class PackageExplorer {
             public void doInBackground() {
                 File file = new File(dest);
                 try {
-                    OutputStream outStream = new FileOutputStream(file);
+                    FileOutputStream outStream = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
                     outStream.flush();
                     outStream.close();

@@ -18,9 +18,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apk.axml.APKParser;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ManifestAdapter;
-import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
@@ -33,6 +33,8 @@ import java.util.Objects;
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 08, 2021
  */
 public class ManifestFragment extends Fragment {
+
+    private static final APKParser mAPKParser = new APKParser();
 
     @Nullable
     @Override
@@ -47,8 +49,8 @@ public class ManifestFragment extends Fragment {
     }
 
     private List<String> getData() {
-        return new ArrayList<>(Arrays.asList(Objects.requireNonNull(APKData.getManifest() != null
-                ? APKData.getManifest() : PackageExplorer.readManifest(Common.getSourceDir())).split("\\r?\\n")));
+        return new ArrayList<>(Arrays.asList(Objects.requireNonNull(mAPKParser.getManifest() != null
+                ? mAPKParser.getManifest() : PackageExplorer.readManifest(Common.getSourceDir())).split("\\r?\\n")));
     }
 
 }

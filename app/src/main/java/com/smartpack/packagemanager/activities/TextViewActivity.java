@@ -76,7 +76,7 @@ public class TextViewActivity extends AppCompatActivity {
         List<String> mData = new ArrayList<>();
         String text;
         if (Common.getApplicationID() != null && PackageExplorer.isBinaryXML(mPath)) {
-            text = PackageExplorer.readXMLFromAPK(Common.getSourceDir(), mPath.replace(getCacheDir().getPath() + "/apk/", ""));
+            text = PackageExplorer.readXMLFromAPK(mPath, this);
         } else {
             text = sUtils.read(new File(mPath));
         }

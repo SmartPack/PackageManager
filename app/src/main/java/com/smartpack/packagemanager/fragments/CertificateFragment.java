@@ -16,14 +16,16 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.apk.axml.APKParser;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.APKData;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 26, 2022
  */
 public class CertificateFragment extends Fragment {
+
+    private static final APKParser mAPKParser = new APKParser();
 
     @Nullable
     @Override
@@ -32,9 +34,9 @@ public class CertificateFragment extends Fragment {
 
         MaterialTextView mText = mRootView.findViewById(R.id.text);
 
-        if (APKData.getCertificate() != null) {
+        if (mAPKParser.getCertificate() != null) {
             try {
-                mText.setText(APKData.getCertificate());
+                mText.setText(mAPKParser.getCertificate());
             } catch (Exception ignored) {
             }
         }

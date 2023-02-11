@@ -11,13 +11,10 @@ package com.smartpack.packagemanager.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.apk.axml.APKParser;
 import com.smartpack.packagemanager.R;
 
-import net.dongliu.apk.parser.ApkFile;
-import net.dongliu.apk.parser.bean.ApkMeta;
-
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,65 +25,34 @@ import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
  */
 public class APKData {
 
+    private static final APKParser mAPKParser = new APKParser();
     private static File mAPK = null;
-    private static List<PermissionsItems> mPermissions = null;
-    private static String mCertificate = null, mManifest = null, mMinSDKVersion = null, mSDKVersion = null,
-            mSize = null, mVersion = null;
-
-    public static APKItems getAPKData(String apk, Context context) {
-        try (ApkFile apkFile = new ApkFile(new File(apk))) {
-            ApkMeta apkMeta = apkFile.getApkMeta();
-            APKItems mAPKData = new APKItems(apkMeta.getLabel(), apkMeta.getPackageName(),
-                    apkMeta.getVersionName(), PackageExplorer.readManifest(apk),
-                    apkMeta.getCompileSdkVersion(), apkMeta.getMinSdkVersion(),
-                    sAPKUtils.getAPKIcon(apk, context), apkMeta.getVersionCode(),
-                    apkMeta.getUsesPermissions());
-            apkFile.close();
-            return mAPKData;
-        } catch (IOException ignored) {
-        }
-        return null;
-    }
 
     public static File getAPKFile() {
         return mAPK;
     }
 
-    public static List<String> getData() {
+    @SuppressLint("StringFormatInvalid")
+    public static List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
-        try {
-            if (mVersion != null) {
-                mData.add(mVersion);
-            }
-            if (mSDKVersion != null) {
-                mData.add(mSDKVersion);
-            }
-            if (mMinSDKVersion != null) {
-                mData.add(mMinSDKVersion);
-            }
-            if (mSize != null) {
-                mData.add(mSize);
-            }
-        } catch (Exception ignored) {
+        if (mAPKParser.getVersionName() != null) {
+            mData.add(context.getString(R.string.version, mAPKParser.getVersionName() + " (" + mAPKParser.getVersionCode() + ")"));
+        }
+        if (mAPKParser.getCompiledSDKVersion() != null) {
+            mData.add(context.getString(R.string.sdk_compile, sdkToAndroidVersion(mAPKParser.getCompiledSDKVersion(), context)));
+        }
+        if (mAPKParser.getMinSDKVersion() != null) {
+            mData.add(context.getString(R.string.sdk_minimum, sdkToAndroidVersion(mAPKParser.getMinSDKVersion(), context)));
+        }
+        if (mAPKParser.getAPKSize() != Integer.MIN_VALUE) {
+            mData.add(context.getString(R.string.size_apk, sAPKUtils.getAPKSize(mAPKParser.getAPKSize()) + " (" + mAPKParser.getAPKSize() + " bytes)"));
         }
         return mData;
     }
 
-    public static List<PermissionsItems> getPermissions() {
-        return mPermissions;
-    }
-
-    public static String getCertificate() {
-        return mCertificate;
-    }
-
-    public static String getManifest() {
-        return mManifest;
-    }
-
     @SuppressLint("StringFormatInvalid")
     private static String sdkToAndroidVersion(String sdkVersion, Context context) {
-        int sdk = Integer.parseInt(sdkVersion);
+        int sdk = Integer.parseInt(sdkVersion.trim());
         switch (sdk) {
             case 31:
                 return context.getString(R.string.android_version, "12 (S, " + sdkVersion + ")");
@@ -157,36 +123,6 @@ public class APKData {
 
     public static void setAPKFile(File apk) {
         mAPK = apk;
-    }
-
-    public static void setCertificate(String certificate) {
-        mCertificate = certificate;
-    }
-
-    public static void setManifest(String manifest) {
-        mManifest = manifest;
-    }
-
-    @SuppressLint("StringFormatInvalid")
-    public static void setMinSDKVersion(String minSDKVersion, Context context) {
-        mMinSDKVersion = context.getString(R.string.sdk_minimum, sdkToAndroidVersion(minSDKVersion, context));
-    }
-
-    public static void setPermissions(List<PermissionsItems> permissions) {
-        mPermissions = permissions;
-    }
-
-    @SuppressLint("StringFormatInvalid")
-    public static void setSDKVersion(String sdkVersion, Context context) {
-        mSDKVersion = context.getString(R.string.sdk_compile, sdkToAndroidVersion(sdkVersion, context));
-    }
-
-    public static void setSize(String size) {
-        mSize = size;
-    }
-
-    public static void setVersionInfo(String version) {
-        mVersion = version;
     }
 
 }
