@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.viewpager.widget.ViewPager;
 
 import com.apk.axml.APKParser;
@@ -35,6 +36,7 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
 import java.io.File;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
@@ -100,7 +102,8 @@ public class APKPickerActivity extends AppCompatActivity {
                     mFile = APKData.getAPKFile();
                 } else if (uri != null) {
                     sUtils.delete(getExternalFilesDir("APK"));
-                    mFile = new File(getExternalFilesDir("APK"), "APK.apk");
+                    String fileName = Objects.requireNonNull(DocumentFile.fromSingleUri(activity, uri)).getName();
+                    mFile = new File(getExternalFilesDir("APK"), Objects.requireNonNull(fileName));
                 }
                 Common.isAPKPicker(true);
             }

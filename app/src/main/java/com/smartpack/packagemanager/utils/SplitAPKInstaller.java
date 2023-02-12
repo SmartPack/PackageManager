@@ -18,6 +18,8 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.documentfile.provider.DocumentFile;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.APKPickerActivity;
@@ -139,7 +141,6 @@ public class SplitAPKInstaller {
     public static sExecutor handleSingleInstallationEvent(Uri uriFile, Activity activity) {
         return new sExecutor() {
             private File mFile = null;
-            private String mExtension = null;
             private ProgressDialog mProgressDialog;
 
             @Override
@@ -158,8 +159,8 @@ public class SplitAPKInstaller {
 
             @Override
             public void doInBackground() {
-                mExtension = Utils.getExtension(uriFile, activity);
-                mFile = new File(activity.getExternalFilesDir("APK"), "APK." + mExtension);
+                String fileName = Objects.requireNonNull(DocumentFile.fromSingleUri(activity, uriFile)).getName();
+                mFile = new File(activity.getExternalFilesDir("APK"), Objects.requireNonNull(fileName));
                 sUtils.copy(uriFile, mFile, activity);
             }
 
@@ -170,11 +171,11 @@ public class SplitAPKInstaller {
                     mProgressDialog.dismiss();
                 } catch (IllegalArgumentException ignored) {
                 }
-                if (mExtension.equals("apk")) {
+                if (mFile.getName().equals("apk")) {
                     APKData.setAPKFile(mFile);
                     Intent apkDetails = new Intent(activity, APKPickerActivity.class);
                     activity.startActivity(apkDetails);
-                } else if (mExtension.equals("apkm") || mExtension.equals("apks") || mExtension.equals("xapk")) {
+                } else if (mFile.getName().equals("apkm") || mFile.getName().equals("apks") || mFile.getName().equals("xapk")) {
                     new MaterialAlertDialogBuilder(activity)
                             .setIcon(R.mipmap.ic_launcher)
                             .setTitle(R.string.split_apk_installer)
@@ -215,8 +216,8 @@ public class SplitAPKInstaller {
             @Override
             public void doInBackground() {
                 for (int i = 0; i < uriFiles.getItemCount(); i++) {
-                    String mExtension = Utils.getExtension(uriFiles.getItemAt(i).getUri(), activity);
-                    File mFile = new File(activity.getExternalFilesDir("APK"), "APK" + i + "." + mExtension);
+                    String fileName = Objects.requireNonNull(DocumentFile.fromSingleUri(activity, uriFiles.getItemAt(i).getUri())).getName();
+                    File mFile = new File(activity.getExternalFilesDir("APK"), Objects.requireNonNull(fileName));
                     try (FileOutputStream outputStream = new FileOutputStream(mFile, false)) {
                         InputStream inputStream = activity.getContentResolver().openInputStream(uriFiles.getItemAt(i).getUri());
                         int read;
@@ -225,7 +226,7 @@ public class SplitAPKInstaller {
                             outputStream.write(bytes, 0, read);
                         }
                         // In this case, we don't really care about app bundles!
-                        if (Objects.equals(mExtension, "apk")) {
+                        if (mFile.getName().endsWith(".apk")) {
                             Common.getAppList().add(mFile.getAbsolutePath());
                         }
                         inputStream.close();

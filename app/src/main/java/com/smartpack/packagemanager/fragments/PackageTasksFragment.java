@@ -568,7 +568,7 @@ public class PackageTasksFragment extends Fragment {
                         sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                     } else {
                         if (!PackageData.getPackageDir(activity).exists()) {
-                            PackageData.getPackageDir(activity).mkdirs();
+                            sUtils.mkdir(PackageData.getPackageDir(activity));
                         }
                         File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
                         try {

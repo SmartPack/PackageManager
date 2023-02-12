@@ -8,20 +8,16 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.text.Html;
 import android.util.TypedValue;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.MimeTypeMap;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -111,20 +107,6 @@ public class Utils {
         Intent intent = new Intent(activity, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
-    }
-
-    public static String getExtension(Uri uri, Context context) {
-        if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
-            @SuppressLint("Recycle")
-            Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                return   MimeTypeMap.getFileExtensionFromUrl(Environment.getExternalStorageDirectory().toString() + "/Download/" + cursor.getString(nameIndex));
-            }
-        } else {
-            return MimeTypeMap.getFileExtensionFromUrl(uri.getPath());
-        }
-        return null;
     }
 
 }
