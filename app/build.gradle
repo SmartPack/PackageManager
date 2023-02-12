@@ -1,13 +1,17 @@
 apply plugin: 'com.android.application'
 
+def keystoreFile = rootProject.file("app/sp.jks")
+
 android {
 
-    signingConfigs {
-        release {
-            storeFile file("sp.jks")
-            storePassword "smartpack"
-            keyAlias "sp_key1"
-            keyPassword "smartpack"
+    if (keystoreFile.exists()) {
+        signingConfigs {
+            release {
+                storeFile file("sp.jks")
+                storePassword "smartpack"
+                keyAlias "sp_key1"
+                keyPassword "smartpack"
+            }
         }
     }
 
@@ -22,15 +26,15 @@ android {
         versionCode 67
         versionName "v6.7"
         vectorDrawables.useSupportLibrary = true
-        archivesBaseName = "$applicationId-$versionName"
-        signingConfig signingConfigs.release
         testFunctionalTest = false
         testHandleProfiling = false
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            if (keystoreFile.exists()) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
