@@ -9,9 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,23 +17,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.apk.axml.aXMLDecoder;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.activities.PackageExploreActivity;
+import com.smartpack.packagemanager.utils.tasks.CopyToStorageTasks;
+import com.smartpack.packagemanager.utils.tasks.SaveIconTasks;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.zip.ZipFile;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -115,35 +107,7 @@ public class PackageExplorer {
             sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
             return;
         }
-        new sExecutor() {
-
-            @Override
-            public void onPreExecute() {
-                PackageData.makePackageFolder(activity);
-            }
-
-            @Override
-            public void doInBackground() {
-                File file = new File(dest);
-                try {
-                    FileOutputStream outStream = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-                    outStream.flush();
-                    outStream.close();
-                } catch (IOException ignored) {}
-            }
-
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void onPostExecute() {
-                new MaterialAlertDialogBuilder(activity)
-                        .setMessage(Common.getApplicationName() + " icon " +
-                                activity.getString(R.string.export_file_message, Objects.requireNonNull(
-                                        new File(dest).getParentFile()).toString()))
-                        .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
-                        }).show();
-            }
-        }.execute();
+        new SaveIconTasks(bitmap, dest, activity).execute();
     }
 
     public static void copyToStorage(String path, String dest, Activity activity) {
@@ -154,56 +118,7 @@ public class PackageExplorer {
             sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
             return;
         }
-        new sExecutor() {
-
-            @Override
-            public void onPreExecute() {
-                if (!sUtils.exist(new File(dest))) {
-                    sUtils.mkdir(new File(dest));
-                }
-            }
-
-            @Override
-            public void doInBackground() {
-                sUtils.copy(new File(path), new File(dest, new File(path).getName()));
-            }
-
-            @Override
-            public void onPostExecute() {
-                new MaterialAlertDialogBuilder(activity)
-                        .setMessage(new File(path).getName() + " " +
-                                activity.getString(R.string.export_file_message, dest))
-                        .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
-                        }).show();
-            }
-        }.execute();
-    }
-
-    public static void exploreAPK(LinearLayout linearLayout, String path, Activity activity) {
-        new sExecutor() {
-
-            @Override
-            public void onPreExecute() {
-                linearLayout.setVisibility(View.VISIBLE);
-                if (sUtils.exist(new File(activity.getCacheDir().getPath(), "apk"))) {
-                    sUtils.delete(new File(activity.getCacheDir().getPath(), "apk"));
-                }
-                sUtils.mkdir(new File(activity.getCacheDir().getPath(), "apk"));
-                Common.setPath(activity.getCacheDir().getPath() + "/apk");
-            }
-
-            @Override
-            public void doInBackground() {
-                Utils.unzip(path,activity.getCacheDir().getPath() + "/apk");
-            }
-
-            @Override
-            public void onPostExecute() {
-                linearLayout.setVisibility(View.GONE);
-                Intent explorer = new Intent(activity, PackageExploreActivity.class);
-                activity.startActivity(explorer);
-            }
-        }.execute();
+        new CopyToStorageTasks(path, dest, activity).execute();
     }
 
 }

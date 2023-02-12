@@ -26,7 +26,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ImageViewActivity;
 import com.smartpack.packagemanager.activities.PackageDetailsActivity;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.PackageItems;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
@@ -39,9 +39,9 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapter.ViewHolder> {
 
-    private static List<RecycleViewItem> data;
+    private static List<PackageItems> data;
 
-    public PackageTasksAdapter(List<RecycleViewItem> data) {
+    public PackageTasksAdapter(List<PackageItems> data) {
         PackageTasksAdapter.data = data;
     }
 

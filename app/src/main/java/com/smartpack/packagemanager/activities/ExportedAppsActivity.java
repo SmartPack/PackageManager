@@ -38,8 +38,9 @@ import com.smartpack.packagemanager.adapters.ExportedAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.Flavor;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
+import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.io.File;
 import java.util.Objects;
@@ -194,12 +195,12 @@ public class ExportedAppsActivity extends AppCompatActivity {
                 })
                 .setPositiveButton(R.string.install, (dialog, id) -> {
                     if (Downloads.getData(this).get(position).endsWith(".apkm")) {
-                        SplitAPKInstaller.handleAppBundle(mProgressLayout, Downloads.getData(this).get(position), this);
+                        new AppBundleTasks(mProgressLayout, Downloads.getData(this).get(position), this).execute();
                     } else {
                         Common.getAppList().clear();
                         Common.getAppList().add(Downloads.getData(this).get(position));
                         Common.isUpdating(sPackageUtils.isPackageInstalled(sAPKUtils.getPackageName(Downloads.getData(this).get(position), this), this));
-                        SplitAPKInstaller.installSplitAPKs(this);
+                        new SplitAPKsInstallationTasks(this).execute();
                     }
                 }).show());
 

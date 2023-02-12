@@ -35,11 +35,12 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.tasks.DisableAppTasks;
+import com.smartpack.packagemanager.utils.tasks.ExploreAPKTasks;
 
 import java.io.File;
 import java.util.Objects;
@@ -136,10 +137,10 @@ public class PackageInfoFragment extends Fragment {
                         .setCancelable(false)
                         .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
                             sUtils.saveBoolean("firstExploreAttempt", false, requireActivity());
-                            PackageExplorer.exploreAPK(mProgressLayout, Common.getSourceDir(), requireActivity());
+                            new ExploreAPKTasks(mProgressLayout, Common.getSourceDir(), requireActivity()).execute();
                         }).show();
             } else {
-                PackageExplorer.exploreAPK(mProgressLayout, Common.getSourceDir(), requireActivity());
+                new ExploreAPKTasks(mProgressLayout, Common.getSourceDir(), requireActivity()).execute();
             }
 
         });
@@ -153,7 +154,7 @@ public class PackageInfoFragment extends Fragment {
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                 })
-                .setPositiveButton(getString(R.string.yes), (dialog, id) -> PackageDetails.disableApp(mProgressLayout, mProgressMessage, requireActivity()))
+                .setPositiveButton(getString(R.string.yes), (dialog, id) -> new DisableAppTasks(mProgressLayout, mProgressMessage, requireActivity()).execute())
                 .show());
         mMore.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mMore);

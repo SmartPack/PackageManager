@@ -54,12 +54,16 @@ import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.PackageTasks;
-import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.PackageItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.tasks.BatchDisableTask;
+import com.smartpack.packagemanager.utils.tasks.BatchExportTask;
+import com.smartpack.packagemanager.utils.tasks.BatchResetTask;
+import com.smartpack.packagemanager.utils.tasks.BatchUninstallTask;
+import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
+import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -494,7 +498,7 @@ public class PackageTasksFragment extends Fragment {
                             .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             })
                             .setPositiveButton(getString(R.string.turn_on_off), (dialogInterface, i) ->
-                                    PackageTasks.batchDisableTask(activity))
+                                    new BatchDisableTask(activity).execute())
                             .show();
                     break;
                 case 1:
@@ -506,7 +510,7 @@ public class PackageTasksFragment extends Fragment {
                         uninstall.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
                         uninstall.setPositiveButton(getString(R.string.uninstall), (dialogInterface, i) ->
-                                PackageTasks.batchUninstallTask(activity));
+                                new BatchUninstallTask(activity).execute());
                         uninstall.show();
                     } else {
                         uninstallUserApp(Common.getBatchList().get(0));
@@ -520,7 +524,7 @@ public class PackageTasksFragment extends Fragment {
                     reset.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                     });
                     reset.setPositiveButton(getString(R.string.reset), (dialogInterface, i) ->
-                            PackageTasks.batchResetTask(activity));
+                            new BatchResetTask(activity).execute());
                     reset.show();
                     break;
                 case 3:
@@ -550,7 +554,7 @@ public class PackageTasksFragment extends Fragment {
                         export.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         });
                         export.setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
-                                PackageTasks.batchExportTask(activity));
+                                new BatchExportTask(activity).execute());
                         export.show();
                     }
                     break;
@@ -634,7 +638,7 @@ public class PackageTasksFragment extends Fragment {
                 mRecyclerView.setVisibility(View.GONE);
                 if (sUtils.getBoolean("select_all", false, activity)) {
                     Common.getBatchList().clear();
-                    for (RecycleViewItem mPackage : PackageData.getData(activity)) {
+                    for (PackageItems mPackage : PackageData.getData(activity)) {
                         Common.getBatchList().add(mPackage.getPackageName());
                     }
                 } else {
@@ -676,9 +680,9 @@ public class PackageTasksFragment extends Fragment {
                     Uri uriFile = data.getData();
 
                     if (data.getClipData() != null) {
-                        SplitAPKInstaller.handleMultipleAPKs(data.getClipData(), requireActivity()).execute();
+                        new MultipleAPKsTasks(data.getClipData(), requireActivity()).execute();
                     } else if (uriFile != null) {
-                        SplitAPKInstaller.handleSingleInstallationEvent(uriFile, requireActivity()).execute();
+                        new SingleAPKTasks(uriFile, requireActivity()).execute();
                     }
                 }
             }
@@ -691,7 +695,7 @@ public class PackageTasksFragment extends Fragment {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     // If uninstallation succeed
                     try {
-                        for (RecycleViewItem item : PackageData.getRawData()) {
+                        for (PackageItems item : PackageData.getRawData()) {
                             if (item.getPackageName().equals(Common.isUninstall() ? Common.getApplicationID() : Common.getBatchList().get(0))) {
                                 PackageData.getRawData().remove(item);
                                 if (!Common.isUninstall()) {

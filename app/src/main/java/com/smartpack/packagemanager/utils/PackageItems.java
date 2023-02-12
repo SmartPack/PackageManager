@@ -15,14 +15,14 @@ import java.io.Serializable;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-public class RecycleViewItem implements Serializable {
+public class PackageItems implements Serializable {
 
     private final Drawable mIcon;
     private final long mAPKSize, mInstalledTime, mUpdatedTime;
     private final String mPackageName, mAppName;
 
-    public RecycleViewItem(String packageName, String appName, Drawable icon, long apkSize,
-                           long installedTime, long updatedTime) {
+    public PackageItems(String packageName, String appName, Drawable icon, long apkSize,
+                        long installedTime, long updatedTime) {
         this.mPackageName = packageName;
         this.mAppName = appName;
         this.mIcon = icon;

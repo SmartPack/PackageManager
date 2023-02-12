@@ -21,7 +21,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.RecycleViewAppOpsItem;
+import com.smartpack.packagemanager.utils.AppOpsItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -37,9 +37,9 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder> {
 
-    private static ArrayList<RecycleViewAppOpsItem> data;
+    private static ArrayList<AppOpsItems> data;
 
-    public AppOpsAdapter(ArrayList<RecycleViewAppOpsItem> data) {
+    public AppOpsAdapter(ArrayList<AppOpsItems> data) {
         AppOpsAdapter.data = data;
     }
 

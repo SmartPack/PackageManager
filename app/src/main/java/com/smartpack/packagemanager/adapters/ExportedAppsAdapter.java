@@ -27,9 +27,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.tasks.SaveToDownloadsTasks;
 
 import java.io.File;
 import java.util.List;
@@ -102,7 +102,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                         v.getContext().startActivity(Intent.createChooser(shareScript, v.getContext().getString(R.string.share_with)));
                         break;
                     case 1:
-                        Downloads.saveToDownloads(new File(data.get(position)), v.getContext()).execute();
+                        new SaveToDownloadsTasks(new File(data.get(position)), v.getContext()).execute();
                         break;
                     case 2:
                         new MaterialAlertDialogBuilder(v.getContext())

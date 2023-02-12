@@ -21,8 +21,8 @@ import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
  */
 public class AppOps {
 
-    public static ArrayList<RecycleViewAppOpsItem> getOps(Context context) {
-        ArrayList<RecycleViewAppOpsItem> mData = new ArrayList<>();
+    public static ArrayList<AppOpsItems> getOps(Context context) {
+        ArrayList<AppOpsItems> mData = new ArrayList<>();
         String[] appOpsList;
         if (new RootShell().rootAccess()) {
             appOpsList = new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
@@ -39,7 +39,7 @@ public class AppOps {
              * Also, "Uid mode" needs more work (and likely never work)
              */
             if (!line.equals("No operations.") && !name.equals("Uid mode")) {
-                mData.add(new RecycleViewAppOpsItem(name, sPermissionUtils.getDescription(name, context), (line.contains("allow") || line.contains("ignore"))));
+                mData.add(new AppOpsItems(name, sPermissionUtils.getDescription(name, context), (line.contains("allow") || line.contains("ignore"))));
             }
         }
         return mData;

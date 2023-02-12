@@ -15,12 +15,12 @@ import java.io.Serializable;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-public class RecycleSettingsItem implements Serializable {
+public class SettingsItems implements Serializable {
     private final String mTitle, mDescription, mUrl;
     private final Drawable mIcon;
     private final int mColor, mSize;
 
-    public RecycleSettingsItem(String title, String description, Drawable icon, String url, int color, int size) {
+    public SettingsItems(String title, String description, Drawable icon, String url, int color, int size) {
         this.mTitle = title;
         this.mDescription = description;
         this.mIcon = icon;

@@ -33,7 +33,7 @@ import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
+import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.io.File;
 import java.util.Objects;
@@ -175,7 +175,7 @@ public class APKPickerActivity extends AppCompatActivity {
             Common.setApplicationID(mAPKParser.getPackageName());
             Common.isUpdating(sPackageUtils.isPackageInstalled(mAPKParser.getPackageName(), activity));
             if (Common.getApplicationID() != null) {
-                SplitAPKInstaller.installSplitAPKs(activity);
+                new SplitAPKsInstallationTasks(activity).execute();
             } else {
                 sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.installation_status_bad_apks)).show();
             }

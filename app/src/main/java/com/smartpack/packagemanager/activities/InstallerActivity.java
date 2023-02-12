@@ -24,7 +24,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.RecycleViewItem;
+import com.smartpack.packagemanager.utils.PackageItems;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -77,7 +77,7 @@ public class InstallerActivity extends AppCompatActivity {
             } else {
                 sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this))).show();
             }
-            PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
+            PackageData.getRawData().add(new PackageItems(Common.getApplicationID(),
                     sPackageUtils.getAppName(Common.getApplicationID(), this).toString(),
                     sPackageUtils.getAppIcon(Common.getApplicationID(), this),
                     new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).length(),
@@ -124,7 +124,7 @@ public class InstallerActivity extends AppCompatActivity {
         if (sUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
             if (!Common.isUpdating()) {
                 try {
-                    PackageData.getRawData().add(new RecycleViewItem(Common.getApplicationID(),
+                    PackageData.getRawData().add(new PackageItems(Common.getApplicationID(),
                             PackageData.getAppName(Common.getApplicationID(), this),
                             sPackageUtils.getAppIcon(Common.getApplicationID(), this),
                             new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).length(),

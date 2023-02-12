@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.RecycleSettingsItem;
+import com.smartpack.packagemanager.utils.SettingsItems;
 
 import java.util.ArrayList;
 
@@ -30,11 +30,11 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
 
-    private static ArrayList<RecycleSettingsItem> data;
+    private static ArrayList<SettingsItems> data;
 
     private static ClickListener mClickListener;
 
-    public SettingsAdapter(ArrayList<RecycleSettingsItem> data) {
+    public SettingsAdapter(ArrayList<SettingsItems> data) {
         SettingsAdapter.data = data;
     }
 

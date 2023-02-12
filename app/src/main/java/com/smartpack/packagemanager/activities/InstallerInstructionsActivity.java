@@ -24,7 +24,8 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.Flavor;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
+import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
+import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -74,9 +75,9 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
                     Uri uriFile = data.getData();
 
                     if (data.getClipData() != null) {
-                        SplitAPKInstaller.handleMultipleAPKs(data.getClipData(), this).execute();
+                        new MultipleAPKsTasks(data.getClipData(), this).execute();
                     } else if (uriFile != null) {
-                        SplitAPKInstaller.handleSingleInstallationEvent(uriFile, this).execute();
+                        new SingleAPKTasks(uriFile, this).execute();
                     }
                 }
             }

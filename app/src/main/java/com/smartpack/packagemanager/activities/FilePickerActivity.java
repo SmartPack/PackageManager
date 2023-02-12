@@ -38,8 +38,9 @@ import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
+import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.io.File;
 import java.util.Objects;
@@ -122,7 +123,7 @@ public class FilePickerActivity extends AppCompatActivity {
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                            SplitAPKInstaller.handleAppBundle(mProgressLayout, mPath, this);
+                            new AppBundleTasks(mProgressLayout, mPath, this).execute();
                             exitActivity();
                         }).show();
             } else if (mPath.endsWith("apk")) {
@@ -177,7 +178,7 @@ public class FilePickerActivity extends AppCompatActivity {
                         } else {
                             Common.isUpdating(sPackageUtils.isPackageInstalled(Common.getApplicationID(), FilePickerActivity.this));
                             if (Common.getApplicationID() != null) {
-                                SplitAPKInstaller.installSplitAPKs(FilePickerActivity.this);
+                                new SplitAPKsInstallationTasks(FilePickerActivity.this).execute();
                                 exitActivity();
                             } else {
                                 sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();

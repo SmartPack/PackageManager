@@ -16,19 +16,17 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.core.content.FileProvider;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
-import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ADBUninstallActivity;
+import com.smartpack.packagemanager.utils.tasks.ExportAPKTasks;
+import com.smartpack.packagemanager.utils.tasks.ExportBundleTasks;
+import com.smartpack.packagemanager.utils.tasks.UninstallSystemAppsTasks;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +39,6 @@ import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -50,9 +47,6 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2020
  */
 public class PackageDetails {
-
-    private static RootShell mRootShell = null;
-    private static ShizukuShell mShizukuShell = null;
 
     public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
         if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
@@ -74,144 +68,11 @@ public class PackageDetails {
             }
             sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
         } else if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
-            exportingBundleTask(linearLayout, textView, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
-                    Common.getApplicationIcon(), activity);
+            new ExportBundleTasks(linearLayout, textView, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
+                    Common.getApplicationIcon(), activity).execute();
         } else {
-            exportingTask(linearLayout, textView, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity);
+            new ExportAPKTasks(linearLayout, textView, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity).execute();
         }
-    }
-
-    public static void exportingTask(LinearLayout linearLayout, MaterialTextView textView, String apk,
-                                     String name,Drawable icon, Activity activity) {
-        new sExecutor() {
-
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void onPreExecute() {
-
-                showProgress(linearLayout, textView, activity.getString(R.string.exporting, name) + "...");
-                PackageData.makePackageFolder(activity);
-            }
-
-            @Override
-            public void doInBackground() {
-                sUtils.sleep(1);
-                sUtils.copy(new File(apk), new File(PackageData.getPackageDir(activity), name + "_" + sAPKUtils.getVersionCode(
-                        sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apk"));
-            }
-
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void onPostExecute() {
-                hideProgress(linearLayout, textView);
-                new MaterialAlertDialogBuilder(activity)
-                        .setIcon(icon)
-                        .setTitle(name)
-                        .setMessage(activity.getString(R.string.export_apk_summary, PackageData.getPackageDir(activity)))
-                        .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
-                        })
-                        .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
-                            Uri uriFile = FileProvider.getUriForFile(activity,
-                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(activity), name + "_" +
-                                            sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apk"));
-                            Intent shareScript = new Intent(Intent.ACTION_SEND);
-                            shareScript.setType("application/java-archive");
-                            shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
-                            shareScript.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
-                            shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
-                            shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
-                        }).show();
-            }
-        }.execute();
-    }
-
-    public static void exportingBundleTask(LinearLayout linearLayout, MaterialTextView textView, String apk, String name, Drawable icon, Activity activity) {
-        new sExecutor() {
-
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void onPreExecute() {
-                showProgress(linearLayout, textView, activity.getString(R.string.exporting_bundle, name) + "...");
-                PackageData.makePackageFolder(activity);
-            }
-
-            @Override
-            public void doInBackground() {
-                sUtils.sleep(1);
-                List<File> mFiles = new ArrayList<>();
-                for (final String splitApps : SplitAPKInstaller.splitApks(apk)) {
-                    mFiles.add(new File(apk + "/" + splitApps));
-                }
-                Utils.zip(PackageData.getPackageDir(activity) + "/" + name + "_" + sAPKUtils.getVersionCode(
-                        sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apkm", mFiles);
-            }
-
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void onPostExecute() {
-                hideProgress(linearLayout, textView);
-                new MaterialAlertDialogBuilder(activity)
-                        .setIcon(icon)
-                        .setTitle(name)
-                        .setMessage(activity.getString(R.string.export_bundle_summary, PackageData.getPackageDir(activity) + "/" + name + ".apkm"))
-                        .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
-                        })
-                        .setPositiveButton(activity.getString(R.string.share), (dialog, id) -> {
-                            Uri uriFile = FileProvider.getUriForFile(activity,
-                                    BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(activity) + "/" + name + "_" +
-                                            sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), activity), activity) + ".apkm"));
-                            Intent shareScript = new Intent(Intent.ACTION_SEND);
-                            shareScript.setType("application/zip");
-                            shareScript.putExtra(Intent.EXTRA_SUBJECT, activity.getString(R.string.shared_by, name));
-                            shareScript.putExtra(Intent.EXTRA_TEXT, activity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
-                            shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
-                            shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            activity.startActivity(Intent.createChooser(shareScript, activity.getString(R.string.share_with)));
-                        }).show();
-            }
-        }.execute();
-    }
-
-    public static void disableApp(LinearLayout progressLayout, MaterialTextView progressMessage, Activity activity) {
-        new sExecutor() {
-            private String mResult = null;
-
-            @SuppressLint("StringFormatInvalid")
-            @Override
-            public void onPreExecute() {
-                showProgress(progressLayout, progressMessage, sPackageUtils.isEnabled(Common.getApplicationID(), activity) ?
-                        activity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
-                        activity.getString(R.string.enabling, Common.getApplicationName()) + "...");
-                if (mRootShell == null) {
-                    mRootShell = new RootShell();
-                }
-                if (mShizukuShell == null) {
-                    mShizukuShell = new ShizukuShell();
-                }
-            }
-
-            @Override
-            public void doInBackground() {
-                sUtils.sleep(1);
-                if (mRootShell.rootAccess()) {
-                    mResult = mRootShell.runAndGetError((sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? "pm disable " : "pm enable ") + Common.getApplicationID());
-                } else {
-                    mResult = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(Common.getApplicationID(), activity) ? "pm disable " : "pm enable ") + Common.getApplicationID());
-                }
-            }
-
-            @Override
-            public void onPostExecute() {
-                hideProgress(progressLayout, progressMessage);
-                if (mResult != null && (mResult.contains("new state: disabled") || mResult.contains("new state: enabled"))) {
-                    Common.reloadPage(true);
-                    activity.recreate();
-                } else {
-                    sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.disable_failed_message, Common.getApplicationName())).show();
-                }
-            }
-        }.execute();
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -225,37 +86,7 @@ public class PackageDetails {
                     .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     })
                     .setPositiveButton(activity.getString(R.string.yes), (dialog, id) ->
-                            new sExecutor() {
-
-                                @Override
-                                public void onPreExecute() {
-                                    showProgress(linearLayout, textView, activity.getString(R.string.uninstall_summary, Common.getApplicationName()));
-                                    if (mRootShell == null) {
-                                        mRootShell = new RootShell();
-                                    }
-                                    if (mShizukuShell == null) {
-                                        mShizukuShell = new ShizukuShell();
-                                    }
-                                }
-
-                                @Override
-                                public void doInBackground() {
-                                    sUtils.sleep(1);
-                                    if (mRootShell.rootAccess()) {
-                                        mRootShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
-                                    } else {
-                                        mShizukuShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
-                                    }
-                                }
-
-                                @Override
-                                public void onPostExecute() {
-                                    PackageData.setRawData(activity);
-                                    hideProgress(linearLayout, textView);
-                                    activity.finish();
-                                    Common.reloadPage(true);
-                                }
-                            }.execute())
+                            new UninstallSystemAppsTasks(linearLayout, textView, activity).execute())
                     .show();
         } else {
             Intent details = new Intent(activity, ADBUninstallActivity.class);
@@ -333,13 +164,13 @@ public class PackageDetails {
         return null;
     }
 
-    private static void showProgress(LinearLayout linearLayout, MaterialTextView textView, String message) {
+    public static void showProgress(LinearLayout linearLayout, MaterialTextView textView, String message) {
         textView.setText(message);
         textView.setVisibility(View.VISIBLE);
         linearLayout.setVisibility(View.VISIBLE);
     }
 
-    private static void hideProgress(LinearLayout linearLayout, MaterialTextView textView) {
+    public static void hideProgress(LinearLayout linearLayout, MaterialTextView textView) {
         textView.setVisibility(View.GONE);
         linearLayout.setVisibility(View.GONE);
     }

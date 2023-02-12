@@ -32,20 +32,20 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class PackageData {
 
-    private static List<RecycleViewItem> mRawData = null;
+    private static List<PackageItems> mRawData = null;
 
     public static void makePackageFolder(Context context) {
         if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
-            getPackageDir(context).delete();
+            sUtils.delete(getPackageDir(context));
         }
-        getPackageDir(context).mkdirs();
+        sUtils.mkdir(getPackageDir(context));
     }
 
-    private static List<RecycleViewItem> getRawData(Context context) {
-        List<RecycleViewItem> mRawData = new ArrayList<>();
+    private static List<PackageItems> getRawData(Context context) {
+        List<PackageItems> mRawData = new ArrayList<>();
         List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
-            mRawData.add(new RecycleViewItem(
+            mRawData.add(new PackageItems(
                     packageInfo.packageName,
                     getAppName(packageInfo.packageName, context),
                     sPackageUtils.getAppIcon(packageInfo.packageName, context),
@@ -57,10 +57,10 @@ public class PackageData {
         return mRawData;
     }
 
-    public static List<RecycleViewItem> getData(Context context) {
+    public static List<PackageItems> getData(Context context) {
         boolean mAppType;
-        List<RecycleViewItem> mData = new ArrayList<>();
-        for (RecycleViewItem item : getRawData()) {
+        List<PackageItems> mData = new ArrayList<>();
+        for (PackageItems item : getRawData()) {
             if (sUtils.getString("appTypes", "all", context).equals("system")) {
                 mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
             } else if (sUtils.getString("appTypes", "all", context).equals("user")) {
@@ -79,11 +79,11 @@ public class PackageData {
             if (sUtils.getBoolean("sort_name", false, context)) {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_size", false, context)) {
-                Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getAPKSize));
+                Collections.sort(mData, Comparator.comparingLong(PackageItems::getAPKSize));
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_installed", false, context)) {
-                Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getInstalledTime));
+                Collections.sort(mData, Comparator.comparingLong(PackageItems::getInstalledTime));
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_updated", false, context)) {
-                Collections.sort(mData, Comparator.comparingLong(RecycleViewItem::getUpdatedTime));
+                Collections.sort(mData, Comparator.comparingLong(PackageItems::getUpdatedTime));
             } else {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
             }
@@ -152,7 +152,7 @@ public class PackageData {
         return "\n" + sb;
     }
 
-    public static List<RecycleViewItem> getRawData() {
+    public static List<PackageItems> getRawData() {
         return mRawData;
     }
 
