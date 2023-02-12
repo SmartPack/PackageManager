@@ -431,7 +431,14 @@ public class PackageTasksFragment extends Fragment {
                             activity.startActivity(filePicker);
                         } else {
                             Intent installer = new Intent(Intent.ACTION_GET_CONTENT);
-                            installer.setType("application/*");
+                            installer.setType("*/*");
+                            String[] mimeTypes = {
+                                    "application/vnd.android.package-archive",
+                                    "application/xapk-package-archive",
+                                    "application/octet-stream",
+                                    "application/vnd.apkm"
+                            };
+                            installer.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
                             installer.addCategory(Intent.CATEGORY_OPENABLE);
                             installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                             installApp.launch(installer);
