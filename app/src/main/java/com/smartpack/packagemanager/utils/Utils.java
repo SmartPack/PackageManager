@@ -30,9 +30,9 @@ import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 
 import net.lingala.zip4j.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
@@ -81,15 +81,15 @@ public class Utils {
     }
 
     public static void unzip(String zip, String path) {
-        try {
-            new ZipFile(zip).extractAll(path);
-        } catch (ZipException ignored) {}
+        try (ZipFile zipFile = new ZipFile(zip)) {
+            zipFile.extractAll(path);
+        } catch (IOException ignored) {}
     }
 
     public static void zip(String zip, List<File> files) {
-        try {
-            new ZipFile(zip).addFiles(files);
-        } catch (ZipException ignored) {
+        try (ZipFile zipFile = new ZipFile(zip)) {
+            zipFile.addFiles(files);
+        } catch (IOException ignored) {
         }
     }
 
