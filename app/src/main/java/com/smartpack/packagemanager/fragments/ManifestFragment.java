@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apk.axml.APKParser;
 import com.apk.axml.aXMLDecoder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ManifestAdapter;
@@ -56,10 +57,14 @@ public class ManifestFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                try (ZipFile zipFile = new ZipFile(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()))) {
-                    InputStream inputStream = zipFile.getInputStream(zipFile.getEntry("AndroidManifest.xml"));
-                    mManifest =  new ArrayList<>(Arrays.asList(Objects.requireNonNull(new aXMLDecoder().decode(inputStream).trim()).split("\\r?\\n")));
-                } catch (Exception ignored) {
+                if (Common.isAPKPicker()) {
+                    mManifest = new ArrayList<>(Arrays.asList(new APKParser().getManifest().trim().split("\\r?\\n")));
+                } else {
+                    try (ZipFile zipFile = new ZipFile(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()))) {
+                        InputStream inputStream = zipFile.getInputStream(zipFile.getEntry("AndroidManifest.xml"));
+                        mManifest = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new aXMLDecoder().decode(inputStream).trim()).split("\\r?\\n")));
+                    } catch (Exception ignored) {
+                    }
                 }
             }
 
