@@ -80,7 +80,7 @@ public class BatchUninstallTask extends sExecutor {
 
     @Override
     public void onPostExecute() {
-        PackageData.setRawData(mActivity);
+        PackageData.setRawData(null, mActivity);
         Common.getOutput().append("** ").append(mActivity.getString(R.string.everything_done)).append(" *");
         Common.isRunning(false);
         Common.reloadPage(true);

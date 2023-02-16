@@ -413,7 +413,7 @@ public class PackageTasksFragment extends Fragment {
 
                         @Override
                         public void doInBackground() {
-                            PackageData.setRawData(activity);
+                            PackageData.setRawData(mProgress, activity);
                             mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity));
                         }
 

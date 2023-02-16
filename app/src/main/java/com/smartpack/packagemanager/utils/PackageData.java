@@ -14,6 +14,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.widget.ProgressBar;
 
 import com.smartpack.packagemanager.R;
 
@@ -41,7 +42,7 @@ public class PackageData {
         sUtils.mkdir(getPackageDir(context));
     }
 
-    private static List<PackageItems> getRawData(Context context) {
+    private static List<PackageItems> getRawData(ProgressBar progressBar, Context context) {
         List<PackageItems> mRawData = new ArrayList<>();
         List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo: packages) {
@@ -53,6 +54,17 @@ public class PackageData {
                     Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).firstInstallTime,
                     Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime)
             );
+            if (progressBar != null) {
+                if (progressBar.isIndeterminate()) {
+                    progressBar.setIndeterminate(false);
+                }
+                progressBar.setMax(packages.size());
+                if (progressBar.getProgress() < packages.size()) {
+                    progressBar.setProgress(progressBar.getProgress() + 1);
+                } else {
+                    progressBar.setProgress(0);
+                }
+            }
         }
         return mRawData;
     }
@@ -156,8 +168,8 @@ public class PackageData {
         return mRawData;
     }
 
-    public static void setRawData(Context context) {
-        mRawData = getRawData(context);
+    public static void setRawData(ProgressBar progressBar, Context context) {
+        mRawData = getRawData(progressBar, context);
     }
 
 }

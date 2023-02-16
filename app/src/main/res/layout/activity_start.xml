@@ -29,8 +29,7 @@
             android:layout_gravity="center"
             android:indeterminate="true"
             android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:visibility="gone" />
+            android:paddingEnd="15dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/main_text"

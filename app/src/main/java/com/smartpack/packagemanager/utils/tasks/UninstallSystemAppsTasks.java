@@ -59,7 +59,7 @@ public class UninstallSystemAppsTasks extends sExecutor {
 
     @Override
     public void onPostExecute() {
-        PackageData.setRawData(mActivity);
+        PackageData.setRawData(null, mActivity);
         PackageDetails.hideProgress(mLinearLayout, mTextView);
         mActivity.finish();
         Common.reloadPage(true);

@@ -48,6 +48,7 @@ public class StartActivity extends AppCompatActivity {
         if (sUtils.getBoolean("welcomeMessage", true, this)) {
             mMainText.setVisibility(View.VISIBLE);
             mBottomLayout.setVisibility(View.VISIBLE);
+            mProgress.setVisibility(View.GONE);
 
             mDocumentationCard.setOnClickListener(v -> sUtils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
 
@@ -55,15 +56,15 @@ public class StartActivity extends AppCompatActivity {
                 mProgress.setVisibility(View.VISIBLE);
                 mMainText.setText(getString(R.string.initializing));
                 mBottomLayout.setVisibility(View.GONE);
-                loadData(this);
+                loadData(mProgress, this);
                 sUtils.saveBoolean("welcomeMessage",false, this);
             });
         } else {
-            loadData(this);
+            loadData(mProgress, this);
         }
     }
 
-    private static void loadData(Activity activity) {
+    private static void loadData(ProgressBar progressBar, Activity activity) {
         new sExecutor() {
             @Override
             public void onPreExecute() {
@@ -71,7 +72,7 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                PackageData.setRawData(activity);
+                PackageData.setRawData(progressBar, activity);
             }
 
             @Override

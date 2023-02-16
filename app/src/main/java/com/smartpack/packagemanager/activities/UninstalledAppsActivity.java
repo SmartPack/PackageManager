@@ -231,7 +231,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
 
             @Override
             public void onPostExecute() {
-                PackageData.setRawData(context);
+                PackageData.setRawData(null, context);
                 if (batch) {
                     Common.getRestoreCard().setVisibility(View.GONE);
                     Common.getRestoreList().clear();
