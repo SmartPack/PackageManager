@@ -422,6 +422,7 @@ public class PackageTasksFragment extends Fragment {
                             mBatchOptions.setVisibility(View.GONE);
                             mRecyclerView.setAdapter(mRecycleViewAdapter);
                             mProgress.setVisibility(View.GONE);
+                            mProgress.setIndeterminate(true);
                             mRecyclerView.setVisibility(View.VISIBLE);
                         }
                     }.execute();
