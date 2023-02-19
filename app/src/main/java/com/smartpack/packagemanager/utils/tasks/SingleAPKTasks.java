@@ -77,11 +77,11 @@ public class SingleAPKTasks extends sExecutor {
             mProgressDialog.dismiss();
         } catch (IllegalArgumentException ignored) {
         }
-        if (mFile.getName().equals("apk")) {
+        if (mFile.getName().endsWith("apk")) {
             APKData.setAPKFile(mFile);
             Intent apkDetails = new Intent(mActivity, APKPickerActivity.class);
             mActivity.startActivity(apkDetails);
-        } else if (mFile.getName().equals("apkm") || mFile.getName().equals("apks") || mFile.getName().equals("xapk")) {
+        } else if (mFile.getName().endsWith("apkm") || mFile.getName().endsWith("apks") || mFile.getName().endsWith("xapk")) {
             new MaterialAlertDialogBuilder(mActivity)
                     .setIcon(R.mipmap.ic_launcher)
                     .setTitle(R.string.split_apk_installer)
