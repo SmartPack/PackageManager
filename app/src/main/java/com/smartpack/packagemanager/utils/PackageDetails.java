@@ -19,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
@@ -48,7 +49,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class PackageDetails {
 
-    public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
+    public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, ProgressBar progressBar, Activity activity) {
         if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
                 Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -68,10 +69,10 @@ public class PackageDetails {
             }
             sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
         } else if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
-            new ExportBundleTasks(linearLayout, textView, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
+            new ExportBundleTasks(linearLayout, textView, progressBar, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
                     Common.getApplicationIcon(), activity).execute();
         } else {
-            new ExportAPKTasks(linearLayout, textView, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity).execute();
+            new ExportAPKTasks(linearLayout, textView, progressBar, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity).execute();
         }
     }
 

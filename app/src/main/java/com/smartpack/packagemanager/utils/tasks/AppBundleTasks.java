@@ -18,9 +18,10 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.ZipFileUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -65,7 +66,9 @@ public class AppBundleTasks extends sExecutor {
 
     @Override
     public void doInBackground() {
-        Utils.unzip(mPath, mActivity.getCacheDir().getAbsolutePath());
+        try (ZipFileUtils zipFileUtils = new ZipFileUtils(mPath)) {
+            zipFileUtils.unzip(mActivity.getCacheDir().getAbsolutePath());
+        } catch (IOException ignored) {}
         for (File files : SplitAPKInstaller.getFilesList(mActivity.getCacheDir())) {
             if (files.isFile() && files.getName().endsWith(".apk")) {
                 Common.setPath(mActivity.getCacheDir().getAbsolutePath());

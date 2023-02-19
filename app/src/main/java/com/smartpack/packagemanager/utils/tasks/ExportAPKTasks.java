@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.core.content.FileProvider;
 
@@ -41,11 +42,14 @@ public class ExportAPKTasks extends sExecutor {
     private static Drawable mIcon = null;
     private final LinearLayout mLinearLayout;
     private final MaterialTextView mTextView;
+    private final ProgressBar mProgressBar;
     private static String mAPKPath = null, mName = null;
 
-    public ExportAPKTasks(LinearLayout linearLayout, MaterialTextView textView, String path, String name, Drawable icon, Activity activity) {
+    public ExportAPKTasks(LinearLayout linearLayout, MaterialTextView textView, ProgressBar progressBar,
+                          String path, String name, Drawable icon, Activity activity) {
         mLinearLayout = linearLayout;
         mTextView = textView;
+        mProgressBar = progressBar;
         mAPKPath = path;
         mName = name;
         mIcon = icon;
@@ -56,20 +60,23 @@ public class ExportAPKTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPreExecute() {
+        mProgressBar.setIndeterminate(false);
         PackageDetails.showProgress(mLinearLayout, mTextView, mActivity.getString(R.string.exporting, mName) + "...");
         PackageData.makePackageFolder(mActivity);
     }
 
     @Override
-    public void doInBackground() {sUtils.sleep(1);
+    public void doInBackground() {
+        sUtils.sleep(1);
         sUtils.copy(new File(mAPKPath), new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
-                sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"));
+                sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"), mProgressBar);
     }
 
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
         PackageDetails.hideProgress(mLinearLayout, mTextView);
+        mProgressBar.setIndeterminate(true);
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
                 .setTitle(mName)

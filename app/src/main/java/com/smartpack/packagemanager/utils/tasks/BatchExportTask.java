@@ -17,9 +17,10 @@ import com.smartpack.packagemanager.activities.PackageTasksActivity;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.ZipFileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +67,10 @@ public class BatchExportTask extends sExecutor {
                     for (final String splitApps : SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageID, mActivity))) {
                         mFiles.add(new File(sPackageUtils.getParentDir(packageID, mActivity) + "/" + splitApps));
                     }
-                    Utils.zip(PackageData.getPackageDir(mActivity) + "/" + PackageData.getFileName(packageID, mActivity) + "_" +
-                            sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(packageID, mActivity), mActivity) + ".apkm", mFiles);
+                    try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(mActivity) + "/" + PackageData.getFileName(packageID, mActivity) + "_" +
+                            sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(packageID, mActivity), mActivity) + ".apkm")) {
+                        zipFileUtils.zip(mFiles);
+                    } catch (IOException ignored) {}
                 } else {
                     Common.getOutput().append("** ").append(mActivity.getString(R.string.exporting, PackageData.getAppName(packageID, mActivity)));
                     sUtils.copy(new File(sPackageUtils.getSourceDir(packageID, mActivity)), new File(PackageData.getPackageDir(mActivity), PackageData.getFileName(packageID, mActivity) + "_" +

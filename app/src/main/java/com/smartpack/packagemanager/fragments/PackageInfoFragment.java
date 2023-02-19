@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -82,6 +83,7 @@ public class PackageInfoFragment extends Fragment {
         LinearLayout mMore = mRootView.findViewById(R.id.more);
         LinearLayout mUninstallApp = mRootView.findViewById(R.id.remove_app);
         LinearLayout mOpenSettings = mRootView.findViewById(R.id.info_app);
+        ProgressBar mProgress = mRootView.findViewById(R.id.progress);
 
         mProgressLayout.setBackgroundColor(sUtils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
         mLastUpdated.setText(getString(R.string.date_installed, sPackageUtils.getInstalledDate(Common.getApplicationID(), requireActivity())) +
@@ -144,7 +146,7 @@ public class PackageInfoFragment extends Fragment {
             }
 
         });
-        mExport.setOnClickListener(v -> PackageDetails.exportApp(mProgressLayout, mProgressMessage, requireActivity()));
+        mExport.setOnClickListener(v -> PackageDetails.exportApp(mProgressLayout, mProgressMessage, mProgress, requireActivity()));
         mDisable.setOnClickListener(v -> new MaterialAlertDialogBuilder(requireActivity())
                 .setIcon(Common.getApplicationIcon())
                 .setTitle(Common.getApplicationName())

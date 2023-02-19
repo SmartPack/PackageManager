@@ -15,9 +15,10 @@ import android.widget.LinearLayout;
 
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.ZipFileUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
@@ -50,7 +51,9 @@ public class ExploreAPKTasks extends sExecutor {
 
     @Override
     public void doInBackground() {
-        Utils.unzip(mPath,mActivity.getCacheDir().getPath() + "/apk");
+        try (ZipFileUtils zipFileUtils = new ZipFileUtils(mPath)) {
+            zipFileUtils.unzip(mActivity.getCacheDir().getPath() + "/apk");
+        } catch (IOException ignored) {}
     }
 
     @Override

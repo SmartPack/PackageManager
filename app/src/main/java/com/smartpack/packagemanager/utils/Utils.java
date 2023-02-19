@@ -25,12 +25,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 
-import net.lingala.zip4j.ZipFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
@@ -73,19 +67,6 @@ public class Utils {
             return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
         } else {
             return Html.fromHtml(text);
-        }
-    }
-
-    public static void unzip(String zip, String path) {
-        try (ZipFile zipFile = new ZipFile(zip)) {
-            zipFile.extractAll(path);
-        } catch (IOException ignored) {}
-    }
-
-    public static void zip(String zip, List<File> files) {
-        try (ZipFile zipFile = new ZipFile(zip)) {
-            zipFile.addFiles(files);
-        } catch (IOException ignored) {
         }
     }
 

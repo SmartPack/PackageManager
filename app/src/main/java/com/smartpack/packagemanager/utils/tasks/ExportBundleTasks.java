@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.core.content.FileProvider;
 
@@ -25,9 +26,10 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.ZipFileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +47,14 @@ public class ExportBundleTasks extends sExecutor {
     private static Drawable mIcon = null;
     private final LinearLayout mLinearLayout;
     private final MaterialTextView mTextView;
+    private final ProgressBar mProgressBar;
     private static String mAPKPath = null, mName = null;
 
-    public ExportBundleTasks(LinearLayout linearLayout, MaterialTextView textView, String path, String name, Drawable icon, Activity activity) {
+    public ExportBundleTasks(LinearLayout linearLayout, MaterialTextView textView, ProgressBar progressBar,
+                             String path, String name, Drawable icon, Activity activity) {
         mLinearLayout = linearLayout;
         mTextView = textView;
+        mProgressBar = progressBar;
         mAPKPath = path;
         mName = name;
         mIcon = icon;
@@ -60,6 +65,7 @@ public class ExportBundleTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPreExecute() {
+        mProgressBar.setIndeterminate(false);
         PackageDetails.showProgress(mLinearLayout, mTextView, mActivity.getString(R.string.exporting_bundle, mName) + "...");
         PackageData.makePackageFolder(mActivity);
     }
@@ -71,14 +77,17 @@ public class ExportBundleTasks extends sExecutor {
         for (final String splitApps : SplitAPKInstaller.splitApks(mAPKPath)) {
             mFiles.add(new File(mAPKPath + "/" + splitApps));
         }
-        Utils.zip(PackageData.getPackageDir(mActivity) + "/" + mName + "_" + sAPKUtils.getVersionCode(
-                sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apkm", mFiles);
+        try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(mActivity) + "/" + mName + "_" + sAPKUtils.getVersionCode(
+                sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apkm")) {
+            zipFileUtils.zip(mFiles, mProgressBar);
+        } catch (IOException ignored) {}
     }
 
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
         PackageDetails.hideProgress(mLinearLayout, mTextView);
+        mProgressBar.setIndeterminate(true);
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
                 .setTitle(mName)
