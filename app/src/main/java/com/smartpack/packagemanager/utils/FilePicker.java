@@ -71,7 +71,7 @@ public class FilePicker {
 
     public static String getLastDirPath(Activity activity) {
         String mDir = sUtils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
-        if (sUtils.exist(new File(mDir))) {
+        if (sUtils.exist(new File(mDir)) && mDir.contains(Environment.getExternalStorageDirectory().toString())) {
             return mDir;
         } else {
             return Environment.getExternalStorageDirectory().toString();
