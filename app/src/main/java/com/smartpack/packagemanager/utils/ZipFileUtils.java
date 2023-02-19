@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.model.FileHeader;
 
 import java.io.File;
 import java.util.List;
@@ -27,6 +28,22 @@ public class ZipFileUtils extends ZipFile {
 
     public void unzip(String path) throws ZipException {
         extractAll(path);
+    }
+
+    public void unzip(String path, ProgressBar progressBar) throws ZipException {
+        if (progressBar != null) {
+            progressBar.setMax(getFileHeaders().size());
+        }
+        for (FileHeader fileHeaders : getFileHeaders()) {
+            extractFile(fileHeaders, path);
+            if (progressBar != null) {
+                if (progressBar.getProgress() < getFileHeaders().size()) {
+                    progressBar.setProgress(progressBar.getProgress() + 1);
+                } else {
+                    progressBar.setProgress(0);
+                }
+            }
+        }
     }
 
     public void zip(List<File> files) throws ZipException {

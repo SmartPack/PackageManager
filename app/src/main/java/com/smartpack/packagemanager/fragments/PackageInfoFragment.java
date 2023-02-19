@@ -139,10 +139,10 @@ public class PackageInfoFragment extends Fragment {
                         .setCancelable(false)
                         .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
                             sUtils.saveBoolean("firstExploreAttempt", false, requireActivity());
-                            new ExploreAPKTasks(mProgressLayout, Common.getSourceDir(), requireActivity()).execute();
+                            new ExploreAPKTasks(mProgressLayout, mProgress, Common.getSourceDir(), requireActivity()).execute();
                         }).show();
             } else {
-                new ExploreAPKTasks(mProgressLayout, Common.getSourceDir(), requireActivity()).execute();
+                new ExploreAPKTasks(mProgressLayout, mProgress, Common.getSourceDir(), requireActivity()).execute();
             }
 
         });

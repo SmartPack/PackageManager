@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 import com.smartpack.packagemanager.utils.Common;
@@ -30,10 +31,12 @@ public class ExploreAPKTasks extends sExecutor {
 
     private final Activity mActivity;
     private final LinearLayout mLinearLayout;
+    private final ProgressBar mProgressBar;
     private final String mPath;
 
-    public ExploreAPKTasks(LinearLayout linearLayout, String path, Activity activity) {
+    public ExploreAPKTasks(LinearLayout linearLayout, ProgressBar progressBar, String path, Activity activity) {
         mLinearLayout = linearLayout;
+        mProgressBar = progressBar;
         mPath = path;
         mActivity = activity;
 
@@ -41,6 +44,7 @@ public class ExploreAPKTasks extends sExecutor {
 
     @Override
     public void onPreExecute() {
+        mProgressBar.setIndeterminate(false);
         mLinearLayout.setVisibility(View.VISIBLE);
         if (sUtils.exist(new File(mActivity.getCacheDir().getPath(), "apk"))) {
             sUtils.delete(new File(mActivity.getCacheDir().getPath(), "apk"));
@@ -52,13 +56,14 @@ public class ExploreAPKTasks extends sExecutor {
     @Override
     public void doInBackground() {
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(mPath)) {
-            zipFileUtils.unzip(mActivity.getCacheDir().getPath() + "/apk");
+            zipFileUtils.unzip(mActivity.getCacheDir().getPath() + "/apk", mProgressBar);
         } catch (IOException ignored) {}
     }
 
     @Override
     public void onPostExecute() {
         mLinearLayout.setVisibility(View.GONE);
+        mProgressBar.setIndeterminate(true);
         Intent explorer = new Intent(mActivity, PackageExploreActivity.class);
         mActivity.startActivity(explorer);
     }
