@@ -56,7 +56,6 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
  */
 public class FilePickerActivity extends AppCompatActivity {
 
-    private LinearLayout mProgressLayout;
     private MaterialCardView mSelect;
     private MaterialTextView mTitle;
     private ProgressBar mProgress;
@@ -71,7 +70,6 @@ public class FilePickerActivity extends AppCompatActivity {
 
         AppCompatImageButton mBack = findViewById(R.id.back);
         AppCompatImageButton mSortButton = findViewById(R.id.sort);
-        mProgressLayout = findViewById(R.id.progress_layout);
         mProgress = findViewById(R.id.progress);
         mTitle = findViewById(R.id.title);
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
@@ -122,10 +120,7 @@ public class FilePickerActivity extends AppCompatActivity {
                         .setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
-                        .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> {
-                            new AppBundleTasks(mProgressLayout, mPath, this).execute();
-                            exitActivity();
-                        }).show();
+                        .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> new AppBundleTasks(mProgress, mPath, true, this).execute()).show();
             } else if (mPath.endsWith("apk")) {
                 if (Common.getAppList().contains(mPath)) {
                     Common.getAppList().remove(mPath);
@@ -240,6 +235,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (mProgress.getVisibility() == View.VISIBLE) return;
         if (Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
             new MaterialAlertDialogBuilder(this)
                     .setIcon(R.mipmap.ic_launcher)

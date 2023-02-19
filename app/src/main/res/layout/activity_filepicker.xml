@@ -115,6 +115,4 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-    <include layout="@layout/progress_view_layout" />
 </RelativeLayout>

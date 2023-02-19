@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.app.ProgressDialog;
 import android.widget.ProgressBar;
 
 import net.lingala.zip4j.ZipFile;
@@ -22,47 +23,58 @@ import java.util.List;
  */
 public class ZipFileUtils extends ZipFile {
 
+    private ProgressBar mProgressBar = null;
+    private ProgressDialog mProgressDialog = null;
+
     public ZipFileUtils(String zipFile) {
         super(zipFile);
     }
 
-    public void unzip(String path) throws ZipException {
-        extractAll(path);
+    public void setProgress(ProgressBar progressBar) {
+        mProgressBar = progressBar;
     }
 
-    public void unzip(String path, ProgressBar progressBar) throws ZipException {
-        if (progressBar != null) {
-            progressBar.setMax(getFileHeaders().size());
+    public void setProgress(ProgressDialog progressDialog) {
+        mProgressDialog = progressDialog;
+    }
+
+    private void setProgress() {
+        if (mProgressBar != null) {
+            if (mProgressBar.getProgress() < mProgressBar.getMax()) {
+                mProgressBar.setProgress(mProgressBar.getProgress() + 1);
+            } else {
+                mProgressBar.setProgress(0);
+            }
+        } else if (mProgressDialog != null) {
+            if (mProgressDialog.getProgress() < mProgressDialog.getMax()) {
+                mProgressDialog.setProgress(mProgressDialog.getProgress() + 1);
+            } else {
+                mProgressDialog.setProgress(0);
+            }
         }
+    }
+
+    private void setProgressMax(int max) {
+        if (mProgressBar != null) {
+            mProgressBar.setMax(max);
+        } else if (mProgressDialog != null) {
+            mProgressDialog.setMax(max);
+        }
+    }
+
+    public void unzip(String path) throws ZipException {
+        setProgressMax(getFileHeaders().size());
         for (FileHeader fileHeaders : getFileHeaders()) {
             extractFile(fileHeaders, path);
-            if (progressBar != null) {
-                if (progressBar.getProgress() < getFileHeaders().size()) {
-                    progressBar.setProgress(progressBar.getProgress() + 1);
-                } else {
-                    progressBar.setProgress(0);
-                }
-            }
+            setProgress();
         }
     }
 
     public void zip(List<File> files) throws ZipException {
-        addFiles(files);
-    }
-
-    public void zip(List<File> files, ProgressBar progressBar) throws ZipException {
-        if (progressBar != null) {
-            progressBar.setMax(files.size());
-        }
+        setProgressMax(files.size());
         for (File file : files) {
             addFile(file);
-            if (progressBar != null) {
-                if (progressBar.getProgress() < files.size()) {
-                    progressBar.setProgress(progressBar.getProgress() + 1);
-                } else {
-                    progressBar.setProgress(0);
-                }
-            }
+            setProgress();
         }
     }
 

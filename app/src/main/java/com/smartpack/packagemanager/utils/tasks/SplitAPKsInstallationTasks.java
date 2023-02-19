@@ -9,7 +9,6 @@
 package com.smartpack.packagemanager.utils.tasks;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.smartpack.packagemanager.activities.InstallerActivity;
@@ -50,10 +49,6 @@ public class SplitAPKsInstallationTasks extends sExecutor {
         return totalSize;
     }
 
-    private static Intent getInstallerCallbackIntent(Context context) {
-        return new Intent(context, SplitAPKInstallService.class);
-    }
-
     @Override
     public void onPreExecute() {
         Intent installIntent = new Intent(mActivity, InstallerActivity.class);
@@ -76,7 +71,7 @@ public class SplitAPKsInstallationTasks extends sExecutor {
             }
         } catch (NullPointerException ignored) {
         }
-        sInstallerUtils.doCommitSession(sessionId, getInstallerCallbackIntent(mActivity), mActivity);
+        sInstallerUtils.doCommitSession(sessionId, new Intent(mActivity, SplitAPKInstallService.class), mActivity);
     }
 
     @Override

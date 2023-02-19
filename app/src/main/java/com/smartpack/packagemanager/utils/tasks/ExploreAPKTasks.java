@@ -56,7 +56,8 @@ public class ExploreAPKTasks extends sExecutor {
     @Override
     public void doInBackground() {
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(mPath)) {
-            zipFileUtils.unzip(mActivity.getCacheDir().getPath() + "/apk", mProgressBar);
+            zipFileUtils.setProgress(mProgressBar);
+            zipFileUtils.unzip(mActivity.getCacheDir().getPath() + "/apk");
         } catch (IOException ignored) {}
     }
 

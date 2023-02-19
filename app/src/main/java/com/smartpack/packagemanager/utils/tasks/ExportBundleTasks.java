@@ -79,7 +79,8 @@ public class ExportBundleTasks extends sExecutor {
         }
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(mActivity) + "/" + mName + "_" + sAPKUtils.getVersionCode(
                 sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apkm")) {
-            zipFileUtils.zip(mFiles, mProgressBar);
+            zipFileUtils.setProgress(mProgressBar);
+            zipFileUtils.zip(mFiles);
         } catch (IOException ignored) {}
     }
 

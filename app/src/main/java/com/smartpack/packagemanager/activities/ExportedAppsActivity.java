@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,8 +57,8 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class ExportedAppsActivity extends AppCompatActivity {
 
     private AppCompatEditText mSearchWord;
-    private LinearLayout mProgressLayout;
     private MaterialTextView mTitle;
+    private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private ExportedAppsAdapter mRecycleViewAdapter;
 
@@ -70,8 +71,8 @@ public class ExportedAppsActivity extends AppCompatActivity {
         AppCompatImageButton mBack = findViewById(R.id.back_button);
         AppCompatImageButton mSearch = findViewById(R.id.search_icon);
         AppCompatImageButton mSort = findViewById(R.id.sort_icon);
-        mProgressLayout = findViewById(R.id.progress_layout);
         mTitle = findViewById(R.id.title);
+        mProgress = findViewById(R.id.progress);
         mRecyclerView = findViewById(R.id.recycler_view);
         TabLayout mTabLayout = findViewById(R.id.tab_layout);
 
@@ -195,7 +196,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
                 })
                 .setPositiveButton(R.string.install, (dialog, id) -> {
                     if (Downloads.getData(this).get(position).endsWith(".apkm")) {
-                        new AppBundleTasks(mProgressLayout, Downloads.getData(this).get(position), this).execute();
+                        new AppBundleTasks(mProgress, Downloads.getData(this).get(position), false, this).execute();
                     } else {
                         Common.getAppList().clear();
                         Common.getAppList().add(Downloads.getData(this).get(position));

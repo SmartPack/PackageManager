@@ -9,21 +9,16 @@
 package com.smartpack.packagemanager.utils.tasks;
 
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
 
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.FileUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
+import java.io.IOException;
 
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -46,27 +41,18 @@ public class SaveToDownloadsTasks extends sExecutor {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
         mProgressDialog.setTitle(R.string.app_name);
-        mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
 
     @Override
     public void doInBackground() {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                FileInputStream inputStream = new FileInputStream(mSource);
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.MediaColumns.DISPLAY_NAME, mSource.getName());
-                values.put(MediaStore.MediaColumns.MIME_TYPE, "*/*");
-                values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
-                Uri uri = mContext.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
-                OutputStream outStream = mContext.getContentResolver().openOutputStream(uri);
-                sUtils.copyStream(inputStream, outStream);
-                inputStream.close();
-                outStream.close();
-            }
-        } catch(Exception ignored) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            try {
+                FileUtils FileUtils = new FileUtils(mSource.getAbsolutePath());
+                FileUtils.setProgress(mProgressDialog);
+                FileUtils.copyToDownloads(mContext);
+            } catch (IOException ignored) {}
         }
     }
 

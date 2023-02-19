@@ -25,8 +25,10 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
+import com.smartpack.packagemanager.utils.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
@@ -68,8 +70,12 @@ public class ExportAPKTasks extends sExecutor {
     @Override
     public void doInBackground() {
         sUtils.sleep(1);
-        sUtils.copy(new File(mAPKPath), new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
-                sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"), mProgressBar);
+        try {
+            FileUtils FileUtils = new FileUtils(mAPKPath);
+            FileUtils.setProgress(mProgressBar);
+            FileUtils.copy(new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
+                    sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"));
+        } catch (IOException ignored) {}
     }
 
     @SuppressLint("StringFormatInvalid")

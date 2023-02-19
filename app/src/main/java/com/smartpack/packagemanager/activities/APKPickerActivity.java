@@ -33,9 +33,11 @@ import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FileUtils;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
@@ -90,11 +92,11 @@ public class APKPickerActivity extends AppCompatActivity {
             @Override
             public void onPreExecute() {
                 mProgressDialog = new ProgressDialog(activity);
-                mProgressDialog.setMessage("\n" + activity.getString(R.string.initializing));
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 mProgressDialog.setIcon(R.mipmap.ic_launcher);
                 mProgressDialog.setTitle(R.string.app_name);
-                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.setMessage("\n" + activity.getString(R.string.initializing));
+                mProgressDialog.setIndeterminate(uri == null);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
 
@@ -111,7 +113,11 @@ public class APKPickerActivity extends AppCompatActivity {
             @Override
             public void doInBackground() {
                 if (uri != null) {
-                    sUtils.copy(uri, mFile, activity);
+                    try {
+                        FileUtils FileUtils = new FileUtils(mFile.getAbsolutePath());
+                        FileUtils.setProgress(mProgressDialog);
+                        FileUtils.copy(uri, activity);
+                    } catch (IOException ignored) {}
                 }
                 mAPKParser = new APKParser();
                 mAPKParser.parse(mFile.getAbsolutePath(), activity);

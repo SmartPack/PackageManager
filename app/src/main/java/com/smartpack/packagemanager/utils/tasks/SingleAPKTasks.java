@@ -21,8 +21,10 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.APKPickerActivity;
 import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Utils.sExecutor;
@@ -47,11 +49,10 @@ public class SingleAPKTasks extends sExecutor {
     @Override
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
         mProgressDialog.setTitle(R.string.app_name);
         mProgressDialog.setMessage("\n" + mActivity.getString(R.string.preparing_message));
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
         sUtils.delete(mActivity.getExternalFilesDir("APK"));
@@ -62,7 +63,11 @@ public class SingleAPKTasks extends sExecutor {
     public void doInBackground() {
         String fileName = Objects.requireNonNull(DocumentFile.fromSingleUri(mActivity, mURIFile)).getName();
         mFile = new File(mActivity.getExternalFilesDir("APK"), Objects.requireNonNull(fileName));
-        sUtils.copy(mURIFile, mFile, mActivity);
+        try {
+            FileUtils FileUtils = new FileUtils(mFile.getAbsolutePath());
+            FileUtils.setProgress(mProgressDialog);
+            FileUtils.copy(mURIFile, mActivity);
+        } catch (IOException ignored) {}
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -85,7 +90,7 @@ public class SingleAPKTasks extends sExecutor {
                     .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
                     })
                     .setPositiveButton(R.string.install, (dialogInterface, i) ->
-                            new AppBundleTasks(null, mFile.getAbsolutePath(), mActivity).execute()
+                            new AppBundleTasks(null, mFile.getAbsolutePath(), false, mActivity).execute()
                     ).show();
         } else {
             new MaterialAlertDialogBuilder(mActivity)

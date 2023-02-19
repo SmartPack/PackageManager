@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.FilePickerActivity;
@@ -32,28 +33,30 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class AppBundleTasks extends sExecutor {
 
     private final Activity mActivity;
-    private final LinearLayout mLinearLayout;
+    private final boolean mExit;
+    private final ProgressBar mProgressBar;
     private static ProgressDialog mProgressDialog;
     private final String mPath;
 
-    public AppBundleTasks(LinearLayout linearLayout, String path, Activity activity) {
-        mLinearLayout = linearLayout;
+    public AppBundleTasks(ProgressBar progressBar, String path, boolean exit, Activity activity) {
+        mProgressBar = progressBar;
         mPath = path;
+        mExit = exit;
         mActivity = activity;
 
     }
 
     @Override
     public void onPreExecute() {
-        if (mLinearLayout != null) {
-            mLinearLayout.setVisibility(View.VISIBLE);
+        if (mProgressBar != null) {
+            mProgressBar.setIndeterminate(false);
+            mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mProgressDialog = new ProgressDialog(mActivity);
             mProgressDialog.setMessage(mActivity.getString(R.string.preparing_message));
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             mProgressDialog.setIcon(R.mipmap.ic_launcher);
             mProgressDialog.setTitle(R.string.app_name);
-            mProgressDialog.setIndeterminate(true);
             mProgressDialog.setCancelable(false);
             mProgressDialog.show();
         }
@@ -67,6 +70,11 @@ public class AppBundleTasks extends sExecutor {
     @Override
     public void doInBackground() {
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(mPath)) {
+            if (mProgressBar != null) {
+                zipFileUtils.setProgress(mProgressBar);
+            } else {
+                zipFileUtils.setProgress(mProgressDialog);
+            }
             zipFileUtils.unzip(mActivity.getCacheDir().getAbsolutePath());
         } catch (IOException ignored) {}
         for (File files : SplitAPKInstaller.getFilesList(mActivity.getCacheDir())) {
@@ -84,17 +92,19 @@ public class AppBundleTasks extends sExecutor {
 
     @Override
     public void onPostExecute() {
-        if (mLinearLayout != null) {
-            mLinearLayout.setVisibility(View.GONE);
+        Common.getAppList().clear();
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBar.setIndeterminate(true);
         } else {
             try {
                 mProgressDialog.dismiss();
             } catch (IllegalArgumentException ignored) {
             }
         }
-        Common.getAppList().clear();
         Intent filePicker = new Intent(mActivity, FilePickerActivity.class);
         mActivity.startActivity(filePicker);
+        if (mExit) mActivity.finish();
     }
 
 }
