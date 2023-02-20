@@ -96,7 +96,7 @@ public class APKPickerActivity extends AppCompatActivity {
                 mProgressDialog.setIcon(R.mipmap.ic_launcher);
                 mProgressDialog.setTitle(R.string.app_name);
                 mProgressDialog.setMessage("\n" + activity.getString(R.string.initializing));
-                mProgressDialog.setIndeterminate(uri == null);
+                mProgressDialog.setIndeterminate(APKData.getAPKFile() != null);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
 
@@ -119,8 +119,10 @@ public class APKPickerActivity extends AppCompatActivity {
                         FileUtils.copy(uri, activity);
                     } catch (IOException ignored) {}
                 }
-                mAPKParser = new APKParser();
-                mAPKParser.parse(mFile.getAbsolutePath(), activity);
+                if (mFile.getName().endsWith(".apk")) {
+                    mAPKParser = new APKParser();
+                    mAPKParser.parse(mFile.getAbsolutePath(), activity);
+                }
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -131,7 +133,7 @@ public class APKPickerActivity extends AppCompatActivity {
                 } catch (IllegalArgumentException ignored) {
                 }
                 if (mFile.exists()) {
-                    if (mAPKParser.isParsed()) {
+                    if (mAPKParser != null && mAPKParser.isParsed()) {
                         loadAPKDetails(activity);
                     } else {
                         sUtils.toast(getString(R.string.wrong_extension, ".apk"), activity).show();
