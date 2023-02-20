@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 63. [v6.8](https://github.com/SmartPack/PackageManager/releases/tag/v6.8) *(February 20, 2023)*
+- App now shows better progress for various tasks (including main UI loading).
+- Improved handling APK's and app bundles.
+- Fixed few other bugs and crashes.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 62. [v6.7](https://github.com/SmartPack/PackageManager/releases/tag/v6.7) *(December 12, 2022)*
 - Allow tweaking permissions on Root or Shizuku supported devices.
 - Improved APK picker.

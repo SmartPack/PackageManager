@@ -2,7 +2,7 @@
 
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot001.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot002.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot003.jpg" alt="" width="250" height="450" /></p>
 
-[![](https://img.shields.io/badge/Package%20Manager-v6.7-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
+[![](https://img.shields.io/badge/Package%20Manager-v6.8-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
 ![](https://img.shields.io/github/contributors/smartpack/PackageManager)
 ![](https://img.shields.io/github/license/smartpack/PackageManager)
@@ -73,7 +73,7 @@ A list of people who contributed to this project is available [here](Credits.md)
 
 ## License
 
-    Copyright (C) 2022-2023 sunilpaulmathew <sunil.kde@gmail.com>
+    Copyright (C) 2023-2024 sunilpaulmathew <sunil.kde@gmail.com>
 
     Package Manager is a free softwares: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published
