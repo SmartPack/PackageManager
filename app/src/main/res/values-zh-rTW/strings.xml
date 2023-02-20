@@ -80,7 +80,10 @@
     <string name="uninstall_nope">"對不起！您不能從這裡開始！"</string>
     <string name="uninstall_summary">"正在刪除％s"</string>
     <string name="uninstall_title">"您確定要解除安裝％s嗎？"</string>
-    <string name="uninstall_warning">"請注意：刪除系統應用程式有時會很危險！\n\n*** <b>自行承擔使用風險</b> ***"</string>
+    <string name="uninstall_warning">"請注意：刪除系統應用程式有時會很危險！
+
+        *** <b>自行承擔使用風險</b> ***
+        "</string>
     <string name="version">"版本：％s"</string>
     <string name="welcome_message">"歡迎使用Package Manager，這是一個簡單但功能強大的應用程式，用於管理您的應用程式。"</string>
     <string name="wrong_extension">"請選擇一個文件％s 副檔名。"</string>
@@ -117,15 +120,69 @@
     <string name="split_apk_installer">"拆分APK安裝程序"</string>
     <string name="certificate">"證書"</string>
     <string name="manifest">"宣告"</string>
+    <string name="apks">"APK 的"</string>
     <string name="bundles">"捆綁"</string>
     <string name="delete">"删除"</string>
     <string name="delete_question">"刪除 '%s'?"</string>
     <string name="install_question">"安裝  '%s'?"</string>
+    <string name="reverse_order">"相反的順序"</string>
     <string name="show_apps_all">"全部"</string>
     <string name="show_apps_system">"系統"</string>
     <string name="show_apps_user">"使用者"</string>
     <string name="exported_apps">"導出的應用"</string>
     <string name="operations">"運作"</string>
+    <string name="operations_warning">"更改某些操作將是危險的。請僅在您知道自己在做什麼的情況下才這樣做。此外，請注意某些操作是無法更改的（關閉並返回此頁面以了解新狀態）。"</string>
+    <string name="bundle_path">"捆綁路徑"</string>
+    <string name="size_apk">"APK 大小：%s"</string>
+    <string name="size_bundle">"包大小：%s"</string>
+    <string name="file_permission_request_message">"為了使此功能在較新的 Android 版本（Android R 或更新版本）上運行，必須向包管理器授予“所有文件訪問”權限。請在單擊“授予”按鈕後打開的新屏幕中手動授予權限。"</string>
     <string name="grant">"給予"</string>
     <string name="select_all">"全選"</string>
+    <string name="select_all_summary">"選擇此頁面中的所有應用程序並將其添加到批處理列表中？"</string>
+    <string name="uninstall_status_failed">"卸載 %s 失敗或被用戶取消"</string>
+    <string name="export_apk_summary">"選定的 APK 導出到“%s”"</string>
+    <string name="initializing">"正在初始化…"</string>
+    <string name="start">"開始"</string>
+    <string name="size">"尺寸"</string>
+    <string name="time_installed">"安裝時間"</string>
+    <string name="time_updated">"更新時間"</string>
+    <string name="copyright">"版權所有：© %s"</string>
+    <string name="export_details">"出口詳情"</string>
+    <string name="export_details_message">"應用詳細信息導出為 %s"</string>
+    <string name="fdroid">"F-機器人"</string>
+    <string name="more">"更多的"</string>
+    <string name="search_market_message">"在 %s 中搜索"</string>
+    <string name="apk_installer_description">"單個 APK 文件"</string>
+    <string name="bundle_installer_description">"“apkm”、“apks”和“xapk”格式的應用程序包"</string>
+    <string name="exit_confirmation">"顯示確認"</string>
+    <string name="exit_simple">"簡單退出"</string>
+    <string name="exiting_app">"在退出應用程序時"</string>
+    <string name="exported_apps_name">"導出的 APK 名稱"</string>
+    <string name="general">"一般的"</string>
+    <string name="installer">"安裝程序"</string>
+    <string name="installer_clicking">"單擊安裝程序時"</string>
+    <string name="installer_file_picker">"啟動文件選擇器"</string>
+    <string name="installer_instructions">"顯示說明"</string>
+    <string name="installer_summary">"您可以通過單擊此頁面頂部的加號按鈕來選擇安裝文件。安裝程序支持以下軟件包："</string>
+    <string name="never_show_page">"不要再顯示這個"</string>
+    <string name="other">"其他"</string>
+    <string name="restore">"恢復"</string>
+    <string name="restore_message">"恢復“%s”的出廠版本？"</string>
+    <string name="restore_message_batch">"恢復以下應用的出廠版本？
+
+        %s"</string>
+    <string name="restore_success_message">"所選應用程序的出廠版本已成功恢復"</string>
+    <string name="split_apk_installer_description">"拆分 APK（具有相同包名的多個 APK 文件）"</string>
+    <string name="uninstalled_apps">"卸載的應用程序"</string>
+    <string name="user_interface">"用戶界面"</string>
+    <string name="uninstall_updates_message">"但是，安裝了“%s”的本地更新，可以通過單擊“卸載”按鈕自由刪除。"</string>
+    <string name="close">"關"</string>
+    <string name="bundle_install_question">"您確定要安裝選定的應用程序包嗎？"</string>
+    <string name="preparing_message">"準備…"</string>
+    <string name="save_to_downloads">"保存到下載"</string>
+    <string name="android_version">"安卓 %s"</string>
+    <string name="sdk_compile">"編譯 SDK: %s"</string>
+    <string name="sdk_minimum">"最低 SDK：%s"</string>
+    <string name="update">"更新"</string>
+    <string name="reload">"重新加載"</string>
 </resources>

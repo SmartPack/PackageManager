@@ -102,7 +102,7 @@
     <string name="share_app_Summary">"邀请您的朋友使用 Package Manager"</string>
     <string name="source_code_summary">"Package Manager 是一款开放源代码应用，可以随时接受开发社区的贡献。点击此处查看源代码！"</string>
     <string name="support_summary">"加入 Telegram 支持群组"</string>
-    <string name="batch_options">"批量处理选项 (%s)"</string>
+    <string name="batch_options">"批量处理选项"</string>
     <string name="batch_list_added">"%s 已被添加到批量处理列表中"</string>
     <string name="batch_list_export">"您确定要将以下应用导出到设备存储吗？"</string>
     <string name="batch_list_removed">"%s 已从批量处理列表中移除"</string>
@@ -184,4 +184,10 @@
     <string name="sdk_compile">"编译 SDK：%s"</string>
     <string name="sdk_minimum">"最低 SDK：%s"</string>
     <string name="update">"更新"</string>
+    <string name="reload">"刷新"</string>
+    <string name="disable_failed_message">"更改 %s 组件状态失败。 "</string>
+    <string name="never_show">"永不显示"</string>
+    <string name="request">"请求"</string>
+    <string name="shizuku_integration_message">"Package Manager 现在可以与 Shizuku API 集成以执行高级任务。如果您想使用 Shizuku 集成，请点击下面的按钮授予权限（一次性）。"</string>
+    <string name="feature_unavailable_message">"此功能需要 Root 或 Shizuku 支持"</string>
 </resources>

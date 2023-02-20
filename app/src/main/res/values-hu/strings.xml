@@ -81,7 +81,7 @@
     <string name="uninstall_title">"Biztosan eltávolítja a(z) %s -t?"</string>
     <string name="uninstall_warning">"Kérjük vegye figyelembe: A rendszeralkalmazások eltávolítása néha veszélyes lehet
 
-        *** <b>HASZNÁLJA FELELŐSÉGGEL</b> ***
+        ***<b>HASZNÁLJA FELELŐSÉGGEL</b>***
         "</string>
     <string name="version">"Verzió: %s"</string>
     <string name="welcome_message">"Üdvözöljük a Package Managerben, amely egy egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez."</string>
@@ -188,4 +188,5 @@
     <string name="never_show">"Ne mutassa"</string>
     <string name="request">"Kérés"</string>
     <string name="shizuku_integration_message">"A Package Manager most már integrálhatja a Shizuku API-t a fejlett feladatok elvégzéséhez. Ha használni szeretné a Shizuku integrációt, kérjük adja meg az engedélyt (egyszeri) az alábbi gombra kattintva."</string>
+    <string name="feature_unavailable_message">"Ehhez a funkcióhoz Root vagy Shizuku támogatás szükséges"</string>
 </resources>
