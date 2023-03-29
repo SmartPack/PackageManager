@@ -24,10 +24,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -57,7 +58,7 @@ public class BatchExportTask extends sExecutor {
     @Override
     public void doInBackground() {
         if (!PackageData.getPackageDir(mActivity).exists()) {
-            sUtils.mkdir(PackageData.getPackageDir(mActivity));
+            sFileUtils.mkdir(PackageData.getPackageDir(mActivity));
         }
         for (String packageID : Common.getBatchList()) {
             if (packageID.contains(".") && sPackageUtils.isPackageInstalled(packageID, mActivity)) {
@@ -73,11 +74,11 @@ public class BatchExportTask extends sExecutor {
                     } catch (IOException ignored) {}
                 } else {
                     Common.getOutput().append("** ").append(mActivity.getString(R.string.exporting, PackageData.getAppName(packageID, mActivity)));
-                    sUtils.copy(new File(sPackageUtils.getSourceDir(packageID, mActivity)), new File(PackageData.getPackageDir(mActivity), PackageData.getFileName(packageID, mActivity) + "_" +
+                    sFileUtils.copy(new File(sPackageUtils.getSourceDir(packageID, mActivity)), new File(PackageData.getPackageDir(mActivity), PackageData.getFileName(packageID, mActivity) + "_" +
                             sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(packageID, mActivity), mActivity) + ".apk"));
                 }
                 Common.getOutput().append(": ").append(mActivity.getString(R.string.done)).append(" *\n\n");
-                sUtils.sleep(1);
+                sCommonUtils.sleep(1);
             }
         }
     }

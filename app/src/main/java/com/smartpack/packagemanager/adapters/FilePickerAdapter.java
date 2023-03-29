@@ -25,8 +25,9 @@ import com.smartpack.packagemanager.utils.Utils;
 import java.io.File;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2020
@@ -52,21 +53,22 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
     public void onBindViewHolder(@NonNull FilePickerAdapter.ViewHolder holder, int position) {
         if (position == 0) {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
-            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
             holder.mIcon.setRotation(90);
             holder.mTitle.setText(null);
             holder.mSize.setText(null);
         } else if (new File(this.data.get(position)).isDirectory()) {
-            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_folder, holder.mIcon.getContext()));
-            if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
-                holder.mIcon.setBackground(sUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mIcon.getContext()));
+            if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
+                holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
             }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mDescription.setVisibility(View.GONE);
             holder.mSize.setVisibility(View.GONE);
             holder.mCheckBox.setVisibility(View.GONE);
         } else if (this.data.get(position).endsWith(".apk")) {
-            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), sCommonUtils.getColor(sThemeUtils.isDarkTheme(
+                    holder.mIcon.getContext()) ? R.color.colorWhite : R.color.colorBlack, holder.mIcon.getContext()), holder.mIcon.getContext()));
             if (sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()) != null) {
                 holder.mDescription.setText(sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()));
                 holder.mDescription.setVisibility(View.VISIBLE);
@@ -84,9 +86,9 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
             holder.mSize.setVisibility(View.VISIBLE);
             holder.mCheckBox.setVisibility(View.VISIBLE);
         } else {
-            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
-            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? sUtils.getColor(R.color.colorWhite, holder.mIcon.getContext()) :
-                    sUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
+            holder.mIcon.setColorFilter(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ? sCommonUtils.getColor(R.color.colorWhite, holder.mIcon.getContext()) :
+                    sCommonUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
             holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
             holder.mSize.setVisibility(View.VISIBLE);
         }

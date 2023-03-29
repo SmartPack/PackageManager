@@ -23,17 +23,17 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FileUtils;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -69,7 +69,7 @@ public class ExportAPKTasks extends sExecutor {
 
     @Override
     public void doInBackground() {
-        sUtils.sleep(1);
+        sCommonUtils.sleep(1);
         try {
             FileUtils FileUtils = new FileUtils(mAPKPath);
             FileUtils.setProgress(mProgressBar);

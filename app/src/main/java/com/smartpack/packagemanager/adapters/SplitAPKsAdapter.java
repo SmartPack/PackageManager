@@ -29,8 +29,10 @@ import com.smartpack.packagemanager.utils.Utils;
 import java.io.File;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
@@ -57,9 +59,11 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
         holder.mSize.setText(sAPKUtils.getAPKSize(new File(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                 .getContext()) + "/" + data.get(position)).length()));
         if (sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
+                .getContext()) + "/" + data.get(position), sCommonUtils.getColor(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ?
+                R.color.colorWhite : R.color.colorBlack, holder.mIcon.getContext()), holder.mIcon.getContext()) != null) {
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                    .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
+                    .getContext()) + "/" + data.get(position), sCommonUtils.getColor(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ?
+                    R.color.colorWhite : R.color.colorBlack, holder.mIcon.getContext()), holder.mIcon.getContext()));
         } else {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
         }

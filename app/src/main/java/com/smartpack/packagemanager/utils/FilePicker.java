@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on May 30, 2021
@@ -34,7 +35,7 @@ public class FilePicker {
                 }
             }
             Collections.sort(mDir, String.CASE_INSENSITIVE_ORDER);
-            if (!sUtils.getBoolean("az_order", true, activity)) {
+            if (!sCommonUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mDir);
             }
             mData.addAll(mDir);
@@ -48,7 +49,7 @@ public class FilePicker {
                 }
             }
             Collections.sort(mFiles, String.CASE_INSENSITIVE_ORDER);
-            if (!sUtils.getBoolean("az_order", true, activity)) {
+            if (!sCommonUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mFiles);
             }
             mData.addAll(mFiles);
@@ -70,8 +71,8 @@ public class FilePicker {
     }
 
     public static String getLastDirPath(Activity activity) {
-        String mDir = sUtils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
-        if (sUtils.exist(new File(mDir)) && mDir.contains(Environment.getExternalStorageDirectory().toString())) {
+        String mDir = sCommonUtils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
+        if (sFileUtils.exist(new File(mDir)) && mDir.contains(Environment.getExternalStorageDirectory().toString())) {
             return mDir;
         } else {
             return Environment.getExternalStorageDirectory().toString();

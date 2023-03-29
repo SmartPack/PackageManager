@@ -16,8 +16,8 @@ import com.smartpack.packagemanager.R;
 
 import java.io.File;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -36,14 +36,14 @@ public class CopyToStorageTasks extends sExecutor {
 
     @Override
     public void onPreExecute() {
-        if (!sUtils.exist(new File(mDest))) {
-            sUtils.mkdir(new File(mDest));
+        if (!sFileUtils.exist(new File(mDest))) {
+            sFileUtils.mkdir(new File(mDest));
         }
     }
 
     @Override
     public void doInBackground() {
-        sUtils.copy(new File(mPath), new File(mDest, new File(mPath).getName()));
+        sFileUtils.copy(new File(mPath), new File(mDest, new File(mPath).getName()));
     }
 
     @SuppressLint("StringFormatInvalid")

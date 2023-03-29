@@ -13,7 +13,7 @@ import android.os.Build;
 
 import java.util.ArrayList;
 
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by Lennoard <lennoardrai@gmail.com> on Mar 14, 2021

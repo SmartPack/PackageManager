@@ -24,7 +24,8 @@ import com.smartpack.packagemanager.utils.Utils;
 import java.io.File;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
@@ -50,26 +51,26 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
     public void onBindViewHolder(@NonNull PackageExploreAdapter.ViewHolder holder, int position) {
         if (position == 0) {
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
-            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
             holder.mIcon.setRotation(90);
             holder.mTitle.setText(null);
         } else if (new File(data.get(position)).isDirectory()) {
-            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
-            if (sUtils.isDarkTheme(holder.mIcon.getContext())) {
-                holder.mIcon.setBackground(sUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
+            if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
+                holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
             }
             holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
         } else if (PackageExplorer.isImageFile(data.get(position))) {
             if (PackageExplorer.getIconFromPath(data.get(position)) != null) {
                 holder.mIcon.setImageURI(PackageExplorer.getIconFromPath(data.get(position)));
             } else {
-                holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
+                holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
             }
             holder.mIcon.setBackground(null);
         } else {
-            holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
-            holder.mIcon.setColorFilter(sUtils.isDarkTheme(holder.mIcon.getContext()) ? sUtils.getColor(R.color.colorWhite,
-                    holder.mIcon.getContext()) : sUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
+            holder.mIcon.setColorFilter(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ? sCommonUtils.getColor(R.color.colorWhite,
+                    holder.mIcon.getContext()) : sCommonUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
             holder.mIcon.setBackground(null);
         }
         holder.mTitle.setText(new File(data.get(position)).getName());

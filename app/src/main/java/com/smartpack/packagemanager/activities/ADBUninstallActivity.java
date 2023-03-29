@@ -24,8 +24,8 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 28, 2021
@@ -60,7 +60,7 @@ public class ADBUninstallActivity extends AppCompatActivity {
 
         mGotIt.setOnClickListener(v -> finish());
 
-        mDocumentation.setOnClickListener(v -> sUtils.launchUrl("https://smartpack.github.io/adb-debloating/", this));
+        mDocumentation.setOnClickListener(v -> sCommonUtils.launchUrl("https://smartpack.github.io/adb-debloating/", this));
 
         mUninstallButton.setOnClickListener(v -> {
             Intent remove = new Intent(Intent.ACTION_DELETE);

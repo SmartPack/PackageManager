@@ -17,10 +17,11 @@ import com.smartpack.packagemanager.utils.Common;
 
 import java.io.File;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sInstallerParams;
-import in.sunilpaulmathew.sCommon.Utils.sInstallerUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.InstallerUtils.sInstallerParams;
+import in.sunilpaulmathew.sCommon.InstallerUtils.sInstallerUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -38,7 +39,7 @@ public class SplitAPKsInstallationTasks extends sExecutor {
         int totalSize = 0;
         if (Common.getAppList().size() > 0) {
             for (String string : Common.getAppList()) {
-                if (sUtils.exist(new File(string))) {
+                if (sFileUtils.exist(new File(string))) {
                     File mFile = new File(string);
                     if (mFile.exists() && mFile.getName().endsWith(".apk")) {
                         totalSize += mFile.length();
@@ -52,7 +53,7 @@ public class SplitAPKsInstallationTasks extends sExecutor {
     @Override
     public void onPreExecute() {
         Intent installIntent = new Intent(mActivity, InstallerActivity.class);
-        sUtils.saveString("installationStatus", "waiting", mActivity);
+        sCommonUtils.saveString("installationStatus", "waiting", mActivity);
         mActivity.startActivity(installIntent);
     }
 

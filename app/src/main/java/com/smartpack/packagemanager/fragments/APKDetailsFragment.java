@@ -22,7 +22,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.APKDetailsAdapter;
 import com.smartpack.packagemanager.utils.APKData;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 26, 2022

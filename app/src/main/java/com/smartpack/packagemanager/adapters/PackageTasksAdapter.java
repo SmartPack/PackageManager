@@ -31,8 +31,8 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
@@ -72,7 +72,7 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
         holder.appName.setText(data.get(position).getAppName());
         holder.appIcon.setOnClickListener(v -> {
             if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                sUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
+                sCommonUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
                 return;
             }
             Common.setApplicationName(data.get(position).getAppName());
@@ -83,16 +83,16 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
         holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position).getPackageName()));
         holder.checkBox.setOnClickListener(v -> {
             if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                sUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
+                sCommonUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
                 holder.checkBox.setChecked(false);
                 return;
             }
             if (Common.getBatchList().contains(data.get(position).getPackageName())) {
                 Common.getBatchList().remove(data.get(position).getPackageName());
-                sUtils.snackBar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName())).show();
+                sCommonUtils.snackBar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName())).show();
             } else {
                 Common.getBatchList().add(data.get(position).getPackageName());
-                sUtils.snackBar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName())).show();
+                sCommonUtils.snackBar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName())).show();
             }
             Common.getBatchOptionsCard().setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
             Common.getBatchOptionTitle().setText(v.getContext().getString(R.string.batch_options, Common.getBatchList().size()));
@@ -122,7 +122,7 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
         @Override
         public void onClick(View view) {
             if (!sPackageUtils.isPackageInstalled(data.get(getAdapterPosition()).getPackageName(), view.getContext())) {
-                sUtils.snackBar(view, view.getContext().getString(R.string.package_removed)).show();
+                sCommonUtils.snackBar(view, view.getContext().getString(R.string.package_removed)).show();
                 return;
             }
             Common.setApplicationID(data.get(getAdapterPosition()).getPackageName());

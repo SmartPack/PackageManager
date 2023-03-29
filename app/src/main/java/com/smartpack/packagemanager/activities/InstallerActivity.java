@@ -30,9 +30,10 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 06, 2021
@@ -75,7 +76,7 @@ public class InstallerActivity extends AppCompatActivity {
                 startActivity(launchIntent);
                 finish();
             } else {
-                sUtils.snackBar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this))).show();
+                sCommonUtils.snackBar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this))).show();
             }
             PackageData.getRawData().add(new PackageItems(Common.getApplicationID(),
                     sPackageUtils.getAppName(Common.getApplicationID(), this).toString(),
@@ -109,8 +110,10 @@ public class InstallerActivity extends AppCompatActivity {
     private Drawable getIcon() {
         Drawable icon = null;
         for (String mAPKs : Common.getAppList()) {
-            if (sAPKUtils.getAPKIcon(mAPKs, this) != null) {
-                icon = sAPKUtils.getAPKIcon(mAPKs, this);
+            if (sAPKUtils.getAPKIcon(mAPKs, sCommonUtils.getColor(sThemeUtils.isDarkTheme(this) ? R.color.colorWhite :
+                    R.color.colorBlack, this), this) != null) {
+                icon = sAPKUtils.getAPKIcon(mAPKs, sCommonUtils.getColor(sThemeUtils.isDarkTheme(this) ?
+                        R.color.colorWhite : R.color.colorBlack, this), this);
             }
         }
         return icon;
@@ -118,10 +121,10 @@ public class InstallerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (sUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
+        if (sCommonUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
         }
-        if (sUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
+        if (sCommonUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
             if (!Common.isUpdating()) {
                 try {
                     PackageData.getRawData().add(new PackageItems(Common.getApplicationID(),
@@ -165,7 +168,7 @@ public class InstallerActivity extends AppCompatActivity {
                         break;
                     }
                     activity.runOnUiThread(() -> {
-                        String installationStatus = sUtils.getString("installationStatus", "waiting", activity);
+                        String installationStatus = sCommonUtils.getString("installationStatus", "waiting", activity);
                         if (installationStatus.equals("waiting")) {
                             activity.mStatus.setText(activity.getString(R.string.installing_bundle));
                         } else {

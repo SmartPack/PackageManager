@@ -10,7 +10,7 @@ package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 17, 2021
@@ -18,7 +18,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class Billing {
 
     public static void showDonateOption(Activity activity) {
-        sUtils.launchUrl("https://smartpack.github.io/donation/", activity);
+        sCommonUtils.launchUrl("https://smartpack.github.io/donation/", activity);
     }
 
 }

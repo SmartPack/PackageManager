@@ -27,8 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -55,7 +55,7 @@ public class SingleAPKTasks extends sExecutor {
         mProgressDialog.setMessage("\n" + mActivity.getString(R.string.preparing_message));
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
-        sUtils.delete(mActivity.getExternalFilesDir("APK"));
+        sFileUtils.delete(mActivity.getExternalFilesDir("APK"));
         Common.getAppList().clear();
     }
 

@@ -25,8 +25,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 12, 2020
@@ -37,9 +38,9 @@ public class PackageData {
 
     public static void makePackageFolder(Context context) {
         if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
-            sUtils.delete(getPackageDir(context));
+            sFileUtils.delete(getPackageDir(context));
         }
-        sUtils.mkdir(getPackageDir(context));
+        sFileUtils.mkdir(getPackageDir(context));
     }
 
     private static List<PackageItems> getRawData(ProgressBar progressBar, Context context) {
@@ -73,9 +74,9 @@ public class PackageData {
         boolean mAppType;
         List<PackageItems> mData = new ArrayList<>();
         for (PackageItems item : getRawData()) {
-            if (sUtils.getString("appTypes", "all", context).equals("system")) {
+            if (sCommonUtils.getString("appTypes", "all", context).equals("system")) {
                 mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
-            } else if (sUtils.getString("appTypes", "all", context).equals("user")) {
+            } else if (sCommonUtils.getString("appTypes", "all", context).equals("user")) {
                 mAppType = (!sPackageUtils.isSystemApp(item.getPackageName(), context));
             } else {
                 mAppType = true;
@@ -88,19 +89,19 @@ public class PackageData {
                     mData.add(item);
                 }
             }
-            if (sUtils.getBoolean("sort_name", false, context)) {
+            if (sCommonUtils.getBoolean("sort_name", false, context)) {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_size", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sCommonUtils.getBoolean("sort_size", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(PackageItems::getAPKSize));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_installed", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sCommonUtils.getBoolean("sort_installed", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(PackageItems::getInstalledTime));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sUtils.getBoolean("sort_updated", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sCommonUtils.getBoolean("sort_updated", false, context)) {
                 Collections.sort(mData, Comparator.comparingLong(PackageItems::getUpdatedTime));
             } else {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
             }
         }
-        if (sUtils.getBoolean("reverse_order", false, context)) {
+        if (sCommonUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;
@@ -119,7 +120,7 @@ public class PackageData {
     }
 
     public static String getFileName(String packageName, Context context) {
-        if (sUtils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
+        if (sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
             return getAppName(packageName, context);
         } else {
             return packageName;

@@ -1,15 +1,8 @@
-<com.google.android.material.card.MaterialCardView
+<HorizontalScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_gravity="start"
-    app:cardCornerRadius="15dp" >
+    android:padding="5dp" >
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <include layout="@layout/layout_recyclerview" />
-    </HorizontalScrollView>
-</com.google.android.material.card.MaterialCardView>
+    <include layout="@layout/layout_recyclerview" />
+</HorizontalScrollView>

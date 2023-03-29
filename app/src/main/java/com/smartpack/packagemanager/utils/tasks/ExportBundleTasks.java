@@ -33,10 +33,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -72,7 +72,7 @@ public class ExportBundleTasks extends sExecutor {
 
     @Override
     public void doInBackground() {
-        sUtils.sleep(1);
+        sCommonUtils.sleep(1);
         List<File> mFiles = new ArrayList<>();
         for (final String splitApps : SplitAPKInstaller.splitApks(mAPKPath)) {
             mFiles.add(new File(mAPKPath + "/" + splitApps));

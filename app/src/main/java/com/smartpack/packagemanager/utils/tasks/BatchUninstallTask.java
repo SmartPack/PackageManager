@@ -19,9 +19,9 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -73,7 +73,7 @@ public class BatchUninstallTask extends sExecutor {
                     Common.getOutput().append(sPackageUtils.isPackageInstalled(packageID, mActivity) ? ": " +
                             mActivity.getString(R.string.failed) + " *\n\n" : ": " + mActivity.getString(R.string.done) + " *\n\n");
                 }
-                sUtils.sleep(1);
+                sCommonUtils.sleep(1);
             }
         }
     }

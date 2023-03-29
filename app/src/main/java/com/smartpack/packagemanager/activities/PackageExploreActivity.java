@@ -34,8 +34,9 @@ import com.smartpack.packagemanager.utils.PackageExplorer;
 import java.io.File;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2020
@@ -61,7 +62,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         mTitle.setText(Common.getApplicationName());
 
         mBack.setOnClickListener(v -> {
-            sUtils.delete(new File(getCacheDir().getPath(), "apk"));
+            sFileUtils.delete(new File(getCacheDir().getPath(), "apk"));
             super.onBackPressed();
         });
 
@@ -107,9 +108,9 @@ public class PackageExploreActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSortButton);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, "A-Z").setCheckable(true)
-                    .setChecked(sUtils.getBoolean("az_order", true, this));
+                    .setChecked(sCommonUtils.getBoolean("az_order", true, this));
             popupMenu.setOnMenuItemClickListener(item -> {
-                sUtils.saveBoolean("az_order", !sUtils.getBoolean("az_order", true, this), this);
+                sCommonUtils.saveBoolean("az_order", !sCommonUtils.getBoolean("az_order", true, this), this);
                 reload(this);
                 return false;
             });
@@ -141,7 +142,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (Common.getPath().equals(getCacheDir().toString() + "/apk/")) {
-            sUtils.delete(new File(getCacheDir().getPath(),"apk"));
+            sFileUtils.delete(new File(getCacheDir().getPath(),"apk"));
             finish();
         } else {
             Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());

@@ -34,9 +34,11 @@ import com.smartpack.packagemanager.utils.tasks.SaveToDownloadsTasks;
 import java.io.File;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
@@ -65,21 +67,22 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
                 holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
             } else {
-                holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
+                holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), sCommonUtils.getColor(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ?
+                        R.color.colorWhite : Color.BLACK, holder.mIcon.getContext()), holder.mIcon.getContext()));
             }
             holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
         } else {
             if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext())) {
                 holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext()));
             } else {
-                holder.mIcon.setImageDrawable(sUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
+                holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
                 holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             }
             holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
         }
-        holder.mTitle.setTextColor(sUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+        holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
-        holder.mAction.setImageDrawable(sUtils.getDrawable(R.drawable.ic_settings, holder.mAction.getContext()));
+        holder.mAction.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_settings, holder.mAction.getContext()));
         holder.mAction.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             Menu menu = popupMenu.getMenu();
@@ -112,7 +115,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialog, id) -> {
                                 })
                                 .setPositiveButton(v.getContext().getString(R.string.delete), (dialog, id) -> {
-                                    sUtils.delete(new File(data.get(position)));
+                                    sFileUtils.delete(new File(data.get(position)));
                                     data.remove(position);
                                     notifyDataSetChanged();
                                 }).show();

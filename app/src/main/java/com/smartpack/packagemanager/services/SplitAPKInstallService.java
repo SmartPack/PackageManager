@@ -13,7 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.os.IBinder;
 
-import in.sunilpaulmathew.sCommon.Utils.sInstallerUtils;
+import in.sunilpaulmathew.sCommon.InstallerUtils.sInstallerUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 25, 2021

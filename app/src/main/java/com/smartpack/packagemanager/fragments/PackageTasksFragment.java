@@ -73,10 +73,11 @@ import java.io.File;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
@@ -120,13 +121,13 @@ public class PackageTasksFragment extends Fragment {
         mShizukuShell = new ShizukuShell();
 
         if (!mRootShell.rootAccess() && mShizukuShell.isSupported() && mShizukuShell.isPermissionDenied()
-                && sUtils.getBoolean("request_shizuku", true, requireActivity())) {
+                && sCommonUtils.getBoolean("request_shizuku", true, requireActivity())) {
             new MaterialAlertDialogBuilder(requireActivity())
                     .setCancelable(false)
                     .setIcon(R.mipmap.ic_launcher)
                     .setTitle(getString(R.string.app_name))
                     .setMessage(getString(R.string.shizuku_integration_message))
-                    .setNegativeButton(getString(R.string.never_show), (dialogInterface, i) -> sUtils.saveBoolean(
+                    .setNegativeButton(getString(R.string.never_show), (dialogInterface, i) -> sCommonUtils.saveBoolean(
                             "request_shizuku", false, requireActivity()))
                     .setPositiveButton(getString(R.string.request), (dialogInterface, i) -> mShizukuShell.requestPermission()
                     ).show();
@@ -143,23 +144,23 @@ public class PackageTasksFragment extends Fragment {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = sUtils.getString("appTypes", "all", requireActivity());
+                String mStatus = sCommonUtils.getString("appTypes", "all", requireActivity());
                 switch (tab.getPosition()) {
                     case 0:
                         if (!mStatus.equals("all")) {
-                            sUtils.saveString("appTypes", "all", requireActivity());
+                            sCommonUtils.saveString("appTypes", "all", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("system")) {
-                            sUtils.saveString("appTypes", "system", requireActivity());
+                            sCommonUtils.saveString("appTypes", "system", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
                     case 2:
                         if (!mStatus.equals("user")) {
-                            sUtils.saveString("appTypes", "user", requireActivity());
+                            sCommonUtils.saveString("appTypes", "user", requireActivity());
                             loadUI(requireActivity());
                         }
                         break;
@@ -239,12 +240,12 @@ public class PackageTasksFragment extends Fragment {
                             })
                             .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> exit(requireActivity())
                             ).show();
-                } else if (sUtils.getBoolean("exit_confirmation", true, requireActivity())) {
+                } else if (sCommonUtils.getBoolean("exit_confirmation", true, requireActivity())) {
                     if (mExit) {
                         mExit = false;
                         exit(requireActivity());
                     } else {
-                        sUtils.snackBar(mRootView, getString(R.string.press_back)).show();
+                        sCommonUtils.snackBar(mRootView, getString(R.string.press_back)).show();
                         mExit = true;
                         mHandler.postDelayed(() -> mExit = false, 2000);
                     }
@@ -258,7 +259,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private int getTabPosition(Activity activity) {
-        String mStatus = sUtils.getString("appTypes", "all", activity);
+        String mStatus = sCommonUtils.getString("appTypes", "all", activity);
         if (mStatus.equals("user")) {
             return 2;
         } else if (mStatus.equals("system")) {
@@ -275,7 +276,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private void selectAll(boolean b) {
-        sUtils.saveBoolean("select_all", b, requireActivity());
+        sCommonUtils.saveBoolean("select_all", b, requireActivity());
         loadUI(requireActivity());
     }
 
@@ -298,76 +299,76 @@ public class PackageTasksFragment extends Fragment {
         Menu menu = popupMenu.getMenu();
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
         sort.add(0, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(sUtils.getBoolean("sort_name", false, activity));
+                .setChecked(sCommonUtils.getBoolean("sort_name", false, activity));
         sort.add(0, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(sUtils.getBoolean("sort_id", true, activity));
+                .setChecked(sCommonUtils.getBoolean("sort_id", true, activity));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sort.add(0, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
-                    .setChecked(sUtils.getBoolean("sort_installed", false, activity));
+                    .setChecked(sCommonUtils.getBoolean("sort_installed", false, activity));
             sort.add(0, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
-                    .setChecked(sUtils.getBoolean("sort_updated", false, activity));
+                    .setChecked(sCommonUtils.getBoolean("sort_updated", false, activity));
             sort.add(0, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
-                    .setChecked(sUtils.getBoolean("sort_size", false, activity));
+                    .setChecked(sCommonUtils.getBoolean("sort_size", false, activity));
         }
         menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                .setChecked(sUtils.getBoolean("reverse_order", false, activity));
+                .setChecked(sCommonUtils.getBoolean("reverse_order", false, activity));
         sort.setGroupCheckable(0, true, true);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
                     break;
                 case 1:
-                    if (!sUtils.getBoolean("sort_name", false, activity)) {
-                        sUtils.saveBoolean("sort_name", true, activity);
-                        sUtils.saveBoolean("sort_id", false, activity);
-                        sUtils.saveBoolean("sort_installed", false, activity);
-                        sUtils.saveBoolean("sort_updated", false, activity);
-                        sUtils.saveBoolean("sort_size", false, activity);
+                    if (!sCommonUtils.getBoolean("sort_name", false, activity)) {
+                        sCommonUtils.saveBoolean("sort_name", true, activity);
+                        sCommonUtils.saveBoolean("sort_id", false, activity);
+                        sCommonUtils.saveBoolean("sort_installed", false, activity);
+                        sCommonUtils.saveBoolean("sort_updated", false, activity);
+                        sCommonUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 2:
-                    if (!sUtils.getBoolean("sort_id", true, activity)) {
-                        sUtils.saveBoolean("sort_name", false, activity);
-                        sUtils.saveBoolean("sort_id", true, activity);
-                        sUtils.saveBoolean("sort_installed", false, activity);
-                        sUtils.saveBoolean("sort_updated", false, activity);
-                        sUtils.saveBoolean("sort_size", false, activity);
+                    if (!sCommonUtils.getBoolean("sort_id", true, activity)) {
+                        sCommonUtils.saveBoolean("sort_name", false, activity);
+                        sCommonUtils.saveBoolean("sort_id", true, activity);
+                        sCommonUtils.saveBoolean("sort_installed", false, activity);
+                        sCommonUtils.saveBoolean("sort_updated", false, activity);
+                        sCommonUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
-                    if (!sUtils.getBoolean("sort_installed", false, activity)) {
-                        sUtils.saveBoolean("sort_name", false, activity);
-                        sUtils.saveBoolean("sort_id", false, activity);
-                        sUtils.saveBoolean("sort_installed", true, activity);
-                        sUtils.saveBoolean("sort_updated", false, activity);
-                        sUtils.saveBoolean("sort_size", false, activity);
+                    if (!sCommonUtils.getBoolean("sort_installed", false, activity)) {
+                        sCommonUtils.saveBoolean("sort_name", false, activity);
+                        sCommonUtils.saveBoolean("sort_id", false, activity);
+                        sCommonUtils.saveBoolean("sort_installed", true, activity);
+                        sCommonUtils.saveBoolean("sort_updated", false, activity);
+                        sCommonUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 4:
-                    if (!sUtils.getBoolean("sort_updated", false, activity)) {
-                        sUtils.saveBoolean("sort_name", false, activity);
-                        sUtils.saveBoolean("sort_id", false, activity);
-                        sUtils.saveBoolean("sort_installed", false, activity);
-                        sUtils.saveBoolean("sort_updated", true, activity);
-                        sUtils.saveBoolean("sort_size", false, activity);
+                    if (!sCommonUtils.getBoolean("sort_updated", false, activity)) {
+                        sCommonUtils.saveBoolean("sort_name", false, activity);
+                        sCommonUtils.saveBoolean("sort_id", false, activity);
+                        sCommonUtils.saveBoolean("sort_installed", false, activity);
+                        sCommonUtils.saveBoolean("sort_updated", true, activity);
+                        sCommonUtils.saveBoolean("sort_size", false, activity);
                         loadUI(activity);
                     }
                     break;
                 case 5:
-                    if (!sUtils.getBoolean("sort_size", false, activity)) {
-                        sUtils.saveBoolean("sort_name", false, activity);
-                        sUtils.saveBoolean("sort_id", false, activity);
-                        sUtils.saveBoolean("sort_installed", false, activity);
-                        sUtils.saveBoolean("sort_updated", false, activity);
-                        sUtils.saveBoolean("sort_size", true, activity);
+                    if (!sCommonUtils.getBoolean("sort_size", false, activity)) {
+                        sCommonUtils.saveBoolean("sort_name", false, activity);
+                        sCommonUtils.saveBoolean("sort_id", false, activity);
+                        sCommonUtils.saveBoolean("sort_installed", false, activity);
+                        sCommonUtils.saveBoolean("sort_updated", false, activity);
+                        sCommonUtils.saveBoolean("sort_size", true, activity);
                         loadUI(activity);
                     }
                     break;
                 case 6:
-                    sUtils.saveBoolean("reverse_order", !sUtils.getBoolean("reverse_order", false, activity), activity);
+                    sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, activity), activity);
                     loadUI(activity);
                     break;
             }
@@ -428,7 +429,7 @@ public class PackageTasksFragment extends Fragment {
                     }.execute();
                     break;
                 case 1:
-                    if (sUtils.getBoolean("neverShow", false, requireActivity())) {
+                    if (sCommonUtils.getBoolean("neverShow", false, requireActivity())) {
                         if (Flavor.isFullVersion()) {
                             Common.getAppList().clear();
                             Common.setPath(FilePicker.getLastDirPath(activity));
@@ -546,7 +547,7 @@ public class PackageTasksFragment extends Fragment {
                                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     activity);
                         }
-                        sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+                        sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
                     } else {
                         MaterialAlertDialogBuilder export = new MaterialAlertDialogBuilder(activity);
                         export.setIcon(R.mipmap.ic_launcher);
@@ -577,10 +578,10 @@ public class PackageTasksFragment extends Fragment {
                                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     requireActivity());
                         }
-                        sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
+                        sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                     } else {
                         if (!PackageData.getPackageDir(activity).exists()) {
-                            sUtils.mkdir(PackageData.getPackageDir(activity));
+                            sFileUtils.mkdir(PackageData.getPackageDir(activity));
                         }
                         File mJSON = new File(PackageData.getPackageDir(requireActivity()), "package_details.json");
                         try {
@@ -592,8 +593,8 @@ public class PackageTasksFragment extends Fragment {
                                 }
                             }
                             obj.put("applications", apps);
-                            sUtils.create(obj.toString(), mJSON);
-                            sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
+                            sFileUtils.create(obj.toString(), mJSON);
+                            sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
                         } catch (JSONException ignored) {
                         }
                     }
@@ -602,7 +603,7 @@ public class PackageTasksFragment extends Fragment {
                     if (PackageData.getData(activity).size() == Common.getBatchList().size()) {
                         selectAll(false);
                     } else {
-                        if (sUtils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
+                        if (sCommonUtils.getBoolean("select_all_firstAttempt", true, requireActivity())) {
                             new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
                                     .setIcon(R.mipmap.ic_launcher)
                                     .setTitle(getString(R.string.sure_question))
@@ -612,7 +613,7 @@ public class PackageTasksFragment extends Fragment {
                                     })
                                     .setPositiveButton(getString(R.string.select_all), (dialog, id) -> {
                                         selectAll(true);
-                                        sUtils.saveBoolean("select_all_firstAttempt", false, requireActivity());
+                                        sCommonUtils.saveBoolean("select_all_firstAttempt", false, requireActivity());
                                     }).show();
                         } else {
                             selectAll(true);
@@ -637,7 +638,7 @@ public class PackageTasksFragment extends Fragment {
                 mProgress.setVisibility(View.VISIBLE);
                 mBatchOptions.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.GONE);
-                if (sUtils.getBoolean("select_all", false, activity)) {
+                if (sCommonUtils.getBoolean("select_all", false, activity)) {
                     Common.getBatchList().clear();
                     for (PackageItems mPackage : PackageData.getData(activity)) {
                         Common.getBatchList().add(mPackage.getPackageName());
@@ -656,8 +657,8 @@ public class PackageTasksFragment extends Fragment {
             @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
             @Override
             public void onPostExecute() {
-                if (sUtils.getBoolean("select_all", false, activity)) {
-                    sUtils.saveBoolean("select_all", false, activity);
+                if (sCommonUtils.getBoolean("select_all", false, activity)) {
+                    sCommonUtils.saveBoolean("select_all", false, activity);
                     mBatchOptions.setVisibility(View.VISIBLE);
                 } else {
                     mBatchOptions.setVisibility(View.GONE);
@@ -717,7 +718,7 @@ public class PackageTasksFragment extends Fragment {
                         Common.isUninstall(false);
                     } else {
                         // If uninstallation cancelled or failed
-                        sUtils.snackBar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity()))).show();
+                        sCommonUtils.snackBar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity()))).show();
                         Common.getBatchList().remove(0);
                         handleUninstallEvent();
                     }

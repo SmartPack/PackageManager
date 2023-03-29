@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
@@ -27,7 +28,7 @@ public class Downloads {
     public static List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
         for (File mFile : getDownloadList(context)) {
-            if (sUtils.getString("downloadTypes", "apks", context).equals("bundles")) {
+            if (sCommonUtils.getString("downloadTypes", "apks", context).equals("bundles")) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
                     if (mSearchText == null) {
                         mData.add(mFile.getAbsolutePath());
@@ -45,7 +46,7 @@ public class Downloads {
                 }
             }
         }
-        if (sUtils.getBoolean("reverse_order_exports", false, context)) {
+        if (sCommonUtils.getBoolean("reverse_order_exports", false, context)) {
             Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(rhs, lhs));
         } else {
             Collections.sort(mData, String.CASE_INSENSITIVE_ORDER);
@@ -64,7 +65,7 @@ public class Downloads {
 
     private static File[] getDownloadList(Context context) {
         if (!PackageData.getPackageDir(context).exists()) {
-            sUtils.mkdir(PackageData.getPackageDir(context));
+            sFileUtils.mkdir(PackageData.getPackageDir(context));
         }
         return PackageData.getPackageDir(context).listFiles();
     }

@@ -18,7 +18,7 @@ import com.smartpack.packagemanager.utils.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023

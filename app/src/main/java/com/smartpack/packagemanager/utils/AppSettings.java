@@ -16,9 +16,10 @@ import com.smartpack.packagemanager.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sSerializableItems;
-import in.sunilpaulmathew.sCommon.Utils.sSingleChoiceDialog;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sSerializableItems;
+import in.sunilpaulmathew.sCommon.Dialog.sSingleChoiceDialog;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
@@ -26,7 +27,7 @@ import in.sunilpaulmathew.sCommon.Utils.sUtils;
 public class AppSettings {
 
     public static int getAPKNameOptionsPosition(Context context) {
-        if (sUtils.getString("exportedAPKName", context.getString(R.string.package_id), context)
+        if (sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context)
                 .equals(context.getString(R.string.name))) {
             return 1;
         } else {
@@ -35,7 +36,7 @@ public class AppSettings {
     }
 
     public static int getExitMenuPosition(Context context) {
-        if (sUtils.getBoolean("exit_confirmation", true, context)) {
+        if (sCommonUtils.getBoolean("exit_confirmation", true, context)) {
             return 1;
         } else {
             return 0;
@@ -43,7 +44,7 @@ public class AppSettings {
     }
 
     public static int getInstallerOptionsPosition(Context context) {
-        if (sUtils.getBoolean("neverShow", false, context)) {
+        if (sCommonUtils.getBoolean("neverShow", false, context)) {
             return 1;
         } else {
             return 0;
@@ -94,7 +95,7 @@ public class AppSettings {
     }
 
     public static String getLanguage(Activity activity) {
-        switch (sUtils.getLanguage(activity)) {
+        switch (sThemeUtils.getLanguage(activity)) {
             case "en_US":
                 return activity.getString(R.string.language_en);
             case "ko":
@@ -139,11 +140,11 @@ public class AppSettings {
     }
 
     public static String getExportedAPKName(Activity activity) {
-        return sUtils.getString("exportedAPKName", activity.getString(R.string.package_id), activity);
+        return sCommonUtils.getString("exportedAPKName", activity.getString(R.string.package_id), activity);
     }
 
     public static String getExitingStatus(Activity activity) {
-        if (sUtils.getBoolean("exit_confirmation", true, activity)) {
+        if (sCommonUtils.getBoolean("exit_confirmation", true, activity)) {
             return activity.getString(R.string.exit_confirmation);
         } else {
             return activity.getString(R.string.exit_simple);
@@ -151,7 +152,7 @@ public class AppSettings {
     }
 
     public static String getInstallerStatus(Activity activity) {
-        if (sUtils.getBoolean("neverShow", false, activity)) {
+        if (sCommonUtils.getBoolean("neverShow", false, activity)) {
             return activity.getString(R.string.installer_file_picker);
         } else {
             return activity.getString(R.string.installer_instructions);
@@ -212,122 +213,122 @@ public class AppSettings {
             public void onItemSelected(int position) {
                 switch (position) {
                     case 0:
-                        if (!sUtils.getLanguage(activity).equals(java.util.Locale.getDefault().getLanguage())) {
-                            sUtils.saveString("appLanguage", java.util.Locale.getDefault().getLanguage(), activity);
+                        if (!sThemeUtils.getLanguage(activity).equals(java.util.Locale.getDefault().getLanguage())) {
+                            sCommonUtils.saveString("appLanguage", java.util.Locale.getDefault().getLanguage(), activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 1:
-                        if (!sUtils.getLanguage(activity).equals("en_US")) {
-                            sUtils.saveString("appLanguage", "en_US", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("en_US")) {
+                            sCommonUtils.saveString("appLanguage", "en_US", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 2:
-                        if (!sUtils.getLanguage(activity).equals("ko")) {
-                            sUtils.saveString("appLanguage", "ko", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("ko")) {
+                            sCommonUtils.saveString("appLanguage", "ko", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 3:
-                        if (!sUtils.getLanguage(activity).equals("am")) {
-                            sUtils.saveString("appLanguage", "am", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("am")) {
+                            sCommonUtils.saveString("appLanguage", "am", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 4:
-                        if (!sUtils.getLanguage(activity).equals("el")) {
-                            sUtils.saveString("appLanguage", "el", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("el")) {
+                            sCommonUtils.saveString("appLanguage", "el", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 5:
-                        if (!sUtils.getLanguage(activity).equals("ml")) {
-                            sUtils.saveString("appLanguage", "ml", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("ml")) {
+                            sCommonUtils.saveString("appLanguage", "ml", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 6:
-                        if (!sUtils.getLanguage(activity).equals("pt")) {
-                            sUtils.saveString("appLanguage", "pt", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("pt")) {
+                            sCommonUtils.saveString("appLanguage", "pt", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 7:
-                        if (!sUtils.getLanguage(activity).equals("ru")) {
-                            sUtils.saveString("appLanguage", "ru", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("ru")) {
+                            sCommonUtils.saveString("appLanguage", "ru", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 8:
-                        if (!sUtils.getLanguage(activity).equals("uk")) {
-                            sUtils.saveString("appLanguage", "uk", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("uk")) {
+                            sCommonUtils.saveString("appLanguage", "uk", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 9:
-                        if (!sUtils.getLanguage(activity).equals("fr")) {
-                            sUtils.saveString("appLanguage", "fr", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("fr")) {
+                            sCommonUtils.saveString("appLanguage", "fr", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 10:
-                        if (!sUtils.getLanguage(activity).equals("de")) {
-                            sUtils.saveString("appLanguage", "de", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("de")) {
+                            sCommonUtils.saveString("appLanguage", "de", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 11:
-                        if (!sUtils.getLanguage(activity).equals("tr")) {
-                            sUtils.saveString("appLanguage", "tr", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("tr")) {
+                            sCommonUtils.saveString("appLanguage", "tr", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 12:
-                        if (!sUtils.getLanguage(activity).equals("cs")) {
-                            sUtils.saveString("appLanguage", "cs", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("cs")) {
+                            sCommonUtils.saveString("appLanguage", "cs", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 13:
-                        if (!sUtils.getLanguage(activity).equals("es")) {
-                            sUtils.saveString("appLanguage", "es", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("es")) {
+                            sCommonUtils.saveString("appLanguage", "es", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 14:
-                        if (!sUtils.getLanguage(activity).equals("vi")) {
-                            sUtils.saveString("appLanguage", "vi", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("vi")) {
+                            sCommonUtils.saveString("appLanguage", "vi", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 15:
-                        if (!sUtils.getLanguage(activity).equals("zh")) {
-                            sUtils.saveString("appLanguage", "zh", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("zh")) {
+                            sCommonUtils.saveString("appLanguage", "zh", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 16:
-                        if (!sUtils.getLanguage(activity).equals("hu")) {
-                            sUtils.saveString("appLanguage", "hu", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("hu")) {
+                            sCommonUtils.saveString("appLanguage", "hu", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 17:
-                        if (!sUtils.getLanguage(activity).equals("pl")) {
-                            sUtils.saveString("appLanguage", "pl", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("pl")) {
+                            sCommonUtils.saveString("appLanguage", "pl", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 18:
-                        if (!sUtils.getLanguage(activity).equals("it")) {
-                            sUtils.saveString("appLanguage", "it", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("it")) {
+                            sCommonUtils.saveString("appLanguage", "it", activity);
                             Utils.restartApp(activity);
                         }
                         break;
                     case 19:
-                        if (!sUtils.getLanguage(activity).equals("ar")) {
-                            sUtils.saveString("appLanguage", "ar", activity);
+                        if (!sThemeUtils.getLanguage(activity).equals("ar")) {
+                            sCommonUtils.saveString("appLanguage", "ar", activity);
                             Utils.restartApp(activity);
                         }
                         break;

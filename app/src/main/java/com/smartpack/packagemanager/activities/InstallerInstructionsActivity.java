@@ -27,7 +27,7 @@ import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 12, 2021
@@ -43,9 +43,9 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
         AppCompatImageButton mAdd = findViewById(R.id.add_button);
         SwitchMaterial mHideSwitch = findViewById(R.id.hide_switch);
 
-        mHideSwitch.setChecked(sUtils.getBoolean("neverShow", false, this));
+        mHideSwitch.setChecked(sCommonUtils.getBoolean("neverShow", false, this));
 
-        mHideSwitch.setOnClickListener(v -> sUtils.saveBoolean("neverShow", !sUtils.getBoolean(
+        mHideSwitch.setOnClickListener(v -> sCommonUtils.saveBoolean("neverShow", !sCommonUtils.getBoolean(
                 "neverShow",false, this), this));
 
         mBack.setOnClickListener(v -> finish());

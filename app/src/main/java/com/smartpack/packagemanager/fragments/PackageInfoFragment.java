@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 
+import com.apk.axml.APKParser;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
@@ -46,11 +47,12 @@ import com.smartpack.packagemanager.utils.tasks.ExploreAPKTasks;
 import java.io.File;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKCertificateUtils;
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
@@ -85,11 +87,11 @@ public class PackageInfoFragment extends Fragment {
         LinearLayout mOpenSettings = mRootView.findViewById(R.id.info_app);
         ProgressBar mProgress = mRootView.findViewById(R.id.progress);
 
-        mProgressLayout.setBackgroundColor(sUtils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
+        mProgressLayout.setBackgroundColor(sThemeUtils.isDarkTheme(requireActivity()) ? Color.BLACK : Color.WHITE);
         mLastUpdated.setText(getString(R.string.date_installed, sPackageUtils.getInstalledDate(Common.getApplicationID(), requireActivity())) +
                 "\n" + getString(R.string.date_updated, sPackageUtils.getUpdatedDate(Common.getApplicationID(), requireActivity())));
 
-        String certificate = new sAPKCertificateUtils(null, Common.getApplicationID(), requireActivity()).getCertificateDetails();
+        String certificate = APKParser.getCertificateDetails(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity());
         if (certificate == null) {
             mCertificateTitle.setVisibility(View.GONE);
             mCertificate.setVisibility(View.GONE);
@@ -113,13 +115,13 @@ public class PackageInfoFragment extends Fragment {
         mOpenApp.setVisibility(sPackageUtils.isEnabled(Common.getApplicationID(), requireActivity()) ? View.VISIBLE : View.GONE);
         mOpenApp.setOnClickListener(v -> {
             if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
-                sUtils.snackBar(mRootView, getString(R.string.open_message)).show();
+                sCommonUtils.snackBar(mRootView, getString(R.string.open_message)).show();
             } else {
                 Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
                 if (launchIntent != null) {
                     startActivity(launchIntent);
                 } else {
-                    sUtils.snackBar(mRootView, getString(R.string.open_failed, Common.getApplicationName())).show();
+                    sCommonUtils.snackBar(mRootView, getString(R.string.open_failed, Common.getApplicationName())).show();
                 }
             }
         });
@@ -131,14 +133,14 @@ public class PackageInfoFragment extends Fragment {
                 })
                 .setPositiveButton(R.string.yes, (dialog, id) -> PackageData.clearAppSettings(Common.getApplicationID())).show());
         mExplore.setOnClickListener(v -> {
-            if (sUtils.getBoolean("firstExploreAttempt", true, requireActivity())) {
+            if (sCommonUtils.getBoolean("firstExploreAttempt", true, requireActivity())) {
                 new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle(getString(R.string.warning))
                         .setMessage(getString(R.string.file_picker_message))
                         .setCancelable(false)
                         .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-                            sUtils.saveBoolean("firstExploreAttempt", false, requireActivity());
+                            sCommonUtils.saveBoolean("firstExploreAttempt", false, requireActivity());
                             new ExploreAPKTasks(mProgressLayout, mProgress, Common.getSourceDir(), requireActivity()).execute();
                         }).show();
             } else {
@@ -168,10 +170,10 @@ public class PackageInfoFragment extends Fragment {
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case 0:
-                        sUtils.launchUrl("https://play.google.com/store/apps/details?id=" + Common.getApplicationID(), requireActivity());
+                        sCommonUtils.launchUrl("https://play.google.com/store/apps/details?id=" + Common.getApplicationID(), requireActivity());
                         break;
                     case 1:
-                        sUtils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
+                        sCommonUtils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
                         break;
                     case 2:
                         if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
@@ -191,15 +193,15 @@ public class PackageInfoFragment extends Fragment {
                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                         requireActivity());
                             }
-                            sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
+                            sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
                         } else {
                             if (!PackageData.getPackageDir(requireActivity()).exists()) {
-                                sUtils.mkdir(PackageData.getPackageDir(requireActivity()));
+                                sFileUtils.mkdir(PackageData.getPackageDir(requireActivity()));
                             }
                             File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + "_" + sAPKUtils.getVersionCode(
                                     sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()) + ".json");
-                            sUtils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
-                            sUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
+                            sFileUtils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
+                            sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
                         }
                         break;
                     case 3:
@@ -219,7 +221,7 @@ public class PackageInfoFragment extends Fragment {
         });
         mUninstallApp.setOnClickListener(v -> {
             if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
-                sUtils.snackBar(mRootView, getString(R.string.uninstall_nope)).show();
+                sCommonUtils.snackBar(mRootView, getString(R.string.uninstall_nope)).show();
             } else if (!Common.isSystemApp()) {
                 Common.isUninstall(true);
                 requireActivity().finish();

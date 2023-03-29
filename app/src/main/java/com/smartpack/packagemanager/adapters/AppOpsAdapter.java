@@ -20,8 +20,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppOps;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.AppOpsItems;
+import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by Lennoard <lennoardrai@gmail.com> on Mar 14, 2021
@@ -56,14 +56,14 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
         holder.mDescription.setText(data.get(position).getDescription());
         holder.mCheckBox.setChecked(data.get(position).isEnabled());
         holder.mCheckBox.setOnClickListener(v -> {
-            if (sUtils.getBoolean("firstOpsAttempt", true, v.getContext())) {
+            if (sCommonUtils.getBoolean("firstOpsAttempt", true, v.getContext())) {
                 new MaterialAlertDialogBuilder(Objects.requireNonNull(v.getContext()))
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle(v.getContext().getString(R.string.warning))
                         .setMessage(v.getContext().getString(R.string.operations_warning))
                         .setCancelable(false)
                         .setPositiveButton(R.string.got_it, (dialog, id) -> {
-                            sUtils.saveBoolean("firstOpsAttempt", false, v.getContext());
+                            sCommonUtils.saveBoolean("firstOpsAttempt", false, v.getContext());
                             holder.mCheckBox.setChecked(data.get(position).isEnabled());
                         }).show();
             } else {

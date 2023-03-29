@@ -41,10 +41,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 26, 2022
@@ -103,7 +104,7 @@ public class APKPickerActivity extends AppCompatActivity {
                 if (APKData.getAPKFile() != null) {
                     mFile = APKData.getAPKFile();
                 } else if (uri != null) {
-                    sUtils.delete(getExternalFilesDir("APK"));
+                    sFileUtils.delete(getExternalFilesDir("APK"));
                     String fileName = Objects.requireNonNull(DocumentFile.fromSingleUri(activity, uri)).getName();
                     mFile = new File(getExternalFilesDir("APK"), Objects.requireNonNull(fileName));
                 }
@@ -136,7 +137,7 @@ public class APKPickerActivity extends AppCompatActivity {
                     if (mAPKParser != null && mAPKParser.isParsed()) {
                         loadAPKDetails(activity);
                     } else {
-                        sUtils.toast(getString(R.string.wrong_extension, ".apk"), activity).show();
+                        sCommonUtils.toast(getString(R.string.wrong_extension, ".apk"), activity).show();
                         activity.finish();
                     }
                 }
@@ -185,7 +186,7 @@ public class APKPickerActivity extends AppCompatActivity {
             if (Common.getApplicationID() != null) {
                 new SplitAPKsInstallationTasks(activity).execute();
             } else {
-                sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.installation_status_bad_apks)).show();
+                sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.installation_status_bad_apks)).show();
             }
             finish();
         });

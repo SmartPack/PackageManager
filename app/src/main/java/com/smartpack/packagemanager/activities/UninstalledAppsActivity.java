@@ -42,9 +42,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 10, 2021
@@ -132,10 +132,10 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSort);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(sUtils.getBoolean("reverse_order", false, this));
+                    .setChecked(sCommonUtils.getBoolean("reverse_order", false, this));
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
-                    sUtils.saveBoolean("reverse_order", !sUtils.getBoolean("reverse_order", false, this), this);
+                    sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, this), this);
                     loadUI();
                 }
                 return false;
@@ -191,7 +191,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
                 }
             }
         }
-        if (sUtils.getBoolean("reverse_order", false, context)) {
+        if (sCommonUtils.getBoolean("reverse_order", false, context)) {
             Collections.reverse(mData);
         }
         return mData;

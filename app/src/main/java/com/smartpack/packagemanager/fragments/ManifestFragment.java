@@ -31,9 +31,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.zip.ZipFile;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 08, 2021
@@ -73,7 +73,7 @@ public class ManifestFragment extends Fragment {
                 if (mManifest != null && mManifest.size() > 0) {
                     mRecyclerView.setAdapter(new ManifestAdapter(mManifest));
                 } else {
-                    sUtils.snackBar(mRootView, getString(R.string.failed_decode_xml, "AndroidManifest.xml")).show();
+                    sCommonUtils.snackBar(mRootView, getString(R.string.failed_decode_xml, "AndroidManifest.xml")).show();
                 }
             }
         }.execute();

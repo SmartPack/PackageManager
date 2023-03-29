@@ -19,9 +19,9 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -76,7 +76,7 @@ public class BatchDisableTask extends sExecutor {
                     Common.getOutput().append(": ").append(mActivity.getString(result != null && (result.contains("new state: disabled")
                             || result.contains("new state: enabled")) ? R.string.done : R.string.failed)).append(" *\n\n");
                 }
-                sUtils.sleep(1);
+                sCommonUtils.sleep(1);
             }
         }
     }

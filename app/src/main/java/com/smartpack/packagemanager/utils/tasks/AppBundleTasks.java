@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.smartpack.packagemanager.R;
@@ -24,8 +23,8 @@ import com.smartpack.packagemanager.utils.ZipFileUtils;
 import java.io.File;
 import java.io.IOException;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -60,9 +59,9 @@ public class AppBundleTasks extends sExecutor {
             mProgressDialog.setCancelable(false);
             mProgressDialog.show();
         }
-        if (sUtils.exist(mActivity.getCacheDir())) {
+        if (sFileUtils.exist(mActivity.getCacheDir())) {
             for (File files : SplitAPKInstaller.getFilesList(mActivity.getCacheDir())) {
-                sUtils.delete(files);
+                sFileUtils.delete(files);
             }
         }
     }

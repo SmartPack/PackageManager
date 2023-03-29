@@ -48,9 +48,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ChangeLogsActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-            android:exported="false" />
         <activity android:name=".activities.ExportedAppsActivity"
             android:exported="false" />
         <activity android:name=".activities.FilePickerActivity"

@@ -46,10 +46,10 @@ import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 import java.io.File;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
@@ -85,10 +85,10 @@ public class ExportedAppsActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSort);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(sUtils.getBoolean("reverse_order_exports", false, this));
+                    .setChecked(sCommonUtils.getBoolean("reverse_order_exports", false, this));
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
-                    sUtils.saveBoolean("reverse_order_exports", !sUtils.getBoolean("reverse_order_exports", false, this), this);
+                    sCommonUtils.saveBoolean("reverse_order_exports", !sCommonUtils.getBoolean("reverse_order_exports", false, this), this);
                     loadUI();
                 }
                 return false;
@@ -129,17 +129,17 @@ public class ExportedAppsActivity extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                String mStatus = sUtils.getString("downloadTypes", "apks", ExportedAppsActivity.this);
+                String mStatus = sCommonUtils.getString("downloadTypes", "apks", ExportedAppsActivity.this);
                 switch (tab.getPosition()) {
                     case 0:
                         if (!mStatus.equals("apks")) {
-                            sUtils.saveString("downloadTypes", "apks", ExportedAppsActivity.this);
+                            sCommonUtils.saveString("downloadTypes", "apks", ExportedAppsActivity.this);
                             loadUI();
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("bundles")) {
-                            sUtils.saveString("downloadTypes", "bundles", ExportedAppsActivity.this);
+                            sCommonUtils.saveString("downloadTypes", "bundles", ExportedAppsActivity.this);
                             loadUI();
                         }
                         break;
@@ -213,7 +213,7 @@ public class ExportedAppsActivity extends AppCompatActivity {
     }
 
     private int getTabPosition(Activity activity) {
-        if (sUtils.getString("downloadTypes", "apks", activity).equals("bundles")) {
+        if (sCommonUtils.getString("downloadTypes", "apks", activity).equals("bundles")) {
             return 1;
         } else {
             return 0;

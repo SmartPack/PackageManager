@@ -26,7 +26,7 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
@@ -46,7 +46,7 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
     public PermissionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mRootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
         if (!Common.isAPKPicker() && (!mRootShell.rootAccess() && !mShizukuShell.isReady())) {
-            mRootView.setOnClickListener(v -> sUtils.snackBar(mRootView, mRootView
+            mRootView.setOnClickListener(v -> sCommonUtils.snackBar(mRootView, mRootView
                     .getContext().getString(R.string.feature_unavailable_message)).show());
         }
         return new PermissionsAdapter.ViewHolder(mRootView);

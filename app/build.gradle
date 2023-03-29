@@ -57,8 +57,17 @@ android {
 
 dependencies {
     playImplementation 'com.android.billingclient:billing:5.1.0'
-    implementation 'com.github.apk-editor:axml:743632cf62'
-    implementation 'com.github.sunilpaulmathew:sCommon:bd146daf23'
+    implementation 'com.github.apk-editor:aXML:8458ba5aee'
+
+    def sCommon_Version = '970617f38a'
+    implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:crashreporter:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:installerutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:permissionutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:themeutils:${sCommon_Version}"
+    implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
+
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
     implementation 'com.google.android.material:material:1.8.0'
     implementation "dev.rikka.shizuku:api:12.1.0"

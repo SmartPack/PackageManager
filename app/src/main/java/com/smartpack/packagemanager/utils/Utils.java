@@ -25,8 +25,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
@@ -43,12 +42,8 @@ public class Utils {
         return value.data;
     }
 
-    public static boolean isNotDonated(Context context) {
-        return !sPackageUtils.isPackageInstalled("com.smartpack.donate", context);
-    }
-
     public static boolean isProUser(Context context) {
-        return sUtils.getBoolean("support_received", false, context) || !isNotDonated(context);
+        return sCommonUtils.getBoolean("support_received", false, context);
     }
 
     public static void toggleKeyboard(int mode, AppCompatEditText editText, Activity activity) {

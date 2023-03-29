@@ -22,7 +22,7 @@ import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on April 01, 2021
@@ -51,13 +51,13 @@ public class ManifestAdapter extends RecyclerView.Adapter<ManifestAdapter.ViewHo
         } else if (data.get(position).trim().matches("<uses-permission|</uses-permission>")) {
             holder.mText.setTextColor(Color.RED);
         } else if (data.get(position).trim().matches("<activity|</activity>") || data.get(position).startsWith(".method") || data.get(position).startsWith(".annotation")) {
-            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.GREEN : Color.MAGENTA);
+            holder.mText.setTextColor(sThemeUtils.isDarkTheme(holder.mText.getContext()) ? Color.GREEN : Color.MAGENTA);
         } else if (data.get(position).trim().matches("<service|</service>") || data.get(position).startsWith(".end method") || data.get(position).startsWith(".end annotation")) {
-            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.MAGENTA : Color.BLUE);
+            holder.mText.setTextColor(sThemeUtils.isDarkTheme(holder.mText.getContext()) ? Color.MAGENTA : Color.BLUE);
         } else if (data.get(position).trim().matches("<provider|</provider>")) {
-            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.LTGRAY : Color.DKGRAY);
+            holder.mText.setTextColor(sThemeUtils.isDarkTheme(holder.mText.getContext()) ? Color.LTGRAY : Color.DKGRAY);
         } else {
-            holder.mText.setTextColor(sUtils.isDarkTheme(holder.mText.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mText.setTextColor(sThemeUtils.isDarkTheme(holder.mText.getContext()) ? Color.WHITE : Color.BLACK);
         }
     }
 

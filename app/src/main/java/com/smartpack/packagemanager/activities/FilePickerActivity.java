@@ -45,11 +45,11 @@ import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 import java.io.File;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
@@ -130,7 +130,7 @@ public class FilePickerActivity extends AppCompatActivity {
                 mRecycleViewAdapter.notifyItemChanged(position);
                 mSelect.setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             } else {
-                sUtils.snackBar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk")).show();
+                sCommonUtils.snackBar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk")).show();
             }
         });
 
@@ -138,9 +138,9 @@ public class FilePickerActivity extends AppCompatActivity {
             PopupMenu popupMenu = new PopupMenu(this, mSortButton);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, "A-Z").setCheckable(true)
-                    .setChecked(sUtils.getBoolean("az_order", true, this));
+                    .setChecked(sCommonUtils.getBoolean("az_order", true, this));
             popupMenu.setOnMenuItemClickListener(item -> {
-                sUtils.saveBoolean("az_order", !sUtils.getBoolean("az_order", true, this), this);
+                sCommonUtils.saveBoolean("az_order", !sCommonUtils.getBoolean("az_order", true, this), this);
                 reload(this);
                 return false;
             });
@@ -176,7 +176,7 @@ public class FilePickerActivity extends AppCompatActivity {
                                 new SplitAPKsInstallationTasks(FilePickerActivity.this).execute();
                                 exitActivity();
                             } else {
-                                sUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
+                                sCommonUtils.snackBar(mRecyclerView, getString(R.string.installation_status_bad_apks)).show();
                             }
                         }
                     }
@@ -217,7 +217,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
     private void exitActivity() {
         if (!Common.getPath().contains(getCacheDir().getPath())) {
-            sUtils.saveString("lastDirPath", Common.getPath(), this);
+            sCommonUtils.saveString("lastDirPath", Common.getPath(), this);
         }
         finish();
     }

@@ -25,11 +25,9 @@ import com.smartpack.packagemanager.utils.tasks.SaveIconTasks;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.zip.ZipFile;
 
-import in.sunilpaulmathew.sCommon.Utils.sPermissionUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 09, 2020
@@ -51,23 +49,14 @@ public class PackageExplorer {
     }
 
     public static int getSpanCount(Activity activity) {
-        return sUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
-    }
-
-    public static String readManifest(String apk) {
-        try (ZipFile zipFile = new ZipFile(apk)) {
-            InputStream inputStream = zipFile.getInputStream(zipFile.getEntry("AndroidManifest.xml"));
-            return new aXMLDecoder().decode(inputStream).trim();
-        } catch (Exception ignored) {
-        }
-        return null;
+        return sCommonUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
     }
 
     public static String readXMLFromAPK(String path, Activity activity) {
         try (FileInputStream inputStream = new FileInputStream(path)) {
             return new aXMLDecoder().decode(inputStream);
         } catch (Exception e) {
-            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.failed_decode_xml, new File(path).getName())).show();
+            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.failed_decode_xml, new File(path).getName())).show();
         }
         return null;
     }
@@ -104,7 +93,7 @@ public class PackageExplorer {
             sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     activity);
-            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
             return;
         }
         new SaveIconTasks(bitmap, dest, activity).execute();
@@ -115,7 +104,7 @@ public class PackageExplorer {
             sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     activity);
-            sUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
             return;
         }
         new CopyToStorageTasks(path, dest, activity).execute();

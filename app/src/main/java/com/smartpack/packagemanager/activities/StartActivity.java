@@ -23,9 +23,9 @@ import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageData;
 
-import in.sunilpaulmathew.sCommon.Utils.sExecutor;
-import in.sunilpaulmathew.sCommon.Utils.sThemeUtils;
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 1, 2020
@@ -45,19 +45,19 @@ public class StartActivity extends AppCompatActivity {
         MaterialTextView mMainText = findViewById(R.id.main_text);
         ProgressBar mProgress = findViewById(R.id.progress);
 
-        if (sUtils.getBoolean("welcomeMessage", true, this)) {
+        if (sCommonUtils.getBoolean("welcomeMessage", true, this)) {
             mMainText.setVisibility(View.VISIBLE);
             mBottomLayout.setVisibility(View.VISIBLE);
             mProgress.setVisibility(View.GONE);
 
-            mDocumentationCard.setOnClickListener(v -> sUtils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
+            mDocumentationCard.setOnClickListener(v -> sCommonUtils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
 
             mStartCard.setOnClickListener(v -> {
                 mProgress.setVisibility(View.VISIBLE);
                 mMainText.setText(getString(R.string.initializing));
                 mBottomLayout.setVisibility(View.GONE);
                 loadData(mProgress, this);
-                sUtils.saveBoolean("welcomeMessage",false, this);
+                sCommonUtils.saveBoolean("welcomeMessage",false, this);
             });
         } else {
             loadData(mProgress, this);

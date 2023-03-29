@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 26, 2022

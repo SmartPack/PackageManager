@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.Utils.sUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
@@ -78,7 +78,7 @@ public class TextViewActivity extends AppCompatActivity {
         if (Common.getApplicationID() != null && PackageExplorer.isBinaryXML(mPath)) {
             text = PackageExplorer.readXMLFromAPK(mPath, this);
         } else {
-            text = sUtils.read(new File(mPath));
+            text = sFileUtils.read(new File(mPath));
         }
         if (text != null) {
             mData.addAll(Arrays.asList(text.split("\\r?\\n")));
