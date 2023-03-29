@@ -36,6 +36,10 @@ public class PackageData {
 
     private static List<PackageItems> mRawData = null;
 
+    public static int getSortingType(Context context) {
+        return sCommonUtils.getInt("sort_apps", 0, context);
+    }
+
     public static void makePackageFolder(Context context) {
         if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
             sFileUtils.delete(getPackageDir(context));
@@ -89,13 +93,13 @@ public class PackageData {
                     mData.add(item);
                 }
             }
-            if (sCommonUtils.getBoolean("sort_name", false, context)) {
+            if (PackageData.getSortingType(context) == 0) {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sCommonUtils.getBoolean("sort_size", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && PackageData.getSortingType(context) == 4) {
                 Collections.sort(mData, Comparator.comparingLong(PackageItems::getAPKSize));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sCommonUtils.getBoolean("sort_installed", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && PackageData.getSortingType(context) == 2) {
                 Collections.sort(mData, Comparator.comparingLong(PackageItems::getInstalledTime));
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && sCommonUtils.getBoolean("sort_updated", false, context)) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && PackageData.getSortingType(context) == 3) {
                 Collections.sort(mData, Comparator.comparingLong(PackageItems::getUpdatedTime));
             } else {
                 Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
@@ -171,6 +175,10 @@ public class PackageData {
 
     public static void setRawData(ProgressBar progressBar, Context context) {
         mRawData = getRawData(progressBar, context);
+    }
+
+    public static void setSortingType(int value, Context context) {
+        sCommonUtils.saveInt("sort_apps", value, context);
     }
 
 }

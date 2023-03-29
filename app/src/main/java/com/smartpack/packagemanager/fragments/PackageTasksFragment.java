@@ -299,16 +299,16 @@ public class PackageTasksFragment extends Fragment {
         Menu menu = popupMenu.getMenu();
         SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
         sort.add(0, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(sCommonUtils.getBoolean("sort_name", false, activity));
+                .setChecked(PackageData.getSortingType(activity) == 0);
         sort.add(0, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(sCommonUtils.getBoolean("sort_id", true, activity));
+                .setChecked(PackageData.getSortingType(activity) == 1);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sort.add(0, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
-                    .setChecked(sCommonUtils.getBoolean("sort_installed", false, activity));
+                    .setChecked(PackageData.getSortingType(activity) == 2);
             sort.add(0, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
-                    .setChecked(sCommonUtils.getBoolean("sort_updated", false, activity));
+                    .setChecked(PackageData.getSortingType(activity) == 3);
             sort.add(0, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
-                    .setChecked(sCommonUtils.getBoolean("sort_size", false, activity));
+                    .setChecked(PackageData.getSortingType(activity) == 4);
         }
         menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(sCommonUtils.getBoolean("reverse_order", false, activity));
@@ -318,52 +318,32 @@ public class PackageTasksFragment extends Fragment {
                 case 0:
                     break;
                 case 1:
-                    if (!sCommonUtils.getBoolean("sort_name", false, activity)) {
-                        sCommonUtils.saveBoolean("sort_name", true, activity);
-                        sCommonUtils.saveBoolean("sort_id", false, activity);
-                        sCommonUtils.saveBoolean("sort_installed", false, activity);
-                        sCommonUtils.saveBoolean("sort_updated", false, activity);
-                        sCommonUtils.saveBoolean("sort_size", false, activity);
+                    if (PackageData.getSortingType(activity) != 0) {
+                        PackageData.setSortingType(0, activity);
                         loadUI(activity);
                     }
                     break;
                 case 2:
-                    if (!sCommonUtils.getBoolean("sort_id", true, activity)) {
-                        sCommonUtils.saveBoolean("sort_name", false, activity);
-                        sCommonUtils.saveBoolean("sort_id", true, activity);
-                        sCommonUtils.saveBoolean("sort_installed", false, activity);
-                        sCommonUtils.saveBoolean("sort_updated", false, activity);
-                        sCommonUtils.saveBoolean("sort_size", false, activity);
+                    if (PackageData.getSortingType(activity) != 1) {
+                        PackageData.setSortingType(1, activity);
                         loadUI(activity);
                     }
                     break;
                 case 3:
-                    if (!sCommonUtils.getBoolean("sort_installed", false, activity)) {
-                        sCommonUtils.saveBoolean("sort_name", false, activity);
-                        sCommonUtils.saveBoolean("sort_id", false, activity);
-                        sCommonUtils.saveBoolean("sort_installed", true, activity);
-                        sCommonUtils.saveBoolean("sort_updated", false, activity);
-                        sCommonUtils.saveBoolean("sort_size", false, activity);
+                    if (PackageData.getSortingType(activity) != 2) {
+                        PackageData.setSortingType(2, activity);
                         loadUI(activity);
                     }
                     break;
                 case 4:
-                    if (!sCommonUtils.getBoolean("sort_updated", false, activity)) {
-                        sCommonUtils.saveBoolean("sort_name", false, activity);
-                        sCommonUtils.saveBoolean("sort_id", false, activity);
-                        sCommonUtils.saveBoolean("sort_installed", false, activity);
-                        sCommonUtils.saveBoolean("sort_updated", true, activity);
-                        sCommonUtils.saveBoolean("sort_size", false, activity);
+                    if (PackageData.getSortingType(activity) != 3) {
+                        PackageData.setSortingType(3, activity);
                         loadUI(activity);
                     }
                     break;
                 case 5:
-                    if (!sCommonUtils.getBoolean("sort_size", false, activity)) {
-                        sCommonUtils.saveBoolean("sort_name", false, activity);
-                        sCommonUtils.saveBoolean("sort_id", false, activity);
-                        sCommonUtils.saveBoolean("sort_installed", false, activity);
-                        sCommonUtils.saveBoolean("sort_updated", false, activity);
-                        sCommonUtils.saveBoolean("sort_size", true, activity);
+                    if (PackageData.getSortingType(activity) != 4) {
+                        PackageData.setSortingType(4, activity);
                         loadUI(activity);
                     }
                     break;
