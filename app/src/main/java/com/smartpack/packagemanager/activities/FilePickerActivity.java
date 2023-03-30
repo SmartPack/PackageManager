@@ -75,6 +75,8 @@ public class FilePickerActivity extends AppCompatActivity {
         mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
 
+        mSelect.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
+
         mBack.setOnClickListener(v -> exitActivity());
 
         if (!Common.getPath().contains(getCacheDir().getPath())) {

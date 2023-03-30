@@ -79,6 +79,9 @@ public class APKPickerActivity extends AppCompatActivity {
         mTabLayout = findViewById(R.id.tab_Layout);
         mViewPager = findViewById(R.id.view_pager);
 
+        mInstall.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
+        mCancel.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
+
         if (APKData.getAPKFile() != null) {
             manageInstallation(null, this).execute();
         } else if (getIntent().getData() != null) {

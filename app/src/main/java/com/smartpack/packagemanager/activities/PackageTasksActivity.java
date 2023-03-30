@@ -22,6 +22,8 @@ import com.smartpack.packagemanager.utils.Common;
 
 import java.lang.ref.WeakReference;
 
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on April 28, 2020
  */
@@ -44,6 +46,7 @@ public class PackageTasksActivity extends AppCompatActivity {
         mScrollView = findViewById(R.id.scroll_view);
 
         mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
+        mCloseButton.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
 
         mCloseButton.setOnClickListener(v -> onBackPressed());
 

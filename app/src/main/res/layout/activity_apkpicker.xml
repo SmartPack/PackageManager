@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/colorAccent"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             app:cardCornerRadius="15dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatImageButton
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/colorAccent"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             app:cardCornerRadius="15dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:layout_margin="15dp"
+                android:layout_margin="10dp"
                 android:gravity="center">
 
                 <com.google.android.material.textview.MaterialTextView

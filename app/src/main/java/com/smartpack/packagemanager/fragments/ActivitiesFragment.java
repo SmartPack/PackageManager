@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ public class ActivitiesFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
         ActivitiesAdapter mRecycleViewAdapter = new ActivitiesAdapter(PackageDetails.getActivities(Common.getApplicationID(), requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 

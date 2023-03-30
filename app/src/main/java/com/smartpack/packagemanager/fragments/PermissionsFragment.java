@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +48,7 @@ public class PermissionsFragment extends Fragment {
 
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
         PermissionsAdapter mRecycleViewAdapter = new PermissionsAdapter(mAPKParser.getPermissions()
                 != null ? getPermissions(requireActivity()) : PackageDetails.getPermissions(Common.getApplicationID(), requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);

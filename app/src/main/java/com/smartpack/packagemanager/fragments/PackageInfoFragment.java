@@ -96,7 +96,7 @@ public class PackageInfoFragment extends Fragment {
             mCertificateTitle.setVisibility(View.GONE);
             mCertificate.setVisibility(View.GONE);
         } else {
-            mCertificate.setText(certificate);
+            mCertificate.setText(certificate.trim());
         }
 
         mPackageID.setText(Common.getApplicationID());

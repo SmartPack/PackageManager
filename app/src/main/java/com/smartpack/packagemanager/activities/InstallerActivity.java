@@ -58,6 +58,9 @@ public class InstallerActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.title);
         mStatus = findViewById(R.id.status);
 
+        mOpen.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
+        mClose.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
+
         if (getName() != null) {
             mTitle.setText(getName());
         } else {
