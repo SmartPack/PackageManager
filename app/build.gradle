@@ -59,7 +59,7 @@ dependencies {
     playImplementation 'com.android.billingclient:billing:5.1.0'
     implementation 'com.github.apk-editor:aXML:8458ba5aee'
 
-    def sCommon_Version = '970617f38a'
+    def sCommon_Version = '2d827ce148'
     implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:crashreporter:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"

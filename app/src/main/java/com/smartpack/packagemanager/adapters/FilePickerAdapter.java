@@ -67,8 +67,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
             holder.mSize.setVisibility(View.GONE);
             holder.mCheckBox.setVisibility(View.GONE);
         } else if (this.data.get(position).endsWith(".apk")) {
-            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), sCommonUtils.getColor(sThemeUtils.isDarkTheme(
-                    holder.mIcon.getContext()) ? R.color.colorWhite : R.color.colorBlack, holder.mIcon.getContext()), holder.mIcon.getContext()));
+            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
             if (sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()) != null) {
                 holder.mDescription.setText(sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()));
                 holder.mDescription.setVisibility(View.VISIBLE);

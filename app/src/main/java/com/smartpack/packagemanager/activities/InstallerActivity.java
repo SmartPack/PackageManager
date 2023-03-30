@@ -33,7 +33,6 @@ import java.util.Objects;
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
-import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 06, 2021
@@ -110,10 +109,8 @@ public class InstallerActivity extends AppCompatActivity {
     private Drawable getIcon() {
         Drawable icon = null;
         for (String mAPKs : Common.getAppList()) {
-            if (sAPKUtils.getAPKIcon(mAPKs, sCommonUtils.getColor(sThemeUtils.isDarkTheme(this) ? R.color.colorWhite :
-                    R.color.colorBlack, this), this) != null) {
-                icon = sAPKUtils.getAPKIcon(mAPKs, sCommonUtils.getColor(sThemeUtils.isDarkTheme(this) ?
-                        R.color.colorWhite : R.color.colorBlack, this), this);
+            if (sAPKUtils.getAPKIcon(mAPKs, this) != null) {
+                icon = sAPKUtils.getAPKIcon(mAPKs, this);
             }
         }
         return icon;

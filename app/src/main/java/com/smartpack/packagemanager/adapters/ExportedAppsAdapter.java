@@ -67,8 +67,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
                 holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
             } else {
-                holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), sCommonUtils.getColor(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ?
-                        R.color.colorWhite : Color.BLACK, holder.mIcon.getContext()), holder.mIcon.getContext()));
+                holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
             }
             holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
         } else {
