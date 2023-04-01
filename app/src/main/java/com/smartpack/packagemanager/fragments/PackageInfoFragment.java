@@ -65,8 +65,7 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class PackageInfoFragment extends Fragment {
 
-    private final List<PackageInfoItems> mPackageInfoItems = new ArrayList<>();
-    private final List<PackageOptionsItems> mPackageOptionsItems = new ArrayList<>();
+    private boolean mRootOrShizuku = false;
 
     @SuppressLint("StringFormatInvalid")
     @Nullable
@@ -85,45 +84,15 @@ public class PackageInfoFragment extends Fragment {
         mPackageOptions.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
         mPackageInfo.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
-        boolean mRootOrShizuku = new RootShell().rootAccess() || new ShizukuShell().isReady();
-        boolean mAppBundle = new File(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
-                .splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity())).size() > 1;
-        String certificate = APKParser.getCertificateDetails(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()).trim();
+        mRootOrShizuku = new RootShell().rootAccess() || new ShizukuShell().isReady();
 
-        if (sPackageUtils.isEnabled(Common.getApplicationID(), requireActivity())) {
-            mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_open, requireActivity()), getString(R.string.open), 0));
-        }
-        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_explore, requireActivity()), getString(R.string.explore), 1));
-        if (mRootOrShizuku) {
-            mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_disable, requireActivity()), getString(sPackageUtils.isEnabled(
-                    Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable), 2));
-        }
-        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_delete, requireActivity()), getString(R.string.uninstall), 3));
-        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_settings, requireActivity()), getString(R.string.app_info), 4));
-
-        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.package_id), Common.getApplicationID(), null, null,
-                getString(R.string.more), sCommonUtils.getDrawable(R.drawable.ic_dots, requireActivity())));
-        mPackageInfoItems.add(new PackageInfoItems(getString(mAppBundle ? R.string.bundle_path : R.string.apk_path), sPackageUtils.getParentDir(
-                Common.getApplicationID(), requireActivity()), null, mAppBundle ? getString(R.string.size_bundle, PackageData
-                .getBundleSize(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity()))) : getString(R.string.size_apk,
-                sAPKUtils.getAPKSize(new File(Common.getSourceDir()).length())), getString(R.string.export), sCommonUtils.getDrawable(
-                R.drawable.ic_export, requireActivity())));
-        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.data_dir), Common.getDataDir(), null, null,
-                mRootOrShizuku ? getString(R.string.reset) : null, mRootOrShizuku ? sCommonUtils.getDrawable(R.drawable.ic_reset, requireActivity()) : null));
-        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.native_lib), null, Common.getNativeLibsDir(), null,
-                null, null));
-        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.date_installation), null, getString(R.string.date_installed, sPackageUtils.getInstalledDate(
-                Common.getApplicationID(), requireActivity())) + "\n" + getString(R.string.date_updated, sPackageUtils.getUpdatedDate(Common.getApplicationID(),
-                requireActivity())), null, null, null));
-        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.certificate), null, certificate, null, null, null));
-
-        mPackageOptionsAdapter = new PackageOptionsAdapter(mPackageOptionsItems);
-        mPackageInfoAdapter = new PackageInfoAdapter(mPackageInfoItems);
+        mPackageOptionsAdapter = new PackageOptionsAdapter(getPackageOptionsData());
+        mPackageInfoAdapter = new PackageInfoAdapter(getPackageInfoData());
         mPackageOptions.setAdapter(mPackageOptionsAdapter);
         mPackageInfo.setAdapter(mPackageInfoAdapter);
 
         mPackageOptionsAdapter.setOnItemClickListener((position, v) -> {
-            switch (mPackageOptionsItems.get(position).getPosition()) {
+            switch (getPackageOptionsData().get(position).getPosition()) {
                 case 0:
                     if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
                         sCommonUtils.snackBar(mRootView, getString(R.string.open_message)).show();
@@ -269,6 +238,45 @@ public class PackageInfoFragment extends Fragment {
         });
 
         return mRootView;
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private List<PackageInfoItems> getPackageInfoData() {
+        List<PackageInfoItems> mPackageInfoItems = new ArrayList<>();
+        boolean mAppBundle = new File(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
+                .splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity())).size() > 1;
+        String certificate = APKParser.getCertificateDetails(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()).trim();
+        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.package_id), Common.getApplicationID(), null, null,
+                getString(R.string.more), sCommonUtils.getDrawable(R.drawable.ic_dots, requireActivity())));
+        mPackageInfoItems.add(new PackageInfoItems(getString(mAppBundle ? R.string.bundle_path : R.string.apk_path), sPackageUtils.getParentDir(
+                Common.getApplicationID(), requireActivity()), null, mAppBundle ? getString(R.string.size_bundle, PackageData
+                .getBundleSize(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity()))) : getString(R.string.size_apk,
+                sAPKUtils.getAPKSize(new File(Common.getSourceDir()).length())), getString(R.string.export), sCommonUtils.getDrawable(
+                R.drawable.ic_export, requireActivity())));
+        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.data_dir), Common.getDataDir(), null, null,
+                mRootOrShizuku ? getString(R.string.reset) : null, mRootOrShizuku ? sCommonUtils.getDrawable(R.drawable.ic_reset, requireActivity()) : null));
+        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.native_lib), null, Common.getNativeLibsDir(), null,
+                null, null));
+        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.date_installation), null, getString(R.string.date_installed, sPackageUtils.getInstalledDate(
+                Common.getApplicationID(), requireActivity())) + "\n" + getString(R.string.date_updated, sPackageUtils.getUpdatedDate(Common.getApplicationID(),
+                requireActivity())), null, null, null));
+        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.certificate), null, certificate, null, null, null));
+        return mPackageInfoItems;
+    }
+
+    private List<PackageOptionsItems> getPackageOptionsData() {
+        List<PackageOptionsItems> mPackageOptionsItems = new ArrayList<>();
+        if (sPackageUtils.isEnabled(Common.getApplicationID(), requireActivity())) {
+            mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_open, requireActivity()), getString(R.string.open), 0));
+        }
+        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_explore, requireActivity()), getString(R.string.explore), 1));
+        if (mRootOrShizuku) {
+            mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_disable, requireActivity()), getString(sPackageUtils.isEnabled(
+                    Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable), 2));
+        }
+        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_delete, requireActivity()), getString(R.string.uninstall), 3));
+        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_settings, requireActivity()), getString(R.string.app_info), 4));
+        return mPackageOptionsItems;
     }
 
 }
