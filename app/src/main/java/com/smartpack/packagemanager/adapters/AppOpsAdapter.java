@@ -20,8 +20,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppOps;
-import com.smartpack.packagemanager.utils.AppOpsItems;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.PermissionsItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -37,9 +37,9 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder> {
 
-    private static ArrayList<AppOpsItems> data;
+    private static ArrayList<PermissionsItems> data;
 
-    public AppOpsAdapter(ArrayList<AppOpsItems> data) {
+    public AppOpsAdapter(ArrayList<PermissionsItems> data) {
         AppOpsAdapter.data = data;
     }
 
@@ -54,7 +54,7 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
     public void onBindViewHolder(@NonNull AppOpsAdapter.ViewHolder holder, int position) {
         holder.mTitle.setText(data.get(position).getTitle().toUpperCase(Locale.getDefault()));
         holder.mDescription.setText(data.get(position).getDescription());
-        holder.mCheckBox.setChecked(data.get(position).isEnabled());
+        holder.mCheckBox.setChecked(data.get(position).isGranted());
         holder.mCheckBox.setOnClickListener(v -> {
             if (sCommonUtils.getBoolean("firstOpsAttempt", true, v.getContext())) {
                 new MaterialAlertDialogBuilder(Objects.requireNonNull(v.getContext()))
@@ -64,15 +64,15 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
                         .setCancelable(false)
                         .setPositiveButton(R.string.got_it, (dialog, id) -> {
                             sCommonUtils.saveBoolean("firstOpsAttempt", false, v.getContext());
-                            holder.mCheckBox.setChecked(data.get(position).isEnabled());
+                            holder.mCheckBox.setChecked(data.get(position).isGranted());
                         }).show();
             } else {
                 if (new RootShell().rootAccess()) {
                     new RootShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
-                            data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
+                            data.get(position).getTitle() + (data.get(position).isGranted() ? " deny" : " allow"));
                 } else {
                     new ShizukuShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
-                            data.get(position).getTitle() + (data.get(position).isEnabled() ? " deny" : " allow"));
+                            data.get(position).getTitle() + (data.get(position).isGranted() ? " deny" : " allow"));
                 }
             }
         });

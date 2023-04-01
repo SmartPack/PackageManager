@@ -21,8 +21,8 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class AppOps {
 
-    public static ArrayList<AppOpsItems> getOps(Context context) {
-        ArrayList<AppOpsItems> mData = new ArrayList<>();
+    public static ArrayList<PermissionsItems> getOps(Context context) {
+        ArrayList<PermissionsItems> mData = new ArrayList<>();
         String[] appOpsList;
         if (new RootShell().rootAccess()) {
             appOpsList = new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
@@ -39,7 +39,7 @@ public class AppOps {
              * Also, "Uid mode" needs more work (and likely never work)
              */
             if (!line.equals("No operations.") && !name.equals("Uid mode")) {
-                mData.add(new AppOpsItems(name, sPermissionUtils.getDescription(name, context), (line.contains("allow") || line.contains("ignore"))));
+                mData.add(new PermissionsItems((line.contains("allow") || line.contains("ignore")), name, sPermissionUtils.getDescription(name, context)));
             }
         }
         return mData;

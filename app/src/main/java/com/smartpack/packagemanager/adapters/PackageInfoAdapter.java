@@ -20,8 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageInfoItems;
-import com.smartpack.packagemanager.utils.RootShell;
-import com.smartpack.packagemanager.utils.ShizukuShell;
 
 import java.util.List;
 
