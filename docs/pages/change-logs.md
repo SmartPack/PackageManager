@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 64. [v6.9](https://github.com/SmartPack/PackageManager/releases/tag/v6.9) *(May 01, 2023)*
+- Visually improved package info page.
+- App now uses material 3 DayNight theme.
+- Updated build tools & dependencies.
+- Updated translations from POEditor.
+- Miscellaneous changes.
+
 ### 63. [v6.8](https://github.com/SmartPack/PackageManager/releases/tag/v6.8) *(February 20, 2023)*
 - App now shows better progress for various tasks (including main UI loading).
 - Improved handling APK's and app bundles.

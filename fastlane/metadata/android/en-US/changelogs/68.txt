@@ -1,5 +1,0 @@
-* App now shows better progress for various tasks (including main UI loading).
-* Improved handling APK's and app bundles.
-* Fixed few other bugs and crashes.
-* Updated translations.
-* Miscellaneous changes.

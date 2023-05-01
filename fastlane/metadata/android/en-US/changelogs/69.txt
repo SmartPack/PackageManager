@@ -1,0 +1,5 @@
+* Visually improved package info page.
+* App now uses material 3 DayNight theme.
+* Updated build tools & dependencies.
+* Updated translations from POEditor.
+* Miscellaneous changes.
