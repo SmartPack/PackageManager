@@ -28,12 +28,13 @@ Package Manager is, and as always, an open-source project which is ready to acce
 * Woytazzer, Czech Translations
 * Javi, Spanish Translations
 * Hoa Gia Đại Thiếu, Vietnamese Translations
-* [jason5545](https://github.com/jason5545), Chinese (Simplified & Traditional) Translations
+* [jason5545](https://github.com/jason5545), deluxghost, Yadi, Marco, Thomas Yu, & 蔡承佑, Chinese (Simplified & Traditional) Translations
 * Carnum & Cláudia Sebastião, Portuguese (Portugal) Translations
 * Erős Pista, Hungarian Translations
 * [Agnieszka C](https://github.com/Aga-C), Polish Translations
 * [AbsurdUsername](https://github.com/AbsurdUsername), Italian Translations
 * rotid, Arabic Translations
+* Pen, Slovakian Translations
 * Many other people contributed via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc)
 
 _If you think I missed your name, please let me know._

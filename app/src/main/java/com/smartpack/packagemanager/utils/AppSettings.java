@@ -91,6 +91,7 @@ public class AppSettings {
         mData.add(new sSerializableItems(null, "Erős Pista", "Hungarian Translations", null));
         mData.add(new sSerializableItems(null, "AbsurdUsername", "Italian Translations", "https://github.com/AbsurdUsername"));
         mData.add(new sSerializableItems(null, "rotid™", "Arabic Translations", null));
+        mData.add(new sSerializableItems(null, "Pen™", "Slovakian Translations", null));
         return mData;
     }
 
