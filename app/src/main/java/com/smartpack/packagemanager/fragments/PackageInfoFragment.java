@@ -245,7 +245,6 @@ public class PackageInfoFragment extends Fragment {
         List<PackageInfoItems> mPackageInfoItems = new ArrayList<>();
         boolean mAppBundle = new File(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity())).getName().equals("base.apk") && SplitAPKInstaller
                 .splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity())).size() > 1;
-        String certificate = APKParser.getCertificateDetails(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()).trim();
         mPackageInfoItems.add(new PackageInfoItems(getString(R.string.package_id), Common.getApplicationID(), null, null,
                 getString(R.string.more), sCommonUtils.getDrawable(R.drawable.ic_dots, requireActivity())));
         mPackageInfoItems.add(new PackageInfoItems(getString(mAppBundle ? R.string.bundle_path : R.string.apk_path), sPackageUtils.getParentDir(
@@ -260,7 +259,11 @@ public class PackageInfoFragment extends Fragment {
         mPackageInfoItems.add(new PackageInfoItems(getString(R.string.date_installation), null, getString(R.string.date_installed, sPackageUtils.getInstalledDate(
                 Common.getApplicationID(), requireActivity())) + "\n" + getString(R.string.date_updated, sPackageUtils.getUpdatedDate(Common.getApplicationID(),
                 requireActivity())), null, null, null));
-        mPackageInfoItems.add(new PackageInfoItems(getString(R.string.certificate), null, certificate, null, null, null));
+        try {
+            mPackageInfoItems.add(new PackageInfoItems(getString(R.string.certificate), null, APKParser.getCertificateDetails(sPackageUtils.getSourceDir(
+                    Common.getApplicationID(), requireActivity()), requireActivity()).trim(), null, null, null));
+        } catch (Exception ignored) {
+        }
         return mPackageInfoItems;
     }
 

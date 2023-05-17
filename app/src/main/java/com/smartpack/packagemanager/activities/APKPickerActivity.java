@@ -124,8 +124,11 @@ public class APKPickerActivity extends AppCompatActivity {
                     } catch (IOException ignored) {}
                 }
                 if (mFile.getName().endsWith(".apk")) {
-                    mAPKParser = new APKParser();
-                    mAPKParser.parse(mFile.getAbsolutePath(), activity);
+                    try {
+                        mAPKParser = new APKParser();
+                        mAPKParser.parse(mFile.getAbsolutePath(), activity);
+                    } catch (Exception ignored) {
+                    }
                 }
             }
 
