@@ -6,6 +6,12 @@ permalink: /change-logs/
 
 ## What's New
 
+### 65. [v7.0](https://github.com/SmartPack/PackageManager/releases/tag/v7.0) *(May 17, 2023)*
+- Fixed crashes due to some certificates not loading.
+- Updated build tools and dependencies.
+- Updated arabic translations.
+- Miscellaneous changes.
+
 ### 64. [v6.9](https://github.com/SmartPack/PackageManager/releases/tag/v6.9) *(May 01, 2023)*
 - Visually improved package info page.
 - App now uses material 3 DayNight theme.

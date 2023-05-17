@@ -58,7 +58,7 @@
     <string name="share">"يشارك"</string>
     <string name="shared_by">"٪ s / مشترك بواسطة إدارة الحزم"</string>
     <string name="share_message">"يمكن الحصول على إدارة الحزم٪ s من
-        جوجل بلاي: https://play.google.com/store/apps/details؟"</string>
+        جوجل بلاي: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager؟"</string>
     <string name="share_with">"شارك مع"</string>
     <string name="sort_by">"فرز التطبيقات"</string>
     <string name="source_code">"مصدر الرمز"</string>
