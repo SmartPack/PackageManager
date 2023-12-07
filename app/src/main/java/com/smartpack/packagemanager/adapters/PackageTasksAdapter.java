@@ -55,48 +55,50 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
     @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     @Override
     public void onBindViewHolder(@NonNull PackageTasksAdapter.ViewHolder holder, int position) {
-        if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
-            return;
-        }
-        holder.appIcon.setImageDrawable(data.get(position).getIcon());
-        if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getPackageName())) {
-            holder.appID.setTypeface(null, Typeface.BOLD);
-            holder.appID.setText(Utils.fromHtml(data.get(position).getPackageName().replace(Common.getSearchText(),"<b><i><font color=\"" +
-                    Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
-        } else {
-            holder.appID.setText(data.get(position).getPackageName());
-        }
-        if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getAppName())) {
-            holder.appName.setTypeface(null, Typeface.BOLD);
-        }
-        holder.appName.setText(data.get(position).getAppName());
-        holder.appIcon.setOnClickListener(v -> {
-            if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                sCommonUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
+        try {
+            if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
                 return;
             }
-            Common.setApplicationName(data.get(position).getAppName());
-            Common.setApplicationIcon(data.get(position).getIcon());
-            Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
-            holder.appIcon.getContext().startActivity(imageView);
-        });
-        holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position).getPackageName()));
-        holder.checkBox.setOnClickListener(v -> {
-            if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                sCommonUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
-                holder.checkBox.setChecked(false);
-                return;
-            }
-            if (Common.getBatchList().contains(data.get(position).getPackageName())) {
-                Common.getBatchList().remove(data.get(position).getPackageName());
-                sCommonUtils.snackBar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName())).show();
+            holder.appIcon.setImageDrawable(data.get(position).getIcon());
+            if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getPackageName())) {
+                holder.appID.setTypeface(null, Typeface.BOLD);
+                holder.appID.setText(Utils.fromHtml(data.get(position).getPackageName().replace(Common.getSearchText(), "<b><i><font color=\"" +
+                        Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
             } else {
-                Common.getBatchList().add(data.get(position).getPackageName());
-                sCommonUtils.snackBar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName())).show();
+                holder.appID.setText(data.get(position).getPackageName());
             }
-            Common.getBatchOptionsCard().setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
-            Common.getBatchOptionTitle().setText(v.getContext().getString(R.string.batch_options, Common.getBatchList().size()));
-        });
+            if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getAppName())) {
+                holder.appName.setTypeface(null, Typeface.BOLD);
+            }
+            holder.appName.setText(data.get(position).getAppName());
+            holder.appIcon.setOnClickListener(v -> {
+                if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
+                    sCommonUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
+                    return;
+                }
+                Common.setApplicationName(data.get(position).getAppName());
+                Common.setApplicationIcon(data.get(position).getIcon());
+                Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
+                holder.appIcon.getContext().startActivity(imageView);
+            });
+            holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position).getPackageName()));
+            holder.checkBox.setOnClickListener(v -> {
+                if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
+                    sCommonUtils.snackBar(v, v.getContext().getString(R.string.package_removed)).show();
+                    holder.checkBox.setChecked(false);
+                    return;
+                }
+                if (Common.getBatchList().contains(data.get(position).getPackageName())) {
+                    Common.getBatchList().remove(data.get(position).getPackageName());
+                    sCommonUtils.snackBar(v, v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName())).show();
+                } else {
+                    Common.getBatchList().add(data.get(position).getPackageName());
+                    sCommonUtils.snackBar(v, v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName())).show();
+                }
+                Common.getBatchOptionsCard().setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
+                Common.getBatchOptionTitle().setText(v.getContext().getString(R.string.batch_options, Common.getBatchList().size()));
+            });
+        } catch (IndexOutOfBoundsException ignored) {}
     }
 
     @Override
