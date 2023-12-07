@@ -16,13 +16,12 @@ android {
     }
 
     namespace 'com.smartpack.packagemanager'
-    compileSdkVersion 33
-    buildToolsVersion '30.0.3'
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 23
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 70
         versionName "v7.0"
         vectorDrawables.useSupportLibrary = true
@@ -41,7 +40,11 @@ android {
         }
     }
 
-    flavorDimensions "release"
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions.add("release")
     productFlavors {
         play {
             dimension "release"
@@ -56,7 +59,7 @@ android {
 }
 
 dependencies {
-    playImplementation 'com.android.billingclient:billing:6.0.0'
+    playImplementation 'com.android.billingclient:billing:6.1.0'
     implementation 'com.github.apk-editor:aXML:8458ba5aee'
 
     def sCommon_Version = 'aa1019da38'
@@ -69,8 +72,8 @@ dependencies {
     implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
 
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation "dev.rikka.shizuku:api:12.1.0"
     implementation "dev.rikka.shizuku:provider:12.1.0"
-    implementation 'net.lingala.zip4j:zip4j:2.11.3'
+    implementation 'net.lingala.zip4j:zip4j:2.11.5'
 }
