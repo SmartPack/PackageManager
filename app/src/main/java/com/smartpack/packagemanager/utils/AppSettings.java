@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2022 sunilpaulmathew <sunil.kde@gmail.com>
+ * Copyright (C) 2024-2025 sunilpaulmathew <sunil.kde@gmail.com>
  *
  * This file is part of Package Manager, a simple, yet powerful application
  * to manage other application installed on an android device.
@@ -64,6 +64,7 @@ public class AppSettings {
         List<sSerializableItems> mData = new ArrayList<>();
         mData.add(new sSerializableItems(null, "Willi Ye", "Kernel Adiutor", "https://github.com/Grarak/KernelAdiutor"));
         mData.add(new sSerializableItems(null, "topjohnwu", "libsu", "https://github.com/topjohnwu/libsu"));
+        mData.add(new sSerializableItems(null, "RikkaApps", "Shizuku", "https://github.com/RikkaApps/Shizuku"));
         mData.add(new sSerializableItems(null, "Srikanth Reddy Lingala", "zip4j", "https://github.com/srikanth-lingala"));
         mData.add(new sSerializableItems(null, "Aefyr", "SAI", "https://github.com/Aefyr/SAI"));
         mData.add(new sSerializableItems(null, "Nitin Kalra", "Split Apk Install", "https://github.com/nkalra0123/"));
@@ -92,6 +93,7 @@ public class AppSettings {
         mData.add(new sSerializableItems(null, "AbsurdUsername", "Italian Translations", "https://github.com/AbsurdUsername"));
         mData.add(new sSerializableItems(null, "rotid™", "Arabic Translations", null));
         mData.add(new sSerializableItems(null, "Pen™", "Slovakian Translations", null));
+        mData.add(new sSerializableItems(null, "yair aaron", "Hebrew Translations", null));
         return mData;
     }
 
