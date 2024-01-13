@@ -79,7 +79,10 @@
     <string name="uninstall_nope">"Sajnálom. Innen nem lehet ezt megtenni"</string>
     <string name="uninstall_summary">"%s eltávolítása"</string>
     <string name="uninstall_title">"Biztosan eltávolítja a(z) %s -t?"</string>
-    <string name="uninstall_warning">"Kérjük vegye figyelembe: A rendszeralkalmazások eltávolítása néha veszélyes lehet\n\n***<b>HASZNÁLJA FELELŐSÉGGEL</b>***\n"</string>
+    <string name="uninstall_warning">"Kérjük vegye figyelembe: A rendszeralkalmazások eltávolítása néha veszélyes lehet
+
+        ***<b>HASZNÁLJA FELELŐSÉGGEL</b>***
+        "</string>
     <string name="version">"Verzió: %s"</string>
     <string name="welcome_message">"Üdvözöljük a Package Managerben, amely egy egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez."</string>
     <string name="wrong_extension">"Válasszon %s kiterjesztésű fájlt."</string>

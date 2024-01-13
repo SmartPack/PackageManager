@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="apk_path">"Путь к APK"</string>
-    <string name="app_info">"Информация о приложении"</string>
+    <string name="app_info">"О приложении"</string>
     <string name="batch_list_clear">"Очистить список"</string>
     <string name="batch_list_disable">"Вы уверены, что хотите отключить (если включено) или включить (если отключено) следующие приложения?"</string>
     <string name="batch_list_remove">"Вы уверены, что хотите удалить следующие приложения?"</string>
@@ -79,7 +79,10 @@
     <string name="uninstall_nope">"Сожалею! Вы не можете сделать это отсюда!"</string>
     <string name="uninstall_summary">"Удаление %s"</string>
     <string name="uninstall_title">"Вы уверены, что хотите удалить %s?"</string>
-    <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!\n\n*** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***"</string>
+    <string name="uninstall_warning">"Обратите внимание: удаление системных приложений будет иногда опасно!
+
+        *** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***
+        "</string>
     <string name="version">"Версия: %s"</string>
     <string name="welcome_message">"Добро пожаловать в Package Manager, простое, но мощное приложение для управления вашими приложениями."</string>
     <string name="wrong_extension">"Пожалуйста, выберите файл с %s расширением."</string>
@@ -98,7 +101,7 @@
     <string name="share_app_Summary">"Предложить друзьям использовать Package Manager"</string>
     <string name="source_code_summary">"Package Manage- это приложение с открытым исходным кодом, которое готово принимать вклад сообщества разработчиков. Щелкните здесь, чтобы ознакомиться с исходным кодом!"</string>
     <string name="support_summary">"Присоединиться к группе поддержки в Telegram"</string>
-    <string name="batch_options">"Пакетные операции (%s)"</string>
+    <string name="batch_options">"Пакетные операции"</string>
     <string name="batch_list_added">"%s добавлен в список пакетной обработки"</string>
     <string name="batch_list_export">"Вы точно хотите экспортировать следующие приложения в хранилище устройства?"</string>
     <string name="batch_list_removed">"%s удален из списка пакетной обработки"</string>
