@@ -8,22 +8,41 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.content.ComponentName;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.os.IBinder;
+import android.os.RemoteException;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import com.smartpack.packagemanager.BuildConfig;
+import com.smartpack.packagemanager.IUserService;
+import com.smartpack.packagemanager.services.UserService;
 
 import rikka.shizuku.Shizuku;
-import rikka.shizuku.ShizukuRemoteProcess;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on November 29, 2022
  */
 public class ShizukuShell {
 
-    private static ShizukuRemoteProcess mProcess = null;
+    private static IUserService mUserService = null;
 
     public ShizukuShell() {
+    }
+
+    public boolean ensureUserService() {
+        if (mUserService != null) {
+            return true;
+        }
+
+        Shizuku.UserServiceArgs mUserServiceArgs = new Shizuku.UserServiceArgs(new ComponentName(BuildConfig.APPLICATION_ID, UserService.class.getName()))
+                .daemon(false)
+                .processNameSuffix("service")
+                .debuggable(BuildConfig.DEBUG)
+                .version(BuildConfig.VERSION_CODE);
+        Shizuku.bindUserService(mUserServiceArgs, mServiceConnection);
+
+        return false;
     }
 
     public boolean isPermissionDenied() {
@@ -31,36 +50,38 @@ public class ShizukuShell {
     }
 
     public boolean isReady() {
-        return Shizuku.pingBinder() && Shizuku.checkSelfPermission() ==
-                PackageManager.PERMISSION_GRANTED;
+        return isSupported() && Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED;
     }
 
     public boolean isSupported() {
-        return Shizuku.pingBinder();
+        return Shizuku.pingBinder() && Shizuku.getVersion() >= 11 && !Shizuku.isPreV11();
     }
+
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            if (iBinder == null || !iBinder.pingBinder()) {
+                return;
+            }
+
+            mUserService = IUserService.Stub.asInterface(iBinder);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
 
     public String runAndGetOutput(String command) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            mProcess = Shizuku.newProcess(new String[] {"sh", "-c", command}, null, null);
-            BufferedReader mInput = new BufferedReader(new InputStreamReader(mProcess.getInputStream()));
-            BufferedReader mError = new BufferedReader(new InputStreamReader(mProcess.getErrorStream()));
-            String line;
-            while ((line = mInput.readLine()) != null) {
-                sb.append(line).append("\n");
+        if (ensureUserService()) {
+            try {
+                return mUserService.runShellCommand(command);
+            } catch (RemoteException ignored) {
             }
-            while ((line = mError.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
-
-            mProcess.waitFor();
-        } catch (Exception ignored) {
         }
-        return sb.toString();
-    }
-
-    public void destroy() {
-        if (mProcess != null) mProcess.destroy();
+        return "";
     }
 
     public void requestPermission() {
@@ -68,10 +89,11 @@ public class ShizukuShell {
     }
 
     public void runCommand(String command) {
-        try {
-            mProcess = Shizuku.newProcess(new String[] {"sh", "-c", command}, null, null);
-            mProcess.waitFor();
-        } catch (InterruptedException ignored) {
+        if (ensureUserService()) {
+            try {
+                mUserService.runShellCommand(command);
+            } catch (RemoteException ignored) {
+            }
         }
     }
 

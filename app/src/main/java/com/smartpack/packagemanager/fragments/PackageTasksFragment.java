@@ -120,17 +120,21 @@ public class PackageTasksFragment extends Fragment {
         mRootShell = new RootShell();
         mShizukuShell = new ShizukuShell();
 
-        if (!mRootShell.rootAccess() && mShizukuShell.isSupported() && mShizukuShell.isPermissionDenied()
-                && sCommonUtils.getBoolean("request_shizuku", true, requireActivity())) {
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setCancelable(false)
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(getString(R.string.app_name))
-                    .setMessage(getString(R.string.shizuku_integration_message))
-                    .setNegativeButton(getString(R.string.never_show), (dialogInterface, i) -> sCommonUtils.saveBoolean(
-                            "request_shizuku", false, requireActivity()))
-                    .setPositiveButton(getString(R.string.request), (dialogInterface, i) -> mShizukuShell.requestPermission()
-                    ).show();
+        if (!mRootShell.rootAccess() && mShizukuShell.isSupported()) {
+            if (mShizukuShell.isPermissionDenied() && sCommonUtils.getBoolean("request_shizuku", true, requireActivity())) {
+                new MaterialAlertDialogBuilder(requireActivity())
+                        .setCancelable(false)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(getString(R.string.app_name))
+                        .setMessage(getString(R.string.shizuku_integration_message))
+                        .setNegativeButton(getString(R.string.never_show), (dialogInterface, i) -> sCommonUtils.saveBoolean(
+                                "request_shizuku", false, requireActivity()))
+                        .setPositiveButton(getString(R.string.request), (dialogInterface, i) -> mShizukuShell.requestPermission()
+                        ).show();
+            } else {
+                // Activate Shizuku on app launch for supported and enabled devices;
+                mShizukuShell.ensureUserService();
+            }
         }
 
         loadUI(requireActivity());
@@ -271,7 +275,6 @@ public class PackageTasksFragment extends Fragment {
 
     private void exit(Activity activity) {
         if (mRootShell.rootAccess() && mRootShell != null) mRootShell.closeSU();
-        if (mShizukuShell.isReady() && mShizukuShell != null) mShizukuShell.destroy();
         activity.finish();
     }
 
@@ -302,14 +305,12 @@ public class PackageTasksFragment extends Fragment {
                 .setChecked(PackageData.getSortingType(activity) == 0);
         sort.add(0, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
                 .setChecked(PackageData.getSortingType(activity) == 1);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            sort.add(0, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
-                    .setChecked(PackageData.getSortingType(activity) == 2);
-            sort.add(0, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
-                    .setChecked(PackageData.getSortingType(activity) == 3);
-            sort.add(0, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
-                    .setChecked(PackageData.getSortingType(activity) == 4);
-        }
+        sort.add(0, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
+                .setChecked(PackageData.getSortingType(activity) == 2);
+        sort.add(0, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
+                .setChecked(PackageData.getSortingType(activity) == 3);
+        sort.add(0, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
+                .setChecked(PackageData.getSortingType(activity) == 4);
         menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                 .setChecked(sCommonUtils.getBoolean("reverse_order", false, activity));
         sort.setGroupCheckable(0, true, true);
@@ -725,7 +726,6 @@ public class PackageTasksFragment extends Fragment {
             Common.setSearchText(null);
         }
         if (mRootShell.rootAccess() && mRootShell != null) mRootShell.closeSU();
-        if (mShizukuShell.isReady() && mShizukuShell != null) mShizukuShell.destroy();
     }
 
 }

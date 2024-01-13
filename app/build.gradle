@@ -20,8 +20,8 @@ android {
 
     defaultConfig {
         applicationId "com.smartpack.packagemanager"
-        minSdkVersion 23
-        targetSdkVersion 34
+        minSdkVersion 24
+        targetSdk 34
         versionCode 70
         versionName "v7.0"
         vectorDrawables.useSupportLibrary = true
@@ -41,7 +41,9 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         buildConfig = true
+        aidl true
     }
 
     flavorDimensions.add("release")
@@ -72,8 +74,11 @@ dependencies {
     implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
 
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.10.0'
-    implementation "dev.rikka.shizuku:api:12.1.0"
-    implementation "dev.rikka.shizuku:provider:12.1.0"
+    implementation 'com.google.android.material:material:1.11.0'
+
+    def shizuku_Version = '13.1.5'
+    implementation "dev.rikka.shizuku:api:${shizuku_Version}"
+    implementation "dev.rikka.shizuku:provider:${shizuku_Version}"
+
     implementation 'net.lingala.zip4j:zip4j:2.11.5'
 }
