@@ -101,7 +101,7 @@
     <string name="share_app_Summary">"Предложить друзьям использовать Package Manager"</string>
     <string name="source_code_summary">"Package Manage- это приложение с открытым исходным кодом, которое готово принимать вклад сообщества разработчиков. Щелкните здесь, чтобы ознакомиться с исходным кодом!"</string>
     <string name="support_summary">"Присоединиться к группе поддержки в Telegram"</string>
-    <string name="batch_options">"Пакетные операции"</string>
+    <string name="batch_options">"Пакетные операции (%s)"</string>
     <string name="batch_list_added">"%s добавлен в список пакетной обработки"</string>
     <string name="batch_list_export">"Вы точно хотите экспортировать следующие приложения в хранилище устройства?"</string>
     <string name="batch_list_removed">"%s удален из списка пакетной обработки"</string>
