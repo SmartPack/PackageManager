@@ -6,6 +6,13 @@ permalink: /change-logs/
 
 ## What's New
 
+### 66. [v7.1](https://github.com/SmartPack/PackageManager/releases/tag/v7.1) *(Jan 22, 2024)*
+- Migrated to latest Shizuku version
+- Fixed possible crashes while searching.
+- Updated build tools and dependencies.
+- Added Hebrew and updated other translations.
+- Miscellaneous changes.
+- 
 ### 65. [v7.0](https://github.com/SmartPack/PackageManager/releases/tag/v7.0) *(May 17, 2023)*
 - Fixed crashes due to some certificates not loading.
 - Updated build tools and dependencies.

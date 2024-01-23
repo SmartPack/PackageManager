@@ -1,4 +1,0 @@
-* Fixed crashes due to some certificates not loading.
-* Updated build tools and dependencies.
-* Updated arabic translations.
-* Miscellaneous changes.
