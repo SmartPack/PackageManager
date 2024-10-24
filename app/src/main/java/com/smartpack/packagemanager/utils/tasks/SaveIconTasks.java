@@ -75,6 +75,8 @@ public class SaveIconTasks extends sExecutor {
     @Override
     public void onPostExecute() {
         new MaterialAlertDialogBuilder(mActivity)
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(R.string.app_name)
                 .setMessage(Common.getApplicationName() + " icon " + mActivity.getString(R.string.export_file_message,
                         Environment.DIRECTORY_DOWNLOADS))
                 .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {

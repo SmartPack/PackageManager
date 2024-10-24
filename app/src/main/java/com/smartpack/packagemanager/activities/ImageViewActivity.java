@@ -53,6 +53,8 @@ public class ImageViewActivity extends AppCompatActivity {
         }
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(R.string.app_name)
                 .setMessage(getString(R.string.export_storage_message, path != null ? new File(path).getName() : Common.getApplicationName() + " icon"))
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })

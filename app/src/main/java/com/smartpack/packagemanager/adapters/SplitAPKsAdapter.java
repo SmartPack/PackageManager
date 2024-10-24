@@ -63,6 +63,8 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         }
         holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(R.string.app_name)
                 .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
                 })
