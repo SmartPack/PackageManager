@@ -8,11 +8,14 @@
 
 package com.smartpack.packagemanager.utils;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
+import com.smartpack.packagemanager.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +33,6 @@ public class Common {
     private static Drawable mApplicationIcon;
 
     private static final List<String> mAPKList = new ArrayList<>(), mBatchList = new ArrayList<>(), mRestoreList = new ArrayList<>();
-
-    private static MaterialCardView mBatchOptions = null, mRestore = null, mSelect = null;
-
-    private static MaterialTextView mBatchOptionTitle = null;
 
     private static String mApplicationID, mDirData, mDirNatLib, mDirSource, mPath, mSearchText;
 
@@ -120,36 +119,16 @@ public class Common {
         return mRestoreList;
     }
 
-    public static MaterialCardView getRestoreCard() {
-        return mRestore;
+    public static MaterialCardView getCardView(Activity activity, int id) {
+        return activity.findViewById(id);
     }
 
-    public static MaterialCardView initializeRestoreCard(View view, int id) {
-        return mRestore = view.findViewById(id);
+    public static MaterialTextView getTextView(Activity activity, int id) {
+        return activity.findViewById(id);
     }
 
-    public static MaterialCardView getSelectCard() {
-        return mSelect;
-    }
-
-    public static MaterialCardView initializeSelectCard(View view, int id) {
-        return mSelect = view.findViewById(id);
-    }
-
-    public static MaterialCardView getBatchOptionsCard() {
-        return mBatchOptions;
-    }
-
-    public static MaterialCardView initializeBatchOptionsCard(View view, int id) {
-        return mBatchOptions = view.findViewById(id);
-    }
-
-    public static MaterialTextView getBatchOptionTitle() {
-        return mBatchOptionTitle;
-    }
-
-    public static MaterialTextView initializeBatchOptionTitle(View view, int id) {
-        return mBatchOptionTitle = view.findViewById(id);
+    public static View getView(Activity activity, int id) {
+        return activity.findViewById(id);
     }
 
     public static void reloadPage(boolean b) {
@@ -174,6 +153,11 @@ public class Common {
 
     public static void isUpdating(boolean b) {
         mUpdating = b;
+    }
+
+    public static void navigateToFragment(Activity activity, int position) {
+        BottomNavigationView bottomNavigationView = activity.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(position);
     }
 
     public static void setApplicationName(CharSequence name) {

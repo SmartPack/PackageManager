@@ -17,8 +17,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
@@ -38,8 +38,7 @@ public class ADBUninstallActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adb_uninstall);
 
-        AppCompatImageButton mBack = findViewById(R.id.back);
-        AppCompatImageButton mUninstallButton = findViewById(R.id.uninstall_button);
+        MaterialButton mUninstallButton = findViewById(R.id.uninstall_button);
         MaterialCardView mDocumentation = findViewById(R.id.documentation);
         MaterialCardView mGotIt = findViewById(R.id.got_it);
         MaterialCardView mUninstall = findViewById(R.id.uninstall);
@@ -55,8 +54,6 @@ public class ADBUninstallActivity extends AppCompatActivity {
         }
 
         mADBCommand.setTextColor(Color.MAGENTA);
-
-        mBack.setOnClickListener(v -> finish());
 
         mGotIt.setOnClickListener(v -> finish());
 

@@ -21,7 +21,6 @@
                             android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorAccent"
                             android:textIsSelectable="false"
                             android:textStyle="bold"
                             android:gravity="start"
@@ -65,21 +64,19 @@
                     android:orientation="vertical"
                     android:visibility="gone" >
 
-                        <androidx.appcompat.widget.AppCompatImageButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/action_icon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@null"
-                            android:clickable="false"
                             android:layout_gravity="center_horizontal"
-                            android:tint="@color/colorAccent" />
+                            style="?attr/materialIconButtonFilledTonalStyle"
+                            android:clickable="false" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/action_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
                             android:layout_gravity="center_horizontal"
                             android:textIsSelectable="true"
                             android:textSize="12sp" />

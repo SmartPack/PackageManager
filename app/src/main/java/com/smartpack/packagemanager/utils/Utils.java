@@ -16,14 +16,12 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
 import android.text.Html;
-import android.util.TypedValue;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 
 import com.smartpack.packagemanager.MainActivity;
-import com.smartpack.packagemanager.R;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
@@ -32,21 +30,11 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class Utils {
 
-    /*
-     * The following code is partly taken from https://github.com/Grarak/KernelAdiutor
-     * Ref: https://github.com/Grarak/KernelAdiutor/blob/master/app/src/main/java/com/grarak/kerneladiutor/utils/ViewUtils.java
-     */
-    public static int getThemeAccentColor(Context context) {
-        TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-        return value.data;
-    }
-
     public static boolean isProUser(Context context) {
         return sCommonUtils.getBoolean("support_received", false, context);
     }
 
-    public static void toggleKeyboard(int mode, AppCompatEditText editText, Activity activity) {
+    public static void toggleKeyboard(int mode, AppCompatAutoCompleteTextView editText, Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (mode == 1) {
             if (editText.requestFocus()) {

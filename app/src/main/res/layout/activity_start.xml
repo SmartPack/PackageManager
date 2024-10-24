@@ -25,7 +25,6 @@
             android:layout_width="175dp"
             android:layout_height="20dp"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressBackgroundTint="@color/colorAccent"
             android:layout_gravity="center"
             android:indeterminate="true"
             android:paddingStart="15dp"
@@ -56,7 +55,6 @@
                 android:id="@+id/documentation_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorAccent"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp" >
 
@@ -70,7 +68,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_book"
-                        android:tint="@color/colorBlack"
                         android:layout_marginStart="5dp"
                         android:background="@null"
                         android:clickable="false"
@@ -79,7 +76,6 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
                         android:text="@string/documentation"
                         android:textStyle="bold|italic"
                         android:clickable="false"
@@ -92,7 +88,6 @@
                 android:id="@+id/start_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorAccent"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp" >
 
@@ -105,7 +100,6 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
                         android:textStyle="bold|italic"
                         android:text="@string/start"
                         android:clickable="false"
@@ -116,7 +110,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_back"
-                        android:tint="@color/colorBlack"
                         android:layout_marginEnd="5dp"
                         android:background="@null"
                         android:clickable="false"

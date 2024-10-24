@@ -18,13 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -60,8 +60,6 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
-        } else {
-            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
         }
         holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
                 .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
@@ -80,7 +78,8 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatImageButton mExport, mIcon;
+        private final AppCompatImageButton mIcon;
+        private final MaterialButton mExport;
         private final MaterialTextView mName, mSize;
 
         public ViewHolder(View view) {

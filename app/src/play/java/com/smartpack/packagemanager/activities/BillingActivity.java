@@ -58,7 +58,6 @@ public class BillingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing);
 
-        AppCompatImageButton mBack = findViewById(R.id.back_button);
         AppCompatImageButton mSupporterIcon = findViewById(R.id.supporter_button);
         MaterialTextView mSupporterMessage = findViewById(R.id.supporter_message);
 
@@ -89,8 +88,6 @@ public class BillingActivity extends AppCompatActivity {
                 buyMeADinner();
             }
         });
-
-        mBack.setOnClickListener(v -> super.onBackPressed());
 
         mBillingClient = BillingClient.newBuilder(BillingActivity.this).enablePendingPurchases().setListener((billingResult, list) -> {
             if (list != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {

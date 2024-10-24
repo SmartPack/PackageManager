@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.activities;
+package com.smartpack.packagemanager.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,21 +15,23 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.UninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
@@ -49,58 +51,56 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 10, 2021
  */
-public class UninstalledAppsActivity extends AppCompatActivity {
+public class UninstalledAppsFragment extends Fragment {
 
-    private AppCompatEditText mSearchWord;
-    private MaterialTextView mTitle;
+    private AppCompatAutoCompleteTextView mSearchWord;
+    private MaterialCardView mRestore;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private UninstalledAppsAdapter mRecycleViewAdapter;
     private String mSearchText = null;
 
     @SuppressLint("StringFormatInvalid")
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_uninstalled_apps);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View mRootView = inflater.inflate(R.layout.fragment_uninstalled_apps, container, false);
 
-        mSearchWord = findViewById(R.id.search_word);
-        AppCompatImageButton mSearch = findViewById(R.id.search_icon);
-        AppCompatImageButton mBack = findViewById(R.id.back_button);
-        AppCompatImageButton mSort = findViewById(R.id.sort_icon);
-        MaterialCardView mRestore = Common.initializeRestoreCard(findViewById(android.R.id.content), R.id.restore);
-        mProgress = findViewById(R.id.progress);
-        mTitle = findViewById(R.id.title);
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mSearchWord = mRootView.findViewById(R.id.search_word);
+        MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
+        MaterialButton mSort = mRootView.findViewById(R.id.sort_icon);
+        mRestore = mRootView.findViewById(R.id.restore);
+        mProgress = mRootView.findViewById(R.id.progress);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecycleViewAdapter = new UninstalledAppsAdapter(getData(this));
+        Common.getView(requireActivity(), R.id.fab).setVisibility(View.GONE);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mRecycleViewAdapter = new UninstalledAppsAdapter(getData(requireActivity()), requireActivity());
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) ->
-                new MaterialAlertDialogBuilder(this)
+                new MaterialAlertDialogBuilder(requireActivity())
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle(R.string.sure_question)
-                        .setMessage(getString(R.string.restore_message, getData(this).get(position)))
+                        .setMessage(getString(R.string.restore_message, getData(requireActivity()).get(position)))
                         .setNegativeButton(R.string.cancel, (dialog, id) -> {
                         })
-                        .setPositiveButton(R.string.restore, (dialog, id) -> restore(position, false,this)).show()
+                        .setPositiveButton(R.string.restore, (dialog, id) -> restore(position, false,requireActivity())).show()
         );
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
                 mSearchWord.setVisibility(View.GONE);
-                mTitle.setVisibility(View.VISIBLE);
-                Utils.toggleKeyboard(0, mSearchWord, this);
+                Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
-                mTitle.setVisibility(View.GONE);
-                Utils.toggleKeyboard(1, mSearchWord, this);
+                Utils.toggleKeyboard(1, mSearchWord, requireActivity());
             }
         });
 
         mSearchWord.setOnEditorActionListener((v, actionId, event) -> {
-            Utils.toggleKeyboard(0, mSearchWord, this);
+            Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             mSearchWord.clearFocus();
             return true;
         });
@@ -121,21 +121,14 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             }
         });
 
-        mBack.setOnClickListener(v -> {
-            if (mProgress.getVisibility() == View.GONE) {
-                Common.getRestoreList().clear();
-                finish();
-            }
-        });
-
         mSort.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(this, mSort);
+            PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(sCommonUtils.getBoolean("reverse_order", false, this));
+                    .setChecked(sCommonUtils.getBoolean("reverse_order", false, requireActivity()));
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
-                    sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, this), this);
+                    sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
                     loadUI();
                 }
                 return false;
@@ -148,14 +141,37 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             for (String packageName : Common.getRestoreList()) {
                 sb.append("* ").append(packageName).append("\n");
             }
-            new MaterialAlertDialogBuilder(this)
+            new MaterialAlertDialogBuilder(requireActivity())
                     .setIcon(R.mipmap.ic_launcher)
                     .setTitle(R.string.sure_question)
                     .setMessage(getString(R.string.restore_message_batch, sb.toString()))
                     .setNegativeButton(R.string.cancel, (dialog, id) -> {
                     })
-                    .setPositiveButton(R.string.restore, (dialog, id) -> restore(0, true, this)).show();
+                    .setPositiveButton(R.string.restore, (dialog, id) -> restore(0, true, requireActivity())).show();
         });
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mSearchText != null) {
+                    mSearchWord.setText(null);
+                    mSearchText = null;
+                    return;
+                }
+                if (mSearchWord.getVisibility() == View.VISIBLE) {
+                    mSearchWord.setVisibility(View.GONE);
+                    return;
+                }
+                if (mProgress.getVisibility() == View.VISIBLE) {
+                    return;
+                }
+                Common.getRestoreList().clear();
+
+                Common.navigateToFragment(requireActivity(), 0);
+            }
+        });
+
+        return mRootView;
     }
 
     private void loadUI() {
@@ -168,7 +184,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(UninstalledAppsActivity.this));
+                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(requireActivity()), requireActivity());
             }
 
             @Override
@@ -233,7 +249,7 @@ public class UninstalledAppsActivity extends AppCompatActivity {
             public void onPostExecute() {
                 PackageData.setRawData(null, context);
                 if (batch) {
-                    Common.getRestoreCard().setVisibility(View.GONE);
+                    mRestore.setVisibility(View.GONE);
                     Common.getRestoreList().clear();
                     new MaterialAlertDialogBuilder(context)
                             .setMessage(getString(R.string.restore_success_message))
@@ -250,25 +266,6 @@ public class UninstalledAppsActivity extends AppCompatActivity {
                 }
             }
         }.execute();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mSearchText != null) {
-            mSearchWord.setText(null);
-            mSearchText = null;
-            return;
-        }
-        if (mSearchWord.getVisibility() == View.VISIBLE) {
-            mSearchWord.setVisibility(View.GONE);
-            mTitle.setVisibility(View.VISIBLE);
-            return;
-        }
-        if (mProgress.getVisibility() == View.VISIBLE) {
-            return;
-        }
-        Common.getRestoreList().clear();
-        finish();
     }
 
 }

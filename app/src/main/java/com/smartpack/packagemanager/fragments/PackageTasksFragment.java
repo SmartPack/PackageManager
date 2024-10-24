@@ -30,27 +30,21 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.activities.ExportedAppsActivity;
-import com.smartpack.packagemanager.activities.FilePickerActivity;
-import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
-import com.smartpack.packagemanager.activities.SettingsActivity;
-import com.smartpack.packagemanager.activities.UninstalledAppsActivity;
 import com.smartpack.packagemanager.adapters.PackageTasksAdapter;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
@@ -62,8 +56,6 @@ import com.smartpack.packagemanager.utils.tasks.BatchDisableTask;
 import com.smartpack.packagemanager.utils.tasks.BatchExportTask;
 import com.smartpack.packagemanager.utils.tasks.BatchResetTask;
 import com.smartpack.packagemanager.utils.tasks.BatchUninstallTask;
-import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
-import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,12 +76,12 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class PackageTasksFragment extends Fragment {
 
-    private AppCompatEditText mSearchWord;
-    private AppCompatImageButton mSettings, mSort;
+    private AppCompatAutoCompleteTextView mSearchWord;
+    private MaterialButton mSort;
     private boolean mExit;
     private final Handler mHandler = new Handler();
     private MaterialCardView mBatchOptions;
-    private MaterialTextView mAppTitle, mBatchOptionTitle;
+    private MaterialTextView mBatchOptionTitle;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private PackageTasksAdapter mRecycleViewAdapter;
@@ -101,16 +93,17 @@ public class PackageTasksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_packagetasks, container, false);
 
-        mAppTitle = mRootView.findViewById(R.id.app_title);
-        mBatchOptionTitle = Common.initializeBatchOptionTitle(mRootView, R.id.batch_option_title);
+        mBatchOptionTitle = mRootView.findViewById(R.id.batch_option_title);
         mProgress = mRootView.findViewById(R.id.progress);
-        mBatchOptions = Common.initializeBatchOptionsCard(mRootView, R.id.batch_options);
+        mBatchOptions = mRootView.findViewById(R.id.batch_options);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
-        AppCompatImageButton mSearch = mRootView.findViewById(R.id.search_icon);
+        MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
         mSort = mRootView.findViewById(R.id.sort_icon);
-        mSettings = mRootView.findViewById(R.id.settings_icon);
+        MaterialButton mReload = mRootView.findViewById(R.id.reload_icon);
+
+        Common.getView(requireActivity(), R.id.fab).setVisibility(View.VISIBLE);
 
         mSearchWord.setHintTextColor(Color.GRAY);
 
@@ -183,11 +176,14 @@ public class PackageTasksFragment extends Fragment {
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
                 mSearchWord.setVisibility(View.GONE);
-                mAppTitle.setVisibility(View.VISIBLE);
+                Utils.toggleKeyboard(1, mSearchWord, requireActivity());
+                return;
+            }
+            if (mSearchWord.getVisibility() == View.VISIBLE) {
+                mSearchWord.setVisibility(View.GONE);
                 Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
-                mAppTitle.setVisibility(View.GONE);
                 Utils.toggleKeyboard(1, mSearchWord, requireActivity());
             }
         });
@@ -214,7 +210,43 @@ public class PackageTasksFragment extends Fragment {
             }
         });
 
-        mSettings.setOnClickListener(v -> settingsMenu(requireActivity()));
+        mReload.setOnClickListener(v -> new sExecutor() {
+
+                    @Override
+                    public void onPreExecute() {
+                        mProgress.setVisibility(View.VISIBLE);
+                        mBatchOptions.setVisibility(View.GONE);
+                        mRecyclerView.setVisibility(View.GONE);
+
+                        if (Common.getSearchText() != null) {
+                            mSearchWord.setText(null);
+                            Common.setSearchText(null);
+                        }
+                        if (mSearchWord.getVisibility() == View.VISIBLE) {
+                            mSearchWord.setVisibility(View.GONE);
+                            Utils.toggleKeyboard(0, mSearchWord, requireActivity());
+                        }
+
+                        Common.getBatchList().clear();
+                        mRecyclerView.removeAllViews();
+                    }
+
+                    @Override
+                    public void doInBackground() {
+                        PackageData.setRawData(mProgress, requireActivity());
+                        mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(requireActivity()), requireActivity());
+                    }
+
+                    @Override
+                    public void onPostExecute() {
+                        mBatchOptions.setVisibility(View.GONE);
+                        mRecyclerView.setAdapter(mRecycleViewAdapter);
+                        mProgress.setVisibility(View.GONE);
+                        mProgress.setIndeterminate(true);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                }.execute()
+        );
 
         mSort.setOnClickListener(v -> sortMenu(requireActivity()));
 
@@ -233,10 +265,9 @@ public class PackageTasksFragment extends Fragment {
                 }
                 if (mSearchWord.getVisibility() == View.VISIBLE) {
                     mSearchWord.setVisibility(View.GONE);
-                    mAppTitle.setVisibility(View.VISIBLE);
                     return;
                 }
-                if (Common.getBatchList().size() > 0) {
+                if (!Common.getBatchList().isEmpty()) {
                     new MaterialAlertDialogBuilder(requireActivity())
                             .setMessage(R.string.batch_warning)
                             .setCancelable(false)
@@ -249,7 +280,7 @@ public class PackageTasksFragment extends Fragment {
                         mExit = false;
                         exit(requireActivity());
                     } else {
-                        sCommonUtils.snackBar(mRootView, getString(R.string.press_back)).show();
+                        sCommonUtils.toast(getString(R.string.press_back), requireActivity()).show();
                         mExit = true;
                         mHandler.postDelayed(() -> mExit = false, 2000);
                     }
@@ -290,7 +321,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     private void handleUninstallEvent() {
-        if (Common.getBatchList().size() > 0) {
+        if (!Common.getBatchList().isEmpty()) {
             uninstallUserApp(Common.getBatchList().get(0));
         } else {
             loadUI(requireActivity());
@@ -351,101 +382,6 @@ public class PackageTasksFragment extends Fragment {
                 case 6:
                     sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, activity), activity);
                     loadUI(activity);
-                    break;
-            }
-            return false;
-        });
-        popupMenu.show();
-    }
-
-    private void settingsMenu(Activity activity) {
-        PopupMenu popupMenu = new PopupMenu(activity, mSettings);
-        Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reload));
-        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.installer));
-        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.exported_apps));
-        if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
-            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.uninstalled_apps));
-        }
-        menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.settings));
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 0:
-                    new sExecutor() {
-
-                        @Override
-                        public void onPreExecute() {
-                            mProgress.setVisibility(View.VISIBLE);
-                            mBatchOptions.setVisibility(View.GONE);
-                            mRecyclerView.setVisibility(View.GONE);
-
-                            if (Common.getSearchText() != null) {
-                                mSearchWord.setText(null);
-                                Common.setSearchText(null);
-                            }
-                            if (mSearchWord.getVisibility() == View.VISIBLE) {
-                                mSearchWord.setVisibility(View.GONE);
-                                mAppTitle.setVisibility(View.VISIBLE);
-                                Utils.toggleKeyboard(0, mSearchWord, requireActivity());
-                            }
-
-                            Common.getBatchList().clear();
-                            mRecyclerView.removeAllViews();
-                        }
-
-                        @Override
-                        public void doInBackground() {
-                            PackageData.setRawData(mProgress, activity);
-                            mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity));
-                        }
-
-                        @Override
-                        public void onPostExecute() {
-                            mBatchOptions.setVisibility(View.GONE);
-                            mRecyclerView.setAdapter(mRecycleViewAdapter);
-                            mProgress.setVisibility(View.GONE);
-                            mProgress.setIndeterminate(true);
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                        }
-                    }.execute();
-                    break;
-                case 1:
-                    if (sCommonUtils.getBoolean("neverShow", false, requireActivity())) {
-                        if (Flavor.isFullVersion()) {
-                            Common.getAppList().clear();
-                            Common.setPath(FilePicker.getLastDirPath(activity));
-                            Intent filePicker = new Intent(activity, FilePickerActivity.class);
-                            activity.startActivity(filePicker);
-                        } else {
-                            Intent installer = new Intent(Intent.ACTION_GET_CONTENT);
-                            installer.setType("*/*");
-                            String[] mimeTypes = {
-                                    "application/vnd.android.package-archive",
-                                    "application/xapk-package-archive",
-                                    "application/octet-stream",
-                                    "application/vnd.apkm"
-                            };
-                            installer.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                            installer.addCategory(Intent.CATEGORY_OPENABLE);
-                            installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                            installApp.launch(installer);
-                        }
-                    } else {
-                        Intent installer = new Intent(activity, InstallerInstructionsActivity.class);
-                        startActivity(installer);
-                    }
-                    break;
-                case 2:
-                    Intent exportedApps = new Intent(activity, ExportedAppsActivity.class);
-                    startActivity(exportedApps);
-                    break;
-                case 3:
-                    Intent uninstalledApps = new Intent(activity, UninstalledAppsActivity.class);
-                    startActivity(uninstalledApps);
-                    break;
-                case 4:
-                    Intent settingsPage = new Intent(activity, SettingsActivity.class);
-                    startActivity(settingsPage);
                     break;
             }
             return false;
@@ -528,7 +464,7 @@ public class PackageTasksFragment extends Fragment {
                                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     activity);
                         }
-                        sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+                        sCommonUtils.toast(activity.getString(R.string.permission_denied_write_storage), requireActivity()).show();
                     } else {
                         MaterialAlertDialogBuilder export = new MaterialAlertDialogBuilder(activity);
                         export.setIcon(R.mipmap.ic_launcher);
@@ -559,7 +495,7 @@ public class PackageTasksFragment extends Fragment {
                                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     requireActivity());
                         }
-                        sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
+                        sCommonUtils.toast(getString(R.string.permission_denied_write_storage), requireActivity()).show();
                     } else {
                         if (!PackageData.getPackageDir(activity).exists()) {
                             sFileUtils.mkdir(PackageData.getPackageDir(activity));
@@ -575,7 +511,7 @@ public class PackageTasksFragment extends Fragment {
                             }
                             obj.put("applications", apps);
                             sFileUtils.create(obj.toString(), mJSON);
-                            sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
+                            sCommonUtils.toast(getString(R.string.export_details_message, mJSON.getName()), requireActivity()).show();
                         } catch (JSONException ignored) {
                         }
                     }
@@ -632,7 +568,7 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity));
+                mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity), activity);
             }
 
             @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
@@ -644,8 +580,8 @@ public class PackageTasksFragment extends Fragment {
                 } else {
                     mBatchOptions.setVisibility(View.GONE);
                 }
-                mBatchOptions.setVisibility(Common.getBatchList().size() > 0 ? View.VISIBLE : View.GONE);
-                if (Common.getBatchList().size() > 0) {
+                mBatchOptions.setVisibility(!Common.getBatchList().isEmpty() ? View.VISIBLE : View.GONE);
+                if (!Common.getBatchList().isEmpty()) {
                     mBatchOptionTitle.setText(getString(R.string.batch_options, Common.getBatchList().size()));
                 }
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
@@ -654,22 +590,6 @@ public class PackageTasksFragment extends Fragment {
             }
         }.execute();
     }
-
-    ActivityResultLauncher<Intent> installApp = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    Intent data = result.getData();
-                    Uri uriFile = data.getData();
-
-                    if (data.getClipData() != null) {
-                        new MultipleAPKsTasks(data.getClipData(), requireActivity()).execute();
-                    } else if (uriFile != null) {
-                        new SingleAPKTasks(uriFile, requireActivity()).execute();
-                    }
-                }
-            }
-    );
 
     @SuppressLint("StringFormatInvalid")
     ActivityResultLauncher<Intent> uninstallApps = registerForActivityResult(
@@ -699,7 +619,7 @@ public class PackageTasksFragment extends Fragment {
                         Common.isUninstall(false);
                     } else {
                         // If uninstallation cancelled or failed
-                        sCommonUtils.snackBar(mRecyclerView, getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity()))).show();
+                        sCommonUtils.toast(getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity())), requireActivity()).show();
                         Common.getBatchList().remove(0);
                         handleUninstallEvent();
                     }

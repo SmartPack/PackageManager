@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageInfoItems;
@@ -68,7 +68,7 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
         }
 
         if (data.get(position).getActionIcon() != null && data.get(position).getActionText() != null) {
-            holder.mActionIcon.setImageDrawable(data.get(position).getActionIcon());
+            holder.mActionIcon.setIcon(data.get(position).getActionIcon());
             holder.mActionText.setText(data.get(position).getActionText());
             holder.mActionLayout.setVisibility(View.VISIBLE);
             holder.mActionLayout.setOnClickListener(v -> mClickListener.onItemClick(position, v));
@@ -83,7 +83,7 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatImageButton mActionIcon;
+        private final MaterialButton mActionIcon;
         private final LinearLayoutCompat mActionLayout;
         private final MaterialTextView mTitle, mDescription, mDescriptionOne, mDescriptionTwo, mActionText;
 

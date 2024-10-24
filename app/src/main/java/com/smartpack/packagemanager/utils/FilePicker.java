@@ -34,7 +34,7 @@ public class FilePicker {
                     mDir.add(mFile.getAbsolutePath());
                 }
             }
-            Collections.sort(mDir, String.CASE_INSENSITIVE_ORDER);
+            mDir.sort(String.CASE_INSENSITIVE_ORDER);
             if (!sCommonUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mDir);
             }
@@ -48,7 +48,7 @@ public class FilePicker {
                     mFiles.add(mFile.getAbsolutePath());
                 }
             }
-            Collections.sort(mFiles, String.CASE_INSENSITIVE_ORDER);
+            mFiles.sort(String.CASE_INSENSITIVE_ORDER);
             if (!sCommonUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mFiles);
             }

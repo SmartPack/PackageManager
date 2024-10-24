@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,12 +69,13 @@ public class ManifestFragment extends Fragment {
                 }
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
-                if (mManifest != null && mManifest.size() > 0) {
+                if (mManifest != null && !mManifest.isEmpty()) {
                     mRecyclerView.setAdapter(new ManifestAdapter(mManifest));
                 } else {
-                    sCommonUtils.snackBar(mRootView, getString(R.string.failed_decode_xml, "AndroidManifest.xml")).show();
+                    sCommonUtils.toast(getString(R.string.failed_decode_xml, "AndroidManifest.xml"), requireActivity()).show();
                 }
             }
         }.execute();

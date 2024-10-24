@@ -5,43 +5,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <FrameLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
-        android:padding="5dp" >
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/exported_apps" >
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|center"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/ic_back"
-            android:background="@null" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:layout_marginStart="40dp"
-            android:text="@string/installer"
-            android:layout_marginEnd="40dp"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:gravity="start"
-            android:textSize="20sp" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/ic_add"
-            android:layout_gravity="end|center"
-            android:layout_margin="5dp" />
-    </FrameLayout>
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_marginEnd="10dp"
+            app:icon="@drawable/ic_add"
+            android:layout_gravity="end" />
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -73,7 +55,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_back"
                     android:background="@null"
                     android:rotation="180" />
@@ -98,7 +79,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_back"
                     android:background="@null"
                     android:rotation="180" />
@@ -123,7 +103,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_back"
                     android:background="@null"
                     android:rotation="180" />
@@ -150,7 +129,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/never_show_page"
-            android:textColor="@color/colorAccent"
             android:layout_marginEnd="50dp"
             android:textStyle="bold|italic"
             android:layout_gravity="end"
@@ -162,7 +140,6 @@
             android:id="@+id/hide_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:foregroundTint="@color/colorAccent"
             android:layout_gravity="end" />
     </FrameLayout>
 </LinearLayout>

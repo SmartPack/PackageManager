@@ -3,47 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
-        android:gravity="center_vertical"
-        android:padding="10dp" >
+        android:orientation="horizontal" >
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/back"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
-            android:tint="@color/colorAccent"
-            android:layout_gravity="center|start"
-            android:gravity="center_vertical"
-            android:src="@drawable/ic_back" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_marginStart="10dp"
+            app:icon="@drawable/ic_back" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
+            style="@style/Widget.Material3.Toolbar"
+            app:layout_constraintTop_toTopOf="@id/back"
+            app:layout_constraintEnd_toStartOf="@id/sort"
+            app:layout_constraintStart_toEndOf="@id/back"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:gravity="center"
             android:textStyle="bold"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorAccent"
-            android:textIsSelectable="true"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:maxLines="1" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/sort"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
-            android:tint="@color/colorAccent"
-            android:layout_gravity="center|end"
-            android:gravity="center_vertical"
-            android:src="@drawable/ic_sort" />
-    </FrameLayout>
+            style="?attr/materialIconButtonFilledTonalStyle"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"
+            app:icon="@drawable/ic_sort" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/layout_recyclerview" />
 
@@ -55,7 +57,6 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/colorAccent"
         android:textIsSelectable="true"
         android:visibility="gone"
         android:textSize="17sp" />

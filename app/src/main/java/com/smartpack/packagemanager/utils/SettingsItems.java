@@ -18,14 +18,15 @@ import java.io.Serializable;
 public class SettingsItems implements Serializable {
     private final String mTitle, mDescription, mUrl;
     private final Drawable mIcon;
-    private final int mColor, mSize;
+    private final boolean mSectionHeading;
+    private final int mSize;
 
-    public SettingsItems(String title, String description, Drawable icon, String url, int color, int size) {
+    public SettingsItems(String title, String description, Drawable icon, String url, boolean sectionHeading, int size) {
         this.mTitle = title;
         this.mDescription = description;
         this.mIcon = icon;
         this.mUrl = url;
-        this.mColor = color;
+        this.mSectionHeading = sectionHeading;
         this.mSize = size;
     }
 
@@ -45,8 +46,8 @@ public class SettingsItems implements Serializable {
         return mUrl;
     }
 
-    public int getColor() {
-        return mColor;
+    public boolean isSectionHeading() {
+        return mSectionHeading;
     }
 
     public int getSize() {

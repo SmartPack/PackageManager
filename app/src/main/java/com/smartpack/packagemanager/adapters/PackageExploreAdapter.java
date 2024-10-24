@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -50,7 +49,6 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
     @Override
     public void onBindViewHolder(@NonNull PackageExploreAdapter.ViewHolder holder, int position) {
         if (position == 0) {
-            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
             holder.mIcon.setRotation(90);
             holder.mTitle.setText(null);
@@ -59,7 +57,6 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
             if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
             }
-            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mTitle.getContext()));
         } else if (PackageExplorer.isImageFile(data.get(position))) {
             if (PackageExplorer.getIconFromPath(data.get(position)) != null) {
                 holder.mIcon.setImageURI(PackageExplorer.getIconFromPath(data.get(position)));

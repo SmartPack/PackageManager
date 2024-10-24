@@ -7,20 +7,17 @@
     android:layout_margin="3dp"
     android:gravity="center" >
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:tint="@color/colorAccent"
-            android:background="@null"
-            android:clickable="false"
-            android:gravity="center" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:clickable="false" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
             android:textIsSelectable="false"
             android:clickable="false"
             android:textStyle="bold"

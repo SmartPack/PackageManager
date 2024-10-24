@@ -13,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageOptionsItems;
@@ -44,7 +44,7 @@ public class PackageOptionsAdapter extends RecyclerView.Adapter<PackageOptionsAd
     @Override
     public void onBindViewHolder(@NonNull PackageOptionsAdapter.ViewHolder holder, int position) {
         holder.mText.setText(data.get(position).getText());
-        holder.mIcon.setImageDrawable(data.get(position).getIcon());
+        holder.mIcon.setIcon(data.get(position).getIcon());
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PackageOptionsAdapter extends RecyclerView.Adapter<PackageOptionsAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final AppCompatImageButton mIcon;
+        private final MaterialButton mIcon;
         private final MaterialTextView mText;
 
         public ViewHolder(View view) {

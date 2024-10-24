@@ -25,10 +25,10 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
@@ -68,14 +68,12 @@ public class FilePickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filepicker);
 
-        AppCompatImageButton mBack = findViewById(R.id.back);
-        AppCompatImageButton mSortButton = findViewById(R.id.sort);
+        MaterialButton mBack = findViewById(R.id.back);
+        MaterialButton mSortButton = findViewById(R.id.sort);
         mProgress = findViewById(R.id.progress);
         mTitle = findViewById(R.id.title);
-        mSelect = Common.initializeSelectCard(findViewById(android.R.id.content), R.id.select);
+        mSelect = findViewById(R.id.select);
         mRecyclerView = findViewById(R.id.recycler_view);
-
-        mSelect.setStrokeColor(sCommonUtils.getColor(R.color.colorAccent, this));
 
         mBack.setOnClickListener(v -> exitActivity());
 
@@ -103,7 +101,7 @@ public class FilePickerActivity extends AppCompatActivity {
         }
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
-        mRecycleViewAdapter = new FilePickerAdapter(FilePicker.getData(this, true));
+        mRecycleViewAdapter = new FilePickerAdapter(FilePicker.getData(this, true), this);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mTitle.setText(Common.getPath().equals(Environment.getExternalStorageDirectory().toString() + File.separator) ? getString(R.string.sdcard) : new File(Common.getPath()).getName());
@@ -198,7 +196,7 @@ public class FilePickerActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new FilePickerAdapter(FilePicker.getData(activity, true));
+                mRecycleViewAdapter = new FilePickerAdapter(FilePicker.getData(activity, true), activity);
             }
 
             @Override

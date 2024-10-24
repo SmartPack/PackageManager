@@ -61,10 +61,10 @@ android {
 }
 
 dependencies {
-    playImplementation 'com.android.billingclient:billing:6.1.0'
-    implementation 'com.github.apk-editor:aXML:8458ba5aee'
+    playImplementation 'com.android.billingclient:billing:7.1.1'
+    implementation 'com.github.apk-editor:aXML:20e62a1c11'
 
-    def sCommon_Version = '418add0fdc'
+    def sCommon_Version = 'efc9dce669'
     implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:crashreporter:${sCommon_Version}"
     implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
@@ -74,7 +74,7 @@ dependencies {
     implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
 
     implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
     def shizuku_Version = '13.1.5'
     implementation "dev.rikka.shizuku:api:${shizuku_Version}"

@@ -18,10 +18,10 @@ import android.widget.PopupMenu;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
@@ -53,8 +53,8 @@ public class PackageExploreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packageexplorer);
 
-        AppCompatImageButton mBack = findViewById(R.id.back);
-        AppCompatImageButton mSortButton = findViewById(R.id.sort);
+        MaterialButton mBack = findViewById(R.id.back);
+        MaterialButton mSortButton = findViewById(R.id.sort);
         mTitle = findViewById(R.id.title);
         MaterialTextView mError = findViewById(R.id.error_status);
         mRecyclerView = findViewById(R.id.recycler_view);

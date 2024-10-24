@@ -13,11 +13,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
@@ -38,18 +38,17 @@ public class ImageViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageview);
 
-        AppCompatImageButton mBack = findViewById(R.id.back);
-        AppCompatImageButton mExport = findViewById(R.id.export);
+        MaterialButton mExport = findViewById(R.id.export);
         AppCompatImageView mImage = findViewById(R.id.image);
-        MaterialTextView mTitle = findViewById(R.id.title);
+        Toolbar mTitle = findViewById(R.id.toolbar);
 
         String path = getIntent().getStringExtra(PATH_INTENT);
 
         if (path != null) {
-            mTitle.setText(new File(path).getName());
+            mTitle.setTitle(new File(path).getName());
             mImage.setImageURI(PackageExplorer.getIconFromPath(path));
         } else {
-            mTitle.setText(Common.getApplicationName());
+            mTitle.setTitle(Common.getApplicationName());
             mImage.setImageDrawable(Common.getApplicationIcon());
         }
 
@@ -66,8 +65,6 @@ public class ImageViewActivity extends AppCompatActivity {
                                 + "/" + Common.getApplicationName().toString().replace(" ","_") + "_icon.png", this);
                     }
                 }).show());
-
-        mBack.setOnClickListener(v -> finish());
     }
 
 }

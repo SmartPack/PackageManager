@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
         android:orientation="horizontal"
         android:gravity="center" >
 
@@ -29,7 +28,6 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/app_title"
                 android:layout_width="match_parent"
-                android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:gravity="start"
@@ -40,7 +38,6 @@
                 android:id="@+id/version_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
                 android:textIsSelectable="true"
                 android:layout_gravity="start"
                 android:gravity="start"
@@ -55,9 +52,6 @@
         android:layout_gravity="center"
         app:tabMode="scrollable"
         android:textAlignment="center"
-        android:background="@color/colorBlack"
-        app:tabTextColor="@color/colorWhite"
-        app:tabSelectedTextColor="@color/colorAccent"
         android:id="@+id/tab_Layout" />
 
     <androidx.viewpager.widget.ViewPager

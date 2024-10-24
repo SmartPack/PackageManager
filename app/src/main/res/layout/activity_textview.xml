@@ -1,51 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:orientation="vertical">
 
-    <FrameLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:background="@color/colorBlack">
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:background="@color/colorBlack"
-            android:layout_gravity="start|center_vertical"
-            android:src="@drawable/ic_back"
-            android:tint="@color/colorAccent"
-            android:layout_marginEnd="10dp" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="30dp"
-            android:textColor="@color/colorAccent"
-            android:layout_gravity="start"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:maxLines="1" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:background="@color/colorBlack"
-            android:layout_gravity="end|center_vertical"
-            android:src="@drawable/ic_export"
-            android:tint="@color/colorAccent"
-            android:layout_marginEnd="10dp" />
-    </FrameLayout>
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_marginEnd="10dp"
+            app:icon="@drawable/ic_export"
+            android:layout_gravity="end" />
+    </androidx.appcompat.widget.Toolbar>
 
     <include layout="@layout/layout_recyclerview" />
 </LinearLayout>

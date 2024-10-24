@@ -13,12 +13,12 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ManifestAdapter;
 import com.smartpack.packagemanager.utils.Common;
@@ -46,15 +46,14 @@ public class TextViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textview);
 
-        AppCompatImageButton mBack = findViewById(R.id.back);
-        AppCompatImageButton mExport = findViewById(R.id.export);
-        MaterialTextView mTitle = findViewById(R.id.title);
+        MaterialButton mExport = findViewById(R.id.export);
+        Toolbar mTitle = findViewById(R.id.toolbar);
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
 
         mPath = getIntent().getStringExtra(PATH_INTENT);
 
         if (mPath != null) {
-            mTitle.setText(new File(mPath).getName());
+            mTitle.setTitle(new File(mPath).getName());
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.setAdapter(new ManifestAdapter(getData()));
         }
@@ -68,8 +67,6 @@ public class TextViewActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
                         PackageExplorer.copyToStorage(mPath, PackageData.getPackageDir(this) + "/" +
                         Common.getApplicationID(), this)).show());
-
-        mBack.setOnClickListener(v -> finish());
     }
 
     private List<String> getData() {

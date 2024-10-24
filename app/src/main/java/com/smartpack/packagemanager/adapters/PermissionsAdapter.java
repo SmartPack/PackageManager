@@ -22,7 +22,6 @@ import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PermissionsItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;
 
@@ -54,7 +53,6 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PermissionsAdapter.ViewHolder holder, int position) {
-        holder.mTitle.setTextColor(Utils.getThemeAccentColor(holder.mTitle.getContext()));
         holder.mTitle.setText(mData.get(position).getTitle().replace("android.permission.",""));
         holder.mDescription.setText(mData.get(position).getDescription());
         holder.mGranted.setChecked(mData.get(position).isGranted());

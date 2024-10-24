@@ -50,11 +50,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         if (data.get(position).getTitle() != null) {
             holder.mTitle.setText(data.get(position).getTitle());
         }
-        if (data.get(position).getColor() != 0) {
-            holder.mTitle.setTextColor(data.get(position).getColor());
+        if (data.get(position).isSectionHeading()) {
             holder.mDivider.setVisibility(View.VISIBLE);
         } else {
-            holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
             holder.mDivider.setVisibility(View.GONE);
         }
         holder.mTitle.setTextSize(data.get(position).getSize());

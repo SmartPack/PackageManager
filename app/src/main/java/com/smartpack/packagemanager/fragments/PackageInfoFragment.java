@@ -278,7 +278,7 @@ public class PackageInfoFragment extends Fragment {
                     Common.getApplicationID(), requireActivity()) ? R.string.disable : R.string.enable), 2));
         }
         mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_delete, requireActivity()), getString(R.string.uninstall), 3));
-        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_settings, requireActivity()), getString(R.string.app_info), 4));
+        mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_doubledots, requireActivity()), getString(R.string.app_info), 4));
         return mPackageOptionsItems;
     }
 

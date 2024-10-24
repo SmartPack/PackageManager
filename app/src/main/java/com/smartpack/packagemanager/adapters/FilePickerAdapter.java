@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -34,11 +34,13 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
  */
 public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.ViewHolder> {
 
+    private final Activity activity;
     private static ClickListener clickListener;
 
     private final List<String> data;
 
-    public FilePickerAdapter(List<String> data) {
+    public FilePickerAdapter(List<String> data, Activity activity) {
+        this.activity = activity;
         this.data = data;
     }
 
@@ -52,7 +54,6 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull FilePickerAdapter.ViewHolder holder, int position) {
         if (position == 0) {
-            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
             holder.mIcon.setRotation(90);
             holder.mTitle.setText(null);
@@ -62,7 +63,6 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
             if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
                 holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
             }
-            holder.mIcon.setColorFilter(Utils.getThemeAccentColor(holder.mIcon.getContext()));
             holder.mDescription.setVisibility(View.GONE);
             holder.mSize.setVisibility(View.GONE);
             holder.mCheckBox.setVisibility(View.GONE);
@@ -79,7 +79,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
                 } else {
                     Common.getAppList().add(this.data.get(position));
                 }
-                Common.getSelectCard().setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
+                Common.getCardView(activity, R.id.select).setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             });
             holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
             holder.mSize.setVisibility(View.VISIBLE);

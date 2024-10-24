@@ -7,38 +7,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
         android:orientation="vertical"
         android:padding="16dp" >
 
-        <FrameLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:gravity="end|center_vertical">
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/back_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:layout_gravity="start"
-                android:src="@drawable/ic_back"
-                android:background="@color/colorBlack"
-                android:tint="@color/colorAccent"/>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/colorAccent"
-                android:text="@string/support_development"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:padding="10dp" />
-        </FrameLayout>
+            android:gravity="center_vertical"
+            android:text="@string/support_development"
+            style="@style/Widget.Material3.Toolbar"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:padding="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,16 +36,14 @@
                 android:gravity="center_vertical"
                 android:layout_gravity="start|center"
                 android:src="@drawable/ic_heart"
-                android:background="@color/colorBlack"
-                android:tint="@color/colorAccent"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:background="@null" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/supporter_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/support_development_summary"
-                android:textColor="@color/colorWhite"
                 android:gravity="center" />
         </LinearLayout>
     </LinearLayout>

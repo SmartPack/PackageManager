@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +28,13 @@ import java.util.List;
  */
 public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledAppsAdapter.ViewHolder> {
 
-    private static List<String> data;
-
+    private final Activity activity;
+    private final List<String> data;
     private static ClickListener mClickListener;
 
-    public UninstalledAppsAdapter(List<String> data) {
-        UninstalledAppsAdapter.data = data;
+    public UninstalledAppsAdapter(List<String> data, Activity activity) {
+        this.data = data;
+        this.activity = activity;
     }
 
     @NonNull
@@ -52,7 +54,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
             } else {
                 Common.getRestoreList().add(data.get(position));
             }
-            Common.getRestoreCard().setVisibility(Common.getRestoreList().size() > 0 ? View.VISIBLE : View.GONE);
+            Common.getCardView(activity, R.id.restore).setVisibility(!Common.getRestoreList().isEmpty() ? View.VISIBLE : View.GONE);
         });
     }
 

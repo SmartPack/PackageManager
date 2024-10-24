@@ -48,8 +48,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ExportedAppsActivity"
-            android:exported="false" />
         <activity android:name=".activities.FilePickerActivity"
             android:exported="false" />
         <activity android:name=".activities.ImageViewActivity"
@@ -69,11 +67,7 @@
         <activity android:name=".activities.PackageTasksActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false" />
-        <activity android:name=".activities.SettingsActivity"
-            android:exported="false" />
         <activity android:name=".activities.TextViewActivity"
-            android:exported="false" />
-        <activity android:name=".activities.UninstalledAppsActivity"
             android:exported="false" />
 
         <provider

@@ -11,11 +11,10 @@
             android:id="@+id/icon"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="@null"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
             android:scaleType="fitCenter"
-            android:src="@color/colorBlack"
-            android:layout_marginEnd="10dp" />
+            android:background="@null"  />
 
         <FrameLayout
             android:layout_width="0dp"

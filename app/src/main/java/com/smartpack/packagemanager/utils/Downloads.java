@@ -47,9 +47,9 @@ public class Downloads {
             }
         }
         if (sCommonUtils.getBoolean("reverse_order_exports", false, context)) {
-            Collections.sort(mData, (lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(rhs, lhs));
+            mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(rhs, lhs));
         } else {
-            Collections.sort(mData, String.CASE_INSENSITIVE_ORDER);
+            mData.sort(String.CASE_INSENSITIVE_ORDER);
         }
         return mData;
     }

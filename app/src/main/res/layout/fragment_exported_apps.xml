@@ -1,0 +1,80 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="start"
+    android:orientation="vertical"
+    android:gravity="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:gravity="start">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/exported_apps" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sort_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_marginEnd="10dp"
+                app:icon="@drawable/ic_sort"
+                android:layout_gravity="end" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_marginEnd="10dp"
+                app:icon="@drawable/ic_search"
+                android:layout_gravity="end" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/search_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionDone"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:hint="@string/search"
+                android:cursorVisible="true"
+                android:visibility="gone"
+                android:gravity="center"
+                android:padding="10dp"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <include layout="@layout/layout_recyclerview" />
+    </LinearLayout>
+
+    <include layout="@layout/permission_view_layout" />
+
+    <include layout="@layout/progress_view_layout" />
+</RelativeLayout>

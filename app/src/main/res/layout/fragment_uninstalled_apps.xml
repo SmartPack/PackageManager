@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,54 +7,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:gravity="start" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@string/uninstalled_apps" >
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/back"
+                    android:id="@+id/sort_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     style="?attr/materialIconButtonFilledTonalStyle"
-                    android:layout_marginStart="10dp"
-                    app:icon="@drawable/ic_back" />
+                    android:layout_marginEnd="10dp"
+                    app:icon="@drawable/ic_sort"
+                    android:layout_gravity="end" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/search_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_marginEnd="10dp"
+                    app:icon="@drawable/ic_search"
+                    android:layout_gravity="end" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/search_word"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.Toolbar"
-                    app:layout_constraintTop_toTopOf="@id/back"
-                    app:layout_constraintEnd_toStartOf="@id/sort"
-                    app:layout_constraintStart_toEndOf="@id/back"
-                    android:text="@string/credits_summary"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginEnd="60dp"
+                    android:inputType="textAutoComplete"
+                    android:layout_marginStart="5dp"
+                    android:imeOptions="actionDone"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:hint="@string/search"
+                    android:cursorVisible="true"
+                    android:visibility="gone"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:padding="10dp"
                     android:maxLines="1" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sort"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?attr/materialIconButtonFilledTonalStyle"
-                    app:layout_constraintTop_toTopOf="@id/title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="10dp"
-                    app:icon="@drawable/ic_sort" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar
                 android:id="@+id/progress"
@@ -72,10 +81,8 @@
         <include layout="@layout/layout_recyclerview" />
     </LinearLayout>
 
-    <include layout="@layout/permission_view_layout" />
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/select"
+        android:id="@+id/restore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -106,7 +113,7 @@
                 android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
                 android:layout_marginEnd="10dp"
-                android:text="@string/select"
+                android:text="@string/restore"
                 android:clickable="false"
                 android:textStyle="bold"
                 android:textSize="20sp" />

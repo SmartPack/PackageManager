@@ -17,8 +17,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
@@ -39,16 +39,13 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_installer_instructions);
 
-        AppCompatImageButton mBack = findViewById(R.id.back_button);
-        AppCompatImageButton mAdd = findViewById(R.id.add_button);
+        MaterialButton mAdd = findViewById(R.id.add_button);
         SwitchMaterial mHideSwitch = findViewById(R.id.hide_switch);
 
         mHideSwitch.setChecked(sCommonUtils.getBoolean("neverShow", false, this));
 
         mHideSwitch.setOnClickListener(v -> sCommonUtils.saveBoolean("neverShow", !sCommonUtils.getBoolean(
                 "neverShow",false, this), this));
-
-        mBack.setOnClickListener(v -> finish());
 
         mAdd.setOnClickListener(v -> {
             if (Flavor.isFullVersion()) {
