@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 19, 2023
  */
@@ -44,7 +46,7 @@ public class FileUtils extends File {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void copyToDownloads(Context context) throws IOException {
         setProgressMax((int) length());
-        FileInputStream inputStream = new FileInputStream(toString());
+        FileInputStream inputStream = new FileInputStream(getAbsoluteFile());
         ContentValues values = new ContentValues();
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, getName());
         values.put(MediaStore.MediaColumns.MIME_TYPE, "*/*");
@@ -52,7 +54,7 @@ public class FileUtils extends File {
         Uri uri = context.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
         OutputStream outputStream = context.getContentResolver().openOutputStream(uri);
 
-        copyStream(inputStream, outputStream);
+        sFileUtils.copyStream(inputStream, outputStream);
 
         inputStream.close();
         outputStream.close();
@@ -60,10 +62,10 @@ public class FileUtils extends File {
 
     public void copy(File dest) throws IOException {
         setProgressMax((int) length());
-        FileInputStream inputStream = new FileInputStream(toString());
+        FileInputStream inputStream = new FileInputStream(getAbsoluteFile());
         FileOutputStream outputStream = new FileOutputStream(dest);
 
-        copyStream(inputStream, outputStream);
+        sFileUtils.copyStream(inputStream, outputStream);
 
         inputStream.close();
         outputStream.close();
@@ -77,19 +79,10 @@ public class FileUtils extends File {
         FileOutputStream outputStream = new FileOutputStream(toString(), false);
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
 
-        copyStream(inputStream, outputStream);
+        sFileUtils.copyStream(inputStream, outputStream);
 
         inputStream.close();
         outputStream.close();
-    }
-
-    public void copyStream(InputStream from, OutputStream to) throws IOException {
-        byte[] buf = new byte[1024 * 1024];
-        int len;
-        while ((len = from.read(buf)) > 0) {
-            to.write(buf, 0, len);
-            setProgress(len);
-        }
     }
 
     public void setProgress(int progress) {

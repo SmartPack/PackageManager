@@ -22,7 +22,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ManifestAdapter;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
@@ -65,8 +64,7 @@ public class TextViewActivity extends AppCompatActivity {
                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) ->
-                        PackageExplorer.copyToStorage(mPath, PackageData.getPackageDir(this) + "/" +
-                        Common.getApplicationID(), this)).show());
+                        PackageExplorer.copyToStorage(mPath, this)).show());
     }
 
     private List<String> getData() {

@@ -23,7 +23,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
@@ -38,9 +37,11 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.ViewHolder> {
 
     private static List<String> data;
+    private final Activity activity;
 
-    public SplitAPKsAdapter(List<String> data) {
+    public SplitAPKsAdapter(List<String> data, Activity activity) {
         SplitAPKsAdapter.data = data;
+        this.activity = activity;
     }
 
     @NonNull
@@ -67,8 +68,8 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
                 })
                 .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
                         PackageExplorer.copyToStorage(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                                .getContext()) + "/" + data.get(position), PackageData.getPackageDir(v.getContext()) + "/" +
-                                Common.getApplicationID(), (Activity) v.getContext())).show()
+                                .getContext()) + "/" + data.get(position), activity)
+                ).show()
         );
     }
 

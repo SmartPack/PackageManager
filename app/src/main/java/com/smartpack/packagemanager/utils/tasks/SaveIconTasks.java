@@ -10,49 +10,64 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
  */
 public class SaveIconTasks extends sExecutor {
 
-    private final Activity mActivity;
+    private final Context mActivity;
     private final Bitmap mBitmap;
-    private final String mDest;
+    private final String mName;
 
-    public SaveIconTasks(Bitmap bitmap, String dest, Activity activity) {
+    public SaveIconTasks(String name, Bitmap bitmap, Activity activity) {
+        mName = name;
         mBitmap = bitmap;
-        mDest = dest;
         mActivity = activity;
 
     }
 
     @Override
     public void onPreExecute() {
-        PackageData.makePackageFolder(mActivity);
     }
 
     @Override
     public void doInBackground() {
-        File file = new File(mDest);
         try {
-            FileOutputStream outStream = new FileOutputStream(file);
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.flush();
-            outStream.close();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                ByteArrayOutputStream outStream = new ByteArrayOutputStream(mBitmap.getByteCount());
+                mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                saveToDownloads(mName, new ByteArrayInputStream(outStream.toByteArray()), mActivity);
+            } else {
+                FileOutputStream outStream = new FileOutputStream(new File(Environment.DIRECTORY_DOWNLOADS, mName));
+                mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                outStream.flush();
+                outStream.close();
+            }
         } catch (IOException ignored) {}
     }
 
@@ -61,9 +76,24 @@ public class SaveIconTasks extends sExecutor {
     public void onPostExecute() {
         new MaterialAlertDialogBuilder(mActivity)
                 .setMessage(Common.getApplicationName() + " icon " + mActivity.getString(R.string.export_file_message,
-                        Objects.requireNonNull(new File(mDest).getParentFile()).toString()))
+                        Environment.DIRECTORY_DOWNLOADS))
                 .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                 }).show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private static void saveToDownloads(String name, InputStream inputStream, Context context) throws IOException {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+        values.put(MediaStore.MediaColumns.MIME_TYPE, "*/*");
+        values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
+        Uri uri = context.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
+        OutputStream outputStream = context.getContentResolver().openOutputStream(uri);
+
+        sFileUtils.copyStream(inputStream, outputStream);
+
+        inputStream.close();
+        outputStream.close();
     }
 
 }

@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -20,8 +21,8 @@ import android.os.Build;
 
 import com.apk.axml.aXMLDecoder;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.tasks.CopyToStorageTasks;
 import com.smartpack.packagemanager.utils.tasks.SaveIconTasks;
+import com.smartpack.packagemanager.utils.tasks.SaveToDownloadsTasks;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,11 +53,12 @@ public class PackageExplorer {
         return sCommonUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
     }
 
+    @SuppressLint("StringFormatInvalid")
     public static String readXMLFromAPK(String path, Activity activity) {
         try (FileInputStream inputStream = new FileInputStream(path)) {
             return new aXMLDecoder().decode(inputStream);
         } catch (Exception e) {
-            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.failed_decode_xml, new File(path).getName())).show();
+            sCommonUtils.toast(activity.getString(R.string.failed_decode_xml, new File(path).getName()), activity).show();
         }
         return null;
     }
@@ -73,7 +75,7 @@ public class PackageExplorer {
         Bitmap bitmap;
         if (drawable instanceof BitmapDrawable) {
             BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
+            if (bitmapDrawable.getBitmap() != null) {
                 return bitmapDrawable.getBitmap();
             }
         }
@@ -88,26 +90,26 @@ public class PackageExplorer {
         return bitmap;
     }
 
-    public static void saveIcon(Bitmap bitmap, String dest, Activity activity) {
-        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+    public static void saveIcon(Bitmap bitmap, String name, Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
             sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     activity);
-            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+            sCommonUtils.toast(activity.getString(R.string.permission_denied_write_storage), activity).show();
             return;
         }
-        new SaveIconTasks(bitmap, dest, activity).execute();
+        new SaveIconTasks(name, bitmap, activity).execute();
     }
 
-    public static void copyToStorage(String path, String dest, Activity activity) {
-        if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
+    public static void copyToStorage(String path, Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
             sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     activity);
-            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
+            sCommonUtils.toast(activity.getString(R.string.permission_denied_write_storage), activity).show();
             return;
         }
-        new CopyToStorageTasks(path, dest, activity).execute();
+        new SaveToDownloadsTasks(new File(path), activity).execute();
     }
 
 }

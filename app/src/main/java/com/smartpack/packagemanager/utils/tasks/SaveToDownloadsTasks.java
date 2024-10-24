@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.utils.tasks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.FileUtils;
@@ -47,13 +48,15 @@ public class SaveToDownloadsTasks extends sExecutor {
 
     @Override
     public void doInBackground() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            try {
-                FileUtils FileUtils = new FileUtils(mSource.getAbsolutePath());
-                FileUtils.setProgress(mProgressDialog);
+        try {
+            FileUtils FileUtils = new FileUtils(mSource.getAbsolutePath());
+            FileUtils.setProgress(mProgressDialog);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 FileUtils.copyToDownloads(mContext);
-            } catch (IOException ignored) {}
-        }
+            } else {
+                FileUtils.copy(new File(Environment.DIRECTORY_DOWNLOADS, mSource.getName()));
+            }
+        } catch (IOException ignored) {}
     }
 
     @Override
