@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.utils.tasks;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Build;
@@ -19,6 +20,7 @@ import com.smartpack.packagemanager.utils.FileUtils;
 import java.io.File;
 import java.io.IOException;
 
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
@@ -59,12 +61,16 @@ public class SaveToDownloadsTasks extends sExecutor {
         } catch (IOException ignored) {}
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
         try {
             mProgressDialog.dismiss();
         } catch (IllegalArgumentException ignored) {
         }
+
+        sCommonUtils.toast(mSource.getName() + " " + mContext.getString(R.string.export_file_message,
+                Environment.DIRECTORY_DOWNLOADS), mContext).show();
     }
 
 }

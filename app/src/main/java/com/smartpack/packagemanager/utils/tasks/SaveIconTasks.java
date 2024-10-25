@@ -20,7 +20,6 @@ import android.provider.MediaStore;
 
 import androidx.annotation.RequiresApi;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 
@@ -32,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
@@ -74,13 +74,8 @@ public class SaveIconTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
-        new MaterialAlertDialogBuilder(mActivity)
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(R.string.app_name)
-                .setMessage(Common.getApplicationName() + " icon " + mActivity.getString(R.string.export_file_message,
-                        Environment.DIRECTORY_DOWNLOADS))
-                .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
-                }).show();
+        sCommonUtils.toast(Common.getApplicationName() + " icon " + mActivity.getString(R.string.export_file_message,
+                Environment.DIRECTORY_DOWNLOADS), mActivity).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
