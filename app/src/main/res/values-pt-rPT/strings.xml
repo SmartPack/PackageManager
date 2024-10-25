@@ -184,4 +184,10 @@
     <string name="sdk_minimum">"SDK mínimo: %s"</string>
     <string name="update">"Atualizar"</string>
     <string name="reload">"Recarregar"</string>
+    <string name="disable_failed_message">"Falha ao alterar o estado do componente de %s."</string>
+    <string name="never_show">"Nunca mostrar"</string>
+    <string name="request">"Solicitar"</string>
+    <string name="shizuku_integration_message">"O Package Manager pode agora integrar-se com a API do Shizuku para efetuar tarefas avançadas. Se quiser avançar com a integração do Shizuku, conceda a permissão (uma única vez) clicando no botão fornecido abaixo."</string>
+    <string name="feature_unavailable_message">"Esta funcionalidade requer suporte Root ou Shizuku"</string>
+    <string name="failed_decode_xml">"Falha na descodificação de %s"</string>
 </resources>
