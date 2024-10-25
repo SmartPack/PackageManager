@@ -1,6 +1,6 @@
 # Package Manager
 
-<p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot001.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot002.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/screenshot003.jpg" alt="" width="250" height="450" /></p>
+<p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/7.jpg" alt="" width="250" height="450" /></p>
 
 [![](https://img.shields.io/badge/Package%20Manager-v7.2-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
