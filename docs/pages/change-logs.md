@@ -6,6 +6,14 @@ permalink: /change-logs/
 
 ## What's New
 
+### 67. [v7.2](https://github.com/SmartPack/PackageManager/releases/tag/v7.1) *(Oct 25, 2024)*
+- Redesigned app UI (now follows more material guidelines)
+- Exporting files (except APK'S) now targets Downloads folder.
+- Removed deprecated code as much as possible
+- Updated build tools and dependencies.
+- Updated translations.
+- Miscellaneous changes.
+
 ### 66. [v7.1](https://github.com/SmartPack/PackageManager/releases/tag/v7.1) *(Jan 22, 2024)*
 - Migrated to latest Shizuku version
 - Fixed possible crashes while searching.

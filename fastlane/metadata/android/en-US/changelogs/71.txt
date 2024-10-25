@@ -1,5 +1,0 @@
-* Migrated to latest Shizuku version
-* Fixed possible crashes while searching.
-* Updated build tools and dependencies.
-* Added Hebrew and updated other translations.
-* Miscellaneous changes.

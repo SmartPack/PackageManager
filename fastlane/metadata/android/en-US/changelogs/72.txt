@@ -1,0 +1,6 @@
+* Redesigned app UI (now follows more material guidelines)
+* Exporting everything (except APK'S) now targets Downloads folder.
+* Removed deprecated code as much as possible
+* Updated build tools and dependencies.
+* Updated translations.
+* Miscellaneous changes.
