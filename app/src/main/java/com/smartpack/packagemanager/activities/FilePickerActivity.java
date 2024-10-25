@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,7 +110,7 @@ public class FilePickerActivity extends AppCompatActivity {
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
             String mPath = FilePicker.getData(this, true).get(position);
             if (position == 0) {
-                onBackPressed();
+                backPressedEvent();
             } else if (new File(mPath).isDirectory()) {
                 Common.setPath(mPath);
                 reload(this);
@@ -182,6 +183,13 @@ public class FilePickerActivity extends AppCompatActivity {
                     }
                 }.execute()
         );
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                backPressedEvent();
+            }
+        });
     }
 
     private void reload(Activity activity) {
@@ -233,10 +241,9 @@ public class FilePickerActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
+    private void backPressedEvent() {
         if (mProgress.getVisibility() == View.VISIBLE) return;
-        if (Common.getPath().equals(getCacheDir().getPath() + "/splits/")) {
+        if (new File(Common.getPath()).equals(getCacheDir())) {
             new MaterialAlertDialogBuilder(this)
                     .setIcon(R.mipmap.ic_launcher)
                     .setTitle(getString(R.string.warning))

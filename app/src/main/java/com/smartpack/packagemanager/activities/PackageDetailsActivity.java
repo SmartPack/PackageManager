@@ -64,13 +64,13 @@ public class PackageDetailsActivity extends AppCompatActivity {
         if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), this)).size() > 1) {
             adapter.AddFragment(new SplitApksFragment(), getString(R.string.split_apk));
         }
-        if (PackageDetails.getPermissions(Common.getApplicationID(), this).size() > 0) {
+        if (!PackageDetails.getPermissions(Common.getApplicationID(), this).isEmpty()) {
             adapter.AddFragment(new PermissionsFragment(), getString(R.string.permissions));
         }
-        if ((new RootShell().rootAccess() || new ShizukuShell().isReady()) && AppOps.getOps(this).size() > 0) {
+        if ((new RootShell().rootAccess() || new ShizukuShell().isReady()) && !AppOps.getOps(this).isEmpty()) {
             adapter.AddFragment(new AppOpsFragment(), getString(R.string.operations));
         }
-        if (PackageDetails.getActivities(Common.getApplicationID(), this).size() > 0) {
+        if (!PackageDetails.getActivities(Common.getApplicationID(), this).isEmpty()) {
             adapter.AddFragment(new ActivitiesFragment(), getString(R.string.activities));
         }
         adapter.AddFragment(new ManifestFragment(), getString(R.string.manifest));

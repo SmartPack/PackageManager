@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.activities;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -45,10 +46,17 @@ public class PackageTasksActivity extends AppCompatActivity {
 
         mPackageTitle.setText(getIntent().getStringExtra(TITLE_START));
 
-        mCloseButton.setOnClickListener(v -> onBackPressed());
+        mCloseButton.setOnClickListener(v -> backPressedEvent());
 
         Thread mRefreshThread = new RefreshThread(this);
         mRefreshThread.start();
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                backPressedEvent();
+            }
+        });
     }
 
     private class RefreshThread extends Thread {
@@ -82,12 +90,11 @@ public class PackageTasksActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
+    private void backPressedEvent() {
         if (Common.isRunning()) {
             return;
         }
-        super.onBackPressed();
+        finish();
     }
 
 }

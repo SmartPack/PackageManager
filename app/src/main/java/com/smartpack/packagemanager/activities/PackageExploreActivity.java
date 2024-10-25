@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -28,7 +29,6 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PackageExploreAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
@@ -63,7 +63,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         mBack.setOnClickListener(v -> {
             sFileUtils.delete(new File(getCacheDir().getPath(), "apk"));
-            super.onBackPressed();
+            finish();
         });
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
@@ -79,7 +79,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         PackageExploreAdapter.setOnItemClickListener((position, v) -> {
             String mPath = FilePicker.getData(this, false).get(position);
             if (position == 0) {
-                onBackPressed();
+                backPressedEvent();
             } else if (new File(mPath).isDirectory()) {
                 Common.setPath(mPath);
                 reload(this);
@@ -115,6 +115,13 @@ public class PackageExploreActivity extends AppCompatActivity {
             });
             popupMenu.show();
         });
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                backPressedEvent();
+            }
+        });
     }
 
     private void reload(Activity activity) {
@@ -138,8 +145,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         }.execute();
     }
 
-    @Override
-    public void onBackPressed() {
+    private void backPressedEvent() {
         if (Common.getPath().equals(getCacheDir().toString() + "/apk/")) {
             sFileUtils.delete(new File(getCacheDir().getPath(),"apk"));
             finish();

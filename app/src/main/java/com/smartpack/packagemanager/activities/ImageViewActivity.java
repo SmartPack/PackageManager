@@ -20,7 +20,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;

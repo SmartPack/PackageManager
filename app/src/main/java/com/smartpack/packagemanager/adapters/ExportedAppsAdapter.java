@@ -23,6 +23,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
@@ -79,7 +80,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         }
         holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
-        holder.mAction.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_doubledots, holder.mAction.getContext()));
+        holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_doubledots, holder.mAction.getContext()));
         holder.mAction.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             Menu menu = popupMenu.getMenu();
@@ -131,7 +132,8 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final  AppCompatImageButton mAction, mIcon;
+        private final AppCompatImageButton mIcon;
+        private final MaterialButton mAction;
         private final MaterialTextView mTitle, mSize;
 
         public ViewHolder(View view) {

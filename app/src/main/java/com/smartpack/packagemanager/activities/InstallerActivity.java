@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -86,9 +87,16 @@ public class InstallerActivity extends AppCompatActivity {
             Common.reloadPage(true);
         });
 
-        mClose.setOnClickListener(v -> onBackPressed());
+        mClose.setOnClickListener(v -> backPressedEvent());
 
         refreshStatus(this);
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                backPressedEvent();
+            }
+        });
     }
 
     public void refreshStatus(InstallerActivity activity) {
@@ -116,8 +124,7 @@ public class InstallerActivity extends AppCompatActivity {
         return icon;
     }
 
-    @Override
-    public void onBackPressed() {
+    private void backPressedEvent() {
         if (sCommonUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
         }
@@ -136,7 +143,7 @@ public class InstallerActivity extends AppCompatActivity {
                 Common.isUpdating(false);
             }
         }
-        super.onBackPressed();
+        finish();
     }
 
     @Override

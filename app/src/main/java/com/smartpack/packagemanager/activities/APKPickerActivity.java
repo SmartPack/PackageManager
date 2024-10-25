@@ -195,9 +195,4 @@ public class APKPickerActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
 }

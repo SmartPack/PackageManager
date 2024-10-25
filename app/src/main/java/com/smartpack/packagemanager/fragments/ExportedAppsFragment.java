@@ -10,7 +10,6 @@ package com.smartpack.packagemanager.fragments;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,7 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.PopupMenu;
@@ -112,9 +112,7 @@ public class ExportedAppsFragment extends Fragment {
                     Utils.requestPermission(requireActivity());
                     mRefresh = true;
                 } else {
-                    sPermissionUtils.requestPermission(new String[] {
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    },requireActivity());
+                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 }
             });
         }
@@ -236,16 +234,14 @@ public class ExportedAppsFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 0 && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            requireActivity().recreate();
-        }
-
-    }
+    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (result) {
+                    requireActivity().recreate();
+                }
+            }
+    );
 
     @Override
     public void onStart() {
