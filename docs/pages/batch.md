@@ -22,6 +22,3 @@ permalink: /batch/
     <li><b>Export</b> - Export the APK file or split APK's of the selected apps.</li>
     <li><b>Clear list</b> - Simply clear the batch list.</li>
 </ol>
-
-<p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/8.jpg" alt="" width="250" height="500" /></p>
-<p style="text-align: center">Screenshot showing the batch exporting of APK's</p>
