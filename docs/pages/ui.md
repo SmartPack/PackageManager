@@ -15,7 +15,7 @@ permalink: /ui/
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" alt="" width="250" height="500" /></p>
 <p style="text-align: center">Screenshot of the main UI of Package Manager</p>
 
-Other than the main title (app name itself), the top portion of the application includes three buttons and are
+<p style="text-align: justify;"><tab1>Other than the main title (app name itself), the top portion of the application includes three buttons and are</tab1></p>
 
 <ol>
     <li><b>Search</b> - Search and categorize applications with a specific name/package id).</li>
@@ -23,13 +23,7 @@ Other than the main title (app name itself), the top portion of the application 
     <li><b>Reload</b> - Reload the entire application list.</li>
 </ol>
 
-
-
-
-
-The bottom navigation bar of the application provides quick access links to <b>Exported Apps</b>, <b>Uninstalled Apps</b> (requires Root or Shizuku), and the <b>Settings</b> menu.
-
-// Access to "Split APK Installer", "Exported Apps", "Settings" and the "About" pages of the app
+<p style="text-align: justify;"><tab1>The bottom navigation bar of the application provides quick access links to <b>Exported Apps</b>, <b>Uninstalled Apps</b> (requires Root or Shizuku), and the <b>Settings</b> menu.</tab1></p>
 
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg" alt="" width="250" height="500" /></p>
 <p style="text-align: center">Screenshot of the App Info page of Package Manager</p>
