@@ -69,6 +69,7 @@ permalink: /ui/
 <p style="text-align: justify;"><tab1>The Operations (<b>AppOps</b>) page of Package Manager offers full (nearly) control over various operations handled by an application. However, note that manipulating some operations will affect normal the functioning of the application. As an example, disabling the "Camera" operation for an application using the camera hardware will permanently destroy its access to that hardware. Hence, these features shouldn't be used unless the user is fully aware of the consequences of his/her action. Also, please be aware that some operations are simply unchangeable.</tab1></p>
 
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/12.jpg" alt="" width="250" height="500" /></p>
+<p style="text-align: center">Screenshot of the Activity page of Package Manager</p>
 
 <p style="text-align: justify;"><tab1>The next tab on this page displays all the enabled activities related to the selected application.</tab1></p>
 
