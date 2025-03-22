@@ -66,7 +66,71 @@ If you like to appreciate my efforts to provide this applications entirely free,
 * Share good words about this application with others (family, friends, and other enthusiastic android users).
 
 ## Translations
+Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).[<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic014.png"
+     alt=""
+     height="50">](https://github.com/sponsors/sunilpaulmathew)
+[<img src="https://liberapay.com/assets/widgets/donate.svg"
+     alt=""
+     height="50">](https://liberapay.com/sunilpaulmathew/donate)
+[<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic005.png"
+     alt=""
+     height="50">](https://www.paypal.me/menacherry/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt=""
+     height="50">](https://play.google.com/store/apps/details?id=com.smartpack.donate)
+[<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic010.png"
+     alt=""
+     height="50">](https://ko-fi.com/sunilpaulmathew/)
+
+#### Some other ways to support this project includes, but not limited to
+* Leave a good rating or/and review in [Google Play](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager) (It's free)!
+* Help me to [translate](https://poeditor.com/join/project?hash=0CitpyI1Oc) this application into your local language (or improve existing translations).
+* Share good words about this application with others (family, friends, and other enthusiastic android users).
+
+## Translations
 Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).
+
+## Credits
+A list of people who contributed to this project is available [here](Credits.md).
+
+## License
+
+    Copyright (C) 2024-2025 sunilpaulmathew <sunil.kde@gmail.com>
+
+    Package Manager is a free softwares: you can redistribute it and/or
+[<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic014.png"
+     alt=""
+     height="50">](https://github.com/sponsors/sunilpaulmathew)
+[<img src="https://liberapay.com/assets/widgets/donate.svg"
+     alt=""
+     height="50">](https://liberapay.com/sunilpaulmathew/donate)
+[<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic005.png"
+     alt=""
+     height="50">](https://www.paypal.me/menacherry/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt=""
+     height="50">](https://play.google.com/store/apps/details?id=com.smartpack.donate)
+[<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic010.png"
+     alt=""
+     height="50">](https://ko-fi.com/sunilpaulmathew/)
+
+#### Some other ways to support this project includes, but not limited to
+* Leave a good rating or/and review in [Google Play](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager) (It's free)!
+* Help me to [translate](https://poeditor.com/join/project?hash=0CitpyI1Oc) this application into your local language (or improve existing translations).
+* Share good words about this application with others (family, friends, and other enthusiastic android users).
+
+## Translations
+Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).
+
+## Credits
+A list of people who contributed to this project is available [here](Credits.md).
+
+## License
+
+    Copyright (C) 2024-2025 sunilpaulmathew <sunil.kde@gmail.com>
+
+    Package Manager is a free softwares: you can redistribute it and/or
+    
 
 ## Credits
 A list of people who contributed to this project is available [here](Credits.md).
