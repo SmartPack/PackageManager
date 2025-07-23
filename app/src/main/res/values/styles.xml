@@ -3,9 +3,17 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textAlignment">gravity</item>
         <item name="android:textDirection">locale</item>
-        <item name="colorPrimary">?android:attr/textColorPrimary</item>
-        <item name="colorSecondary">?android:attr/colorSecondary</item>
-        <item name="android:statusBarColor">?android:attr/statusBarColor</item>
+        <item name="android:statusBarColor">@color/colorBlack</item>
+    </style>
+
+    <style name="AppTheme.Title" parent="AppTheme">
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">start|center</item>
+        <item name="android:layout_gravity">start|center</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="Divider" >

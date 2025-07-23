@@ -1,0 +1,28 @@
+[versions]
+core = "6.0.0"
+agp = "8.11.1"
+material = "1.12.0"
+shizuku = "13.1.5"
+scommon = "0a9f4f410f"
+axml = "36915c87a0"
+billing = "8.0.0"
+zip4j = "2.11.5"
+
+[libraries]
+axml = { module = "com.github.apk-editor:aXML", version.ref = "axml" }
+adapters = { module = "com.github.sunilpaulmathew.sCommon:adapters", version.ref = "scommon" }
+crashreporter = { module = "com.github.sunilpaulmathew.sCommon:crashreporter", version.ref = "scommon" }
+credits = { module = "com.github.sunilpaulmathew.sCommon:credits", version.ref = "scommon" }
+installerutils = { module = "com.github.sunilpaulmathew.sCommon:installerutils", version.ref = "scommon" }
+permissionutils = { module = "com.github.sunilpaulmathew.sCommon:permissionutils", version.ref = "scommon" }
+themeutils = { module = "com.github.sunilpaulmathew.sCommon:themeutils", version.ref = "scommon" }
+translatorutils = { module = "com.github.sunilpaulmathew.sCommon:translatorutils", version.ref = "scommon" }
+api = { module = "dev.rikka.shizuku:api", version.ref = "shizuku" }
+provider = { module = "dev.rikka.shizuku:provider", version.ref = "shizuku" }
+billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
+core = { module = "com.github.topjohnwu.libsu:core", version.ref = "core" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,4 +1,6 @@
-apply plugin: 'com.android.application'
+plugins {
+    alias(libs.plugins.androidApplication)
+}
 
 def keystoreFile = rootProject.file("app/sp.jks")
 
@@ -16,12 +18,12 @@ android {
     }
 
     namespace 'com.smartpack.packagemanager'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 24
-        targetSdk 34
+        targetSdk 36
         versionCode 72
         versionName "v7.2"
         vectorDrawables.useSupportLibrary = true
@@ -30,6 +32,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+        }
+
         release {
             if (keystoreFile.exists()) {
                 signingConfig signingConfigs.release
@@ -61,24 +67,22 @@ android {
 }
 
 dependencies {
-    playImplementation 'com.android.billingclient:billing:7.1.1'
-    implementation 'com.github.apk-editor:aXML:20e62a1c11'
+    playImplementation libs.billing
+    implementation libs.axml
 
-    def sCommon_Version = 'efc9dce669'
-    implementation "com.github.sunilpaulmathew.sCommon:adapters:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:crashreporter:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:credits:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:installerutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:permissionutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:themeutils:${sCommon_Version}"
-    implementation "com.github.sunilpaulmathew.sCommon:translatorutils:${sCommon_Version}"
+    implementation libs.adapters
+    implementation libs.crashreporter
+    implementation libs.credits
+    implementation libs.installerutils
+    implementation libs.permissionutils
+    implementation libs.themeutils
+    implementation libs.translatorutils
 
-    implementation "com.github.topjohnwu.libsu:core:4.0.3"
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation libs.core
+    implementation libs.material
 
-    def shizuku_Version = '13.1.5'
-    implementation "dev.rikka.shizuku:api:${shizuku_Version}"
-    implementation "dev.rikka.shizuku:provider:${shizuku_Version}"
+    implementation libs.api
+    implementation libs.provider
 
-    implementation 'net.lingala.zip4j:zip4j:2.11.5'
+    implementation libs.zip4j
 }
