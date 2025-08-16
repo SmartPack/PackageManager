@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textview.MaterialTextView;
@@ -78,8 +80,9 @@ public class ExportedAppsFragment extends Fragment {
         mProgress = mRootView.findViewById(R.id.progress);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
+        FloatingActionButton mFAB = requireActivity().findViewById(R.id.fab);
 
-        requireActivity().findViewById(R.id.fab).setVisibility(VISIBLE);
+        mFAB.setVisibility(VISIBLE);
 
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apks)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.bundles)));
@@ -114,6 +117,15 @@ public class ExportedAppsFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                mFAB.setVisibility(newState == RecyclerView.SCROLL_STATE_IDLE ? View.VISIBLE : View.GONE);
+            }
+        });
 
         loadUI().execute();
 

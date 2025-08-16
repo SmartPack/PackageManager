@@ -31,6 +31,7 @@ import android.widget.ProgressBar;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
@@ -40,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.smartpack.packagemanager.R;
@@ -104,8 +106,9 @@ public class PackageTasksFragment extends Fragment {
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
         mSort = mRootView.findViewById(R.id.sort_icon);
         MaterialButton mReload = mRootView.findViewById(R.id.reload_icon);
+        FloatingActionButton mFAB = requireActivity().findViewById(R.id.fab);
 
-        requireActivity().findViewById(R.id.fab).setVisibility(View.VISIBLE);
+        mFAB.setVisibility(View.VISIBLE);
 
         mSearchWord.setHintTextColor(Color.GRAY);
 
@@ -217,6 +220,15 @@ public class PackageTasksFragment extends Fragment {
         mSort.setOnClickListener(v -> sortMenu(requireActivity()));
 
         mBatchOptions.setOnClickListener(v -> batchOptionsMenu(requireActivity()));
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                mFAB.setVisibility(newState == RecyclerView.SCROLL_STATE_IDLE ? View.VISIBLE : View.GONE);
+            }
+        });
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
