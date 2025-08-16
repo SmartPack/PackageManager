@@ -416,6 +416,7 @@ public class PackageTasksFragment extends Fragment {
                         @Override
                         public void apply(List<BatchOptionsItems> data) {
                             new sExecutor() {
+                                private boolean mEmpty = true;
                                 private final List<BatchOptionsItems> newData = new ArrayList<>();
                                 private ProgressDialog mProgressDialog;
                                 @Override
@@ -452,6 +453,7 @@ public class PackageTasksFragment extends Fragment {
                                                     newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
                                                 }
                                             }
+                                            mEmpty = false;
                                         }
                                         mProgressDialog.updateProgress(1);
                                     }
@@ -460,11 +462,14 @@ public class PackageTasksFragment extends Fragment {
                                 @Override
                                 public void onPostExecute() {
                                     mProgressDialog.dismiss();
-                                    reload().execute();
                                     if (!newData.isEmpty()) {
                                         new BatchResultsDialog(newData, activity);
-                                    } else {
-                                        sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
+                                    }
+                                    if (!mEmpty) {
+                                        reload().execute();
+                                        if (newData.isEmpty()) {
+                                            sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
+                                        }
                                     }
                                 }
                             }.execute();
@@ -477,6 +482,7 @@ public class PackageTasksFragment extends Fragment {
                             @Override
                             public void apply(List<BatchOptionsItems> data) {
                                 new sExecutor() {
+                                    private boolean mEmpty = true;
                                     private final List<BatchOptionsItems> newData = new ArrayList<>();
                                     private ProgressDialog mProgressDialog;
                                     @Override
@@ -499,10 +505,10 @@ public class PackageTasksFragment extends Fragment {
                                         PackageData.makePackageFolder(activity);
                                         mProgressDialog.setMax(data.size());
                                         for (BatchOptionsItems batchOptionsItems : data) {
-                                            if (batchOptionsItems.getPackageName().equals(activity.getPackageName())) {
-                                                newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 0));
-                                            } else {
-                                                if (batchOptionsItems.isChecked()) {
+                                            if (batchOptionsItems.isChecked()) {
+                                                if (batchOptionsItems.getPackageName().equals(activity.getPackageName())) {
+                                                    newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 0));
+                                                } else {
                                                     if (mRootShell.rootAccess()) {
                                                         mRootShell.runCommand("pm uninstall --user 0 " + batchOptionsItems.getPackageName());
                                                     } else {
@@ -511,6 +517,7 @@ public class PackageTasksFragment extends Fragment {
                                                     if (sPackageUtils.isPackageInstalled(batchOptionsItems.getPackageName(), activity)) {
                                                         newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
                                                     }
+                                                    mEmpty = false;
                                                 }
                                             }
                                             mProgressDialog.updateProgress(1);
@@ -520,11 +527,14 @@ public class PackageTasksFragment extends Fragment {
                                     @Override
                                     public void onPostExecute() {
                                         mProgressDialog.dismiss();
-                                        reload().execute();
                                         if (!newData.isEmpty()) {
                                             new BatchResultsDialog(newData, activity);
-                                        } else {
-                                            sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
+                                        }
+                                        if (!mEmpty) {
+                                            reload().execute();
+                                            if (newData.isEmpty()) {
+                                                sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
+                                            }
                                         }
                                     }
                                 }.execute();
@@ -540,6 +550,7 @@ public class PackageTasksFragment extends Fragment {
                         @Override
                         public void apply(List<BatchOptionsItems> data) {
                             new sExecutor() {
+                                private boolean mEmpty = true;
                                 private final List<BatchOptionsItems> newData = new ArrayList<>();
                                 private ProgressDialog mProgressDialog;
                                 @Override
@@ -573,6 +584,7 @@ public class PackageTasksFragment extends Fragment {
                                                 }
                                                 newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
                                             }
+                                            mEmpty = false;
                                         }
                                         mProgressDialog.updateProgress(1);
                                     }
@@ -583,8 +595,11 @@ public class PackageTasksFragment extends Fragment {
                                     mProgressDialog.dismiss();
                                     if (!newData.isEmpty()) {
                                         new BatchResultsDialog(newData, activity);
-                                    } else {
-                                        sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
+                                    }
+                                    if (!mEmpty) {
+                                        if (newData.isEmpty()) {
+                                            sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
+                                        }
                                     }
                                 }
                             }.execute();
@@ -602,6 +617,7 @@ public class PackageTasksFragment extends Fragment {
                             @Override
                             public void apply(List<BatchOptionsItems> data) {
                                 new sExecutor() {
+                                    private boolean mEmpty = true;
                                     private ProgressDialog mProgressDialog;
                                     @Override
                                     public void onPreExecute() {
@@ -631,6 +647,7 @@ public class PackageTasksFragment extends Fragment {
                                                     sFileUtils.copy(new File(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(), activity)), new File(PackageData.getPackageDir(activity), PackageData.getFileName(batchOptionsItems.getPackageName(), activity) + "_" +
                                                             sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(), activity), activity) + ".apk"));
                                                 }
+                                                mEmpty = false;
                                             }
                                             mProgressDialog.updateProgress(1);
                                         }
@@ -639,12 +656,14 @@ public class PackageTasksFragment extends Fragment {
                                     @Override
                                     public void onPostExecute() {
                                         mProgressDialog.dismiss();
-                                        new MaterialAlertDialogBuilder(activity)
-                                                .setIcon(R.mipmap.ic_launcher)
-                                                .setTitle(R.string.app_name)
-                                                .setMessage(getString(R.string.export_message_summary, PackageData.getPackageDir(activity)))
-                                                .setPositiveButton(R.string.cancel, (dialog, id) -> {
-                                                }).show();
+                                        if (!mEmpty) {
+                                            new MaterialAlertDialogBuilder(activity)
+                                                    .setIcon(R.mipmap.ic_launcher)
+                                                    .setTitle(R.string.app_name)
+                                                    .setMessage(getString(R.string.export_message_summary, PackageData.getPackageDir(activity)))
+                                                    .setPositiveButton(R.string.cancel, (dialog, id) -> {
+                                                    }).show();
+                                        }
                                     }
                                 }.execute();
                             }
@@ -662,6 +681,7 @@ public class PackageTasksFragment extends Fragment {
                             @Override
                             public void apply(List<BatchOptionsItems> data) {
                                 new sExecutor() {
+                                    private boolean mEmpty = true;
                                     private File mJSON;
                                     private ProgressDialog mProgressDialog;
                                     @Override
@@ -686,6 +706,7 @@ public class PackageTasksFragment extends Fragment {
                                                     obj.put("applications", apps);
                                                 } catch (JSONException ignored) {
                                                 }
+                                                mEmpty = false;
                                             }
                                             mProgressDialog.updateProgress(1);
                                         }
@@ -696,12 +717,14 @@ public class PackageTasksFragment extends Fragment {
                                     public void onPostExecute() {
                                         mProgressDialog.dismiss();
 
-                                        new MaterialAlertDialogBuilder(requireActivity())
-                                                .setIcon(R.mipmap.ic_launcher)
-                                                .setTitle(R.string.app_name)
-                                                .setMessage(getString(R.string.export_details_message, mJSON.getAbsolutePath()))
-                                                .setPositiveButton(R.string.cancel, (dialog, i) -> {
-                                                }).show();
+                                        if (!mEmpty) {
+                                            new MaterialAlertDialogBuilder(requireActivity())
+                                                    .setIcon(R.mipmap.ic_launcher)
+                                                    .setTitle(R.string.app_name)
+                                                    .setMessage(getString(R.string.export_details_message, mJSON.getAbsolutePath()))
+                                                    .setPositiveButton(R.string.cancel, (dialog, i) -> {
+                                                    }).show();
+                                        }
                                     }
                                 }.execute();
                             }
