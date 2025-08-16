@@ -68,7 +68,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
         try {
-            mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(this, false));
+            mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(this, false), this);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         } catch (NullPointerException ignored) {
             mRecyclerView.setVisibility(View.GONE);
@@ -135,7 +135,7 @@ public class PackageExploreActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(activity, false));
+                mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(activity, false), activity);
             }
 
             @Override

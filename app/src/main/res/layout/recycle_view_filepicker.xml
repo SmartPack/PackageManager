@@ -30,6 +30,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="start"
                     android:focusable="false"
+                    android:clickable="false"
                     android:textStyle="bold"
                     android:textSize="17sp" />
 
@@ -40,6 +41,7 @@
                     android:layout_gravity="center_vertical"
                     android:textStyle="bold|italic"
                     android:visibility="gone"
+                    android:clickable="false"
                     android:gravity="start" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -48,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:textStyle="italic"
+                    android:clickable="false"
                     android:visibility="gone"
                     android:gravity="start" />
         </LinearLayout>
@@ -58,5 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
             android:background="@null"
+            android:clickable="false"
             android:visibility="gone" />
 </FrameLayout>

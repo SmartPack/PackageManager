@@ -72,14 +72,6 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
                 holder.mDescription.setVisibility(View.VISIBLE);
             }
             holder.mCheckBox.setChecked(Common.getAppList().contains(this.data.get(position)));
-            holder.mCheckBox.setOnClickListener(v -> {
-                if (Common.getAppList().contains(this.data.get(position))) {
-                    Common.getAppList().remove(this.data.get(position));
-                } else {
-                    Common.getAppList().add(this.data.get(position));
-                }
-                activity.findViewById(R.id.select).setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
-            });
             holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
             holder.mSize.setVisibility(View.VISIBLE);
             holder.mCheckBox.setVisibility(View.VISIBLE);
@@ -98,7 +90,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
         return this.data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final AppCompatImageButton mIcon;
         private final MaterialCheckBox mCheckBox;
         private final MaterialTextView mTitle, mDescription, mSize;
@@ -115,7 +107,17 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
         @Override
         public void onClick(View view) {
-            clickListener.onItemClick(getAdapterPosition(), view);
+            if (data.get(getAdapterPosition()).endsWith(".apk")) {
+                if (Common.getAppList().contains(data.get(getAdapterPosition()))) {
+                    Common.getAppList().remove(data.get(getAdapterPosition()));
+                } else {
+                    Common.getAppList().add(data.get(getAdapterPosition()));
+                }
+                notifyItemChanged(getAdapterPosition());
+                activity.findViewById(R.id.select).setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
+            } else {
+                clickListener.onItemClick(getAdapterPosition(), view);
+            }
         }
     }
 

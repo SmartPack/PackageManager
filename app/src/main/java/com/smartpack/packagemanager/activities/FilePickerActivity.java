@@ -111,14 +111,6 @@ public class FilePickerActivity extends AppCompatActivity {
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> new AppBundleTasks(mPath, true, this).execute()).show();
-            } else if (mPath.endsWith(".apk")) {
-                if (Common.getAppList().contains(mPath)) {
-                    Common.getAppList().remove(mPath);
-                } else {
-                    Common.getAppList().add(mPath);
-                }
-                mRecycleViewAdapter.notifyItemChanged(position);
-                mSelect.setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             } else {
                 sCommonUtils.snackBar(mRecyclerView, getString(R.string.wrong_extension, ".apks/.apkm/.xapk")).show();
             }
