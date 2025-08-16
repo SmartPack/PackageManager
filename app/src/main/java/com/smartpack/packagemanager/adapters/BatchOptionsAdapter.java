@@ -73,7 +73,7 @@ public class BatchOptionsAdapter extends RecyclerView.Adapter<BatchOptionsAdapte
         return data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final AppCompatImageButton mAppIcon, mInfoButton;
         private final MaterialCheckBox mCheckBox;
@@ -86,6 +86,13 @@ public class BatchOptionsAdapter extends RecyclerView.Adapter<BatchOptionsAdapte
             this.mCheckBox = view.findViewById(R.id.checkbox);
             this.mAppName = view.findViewById(R.id.title);
             this.mAppID = view.findViewById(R.id.description);
+
+            view.setOnClickListener(v -> {
+                if (data.get(getAdapterPosition()).getStatus() == Integer.MIN_VALUE) {
+                    data.get(getAdapterPosition()).setChecked(!data.get(getAdapterPosition()).isChecked());
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
         }
     }
 
