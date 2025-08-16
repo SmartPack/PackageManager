@@ -4,7 +4,6 @@
     <string name="app_info">"Informação da aplicação"</string>
     <string name="batch_list_clear">"Eliminar lista"</string>
     <string name="batch_warning">"As suas definições de lote vão ser eliminadas! Tem a certeza?"</string>
-    <string name="billing_client_disconnected">"Erro de ligação ao cliente de faturação do Google Play!"</string>
     <string name="bundle_install_apks">"Tem a certeza que deseja instalar o pacote de aplicação '%s'?"</string>
     <string name="change_logs">"Registo de alterações"</string>
     <string name="data_dir">"Diretório de dados"</string>
@@ -62,8 +61,8 @@
     <string name="uninstall_title">"Tem a certeza que deseja desinstalar %s?"</string>
     <string name="uninstall_warning">"Aviso: remover aplicações do sistema pode ser perigoso!
 
-        *** <b>USE POR SUA CONTA E RISCO</b> ***
-        "</string>
+        *** <b>USE POR SUA CONTA E RISCO</b>; ***"
+    </string>
     <string name="welcome_message">"Bem-vindo(a) ao Gestor de Pacotes, uma aplicação simples mas poderosa para gerir as suas aplicações."</string>
     <string name="wrong_extension">"Por favor, selecione um ficheiro com a extensão %s. "</string>
     <string name="yes">"Sim"</string>

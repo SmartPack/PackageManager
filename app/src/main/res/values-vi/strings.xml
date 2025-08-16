@@ -3,15 +3,14 @@
     <string name="apk_path">"Đường dẫn APK"</string>
     <string name="app_info">"Thông tin ứng dụng"</string>
     <string name="batch_list_clear">"Dọn dẹp danh sách"</string>
-    <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa! Bạn có chắc không?"</string>
-    <string name="billing_client_disconnected">"Không kết nối được với ứng dụng Thanh toán của Google Play!"</string>
+    <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa!  Bạn có chắc không?"</string>
     <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
     <string name="data_dir">"Thư mục dữ liệu"</string>
     <string name="date_installation">"Ngày cài đặt"</string>
     <string name="date_installed">"Cài đặt lần đầu: %s"</string>
     <string name="date_updated">"Cập nhật lần cuối: %s"</string>
-    <string name="disable_message">"sẽ là %s! Bạn có chắc không?"</string>
+    <string name="disable_message">"sẽ là %s!  Bạn có chắc không?"</string>
     <string name="disable">"Tắt"</string>
     <string name="disabled">"tắt"</string>
     <string name="disabling">"Đang tắt %s"</string>
@@ -53,21 +52,24 @@
     <string name="source_code">"Mã nguồn"</string>
     <string name="support">"Nhóm hỗ trợ"</string>
     <string name="support_development">"Hỗ trợ phát triển"</string>
-    <string name="support_development_summary">"Nếu bạn muốn đánh giá cao nỗ lực của nhà phát triển trong việc cung cấp công cụ này hoàn toàn miễn phí, vui lòng cân nhắc gửi một khoản đóng góp nhỏ bằng cách nhấp vào một trong số các tùy chọn được cung cấp bên dưới! Mua bất kỳ sản phẩm nào trong số này bạn sẽ nhận được huy hiệu ủng hộ tại đây!"</string>
+    <string name="support_development_summary">"Nếu bạn muốn đánh giá cao nỗ lực của nhà phát triển trong việc cung cấp công cụ này hoàn toàn miễn phí, vui lòng cân nhắc gửi một khoản đóng góp nhỏ bằng cách nhấp vào một trong số các tùy chọn được cung cấp bên dưới!  Mua bất kỳ sản phẩm nào trong số này bạn sẽ nhận được huy hiệu ủng hộ tại đây!"</string>
     <string name="sure_question">"Bạn có chắc không?"</string>
     <string name="turn_on_off">"Bật/Tắt"</string>
     <string name="uninstall">"Gỡ cài đặt"</string>
     <string name="uninstall_nope">"Lấy làm tiếc! Bạn không thể làm điều này từ đây!"</string>
     <string name="uninstall_summary">"Đang xóa %s"</string>
     <string name="uninstall_title">"Bạn có chắc chắn gỡ cài đặt %s không?"</string>
-    <string name="uninstall_warning">"Xin lưu ý: Việc xóa các ứng dụng hệ thống đôi khi sẽ rất nguy hiểm!\n\n*** <b>SỬ DỤNG RỦI RO CỦA RIÊNG BẠN</b> ***\n"</string>
+    <string name="uninstall_warning">"Xin lưu ý: Việc xóa các ứng dụng hệ thống đôi khi sẽ rất nguy hiểm!
+
+        *** <b>SỬ DỤNG RỦI RO CỦA RIÊNG BẠN</b> ***
+        "</string>
     <string name="welcome_message">"Chào mừng bạn đến với Package Manager, một ứng dụng đơn giản nhưng mạnh mẽ để quản lý các ứng dụng của bạn."</string>
     <string name="wrong_extension">"Vui lòng chọn một tệp có phần mở rộng %s."</string>
     <string name="yes">"Có"</string>
     <string name="explore">"Khám phá"</string>
     <string name="export_storage_message">"Xuất %s vào bộ nhớ thiết bị?"</string>
     <string name="more_apps_summary">"Kiểm tra các ứng dụng khác do nhà phát triển cung cấp trong Google Play"</string>
-    <string name="open_failed_export_message">"Không thể mở %s! Bạn có muốn xuất nó vào bộ nhớ thiết bị không?"</string>
+    <string name="open_failed_export_message">"Không thể mở %s!  Bạn có muốn xuất nó vào bộ nhớ thiết bị không?"</string>
     <string name="rate_us">"Đánh giá ứng dụng"</string>
     <string name="rate_us_Summary">"Xếp hạng hoặc/và Đánh giá Package Manager trong Google Play"</string>
     <string name="report_issue_summary">"Đặt vấn đề tại GitHub"</string>

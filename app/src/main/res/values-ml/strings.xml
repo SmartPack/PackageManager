@@ -4,7 +4,6 @@
     <string name="app_info">"വിശദാംശങ്ങൾ"</string>
     <string name="batch_list_clear">"മായ്‌ക്കുക"</string>
     <string name="batch_warning">"നിങ്ങളുടെ ബാച്ച് ക്രമീകരണങ്ങൾ നീക്കംചെയ്യും! നിങ്ങള്ക്ക് ഉറപ്പാണോ?"</string>
-    <string name="billing_client_disconnected">"ഗൂഗിൾ പ്ലേ ബില്ലിംഗ് ക്ലയന്റുമായി ബന്ധിപ്പിക്കുന്നതിൽ പരാജയപ്പെട്ടു!"</string>
     <string name="bundle_install_apks">"അപ്ലിക്കേഷൻ ബണ്ടിൽ '%s' ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന്‌ ഉറപ്പാണോ?"</string>
     <string name="data_dir">"ഡാറ്റ ഡയറക്ടറി"</string>
     <string name="date_installation">"ഇൻസ്റ്റാളേഷൻ തീയതികൾ"</string>
@@ -52,7 +51,10 @@
     <string name="uninstall_nope">"ക്ഷമിക്കണം! നിങ്ങൾക്ക് ഇവിടെ നിന്ന് ഇത് ചെയ്യാൻ കഴിയില്ല!"</string>
     <string name="uninstall_summary">"%s നീക്കംചെയ്യുന്നു"</string>
     <string name="uninstall_title">"%s അൺ‌ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
-    <string name="uninstall_warning">"ദയവായി ശ്രദ്ധിക്കുക: സിസ്റ്റം അപ്ലിക്കേഷനുകൾ നീക്കംചെയ്യുന്നത് ചിലപ്പോൾ അപകടകരമാണ്!\n\n*** <b>USE AT YOUR OWN RISK</b> ***"</string>
+    <string name="uninstall_warning">"ദയവായി ശ്രദ്ധിക്കുക: സിസ്റ്റം അപ്ലിക്കേഷനുകൾ നീക്കംചെയ്യുന്നത് ചിലപ്പോൾ അപകടകരമാണ്!
+
+        *** <b>USE AT YOUR OWN RISK</b> ***
+        "</string>
     <string name="welcome_message">"പാക്കേജ് മാനേജറിലേക്ക്, നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ മാനേജുചെയ്യുന്നതിനുള്ള ലളിതവും ശക്തവുമായ അപ്ലിക്കേഷനിലേക്ക് സ്വാഗതം."</string>
     <string name="wrong_extension">"%s extension ഉള്ള ഒരു ഫയൽ തിരഞ്ഞെടുക്കുക."</string>
     <string name="yes">"അതെ"</string>

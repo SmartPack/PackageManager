@@ -4,10 +4,8 @@
     <string name="app_info">"Info o aplikaci"</string>
     <string name="batch_list_clear">"Vyčistit seznam"</string>
     <string name="batch_warning">"Váše dávkové nastavení bude odstraněno! Opravdu?"</string>
-    <string name="billing_client_disconnected">"Chyba spojení s Google Play platebním klientem!"</string>
     <string name="bundle_install_apks">"Opravdu chcete instalovat apk bundle (.aab) '%s'?"</string>
     <string name="change_logs">"Seznamy změn"</string>
-    <string name="copyright">"Autorské právo: ©%s"</string>
     <string name="data_dir">"Adresář dat"</string>
     <string name="date_installation">"Instalační data"</string>
     <string name="date_installed">"Prvně instalováno: %s"</string>
@@ -77,7 +75,7 @@
     <string name="share_app_Summary">"Pozvěte přátele k používání Package Manager"</string>
     <string name="source_code_summary">"Package Manager je aplikace s otevřeným zdrojovým kódem, která je připravena přijímat příspěvky od vývojové komunity.  Klikněte sem a podívejte se na zdrojový kód!"</string>
     <string name="support_summary">"Připojit se k Telegramové skupině podpory"</string>
-    <string name="batch_options">"Dávkové nastavení (%s)"</string>
+    <string name="batch_options">"Dávkové nastavení"</string>
     <string name="batch_list_added">"%s bylo přidáno na dávkový seznam"</string>
     <string name="batch_list_removed">"%s bylo odebráno z hromadného seznamu"</string>
     <string name="explore_error_status">"Chyba procházení %s!"</string>

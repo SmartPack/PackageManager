@@ -4,7 +4,6 @@
     <string name="app_info">"Appinformationen"</string>
     <string name="batch_list_clear">"Liste löschen"</string>
     <string name="batch_warning">"Ihre Stapeleinstellungen werden entfernt! Fortfahren?"</string>
-    <string name="billing_client_disconnected">"Verbindung mit Google Play fehlgeschlagen!"</string>
     <string name="bundle_install_apks">"Sind Sie sich sicher, das App-Bunde \"%s\" zu installieren?"</string>
     <string name="change_logs">"Änderungsprotokolle"</string>
     <string name="data_dir">"Verzeichnis"</string>

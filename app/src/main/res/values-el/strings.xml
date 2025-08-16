@@ -4,7 +4,6 @@
     <string name="app_info">"Πληροφορίες εφαρμογής"</string>
     <string name="batch_list_clear">"Διαγραφή λίστας"</string>
     <string name="batch_warning">"Οι ρυθμίσεις ομάδας σας θα αφαιρεθούν! Είστε σίγουρος;"</string>
-    <string name="billing_client_disconnected">"Αποτυχία σύνδεσης με τον διακομιστή της Google Play Billing"</string>
     <string name="bundle_install_apks">"Είστε σίγουρος για την εγκατάσταση της δέσμης εφαρμογής '%s';"</string>
     <string name="change_logs">"Λίστα αλλαγών"</string>
     <string name="data_dir">"Φάκελος Δεδομένων"</string>

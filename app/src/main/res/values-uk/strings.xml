@@ -4,7 +4,6 @@
     <string name="app_info">"Інфо"</string>
     <string name="batch_list_clear">"Очистити список"</string>
     <string name="batch_warning">"Ваші пакетні налаштування  буде видалено! Ви впевнені?"</string>
-    <string name="billing_client_disconnected">"Не вдалося підключитися до клієнта Google Play Billing!"</string>
     <string name="bundle_install_apks">"Ви впевнені що хочете встановити пакетний (split) додаток?"</string>
     <string name="change_logs">"Зміни"</string>
     <string name="data_dir">"Каталог даних"</string>
@@ -60,7 +59,10 @@
     <string name="uninstall_nope">"Вибачте! Ви не можете зробити це звідси!"</string>
     <string name="uninstall_summary">"Видалення %s"</string>
     <string name="uninstall_title">"Ви впевнені, що хочете видалити %s?"</string>
-    <string name="uninstall_warning">"Зверніть увагу: Видалення системних додатків може бути часом небезпечним!\n\n*** <b>ВИКОРИСТОВУЙТЕ НА ВАШ ВЛАСНИЙ РИЗИК</b> ***"</string>
+    <string name="uninstall_warning">"Зверніть увагу: Видалення системних додатків може бути часом небезпечним!
+
+        *** <b>ВИКОРИСТОВУЙТЕ НА ВАШ ВЛАСНИЙ РИЗИК</b> ***
+        "</string>
     <string name="welcome_message">"Ласкаво просимо до Package Manager, простий, але потужний додаток для управління вашими програмами."</string>
     <string name="wrong_extension">"Виберіть файл із %s розширенням."</string>
     <string name="yes">"Так"</string>
@@ -76,7 +78,7 @@
     <string name="share_app_Summary">"Запропонувати Package Manager вашим друзям"</string>
     <string name="source_code_summary">"Package Manager - це програма з відкритим кодом, яка готова прийняти внески від спільноти розробників. Клацніть тут, щоб оглянути вихідний код!"</string>
     <string name="support_summary">"Приєднатися до групи підтримки в Telegram"</string>
-    <string name="batch_options">"Пакетні операції (%s)"</string>
+    <string name="batch_options">"Пакетні операції"</string>
     <string name="batch_list_added">"%s додано до списку пакетної обробки"</string>
     <string name="batch_list_removed">"%s видалено зі списку пакетної обробки"</string>
     <string name="explore_error_status">"Не вдалося оглянути %s!"</string>

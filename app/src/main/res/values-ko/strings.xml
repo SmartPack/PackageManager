@@ -5,7 +5,6 @@
     <string name="app_info">앱 정보</string>
     <string name="batch_list_clear">목록 지우기</string>
     <string name="batch_warning">모음집 목록을 지울까요?</string>
-    <string name="billing_client_disconnected">Google Play 결제 시스템에 연결하지 못했어요!</string>
     <string name="bundle_install_apks">Split Apks인 \'%s\'을(를) 설치할까요?</string>
     <string name="change_logs">변경사항</string>
     <string name="data_dir">데이터 경로</string>
@@ -69,7 +68,10 @@
     <string name="uninstall_nope">이 앱은 제거할 수 없어요!</string>
     <string name="uninstall_summary">%s을(를) 제거하는 중…</string>
     <string name="uninstall_title">%s을(를) 제거할까요?</string>
-    <string name="uninstall_warning">알아두기: 시스템 앱을 지우는 것은 위험합니다!\n\n *** <b>위험을 감수하고 사용하세요 (본인 책임입니다)</b> ***\n</string>
+    <string name="uninstall_warning">알아두기: 시스템 앱을 지우는 것은 위험합니다!
+
+        *** <b>위험을 감수하고 사용하세요 (본인 책임입니다)</b> ***
+    </string>
     <string name="welcome_message">Package Manager에 오신 것을 환영합니다.\n당신의 앱들을 관리하는 심플한 어플리케이션.</string>
     <string name="wrong_extension">%s 확장자를 가진 파일을 선택해주세요.</string>
     <string name="yes">예</string>

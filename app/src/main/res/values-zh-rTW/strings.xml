@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <!-- Chines traditional (zh-TW) -->
 
     <string name="apk_path">"APK路徑"</string>
     <string name="app_info">"應用信息"</string>
     <string name="batch_list_clear">"清晰的列表"</string>
     <string name="batch_warning">"您的批處理設置將被刪除。 你確定嗎？"</string>
-    <string name="billing_client_disconnected">"無法連接到 Google Play 結算客戶端"</string>
     <string name="bundle_install_apks">"您確定要安裝應用程序包“%s”嗎？"</string>
     <string name="change_logs">"更改日誌"</string>
     <string name="data_dir">"數據目錄"</string>

@@ -4,7 +4,6 @@
     <string name="app_info">"Informacje"</string>
     <string name="batch_list_clear">"Wyczyść listę"</string>
     <string name="batch_warning">"Twoje ustawienia wsadu zostaną usunięte. Czy na pewno?"</string>
-    <string name="billing_client_disconnected">"Nie udało się połączyć z klientem rozliczeń Google Play"</string>
     <string name="bundle_install_apks">"Czy na pewno zainstalować paczkę aplikacji „%s”?"</string>
     <string name="change_logs">"Lista zmian"</string>
     <string name="data_dir">"Katalog danych"</string>
@@ -62,8 +61,8 @@
     <string name="uninstall_title">"Czy na pewno odinstalować %s?"</string>
     <string name="uninstall_warning">"Uwaga: Odinstalowywanie aplikacji systemowych może być czasami niebezpieczne
 
-        *** <b>ROBISZ TO NA WŁASNE RYZYKO</b> ***
-        "</string>
+        *** <b>ROBISZ TO NA WŁASNE RYZYKO</b> ***"
+    </string>
     <string name="welcome_message">"Witaj w Package Manager, prostej, ale potężnej aplikacji do zarządzania Twoimi aplikacjami."</string>
     <string name="wrong_extension">"Wybierz plik z rozszerzeniem %s."</string>
     <string name="yes">"Tak"</string>
@@ -158,4 +157,5 @@
     <string name="request">"Przyznaj"</string>
     <string name="shizuku_integration_message">"Menedżer pakietów może teraz integrować się z interfejsem API Shizuku w celu wykonywania zaawansowanych zadań. Jeśli chcesz skorzystać z integracji z Shizuku, przyznaj uprawnienie (jednorazowo), naciskając poniższy przycisk."</string>
     <string name="feature_unavailable_message">"Ta funkcja wymaga dostępu do roota lub Shizuku"</string>
+    <string name="failed_decode_xml">"Nie udało się zdekodować %s"</string>
 </resources>

@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <!-- Chines simplified (zh-hans) -->
 
     <string name="apk_path">"APK 路径"</string>
     <string name="app_info">"应用信息"</string>
     <string name="batch_list_clear">"清空列表"</string>
     <string name="batch_warning">"您的批量处理设置将被删除！您确定吗？"</string>
-    <string name="billing_client_disconnected">"Google Play 结算客户端无法连接！"</string>
     <string name="bundle_install_apks">"您确定要安装应用捆绑包 '%s' 吗？"</string>
     <string name="change_logs">"更新日志"</string>
     <string name="data_dir">"数据目录"</string>
@@ -63,6 +63,7 @@
     <string name="uninstall_warning">"请注意：删除系统应用有时会很危险！
 
         *** <b>您需要自担风险</b> ***
+
         "</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
     <string name="wrong_extension">"请选择一个带有 %s 扩展名的文件。"</string>

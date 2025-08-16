@@ -1,17 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
-    <string name="apk_path">"APK Dizini"</string>
-    <string name="app_info">"UYGULAMA BİLGİLERİ"</string>
-    <string name="batch_list_clear">"Listeyi temizle"</string>
-    <string name="batch_warning">"Toplu İşlem ayarlarınız silinecek! İstediğinize emin misiniz?"</string>
-    <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
-    <string name="bundle_install_apks">"'%s' toplu uygulama paketini yüklemek istediğinize emin misiniz?"</string>
-    <string name="change_logs">"Değişiklik Günlüğü"</string>
-    <string name="data_dir">"Veri Dizini"</string>
-    <string name="date_installation">"Yüklenme Tarihi"</string>
-    <string name="date_installed">"İlk Yüklenme: %s"</string>
-    <string name="date_updated">"Son Güncellenme: %s"</string>
-    <string name="disable_message">"%s olacak! İstediğinize emin misiniz?"</string>
     <string name="disable">"Devre Dışı Bırak"</string>
     <string name="disabled">"devre dışı"</string>
     <string name="disabling">"%s devre dışı bırakılıyor"</string>
@@ -62,7 +50,7 @@
     <string name="uninstall_title">"%s kaldırmak istediğinize emin misiniz?"</string>
     <string name="uninstall_warning">"Sakın unutmayın: Sistem uygulamalarını kaldırmak bazen tehlikeli olabilir!
 
-        *** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***
+        *** &lt;b&gt;KENDİ SORUMLULUĞUNUZDA KULLANINIZ&lt;/b&gt; ***
         "</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>

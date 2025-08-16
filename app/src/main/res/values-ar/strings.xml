@@ -4,7 +4,6 @@
     <string name="app_info">"معلومات التطبيق"</string>
     <string name="batch_list_clear">"لائحة خالية"</string>
     <string name="batch_warning">"ستتم إزالة إعدادات الدُفعات الخاصة بك. هل أنت متأكد؟"</string>
-    <string name="billing_client_disconnected">"فشل الاتصال بعميل Google Play Billing"</string>
     <string name="bundle_install_apks">"هل أنت متأكد من تثبيت حزمة التطبيقات '٪ s'؟"</string>
     <string name="change_logs">"تغيير السجلات"</string>
     <string name="data_dir">"دليل البيانات"</string>
@@ -48,7 +47,7 @@
     <string name="share">"يشارك"</string>
     <string name="shared_by">"٪ s / مشترك بواسطة إدارة الحزم"</string>
     <string name="share_message">"يمكن الحصول على إدارة الحزم٪ s من
-        جوجل بلاي: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager؟"</string>
+        جوجل بلاي: https://play.google.com/store/apps/details؟"</string>
     <string name="share_with">"شارك مع"</string>
     <string name="sort_by">"فرز التطبيقات"</string>
     <string name="source_code">"مصدر الرمز"</string>
@@ -62,7 +61,6 @@
     <string name="uninstall_summary">"إزالة٪ s"</string>
     <string name="uninstall_title">"هل أنت متأكد من إلغاء تثبيت٪ s؟"</string>
     <string name="uninstall_warning">"يرجى ملاحظة ما يلي: قد تكون إزالة تطبيقات النظام خطيرة في بعض الأحيان
-
         *** <b> استخدمه على مسؤوليتك الخاصة </b> ***
         "</string>
     <string name="welcome_message">"مرحبًا بك في Package Manager ، تطبيق بسيط ولكنه قوي لإدارة تطبيقاتك."</string>

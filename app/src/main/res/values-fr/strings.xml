@@ -4,7 +4,6 @@
     <string name="app_info">"Info de l'Appli"</string>
     <string name="batch_list_clear">"Vider la liste"</string>
     <string name="batch_warning">"Vos paramètres de traitement par lot seront supprimés. Êtes-vous sûr ?"</string>
-    <string name="billing_client_disconnected">"Échec de connexion avec le client de facturation Google Play !"</string>
     <string name="bundle_install_apks">"Êtes-vous sûr d'installer le paquet '%s' ?"</string>
     <string name="change_logs">"Notes de version"</string>
     <string name="data_dir">"Dossier des données"</string>
@@ -60,7 +59,10 @@
     <string name="uninstall_nope">"Désolé ! Cela ne peut être fait d'ici."</string>
     <string name="uninstall_summary">"Suppression de %s"</string>
     <string name="uninstall_title">"Êtes-vous sûr de désinstaller %s ?"</string>
-    <string name="uninstall_warning">"Remarque : la suppression des applications système peut être dangereuse !\n\n*** <b>À VOS RISQUES ET PÉRILS</b> ***\n"</string>
+    <string name="uninstall_warning">"Remarque : la suppression des applications système peut être dangereuse !
+
+        *** <b>À VOS RISQUES ET PÉRILS</b> ***
+        "</string>
     <string name="welcome_message">"Bienvenue dans Package Manager, une application simple mais puissante pour gérer vos applications."</string>
     <string name="wrong_extension">"Veuillez sélectionner un fichier avec l'extension %s."</string>
     <string name="yes">"Oui"</string>
@@ -76,7 +78,7 @@
     <string name="share_app_Summary">"Inviter un ami à utiliser Package Manager"</string>
     <string name="source_code_summary">"Package Manager est une application open source qui peut être améliorée grâce aux contributions de la communauté de développement. Cliquez ici pour consulter le code source !"</string>
     <string name="support_summary">"Rejoindre le groupe de support Telegram"</string>
-    <string name="batch_options">"Options pour le traitement par lots (%s)"</string>
+    <string name="batch_options">"Options pour le traitement par lots"</string>
     <string name="batch_list_added">"%s est ajouté dans la liste du traitement par lots"</string>
     <string name="batch_list_removed">"%s est supprimé de la liste du traitement par lots"</string>
     <string name="explore_error_status">"Échec de l'exploration de %s !"</string>
