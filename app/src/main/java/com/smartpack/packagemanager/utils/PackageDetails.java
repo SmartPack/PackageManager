@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -16,15 +15,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ADBUninstallActivity;
+import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 import com.smartpack.packagemanager.utils.tasks.ExportAPKTasks;
 import com.smartpack.packagemanager.utils.tasks.ExportBundleTasks;
 import com.smartpack.packagemanager.utils.tasks.UninstallSystemAppsTasks;
@@ -40,7 +35,6 @@ import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
@@ -49,35 +43,17 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class PackageDetails {
 
-    public static void exportApp(LinearLayout linearLayout, MaterialTextView textView, ProgressBar progressBar, Activity activity) {
-        if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
-                Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                new MaterialAlertDialogBuilder(activity)
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(R.string.app_name)
-                        .setMessage(activity.getString(R.string.file_permission_request_message))
-                        .setNegativeButton(activity.getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-                        .setPositiveButton(activity.getString(R.string.grant), (dialogInterface, i) ->
-                                Utils.requestPermission(activity))
-                        .show();
-            } else {
-                sPermissionUtils.requestPermission(new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        activity);
-            }
-            sCommonUtils.snackBar(activity.findViewById(android.R.id.content), activity.getString(R.string.permission_denied_write_storage)).show();
-        } else if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
-            new ExportBundleTasks(linearLayout, textView, progressBar, sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
+    public static void exportApp(Activity activity) {
+        if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
+            new ExportBundleTasks(sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
                     Common.getApplicationIcon(), activity).execute();
         } else {
-            new ExportAPKTasks(linearLayout, textView, progressBar, Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity).execute();
+            new ExportAPKTasks(Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity).execute();
         }
     }
 
     @SuppressLint("StringFormatInvalid")
-    public static void uninstallSystemApp(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
+    public static void uninstallSystemApp(Activity activity) {
         if (new RootShell().rootAccess() || new ShizukuShell().isReady()) {
             new MaterialAlertDialogBuilder(activity)
                     .setIcon(Common.getApplicationIcon())
@@ -87,7 +63,7 @@ public class PackageDetails {
                     .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     })
                     .setPositiveButton(activity.getString(R.string.yes), (dialog, id) ->
-                            new UninstallSystemAppsTasks(linearLayout, textView, activity).execute())
+                            new UninstallSystemAppsTasks(activity).execute())
                     .show();
         } else {
             Intent details = new Intent(activity, ADBUninstallActivity.class);
@@ -163,17 +139,6 @@ public class PackageDetails {
         } catch (JSONException ignored) {
         }
         return null;
-    }
-
-    public static void showProgress(LinearLayout linearLayout, MaterialTextView textView, String message) {
-        textView.setText(message);
-        textView.setVisibility(View.VISIBLE);
-        linearLayout.setVisibility(View.VISIBLE);
-    }
-
-    public static void hideProgress(LinearLayout linearLayout, MaterialTextView textView) {
-        textView.setVisibility(View.GONE);
-        linearLayout.setVisibility(View.GONE);
     }
 
 }

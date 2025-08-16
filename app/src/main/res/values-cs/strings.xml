@@ -3,13 +3,6 @@
     <string name="apk_path">"Cesta k apk souboru"</string>
     <string name="app_info">"Info o aplikaci"</string>
     <string name="batch_list_clear">"Vyčistit seznam"</string>
-    <string name="batch_list_disable">"Opravdu chcete vypnout (pokud byla(y) vypnuta(y) ) nebo zapnout (pokud byla(y) vypnuta(y) ) následující aplikaci(e) ?"</string>
-    <string name="batch_list_remove">"Opravdu chcete odebrat následující aplikaci(e)?"</string>
-    <string name="batch_list_reset">"Opravdu chcete resetovat následující aplikaci(e)"</string>
-    <string name="batch_list_summary">"Následující aplikace jsou přidány do dávkového seznamu"</string>
-    <string name="batch_processing">"Dávkový proces v procesu !"</string>
-    <string name="batch_processing_finished">"Dávkový proces dokončen!"</string>
-    <string name="batch_processing_initialized">"Připravuji dávkový proces"</string>
     <string name="batch_warning">"Váše dávkové nastavení bude odstraněno! Opravdu?"</string>
     <string name="billing_client_disconnected">"Chyba spojení s Google Play platebním klientem!"</string>
     <string name="bundle_install_apks">"Opravdu chcete instalovat apk bundle (.aab) '%s'?"</string>
@@ -23,7 +16,6 @@
     <string name="disable">"Vypnout"</string>
     <string name="disabled">"Vyonuto"</string>
     <string name="disabling">"Vypínání %s"</string>
-    <string name="done">"Dokončeno"</string>
     <string name="enable">"Zapnout"</string>
     <string name="enabled">"Zapnuto"</string>
     <string name="enabling">"Zapínání %s"</string>
@@ -31,7 +23,6 @@
     <string name="export_bundle_summary">"Celý balíček aplikace je exportován do %s!"</string>
     <string name="exporting">"Exportování %s"</string>
     <string name="exporting_bundle">"Exportování %s Apk bundle"</string>
-    <string name="everything_done">"Vše dokončeno"</string>
     <string name="failed">"Chyba"</string>
     <string name="got_it">"Mám to"</string>
     <string name="install">"Instalovat"</string>
@@ -55,7 +46,6 @@
     <string name="reset_message">"Reset %"</string>
     <string name="reset_summary">"Resetuji %s"</string>
     <string name="result">"Vysledek6: %s"</string>
-    <string name="search">"Vyhledat…"</string>
     <string name="share">"Sdílet"</string>
     <string name="shared_by">"%s/sdíleno Package Manager-em"</string>
     <string name="share_message">"Package Manager je k získání na Google Play obchodě: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -63,17 +53,8 @@
     <string name="sort_by">"Třídit aplikace"</string>
     <string name="source_code">"Zdroj kódu"</string>
     <string name="support">"Skupina podpory"</string>
-    <string name="support_acknowledged">"Dsr uznán \2665"</string>
-    <string name="support_app">"Kupte podporu aplikace"</string>
     <string name="support_development">"Podpořit vývoj"</string>
     <string name="support_development_summary">"Pokud chcete ocenit snahu vývojáře poskytnout tento nástroj zcela zdarma, zvažte odeslání malého daru kliknutím na některou z níže uvedených možností!  Zakoupením některého z těchto produktů zde získáte odznak podporovatele!"</string>
-    <string name="support_dinner">"Koupit mi večeři"</string>
-    <string name="support_meal">"Kupte mi oběd"</string>
-    <string name="support_coffee">"Kupte mi kávu"</string>
-    <string name="support_already_received_message">"Již jste podpořil/a vývojáře touto položkou dříve!"</string>
-    <string name="support_received_message">"Velmi děkuji za vaši podporu \u2665 \nBude mě to velmi motivovat pro aktivní pokračování mého projektu."</string>
-    <string name="support_retry_message">"Prosím zkuste "</string>
-    <string name="support_status_message">"Děkuji velmi děkuji za vaši podporu!"</string>
     <string name="sure_question">"Opravdu?"</string>
     <string name="turn_on_off">"Přepnout Zap/ Vyp"</string>
     <string name="uninstall">"Odinstalovat"</string>
@@ -81,14 +62,11 @@
     <string name="uninstall_summary">"Odstraňování%s"</string>
     <string name="uninstall_title">"Opravdu chcete odinstalovat%s?"</string>
     <string name="uninstall_warning">"Poznámka: Odstranění systémových aplikací"</string>
-    <string name="version">"Verze:%s"</string>
     <string name="welcome_message">"Vítejte v Package Manager, jednoduše, mocná aplikace na správu aplikací."</string>
     <string name="wrong_extension">"Prosím vyberte soubor tímto %s rozšířením."</string>
     <string name="yes">"Ano"</string>
     <string name="explore">"Procházet"</string>
-    <string name="export_file_message">"Bylo úspěšně exportováno do %s!"</string>
     <string name="export_storage_message">"Exportovat %s do interního úložiště?"</string>
-    <string name="file_picker_message">"Poznámka: Tato funkce je velmi experimentální!"</string>
     <string name="more_apps_summary">"Prohlédněte si více aplikací od vývojáře na Google Play obchodě."</string>
     <string name="open_failed_export_message">"Nelze otevřít %s! Chcete toto exportovat do interního úložiště zařízení?"</string>
     <string name="rate_us">"Ohodnoťte aplikaci"</string>
@@ -101,7 +79,6 @@
     <string name="support_summary">"Připojit se k Telegramové skupině podpory"</string>
     <string name="batch_options">"Dávkové nastavení (%s)"</string>
     <string name="batch_list_added">"%s bylo přidáno na dávkový seznam"</string>
-    <string name="batch_list_export">"Opravdu chcete exportovat následující aplikaci(e) do interního úložiště zařízení?"</string>
     <string name="batch_list_removed">"%s bylo odebráno z hromadného seznamu"</string>
     <string name="explore_error_status">"Chyba procházení %s!"</string>
     <string name="split_apk">"Splkt APK soubory"</string>

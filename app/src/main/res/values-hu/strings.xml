@@ -3,13 +3,6 @@
     <string name="apk_path">"APK útvonal"</string>
     <string name="app_info">"App infó"</string>
     <string name="batch_list_clear">"Lista törlése"</string>
-    <string name="batch_list_disable">"Biztos, hogy tiltja (ha engedélyezett), vagy engedélyezi (ha tiltott) a következő alkakmazás(oka)t?"</string>
-    <string name="batch_list_remove">"Biztos, hogy eltávolítja a következő alkakmazás(oka)t?"</string>
-    <string name="batch_list_reset">"Biztos, hogy visszaállítja a következő alkalmazás(oka)t?"</string>
-    <string name="batch_list_summary">"A következő alkalmazások kerülnek a kötegelt listába"</string>
-    <string name="batch_processing">"A kötegelt feldolgozás folyamatban van"</string>
-    <string name="batch_processing_finished">"A kötegelt feldolgozás kész"</string>
-    <string name="batch_processing_initialized">"Kezdi a kötegelt feldolgozást"</string>
     <string name="batch_warning">"A kötegelés beállításait eltávolítjuk. Biztos vagy ebben?"</string>
     <string name="billing_client_disconnected">"Nem sikerült csatlakozni a Google Play Számlázási klienshez"</string>
     <string name="bundle_install_apks">"Biztosan telepíti a(z) '%s' alkalmazáscsomagot?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Tilt"</string>
     <string name="disabled">"tiltott"</string>
     <string name="disabling">"%s letiltása"</string>
-    <string name="done">"Kész"</string>
     <string name="enable">"Engedélyez"</string>
     <string name="enabled">"engedélyezett"</string>
     <string name="enabling">"%s engedélyezése"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"A teljes alkalmazás exportálódik a %s -ba(-be)"</string>
     <string name="exporting">"%s exportálása"</string>
     <string name="exporting_bundle">"%s alkalmazáscsomag exportálása"</string>
-    <string name="everything_done">"Minden kész"</string>
     <string name="failed">"Sikertelen"</string>
     <string name="got_it">"Értem"</string>
     <string name="install">"Telepít"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Visszaállítja '%s'?"</string>
     <string name="reset_summary">"Visszaállítva %s"</string>
     <string name="result">"Eredmény: %s"</string>
-    <string name="search">"Keresés…"</string>
     <string name="share">"Megoszt"</string>
     <string name="shared_by">"%s/ megosztva a Package Managerrel"</string>
     <string name="share_message">"A Package Manager %s a Google Play-ről tölthető le: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"APK'-k rendezése"</string>
     <string name="source_code">"Forráskód"</string>
     <string name="support">"Támogatócsoport"</string>
-    <string name="support_acknowledged">"Adomány elismerve \u2665"</string>
-    <string name="support_app">"Adományozói App vásárlása"</string>
     <string name="support_development">"Fejlesztői Támogatás"</string>
     <string name="support_development_summary">"Ha értékeli a fejlesztő erőfeszítéseit, hogy teljesen ingyen biztosítja ezt az eszközt, kérjük fontolja meg egy kis adomány elküldését az alább megadott lehetőségek egyikére kattintva. Ha megvásárolja ezt a terméket itt, támogatói jelvényt kap."</string>
-    <string name="support_dinner">"Vegyél nekem egy vacsorát"</string>
-    <string name="support_meal">"Vegyél nekem egy ételt"</string>
-    <string name="support_coffee">"Vegyél nekem egy kávét"</string>
-    <string name="support_already_received_message">"Korábban már támogatta a fejlesztést ezzel a tétellel"</string>
-    <string name="support_received_message">"Nagyon köszönöm a támogatást \u2665. Ez motiválni fog engem, hogy aktívabban folytassam a projektjeimet. Ezen felül az oldal tetején támogatói jelvényt kap."</string>
-    <string name="support_retry_message">"Kérjük próbálkozzon újra"</string>
-    <string name="support_status_message">"Köszönöm a segítségét"</string>
     <string name="sure_question">"Biztos benne?"</string>
     <string name="turn_on_off">"Ki/Be-kapcsolás"</string>
     <string name="uninstall">"Eltávolítás"</string>
@@ -83,14 +64,11 @@
 
         ***<b>HASZNÁLJA FELELŐSÉGGEL</b>***
         "</string>
-    <string name="version">"Verzió: %s"</string>
     <string name="welcome_message">"Üdvözöljük a Package Managerben, amely egy egyszerű, ugyanakkor hatékony program az alkalmazások kezeléséhez."</string>
     <string name="wrong_extension">"Válasszon %s kiterjesztésű fájlt."</string>
     <string name="yes">"Igen"</string>
     <string name="explore">"Fedezd fel"</string>
-    <string name="export_file_message">"sikeresen exportálva %s-ba(-be)"</string>
     <string name="export_storage_message">"%s exportálja az eszköztárolóba?"</string>
-    <string name="file_picker_message">"Megjegyzés: Ez a funkció még kísérleti jellegű"</string>
     <string name="more_apps_summary">"Ellenőrizze a fejlesztő további alkalmazásait a Google Playen"</string>
     <string name="open_failed_export_message">"Nem sikerült megnyitni a(z) %s-t. Exportálja az eszköz tárolójába?"</string>
     <string name="rate_us">"Értékeld az alkalmazást"</string>
@@ -103,7 +81,6 @@
     <string name="support_summary">"Csatlakozzon a Telegram támogató csoporthoz"</string>
     <string name="batch_options">"Kötegelt opciók"</string>
     <string name="batch_list_added">"%s hozzáadódik a kötegelt listához"</string>
-    <string name="batch_list_export">"Biztosan exportálja a következő alkalmazás(oka)t az eszköz tárhelyére?"</string>
     <string name="batch_list_removed">"%s eltávolítva a kötegelt listából"</string>
     <string name="explore_error_status">"%s felfedezése sikertelen"</string>
     <string name="split_apk">"Felosztott APK'-k"</string>
@@ -134,10 +111,8 @@
     <string name="bundle_path">"Csomag útvonala"</string>
     <string name="size_apk">"APK mérete: %s"</string>
     <string name="size_bundle">"Csomag mérete: %s"</string>
-    <string name="file_permission_request_message">"Annak érdekében, hogy ez a funkció működjön az újabb Android-verziókon (Android R vagy újabb), meg kell adni az \"Összes fájlhoz való hozzáférés\" engedélyét a Package Manager számára. Kérjük adja meg az engedélyt manuálisan az új képernyőn, amely az \"Engedélyez\" gombra kattintás után nyilik meg."</string>
     <string name="grant">"Engedélyez"</string>
     <string name="select_all">"Mindet kiválasztja"</string>
-    <string name="select_all_summary">"Kiválasztja és hozzáadja az összes alkalmazást erről az oldalról a kötegelt listához?"</string>
     <string name="uninstall_status_failed">"A(z) %s eltávolítása nem sikerült, vagy a felhasználó leállította"</string>
     <string name="export_apk_summary">"A kiválasztott APK exportálva a(z) '%s' mappába"</string>
     <string name="initializing">"Indítás…"</string>
@@ -167,23 +142,17 @@
     <string name="other">"Egyéb"</string>
     <string name="restore">"Visszaállítás"</string>
     <string name="restore_message">"Visszaállítja a(z) '%s' gyári verzióját?"</string>
-    <string name="restore_message_batch">"A visszaállítja a következő alkalmazásokat a gyári verzióra?
-
-        %s"</string>
     <string name="restore_success_message">"A kiválasztott alkalmazás(ok) sikeresen visszaálltak a gyári verzióra"</string>
     <string name="split_apk_installer_description">"Felosztott APK-k (több részből álló APK fájlok, azonos csomagnévvel)"</string>
     <string name="uninstalled_apps">"Eltávolított alkalmazások"</string>
     <string name="user_interface">"Felhasználói felület"</string>
     <string name="uninstall_updates_message">"A(z) '%s' egy helyi frissítése azonban telepítve van, amelyet az \"Eltávolítás\" gombra kattintva szabadon eltávolíthat."</string>
     <string name="close">"Bezárás"</string>
-    <string name="bundle_install_question">"Biztosan telepíti a kiválasztott alkalmazáscsomagot?"</string>
     <string name="preparing_message">"Előkészítés…"</string>
-    <string name="save_to_downloads">"Mentés a letöltések közé"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_compile">"Compile SDK: %s"</string>
     <string name="sdk_minimum">"Minimum SDK: %s"</string>
     <string name="update">"Frissítés"</string>
-    <string name="reload">"Újratöltés"</string>
     <string name="disable_failed_message">"%s komponens állapotát mem sikerült megváltoztatni."</string>
     <string name="never_show">"Ne mutassa"</string>
     <string name="request">"Kérés"</string>

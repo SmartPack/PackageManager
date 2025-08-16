@@ -1,0 +1,26 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <include layout="@layout/layout_recyclerview" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/batch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_alignParentBottom="true"
+        android:textColor="?attr/colorPrimary"
+        android:text="@string/export_selected"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|center"
+        android:layout_marginBottom="50dp"
+        app:iconTint="?attr/colorPrimary"
+        android:layout_marginEnd="50dp"
+        app:icon="@drawable/ic_select"
+        android:visibility="gone"
+        android:textSize="17sp"
+        app:iconPadding="10sp" />
+</RelativeLayout>

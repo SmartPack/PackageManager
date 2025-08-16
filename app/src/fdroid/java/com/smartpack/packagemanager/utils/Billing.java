@@ -10,6 +10,8 @@ package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
 
+import com.smartpack.packagemanager.BuildConfig;
+
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
@@ -17,8 +19,16 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class Billing {
 
+    public static String getAppVersion() {
+        return BuildConfig.VERSION_NAME;
+    }
+
+    public static String getPackageExt() {
+        return null;
+    }
+
     public static void showDonateOption(Activity activity) {
-        sCommonUtils.launchUrl("https://smartpack.github.io/donation/", activity);
+        sCommonUtils.launchUrl("https://smartpack.github.io/PackageManager/donations/", activity);
     }
 
 }

@@ -86,10 +86,12 @@ public class PackageExploreActivity extends AppCompatActivity {
             } else if (PackageExplorer.isTextFile(mPath)) {
                 Intent textView = new Intent(this, TextViewActivity.class);
                 textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
+                textView.putExtra(TextViewActivity.PACKAGE_INTENT, Common.getApplicationID());
                 startActivity(textView);
             } else if (PackageExplorer.isImageFile(mPath)) {
                 Intent imageView = new Intent(this, ImageViewActivity.class);
                 imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
+                imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, Common.getApplicationID());
                 startActivity(imageView);
             } else {
                 new MaterialAlertDialogBuilder(this)
@@ -99,7 +101,7 @@ public class PackageExploreActivity extends AppCompatActivity {
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
                         .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
-                                .copyToStorage(mPath, this)).show();
+                                .copyToStorage(mPath, Common.getApplicationID(), this)).show();
             }
         });
 

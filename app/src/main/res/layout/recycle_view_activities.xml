@@ -1,16 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_gravity="center"
+    android:gravity="start"
     android:padding="10dp" >
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="start"
+            android:layout_gravity="center|start"
             android:src="@drawable/ic_circle"
+            android:tint="?attr/colorPrimary"
             android:scaleType="fitCenter"
             android:background="@null" />
 
@@ -18,9 +20,10 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="5sp"
+            android:layout_gravity="center"
             android:focusable="false"
+            android:gravity="start"
             android:textStyle="bold"
-            android:textSize="15sp" />
-</FrameLayout>
+            android:textSize="15sp"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

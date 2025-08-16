@@ -8,8 +8,9 @@
 
 package com.smartpack.packagemanager.utils;
 
-import android.app.ProgressDialog;
 import android.widget.ProgressBar;
+
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -46,11 +47,7 @@ public class ZipFileUtils extends ZipFile {
                 mProgressBar.setProgress(0);
             }
         } else if (mProgressDialog != null) {
-            if (mProgressDialog.getProgress() < mProgressDialog.getMax()) {
-                mProgressDialog.setProgress(mProgressDialog.getProgress() + 1);
-            } else {
-                mProgressDialog.setProgress(0);
-            }
+            mProgressDialog.updateProgress(1);
         }
     }
 

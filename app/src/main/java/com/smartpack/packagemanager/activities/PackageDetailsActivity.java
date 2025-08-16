@@ -43,6 +43,8 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class PackageDetailsActivity extends AppCompatActivity {
 
+    public static final String LAUNCH_INTENT = "launch";
+
     @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,12 +57,14 @@ public class PackageDetailsActivity extends AppCompatActivity {
         TabLayout mTabLayout = findViewById(R.id.tab_Layout);
         ViewPager mViewPager = findViewById(R.id.view_pager);
 
+        boolean launchIntent = getIntent().getBooleanExtra(LAUNCH_INTENT, false);
+
         mAppIcon.setImageDrawable(Common.getApplicationIcon());
         mAppName.setText(Common.getApplicationName());
         mVersion.setText(getString(R.string.version, sAPKUtils.getVersionName(Common.getSourceDir(), this)));
 
         sPagerAdapter adapter = new sPagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new PackageInfoFragment(), getString(R.string.app_info));
+        adapter.AddFragment(PackageInfoFragment.newInstance(launchIntent), getString(R.string.app_info));
         if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), this)).size() > 1) {
             adapter.AddFragment(new SplitApksFragment(), getString(R.string.split_apk));
         }

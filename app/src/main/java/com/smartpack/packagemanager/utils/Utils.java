@@ -11,27 +11,34 @@ package com.smartpack.packagemanager.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.Settings;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
+import androidx.core.content.ContextCompat;
 
 import com.smartpack.packagemanager.MainActivity;
-
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
  */
 public class Utils {
 
-    public static boolean isProUser(Context context) {
-        return sCommonUtils.getBoolean("support_received", false, context);
+    public static CharSequence fromHtml(String text) {
+        return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
+    }
+
+    public static int getColor(int resID, Context context) {
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(resID, typedValue, true);
+        return ContextCompat.getColor(context, typedValue.resourceId);
+    }
+
+    public static void restartApp(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
     }
 
     public static void toggleKeyboard(int mode, AppCompatAutoCompleteTextView editText, Activity activity) {
@@ -43,30 +50,6 @@ public class Utils {
         } else {
             imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         }
-    }
-
-    public static CharSequence fromHtml(String text) {
-        return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    public static void requestPermission(Activity activity) {
-        Intent intent = new Intent();
-        intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-        intent.setData(uri);
-        activity.startActivity(intent);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    public static boolean isPermissionDenied() {
-        return !Environment.isExternalStorageManager();
-    }
-
-    public static void restartApp(Activity activity) {
-        Intent intent = new Intent(activity, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        activity.startActivity(intent);
     }
 
 }

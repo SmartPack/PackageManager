@@ -21,9 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
@@ -48,19 +45,11 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
                 "neverShow",false, this), this));
 
         mAdd.setOnClickListener(v -> {
-            if (Flavor.isFullVersion()) {
-                Common.getAppList().clear();
-                Common.setPath(FilePicker.getLastDirPath(this));
-                Intent filePicker = new Intent(this, FilePickerActivity.class);
-                startActivity(filePicker);
-                finish();
-            } else {
-                Intent installer = new Intent(Intent.ACTION_GET_CONTENT);
-                installer.setType("*/*");
-                installer.addCategory(Intent.CATEGORY_OPENABLE);
-                installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                installApp.launch(installer);
-            }
+            Intent installer = new Intent(Intent.ACTION_GET_CONTENT);
+            installer.setType("*/*");
+            installer.addCategory(Intent.CATEGORY_OPENABLE);
+            installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            installApp.launch(installer);
         });
     }
 

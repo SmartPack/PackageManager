@@ -13,18 +13,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.ZipFileUtils;
 
@@ -34,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
@@ -45,16 +41,10 @@ public class ExportBundleTasks extends sExecutor {
 
     private final Activity mActivity;
     private static Drawable mIcon = null;
-    private final LinearLayout mLinearLayout;
-    private final MaterialTextView mTextView;
-    private final ProgressBar mProgressBar;
     private static String mAPKPath = null, mName = null;
+    private ProgressDialog mProgressDialog;
 
-    public ExportBundleTasks(LinearLayout linearLayout, MaterialTextView textView, ProgressBar progressBar,
-                             String path, String name, Drawable icon, Activity activity) {
-        mLinearLayout = linearLayout;
-        mTextView = textView;
-        mProgressBar = progressBar;
+    public ExportBundleTasks(String path, String name, Drawable icon, Activity activity) {
         mAPKPath = path;
         mName = name;
         mIcon = icon;
@@ -65,21 +55,23 @@ public class ExportBundleTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPreExecute() {
-        mProgressBar.setIndeterminate(false);
-        PackageDetails.showProgress(mLinearLayout, mTextView, mActivity.getString(R.string.exporting_bundle, mName) + "...");
-        PackageData.makePackageFolder(mActivity);
+        mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setIcon(R.mipmap.ic_launcher);
+        mProgressDialog.setTitle(mActivity.getString(R.string.exporting_bundle, mName) + "...");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.show();
     }
 
     @Override
     public void doInBackground() {
-        sCommonUtils.sleep(1);
         List<File> mFiles = new ArrayList<>();
         for (final String splitApps : SplitAPKInstaller.splitApks(mAPKPath)) {
-            mFiles.add(new File(mAPKPath + "/" + splitApps));
+            mFiles.add(new File(mAPKPath, splitApps));
         }
+        PackageData.makePackageFolder(mActivity);
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(mActivity) + "/" + mName + "_" + sAPKUtils.getVersionCode(
                 sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apkm")) {
-            zipFileUtils.setProgress(mProgressBar);
+            zipFileUtils.setProgress(mProgressDialog);
             zipFileUtils.zip(mFiles);
         } catch (IOException ignored) {}
     }
@@ -87,8 +79,7 @@ public class ExportBundleTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
-        PackageDetails.hideProgress(mLinearLayout, mTextView);
-        mProgressBar.setIndeterminate(true);
+        mProgressDialog.dismiss();
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
                 .setTitle(mName)

@@ -1,0 +1,64 @@
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:padding="5dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center|start"
+            android:scaleType="fitCenter"
+            android:background="@null" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40sp"
+            android:layout_marginEnd="40sp"
+            android:orientation="vertical" >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:textStyle="bold"
+                    android:textSize="17sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_gravity="center|end"
+                    android:tint="?attr/colorPrimary"
+                    android:background="@null"
+                    android:gravity="center" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@null"
+                    android:visibility="gone"
+                    android:gravity="center" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+</FrameLayout>

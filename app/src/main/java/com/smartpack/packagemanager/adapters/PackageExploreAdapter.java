@@ -49,8 +49,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
     @Override
     public void onBindViewHolder(@NonNull PackageExploreAdapter.ViewHolder holder, int position) {
         if (position == 0) {
-            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
-            holder.mIcon.setRotation(90);
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots_horizontal, holder.mIcon.getContext()));
             holder.mTitle.setText(null);
         } else if (new File(data.get(position)).isDirectory()) {
             holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));

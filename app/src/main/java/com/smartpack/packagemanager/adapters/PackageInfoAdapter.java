@@ -13,13 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.PackageInfoItems;
+import com.smartpack.packagemanager.utils.SerializableItems.PackageInfoItems;
 
 import java.util.List;
 
@@ -68,12 +67,12 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
         }
 
         if (data.get(position).getActionIcon() != null && data.get(position).getActionText() != null) {
-            holder.mActionIcon.setIcon(data.get(position).getActionIcon());
-            holder.mActionText.setText(data.get(position).getActionText());
-            holder.mActionLayout.setVisibility(View.VISIBLE);
-            holder.mActionLayout.setOnClickListener(v -> mClickListener.onItemClick(position, v));
+            holder.mIcon.setIcon(data.get(position).getActionIcon());
+            holder.mIcon.setText(data.get(position).getActionText());
+            holder.mIcon.setVisibility(View.VISIBLE);
+            holder.mIcon.setOnClickListener(v -> mClickListener.onItemClick(position, v));
         } else {
-            holder.mActionLayout.setVisibility(View.GONE);
+            holder.mIcon.setVisibility(View.GONE);
         }
     }
 
@@ -83,15 +82,12 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final MaterialButton mActionIcon;
-        private final LinearLayoutCompat mActionLayout;
-        private final MaterialTextView mTitle, mDescription, mDescriptionOne, mDescriptionTwo, mActionText;
+        private final MaterialButton mIcon;
+        private final MaterialTextView mTitle, mDescription, mDescriptionOne, mDescriptionTwo;
 
         public ViewHolder(View view) {
             super(view);
-            this.mActionIcon = view.findViewById(R.id.action_icon);
-            this.mActionLayout = view.findViewById(R.id.action_layout);
-            this.mActionText = view.findViewById(R.id.action_text);
+            this.mIcon = view.findViewById(R.id.icon);
             this.mDescription = view.findViewById(R.id.description);
             this.mDescriptionOne = view.findViewById(R.id.description_one);
             this.mDescriptionTwo = view.findViewById(R.id.description_two);

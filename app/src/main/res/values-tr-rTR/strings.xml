@@ -3,13 +3,6 @@
     <string name="apk_path">"APK Dizini"</string>
     <string name="app_info">"UYGULAMA BİLGİLERİ"</string>
     <string name="batch_list_clear">"Listeyi temizle"</string>
-    <string name="batch_list_disable">"Seçili uygulamayı(ları) devre dışı bırakmak (etkin ise) veya aktif etmek (devre dışı ise) istediğinize emin misiniz?"</string>
-    <string name="batch_list_remove">"Seçili uygulamayı(ları) kaldırmak istediğinize emin misiniz?"</string>
-    <string name="batch_list_reset">"Seçili uygulamayı(ları) sıfırlamak istediğinize emin misiniz?"</string>
-    <string name="batch_list_summary">"Seçili uygulamalar toplu işlem listesine eklendi"</string>
-    <string name="batch_processing">"Toplu İşlemler Uygulanıyor!"</string>
-    <string name="batch_processing_finished">"Toplu İşlemler Tamamlandı!"</string>
-    <string name="batch_processing_initialized">"Toplu İşlemler Başlatılıyor"</string>
     <string name="batch_warning">"Toplu İşlem ayarlarınız silinecek! İstediğinize emin misiniz?"</string>
     <string name="billing_client_disconnected">"Google Play Faturalandırması'na bağlanılamadı!"</string>
     <string name="bundle_install_apks">"'%s' toplu uygulama paketini yüklemek istediğinize emin misiniz?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Devre Dışı Bırak"</string>
     <string name="disabled">"devre dışı"</string>
     <string name="disabling">"%s devre dışı bırakılıyor"</string>
-    <string name="done">"Bitti"</string>
     <string name="enable">"Aktif Et"</string>
     <string name="enabled">"aktif"</string>
     <string name="enabling">"%s aktif ediliyor"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Toplu uygulama paketinin tamamı %s klasörüne aktarıldı!"</string>
     <string name="exporting">"%s dışa aktarılıyor"</string>
     <string name="exporting_bundle">"%s toplu uygulama paketi dışa aktarılıyor"</string>
-    <string name="everything_done">"Her Şey Tamam!"</string>
     <string name="failed">"Başarısız"</string>
     <string name="got_it">"Anlaşıldı"</string>
     <string name="install">"Yükle"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"'%s' sıfırlansın mı?"</string>
     <string name="reset_summary">"%s sıfırlanıyor"</string>
     <string name="result">"Sonuç: %s"</string>
-    <string name="search">"Ara…"</string>
     <string name="share">"Paylaş"</string>
     <string name="shared_by">"%s/Package Manager tarafından paylaşıldı"</string>
     <string name="share_message">"Package Manager %s Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Uygulamala Sıralaması"</string>
     <string name="source_code">"Kaynak Kodu"</string>
     <string name="support">"Destek Grubu"</string>
-    <string name="support_acknowledged">"Bağış Onaylandı \u2665"</string>
-    <string name="support_app">"Bağış Uygulamasını Satın Al"</string>
     <string name="support_development">"Geliştirmeye Destek Olun"</string>
     <string name="support_development_summary">"Geliştiricinin bu aracı ücretsiz bir şekilde sunmak için gösterdiği bu çabasını takdir etmek isterseniz, aşağıdaki butonlardan birine tıklayarak küçük bir bağışta bulunabilirsiniz! Bu ürünlerden herhangi birini satın aldığınızda destekçi rozetiyle ödüllendirileceksiniz!"</string>
-    <string name="support_dinner">"Bana bir akşam yemeği ısmarla"</string>
-    <string name="support_meal">"Bana bir yemek al"</string>
-    <string name="support_coffee">"Bana bir kahve al"</string>
-    <string name="support_already_received_message">"Daha önce bununla geliştirmeye destek olmuştunuz zaten!"</string>
-    <string name="support_received_message">"Desteğin için çok teşekkür ederim \u2665 \nBu beni projelerime daha aktif bir şekilde devam etmem için oldukça motive edecek! Ayrıca, bu sayfanın en üstünde bir destekçi rozetiniz olacak."</string>
-    <string name="support_retry_message">"Lütfen tekrar satın almayı deneyiniz!"</string>
-    <string name="support_status_message">"Desteğin için çok teşekkür ederim!"</string>
     <string name="sure_question">"Emin misin?"</string>
     <string name="turn_on_off">"Aç/Kapat"</string>
     <string name="uninstall">"Kaldır"</string>
@@ -83,14 +64,11 @@
 
         *** <b>KENDİ SORUMLULUĞUNUZDA KULLANINIZ</b> ***
         "</string>
-    <string name="version">"Sürüm: %s"</string>
     <string name="welcome_message">"Package Manager'a hoş geldiniz, uygulamalarınızı yönetmek için basit ve bir o kadar da güçlü bir uygulama."</string>
     <string name="wrong_extension">"Lütfen %s uzantılı bir dosya seç."</string>
     <string name="yes">"Evet"</string>
     <string name="explore">"Keşfet"</string>
-    <string name="export_file_message">"başarılı bir şekilde %s içerisine aktarıldı!"</string>
     <string name="export_storage_message">"%s cihaz depolamasına aktaracak mısınız?"</string>
-    <string name="file_picker_message">"Sakın unutmayın: Bu özellik fazlasıyla deneyseldir!"</string>
     <string name="more_apps_summary">"Geliştiricinin diğer uygulamalarına Google Play'den bir göz atın"</string>
     <string name="open_failed_export_message">"%s açılamıyor! Cihaz depolamasına aktarmak ister misiniz?"</string>
     <string name="rate_us">"Uygulamayı Oylayın"</string>
@@ -103,7 +81,6 @@
     <string name="support_summary">"Telegram destek grubuna katılın"</string>
     <string name="batch_options">"Toplu İşlem Seçenekleri"</string>
     <string name="batch_list_added">"%s toplu işlem listesine eklendi"</string>
-    <string name="batch_list_export">"Seçili uygulamayı(ları) cihaz depolamasına aktarmak istediğinize emin misiniz?"</string>
     <string name="batch_list_removed">"%s toplu işlem listesinden kaldırıldı"</string>
     <string name="explore_error_status">"%s keşfetme başarısız!"</string>
     <string name="split_apk">"BÖLÜNMÜŞ APK'LER"</string>
@@ -134,10 +111,8 @@
     <string name="bundle_path">"Toplu Paket Dizini"</string>
     <string name="size_apk">"APK Boyutu: %s"</string>
     <string name="size_bundle">"Toplu Paket Boyutu: %s"</string>
-    <string name="file_permission_request_message">"Bu özelliğin yeni Android sürümlerinde (Android R veya üstü) çalışmasını sağlamak için Package Manager'a \"Tüm dosyalara eriş\" izninin verilmesi gerekmektedir. Lütfen \"Yetkilendir\" butonuna bastıktan sonra açılan ekrandan bu izni veriniz."</string>
     <string name="grant">"Yetkilendir"</string>
     <string name="select_all">"Hepsini Seç"</string>
-    <string name="select_all_summary">"Bu sayfadaki bütün uygulamaları seçip toplu işlem listesine ekleyecek misiniz?"</string>
     <string name="uninstall_status_failed">"%s kaldırma işlemi başarısız oldu veya kullanıcı tarafından iptal edildi!"</string>
     <string name="export_apk_summary">"Seçilen APK dosyası '%s' içerisine çıkartıldı!"</string>
     <string name="initializing">"Hazırlanıyor…"</string>
@@ -167,23 +142,17 @@
     <string name="other">"Diğer"</string>
     <string name="restore">"Geri Yükle"</string>
     <string name="restore_message">"'%s' fabrika sürümüne geri yükleyecek misiniz?"</string>
-    <string name="restore_message_batch">"Aşağıdaki uygulamaları fabrika sürümüne geri yükleyecek misiniz?
-
-        %s"</string>
     <string name="restore_success_message">"Seçilen uygulamalar başarıyla fabrika sürümüne geri yüklendi!"</string>
     <string name="split_apk_installer_description">"Bölünmüş APK'ler (aynı paket adındaki çoklu APK dosyaları)"</string>
     <string name="uninstalled_apps">"Kaldırılan Uygulamalar"</string>
     <string name="user_interface">"Kullanıcı Arayüzü"</string>
     <string name="uninstall_updates_message">"'%s' yüklü bir güncellemesi ancak \"Kaldır\" butonuna basarak kolaylıkla kaldırılabilir."</string>
     <string name="close">"Kapat"</string>
-    <string name="bundle_install_question">"Seçilen toplu uygulama paketini yüklemek istediğine emin misiniz?"</string>
     <string name="preparing_message">"Hazırlanıyor…"</string>
-    <string name="save_to_downloads">"İndirilenler'e kaydet"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_compile">"SDK Derleme: %s"</string>
     <string name="sdk_minimum">"Minimum SDK: %s"</string>
     <string name="update">"Güncelle"</string>
-    <string name="reload">"Tekrar yükle"</string>
     <string name="disable_failed_message">"%s bileşeninin durumu değiştirilemedi."</string>
     <string name="never_show">"Bir daha gösterme"</string>
     <string name="request">"Talep"</string>

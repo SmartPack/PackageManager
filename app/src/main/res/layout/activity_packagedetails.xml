@@ -29,19 +29,23 @@
                 android:id="@+id/app_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
                 android:layout_gravity="start"
-                android:gravity="start"
                 android:textStyle="bold"
-                android:textSize="23sp" />
+                android:gravity="start"
+                android:textSize="23sp"
+                android:maxLines="1" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/version_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold|italic"
                 android:textIsSelectable="true"
                 android:layout_gravity="start"
                 android:gravity="start"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:maxLines="1" />
         </LinearLayout>
     </LinearLayout>
 

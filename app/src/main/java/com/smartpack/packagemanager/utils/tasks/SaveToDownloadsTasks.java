@@ -8,20 +8,19 @@
 
 package com.smartpack.packagemanager.utils.tasks;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Build;
-import android.os.Environment;
 
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.ExportSuccessDialog;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.FileUtils;
+import com.smartpack.packagemanager.utils.PackageData;
 
 import java.io.File;
 import java.io.IOException;
 
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 12, 2023
@@ -29,11 +28,14 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 public class SaveToDownloadsTasks extends sExecutor {
 
     private final Context mContext;
-    private static File mSource = null;
+    private File mParentFile;
+    private final File mSource;
+    private final String mPackageName;
     private static ProgressDialog mProgressDialog;
 
-    public SaveToDownloadsTasks(File source, Context context) {
+    public SaveToDownloadsTasks(File source, String packageName, Context context) {
         mSource = source;
+        mPackageName = packageName;
         mContext = context;
 
     }
@@ -41,36 +43,28 @@ public class SaveToDownloadsTasks extends sExecutor {
     @Override
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mContext);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
-        mProgressDialog.setTitle(R.string.app_name);
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setTitle(R.string.preparing_message);
         mProgressDialog.show();
     }
 
     @Override
     public void doInBackground() {
+        PackageData.makePackageFolder(mContext);
+        mParentFile = new File(PackageData.getPackageDir(mContext), mPackageName);
+        if (!mParentFile.exists()) {
+            sFileUtils.mkdir(mParentFile);
+        }
+        FileUtils FileUtils = new FileUtils(new File(mParentFile, mSource.getName()), mProgressDialog);
         try {
-            FileUtils FileUtils = new FileUtils(mSource.getAbsolutePath());
-            FileUtils.setProgress(mProgressDialog);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                FileUtils.copyToDownloads(mContext);
-            } else {
-                FileUtils.copy(new File(Environment.DIRECTORY_DOWNLOADS, mSource.getName()));
-            }
+            FileUtils.copy(mSource.getAbsolutePath());
         } catch (IOException ignored) {}
     }
 
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
-        try {
-            mProgressDialog.dismiss();
-        } catch (IllegalArgumentException ignored) {
-        }
-
-        sCommonUtils.toast(mSource.getName() + " " + mContext.getString(R.string.export_file_message,
-                Environment.DIRECTORY_DOWNLOADS), mContext).show();
+        mProgressDialog.dismiss();
+        new ExportSuccessDialog(new File(mParentFile, mSource.getName()).getAbsolutePath(), mContext);
     }
 
 }

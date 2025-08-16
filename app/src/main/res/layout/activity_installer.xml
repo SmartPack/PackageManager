@@ -12,7 +12,7 @@
             android:textSize="20sp"
             android:padding="10dp" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -29,7 +29,7 @@
                     android:scaleType="fitCenter"
                     android:background="@null" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -42,7 +42,7 @@
                             android:layout_gravity="center_vertical"
                             android:textSize="17sp" />
 
-                        <ProgressBar
+                        <androidx.core.widget.ContentLoadingProgressBar
                             android:id="@+id/progress"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
@@ -55,52 +55,42 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical" />
-                </LinearLayout>
-        </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_margin="15sp"
+            android:gravity="center" >
 
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="50dp"
-                    app:cardCornerRadius="15dp"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:text="@string/open"
+                    android:layout_marginEnd="10dp"
+                    app:icon="@drawable/ic_open"
                     android:visibility="gone"
-                    android:padding="10dp">
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:iconPadding="10sp"/>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:textStyle="bold|italic"
-                            android:text="@string/open"
-                            android:layout_margin="10dp"
-                            android:textSize="17sp" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/close"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="50dp"
-                    app:cardCornerRadius="15dp"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_marginStart="10dp"
+                    app:icon="@drawable/ic_cancel"
+                    android:text="@string/close"
+                    app:iconGravity="textEnd"
                     android:visibility="gone"
-                    android:padding="10dp">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:textStyle="bold|italic"
-                            android:text="@string/close"
-                            android:layout_margin="10dp"
-                            android:textSize="17sp" />
-                </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:iconPadding="10sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>

@@ -9,7 +9,8 @@
 package com.smartpack.packagemanager.utils;
 
 import android.content.Context;
-import android.os.Build;
+
+import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 
 import java.util.ArrayList;
 
@@ -25,11 +26,11 @@ public class AppOps {
         ArrayList<PermissionsItems> mData = new ArrayList<>();
         String[] appOpsList;
         if (new RootShell().rootAccess()) {
-            appOpsList = new RootShell().runAndGetOutput(getCommandPrefix() + " appops get " +
-                    Common.getApplicationID()).trim().split("\\r?\\n");
+            appOpsList = new RootShell().runAndGetOutput("cmd appops get " + Common.getApplicationID())
+                    .trim().split("\\r?\\n");
         } else {
-            appOpsList = new ShizukuShell().runAndGetOutput(getCommandPrefix() + " appops get " +
-                    Common.getApplicationID()).trim().split("\\r?\\n");
+            appOpsList = new ShizukuShell().runAndGetOutput("cmd appops get " + Common.getApplicationID())
+                    .trim().split("\\r?\\n");
         }
         for (String line : appOpsList) {
             String[] splitOp = line.split(":");
@@ -43,14 +44,6 @@ public class AppOps {
             }
         }
         return mData;
-    }
-
-    public static String getCommandPrefix() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return "cmd";
-        } else {
-            return  "";
-        }
     }
 
 }

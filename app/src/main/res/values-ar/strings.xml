@@ -3,13 +3,6 @@
     <string name="apk_path">"مسار APK"</string>
     <string name="app_info">"معلومات التطبيق"</string>
     <string name="batch_list_clear">"لائحة خالية"</string>
-    <string name="batch_list_disable">"هل أنت متأكد من تعطيل (إذا تم تمكين) أو تمكين (إذا تم تعطيل) التطبيق (التطبيقات) التالية؟"</string>
-    <string name="batch_list_remove">"هل أنت متأكد من إزالة التطبيق (التطبيقات) التالية؟"</string>
-    <string name="batch_list_reset">"هل أنت متأكد من إعادة تعيين التطبيق (التطبيقات) التالية؟"</string>
-    <string name="batch_list_summary">"تمت إضافة التطبيقات التالية إلى قائمة الدُفعات"</string>
-    <string name="batch_processing">"جاري معالجة الدُفعات"</string>
-    <string name="batch_processing_finished">"اكتملت معالجة الدُفعات"</string>
-    <string name="batch_processing_initialized">"جارٍ بدء العملية المجمّعة"</string>
     <string name="batch_warning">"ستتم إزالة إعدادات الدُفعات الخاصة بك. هل أنت متأكد؟"</string>
     <string name="billing_client_disconnected">"فشل الاتصال بعميل Google Play Billing"</string>
     <string name="bundle_install_apks">"هل أنت متأكد من تثبيت حزمة التطبيقات '٪ s'؟"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"تعطيل"</string>
     <string name="disabled">"معاق"</string>
     <string name="disabling">"تعطيل٪ s"</string>
-    <string name="done">"فعله"</string>
     <string name="enable">"يُمكَِن"</string>
     <string name="enabled">"ممكن"</string>
     <string name="enabling">"تمكين٪ s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"تم تصدير حزمة التطبيق بالكامل إلى٪ s"</string>
     <string name="exporting">"تصدير٪ s"</string>
     <string name="exporting_bundle">"تصدير حزمة تطبيقات٪ s"</string>
-    <string name="everything_done">"كل شئ جاهز"</string>
     <string name="failed">"باءت بالفشل"</string>
     <string name="got_it">"فهمتك"</string>
     <string name="install">"تثبيت"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"إعادة تعيين '٪ s'؟"</string>
     <string name="reset_summary">"إعادة تعيين٪ s"</string>
     <string name="result">"نتائج"</string>
-    <string name="search">"يبحث…"</string>
     <string name="share">"يشارك"</string>
     <string name="shared_by">"٪ s / مشترك بواسطة إدارة الحزم"</string>
     <string name="share_message">"يمكن الحصول على إدارة الحزم٪ s من
@@ -63,18 +53,8 @@
     <string name="sort_by">"فرز التطبيقات"</string>
     <string name="source_code">"مصدر الرمز"</string>
     <string name="support">"مجموعة الدعم"</string>
-    <string name="support_acknowledged">"تم الإقرار بالتبرع \ u2665"</string>
-    <string name="support_app">"شراء تطبيق التبرع"</string>
     <string name="support_development">"تطوير الدعم"</string>
     <string name="support_development_summary">"إذا كنت ترغب في تقدير جهود المطور لتوفير هذه الأداة مجانًا تمامًا ، فيرجى التفكير في إرسال تبرع صغير من خلال النقر فوق واحد من بين الخيارات المتوفرة أدناه. شراء أي من هذا المنتج يمنحك شارة الداعم هنا."</string>
-    <string name="support_dinner">"اشتري لي عشاء"</string>
-    <string name="support_meal">"اشتري لي وجبة"</string>
-    <string name="support_coffee">"اشتري لي قهوة"</string>
-    <string name="support_already_received_message">"لقد سبق لك دعم التطوير باستخدام هذا العنصر من قبل"</string>
-    <string name="support_received_message">"شكرًا جزيلاً على دعمك \ u2665
-        سيحفزني ذلك كثيرًا لمواصلة مشاريعي بشكل أكثر نشاطًا. علاوة على ذلك ، ستحصل على شارة مؤيد أعلى هذه الصفحة."</string>
-    <string name="support_retry_message">"يرجى محاولة الشراء مرة أخرى"</string>
-    <string name="support_status_message">"شكرا جزيلا لدعمكم"</string>
     <string name="sure_question">"هل أنت واثق؟"</string>
     <string name="turn_on_off">"تشغيل / ايقاف"</string>
     <string name="uninstall">"الغاء التثبيت"</string>
@@ -85,14 +65,11 @@
 
         *** <b> استخدمه على مسؤوليتك الخاصة </b> ***
         "</string>
-    <string name="version">"الإصدار:٪ s"</string>
     <string name="welcome_message">"مرحبًا بك في Package Manager ، تطبيق بسيط ولكنه قوي لإدارة تطبيقاتك."</string>
     <string name="wrong_extension">"الرجاء تحديد ملف بملحق٪ s."</string>
     <string name="yes">"نعم"</string>
     <string name="explore">"يكتشف"</string>
-    <string name="export_file_message">"تم تصديره بنجاح إلى٪ s"</string>
     <string name="export_storage_message">"هل تريد تصدير٪ s إلى مساحة تخزين الجهاز؟"</string>
-    <string name="file_picker_message">"يرجى ملاحظة: هذه الميزة تجريبية للغاية"</string>
     <string name="more_apps_summary">"تحقق من المزيد من التطبيقات التي يقدمها المطور في Google Play"</string>
     <string name="open_failed_export_message">"غير قادر على فتح٪ s. هل تريد تصديره إلى وحدة تخزين الجهاز؟"</string>
     <string name="rate_us">"قيم التطبيق"</string>
@@ -105,7 +82,6 @@
     <string name="support_summary">"انضم إلى مجموعة دعم Telegram"</string>
     <string name="batch_options">"خيارات الدفعة (٪ s)"</string>
     <string name="batch_list_added">"تمت إضافة٪ s إلى قائمة الدُفعات"</string>
-    <string name="batch_list_export">"هل أنت متأكد من تصدير التطبيق (التطبيقات) التالية إلى مساحة تخزين الجهاز؟"</string>
     <string name="batch_list_removed">"تمت إزالة٪ s من قائمة الدُفعات"</string>
     <string name="explore_error_status">"فشل استكشاف٪ s"</string>
     <string name="split_apk">"تقسيم ملفات APK"</string>
@@ -136,10 +112,8 @@
     <string name="bundle_path">"مسار الحزمة"</string>
     <string name="size_apk">"حجم APK:٪ s"</string>
     <string name="size_bundle">"حجم الحزمة:٪ s"</string>
-    <string name="file_permission_request_message">"لكي تعمل هذه الميزة على إصدارات Android الأحدث (Android R أو الأحدث) ، من الضروري منح إذن \"الوصول إلى جميع الملفات\" لمدير الحزم. يرجى منح الإذن يدويًا من الشاشة الجديدة المفتوحة بعد النقر فوق الزر \"منح\"."</string>
     <string name="grant">"منحة"</string>
     <string name="select_all">"اختر الكل"</string>
-    <string name="select_all_summary">"حدد وأضف جميع التطبيقات من هذه الصفحة إلى قائمة الدُفعات؟"</string>
     <string name="uninstall_status_failed">"فشل إلغاء تثبيت٪ s أو تم إلغاؤه من قبل المستخدم"</string>
     <string name="export_apk_summary">"تم تصدير ملف APK المحدد إلى '٪ s'"</string>
     <string name="initializing">"جار تهيئة…"</string>
@@ -169,23 +143,17 @@
     <string name="other">"آخر"</string>
     <string name="restore">"يعيد"</string>
     <string name="restore_message">"هل تريد استعادة إصدار المصنع لـ '٪ s'؟"</string>
-    <string name="restore_message_batch">"هل تريد استعادة إصدارات المصنع للتطبيقات التالية؟
-
-            ٪س"</string>
     <string name="restore_success_message">"تمت استعادة إصدار المصنع من التطبيق (التطبيقات) المحدد بنجاح"</string>
     <string name="split_apk_installer_description">"تقسيم ملفات APK (ملفات APK متعددة بنفس اسم الحزمة)"</string>
     <string name="uninstalled_apps">"تطبيقات غير مثبتة"</string>
     <string name="user_interface">"واجهة المستخدم"</string>
     <string name="uninstall_updates_message">"تم تثبيت تحديث محلي لـ '٪ s' ، مع ذلك ، يمكن إزالته بحرية بالنقر فوق الزر \"إلغاء التثبيت\"."</string>
     <string name="close">"قريب"</string>
-    <string name="bundle_install_question">"هل أنت متأكد من تثبيت حزمة التطبيق المحددة؟"</string>
     <string name="preparing_message">"خطة…"</string>
-    <string name="save_to_downloads">"حفظ في التنزيلات"</string>
     <string name="android_version">"Android٪ s"</string>
     <string name="sdk_compile">"تجميع SDK:٪ s"</string>
     <string name="sdk_minimum">"الحد الأدنى من SDK:٪ s"</string>
     <string name="update">"تحديث"</string>
-    <string name="reload">"إعادة تحميل"</string>
     <string name="disable_failed_message">"فشل تغيير حالة المكون لـ٪ s."</string>
     <string name="never_show">"لا تظهر أبدا"</string>
     <string name="request">"طلب"</string>

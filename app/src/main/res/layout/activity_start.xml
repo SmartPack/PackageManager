@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,11 +20,12 @@
             android:layout_margin="15dp"
             android:gravity="center" />
 
-        <ProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress"
             android:layout_width="175dp"
             android:layout_height="20dp"
             style="?android:attr/progressBarStyleHorizontal"
+            android:progressTint="?attr/colorPrimary"
             android:layout_gravity="center"
             android:indeterminate="true"
             android:paddingStart="15dp"
@@ -35,13 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_message"
-            android:textStyle="italic"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold|italic"
             android:visibility="gone"
             android:gravity="center"
             android:textSize="17sp"
             android:padding="10dp" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/layout_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,71 +53,30 @@
             android:layout_marginTop="50dp"
             android:visibility="gone" >
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/documentation_card"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/documentation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="15dp" >
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:text="@string/documentation"
+                android:layout_marginEnd="10dp"
+                app:icon="@drawable/ic_book"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                app:iconPadding="10sp"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center" >
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_book"
-                        android:layout_marginStart="5dp"
-                        android:background="@null"
-                        android:clickable="false"
-                        android:rotation="180" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/documentation"
-                        android:textStyle="bold|italic"
-                        android:clickable="false"
-                        android:textSize="16sp"
-                        android:padding="10dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/start_card"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="15dp" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center" >
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold|italic"
-                        android:text="@string/start"
-                        android:clickable="false"
-                        android:textSize="16sp"
-                        android:padding="10dp" />
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_back"
-                        android:layout_marginEnd="5dp"
-                        android:background="@null"
-                        android:clickable="false"
-                        android:rotation="180" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-    </LinearLayout>
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_marginStart="10dp"
+                app:icon="@drawable/ic_start"
+                android:text="@string/start"
+                app:iconGravity="textEnd"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                app:iconPadding="10sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

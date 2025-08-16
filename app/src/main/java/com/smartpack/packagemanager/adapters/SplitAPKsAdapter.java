@@ -8,6 +8,9 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
@@ -38,10 +42,12 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
 
     private static List<String> data;
     private final Activity activity;
+    private static boolean batch = false;
 
     public SplitAPKsAdapter(List<String> data, Activity activity) {
         SplitAPKsAdapter.data = data;
         this.activity = activity;
+        batch = !Common.getRestoreList().isEmpty();
     }
 
     @NonNull
@@ -62,6 +68,23 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         }
+
+        holder.mExport.setVisibility(batch ? GONE : VISIBLE);
+        holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
+
+        holder.mCheckBox.setChecked(Common.getRestoreList().contains(data.get(position)));
+
+        activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+
+        holder.mCheckBox.setOnClickListener(v -> {
+            if (Common.getRestoreList().contains(data.get(position))) {
+                Common.getRestoreList().remove(data.get(position));
+            } else {
+                Common.getRestoreList().add(data.get(position));
+            }
+            notifyItemChanged(position);
+        });
+
         holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
                 .setIcon(R.mipmap.ic_launcher)
                 .setTitle(R.string.app_name)
@@ -70,7 +93,7 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
                 })
                 .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
                         PackageExplorer.copyToStorage(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                                .getContext()) + "/" + data.get(position), activity)
+                                .getContext()) + "/" + data.get(position), Common.getApplicationID(), activity)
                 ).show()
         );
     }
@@ -80,17 +103,43 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
         return data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatImageButton mIcon;
         private final MaterialButton mExport;
+        private final MaterialCheckBox mCheckBox;
         private final MaterialTextView mName, mSize;
 
         public ViewHolder(View view) {
             super(view);
             this.mExport = view.findViewById(R.id.export);
             this.mIcon = view.findViewById(R.id.icon);
+            this.mCheckBox = view.findViewById(R.id.checkbox);
             this.mName = view.findViewById(R.id.name);
             this.mSize = view.findViewById(R.id.size);
+
+            view.setOnClickListener(v -> {
+                if (batch) {
+                    if (Common.getRestoreList().contains(data.get(getAdapterPosition()))) {
+                        Common.getRestoreList().remove(data.get(getAdapterPosition()));
+                    } else {
+                        Common.getRestoreList().add(data.get(getAdapterPosition()));
+                    }
+                    notifyItemRangeChanged(0, getItemCount());
+                }
+            });
+
+            view.setOnLongClickListener(v -> {
+                if (batch) {
+                    Common.getRestoreList().clear();
+                    batch = false;
+                } else {
+                    batch = true;
+                    Common.getRestoreList().add(data.get(getAdapterPosition()));
+                }
+                activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                notifyItemRangeChanged(0, getItemCount());
+                return true;
+            });
         }
     }
 

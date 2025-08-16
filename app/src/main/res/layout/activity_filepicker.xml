@@ -5,12 +5,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -38,7 +38,7 @@
                     app:layout_constraintTop_toTopOf="@id/back"
                     app:layout_constraintEnd_toStartOf="@id/sort"
                     app:layout_constraintStart_toEndOf="@id/back"
-                    android:text="@string/credits_summary"
+                    android:textColor="?attr/colorPrimary"
                     android:layout_marginStart="60dp"
                     android:layout_marginEnd="60dp"
                     android:gravity="center"
@@ -57,7 +57,7 @@
                     app:icon="@drawable/ic_sort" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ProgressBar
+            <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/progress"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -67,49 +67,27 @@
                 android:layout_gravity="center"
                 android:indeterminate="true"
                 android:visibility="gone" />
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <include layout="@layout/layout_recyclerview" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <include layout="@layout/permission_view_layout" />
 
-    <com.google.android.material.card.MaterialCardView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="50dp"
         android:layout_marginEnd="75dp"
+        app:icon="@drawable/ic_select"
+        android:text="@string/select"
         app:cardCornerRadius="15dp"
-        android:visibility="gone" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp" >
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:gravity="center_vertical"
-                android:src="@drawable/ic_select"
-                android:background="@null"
-                android:clickable="false" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="center_vertical"
-                android:layout_marginEnd="10dp"
-                android:text="@string/select"
-                android:clickable="false"
-                android:textStyle="bold"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        app:iconPadding="5sp"/>
 </RelativeLayout>

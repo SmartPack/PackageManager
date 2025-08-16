@@ -21,6 +21,7 @@
                             android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="?attr/colorPrimary"
                             android:textIsSelectable="false"
                             android:textStyle="bold"
                             android:gravity="start"
@@ -55,31 +56,17 @@
                             android:gravity="start" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/action_layout"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="end"
-                    android:orientation="vertical"
-                    android:visibility="gone" >
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/action_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            style="?attr/materialIconButtonFilledTonalStyle"
-                            android:clickable="false" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/action_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:layout_gravity="center_horizontal"
-                            android:textIsSelectable="true"
-                            android:textSize="12sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_gravity="center|end"
+                    app:iconGravity="textTop"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    app:iconSize="24sp" />
         </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -1,25 +1,14 @@
-<androidx.appcompat.widget.LinearLayoutCompat
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/icon"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    style="?attr/materialIconButtonFilledTonalStyle"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@android:color/transparent"
+    android:textColor="?attr/colorPrimary"
     android:layout_gravity="center"
-    android:orientation="vertical"
-    android:layout_margin="3dp"
-    android:gravity="center" >
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:clickable="false" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textIsSelectable="false"
-            android:clickable="false"
-            android:textStyle="bold"
-            android:textSize="12sp" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+    app:iconGravity="textTop"
+    android:gravity="center"
+    android:textSize="12sp"
+    app:iconSize="24sp" />

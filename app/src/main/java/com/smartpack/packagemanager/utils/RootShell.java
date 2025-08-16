@@ -37,7 +37,7 @@ public class RootShell {
      * Ref: https://github.com/SmartPack/SmartPack-Kernel-Manager/blob/beta/app/src/main/java/com/smartpack/kernelmanager/utils/root/RootUtils.java
      */
     public boolean rootAccess() {
-        return Shell.rootAccess();
+        return Shell.getShell().isRoot();
     }
 
     private static String removeSuffix(@Nullable String s) {

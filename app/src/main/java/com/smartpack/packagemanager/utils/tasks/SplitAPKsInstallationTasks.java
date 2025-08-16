@@ -36,8 +36,8 @@ public class SplitAPKsInstallationTasks extends sExecutor {
     }
 
     private static long getTotalSize() {
-        int totalSize = 0;
-        if (Common.getAppList().size() > 0) {
+        long totalSize = 0;
+        if (!Common.getAppList().isEmpty()) {
             for (String string : Common.getAppList()) {
                 if (sFileUtils.exist(new File(string))) {
                     File mFile = new File(string);

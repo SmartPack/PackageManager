@@ -32,7 +32,7 @@ import com.smartpack.packagemanager.adapters.SettingsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.Billing;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.SettingsItems;
+import com.smartpack.packagemanager.utils.SerializableItems.SettingsItems;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
@@ -61,11 +61,11 @@ public class SettingsFragment extends Fragment {
         MaterialTextView mCopyright = mRootView.findViewById(R.id.copyright);
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
 
-        Common.getView(requireActivity(), R.id.fab).setVisibility(View.GONE);
+        requireActivity().findViewById(R.id.fab).setVisibility(View.GONE);
 
-        mAppTitle.setText(getString(R.string.app_name) + (Utils.isProUser(requireActivity()) ? " Pro " :  " ") + BuildConfig.VERSION_NAME);
+        mAppTitle.setText(getString(R.string.version, Billing.getAppVersion()));
         mAppTitle.setTextColor(sThemeUtils.isDarkTheme(requireActivity()) ? Color.WHITE : Color.BLACK);
-        mCopyright.setText(getString(R.string.copyright, "2024-2025, sunilpaulmathew"));
+        mCopyright.setText(getString(R.string.copyright, getString(R.string.copyright_text)));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         SettingsAdapter mRecycleViewAdapter = new SettingsAdapter(mData);
@@ -109,7 +109,7 @@ public class SettingsFragment extends Fragment {
                 "https://smartpack.github.io/PackageManager/change-logs/", false, 18));
         mData.add(new SettingsItems(getString(R.string.share_app), getString(R.string.share_app_Summary), sCommonUtils.getDrawable(R.drawable.ic_share, requireActivity()), null, false, 18));
         mData.add(new SettingsItems(getString(R.string.rate_us), getString(R.string.rate_us_Summary), sCommonUtils.getDrawable(R.drawable.ic_rate, requireActivity()),
-                "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager", false, 18));
+                "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" + Billing.getPackageExt(), false, 18));
         mData.add(new SettingsItems(getString(R.string.credits), getString(R.string.credits_summary), sCommonUtils.getDrawable(R.drawable.ic_credits, requireActivity()),null, false, 18));
 
         mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
@@ -205,7 +205,7 @@ public class SettingsFragment extends Fragment {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                share_app.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, BuildConfig.VERSION_NAME));
+                share_app.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, Billing.getAppVersion()) + Billing.getPackageExt());
                 share_app.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(share_app, getString(R.string.share_with));
                 startActivity(shareIntent);
@@ -213,10 +213,9 @@ public class SettingsFragment extends Fragment {
                 new sCreditsUtils(AppSettings.getCredits(),
                         sCommonUtils.getDrawable(R.mipmap.ic_launcher, requireActivity()),
                         sCommonUtils.getDrawable(R.drawable.ic_back, requireActivity()),
-                        sCommonUtils.getColor(sThemeUtils.isDarkTheme(requireActivity()) ?
-                                R.color.colorWhite : R.color.colorBlack, requireActivity()),
-                        20, getString(R.string.app_name), "2024-2025, sunilpaulmathew",
-                        BuildConfig.VERSION_NAME).launchCredits(v.getContext()
+                        Utils.getColor(R.attr.colorPrimary, requireActivity()),
+                        25, getString(R.string.app_name), getString(R.string.copyright_text),
+                        Billing.getAppVersion()).launchCredits(v.getContext()
                 );
             }
         });

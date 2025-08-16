@@ -1,32 +1,21 @@
-<LinearLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     android:id="@+id/progress_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="?android:attr/colorBackground"
+    android:layout_gravity="center"
     android:orientation="vertical"
-    android:visibility="gone"
+    android:layout_margin="25sp"
     android:gravity="center"
-    android:alpha="0.75" >
+    android:padding="10dp" >
 
-    <ProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
+        android:progressTint="?attr/colorPrimary"
         android:layout_gravity="center"
-        android:indeterminate="true" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/progress_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:visibility="gone"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="20sp" />
-</LinearLayout>
+        android:indeterminate="true"
+        android:layout_margin="10dp" />
+</androidx.appcompat.widget.LinearLayoutCompat>

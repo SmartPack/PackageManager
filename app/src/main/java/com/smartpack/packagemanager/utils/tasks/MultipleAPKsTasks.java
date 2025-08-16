@@ -9,12 +9,12 @@
 package com.smartpack.packagemanager.utils.tasks;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ClipData;
 
 import androidx.documentfile.provider.DocumentFile;
 
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.Common;
 
 import java.io.File;
@@ -45,7 +45,6 @@ public class MultipleAPKsTasks extends sExecutor {
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setMessage(mActivity.getString(R.string.preparing_message));
-        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
         sFileUtils.delete(mActivity.getExternalFilesDir("APK"));
         Common.getAppList().clear();
@@ -75,10 +74,7 @@ public class MultipleAPKsTasks extends sExecutor {
 
     @Override
     public void onPostExecute() {
-        try {
-            mProgressDialog.dismiss();
-        } catch (IllegalArgumentException ignored) {
-        }
+        mProgressDialog.dismiss();
         new SplitAPKsInstallationTasks(mActivity).execute();
     }
 

@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.adapters;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.SettingsItems;
+import com.smartpack.packagemanager.utils.SerializableItems.SettingsItems;
+import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
-
-import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
@@ -56,19 +54,22 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             holder.mDivider.setVisibility(View.GONE);
         }
         holder.mTitle.setTextSize(data.get(position).getSize());
+        if (data.get(position).getDescription() == null && data.get(position).getIcon() == null) {
+            holder.mTitle.setTextColor(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
+        } else {
+            holder.mTitle.setTextColor(Utils.getColor(R.attr.colorPrimary, holder.mTitle.getContext()));
+        }
         if (data.get(position).getDescription() != null) {
             holder.mDescription.setText(data.get(position).getDescription());
             holder.mDescription.setVisibility(View.VISIBLE);
-            holder.mDescription.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+            holder.mDescription.setTextColor(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
         } else {
             holder.mDescription.setVisibility(View.GONE);
         }
         if (data.get(position).getIcon() != null) {
             holder.mIcon.setImageDrawable(data.get(position).getIcon());
+            holder.mIcon.setColorFilter(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
             holder.mIcon.setVisibility(View.VISIBLE);
-            if (!sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
-                holder.mIcon.setColorFilter(Color.BLACK);
-            }
         } else {
             holder.mIcon.setVisibility(View.GONE);
         }

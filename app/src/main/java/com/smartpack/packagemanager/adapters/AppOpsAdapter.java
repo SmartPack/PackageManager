@@ -19,10 +19,9 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.AppOps;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PermissionsItems;
 import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
 import java.util.ArrayList;
@@ -68,10 +67,10 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
                         }).show();
             } else {
                 if (new RootShell().rootAccess()) {
-                    new RootShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
+                    new RootShell().runCommand("cmd appops set " + Common.getApplicationID() + " " +
                             data.get(position).getTitle() + (data.get(position).isGranted() ? " deny" : " allow"));
                 } else {
-                    new ShizukuShell().runCommand(AppOps.getCommandPrefix() + " appops set " + Common.getApplicationID() + " " +
+                    new ShizukuShell().runCommand("cmd appops set " + Common.getApplicationID() + " " +
                             data.get(position).getTitle() + (data.get(position).isGranted() ? " deny" : " allow"));
                 }
             }

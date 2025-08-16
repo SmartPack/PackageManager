@@ -10,11 +10,8 @@ package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 
 import java.util.ArrayList;
@@ -25,7 +22,7 @@ import java.util.List;
  */
 public class Common {
 
-    private static boolean mAPKPicker = false, mReloadPage = false, mRunning = false,
+    private static boolean mAPKPicker = false, mReloadPage = false,
             mSystemApp = false, mUninstall = false, mUpdating = false;
 
     private static CharSequence mApplicationName;
@@ -35,8 +32,6 @@ public class Common {
     private static final List<String> mAPKList = new ArrayList<>(), mBatchList = new ArrayList<>(), mRestoreList = new ArrayList<>();
 
     private static String mApplicationID, mDirData, mDirNatLib, mDirSource, mPath, mSearchText;
-
-    private static final StringBuilder mOutput = new StringBuilder();
 
     public static boolean isAPKPicker() {
         return mAPKPicker;
@@ -56,10 +51,6 @@ public class Common {
 
     public static boolean reloadPage() {
         return mReloadPage;
-    }
-
-    public static boolean isRunning() {
-        return mRunning;
     }
 
     public static boolean isTextMatched(String searchText) {
@@ -103,10 +94,6 @@ public class Common {
         return mSearchText;
     }
 
-    public static StringBuilder getOutput() {
-        return mOutput;
-    }
-
     public static List<String> getAppList() {
         return mAPKList;
     }
@@ -119,28 +106,12 @@ public class Common {
         return mRestoreList;
     }
 
-    public static MaterialCardView getCardView(Activity activity, int id) {
-        return activity.findViewById(id);
-    }
-
-    public static MaterialTextView getTextView(Activity activity, int id) {
-        return activity.findViewById(id);
-    }
-
-    public static View getView(Activity activity, int id) {
-        return activity.findViewById(id);
-    }
-
     public static void reloadPage(boolean b) {
         mReloadPage = b;
     }
 
     public static void isAPKPicker(boolean b) {
         mAPKPicker = b;
-    }
-
-    public static void isRunning(boolean b) {
-        mRunning = b;
     }
 
     public static void isSystemApp(boolean b) {

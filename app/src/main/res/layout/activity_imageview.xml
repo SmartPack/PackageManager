@@ -6,25 +6,35 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        android:gravity="top|center_vertical"
+        android:paddingBottom="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp" >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="80dp"
+            style="@style/AppTheme.Title" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/export"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             style="?attr/materialIconButtonFilledTonalStyle"
-            android:layout_marginEnd="10dp"
-            app:icon="@drawable/ic_export"
-            android:layout_gravity="end" />
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_gravity="center|end"
+            app:iconTint="?attr/colorPrimary"
+            android:layout_marginStart="85dp"
+            app:icon="@drawable/ic_download"
+            android:layout_marginEnd="5dp"
+            android:gravity="center" />
+    </FrameLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -35,7 +45,7 @@
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:padding="10dp" />
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

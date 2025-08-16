@@ -3,13 +3,6 @@
     <string name="apk_path">"Ścieżka APK"</string>
     <string name="app_info">"Informacje"</string>
     <string name="batch_list_clear">"Wyczyść listę"</string>
-    <string name="batch_list_disable">"Czy na pewno wyłączyć (jeśli włączone) lub włączyć (jeśli wyłączone) następujące aplikacje?"</string>
-    <string name="batch_list_remove">"Czy na pewno odinstalować następujące aplikacje?"</string>
-    <string name="batch_list_reset">"Czy na pewno zresetować następujące aplikacje?"</string>
-    <string name="batch_list_summary">"Następujące aplikacje zostały dodane do listy wsadowej:"</string>
-    <string name="batch_processing">"Przetwarzanie wsadowe w toku"</string>
-    <string name="batch_processing_finished">"Przetwarzanie wsadowe zakończone"</string>
-    <string name="batch_processing_initialized">"Inicjowanie procesu wsadowego"</string>
     <string name="batch_warning">"Twoje ustawienia wsadu zostaną usunięte. Czy na pewno?"</string>
     <string name="billing_client_disconnected">"Nie udało się połączyć z klientem rozliczeń Google Play"</string>
     <string name="bundle_install_apks">"Czy na pewno zainstalować paczkę aplikacji „%s”?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Wyłącz"</string>
     <string name="disabled">"wyłączony"</string>
     <string name="disabling">"Wyłączanie %s"</string>
-    <string name="done">"Zrobione"</string>
     <string name="enable">"Włącz"</string>
     <string name="enabled">"włączony"</string>
     <string name="enabling">"Włączanie %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Cała paczka aplikacji została wyeksportowana do %s"</string>
     <string name="exporting">"Eksportowanie %s"</string>
     <string name="exporting_bundle">"Eksportowanie paczki aplikacji %s"</string>
-    <string name="everything_done">"Wszystko zrobione"</string>
     <string name="failed">"Nieudane"</string>
     <string name="got_it">"Rozumiem"</string>
     <string name="install">"Zainstaluj"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Czy zresetować „%s”?"</string>
     <string name="reset_summary">"Resetowanie %s"</string>
     <string name="result">"Rezultat: %s"</string>
-    <string name="search">"Szukaj…"</string>
     <string name="share">"Udostępnij"</string>
     <string name="shared_by">"%s/udostępniony przez Package Manager"</string>
     <string name="share_message">"Package Manager %s można pobrać z Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,18 +52,8 @@
     <string name="sort_by">"Sortuj aplikacje"</string>
     <string name="source_code">"Kod źródłowy"</string>
     <string name="support">"Grupa wsparcia"</string>
-    <string name="support_acknowledged">"Darowizna przyjęta \u2665"</string>
-    <string name="support_app">"Kup aplikację Donation"</string>
     <string name="support_development">"Wesprzyj rozwój"</string>
     <string name="support_development_summary">"Jeśli chcesz docenić wkład programisty w stworzenie tego narzędzia całkowicie za darmo, rozważ małe wsparcie przez naciśnięcie jednej z poniżej dostępnych opcji. Za zakup któregokolwiek z tych produktów otrzymasz tutaj odznakę wspierającego."</string>
-    <string name="support_dinner">"Postaw mi obiad"</string>
-    <string name="support_meal">"Postaw mi posiłek"</string>
-    <string name="support_coffee">"Postaw mi kawę"</string>
-    <string name="support_already_received_message">"Już wcześniej wsparłeś(-aś) rozwój w ten sposób"</string>
-    <string name="support_received_message">"Bardzo dziękuję za wsparcie \u2665
-        To mnie zmotywuje do kontynuowania moich projektów jeszcze bardziej aktywnie. Ponadto na górze tej strony otrzymasz odznakę wspierającego."</string>
-    <string name="support_retry_message">"Proszę spróbować zakupić ponownie"</string>
-    <string name="support_status_message">"Bardzo dziękuję za wsparcie"</string>
     <string name="sure_question">"Czy na pewno?"</string>
     <string name="turn_on_off">"Włącz/Wyłącz"</string>
     <string name="uninstall">"Odinstaluj"</string>
@@ -84,14 +64,11 @@
 
         *** <b>ROBISZ TO NA WŁASNE RYZYKO</b> ***
         "</string>
-    <string name="version">"Wersja: %s"</string>
     <string name="welcome_message">"Witaj w Package Manager, prostej, ale potężnej aplikacji do zarządzania Twoimi aplikacjami."</string>
     <string name="wrong_extension">"Wybierz plik z rozszerzeniem %s."</string>
     <string name="yes">"Tak"</string>
     <string name="explore">"Przeglądaj"</string>
-    <string name="export_file_message">"został wyeksportowany do %s"</string>
     <string name="export_storage_message">"Czy wyeksportować %s do pamięci urządzenia?"</string>
-    <string name="file_picker_message">"Uwaga: Ta funkcja jest zbyt eksperymentalna"</string>
     <string name="more_apps_summary">"Sprawdź więcej aplikacji programisty w Google Play"</string>
     <string name="open_failed_export_message">"Nie można otworzyć %s. Czy chcesz wyeksportować go do pamięci urządzenia?"</string>
     <string name="rate_us">"Oceń aplikację"</string>
@@ -104,7 +81,6 @@
     <string name="support_summary">"Dołącz do grupy wsparcia na Telegramie"</string>
     <string name="batch_options">"Opcje wsadowe (%s)"</string>
     <string name="batch_list_added">"%s został dodany do listy wsadowej"</string>
-    <string name="batch_list_export">"Czy na pewno wyeksportować następujące aplikacje do pamięci urządzenia?"</string>
     <string name="batch_list_removed">"%s został usunięty z listy wsadowej"</string>
     <string name="explore_error_status">"Nie udało się przejrzeć %s"</string>
     <string name="split_apk">"Podzielone APK"</string>
@@ -135,10 +111,8 @@
     <string name="bundle_path">"Ścieżka paczki"</string>
     <string name="size_apk">"Rozmiar APK: %s"</string>
     <string name="size_bundle">"Rozmiar paczki: %s"</string>
-    <string name="file_permission_request_message">"Aby ta funkcja działała na nowszych wersjach Androida (Android R lub nowszy), konieczne jest przyznanie uprawnienia „Dostęp do wszystkich plików” dla Package Manager. Powinieneś/Powinnaś przyznać uprawnienie ręcznie z nowo otwartego ekranu po naciśnięciu przycisku „Przyznaj”."</string>
     <string name="grant">"Przyznaj"</string>
     <string name="select_all">"Wybierz wszystkie"</string>
-    <string name="select_all_summary">"Czy wybrać i dodać wszystkie aplikacje z tej strony do listy wsadowej?"</string>
     <string name="uninstall_status_failed">"Odinstalowywanie %s nie powiodło się albo zostało anulowane przez użytkownika"</string>
     <string name="export_apk_summary">"Wybrane APK zostało wyeksportowane do „%s”"</string>
     <string name="initializing">"Inicjowanie…"</string>
@@ -168,23 +142,17 @@
     <string name="other">"Inne"</string>
     <string name="restore">"Przywróć"</string>
     <string name="restore_message">"Czy przywrócić ustawienia fabryczne „%s”?"</string>
-    <string name="restore_message_batch">"Czy przywrócić ustawienia fabryczne następujących aplikacji?
-
-        %s"</string>
     <string name="restore_success_message">"Przywrócono ustawienia fabryczne wybranej/wybranych aplikacji"</string>
     <string name="split_apk_installer_description">"Podzielone APK (wiele plików APK z tą samą nazwą pakietu)"</string>
     <string name="uninstalled_apps">"Odinstalowane aplikacje"</string>
     <string name="user_interface">"Interfejs użytkownika"</string>
     <string name="uninstall_updates_message">"Zainstalowana jest jednak lokalna aktualizacja „%s”, którą można swobodnie usunąć, naciskając przycisk „Odinstaluj”."</string>
     <string name="close">"Zamknij"</string>
-    <string name="bundle_install_question">"Czy na pewno zainstalować wybraną paczkę aplikacji?"</string>
     <string name="preparing_message">"Przygotowywanie…"</string>
-    <string name="save_to_downloads">"Zapisz w Pobranych"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_compile">"SDK kompilacji: %s"</string>
     <string name="sdk_minimum">"Minimalne SDK: %s"</string>
     <string name="update">"Zaktualizuj"</string>
-    <string name="reload">"Odśwież"</string>
     <string name="disable_failed_message">"Nie udało się zmienić stanu komponentu %s"</string>
     <string name="never_show">"Nigdy nie pokazuj"</string>
     <string name="request">"Przyznaj"</string>

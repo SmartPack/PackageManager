@@ -3,13 +3,6 @@
     <string name="apk_path">"Pfad zur APK"</string>
     <string name="app_info">"Appinformationen"</string>
     <string name="batch_list_clear">"Liste löschen"</string>
-    <string name="batch_list_disable">"Sind Sie sicher, dass Sie die folgende(n) App(s) deaktivieren (falls aktiviert) oder aktivieren (falls deaktiviert) wollen?"</string>
-    <string name="batch_list_remove">"Sind Sie sicher, dass Sie die folgende(n) App(s) entfernen wollen?"</string>
-    <string name="batch_list_reset">"Sind Sie sicher, dass Sie die folgende(n) App(s) zurücksetzen wollen?"</string>
-    <string name="batch_list_summary">"Die folgenden Anwendungen werden in den Stapel aufgenommen"</string>
-    <string name="batch_processing">"Stapelverarbeitung im Gange!"</string>
-    <string name="batch_processing_finished">"Stapelverarbeitung abgeschlossen!"</string>
-    <string name="batch_processing_initialized">"Starte Stapelverarbeitung"</string>
     <string name="batch_warning">"Ihre Stapeleinstellungen werden entfernt! Fortfahren?"</string>
     <string name="billing_client_disconnected">"Verbindung mit Google Play fehlgeschlagen!"</string>
     <string name="bundle_install_apks">"Sind Sie sich sicher, das App-Bunde \"%s\" zu installieren?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Deaktivieren"</string>
     <string name="disabled">"deaktiviert"</string>
     <string name="disabling">"Deaktiviere %s"</string>
-    <string name="done">"Fertig"</string>
     <string name="enable">"Einschalten"</string>
     <string name="enabled">"eingeschaltet"</string>
     <string name="enabling">"Schalte %s ein"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Das gesamte App-Bundle wird nach %s exportiert!"</string>
     <string name="exporting">"Exportiere %s"</string>
     <string name="exporting_bundle">"Exportiere App-Bundle %s"</string>
-    <string name="everything_done">"Alle Vorgänge abgeschlossen!"</string>
     <string name="failed">"Fehlgeschlagen"</string>
     <string name="got_it">"Verstanden"</string>
     <string name="install">"Installieren"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"&amp;s zurücksetzen?"</string>
     <string name="reset_summary">"Setze %s zurück"</string>
     <string name="result">"Ergebnis: %s"</string>
-    <string name="search">"Suchen…"</string>
     <string name="share">"Teilen"</string>
     <string name="shared_by">"%s/geteilt durch Package Manager"</string>
     <string name="share_message">"Package Manager %s kann von Google Play bezogen werden: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Apps sortieren"</string>
     <string name="source_code">"Quellcode"</string>
     <string name="support">"Supportgruppe"</string>
-    <string name="support_acknowledged">"Spende bestätigt \u2665"</string>
-    <string name="support_app">"Kaufe Spenden-App"</string>
     <string name="support_development">"Entwicklung unterstützen"</string>
     <string name="support_development_summary">"Wenn Sie die Bemühungen des Entwicklers zu schätzen wissen, dieses Tool völlig kostenlos zur Verfügung zu stellen, ziehen Sie bitte eine kleine Spende in Betracht, indem Sie auf eine der unten angebotenen Optionen klicken! Wenn Sie eines dieser Produkte kaufen, erhalten Sie hier ein Unterstützer-Abzeichen!"</string>
-    <string name="support_dinner">"Kaufen Sie mir ein Abendessen"</string>
-    <string name="support_meal">"Kaufen Sie mir eine Mahlzeit"</string>
-    <string name="support_coffee">"Kaufen Sie mir einen Kaffee"</string>
-    <string name="support_already_received_message">"Sie haben die Entwicklung mit diesem Artikel schon einmal unterstützt!"</string>
-    <string name="support_received_message">"Vielen Dank für Ihre Unterstützung \u2665 \nEs motiviert mich sehr, meine Projekte noch aktiver weiterzuführen! Außerdem erhalten Sie ein Supporter-Badge oben auf dieser Seite."</string>
-    <string name="support_retry_message">"Bitte versuchen Sie den Kauf erneut!"</string>
-    <string name="support_status_message">"Herzlichen Dank für Ihre Unterstützung!"</string>
     <string name="sure_question">"Sind Sie sicher?"</string>
     <string name="turn_on_off">"An-/Ausschalten"</string>
     <string name="uninstall">"Deinstallieren"</string>
@@ -83,14 +64,11 @@
 
         *** <b>VERWENDEN AUF EIGENES RISIKO</b> ***
         "</string>
-    <string name="version">"Version: %s"</string>
     <string name="welcome_message">"Willkommen bei Package Manager, einer einfachen, aber leistungsstarken Anwendung zur Verwaltung Ihrer Apps."</string>
     <string name="wrong_extension">"Bitte wählen Sie eine Datei mit der Erweiterung %s."</string>
     <string name="yes">"Ja"</string>
     <string name="explore">"Entdecken"</string>
-    <string name="export_file_message">"wurde erfolgreich in %s exportiert!"</string>
     <string name="export_storage_message">"%s in Gerätespeicher exportieren?"</string>
-    <string name="file_picker_message">"Bitte beachten Sie: Diese Funktion ist zu experimentell!"</string>
     <string name="more_apps_summary">"Entdecken Sie weitere Anwendungen des Entwicklers in Google Play"</string>
     <string name="open_failed_export_message">"Kann %s nicht öffnen! Möchten Sie es in den Gerätespeicher exportieren?"</string>
     <string name="rate_us">"App bewerten"</string>
@@ -103,7 +81,6 @@
     <string name="support_summary">"Telegram-Supportgruppe beitreten"</string>
     <string name="batch_options">"Stapeloptionen"</string>
     <string name="batch_list_added">"%s wurde zum Stapel hinzugefügt"</string>
-    <string name="batch_list_export">"Sind Sie sicher, dass Sie die folgende(n) App(s) in den Gerätespeicher exportieren möchten?"</string>
     <string name="batch_list_removed">"%s wurde vom Stapel entfernt"</string>
     <string name="explore_error_status">"Prüfung von %s fehlgeschlagen!"</string>
     <string name="split_apk">"splitte APKs"</string>
@@ -134,10 +111,8 @@
     <string name="bundle_path">"Bundle Pfad"</string>
     <string name="size_apk">"APK Größe: %s"</string>
     <string name="size_bundle">"Bundle Größe: %s"</string>
-    <string name="file_permission_request_message">"Damit diese Funktion auf neueren Android-Versionen (Android R oder neuer) funktioniert, müssen Sie dem Package Manager die Berechtigung \"Zugriff auf alle Dateien\" erteilen. Bitte erteilen Sie diese Berechtigung manuell auf dem neuen Bildschirm, der sich nach dem Klicken auf die Schaltfläche \"Erlauben\" öffnet."</string>
     <string name="grant">"Erlauben"</string>
     <string name="select_all">"Alle auswählen"</string>
-    <string name="select_all_summary">"Alle Anwendungen dieser Seite auswählen und zur Batchliste hinzufügen?"</string>
     <string name="uninstall_status_failed">"Deinstallation %s fehlgeschlagen oder durch den Benutzer abgebrochen"</string>
     <string name="export_apk_summary">"Die gewählte APK wird hierhin exportiert: '%s'!"</string>
     <string name="initializing">"Initialisierung…"</string>
@@ -167,23 +142,17 @@
     <string name="other">"Andere"</string>
     <string name="restore">"Wiederherstellen"</string>
     <string name="restore_message">"Werkeinstellung von '%s' wiederherstellen?"</string>
-    <string name="restore_message_batch">"Werkeinstellungen der folgenden Apps wiederherstellen?
-
-        %s"</string>
     <string name="restore_success_message">"Werkeinstellung der ausgewählten App(s) erfolgreich wiederhergestellt"</string>
     <string name="split_apk_installer_description">"Split APKs (mehrere APK-Dateien mit demselben Paketnamen)"</string>
     <string name="uninstalled_apps">"Deinstallierte Apps"</string>
     <string name="user_interface">"Benutzeroberfläche"</string>
     <string name="uninstall_updates_message">"Es ist jedoch ein lokales Update von '%s' installiert, das durch Klicken auf die Schaltfläche \"Deinstallieren\" entfernt werden kann."</string>
     <string name="close">"Schließen"</string>
-    <string name="bundle_install_question">"Sind Sie sicher, dass Sie das ausgewählte App-Bundle installieren möchten?"</string>
     <string name="preparing_message">"Vorbereiten…"</string>
-    <string name="save_to_downloads">"In Downloads speichern"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_compile">"SDK kompilieren: %s"</string>
     <string name="sdk_minimum">"Minimum SDK: %s"</string>
     <string name="update">"Aktualisierung"</string>
-    <string name="reload">"Neu laden"</string>
     <string name="disable_failed_message">"Der Komponentenstatus von %s konnte nicht geändert werden."</string>
     <string name="never_show">"Nie anzeigen"</string>
     <string name="request">"Anfrage"</string>

@@ -13,19 +13,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FileUtils;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageDetails;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,16 +39,10 @@ public class ExportAPKTasks extends sExecutor {
 
     private final Activity mActivity;
     private static Drawable mIcon = null;
-    private final LinearLayout mLinearLayout;
-    private final MaterialTextView mTextView;
-    private final ProgressBar mProgressBar;
     private static String mAPKPath = null, mName = null;
+    private ProgressDialog mProgressDialog;
 
-    public ExportAPKTasks(LinearLayout linearLayout, MaterialTextView textView, ProgressBar progressBar,
-                          String path, String name, Drawable icon, Activity activity) {
-        mLinearLayout = linearLayout;
-        mTextView = textView;
-        mProgressBar = progressBar;
+    public ExportAPKTasks(String path, String name, Drawable icon, Activity activity) {
         mAPKPath = path;
         mName = name;
         mIcon = icon;
@@ -62,27 +53,27 @@ public class ExportAPKTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPreExecute() {
-        mProgressBar.setIndeterminate(false);
-        PackageDetails.showProgress(mLinearLayout, mTextView, mActivity.getString(R.string.exporting, mName) + "...");
-        PackageData.makePackageFolder(mActivity);
+        mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setIcon(R.mipmap.ic_launcher);
+        mProgressDialog.setTitle(mActivity.getString(R.string.exporting, mName) + "...");
+        mProgressDialog.show();
     }
 
     @Override
     public void doInBackground() {
         sCommonUtils.sleep(1);
+        PackageData.makePackageFolder(mActivity);
         try {
-            FileUtils FileUtils = new FileUtils(mAPKPath);
-            FileUtils.setProgress(mProgressBar);
-            FileUtils.copy(new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
-                    sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"));
+            FileUtils FileUtils = new FileUtils(new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
+                    sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"), mProgressDialog);
+            FileUtils.copy(mAPKPath);
         } catch (IOException ignored) {}
     }
 
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
-        PackageDetails.hideProgress(mLinearLayout, mTextView);
-        mProgressBar.setIndeterminate(true);
+        mProgressDialog.dismiss();
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
                 .setTitle(mName)

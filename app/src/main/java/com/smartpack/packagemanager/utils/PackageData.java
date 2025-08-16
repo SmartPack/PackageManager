@@ -17,13 +17,13 @@ import android.os.Environment;
 import android.widget.ProgressBar;
 
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
@@ -41,10 +41,17 @@ public class PackageData {
     }
 
     public static void makePackageFolder(Context context) {
-        if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
-            sFileUtils.delete(getPackageDir(context));
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            if (getPackageDir(context).exists() && getPackageDir(context).isFile()) {
+                sFileUtils.delete(getPackageDir(context));
+            }
+            sFileUtils.mkdir(getPackageDir(context));
+        } else {
+            if (!getPackageDir(context).exists()) {
+                sFileUtils.mkdir(getPackageDir(context));
+            }
         }
-        sFileUtils.mkdir(getPackageDir(context));
+
     }
 
     private static List<PackageItems> getRawData(ProgressBar progressBar, Context context) {
@@ -54,10 +61,7 @@ public class PackageData {
             mRawData.add(new PackageItems(
                     packageInfo.packageName,
                     getAppName(packageInfo.packageName, context),
-                    sPackageUtils.getAppIcon(packageInfo.packageName, context),
-                    new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(),
-                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).firstInstallTime,
-                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime)
+                    new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(), context)
             );
             if (progressBar != null) {
                 if (progressBar.isIndeterminate()) {
@@ -86,10 +90,8 @@ public class PackageData {
                 mAppType = true;
             }
             if (mAppType && item.getPackageName().contains(".")) {
-                if (Common.getSearchText() == null) {
-                    mData.add(item);
-                } else if (Common.isTextMatched(item.getAppName())
-                        || Common.isTextMatched(item.getPackageName())) {
+                if (Common.getSearchText() == null || (Common.isTextMatched(item.getAppName())
+                        || Common.isTextMatched(item.getPackageName()))) {
                     mData.add(item);
                 }
             }
@@ -132,8 +134,9 @@ public class PackageData {
     }
 
     public static File getPackageDir(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied()) {
-            return context.getExternalFilesDir("");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                    context.getString(R.string.app_name));
         } else {
             return new File(Environment.getExternalStorageDirectory(), "Package_Manager");
         }
@@ -158,15 +161,6 @@ public class PackageData {
         } else {
             return size  + " KB";
         }
-    }
-
-    public static String showBatchList() {
-        StringBuilder sb = new StringBuilder();
-        for (String s : Common.getBatchList()) {
-            if (s != null && !s.isEmpty())
-                sb.append(" - ").append(s.replaceAll(","," ")).append("\n");
-        }
-        return "\n" + sb;
     }
 
     public static List<PackageItems> getRawData() {

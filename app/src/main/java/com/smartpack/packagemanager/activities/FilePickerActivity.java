@@ -12,7 +12,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,12 +19,13 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,11 +35,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.FilePickerAdapter;
-import com.smartpack.packagemanager.utils.APKData;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
@@ -57,9 +55,9 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class FilePickerActivity extends AppCompatActivity {
 
-    private MaterialCardView mSelect;
+    private ContentLoadingProgressBar mProgress;
+    private MaterialButton mSelect;
     private MaterialTextView mTitle;
-    private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private FilePickerAdapter mRecycleViewAdapter;
 
@@ -79,24 +77,15 @@ public class FilePickerActivity extends AppCompatActivity {
         mBack.setOnClickListener(v -> exitActivity());
 
         if (!Common.getPath().contains(getCacheDir().getPath())) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() || Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q &&
-                    sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, this)) {
                 LinearLayout mPermissionLayout = findViewById(R.id.permission_layout);
                 MaterialCardView mPermissionGrant = findViewById(R.id.grant_card);
                 MaterialTextView mPermissionText = findViewById(R.id.permission_text);
-                mPermissionText.setText(getString(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ? R.string.file_permission_request_message : R.string.permission_denied_write_storage));
+                mTitle.setText(R.string.app_name);
+                mPermissionText.setText(getString(R.string.permission_denied_write_storage));
                 mPermissionLayout.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(View.GONE);
-                mPermissionGrant.setOnClickListener(v -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        Utils.requestPermission(this);
-                        finish();
-                    } else {
-                        sPermissionUtils.requestPermission(new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        }, this);
-                    }
-                });
+                mPermissionGrant.setOnClickListener(v -> requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE));
                 return;
             }
         }
@@ -114,15 +103,15 @@ public class FilePickerActivity extends AppCompatActivity {
             } else if (new File(mPath).isDirectory()) {
                 Common.setPath(mPath);
                 reload(this);
-            } else if (mPath.endsWith("apks") || mPath.endsWith("apkm") || mPath.endsWith("xapk")) {
+            } else if (mPath.endsWith(".apks") || mPath.endsWith(".apkm") || mPath.endsWith(".xapk")) {
                 new MaterialAlertDialogBuilder(this)
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle(getString(R.string.app_name))
                         .setMessage(getString(R.string.bundle_install_apks, new File(mPath).getName()))
                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                         })
-                        .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> new AppBundleTasks(mProgress, mPath, true, this).execute()).show();
-            } else if (mPath.endsWith("apk")) {
+                        .setPositiveButton(getString(R.string.install), (dialogInterface, i) -> new AppBundleTasks(mPath, true, this).execute()).show();
+            } else if (mPath.endsWith(".apk")) {
                 if (Common.getAppList().contains(mPath)) {
                     Common.getAppList().remove(mPath);
                 } else {
@@ -167,8 +156,9 @@ public class FilePickerActivity extends AppCompatActivity {
                     @Override
                     public void onPostExecute() {
                         if (Common.getAppList().size() == 1) {
-                            APKData.setAPKFile(new File(Common.getAppList().get(0)));
                             Intent apkDetails = new Intent(FilePickerActivity.this, APKPickerActivity.class);
+                            apkDetails.putExtra(APKPickerActivity.PATH_INTENT, Common.getAppList().get(0));
+                            apkDetails.putExtra(APKPickerActivity.NAME_INTENT, new File(Common.getAppList().get(0)).getName());
                             startActivity(apkDetails);
                             exitActivity();
                         } else {
@@ -230,16 +220,14 @@ public class FilePickerActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 0 && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            this.recreate();
-        }
-
-    }
+    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (result) {
+                    recreate();
+                }
+            }
+    );
 
     private void backPressedEvent() {
         if (mProgress.getVisibility() == View.VISIBLE) return;

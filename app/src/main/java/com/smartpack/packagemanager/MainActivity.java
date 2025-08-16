@@ -22,15 +22,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.smartpack.packagemanager.activities.FilePickerActivity;
 import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
 import com.smartpack.packagemanager.fragments.ExportedAppsFragment;
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
 import com.smartpack.packagemanager.fragments.SettingsFragment;
 import com.smartpack.packagemanager.fragments.UninstalledAppsFragment;
-import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
@@ -100,15 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
         mFAB.setOnClickListener(v -> {
             if (sCommonUtils.getBoolean("neverShow", false, this)) {
-                if (Flavor.isFullVersion()) {
-                    Common.getAppList().clear();
-                    Common.setPath(FilePicker.getLastDirPath(this));
-                    Intent filePicker = new Intent(this, FilePickerActivity.class);
-                    startActivity(filePicker);
-                } else {
-                    Intent installer = getInstallerIntent();
-                    installApp.launch(installer);
-                }
+                Intent installer = getInstallerIntent();
+                installApp.launch(installer);
             } else {
                 Intent installer = new Intent(this, InstallerInstructionsActivity.class);
                 startActivity(installer);
@@ -132,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         return installer;
     }
 
-    ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> installApp = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {

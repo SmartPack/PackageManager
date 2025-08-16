@@ -16,9 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.PackageOptionsItems;
+import com.smartpack.packagemanager.utils.SerializableItems.PackageOptionsItems;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class PackageOptionsAdapter extends RecyclerView.Adapter<PackageOptionsAd
 
     @Override
     public void onBindViewHolder(@NonNull PackageOptionsAdapter.ViewHolder holder, int position) {
-        holder.mText.setText(data.get(position).getText());
+        holder.mIcon.setText(data.get(position).getText());
         holder.mIcon.setIcon(data.get(position).getIcon());
     }
 
@@ -54,13 +53,11 @@ public class PackageOptionsAdapter extends RecyclerView.Adapter<PackageOptionsAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final MaterialButton mIcon;
-        private final MaterialTextView mText;
 
         public ViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
             this.mIcon = view.findViewById(R.id.icon);
-            this.mText = view.findViewById(R.id.text);
         }
 
         @Override

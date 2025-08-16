@@ -3,13 +3,6 @@
     <string name="apk_path">"Diretório de APK"</string>
     <string name="app_info">"Informação da aplicação"</string>
     <string name="batch_list_clear">"Eliminar lista"</string>
-    <string name="batch_list_disable">"Tem a certeza que deseja desativar ou ativar a(s) seguinte(s) aplicação(ões)?"</string>
-    <string name="batch_list_remove">"Tem a certeza que deseja remover as seguintes aplicações?"</string>
-    <string name="batch_list_reset">"Tem a certeza que deseja repor as seguintes aplicações?"</string>
-    <string name="batch_list_summary">"As seguintes aplicações estão na lista de lotes"</string>
-    <string name="batch_processing">"Processamento de lotes em progresso!"</string>
-    <string name="batch_processing_finished">"Processamento de lotes concluído!"</string>
-    <string name="batch_processing_initialized">"A iniciar o processamento de lotes"</string>
     <string name="batch_warning">"As suas definições de lote vão ser eliminadas! Tem a certeza?"</string>
     <string name="billing_client_disconnected">"Erro de ligação ao cliente de faturação do Google Play!"</string>
     <string name="bundle_install_apks">"Tem a certeza que deseja instalar o pacote de aplicação '%s'?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Desativar"</string>
     <string name="disabled">"desativado"</string>
     <string name="disabling">"A desativar %s"</string>
-    <string name="done">"Feito"</string>
     <string name="enable">"Ativar"</string>
     <string name="enabled">"ativado"</string>
     <string name="enabling">"A ativar"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"O pacote de aplicação inteiro foi exportado para %s!"</string>
     <string name="exporting">"A exportar %s"</string>
     <string name="exporting_bundle">"A exportar %s pacote de aplicação"</string>
-    <string name="everything_done">"Terminado!"</string>
     <string name="failed">"Erro"</string>
     <string name="got_it">"Feito"</string>
     <string name="install">"Instalar"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Repor '%s'?"</string>
     <string name="reset_summary">"A repor %s"</string>
     <string name="result">"Resultado: %s"</string>
-    <string name="search">"Pesquisar…"</string>
     <string name="share">"Partilhar"</string>
     <string name="shared_by">"%s/partilhado pelo Gestor de Pacotes"</string>
     <string name="share_message">"Obtenha o Gestor de Pacotes %s no Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Ordenar aplicações"</string>
     <string name="source_code">"Código-fonte"</string>
     <string name="support">"Grupo de apoio"</string>
-    <string name="support_acknowledged">"Obrigado pelo donativo \u2665"</string>
-    <string name="support_app">"Comprar a aplicação de donativo"</string>
     <string name="support_development">"Apoio à programação"</string>
     <string name="support_development_summary">"Se gosta desta aplicação gratuita, por favor considere fazer um pequeno donativo ao criador ao clicar numa das opções abaixo! Se o fizer, vai receber uma medalha de apoiante!"</string>
-    <string name="support_dinner">"Pague-me um jantar"</string>
-    <string name="support_meal">"Pague-me uma refeição"</string>
-    <string name="support_coffee">"Pague-me um café"</string>
-    <string name="support_already_received_message">"Já fez este donativo antes!"</string>
-    <string name="support_received_message">"Muito obrigado pelo apoio \u2665 \nMotivou-me a continuar a manter os meus projetos mais ativos! Adicionalmente, vai receber uma medalha de apoiante no início desta página."</string>
-    <string name="support_retry_message">"Por favor tente novamente!"</string>
-    <string name="support_status_message">"Muito obrigado pelo seu apoio!"</string>
     <string name="sure_question">"Tem a certeza?"</string>
     <string name="turn_on_off">"Ligar/desligar"</string>
     <string name="uninstall">"Desinstalar"</string>
@@ -83,14 +64,11 @@
 
         *** <b>USE POR SUA CONTA E RISCO</b> ***
         "</string>
-    <string name="version">"Versão: %s"</string>
     <string name="welcome_message">"Bem-vindo(a) ao Gestor de Pacotes, uma aplicação simples mas poderosa para gerir as suas aplicações."</string>
     <string name="wrong_extension">"Por favor, selecione um ficheiro com a extensão %s. "</string>
     <string name="yes">"Sim"</string>
     <string name="explore">"Explorar"</string>
-    <string name="export_file_message">"foi exportado com sucesso para %s!"</string>
     <string name="export_storage_message">"Exportar %s para o armazenamento do dispositivo?"</string>
-    <string name="file_picker_message">"Aviso: esta funcionalidade é experimental!"</string>
     <string name="more_apps_summary">"Explore mais aplicações do mesmo criador no Google Play"</string>
     <string name="open_failed_export_message">"Impossível abrir %s! Quer exportar para o armazenamento do dispositivo?"</string>
     <string name="rate_us">"Avaliar a aplicação"</string>
@@ -103,7 +81,6 @@
     <string name="support_summary">"Aderir ao grupo do Telegram"</string>
     <string name="batch_options">"Opções de lote"</string>
     <string name="batch_list_added">"%s foi adicionado à lista de lotes"</string>
-    <string name="batch_list_export">"Tem a certeza que deseja exportar as seguintes aplicações para o armazenamento do dispositivo?"</string>
     <string name="batch_list_removed">"%s foi removido da lista de lotes"</string>
     <string name="explore_error_status">"Erro ao explorar %s!"</string>
     <string name="split_apk">"APKs separadas"</string>
@@ -134,10 +111,8 @@
     <string name="bundle_path">"Diretório do Pacote"</string>
     <string name="size_apk">"Tamanho da APK: %s"</string>
     <string name="size_bundle">"Tamanho do pacote: %s"</string>
-    <string name="file_permission_request_message">"Para que esta funcionalidade funcione em versões do Android recentes (Android R ou mais recente), é necessário conceder permissão \"Acesso a todos os ficheiros\" ao Gestor de Pacotes. Forneça a permissão manualmente no novo ecrã aberto após pressionar o botão \"Conceder\"."</string>
     <string name="grant">"Conceder"</string>
     <string name="select_all">"Selecionar tudo"</string>
-    <string name="select_all_summary">"Selecione e adicione todas as aplicações desta página à lista de lote?"</string>
     <string name="uninstall_status_failed">"A desinstalação de %s falhou ou foi cancelada pelo utilizador!"</string>
     <string name="export_apk_summary">"A APK selecionada foi exportada para '%s'!"</string>
     <string name="initializing">"A inicializar…"</string>
@@ -167,23 +142,17 @@
     <string name="other">"Outro"</string>
     <string name="restore">"Restaurar"</string>
     <string name="restore_message">"Restaurar a versão de fábrica de '%s'?"</string>
-    <string name="restore_message_batch">"Restaurar a versão de fábrica das seguintes aplicações?
-
-        %s"</string>
     <string name="restore_success_message">"As versões de fábrica das aplicações selecionadas foram restauradas com sucesso"</string>
     <string name="split_apk_installer_description">"Dividir APK's (vários ficheiros APK como o mesmo nome de pacote)"</string>
     <string name="uninstalled_apps">"Aplicações desinstaladas"</string>
     <string name="user_interface">"Interface de utilizador"</string>
     <string name="uninstall_updates_message">"No entanto é instalado uma atualização local de '%s' que pode ser removida clicando no botão \"Desinstalar\" ."</string>
     <string name="close">"Fechar"</string>
-    <string name="bundle_install_question">"Tem a certeza que quer instalar o pacote da aplicação selecionada?"</string>
     <string name="preparing_message">"A preparar…"</string>
-    <string name="save_to_downloads">"Guardar em Descarregamentos"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_compile">"Compile SDK: %s"</string>
     <string name="sdk_minimum">"SDK mínimo: %s"</string>
     <string name="update">"Atualizar"</string>
-    <string name="reload">"Recarregar"</string>
     <string name="disable_failed_message">"Falha ao alterar o estado do componente de %s."</string>
     <string name="never_show">"Nunca mostrar"</string>
     <string name="request">"Solicitar"</string>

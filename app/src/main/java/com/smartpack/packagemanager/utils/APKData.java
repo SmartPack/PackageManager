@@ -14,7 +14,6 @@ import android.content.Context;
 import com.apk.axml.APKParser;
 import com.smartpack.packagemanager.R;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,27 +25,24 @@ import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 public class APKData {
 
     private static final APKParser mAPKParser = new APKParser();
-    private static File mAPK = null;
-
-    public static File getAPKFile() {
-        return mAPK;
-    }
 
     @SuppressLint("StringFormatInvalid")
     public static List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
-        if (mAPKParser.getVersionName() != null) {
-            mData.add(context.getString(R.string.version, mAPKParser.getVersionName() + " (" + mAPKParser.getVersionCode() + ")"));
-        }
-        if (mAPKParser.getCompiledSDKVersion() != null) {
-            mData.add(context.getString(R.string.sdk_compile, sdkToAndroidVersion(mAPKParser.getCompiledSDKVersion(), context)));
-        }
-        if (mAPKParser.getMinSDKVersion() != null) {
-            mData.add(context.getString(R.string.sdk_minimum, sdkToAndroidVersion(mAPKParser.getMinSDKVersion(), context)));
-        }
-        if (mAPKParser.getAPKSize() != Integer.MIN_VALUE) {
-            mData.add(context.getString(R.string.size_apk, sAPKUtils.getAPKSize(mAPKParser.getAPKSize()) + " (" + mAPKParser.getAPKSize() + " bytes)"));
-        }
+        try {
+            if (mAPKParser.getVersionName() != null) {
+                mData.add(context.getString(R.string.version, mAPKParser.getVersionName() + " (" + mAPKParser.getVersionCode() + ")"));
+            }
+            if (mAPKParser.getCompiledSDKVersion() != null) {
+                mData.add(context.getString(R.string.sdk_compile, sdkToAndroidVersion(mAPKParser.getCompiledSDKVersion(), context)));
+            }
+            if (mAPKParser.getMinSDKVersion() != null) {
+                mData.add(context.getString(R.string.sdk_minimum, sdkToAndroidVersion(mAPKParser.getMinSDKVersion(), context)));
+            }
+            if (mAPKParser.getAPKSize() != Integer.MIN_VALUE) {
+                mData.add(context.getString(R.string.size_apk, sAPKUtils.getAPKSize(mAPKParser.getAPKSize()) + " (" + mAPKParser.getAPKSize() + " bytes)"));
+            }
+        } catch (Exception ignored) {}
         return mData;
     }
 
@@ -119,10 +115,6 @@ public class APKData {
             default:
                 return sdkVersion;
         }
-    }
-
-    public static void setAPKFile(File apk) {
-        mAPK = apk;
     }
 
 }

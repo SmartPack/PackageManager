@@ -9,18 +9,36 @@
 package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
-import android.content.Intent;
 
-import com.smartpack.packagemanager.activities.BillingActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.smartpack.packagemanager.BuildConfig;
+import com.smartpack.packagemanager.R;
+
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
- * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 17, 2021
+ * Created by sunilpaulmathew <sunil.kde@gmailcom> on January 17, 2021
  */
 public class Billing {
 
+    public static String getAppVersion() {
+        return BuildConfig.VERSION_NAME;
+    }
+
+    public static String getPackageExt() {
+        return null;
+    }
+
     public static void showDonateOption(Activity activity) {
-        Intent donations = new Intent(activity, BillingActivity.class);
-        activity.startActivity(donations);
+        new MaterialAlertDialogBuilder(activity)
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(R.string.support_development)
+                .setMessage(R.string.support_development_summary)
+                .setNeutralButton(R.string.cancel, (dialog, id) -> {
+                })
+                .setPositiveButton(R.string.purchase_pro, (dialog, id) ->
+                        sCommonUtils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro", activity)
+                ).show();
     }
 
 }

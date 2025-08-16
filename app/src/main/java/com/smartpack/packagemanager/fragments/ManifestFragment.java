@@ -16,20 +16,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.apk.axml.APKParser;
 import com.apk.axml.aXMLDecoder;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.ManifestAdapter;
 import com.smartpack.packagemanager.utils.Common;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.zip.ZipFile;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -44,13 +38,12 @@ public class ManifestFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_manifest, container, false);
+        View mRootView = inflater.inflate(R.layout.layout_textview, container, false);
 
-        RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        MaterialTextView mText = mRootView.findViewById(R.id.text);
 
         new sExecutor() {
-            private List<String> mManifest = null;
+            private String mManifest = null;
 
             @Override
             public void onPreExecute() {
@@ -59,11 +52,11 @@ public class ManifestFragment extends Fragment {
             @Override
             public void doInBackground() {
                 if (Common.isAPKPicker()) {
-                    mManifest = new ArrayList<>(Arrays.asList(new APKParser().getManifest().trim().split("\\r?\\n")));
+                    mManifest = new APKParser().getManifest().trim();
                 } else {
                     try (ZipFile zipFile = new ZipFile(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()))) {
                         InputStream inputStream = zipFile.getInputStream(zipFile.getEntry("AndroidManifest.xml"));
-                        mManifest = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new aXMLDecoder().decode(inputStream).trim()).split("\\r?\\n")));
+                        mManifest = new aXMLDecoder(inputStream).decode().trim();
                     } catch (Exception ignored) {
                     }
                 }
@@ -73,7 +66,7 @@ public class ManifestFragment extends Fragment {
             @Override
             public void onPostExecute() {
                 if (mManifest != null && !mManifest.isEmpty()) {
-                    mRecyclerView.setAdapter(new ManifestAdapter(mManifest));
+                    mText.setText(mManifest);
                 } else {
                     sCommonUtils.toast(getString(R.string.failed_decode_xml, "AndroidManifest.xml"), requireActivity()).show();
                 }

@@ -17,6 +17,4 @@
 
         <include layout="@layout/layout_recyclerview" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <include layout="@layout/progress_view_layout" />
 </RelativeLayout>

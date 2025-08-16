@@ -3,13 +3,6 @@
     <string name="apk_path">"Chemin de l'APK"</string>
     <string name="app_info">"Info de l'Appli"</string>
     <string name="batch_list_clear">"Vider la liste"</string>
-    <string name="batch_list_disable">"Êtes vous sûr de désactiver (si activée(s)) ou activer (si désactivée(s)) l'(es) appli(s) suivante(s) ?"</string>
-    <string name="batch_list_remove">"Êtes vous sûr de supprimer l(es) appli(s) suivante(s) ?"</string>
-    <string name="batch_list_reset">"Êtes vous sûr de réinitialiser l(es) appli(s) suivante(s) ?"</string>
-    <string name="batch_list_summary">"Les applications suivantes sont ajoutées à la liste de traitement par lots"</string>
-    <string name="batch_processing">"Traitement par lots en cours !"</string>
-    <string name="batch_processing_finished">"Traitement par lots complété !"</string>
-    <string name="batch_processing_initialized">"Initialisation du traitement par lots"</string>
     <string name="batch_warning">"Vos paramètres de traitement par lot seront supprimés. Êtes-vous sûr ?"</string>
     <string name="billing_client_disconnected">"Échec de connexion avec le client de facturation Google Play !"</string>
     <string name="bundle_install_apks">"Êtes-vous sûr d'installer le paquet '%s' ?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Désactiver"</string>
     <string name="disabled">"désactivé"</string>
     <string name="disabling">"Désactivation de %s"</string>
-    <string name="done">"Fait"</string>
     <string name="enable">"Actif"</string>
     <string name="enabled">"inactif"</string>
     <string name="enabling">"Activation de %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"L'ensemble de l'appli est exporté vers %s"</string>
     <string name="exporting">"Exportation de %s"</string>
     <string name="exporting_bundle">"Exportation de l'ensemble de l'application %s"</string>
-    <string name="everything_done">"Tâches effectuées !"</string>
     <string name="failed">"Échec"</string>
     <string name="got_it">"J'ai compris"</string>
     <string name="install">"Installer"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Réinitialiser %s ?"</string>
     <string name="reset_summary">"Réinitialisation de %s"</string>
     <string name="result">"Résultat : %s"</string>
-    <string name="search">"Recherche…"</string>
     <string name="share">"Partager"</string>
     <string name="shared_by">"%s/partagé par Package Manager"</string>
     <string name="share_message">"Package Manager %s peut être obtenu en passant par Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Trier apps"</string>
     <string name="source_code">"Code Source"</string>
     <string name="support">"Groupe de Support"</string>
-    <string name="support_acknowledged">"Don reconnu \u2665"</string>
-    <string name="support_app">"Acheter l'application pour faire un don"</string>
     <string name="support_development">"Support de développement"</string>
     <string name="support_development_summary">"Si vous appréciez les efforts du développeur pour fournir cet outil entièrement gratuit, pensez à envoyer un petit don en cliquant sur l'une des options ci-dessous. En achetant l'un de ces produits, vous obtiendrez ici un badge de supporter."</string>
-    <string name="support_dinner">"Offrez-moi un repas"</string>
-    <string name="support_meal">"Offrez-moi un sandwich"</string>
-    <string name="support_coffee">"Offrez-moi un café"</string>
-    <string name="support_already_received_message">"Vous avez déjà aidé le développement avec ce choix précédemment !"</string>
-    <string name="support_received_message">"Merci beaucoup pour votre soutien \u2665 \nCela me motivera beaucoup à continuer mes projets plus activement ! De plus, vous recevrez un badge de supporter en haut de cette page."</string>
-    <string name="support_retry_message">"Veuillez retenter l'achat !"</string>
-    <string name="support_status_message">"Merci beaucoup pour votre soutien !"</string>
     <string name="sure_question">"Êtes-vous sûr ?"</string>
     <string name="turn_on_off">"Allumer/Éteindre"</string>
     <string name="uninstall">"Désinstaller"</string>
@@ -80,14 +61,11 @@
     <string name="uninstall_summary">"Suppression de %s"</string>
     <string name="uninstall_title">"Êtes-vous sûr de désinstaller %s ?"</string>
     <string name="uninstall_warning">"Remarque : la suppression des applications système peut être dangereuse !\n\n*** <b>À VOS RISQUES ET PÉRILS</b> ***\n"</string>
-    <string name="version">"Version : %s"</string>
     <string name="welcome_message">"Bienvenue dans Package Manager, une application simple mais puissante pour gérer vos applications."</string>
     <string name="wrong_extension">"Veuillez sélectionner un fichier avec l'extension %s."</string>
     <string name="yes">"Oui"</string>
     <string name="explore">"Explorer"</string>
-    <string name="export_file_message">"est importé avec succès dans %s !"</string>
     <string name="export_storage_message">"Exporter %s dans le stockage de l'appareil ?"</string>
-    <string name="file_picker_message">"Remarque : cette fonctionnalité est très expérimentale !"</string>
     <string name="more_apps_summary">"Découvrez plus d'applications créées par le développeur dans Google Play"</string>
     <string name="open_failed_export_message">"Impossible d'ouvrir %s ! Voulez-vous l'exporter dans le stockage de l'appareil ?"</string>
     <string name="rate_us">"Noter l'application"</string>
@@ -100,7 +78,6 @@
     <string name="support_summary">"Rejoindre le groupe de support Telegram"</string>
     <string name="batch_options">"Options pour le traitement par lots (%s)"</string>
     <string name="batch_list_added">"%s est ajouté dans la liste du traitement par lots"</string>
-    <string name="batch_list_export">"Êtes-vous sûr d'exporter l(es) application(s) suivante(s) vers le stockage de l'appareil ?"</string>
     <string name="batch_list_removed">"%s est supprimé de la liste du traitement par lots"</string>
     <string name="explore_error_status">"Échec de l'exploration de %s !"</string>
     <string name="split_apk">"APKs modulaires (split APKs)"</string>
@@ -131,10 +108,8 @@
     <string name="bundle_path">"Chemin du paquet"</string>
     <string name="size_apk">"Taille de l'APK :  %s"</string>
     <string name="size_bundle">"Taille du paquet : %s"</string>
-    <string name="file_permission_request_message">"Pour que cette fonctionnalité marche sur les versions d'Android les plus récentes (Android R ou plus récent), il est nécessaire d'accorder l'autorisation \"Accès à tous les fichiers\" au Package Manager. Merci de valider manuellement depuis l'écran qui va s'ouvrir juste après avoir cliqué sur le bouton \"Accorder\"."</string>
     <string name="grant">"Accorder"</string>
     <string name="select_all">"Sélectionner tout"</string>
-    <string name="select_all_summary">"Sélectionner et ajouter toutes les applications de cette page à la liste du traitement par lots ?"</string>
     <string name="uninstall_status_failed">"La désinstallation de %s a échoué ou a été annulée par l'utilisateur"</string>
     <string name="export_apk_summary">"L'APK sélectionné est exporté dans '%s'"</string>
     <string name="initializing">"Initialisation…"</string>
@@ -164,16 +139,11 @@
     <string name="other">"Autre"</string>
     <string name="restore">"Restaurer"</string>
     <string name="restore_message">"Restaurer la version d'usine de '%s' ?"</string>
-    <string name="restore_message_batch">"Restaurer les versions d'usine des applications suivantes ?
-
-        %s"</string>
     <string name="restore_success_message">"La version d'usine des applications sélectionnées a été restaurée avec succès"</string>
     <string name="split_apk_installer_description">"Diviser les APK (plusieurs fichiers APK avec le même nom de package)"</string>
     <string name="uninstalled_apps">"Applications désinstallées"</string>
     <string name="user_interface">"Interface utilisateur"</string>
     <string name="uninstall_updates_message">"Une mise à jour locale de '%s' est cependant installée, qui peut être librement supprimée en cliquant sur le bouton \"Désinstaller\"."</string>
     <string name="close">"Fermer"</string>
-    <string name="bundle_install_question">"Êtes-vous sûr d'installer le groupe d'applications sélectionné ?"</string>
     <string name="preparing_message">"Préparation…"</string>
-    <string name="save_to_downloads">"Enregistrer dans les téléchargements"</string>
 </resources>

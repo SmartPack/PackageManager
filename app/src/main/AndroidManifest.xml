@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -66,15 +65,12 @@
         <activity android:name=".activities.PackageExploreActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false" />
-        <activity android:name=".activities.PackageTasksActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-            android:exported="false" />
         <activity android:name=".activities.TextViewActivity"
             android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.smartpack.packagemanager.provider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

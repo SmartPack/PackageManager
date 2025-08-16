@@ -3,13 +3,6 @@
     <string name="apk_path">"Шлях до APK"</string>
     <string name="app_info">"Інфо"</string>
     <string name="batch_list_clear">"Очистити список"</string>
-    <string name="batch_list_disable">"Ви впевнені, що хочете відключити (якщо увімкнено) чи увімкнути (якщо відключено) такі додатки?"</string>
-    <string name="batch_list_remove">"Ви впевнені, що хочете видалити такі додатки?"</string>
-    <string name="batch_list_reset">"Ви впевнені, що хочете провести скидання наступних додатків?"</string>
-    <string name="batch_list_summary">"Наступні додатки додано до списку пакетної обробки"</string>
-    <string name="batch_processing">"Проводиться пакетна обробка!"</string>
-    <string name="batch_processing_finished">"Пакетна обробка завершена!"</string>
-    <string name="batch_processing_initialized">"Ініціалізація пакетного процесу"</string>
     <string name="batch_warning">"Ваші пакетні налаштування  буде видалено! Ви впевнені?"</string>
     <string name="billing_client_disconnected">"Не вдалося підключитися до клієнта Google Play Billing!"</string>
     <string name="bundle_install_apks">"Ви впевнені що хочете встановити пакетний (split) додаток?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Заморозити"</string>
     <string name="disabled">"заморожено"</string>
     <string name="disabling">"Заморозка %s"</string>
-    <string name="done">"Готово"</string>
     <string name="enable">"Розморозити"</string>
     <string name="enabled">"розморожено"</string>
     <string name="enabling">"Розморозка %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Весь пакет додатків експортується в %s!"</string>
     <string name="exporting">"Експорт %s"</string>
     <string name="exporting_bundle">"Експорт %s пакету додатків"</string>
-    <string name="everything_done">"Все готово!"</string>
     <string name="failed">"Невдача"</string>
     <string name="got_it">"Зрозумів"</string>
     <string name="install">"Встановити"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Скинути %s?"</string>
     <string name="reset_summary">"Скидання %s"</string>
     <string name="result">"Результат: %s"</string>
-    <string name="search">"Пошук…"</string>
     <string name="share">"Поділитися"</string>
     <string name="shared_by">"%s/поділився Package Manager"</string>
     <string name="share_message">"Package Manager %s можна отримати з\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Сортувати програми за"</string>
     <string name="source_code">"Вихідний код"</string>
     <string name="support">"Група підтримки"</string>
-    <string name="support_acknowledged">"Пожертва підтверджена \u2665"</string>
-    <string name="support_app">"Купити додаток для пожертв"</string>
     <string name="support_development">"Підтримка розвитку"</string>
     <string name="support_development_summary">"Якщо ви хочете оцінити зусилля розробника, щоб надати цей інструмент абсолютно безкоштовно, надішліть невелику пожертву, натиснувши одну із запропонованих нижче опцій!"</string>
-    <string name="support_dinner">"Купіть мені вечерю"</string>
-    <string name="support_meal">"Купіть мені поїсти"</string>
-    <string name="support_coffee">"Купіть мені каву"</string>
-    <string name="support_already_received_message">"Ви вже підтримували розробку цим предметом раніше!"</string>
-    <string name="support_received_message">"Дуже дякую за вашу підтримку \u2665\nIt буде сильно мотивувати мене продовжувати проекти!"</string>
-    <string name="support_retry_message">"Будь ласка, спробуйте придбати ще раз!"</string>
-    <string name="support_status_message">"Дякую вам за підтримку!"</string>
     <string name="sure_question">"Ви впевнені?"</string>
     <string name="turn_on_off">"Увімкнення/вимкнення"</string>
     <string name="uninstall">"Видалити"</string>
@@ -80,14 +61,11 @@
     <string name="uninstall_summary">"Видалення %s"</string>
     <string name="uninstall_title">"Ви впевнені, що хочете видалити %s?"</string>
     <string name="uninstall_warning">"Зверніть увагу: Видалення системних додатків може бути часом небезпечним!\n\n*** <b>ВИКОРИСТОВУЙТЕ НА ВАШ ВЛАСНИЙ РИЗИК</b> ***"</string>
-    <string name="version">"Версія: %s"</string>
     <string name="welcome_message">"Ласкаво просимо до Package Manager, простий, але потужний додаток для управління вашими програмами."</string>
     <string name="wrong_extension">"Виберіть файл із %s розширенням."</string>
     <string name="yes">"Так"</string>
     <string name="explore">"Огляд"</string>
-    <string name="export_file_message">"успішно експортовано в %s!"</string>
     <string name="export_storage_message">"Експортувати %s в пам’ять пристрою?"</string>
-    <string name="file_picker_message">"Зверніть увагу: ця функція дуже експериментальна!"</string>
     <string name="more_apps_summary">"Ознайомтесь з дотатками цього розробника у Google Play"</string>
     <string name="open_failed_export_message">"Не вдається відкрити %s! Ви хочете експортувати його в пам’ять пристрою?"</string>
     <string name="rate_us">"Оцінити нас"</string>
@@ -100,7 +78,6 @@
     <string name="support_summary">"Приєднатися до групи підтримки в Telegram"</string>
     <string name="batch_options">"Пакетні операції (%s)"</string>
     <string name="batch_list_added">"%s додано до списку пакетної обробки"</string>
-    <string name="batch_list_export">"Ви впевнені, що хочете експортувати вказані нижче додатки в пам’ять пристрою?"</string>
     <string name="batch_list_removed">"%s видалено зі списку пакетної обробки"</string>
     <string name="explore_error_status">"Не вдалося оглянути %s!"</string>
     <string name="split_apk">"Розділені (split) apk"</string>

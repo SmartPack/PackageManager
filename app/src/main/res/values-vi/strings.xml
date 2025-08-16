@@ -3,13 +3,6 @@
     <string name="apk_path">"Đường dẫn APK"</string>
     <string name="app_info">"Thông tin ứng dụng"</string>
     <string name="batch_list_clear">"Dọn dẹp danh sách"</string>
-    <string name="batch_list_disable">"Bạn có chắc chắn tắt (nếu được bật) hoặc bật (nếu bị tắt) ứng dụng sau không?"</string>
-    <string name="batch_list_remove">"Bạn có chắc chắn xóa ứng dụng sau không?"</string>
-    <string name="batch_list_reset">"Bạn có chắc chắn đặt lại ứng dụng sau không?"</string>
-    <string name="batch_list_summary">"Các ứng dụng sau được thêm vào danh sách hàng loạt"</string>
-    <string name="batch_processing">"Đang xử lí hàng loạt!"</string>
-    <string name="batch_processing_finished">"Đã hoàn tất xử lý hàng loạt!"</string>
-    <string name="batch_processing_initialized">"Khởi tạo quy trình hàng loạt"</string>
     <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa! Bạn có chắc không?"</string>
     <string name="billing_client_disconnected">"Không kết nối được với ứng dụng Thanh toán của Google Play!"</string>
     <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Tắt"</string>
     <string name="disabled">"tắt"</string>
     <string name="disabling">"Đang tắt %s"</string>
-    <string name="done">"Xong"</string>
     <string name="enable">"Bật"</string>
     <string name="enabled">"Bật"</string>
     <string name="enabling">"Đang bật %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Toàn bộ gói ứng dụng được xuất thành %s!"</string>
     <string name="exporting">"Đang xuất %s"</string>
     <string name="exporting_bundle">"Xuất gói ứng dụng %s"</string>
-    <string name="everything_done">"Mọi thứ đã xong!"</string>
     <string name="failed">"Thất bại"</string>
     <string name="got_it">"Hiểu rồi"</string>
     <string name="install">"Cài đặt"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Đặt lại '%s'?"</string>
     <string name="reset_summary">"Đang đặt lại %s"</string>
     <string name="result">"Kết quả: %s"</string>
-    <string name="search">"Tìm kiếm…"</string>
     <string name="share">"Chia sẻ"</string>
     <string name="shared_by">"%s/được chia sẻ bởi Package Manager"</string>
     <string name="share_message">"Package Manager %s có thể được lấy từ\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Sắp xếp ứng dụng"</string>
     <string name="source_code">"Mã nguồn"</string>
     <string name="support">"Nhóm hỗ trợ"</string>
-    <string name="support_acknowledged">"Khoản đóng góp đã được công nhận \u2665"</string>
-    <string name="support_app">"Mua ứng dụng quyên góp"</string>
     <string name="support_development">"Hỗ trợ phát triển"</string>
     <string name="support_development_summary">"Nếu bạn muốn đánh giá cao nỗ lực của nhà phát triển trong việc cung cấp công cụ này hoàn toàn miễn phí, vui lòng cân nhắc gửi một khoản đóng góp nhỏ bằng cách nhấp vào một trong số các tùy chọn được cung cấp bên dưới! Mua bất kỳ sản phẩm nào trong số này bạn sẽ nhận được huy hiệu ủng hộ tại đây!"</string>
-    <string name="support_dinner">"Mua cho tôi một bữa tối"</string>
-    <string name="support_meal">"Mua cho tôi một bữa ăn"</string>
-    <string name="support_coffee">"Mua cho tôi một ly cà phê"</string>
-    <string name="support_already_received_message">"Bạn đã được hỗ trợ phát triển với mặt hàng này trước đây!"</string>
-    <string name="support_received_message">"Xin chân thành cảm ơn sự ủng hộ của bạn \u2665 \nNó sẽ thúc đẩy tôi rất nhiều để tiếp tục các dự án của mình tích cực hơn! Hơn nữa, bạn sẽ nhận được huy hiệu người ủng hộ ở đầu trang này."</string>
-    <string name="support_retry_message">"Vui lòng thử mua lại!"</string>
-    <string name="support_status_message">"Xin chân thành cảm ơn quý khách hàng đã ủng hộ!"</string>
     <string name="sure_question">"Bạn có chắc không?"</string>
     <string name="turn_on_off">"Bật/Tắt"</string>
     <string name="uninstall">"Gỡ cài đặt"</string>
@@ -80,14 +61,11 @@
     <string name="uninstall_summary">"Đang xóa %s"</string>
     <string name="uninstall_title">"Bạn có chắc chắn gỡ cài đặt %s không?"</string>
     <string name="uninstall_warning">"Xin lưu ý: Việc xóa các ứng dụng hệ thống đôi khi sẽ rất nguy hiểm!\n\n*** <b>SỬ DỤNG RỦI RO CỦA RIÊNG BẠN</b> ***\n"</string>
-    <string name="version">"Phiên bản: %s"</string>
     <string name="welcome_message">"Chào mừng bạn đến với Package Manager, một ứng dụng đơn giản nhưng mạnh mẽ để quản lý các ứng dụng của bạn."</string>
     <string name="wrong_extension">"Vui lòng chọn một tệp có phần mở rộng %s."</string>
     <string name="yes">"Có"</string>
     <string name="explore">"Khám phá"</string>
-    <string name="export_file_message">"được xuất thành công thành %s!"</string>
     <string name="export_storage_message">"Xuất %s vào bộ nhớ thiết bị?"</string>
-    <string name="file_picker_message">"Xin lưu ý: Tính năng này quá thử nghiệm!"</string>
     <string name="more_apps_summary">"Kiểm tra các ứng dụng khác do nhà phát triển cung cấp trong Google Play"</string>
     <string name="open_failed_export_message">"Không thể mở %s! Bạn có muốn xuất nó vào bộ nhớ thiết bị không?"</string>
     <string name="rate_us">"Đánh giá ứng dụng"</string>
@@ -100,7 +78,6 @@
     <string name="support_summary">"Tham gia nhóm hỗ trợ Telegram"</string>
     <string name="batch_options">"Tùy chọn hàng loạt"</string>
     <string name="batch_list_added">"%s được thêm vào danh sách hàng loạt"</string>
-    <string name="batch_list_export">"Bạn có chắc chắn xuất ứng dụng sau sang bộ nhớ thiết bị không?"</string>
     <string name="batch_list_removed">"%s bị xóa khỏi danh sách hàng loạt"</string>
     <string name="explore_error_status">"Không khám phá được %s!"</string>
     <string name="split_apk">"Phân chia APK"</string>
@@ -143,8 +120,6 @@
     <string name="installer">"Trình cài đặt"</string>
     <string name="other">"Khác"</string>
     <string name="restore">"Khôi phục"</string>
-    <string name="save_to_downloads">"Lưu vào Tải xuống"</string>
     <string name="update">"Cập nhật"</string>
-    <string name="reload">"Tải lại"</string>
     <string name="failed_decode_xml">"Không thể giải mã %s"</string>
 </resources>

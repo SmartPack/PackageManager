@@ -9,7 +9,6 @@
 package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
-import android.os.Environment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
-import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on May 30, 2021
@@ -68,15 +66,6 @@ public class FilePicker {
             Common.setPath(Common.getPath() + File.separator);
         }
         return new File(Common.getPath()).listFiles();
-    }
-
-    public static String getLastDirPath(Activity activity) {
-        String mDir = sCommonUtils.getString("lastDirPath", Environment.getExternalStorageDirectory().toString(), activity);
-        if (sFileUtils.exist(new File(mDir)) && mDir.contains(Environment.getExternalStorageDirectory().toString())) {
-            return mDir;
-        } else {
-            return Environment.getExternalStorageDirectory().toString();
-        }
     }
 
 }

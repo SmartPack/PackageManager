@@ -14,10 +14,10 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -29,7 +29,7 @@ import java.io.File;
  */
 public class ImageViewActivity extends AppCompatActivity {
 
-    public static final String PATH_INTENT = "path";
+    public static final String PACKAGE_INTENT = "package", PATH_INTENT = "path";
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -37,17 +37,18 @@ public class ImageViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageview);
 
-        MaterialButton mExport = findViewById(R.id.export);
         AppCompatImageView mImage = findViewById(R.id.image);
-        Toolbar mTitle = findViewById(R.id.toolbar);
+        MaterialButton mExport = findViewById(R.id.export);
+        MaterialTextView mTitle = findViewById(R.id.text);
 
+        String packageName = getIntent().getStringExtra(PACKAGE_INTENT);
         String path = getIntent().getStringExtra(PATH_INTENT);
 
         if (path != null) {
-            mTitle.setTitle(new File(path).getName());
+            mTitle.setText(new File(path).getName());
             mImage.setImageURI(PackageExplorer.getIconFromPath(path));
         } else {
-            mTitle.setTitle(Common.getApplicationName());
+            mTitle.setText(Common.getApplicationName());
             mImage.setImageDrawable(Common.getApplicationIcon());
         }
 
@@ -59,9 +60,9 @@ public class ImageViewActivity extends AppCompatActivity {
                 })
                 .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
                     if (path != null) {
-                        PackageExplorer.copyToStorage(path, this);
+                        PackageExplorer.copyToStorage(path, packageName, this);
                     } else {
-                        PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), Common.getApplicationName() + "_icon.png", this);
+                        PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), Common.getApplicationName() + "_icon.png", packageName, this);
                     }
                 }).show());
     }

@@ -1,8 +1,6 @@
 <resources>
     <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
         <item name="windowNoTitle">true</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/colorBlack</item>
     </style>
 

@@ -3,13 +3,6 @@
     <string name="apk_path">"APK 路徑"</string>
     <string name="app_info">"應用程式資訊"</string>
     <string name="batch_list_clear">"清除清單"</string>
-    <string name="batch_list_disable">"您確定要停用（如果啟用）或啟用（如果停用）以下應用程式嗎？"</string>
-    <string name="batch_list_remove">"您確定要刪除以下應用程式？"</string>
-    <string name="batch_list_reset">"您確定要重置以下應用程式嗎？"</string>
-    <string name="batch_list_summary">"以下應用程式已新增到批次處理清單中"</string>
-    <string name="batch_processing">"正在進行批次處理！"</string>
-    <string name="batch_processing_finished">"批次處理完成！"</string>
-    <string name="batch_processing_initialized">"初始化批次處理"</string>
     <string name="batch_warning">"您的批次處理設定將被刪除！你確定嗎？"</string>
     <string name="billing_client_disconnected">"無法連線至 Google Play 結算客戶端！"</string>
     <string name="bundle_install_apks">"您確定要安裝應用程式捆綁包'％s'嗎？"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"停用"</string>
     <string name="disabled">"已停用"</string>
     <string name="disabling">"停用中％s"</string>
-    <string name="done">"完畢"</string>
     <string name="enable">"啟用"</string>
     <string name="enabled">"已啟用"</string>
     <string name="enabling">"啟用中％s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"整個應用程式捆綁包已匯出至％s！"</string>
     <string name="exporting">"出口％s"</string>
     <string name="exporting_bundle">"匯出％s 應用程式捆綁包"</string>
-    <string name="everything_done">"一切都做完了！"</string>
     <string name="failed">"失敗的"</string>
     <string name="got_it">"知道了"</string>
     <string name="install">"安裝"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"重置'％s'？"</string>
     <string name="reset_summary">"正在重置中％s"</string>
     <string name="result">"結果：％s"</string>
-    <string name="search">"搜尋…"</string>
     <string name="share">"分享"</string>
     <string name="shared_by">"％s /透過Package Manager共享"</string>
     <string name="share_message">"Package Manager ％s 可以從 Google Play 取得： https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,18 +52,8 @@
     <string name="sort_by">"排序應用程式"</string>
     <string name="source_code">"原始碼"</string>
     <string name="support">"支援團隊"</string>
-    <string name="support_acknowledged">"捐贈已確認\u2665"</string>
-    <string name="support_app">"購買捐贈應用程式"</string>
     <string name="support_development">"支持發展"</string>
     <string name="support_development_summary">"如果您想感謝開發人員完全免費提供此工具的努力，請考慮通過單擊以下提供的選項中的一個來發送少量捐款！購買任何此產品將在此處獎勵您支持者徽章！"</string>
-    <string name="support_dinner">"請我吃晚餐"</string>
-    <string name="support_meal">"給我買一頓飯"</string>
-    <string name="support_coffee">"給我買杯咖啡"</string>
-    <string name="support_already_received_message">"之前您已經支持此項目的開發！"</string>
-    <string name="support_received_message">"非常感謝您的支持\u2665
-        這將激勵我繼續開展更積極的項目！此外，您還將在此頁面頂部收到支持者徽章。"</string>
-    <string name="support_retry_message">"請嘗試再次購買！"</string>
-    <string name="support_status_message">"非常感謝您的支持！"</string>
     <string name="sure_question">"你確定嗎？"</string>
     <string name="turn_on_off">"開啟/關閉"</string>
     <string name="uninstall">"解除安裝"</string>
@@ -84,14 +64,11 @@
 
         *** <b>自行承擔使用風險</b> ***
         "</string>
-    <string name="version">"版本：％s"</string>
     <string name="welcome_message">"歡迎使用Package Manager，這是一個簡單但功能強大的應用程式，用於管理您的應用程式。"</string>
     <string name="wrong_extension">"請選擇一個文件％s 副檔名。"</string>
     <string name="yes">"是的"</string>
     <string name="explore">"探索"</string>
-    <string name="export_file_message">"已成功匯出到 ％s！"</string>
     <string name="export_storage_message">"匯出％s 到裝置儲存空間？"</string>
-    <string name="file_picker_message">"請注意：此功能是實驗性的！"</string>
     <string name="more_apps_summary">"檢出開發人員在Google Play中提供的更多應用程式"</string>
     <string name="open_failed_export_message">"無法開啟％s！您想要將它匯出到裝置儲存空間嗎？"</string>
     <string name="rate_us">"評價應用程式"</string>
@@ -104,7 +81,6 @@
     <string name="support_summary">"加入Telegram支援小組"</string>
     <string name="batch_options">"批次選項"</string>
     <string name="batch_list_added">"％s 已新增到批次清單"</string>
-    <string name="batch_list_export">"您確定要將以下應用程式匯出到裝置儲存空間嗎？"</string>
     <string name="batch_list_removed">"從批次清單中刪除了％s"</string>
     <string name="explore_error_status">"無法探索％s！"</string>
     <string name="split_apk">"拆分APK"</string>
@@ -135,10 +111,8 @@
     <string name="bundle_path">"捆綁路徑"</string>
     <string name="size_apk">"APK 大小：%s"</string>
     <string name="size_bundle">"包大小：%s"</string>
-    <string name="file_permission_request_message">"為了使此功能在較新的 Android 版本（Android R 或更新版本）上運行，必須向包管理器授予“所有文件訪問”權限。請在單擊“授予”按鈕後打開的新屏幕中手動授予權限。"</string>
     <string name="grant">"給予"</string>
     <string name="select_all">"全選"</string>
-    <string name="select_all_summary">"選擇此頁面中的所有應用程序並將其添加到批處理列表中？"</string>
     <string name="uninstall_status_failed">"卸載 %s 失敗或被用戶取消"</string>
     <string name="export_apk_summary">"選定的 APK 導出到“%s”"</string>
     <string name="initializing">"正在初始化…"</string>
@@ -168,21 +142,15 @@
     <string name="other">"其他"</string>
     <string name="restore">"恢復"</string>
     <string name="restore_message">"恢復“%s”的出廠版本？"</string>
-    <string name="restore_message_batch">"恢復以下應用的出廠版本？
-
-        %s"</string>
     <string name="restore_success_message">"所選應用程序的出廠版本已成功恢復"</string>
     <string name="split_apk_installer_description">"拆分 APK（具有相同包名的多個 APK 文件）"</string>
     <string name="uninstalled_apps">"卸載的應用程序"</string>
     <string name="user_interface">"用戶界面"</string>
     <string name="uninstall_updates_message">"但是，安裝了“%s”的本地更新，可以通過單擊“卸載”按鈕自由刪除。"</string>
     <string name="close">"關"</string>
-    <string name="bundle_install_question">"您確定要安裝選定的應用程序包嗎？"</string>
     <string name="preparing_message">"準備…"</string>
-    <string name="save_to_downloads">"保存到下載"</string>
     <string name="android_version">"安卓 %s"</string>
     <string name="sdk_compile">"編譯 SDK: %s"</string>
     <string name="sdk_minimum">"最低 SDK：%s"</string>
     <string name="update">"更新"</string>
-    <string name="reload">"重新加載"</string>
 </resources>

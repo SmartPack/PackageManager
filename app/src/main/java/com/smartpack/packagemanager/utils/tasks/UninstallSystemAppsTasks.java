@@ -10,13 +10,11 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.widget.LinearLayout;
 
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -29,14 +27,11 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 public class UninstallSystemAppsTasks extends sExecutor {
 
     private final Activity mActivity;
-    private final LinearLayout mLinearLayout;
-    private final MaterialTextView mTextView;
     private static final RootShell mRootShell = new RootShell();
     private static final ShizukuShell mShizukuShell = new ShizukuShell();
+    private ProgressDialog mProgressDialog;
 
-    public UninstallSystemAppsTasks(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        mLinearLayout = linearLayout;
-        mTextView = textView;
+    public UninstallSystemAppsTasks(Activity activity) {
         mActivity = activity;
 
     }
@@ -44,7 +39,10 @@ public class UninstallSystemAppsTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPreExecute() {
-        PackageDetails.showProgress(mLinearLayout, mTextView, mActivity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+        mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setIcon(R.mipmap.ic_launcher);
+        mProgressDialog.setTitle(mActivity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+        mProgressDialog.show();
     }
 
     @Override
@@ -60,7 +58,7 @@ public class UninstallSystemAppsTasks extends sExecutor {
     @Override
     public void onPostExecute() {
         PackageData.setRawData(null, mActivity);
-        PackageDetails.hideProgress(mLinearLayout, mTextView);
+        mProgressDialog.dismiss();
         mActivity.finish();
         Common.reloadPage(true);
     }

@@ -9,6 +9,9 @@
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -39,8 +42,9 @@ public class ADBUninstallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adb_uninstall);
 
         MaterialButton mUninstallButton = findViewById(R.id.uninstall_button);
-        MaterialCardView mDocumentation = findViewById(R.id.documentation);
-        MaterialCardView mGotIt = findViewById(R.id.got_it);
+        MaterialButton mDocumentation = findViewById(R.id.documentation);
+        MaterialButton mCopyButton = findViewById(R.id.copy_button);
+        MaterialButton mGotIt = findViewById(R.id.got_it);
         MaterialCardView mUninstall = findViewById(R.id.uninstall);
         MaterialTextView mMainMessage = findViewById(R.id.uninstall_message);
         MaterialTextView mADBCommand = findViewById(R.id.adb_command);
@@ -52,6 +56,13 @@ public class ADBUninstallActivity extends AppCompatActivity {
             mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, Common.getApplicationName()));
             mUninstall.setVisibility(View.VISIBLE);
         }
+
+        mCopyButton.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied to clipboard", mADBCommand.getText().toString().trim());
+            clipboard.setPrimaryClip(clip);
+            sCommonUtils.toast("Copied to clipboard", this).show();
+        });
 
         mADBCommand.setTextColor(Color.MAGENTA);
 

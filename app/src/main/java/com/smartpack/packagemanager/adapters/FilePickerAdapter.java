@@ -54,8 +54,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull FilePickerAdapter.ViewHolder holder, int position) {
         if (position == 0) {
-            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots, holder.mIcon.getContext()));
-            holder.mIcon.setRotation(90);
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots_horizontal, holder.mIcon.getContext()));
             holder.mTitle.setText(null);
             holder.mSize.setText(null);
         } else if (new File(this.data.get(position)).isDirectory()) {
@@ -79,7 +78,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
                 } else {
                     Common.getAppList().add(this.data.get(position));
                 }
-                Common.getCardView(activity, R.id.select).setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
+                activity.findViewById(R.id.select).setVisibility(Common.getAppList().isEmpty() ? View.GONE : View.VISIBLE);
             });
             holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
             holder.mSize.setVisibility(View.VISIBLE);

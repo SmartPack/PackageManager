@@ -12,12 +12,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 
-import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
@@ -39,20 +39,20 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        LinearLayout mBottomLayout = findViewById(R.id.layout_bottom);
-        MaterialCardView mDocumentationCard = findViewById(R.id.documentation_card);
-        MaterialCardView mStartCard = findViewById(R.id.start_card);
+        LinearLayoutCompat mBottomLayout = findViewById(R.id.layout_bottom);
+        MaterialButton mDocumentation = findViewById(R.id.documentation);
+        MaterialButton mStart = findViewById(R.id.start);
         MaterialTextView mMainText = findViewById(R.id.main_text);
-        ProgressBar mProgress = findViewById(R.id.progress);
+        ContentLoadingProgressBar mProgress = findViewById(R.id.progress);
 
         if (sCommonUtils.getBoolean("welcomeMessage", true, this)) {
             mMainText.setVisibility(View.VISIBLE);
             mBottomLayout.setVisibility(View.VISIBLE);
             mProgress.setVisibility(View.GONE);
 
-            mDocumentationCard.setOnClickListener(v -> sCommonUtils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
+            mDocumentation.setOnClickListener(v -> sCommonUtils.launchUrl("https://smartpack.github.io/PackageManager/general/", this));
 
-            mStartCard.setOnClickListener(v -> {
+            mStart.setOnClickListener(v -> {
                 mProgress.setVisibility(View.VISIBLE);
                 mMainText.setText(getString(R.string.initializing));
                 mBottomLayout.setVisibility(View.GONE);
@@ -64,7 +64,7 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    private static void loadData(ProgressBar progressBar, Activity activity) {
+    private static void loadData(ContentLoadingProgressBar progressBar, Activity activity) {
         new sExecutor() {
             @Override
             public void onPreExecute() {

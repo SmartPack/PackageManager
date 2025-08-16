@@ -1,11 +1,10 @@
 [versions]
 core = "6.0.0"
-agp = "8.11.1"
+agp = "8.12.0"
 material = "1.12.0"
 shizuku = "13.1.5"
 scommon = "0a9f4f410f"
 axml = "36915c87a0"
-billing = "8.0.0"
 zip4j = "2.11.5"
 
 [libraries]
@@ -19,7 +18,6 @@ themeutils = { module = "com.github.sunilpaulmathew.sCommon:themeutils", version
 translatorutils = { module = "com.github.sunilpaulmathew.sCommon:translatorutils", version.ref = "scommon" }
 api = { module = "dev.rikka.shizuku:api", version.ref = "shizuku" }
 provider = { module = "dev.rikka.shizuku:provider", version.ref = "shizuku" }
-billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
 core = { module = "com.github.topjohnwu.libsu:core", version.ref = "core" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" }

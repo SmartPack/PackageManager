@@ -8,7 +8,11 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -24,12 +28,15 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.tasks.SaveToDownloadsTasks;
+import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.Downloads;
+import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
+import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.io.File;
 import java.util.List;
@@ -45,12 +52,14 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
  */
 public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapter.ViewHolder> {
 
-    private static List<String> data;
+    private final Activity activity;
+    private final List<String> data;
+    private static boolean batch = false;
 
-    private static ClickListener mClickListener;
-
-    public ExportedAppsAdapter(List<String> data) {
-        ExportedAppsAdapter.data = data;
+    public ExportedAppsAdapter(List<String> data, Activity activity) {
+        this.data = data;
+        this.activity = activity;
+        batch = !Common.getRestoreList().isEmpty();
     }
 
     @NonNull
@@ -80,15 +89,29 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         }
         holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
-        holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_doubledots, holder.mAction.getContext()));
+        holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_menu, holder.mAction.getContext()));
+        holder.mAction.setVisibility(batch ? GONE : VISIBLE);
+        holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
+
+        holder.mCheckBox.setChecked(Common.getRestoreList().contains(data.get(position)));
+
+        activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+
+        holder.mCheckBox.setOnClickListener(v -> {
+            if (Common.getRestoreList().contains(data.get(position))) {
+                Common.getRestoreList().remove(data.get(position));
+            } else {
+                Common.getRestoreList().add(data.get(position));
+            }
+            notifyItemChanged(position);
+        });
+
         holder.mAction.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 0, Menu.NONE, v.getContext().getString(R.string.share));
-            if (PackageData.getPackageDir(v.getContext()).equals(v.getContext().getExternalFilesDir(""))) {
-                menu.add(Menu.NONE, 1, Menu.NONE, R.string.save_to_downloads);
-            }
-            menu.add(Menu.NONE, 2, Menu.NONE, v.getContext().getString(R.string.delete));
+            menu.add(Menu.NONE, 0, Menu.NONE, v.getContext().getString(R.string.share)).setIcon(R.drawable.ic_share);
+            menu.add(Menu.NONE, 1, Menu.NONE, v.getContext().getString(R.string.delete)).setIcon(R.drawable.ic_delete);
+            popupMenu.setForceShowIcon(true);
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case 0:
@@ -103,13 +126,9 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                         v.getContext().startActivity(Intent.createChooser(shareScript, v.getContext().getString(R.string.share_with)));
                         break;
                     case 1:
-                        new SaveToDownloadsTasks(new File(data.get(position)), v.getContext()).execute();
-                        break;
-                    case 2:
                         new MaterialAlertDialogBuilder(v.getContext())
                                 .setIcon(R.mipmap.ic_launcher)
-                                .setTitle(R.string.app_name)
-                                .setMessage(v.getContext().getString(R.string.delete_question, new File(data.get(position)).getName()))
+                                .setTitle(v.getContext().getString(R.string.delete_question, new File(data.get(position)).getName()))
                                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialog, id) -> {
                                 })
                                 .setPositiveButton(v.getContext().getString(R.string.delete), (dialog, id) -> {
@@ -131,9 +150,10 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         return data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final AppCompatImageButton mIcon;
         private final MaterialButton mAction;
+        private final MaterialCheckBox mCheckBox;
         private final MaterialTextView mTitle, mSize;
 
         public ViewHolder(View view) {
@@ -141,22 +161,52 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             view.setOnClickListener(this);
             this.mAction = view.findViewById(R.id.export);
             this.mIcon = view.findViewById(R.id.icon);
+            this.mCheckBox = view.findViewById(R.id.checkbox);
             this.mTitle = view.findViewById(R.id.name);
             this.mSize = view.findViewById(R.id.size);
+
+            view.setOnLongClickListener(v -> {
+                if (batch) {
+                    Common.getRestoreList().clear();
+                    batch = false;
+                } else {
+                    batch = true;
+                    Common.getRestoreList().add(data.get(getAdapterPosition()));
+                }
+                activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                notifyItemRangeChanged(0, getItemCount());
+                return true;
+            });
         }
 
         @Override
         public void onClick(View view) {
-            mClickListener.onItemClick(getAdapterPosition(), view);
+            if (batch) {
+                if (Common.getRestoreList().contains(data.get(getAdapterPosition()))) {
+                    Common.getRestoreList().remove(data.get(getAdapterPosition()));
+                } else {
+                    Common.getRestoreList().add(data.get(getAdapterPosition()));
+                }
+                notifyItemRangeChanged(0, getItemCount());
+            } else {
+                new MaterialAlertDialogBuilder(view.getContext())
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(view.getContext().getString(Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm") ? R.string.bundle_install_apks
+                                : R.string.install_question, new File(Downloads.getData(view.getContext()).get(getAdapterPosition())).getName()))
+                        .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                        })
+                        .setPositiveButton(R.string.install, (dialog, id) -> {
+                            if (Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm")) {
+                                new AppBundleTasks(Downloads.getData(view.getContext()).get(getAdapterPosition()), false, activity).execute();
+                            } else {
+                                Common.getAppList().clear();
+                                Common.getAppList().add(Downloads.getData(view.getContext()).get(getAdapterPosition()));
+                                Common.isUpdating(sPackageUtils.isPackageInstalled(sAPKUtils.getPackageName(Downloads.getData(view.getContext()).get(getAdapterPosition()), view.getContext()), view.getContext()));
+                                new SplitAPKsInstallationTasks(activity).execute();
+                            }
+                        }).show();
+            }
         }
-    }
-
-    public void setOnItemClickListener(ClickListener clickListener) {
-        ExportedAppsAdapter.mClickListener = clickListener;
-    }
-
-    public interface ClickListener {
-        void onItemClick(int position, View v);
     }
 
 }

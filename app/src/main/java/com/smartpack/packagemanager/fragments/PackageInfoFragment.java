@@ -19,10 +19,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
@@ -31,21 +31,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apk.axml.APKParser;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PackageInfoAdapter;
 import com.smartpack.packagemanager.adapters.PackageOptionsAdapter;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.Flavor;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.PackageInfoItems;
-import com.smartpack.packagemanager.utils.PackageOptionsItems;
+import com.smartpack.packagemanager.utils.SerializableItems.PackageInfoItems;
+import com.smartpack.packagemanager.utils.SerializableItems.PackageOptionsItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
-import com.smartpack.packagemanager.utils.Utils;
 import com.smartpack.packagemanager.utils.tasks.DisableAppTasks;
 import com.smartpack.packagemanager.utils.tasks.ExploreAPKTasks;
 
@@ -67,15 +64,25 @@ public class PackageInfoFragment extends Fragment {
 
     private boolean mRootOrShizuku = false;
 
+    public PackageInfoFragment() {
+    }
+
+    public static PackageInfoFragment newInstance(boolean launcherIntent) {
+        PackageInfoFragment fragment = new PackageInfoFragment();
+
+        Bundle args = new Bundle();
+        args.putBoolean("launcherIntent", launcherIntent);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @SuppressLint("StringFormatInvalid")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_packageinfo, container, false);
 
-        LinearLayout mProgressLayout = mRootView.findViewById(R.id.progress_layout);
-        MaterialTextView mProgressMessage = mRootView.findViewById(R.id.progress_message);
-        ProgressBar mProgress = mRootView.findViewById(R.id.progress);
         RecyclerView mPackageOptions = mRootView.findViewById(R.id.package_options);
         RecyclerView mPackageInfo = mRootView.findViewById(R.id.recycler_view);
 
@@ -95,30 +102,18 @@ public class PackageInfoFragment extends Fragment {
             switch (getPackageOptionsData().get(position).getPosition()) {
                 case 0:
                     if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
-                        sCommonUtils.snackBar(mRootView, getString(R.string.open_message)).show();
+                        sCommonUtils.toast(getString(R.string.open_message), requireActivity()).show();
                     } else {
                         Intent launchIntent = requireActivity().getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
                         if (launchIntent != null) {
                             startActivity(launchIntent);
                         } else {
-                            sCommonUtils.snackBar(mRootView, getString(R.string.open_failed, Common.getApplicationName())).show();
+                            sCommonUtils.toast(getString(R.string.open_failed, Common.getApplicationName()), requireActivity()).show();
                         }
                     }
                     break;
                 case 1:
-                    if (sCommonUtils.getBoolean("firstExploreAttempt", true, requireActivity())) {
-                        new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                .setIcon(R.mipmap.ic_launcher)
-                                .setTitle(getString(R.string.warning))
-                                .setMessage(getString(R.string.file_picker_message))
-                                .setCancelable(false)
-                                .setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-                                    sCommonUtils.saveBoolean("firstExploreAttempt", false, requireActivity());
-                                    new ExploreAPKTasks(mProgressLayout, mProgress, Common.getSourceDir(), requireActivity()).execute();
-                                }).show();
-                    } else {
-                        new ExploreAPKTasks(mProgressLayout, mProgress, Common.getSourceDir(), requireActivity()).execute();
-                    }
+                    new ExploreAPKTasks(Common.getSourceDir(), requireActivity()).execute();
                     break;
                 case 2:
                     new MaterialAlertDialogBuilder(requireActivity())
@@ -130,17 +125,17 @@ public class PackageInfoFragment extends Fragment {
                             .setCancelable(false)
                             .setNegativeButton(getString(R.string.cancel), (dialog, id) -> {
                             })
-                            .setPositiveButton(getString(R.string.yes), (dialog, id) -> new DisableAppTasks(mProgressLayout, mProgressMessage, requireActivity()).execute())
+                            .setPositiveButton(getString(R.string.yes), (dialog, id) -> new DisableAppTasks(requireActivity()).execute())
                             .show();
                     break;
                 case 3:
                     if (Common.getApplicationID().equals(BuildConfig.APPLICATION_ID)) {
-                        sCommonUtils.snackBar(mRootView, getString(R.string.uninstall_nope)).show();
+                        sCommonUtils.toast(getString(R.string.uninstall_nope), requireActivity()).show();
                     } else if (!Common.isSystemApp()) {
                         Common.isUninstall(true);
                         requireActivity().finish();
                     } else {
-                        PackageDetails.uninstallSystemApp(mProgressLayout, mProgressMessage, requireActivity());
+                        PackageDetails.uninstallSystemApp(requireActivity());
                     }
                     break;
                 default:
@@ -171,32 +166,20 @@ public class PackageInfoFragment extends Fragment {
                             sCommonUtils.launchUrl("https://f-droid.org/packages/" + Common.getApplicationID(), requireActivity());
                             break;
                         case 2:
-                            if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() ||
-                                    Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                                    new MaterialAlertDialogBuilder(requireActivity())
-                                            .setIcon(R.mipmap.ic_launcher)
-                                            .setTitle(R.string.app_name)
-                                            .setMessage(getString(R.string.file_permission_request_message))
-                                            .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                            })
-                                            .setPositiveButton(getString(R.string.grant), (dialogInterface, i) ->
-                                                    Utils.requestPermission(requireActivity()))
-                                            .show();
-                                } else {
-                                    sPermissionUtils.requestPermission(new String[]{
-                                                    Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                            requireActivity());
-                                }
-                                sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.permission_denied_write_storage)).show();
+                            if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
+                                requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                             } else {
-                                if (!PackageData.getPackageDir(requireActivity()).exists()) {
-                                    sFileUtils.mkdir(PackageData.getPackageDir(requireActivity()));
-                                }
+                                PackageData.makePackageFolder(requireActivity());
                                 File mJSON = new File(PackageData.getPackageDir(requireActivity()), Common.getApplicationID() + "_" + sAPKUtils.getVersionCode(
                                         sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()), requireActivity()) + ".json");
                                 sFileUtils.create(Objects.requireNonNull(PackageDetails.getPackageDetails(Common.getApplicationID(), requireActivity())).toString(), mJSON);
-                                sCommonUtils.snackBar(requireActivity().findViewById(android.R.id.content), getString(R.string.export_details_message, mJSON.getName())).show();
+
+                                new MaterialAlertDialogBuilder(requireActivity())
+                                        .setIcon(R.mipmap.ic_launcher)
+                                        .setTitle(R.string.app_name)
+                                        .setMessage(getString(R.string.export_details_message, mJSON.getAbsolutePath()))
+                                        .setPositiveButton(R.string.cancel, (dialog, i) -> {
+                                        }).show();
                             }
                             break;
                         case 3:
@@ -214,7 +197,11 @@ public class PackageInfoFragment extends Fragment {
                 });
                 popupMenu.show();
             } else if (position == 1) {
-                PackageDetails.exportApp(mProgressLayout, mProgressMessage, mProgress, requireActivity());
+                if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
+                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                } else {
+                    PackageDetails.exportApp(requireActivity());
+                }
             } else if (position == 2) {
                 new MaterialAlertDialogBuilder(requireActivity())
                         .setIcon(Common.getApplicationIcon())
@@ -231,9 +218,7 @@ public class PackageInfoFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (mProgressLayout.getVisibility() == View.GONE) {
-                    requireActivity().finish();
-                }
+                requireActivity().finish();
             }
         });
 
@@ -251,7 +236,7 @@ public class PackageInfoFragment extends Fragment {
                 Common.getApplicationID(), requireActivity()), null, mAppBundle ? getString(R.string.size_bundle, PackageData
                 .getBundleSize(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity()))) : getString(R.string.size_apk,
                 sAPKUtils.getAPKSize(new File(Common.getSourceDir()).length())), getString(R.string.export), sCommonUtils.getDrawable(
-                R.drawable.ic_export, requireActivity())));
+                R.drawable.ic_download, requireActivity())));
         mPackageInfoItems.add(new PackageInfoItems(getString(R.string.data_dir), Common.getDataDir(), null, null,
                 mRootOrShizuku ? getString(R.string.reset) : null, mRootOrShizuku ? sCommonUtils.getDrawable(R.drawable.ic_reset, requireActivity()) : null));
         mPackageInfoItems.add(new PackageInfoItems(getString(R.string.native_lib), null, Common.getNativeLibsDir(), null,
@@ -269,7 +254,7 @@ public class PackageInfoFragment extends Fragment {
 
     private List<PackageOptionsItems> getPackageOptionsData() {
         List<PackageOptionsItems> mPackageOptionsItems = new ArrayList<>();
-        if (sPackageUtils.isEnabled(Common.getApplicationID(), requireActivity())) {
+        if (requireArguments().getBoolean("launcherIntent", false) && sPackageUtils.isEnabled(Common.getApplicationID(), requireActivity())) {
             mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_open, requireActivity()), getString(R.string.open), 0));
         }
         mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_explore, requireActivity()), getString(R.string.explore), 1));
@@ -281,5 +266,16 @@ public class PackageInfoFragment extends Fragment {
         mPackageOptionsItems.add(new PackageOptionsItems(sCommonUtils.getDrawable(R.drawable.ic_doubledots, requireActivity()), getString(R.string.app_info), 4));
         return mPackageOptionsItems;
     }
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (result) {
+                    sCommonUtils.toast(getString(R.string.permission_granted_write_storage), requireActivity()).show();
+                } else {
+                    sCommonUtils.toast(getString(R.string.permission_denied_write_storage), requireActivity()).show();
+                }
+            }
+    );
 
 }

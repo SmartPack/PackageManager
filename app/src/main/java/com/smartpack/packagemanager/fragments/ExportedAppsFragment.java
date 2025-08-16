@@ -8,6 +8,9 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.Manifest;
 import android.app.Activity;
 import android.os.Build;
@@ -25,7 +28,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -34,24 +36,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ExportedAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
-import com.smartpack.packagemanager.utils.Flavor;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
-import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
-import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.io.File;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
-import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
@@ -59,10 +59,11 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class ExportedAppsFragment extends Fragment {
 
-    private AppCompatAutoCompleteTextView mSearchWord;
     private boolean mRefresh = false;
-    private ProgressBar mProgress;
+    private MaterialAutoCompleteTextView mSearchWord;
+    private MaterialButton mBatch, mSearch, mSort;
     private RecyclerView mRecyclerView;
+    private ProgressBar mProgress;
     private ExportedAppsAdapter mRecycleViewAdapter;
 
     @Nullable
@@ -71,13 +72,14 @@ public class ExportedAppsFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_exported_apps, container, false);
 
         mSearchWord = mRootView.findViewById(R.id.search_word);
-        MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
-        MaterialButton mSort = mRootView.findViewById(R.id.sort_icon);
+        mBatch = mRootView.findViewById(R.id.batch);
+        mSearch = mRootView.findViewById(R.id.search_icon);
+        mSort = mRootView.findViewById(R.id.sort_icon);
         mProgress = mRootView.findViewById(R.id.progress);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
 
-        Common.getView(requireActivity(), R.id.fab).setVisibility(View.VISIBLE);
+        requireActivity().findViewById(R.id.fab).setVisibility(VISIBLE);
 
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apks)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.bundles)));
@@ -85,42 +87,35 @@ public class ExportedAppsFragment extends Fragment {
         mSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(sCommonUtils.getBoolean("reverse_order_exports", false, requireActivity()));
+            if (!Downloads.getData(requireActivity()).isEmpty()) {
+                menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
+                        .setChecked(sCommonUtils.getBoolean("reverse_order_exports", false, requireActivity()));
+            }
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
                     sCommonUtils.saveBoolean("reverse_order_exports", !sCommonUtils.getBoolean("reverse_order_exports", false, requireActivity()), requireActivity());
-                    loadUI();
+                    loadUI().execute();
                 }
                 return false;
             });
             popupMenu.show();
         });
 
-        if (Flavor.isFullVersion() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Utils.isPermissionDenied() || Build.VERSION.SDK_INT <=
-                Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
             LinearLayout mPermissionLayout = mRootView.findViewById(R.id.permission_layout);
             MaterialCardView mPermissionGrant = mRootView.findViewById(R.id.grant_card);
             MaterialTextView mPermissionText = mRootView.findViewById(R.id.permission_text);
-            mPermissionText.setText(getString(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ?
-                    R.string.file_permission_request_message : R.string.permission_denied_write_storage));
-            mPermissionLayout.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-            mTabLayout.setVisibility(View.GONE);
-            mPermissionGrant.setOnClickListener(v -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    Utils.requestPermission(requireActivity());
-                    mRefresh = true;
-                } else {
-                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                }
-            });
+            mPermissionText.setText(getString(R.string.permission_denied_write_storage));
+            mPermissionLayout.setVisibility(VISIBLE);
+            mRecyclerView.setVisibility(GONE);
+            mTabLayout.setVisibility(GONE);
+            mPermissionGrant.setOnClickListener(v -> requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE));
         }
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
-        loadUI();
+        loadUI().execute();
 
         Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
 
@@ -132,13 +127,13 @@ public class ExportedAppsFragment extends Fragment {
                     case 0:
                         if (!mStatus.equals("apks")) {
                             sCommonUtils.saveString("downloadTypes", "apks", requireActivity());
-                            loadUI();
+                            loadUI().execute();
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("bundles")) {
                             sCommonUtils.saveString("downloadTypes", "bundles", requireActivity());
-                            loadUI();
+                            loadUI().execute();
                         }
                         break;
                 }
@@ -154,11 +149,11 @@ public class ExportedAppsFragment extends Fragment {
         });
 
         mSearch.setOnClickListener(v -> {
-            if (mSearchWord.getVisibility() == View.VISIBLE) {
-                mSearchWord.setVisibility(View.GONE);
+            if (mSearchWord.getVisibility() == VISIBLE) {
+                mSearchWord.setVisibility(GONE);
                 Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             } else {
-                mSearchWord.setVisibility(View.VISIBLE);
+                mSearchWord.setVisibility(VISIBLE);
                 Utils.toggleKeyboard(1, mSearchWord, requireActivity());
             }
         });
@@ -181,25 +176,35 @@ public class ExportedAppsFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 Downloads.setSearchText(s.toString());
-                loadUI();
+                loadUI().execute();
             }
         });
 
-        mRecycleViewAdapter.setOnItemClickListener((position, v) -> new MaterialAlertDialogBuilder(requireActivity())
-                .setMessage(getString(Downloads.getData(requireActivity()).get(position).endsWith(".apkm") ? R.string.bundle_install_apks
-                        : R.string.install_question, new File(Downloads.getData(requireActivity()).get(position)).getName()))
-                .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                })
-                .setPositiveButton(R.string.install, (dialog, id) -> {
-                    if (Downloads.getData(requireActivity()).get(position).endsWith(".apkm")) {
-                        new AppBundleTasks(mProgress, Downloads.getData(requireActivity()).get(position), false, requireActivity()).execute();
-                    } else {
-                        Common.getAppList().clear();
-                        Common.getAppList().add(Downloads.getData(requireActivity()).get(position));
-                        Common.isUpdating(sPackageUtils.isPackageInstalled(sAPKUtils.getPackageName(Downloads.getData(requireActivity()).get(position), requireActivity()), requireActivity()));
-                        new SplitAPKsInstallationTasks(requireActivity()).execute();
+        mBatch.setOnClickListener(v ->
+                new sExecutor() {
+
+                    @Override
+                    public void onPreExecute() {
+                        mProgress.setVisibility(VISIBLE);
                     }
-                }).show());
+
+                    @Override
+                    public void doInBackground() {
+                        mProgress.setMax(Common.getRestoreList().size());
+                        for (String apkPath : Common.getRestoreList()) {
+                            sFileUtils.delete(apkPath);
+                            mProgress.setProgress(mProgress.getProgress() + 1);
+                        }
+                        Common.getRestoreList().clear();
+                    }
+
+                    @Override
+                    public void onPostExecute() {
+                        mProgress.setVisibility(GONE);
+                        loadUI().execute();
+                    }
+                }.execute()
+        );
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
@@ -209,10 +214,12 @@ public class ExportedAppsFragment extends Fragment {
                     Downloads.setSearchText(null);
                     return;
                 }
-                if (mSearchWord.getVisibility() == View.VISIBLE) {
-                    mSearchWord.setVisibility(View.GONE);
+                if (mSearchWord.getVisibility() == VISIBLE) {
+                    mSearchWord.setVisibility(GONE);
                     return;
                 }
+
+                Common.getRestoreList().clear();
 
                 Common.navigateToFragment(requireActivity(), 0);
             }
@@ -221,9 +228,35 @@ public class ExportedAppsFragment extends Fragment {
         return mRootView;
     }
 
-    private void loadUI() {
-        mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(requireActivity()));
-        mRecyclerView.setAdapter(mRecycleViewAdapter);
+    private sExecutor loadUI() {
+        return new sExecutor() {
+            @Override
+            public void onPreExecute() {
+                mProgress.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void doInBackground() {
+                File[] oldList = requireActivity().getExternalFilesDir("").listFiles();
+                PackageData.makePackageFolder(requireActivity());
+                for (File files : Objects.requireNonNull(oldList)) {
+                    if (files.isFile() && (files.getName().endsWith(".apk") || files.getName().endsWith(".apkm"))) {
+                        sFileUtils.copy(files, new File(PackageData.getPackageDir(requireActivity()), files.getName()));
+                        sFileUtils.delete(files);
+                    }
+                }
+                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(requireActivity()), requireActivity());
+            }
+
+            @Override
+            public void onPostExecute() {
+                mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
+                mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
+                mBatch.setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                mRecyclerView.setAdapter(mRecycleViewAdapter);
+                mProgress.setVisibility(GONE);
+            }
+        };
     }
 
     private int getTabPosition(Activity activity) {
@@ -250,6 +283,12 @@ public class ExportedAppsFragment extends Fragment {
             requireActivity().recreate();
             mRefresh = false;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Common.getRestoreList().clear();
     }
 
 }

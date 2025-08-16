@@ -3,13 +3,6 @@
     <string name="apk_path">"Путь к APK"</string>
     <string name="app_info">"О приложении"</string>
     <string name="batch_list_clear">"Очистить список"</string>
-    <string name="batch_list_disable">"Вы уверены, что хотите отключить (если включено) или включить (если отключено) следующие приложения?"</string>
-    <string name="batch_list_remove">"Вы уверены, что хотите удалить следующие приложения?"</string>
-    <string name="batch_list_reset">"Вы уверены, что хотите сбросить следующие приложения?"</string>
-    <string name="batch_list_summary">"Следующие приложения добавлены в список пакетной обработки"</string>
-    <string name="batch_processing">"Выполняется пакетная обработка!"</string>
-    <string name="batch_processing_finished">"Пакетная обработка завершена!"</string>
-    <string name="batch_processing_initialized">"Инициализация процесса пакетной обработки"</string>
     <string name="batch_warning">"Настройки пакетной обработки будут удалены! Вы уверены?"</string>
     <string name="billing_client_disconnected">"Не удалось подключиться к клиенту Google Play Billing!"</string>
     <string name="bundle_install_apks">"Вы точно хотите установить пакетное приложение(split) '%s'?"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Заморозить"</string>
     <string name="disabled">"заморожено"</string>
     <string name="disabling">"Заморозка %s"</string>
-    <string name="done">"Готово"</string>
     <string name="enable">"Разморозить"</string>
     <string name="enabled">"разморожено"</string>
     <string name="enabling">"Разморозка %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Весь пакет приложения экспортиhован %s!"</string>
     <string name="exporting">"Экспорт %s"</string>
     <string name="exporting_bundle">"Экспорт %s пакетного приложения"</string>
-    <string name="everything_done">"Все готово!"</string>
     <string name="failed">"Сбой"</string>
     <string name="got_it">"Понял"</string>
     <string name="install">"Установка"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Сбросить %s?"</string>
     <string name="reset_summary">"Сброс %s"</string>
     <string name="result">"Результат: %s"</string>
-    <string name="search">"Поиск…"</string>
     <string name="share">"Поделиться"</string>
     <string name="shared_by">"%s/поделиться Package Manager"</string>
     <string name="share_message">"Package Manager %s можно получить в\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"Сортировать приложения по"</string>
     <string name="source_code">"Исходный код"</string>
     <string name="support">"Группа поддержки"</string>
-    <string name="support_acknowledged">"Пожертвование подтверждено \u2665"</string>
-    <string name="support_app">"Купить приложение для пожертвований"</string>
     <string name="support_development">"Поддержка развития"</string>
     <string name="support_development_summary">"Если вы хотите оценить усилия разработчика по предоставлению этого инструмента совершенно бесплатно, рассмотрите возможность отправки небольшого пожертвования, выбрав один из вариантов ниже!"</string>
-    <string name="support_dinner">"Купите мне ужин"</string>
-    <string name="support_meal">"Купите мне еды"</string>
-    <string name="support_coffee">"Купите мне кофе"</string>
-    <string name="support_already_received_message">"Вы уже поддержали разработку с помощью этого элемента раньше!"</string>
-    <string name="support_received_message">"Большое спасибо вам за вашу поддержку \u2665Это будет очень мотивировать меня поддерживать мои проекты!"</string>
-    <string name="support_retry_message">"Пожалуйста, попробуйте купить еще раз!"</string>
-    <string name="support_status_message">"Большое спасибо за вашу поддержку!"</string>
     <string name="sure_question">"Вы уверены?"</string>
     <string name="turn_on_off">"Включение/выключение"</string>
     <string name="uninstall">"Удалить"</string>
@@ -83,14 +64,11 @@
 
         *** <b>ИСПОЛЬЗУЙТЕ НА СВОЙ РИСК</b> ***
         "</string>
-    <string name="version">"Версия: %s"</string>
     <string name="welcome_message">"Добро пожаловать в Package Manager, простое, но мощное приложение для управления вашими приложениями."</string>
     <string name="wrong_extension">"Пожалуйста, выберите файл с %s расширением."</string>
     <string name="yes">"Да"</string>
     <string name="explore">"Обзор"</string>
-    <string name="export_file_message">"успешно экспортирован в %s!"</string>
     <string name="export_storage_message">"Экспортировать %s в хранилище устройства?"</string>
-    <string name="file_picker_message">"Обратите внимание: эта функция очень экспериментальная!"</string>
     <string name="more_apps_summary">"Ознакомьтесь с другими приложениями, предоставленными разработчиком, в Play Маркет"</string>
     <string name="open_failed_export_message">"Невозможно открыть %s! Вы хотите экспортировать его в хранилище устройства?"</string>
     <string name="rate_us">"Оценить приложение"</string>
@@ -103,7 +81,6 @@
     <string name="support_summary">"Присоединиться к группе поддержки в Telegram"</string>
     <string name="batch_options">"Пакетные операции (%s)"</string>
     <string name="batch_list_added">"%s добавлен в список пакетной обработки"</string>
-    <string name="batch_list_export">"Вы точно хотите экспортировать следующие приложения в хранилище устройства?"</string>
     <string name="batch_list_removed">"%s удален из списка пакетной обработки"</string>
     <string name="explore_error_status">"Не удалось обозреть %s!"</string>
     <string name="split_apk">"Split APK"</string>
@@ -134,10 +111,8 @@
     <string name="bundle_path">"Путь к пакету"</string>
     <string name="size_apk">"Размер APK: %s"</string>
     <string name="size_bundle">"Размер пакета"</string>
-    <string name="file_permission_request_message">"Для работы этой функции в новых версиях Android (Android R и выше) необходимо предоставить Package Manager право \"Доступ ко всем данным\". Нажмите кнопку \"Предоставить\" и на открывшемся экране представьте право вручную."</string>
     <string name="grant">"Предоставить"</string>
     <string name="select_all">"Выбрать всё"</string>
-    <string name="select_all_summary">"Выбрать и добавить все приложения с этой страницы в пакетный список?"</string>
     <string name="uninstall_status_failed">"Произошла ошибка при удалении %s или операция была прервана пользователем!"</string>
     <string name="export_apk_summary">"Выбранный APK экспортирован в '%s'!"</string>
     <string name="initializing">"Инициализация…"</string>
@@ -167,9 +142,6 @@
     <string name="other">"Другой"</string>
     <string name="restore">"Восстановить"</string>
     <string name="restore_message">"Восстановить заводскую версию '%s'?"</string>
-    <string name="restore_message_batch">"Восстановить заводские версии следующих приложений?
-
-        %s"</string>
     <string name="restore_success_message">"Заводская версия выбранных приложений успешно восстановлена"</string>
     <string name="split_apk_installer_description">"Разделить APK (несколько файлов APK с одинаковым именем пакета)"</string>
     <string name="uninstalled_apps">"Удаленные приложения"</string>

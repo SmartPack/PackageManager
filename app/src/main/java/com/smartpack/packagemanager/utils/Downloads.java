@@ -12,11 +12,9 @@ import android.content.Context;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
-import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
@@ -64,9 +62,7 @@ public class Downloads {
     }
 
     private static File[] getDownloadList(Context context) {
-        if (!PackageData.getPackageDir(context).exists()) {
-            sFileUtils.mkdir(PackageData.getPackageDir(context));
-        }
+        PackageData.makePackageFolder(context);
         return PackageData.getPackageDir(context).listFiles();
     }
 

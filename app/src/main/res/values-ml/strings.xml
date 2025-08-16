@@ -3,13 +3,6 @@
     <string name="apk_path">"APK-യുടെ പാത"</string>
     <string name="app_info">"വിശദാംശങ്ങൾ"</string>
     <string name="batch_list_clear">"മായ്‌ക്കുക"</string>
-    <string name="batch_list_disable">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) പ്രവർത്തനരഹിതമാക്കണമെന്ന് (പ്രവർത്തനക്ഷമമാണെങ്കിൽ) അല്ലെങ്കിൽ പ്രവർത്തനക്ഷമമാക്കണമെന്ന് (പ്രവർത്തനരഹിതമാണെങ്കിൽ ) നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
-    <string name="batch_list_remove">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷൻ (അപ്ലിക്കേഷനുകൾ) നീക്കംചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
-    <string name="batch_list_reset">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷനുകൾ reset ചെയ്യണമെന്ന്  ഉറപ്പാണോ?"</string>
-    <string name="batch_list_summary">"താഴെപ്പറയുന്ന അപ്ലിക്കേഷനുകൾ ബാച്ച് ലിസ്റ്റിനോട് ചേർത്തിരിക്കുന്നു"</string>
-    <string name="batch_processing">"ബാച്ച് പ്രോസസ്സിംഗ് പുരോഗമിക്കുന്നു!"</string>
-    <string name="batch_processing_finished">"ബാച്ച് പ്രോസസ്സിംഗ് പൂർത്തിയായിരിക്കുന്നു!"</string>
-    <string name="batch_processing_initialized">"ബാച്ച് പ്രോസസ്സ് ആരംഭിക്കുന്നു"</string>
     <string name="batch_warning">"നിങ്ങളുടെ ബാച്ച് ക്രമീകരണങ്ങൾ നീക്കംചെയ്യും! നിങ്ങള്ക്ക് ഉറപ്പാണോ?"</string>
     <string name="billing_client_disconnected">"ഗൂഗിൾ പ്ലേ ബില്ലിംഗ് ക്ലയന്റുമായി ബന്ധിപ്പിക്കുന്നതിൽ പരാജയപ്പെട്ടു!"</string>
     <string name="bundle_install_apks">"അപ്ലിക്കേഷൻ ബണ്ടിൽ '%s' ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന്‌ ഉറപ്പാണോ?"</string>
@@ -20,7 +13,6 @@
     <string name="disable_message">"%s ചെയ്യ്യപ്പെടും! ഉറപ്പാണോ?"</string>
     <string name="disabled">"പ്രവർത്തനരഹിതമാണ്"</string>
     <string name="disabling">"%s നെ പ്രവർത്തനരഹിതമാക്കുന്നു"</string>
-    <string name="done">"പൂർത്തിയായി"</string>
     <string name="enabled">"പ്രവർത്തനക്ഷമമാണ്"</string>
     <string name="enabling">"%s നെ പ്രവർത്തനക്ഷമമാക്കുന്നു"</string>
     <string name="export">"എക്സ്പോർട്ട്"</string>
@@ -28,7 +20,6 @@
     <string name="export_bundle_summary">"അപ്ലിക്കേഷൻ ബണ്ടിൽ മുഴുവനായി %s ൽ എക്‌സ്‌പോർട്ടുചെയ്തിരിക്കുന്നു!"</string>
     <string name="exporting">"%s എക്സ്പോർട്ട് ചെയ്യുന്നു"</string>
     <string name="exporting_bundle">"%s അപ്ലിക്കേഷൻ ബണ്ടിലിനെ എക്സ്പോർട്ട് ചെയ്യുന്നു"</string>
-    <string name="everything_done">"എല്ലാം പൂർത്തിയായി!"</string>
     <string name="failed">"പരാജയപ്പെട്ടു"</string>
     <string name="got_it">"മനസ്സിലായി"</string>
     <string name="install">"ഇൻസ്റ്റാൾ"</string>
@@ -48,23 +39,13 @@
     <string name="press_back">"ബാക് ബട്ടൺ ഒന്നുകൂടി അമർത്തുക"</string>
     <string name="report_issue">"ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക"</string>
     <string name="result">"ഫലം: %s"</string>
-    <string name="search">"തിരയൽ…"</string>
     <string name="share">"പങ്കുവെക്കുക"</string>
     <string name="shared_by">"%s/പാക്കേജ് മാനേജർ പങ്കുവെച്ചത്"</string>
     <string name="share_message">"Package Manager %s താഴെ ലഭിക്കുന്നതിനായി കാണുന്ന എതെകിലും ലിങ്കിൽ ക്ലിക്ക് ചെയ്യ്യുക\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
     <string name="share_with">"പങ്കിടുക"</string>
     <string name="sort_by">"അടുക്കുക"</string>
-    <string name="support_acknowledged">"സംഭാവന ലഭിച്ചതായി അംഗീകരിക്കുന്നു \u2665"</string>
-    <string name="support_app">"Donation ആപ്പ് വാങ്ങുക"</string>
     <string name="support_development">"വികസനത്തിന് പിന്തുണ നൽകുക"</string>
     <string name="support_development_summary">"ഈ ആപ്പ്ളിക്കേഷൻ പൂർണ്ണമായും സജന്യമായി നൽകാനുള്ള ഡവലപ്പറുടെ ശ്രമങ്ങളെ അഭിനന്ദിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, ചുവടെ നൽകിയിരിക്കുന്ന ഓപ്ഷനുകളിൽ ഒന്ന് ക്ലിക്കുചെയ്ത് ഒരു ചെറിയ സംഭാവന അയയ്ക്കുന്നത് പരിഗണിക്കുക! ഈ ഉൽപ്പന്നത്തിൽ ഏതെങ്കിലും വാങ്ങിയാൽ നിങ്ങൾക്ക് ഇവിടെ ഒരു പിന്തുണാ ബാഡ്ജ് നൽകും!"</string>
-    <string name="support_dinner">"അത്താഴം വാങ്ങുക"</string>
-    <string name="support_meal">"ഭക്ഷണം വാങ്ങുക"</string>
-    <string name="support_coffee">"കോഫി വാങ്ങുക"</string>
-    <string name="support_already_received_message">"നിങ്ങൾ ഇതിനകം തന്നെ വികസനത്തെ പിന്തുണച്ചിട്ടുണ്ട്!"</string>
-    <string name="support_received_message">"നിങ്ങളുടെ പിന്തുണയ്ക്ക് വളരെ നന്ദി \u2665\nഎന്റെ പ്രോജക്റ്റുകൾ കൂടുതൽ സജീവമായി തുടരാൻ ഇത് എന്നെ വളരെയധികം പ്രേരിപ്പിക്കും! മാത്രമല്ല, ഈ പേജിന്റെ മുകളിൽ നിങ്ങൾക്ക് ഒരു പിന്തുണാ ബാഡ്ജ് ലഭിക്കും"</string>
-    <string name="support_retry_message">"ദയവായി വീണ്ടും വാങ്ങാൻ ശ്രമിക്കുക!"</string>
-    <string name="support_status_message">"നിങ്ങളുടെ പിന്തുണയ്ക്ക് വളരെ നന്ദി!"</string>
     <string name="sure_question">"ഉറപ്പാണോ?"</string>
     <string name="turn_on_off">"പ്രവർത്തനരഹിതം/ക്ഷമം ആക്കുക"</string>
     <string name="uninstall">"അൺ‌ഇൻ‌സ്റ്റാൾ‌"</string>
@@ -72,13 +53,10 @@
     <string name="uninstall_summary">"%s നീക്കംചെയ്യുന്നു"</string>
     <string name="uninstall_title">"%s അൺ‌ഇൻസ്റ്റാൾ ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="uninstall_warning">"ദയവായി ശ്രദ്ധിക്കുക: സിസ്റ്റം അപ്ലിക്കേഷനുകൾ നീക്കംചെയ്യുന്നത് ചിലപ്പോൾ അപകടകരമാണ്!\n\n*** <b>USE AT YOUR OWN RISK</b> ***"</string>
-    <string name="version">"പതിപ്പ്: %s"</string>
     <string name="welcome_message">"പാക്കേജ് മാനേജറിലേക്ക്, നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ മാനേജുചെയ്യുന്നതിനുള്ള ലളിതവും ശക്തവുമായ അപ്ലിക്കേഷനിലേക്ക് സ്വാഗതം."</string>
     <string name="wrong_extension">"%s extension ഉള്ള ഒരു ഫയൽ തിരഞ്ഞെടുക്കുക."</string>
     <string name="yes">"അതെ"</string>
-    <string name="export_file_message">"നെ %s ലേക്ക് വിജയകരമായി എക്‌സ്‌പോർട്ടുചെയ്തിരിക്കുന്നു!"</string>
     <string name="export_storage_message">"ഉപകരണ സംഭരണത്തിലേക്ക് %s നെ എക്‌സ്‌പോർട്ടുചെയ്യണോ?"</string>
-    <string name="file_picker_message">"ദയവായി ശ്രദ്ധിക്കുക: ഈ സവിശേഷത വളരെ പരീക്ഷണാത്മകമാണ്!"</string>
     <string name="more_apps_summary">"ഈ ഡെവലപ്പറുടെതായി ഗൂഗിൾ പ്ലേ സ്റ്റോറിൽ ഉള്ള മറ്റു ആപ്പ്ലിക്കേഷനുകൾ പരിശോധിക്കുക"</string>
     <string name="open_failed_export_message">"%s തുറക്കാനായില്ല! ഇത് ഉപകരണ സംഭരണത്തിലേക്ക് എക്‌സ്‌പോർട്ടുചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?"</string>
     <string name="settings">"ക്രമീകരണങ്ങൾ"</string>
@@ -87,7 +65,6 @@
     <string name="support_summary">"ടെലിഗ്രാം സപ്പോർട്ട് ഗ്രൂപ്പിൽ ചേരുക"</string>
     <string name="batch_options">"ബാച്ച് ഓപ്ഷനുകൾ (%s)"</string>
     <string name="batch_list_added">"%s നെ ബാച്ച് പട്ടികയിൽ ചേർത്തു"</string>
-    <string name="batch_list_export">"ഇനിപ്പറയുന്ന അപ്ലിക്കേഷൻ (കൾ) ഫോൺ  സംഭരണത്തിലേക്ക് എക്‌സ്‌പോർട്ടുചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
     <string name="batch_list_removed">"%s നെ ബാച്ച് പട്ടികയിൽ നിന്ന് നീക്കം ചെയ്തു"</string>
     <string name="activities">"Activities"</string>
     <string name="documentation_summary">"പാക്കേജ് മാനേജർ ഉപയോഗിക്കുന്നതിന് ആവശ്യമായ വിശദമായ ഡോക്യുമെന്റേഷൻ പരിശോധിക്കുക"</string>

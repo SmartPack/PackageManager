@@ -56,7 +56,7 @@ public class PackageExplorer {
     @SuppressLint("StringFormatInvalid")
     public static String readXMLFromAPK(String path, Activity activity) {
         try (FileInputStream inputStream = new FileInputStream(path)) {
-            return new aXMLDecoder().decode(inputStream);
+            return new aXMLDecoder(inputStream).decode();
         } catch (Exception e) {
             sCommonUtils.toast(activity.getString(R.string.failed_decode_xml, new File(path).getName()), activity).show();
         }
@@ -90,7 +90,7 @@ public class PackageExplorer {
         return bitmap;
     }
 
-    public static void saveIcon(Bitmap bitmap, String name, Activity activity) {
+    public static void saveIcon(Bitmap bitmap, String name, String packageName, Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
             sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -98,10 +98,10 @@ public class PackageExplorer {
             sCommonUtils.toast(activity.getString(R.string.permission_denied_write_storage), activity).show();
             return;
         }
-        new SaveIconTasks(name, bitmap, activity).execute();
+        new SaveIconTasks(name, packageName, bitmap, activity).execute();
     }
 
-    public static void copyToStorage(String path, Activity activity) {
+    public static void copyToStorage(String path, String packageName, Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, activity)) {
             sPermissionUtils.requestPermission(new String[] {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -109,7 +109,7 @@ public class PackageExplorer {
             sCommonUtils.toast(activity.getString(R.string.permission_denied_write_storage), activity).show();
             return;
         }
-        new SaveToDownloadsTasks(new File(path), activity).execute();
+        new SaveToDownloadsTasks(new File(path), packageName, activity).execute();
     }
 
 }

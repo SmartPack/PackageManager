@@ -1,0 +1,20 @@
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:scrollbars="vertical"
+    android:padding="5dp" >
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:padding="2sp" />
+    </HorizontalScrollView>
+</androidx.core.widget.NestedScrollView>

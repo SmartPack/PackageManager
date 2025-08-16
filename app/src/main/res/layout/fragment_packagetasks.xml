@@ -1,75 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:title="@string/app_name" >
+            android:gravity="top|center_vertical"
+            android:padding="5dp" >
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/reload_icon"
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_marginEnd="10dp"
-                app:icon="@drawable/ic_reset"
-                android:layout_gravity="end" />
+                android:text="@string/app_name"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="125dp"
+                style="@style/AppTheme.Title" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/sort_icon"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_height="wrap_content"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_marginEnd="10dp"
-                app:icon="@drawable/ic_sort"
-                android:layout_gravity="end" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/search_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_marginEnd="10dp"
-                app:icon="@drawable/ic_search"
-                android:layout_gravity="end" />
-        </androidx.appcompat.widget.Toolbar>
+                android:layout_gravity="center|end"
+                android:layout_marginStart="125dp"
+                android:orientation="horizontal"
+                android:layout_marginEnd="5dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reload_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_marginEnd="10dp"
+                    app:icon="@drawable/ic_reset"
+                    android:layout_gravity="end" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/search_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    app:iconTint="?attr/colorPrimary"
+                    app:icon="@drawable/ic_search" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sort_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    app:iconTint="?attr/colorPrimary"
+                    app:icon="@drawable/ic_sort" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </FrameLayout>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" >
+            android:layout_width="match_parent"
+            app:strokeColor="?attr/colorPrimary"
+            app:cardCornerRadius="45dp"
+            android:layout_margin="5dp" >
 
-            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/search_word"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textAutoComplete"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:imeOptions="actionDone"
+                android:layout_width="match_parent"
+                android:drawableStart="@drawable/ic_search"
                 android:layout_gravity="center"
-                android:hint="@string/search"
-                android:cursorVisible="true"
-                android:visibility="gone"
-                android:gravity="center"
-                android:padding="10dp"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:gravity="start|center"
+                android:layout_margin="5dp"
+                android:background="@null"
+                android:visibility="gone" />
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -90,45 +96,22 @@
             android:visibility="gone" />
 
         <include layout="@layout/layout_recyclerview" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/batch_options"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/batch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="?attr/materialIconButtonFilledTonalStyle"
         android:layout_alignParentBottom="true"
+        android:textColor="?attr/colorPrimary"
         android:layout_alignParentEnd="true"
+        android:layout_gravity="end|center"
         android:layout_marginBottom="75dp"
-        android:layout_marginEnd="35dp"
-        app:cardCornerRadius="15dp"
+        app:iconTint="?attr/colorPrimary"
+        android:layout_marginEnd="50dp"
+        app:icon="@drawable/ic_select"
         android:visibility="gone"
-        android:padding="10dp" >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|bottom"
-                android:src="@drawable/ic_batch"
-                android:layout_marginEnd="10dp"
-                android:scaleType="center"
-                android:background="@null"
-                android:clickable="false" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/batch_option_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="false"
-                android:textStyle="bold"
-                android:textSize="17sp"
-                android:gravity="start" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        android:textSize="17sp"
+        app:iconPadding="10sp" />
 </RelativeLayout>

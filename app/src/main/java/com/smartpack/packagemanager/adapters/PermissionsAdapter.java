@@ -19,7 +19,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PermissionsItems;
+import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -45,8 +45,8 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
     public PermissionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mRootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_appops, parent, false);
         if (!Common.isAPKPicker() && (!mRootShell.rootAccess() && !mShizukuShell.isReady())) {
-            mRootView.setOnClickListener(v -> sCommonUtils.snackBar(mRootView, mRootView
-                    .getContext().getString(R.string.feature_unavailable_message)).show());
+            mRootView.setOnClickListener(v -> sCommonUtils.toast(mRootView
+                    .getContext().getString(R.string.feature_unavailable_message), v.getContext()).show());
         }
         return new PermissionsAdapter.ViewHolder(mRootView);
     }

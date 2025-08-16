@@ -3,13 +3,6 @@
     <string name="apk_path">"Τοποθεσία αρχείου APK"</string>
     <string name="app_info">"Πληροφορίες εφαρμογής"</string>
     <string name="batch_list_clear">"Διαγραφή λίστας"</string>
-    <string name="batch_list_disable">"Είστε σίγουρος ότι θέλετε να απενεργοποιήσετε (εάν είναι ενεργοποιημένη) ή να ενεργοποιήσετε (εάν είναι απενεργοποιημένη) την ακόλουθη εφαρμογή(ές);?"</string>
-    <string name="batch_list_remove">"Είστε σίγουρος ότι θέλετε να αφαιρέσετε τις ακόλουθες εφαρμογές;"</string>
-    <string name="batch_list_reset">"Είστε σίγουρος για την επαναφορά των επόμενων εφαρμογών;"</string>
-    <string name="batch_list_summary">"Οι ακόλουθες εφαρμογές προστέθηκαν στη λίστα ομάδας"</string>
-    <string name="batch_processing">"Επεξεργασία Ομάδας σε Εξέλιξη!"</string>
-    <string name="batch_processing_finished">"Η Επεξεργασία Ομάδας ολοκληρώθηκε!"</string>
-    <string name="batch_processing_initialized">"Αρχικοποίηση Διεργασίας Ομάδας"</string>
     <string name="batch_warning">"Οι ρυθμίσεις ομάδας σας θα αφαιρεθούν! Είστε σίγουρος;"</string>
     <string name="billing_client_disconnected">"Αποτυχία σύνδεσης με τον διακομιστή της Google Play Billing"</string>
     <string name="bundle_install_apks">"Είστε σίγουρος για την εγκατάσταση της δέσμης εφαρμογής '%s';"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"Απενεργοποίηση"</string>
     <string name="disabled">"Ανενεργό"</string>
     <string name="disabling">"Απενεργοποίηση %s"</string>
-    <string name="done">"Ολοκληρώθηκε"</string>
     <string name="enable">"Ενεργοποίηση"</string>
     <string name="enabled">"Ενεργό"</string>
     <string name="enabling">"Ενεργοποίηση %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"Ολόκληρη η δέσμη εφαρμογών έχει εξαχθεί σε %s!"</string>
     <string name="exporting">"Εξαγωγή %s"</string>
     <string name="exporting_bundle">"Εξαγωγή %s δέσμης εφαρμογών"</string>
-    <string name="everything_done">"Όλα Ολοκληρώθηκαν!"</string>
     <string name="failed">"Απέτυχε"</string>
     <string name="got_it">"Το κατάλαβα"</string>
     <string name="install">"Εγκατάσταση"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"Επαναφορά '%s';"</string>
     <string name="reset_summary">"Επαναφορά %s"</string>
     <string name="result">"Αποτέλεσμα: %s"</string>
-    <string name="search">"Αναζήτηση…"</string>
     <string name="share">"Κοινοποίηση"</string>
     <string name="shared_by">"%s/κοινοποιημένο από το Package Manager"</string>
     <string name="share_message">"το Package Manager %s μπορεί να αποκτηθεί από
@@ -63,17 +53,8 @@
     <string name="sort_by">"Ταξινόμηση Εφαρμογών Κατά"</string>
     <string name="source_code">"Πηγαίος Κώδικας"</string>
     <string name="support">"Ομάδα υποστήριξης"</string>
-    <string name="support_acknowledged">"Η δωρεά αναγνωρίστηκε \u2665"</string>
-    <string name="support_app">"Αγοράστε την εφαργή δωρεάς"</string>
     <string name="support_development">"Υποστηρίξτε την ανάπτυξη της εφαρμογής"</string>
     <string name="support_development_summary">"Αν θέλετε να εκφράσετε την εκτίμησή σας στον κόπο του προγραμματιστή ώστε να παρέχει αυτό το εργαλείο εντελώς δωρεάν, παρακαλώ σκεφτείτε το ενδεχόμενο να στείλετε μία μικρή δωρεά χρησιμοποιόντας μία απο τις παρακάτω επιλογές. Αγοράζοντας κάποιο από τα προϊόντα θα λάβετε εδώ το παράσημο του υποστηρικτή."</string>
-    <string name="support_dinner">"Κεράστε μου ένα βραδινό γεύμα"</string>
-    <string name="support_meal">"Κεράστε μου ένα γεύμα"</string>
-    <string name="support_coffee">"Κεράστε μου ένα καφέ"</string>
-    <string name="support_already_received_message">"Έχετε ήδη υποστηρίξει την ανάπτυξη αυτής της εφαρμογής με αυτό το αντικείμενο"</string>
-    <string name="support_received_message">"Ευχαριστώ για την υποστήριξη \u2665 Αυτό με παρακινεί να κρατήσω τα έργα μου ακόμα πιο ενεργά. Ακόμα, θα λάβετε το παράσημο του υποστηρικτή στην αρχή αυτής της σελίδας."</string>
-    <string name="support_retry_message">"Παρακαλώ δοκιμάστε ξανά να πραγματοποιήσετε την αγορά"</string>
-    <string name="support_status_message">"Ευχαριστούμε πάρα πολύ για την υποστήριξή σας"</string>
     <string name="sure_question">"Είστε σίγουρος;"</string>
     <string name="turn_on_off">"Ενεργοποίηση/απενεργοποίηση"</string>
     <string name="uninstall">"Απεγκατάσταση"</string>
@@ -84,14 +65,11 @@
 
         *** <b>ΧΡΗΣΙΜΟΠΟΙΉΣΤΕ ΜΕ ΔΙΚΉ ΣΑΣ ΕΥΘΎΝΗ</b> ***
         "</string>
-    <string name="version">"Έκδοση: %s"</string>
     <string name="welcome_message">"Καλώς ήρθατε στο Package Manager, μια απλή, αλλά πανίσχυρη εφαρμογή για να διαχειριστείτε τις εφαρμογές σας."</string>
     <string name="wrong_extension">"Παρακαλώ επιλέξτε κάποιο αρχείο με %s προέκταση."</string>
     <string name="yes">"Ναι"</string>
     <string name="explore">"Πλοήγησηα"</string>
-    <string name="export_file_message">"Έχει εξαχθεί επιτυχώς στο %s"</string>
     <string name="export_storage_message">"Εξαγωγή %s στην συσκευή αποθήκευσης;"</string>
-    <string name="file_picker_message">"Παρακαλώ σημειώστε: Αυτή η λειτουργία βρίσκεται σε πειραματικό στάδιο"</string>
     <string name="more_apps_summary">"Ολοκληρώστε την αγορά περισσοτέρων εφαρμογών αύτου του προγραμματιστή μέσω του Google Play"</string>
     <string name="open_failed_export_message">"Αδύνατη η πρόσβαση %s. Μήπως θέλετε να το εξάγετε στον αποθηκευτικό χώρο της συσκευής;"</string>
     <string name="rate_us">"Αξιολογίστε την εφαρμογή"</string>
@@ -104,7 +82,6 @@
     <string name="support_summary">"Συμμετέχετε στην ομάδα υποστήριξης στο Telegram"</string>
     <string name="batch_options">"Επιλογές δέσμης (%s)"</string>
     <string name="batch_list_added">"%s προστέθηκε στη λίστα"</string>
-    <string name="batch_list_export">"Είστε σίγουρος ότι θέλετε να εξάγετε τις ακόλουθες εφαρμογές στην μνήμη της συσκευής;"</string>
     <string name="batch_list_removed">"%s αφαιρέθηκε από τη λίστα"</string>
     <string name="explore_error_status">"Αποτυχία περιήγησης  %s"</string>
     <string name="split_apk">"Διαχωρισμός αρχείων APK"</string>
@@ -135,7 +112,6 @@
     <string name="size_bundle">"Μέγεθος δέσμης: %s"</string>
     <string name="grant">"Χορήγηση"</string>
     <string name="select_all">"Επιλογή όλων"</string>
-    <string name="select_all_summary">"Επιλογή και πρόσθεση όλων των εφαρμογών αυτής της σελίδας στη λίστα;"</string>
     <string name="uninstall_status_failed">"Η απεγκατάσταση %s απέτυχε ή ακυρώθηκε απο τον χρήστη"</string>
     <string name="export_apk_summary">"Το επιλεγμένο αρχείο APK εξήχθη στο '%s'"</string>
     <string name="initializing">"Αρχικοποίηση…"</string>
@@ -165,19 +141,13 @@
     <string name="other">"Άλλο"</string>
     <string name="restore">"Επανέφερε"</string>
     <string name="restore_message">"Επαναφορά εργοστασιακής έκδοσης του '%s' ;"</string>
-    <string name="restore_message_batch">"Επαναφορά εργοστασιακής έκδοσης των ακόλουθων εφαρμογών;
-
-        %s"</string>
     <string name="restore_success_message">"Η εργοστασιακή έκδοση των επιλεγμένων εφαρμογών επαναφέρθηκε επιτυχώς"</string>
     <string name="split_apk_installer_description">"Χώρισε τα αρχεία APK (πολλαπλά αρχεία APK με το ίδιο όνομα πακέτου)"</string>
     <string name="uninstalled_apps">"Απεγκατεστημένες εφαρμογές"</string>
     <string name="user_interface">"Διεπαφή χρήστη"</string>
     <string name="close">"Κλείσε"</string>
-    <string name="bundle_install_question">"Είστε σίγουρος στην εγκατάσταση της επιλεγμένης δέσμης εφαρμογών;"</string>
     <string name="preparing_message">"Προετοιμασία…"</string>
-    <string name="save_to_downloads">"Αποθήκευση στο φάκελο κατεβασμένων αρχείων"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_minimum">"Ελάχιστο SDK: %s"</string>
     <string name="update">"Αναβάθμιση"</string>
-    <string name="reload">"Επανφόρτωση"</string>
 </resources>

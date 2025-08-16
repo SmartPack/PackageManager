@@ -3,13 +3,6 @@
     <string name="apk_path">"APK 路径"</string>
     <string name="app_info">"应用信息"</string>
     <string name="batch_list_clear">"清空列表"</string>
-    <string name="batch_list_disable">"您确定要禁用（如果已启用）或启用（如果已禁用）以下应用吗？"</string>
-    <string name="batch_list_remove">"您确定要删除以下应用吗？"</string>
-    <string name="batch_list_reset">"您确定要重置以下应用吗？"</string>
-    <string name="batch_list_summary">"以下应用程序已添加到批处理列表中"</string>
-    <string name="batch_processing">"正在进行批量处理！"</string>
-    <string name="batch_processing_finished">"批量处理完成！"</string>
-    <string name="batch_processing_initialized">"初始化批量处理"</string>
     <string name="batch_warning">"您的批量处理设置将被删除！您确定吗？"</string>
     <string name="billing_client_disconnected">"Google Play 结算客户端无法连接！"</string>
     <string name="bundle_install_apks">"您确定要安装应用捆绑包 '%s' 吗？"</string>
@@ -22,7 +15,6 @@
     <string name="disable">"禁用"</string>
     <string name="disabled">"禁用"</string>
     <string name="disabling">"正在禁用 %s"</string>
-    <string name="done">"完成"</string>
     <string name="enable">"启用"</string>
     <string name="enabled">"启用"</string>
     <string name="enabling">"正在启用 %s"</string>
@@ -30,7 +22,6 @@
     <string name="export_bundle_summary">"整个应用捆绑包将被导出到 %s！"</string>
     <string name="exporting">"正在导出 %s"</string>
     <string name="exporting_bundle">"正在导出 %s 应用捆绑包"</string>
-    <string name="everything_done">"全部完成！"</string>
     <string name="failed">"失败"</string>
     <string name="got_it">"明白"</string>
     <string name="install">"安装"</string>
@@ -54,7 +45,6 @@
     <string name="reset_message">"重置 '%s' 吗？"</string>
     <string name="reset_summary">"正在重置 %s"</string>
     <string name="result">"结果：%s"</string>
-    <string name="search">"搜索…"</string>
     <string name="share">"分享"</string>
     <string name="shared_by">"%s/自 Package Manager 分享"</string>
     <string name="share_message">"Package Manager %s 可以前往 Google Play 获取：https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -62,17 +52,8 @@
     <string name="sort_by">"排序应用"</string>
     <string name="source_code">"源代码"</string>
     <string name="support">"反馈群组"</string>
-    <string name="support_acknowledged">"捐赠已确认 \u2665"</string>
-    <string name="support_app">"购买捐赠应用"</string>
     <string name="support_development">"支持开发"</string>
     <string name="support_development_summary">"如果您想感谢开发者为完全免费提供此工具所做的努力，请考虑点击以下任意一个选项来发送少量捐款！任意捐款都会在此奖励您一枚支持者徽章！"</string>
-    <string name="support_dinner">"给我买一顿大餐"</string>
-    <string name="support_meal">"给我买一份零食"</string>
-    <string name="support_coffee">"给我买一杯咖啡"</string>
-    <string name="support_already_received_message">"您已经为开发者支持过此物品了！"</string>
-    <string name="support_received_message">"非常感谢您的支持 \u2665 \n这将激励我继续积极开发我的项目！此外，您还将在此页面顶部收到支持者徽章。"</string>
-    <string name="support_retry_message">"请尝试再次购买！"</string>
-    <string name="support_status_message">"非常感谢您的支持！"</string>
     <string name="sure_question">"您确定吗？"</string>
     <string name="turn_on_off">"开启/关闭"</string>
     <string name="uninstall">"卸载"</string>
@@ -83,14 +64,11 @@
 
         *** <b>您需要自担风险</b> ***
         "</string>
-    <string name="version">"版本：%s"</string>
     <string name="welcome_message">"欢迎使用 Package Manager，一款简单而强大的应用程序管理器。"</string>
     <string name="wrong_extension">"请选择一个带有 %s 扩展名的文件。"</string>
     <string name="yes">"是"</string>
     <string name="explore">"浏览"</string>
-    <string name="export_file_message">"已成功导出到 %s！"</string>
     <string name="export_storage_message">"将 %s 导出到设备存储中？"</string>
-    <string name="file_picker_message">"请注意：此功能是实验性的！"</string>
     <string name="more_apps_summary">"查看开发者在 Google Play 中提供的更多应用"</string>
     <string name="open_failed_export_message">"无法打开 %s！是否要将其导出到设备存储中？"</string>
     <string name="rate_us">"评价应用"</string>
@@ -103,7 +81,6 @@
     <string name="support_summary">"加入 Telegram 支持群组"</string>
     <string name="batch_options">"批量处理选项"</string>
     <string name="batch_list_added">"%s 已被添加到批量处理列表中"</string>
-    <string name="batch_list_export">"您确定要将以下应用导出到设备存储吗？"</string>
     <string name="batch_list_removed">"%s 已从批量处理列表中移除"</string>
     <string name="explore_error_status">"无法浏览 %s！"</string>
     <string name="split_apk">"拆分 APK"</string>
@@ -134,10 +111,8 @@
     <string name="bundle_path">"捆绑包路径"</string>
     <string name="size_apk">"APK 大小：%s"</string>
     <string name="size_bundle">"捆绑包大小：%s"</string>
-    <string name="file_permission_request_message">"若要在较新 Android 版本上（Android R 或更新版本）正常使用此功能，您需要授予 Package Manager“访问所有文件”权限。您可以点击“授权”按钮，并在打开的新页面中手动授予此权限。"</string>
     <string name="grant">"授权"</string>
     <string name="select_all">"全选"</string>
-    <string name="select_all_summary">"选择此页面的所有应用并添加到批量处理列表吗？"</string>
     <string name="uninstall_status_failed">"卸载 %s 失败或被用户取消！"</string>
     <string name="export_apk_summary">"所选 APK 已导出至 '%s'！"</string>
     <string name="initializing">"正在初始化…"</string>
@@ -167,23 +142,17 @@
     <string name="other">"其他"</string>
     <string name="restore">"恢复"</string>
     <string name="restore_message">"恢复 '%s' 到出厂版本吗？"</string>
-    <string name="restore_message_batch">"恢复下列应用到出厂版本吗？
-
-        %s"</string>
     <string name="restore_success_message">"成功恢复所选应用到出厂版本！"</string>
     <string name="split_apk_installer_description">"拆分 APK（多个相同包名的 APK 文件）"</string>
     <string name="uninstalled_apps">"已卸载应用"</string>
     <string name="user_interface">"用户界面"</string>
     <string name="uninstall_updates_message">"一个 '%s' 的本地更新已安装，但您可以点击“卸载”按钮来移除。"</string>
     <string name="close">"关闭"</string>
-    <string name="bundle_install_question">"您确定要安装选中的应用捆绑包吗？"</string>
     <string name="preparing_message">"正在准备…"</string>
-    <string name="save_to_downloads">"保存到下载目录"</string>
     <string name="android_version">"Android %s"</string>
     <string name="sdk_compile">"编译 SDK：%s"</string>
     <string name="sdk_minimum">"最低 SDK：%s"</string>
     <string name="update">"更新"</string>
-    <string name="reload">"刷新"</string>
     <string name="disable_failed_message">"更改 %s 组件状态失败。 "</string>
     <string name="never_show">"永不显示"</string>
     <string name="request">"请求"</string>

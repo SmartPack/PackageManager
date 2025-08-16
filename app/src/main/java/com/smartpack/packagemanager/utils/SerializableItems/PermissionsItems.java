@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.utils;
+package com.smartpack.packagemanager.utils.SerializableItems;
 
 import java.io.Serializable;
 

@@ -23,7 +23,7 @@ android {
     defaultConfig {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 24
-        targetSdk 36
+        targetSdk 35
         versionCode 72
         versionName "v7.2"
         vectorDrawables.useSupportLibrary = true
@@ -57,6 +57,10 @@ android {
         play {
             dimension "release"
         }
+        pro {
+            dimension "release"
+            applicationIdSuffix '.pro'
+        }
         fdroid {
             dimension "release"
         }
@@ -67,7 +71,6 @@ android {
 }
 
 dependencies {
-    playImplementation libs.billing
     implementation libs.axml
 
     implementation libs.adapters

@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="start|center_vertical"
     android:orientation="horizontal"
-    android:padding="5dp" >
+    android:padding="5dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/icon"
@@ -17,39 +18,59 @@
             android:background="@null"  />
 
         <FrameLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end|center_vertical">
+            android:layout_gravity="center"
+            android:gravity="end|center" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="35dp"
-                    android:baselineAligned="false">
+                    android:layout_marginEnd="40sp"
+                    android:orientation="vertical" >
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:focusable="false"
-                            android:textSize="17sp" />
+                            android:textStyle="bold"
+                            android:textSize="17sp"
+                            android:maxLines="1" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:focusable="false" />
+                            android:focusable="false"
+                            android:maxLines="1" />
                 </LinearLayout>
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="35dp"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="@null" />
+                    android:layout_gravity="center|end"
+                    android:orientation="vertical"
+                    android:gravity="center" >
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/open"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="?attr/materialIconButtonFilledTonalStyle"
+                            android:layout_gravity="center|end"
+                            app:iconTint="?attr/colorPrimary"
+                            app:icon="@drawable/ic_open"
+                            android:visibility="gone"
+                            android:gravity="center" />
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/checkbox"
+                            android:layout_width="35dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:background="@null"
+                            android:visibility="gone" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
         </FrameLayout>
 </LinearLayout>

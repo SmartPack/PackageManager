@@ -1,4 +1,4 @@
-<LinearLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -6,18 +6,19 @@
     android:layout_gravity="center"
     android:orientation="vertical" >
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="@string/uninstall_adb" />
+        android:text="@string/uninstall_adb"
+        android:layout_marginStart="10dp"
+        style="@style/AppTheme.Title"
+        android:padding="5dp" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -26,6 +27,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:strokeColor="?attr/colorPrimary"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="10dp" >
 
@@ -35,24 +37,38 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:gravity="start"
-                    android:textSize="17sp"
                     android:padding="10dp" />
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/adb_command"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:textStyle="bold|italic"
-                android:gravity="center_horizontal"
-                android:textSize="16sp"
-                android:padding="10dp" />
+                android:layout_margin="10dp" >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/adb_command"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textIsSelectable="true"
+                    android:textStyle="bold|italic"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:padding="10dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/copy_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_gravity="end|center_vertical"
+                    app:icon="@drawable/ic_copy" />
+            </FrameLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/uninstall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:strokeColor="?attr/colorPrimary"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="10dp"
                 android:visibility="gone" >
@@ -68,7 +84,6 @@
                         android:layout_marginEnd="40dp"
                         android:textStyle="bold"
                         android:gravity="start"
-                        android:textSize="17sp"
                         android:padding="10dp" />
 
                     <com.google.android.material.button.MaterialButton
@@ -81,48 +96,37 @@
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/documentation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="15dp"
-                    android:padding="10dp">
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:text="@string/documentation"
+                    android:layout_marginEnd="10dp"
+                    app:icon="@drawable/ic_book"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:iconPadding="10sp"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/documentation"
-                        android:textStyle="bold|italic"
-                        android:layout_margin="10dp"
-                        android:textSize="17sp" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/got_it"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="50dp"
-                    app:cardCornerRadius="15dp"
-                    android:padding="10dp">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:textStyle="bold|italic"
-                        android:text="@string/got_it"
-                        android:layout_margin="10dp"
-                        android:textSize="17sp" />
-                </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
-        </LinearLayout>
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_marginStart="10dp"
+                    app:icon="@drawable/ic_thumbs"
+                    android:text="@string/got_it"
+                    app:iconGravity="textEnd"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:iconPadding="10sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

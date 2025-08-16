@@ -8,6 +8,9 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -23,15 +26,15 @@ import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.UninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.Common;
@@ -53,8 +56,8 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class UninstalledAppsFragment extends Fragment {
 
-    private AppCompatAutoCompleteTextView mSearchWord;
-    private MaterialCardView mRestore;
+    private MaterialAutoCompleteTextView mSearchWord;
+    private MaterialButton mBatch, mSearch, mSort;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private UninstalledAppsAdapter mRecycleViewAdapter;
@@ -67,27 +70,18 @@ public class UninstalledAppsFragment extends Fragment {
         View mRootView = inflater.inflate(R.layout.fragment_uninstalled_apps, container, false);
 
         mSearchWord = mRootView.findViewById(R.id.search_word);
-        MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
-        MaterialButton mSort = mRootView.findViewById(R.id.sort_icon);
-        mRestore = mRootView.findViewById(R.id.restore);
+        mBatch = mRootView.findViewById(R.id.batch);
+        mSearch = mRootView.findViewById(R.id.search_icon);
+        mSort = mRootView.findViewById(R.id.sort_icon);
         mProgress = mRootView.findViewById(R.id.progress);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
 
-        Common.getView(requireActivity(), R.id.fab).setVisibility(View.GONE);
+        requireActivity().findViewById(R.id.fab).setVisibility(View.GONE);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        mRecycleViewAdapter = new UninstalledAppsAdapter(getData(requireActivity()), requireActivity());
-        mRecyclerView.setAdapter(mRecycleViewAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
-        mRecycleViewAdapter.setOnItemClickListener((position, v) ->
-                new MaterialAlertDialogBuilder(requireActivity())
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(R.string.sure_question)
-                        .setMessage(getString(R.string.restore_message, getData(requireActivity()).get(position)))
-                        .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                        })
-                        .setPositiveButton(R.string.restore, (dialog, id) -> restore(position, false,requireActivity())).show()
-        );
+        loadUI();
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -124,8 +118,10 @@ public class UninstalledAppsFragment extends Fragment {
         mSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                    .setChecked(sCommonUtils.getBoolean("reverse_order", false, requireActivity()));
+            if (!getData(requireActivity()).isEmpty()) {
+                menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
+                        .setChecked(sCommonUtils.getBoolean("reverse_order", false, requireActivity()));
+            }
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
                     sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
@@ -136,19 +132,7 @@ public class UninstalledAppsFragment extends Fragment {
             popupMenu.show();
         });
 
-        mRestore.setOnClickListener(v -> {
-            StringBuilder sb = new StringBuilder();
-            for (String packageName : Common.getRestoreList()) {
-                sb.append("* ").append(packageName).append("\n");
-            }
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(R.string.sure_question)
-                    .setMessage(getString(R.string.restore_message_batch, sb.toString()))
-                    .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                    })
-                    .setPositiveButton(R.string.restore, (dialog, id) -> restore(0, true, requireActivity())).show();
-        });
+        mBatch.setOnClickListener(v -> restore(v.getContext()).execute());
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
@@ -179,7 +163,7 @@ public class UninstalledAppsFragment extends Fragment {
 
             @Override
             public void onPreExecute() {
-                mProgress.setVisibility(View.VISIBLE);
+                mProgress.setVisibility(VISIBLE);
             }
 
             @Override
@@ -189,20 +173,21 @@ public class UninstalledAppsFragment extends Fragment {
 
             @Override
             public void onPostExecute() {
+                mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
+                mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
+                mBatch.setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
-                mProgress.setVisibility(View.GONE);
+                mProgress.setVisibility(GONE);
             }
         }.execute();
     }
 
     private List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
-        List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+        List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
         for (ApplicationInfo packageInfo : packages) {
             if (!sPackageUtils.isPackageInstalled(packageInfo.packageName, context)) {
-                if (mSearchText == null) {
-                    mData.add(packageInfo.packageName);
-                } else if (packageInfo.packageName.contains(mSearchText)) {
+                if (mSearchText == null || packageInfo.packageName.contains(mSearchText)) {
                     mData.add(packageInfo.packageName);
                 }
             }
@@ -213,11 +198,10 @@ public class UninstalledAppsFragment extends Fragment {
         return mData;
     }
 
-    private void restore(int position, boolean batch, Context context) {
-        new sExecutor() {
+    private sExecutor restore(Context context) {
+        return new sExecutor() {
             private RootShell mRootShell = null;
             private ShizukuShell mShizukuShell = null;
-            private String mOutput = null;
 
             @Override
             public void onPreExecute() {
@@ -228,19 +212,11 @@ public class UninstalledAppsFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                if (batch) {
-                    for (String packageName : Common.getRestoreList()) {
-                        if (mRootShell.rootAccess()) {
-                            mRootShell.runCommand("cmd package install-existing " + packageName);
-                        } else {
-                            mShizukuShell.runCommand("cmd package install-existing " + packageName);
-                        }
-                    }
-                } else {
+                for (String packageName : Common.getRestoreList()) {
                     if (mRootShell.rootAccess()) {
-                        mOutput = mRootShell.runAndGetError("cmd package install-existing " + getData(context).get(position));
+                        mRootShell.runCommand("cmd package install-existing " + packageName);
                     } else {
-                        mOutput = mShizukuShell.runAndGetOutput("cmd package install-existing " + getData(context).get(position));
+                        mShizukuShell.runCommand("cmd package install-existing " + packageName);
                     }
                 }
             }
@@ -248,24 +224,21 @@ public class UninstalledAppsFragment extends Fragment {
             @Override
             public void onPostExecute() {
                 PackageData.setRawData(null, context);
-                if (batch) {
-                    mRestore.setVisibility(View.GONE);
-                    Common.getRestoreList().clear();
-                    new MaterialAlertDialogBuilder(context)
-                            .setMessage(getString(R.string.restore_success_message))
-                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
-                            }).show();
-                    loadUI();
-                } else {
-                    new MaterialAlertDialogBuilder(context)
-                            .setMessage(mOutput.endsWith("installed for user: 0") ? getString(R.string.restore_success_message) : mOutput)
-                            .setPositiveButton(R.string.cancel, (dialog, id) -> {
-                            }).show();
-                    mRecycleViewAdapter.notifyItemRemoved(position);
-                    mProgress.setVisibility(View.GONE);
-                }
+                Common.getRestoreList().clear();
+                new MaterialAlertDialogBuilder(context)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(getString(R.string.restore_success_message))
+                        .setPositiveButton(R.string.cancel, (dialog, id) -> {
+                        }).show();
+                loadUI();
             }
-        }.execute();
+        };
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Common.getRestoreList().clear();
     }
 
 }

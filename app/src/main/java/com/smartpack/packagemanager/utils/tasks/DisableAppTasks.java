@@ -10,12 +10,10 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.widget.LinearLayout;
 
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -29,15 +27,12 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class DisableAppTasks extends sExecutor {
 
     private final Activity mActivity;
-    private final LinearLayout mLinearLayout;
-    private final MaterialTextView mTextView;
     private static final RootShell mRootShell = new RootShell();
     private static final ShizukuShell mShizukuShell = new ShizukuShell();
     private static String mResult = null;
+    private ProgressDialog mProgressDialog;
 
-    public DisableAppTasks(LinearLayout linearLayout, MaterialTextView textView, Activity activity) {
-        mLinearLayout = linearLayout;
-        mTextView = textView;
+    public DisableAppTasks(Activity activity) {
         mActivity = activity;
 
     }
@@ -45,9 +40,12 @@ public class DisableAppTasks extends sExecutor {
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPreExecute() {
-        PackageDetails.showProgress(mLinearLayout, mTextView, sPackageUtils.isEnabled(Common.getApplicationID(), mActivity) ?
+        mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setIcon(R.mipmap.ic_launcher);
+        mProgressDialog.setTitle(sPackageUtils.isEnabled(Common.getApplicationID(), mActivity) ?
                 mActivity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
                 mActivity.getString(R.string.enabling, Common.getApplicationName()) + "...");
+        mProgressDialog.show();
     }
 
     @Override
@@ -60,9 +58,10 @@ public class DisableAppTasks extends sExecutor {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
-        PackageDetails.hideProgress(mLinearLayout, mTextView);
+        mProgressDialog.dismiss();
         if (mResult != null && (mResult.contains("new state: disabled") || mResult.contains("new state: enabled"))) {
             Common.reloadPage(true);
             mActivity.recreate();

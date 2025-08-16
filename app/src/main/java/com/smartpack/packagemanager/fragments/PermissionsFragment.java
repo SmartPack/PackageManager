@@ -26,7 +26,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PermissionsAdapter;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.PermissionsItems;
+import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 
 import java.util.ArrayList;
 import java.util.List;

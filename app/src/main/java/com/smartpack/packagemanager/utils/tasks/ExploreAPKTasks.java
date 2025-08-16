@@ -10,11 +10,10 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
+import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.ZipFileUtils;
 
@@ -30,13 +29,11 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 public class ExploreAPKTasks extends sExecutor {
 
     private final Activity mActivity;
-    private final LinearLayout mLinearLayout;
-    private final ProgressBar mProgressBar;
+    private static File mFile;
     private final String mPath;
+    private ProgressDialog mProgressDialog;
 
-    public ExploreAPKTasks(LinearLayout linearLayout, ProgressBar progressBar, String path, Activity activity) {
-        mLinearLayout = linearLayout;
-        mProgressBar = progressBar;
+    public ExploreAPKTasks(String path, Activity activity) {
         mPath = path;
         mActivity = activity;
 
@@ -44,27 +41,30 @@ public class ExploreAPKTasks extends sExecutor {
 
     @Override
     public void onPreExecute() {
-        mProgressBar.setIndeterminate(false);
-        mLinearLayout.setVisibility(View.VISIBLE);
-        if (sFileUtils.exist(new File(mActivity.getCacheDir().getPath(), "apk"))) {
-            sFileUtils.delete(new File(mActivity.getCacheDir().getPath(), "apk"));
+        mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setIcon(R.mipmap.ic_launcher);
+        mProgressDialog.setTitle(R.string.exploring);
+        mProgressDialog.show();
+        mFile = new File(mActivity.getCacheDir(), "apk");
+        if (sFileUtils.exist(mFile)) {
+            sFileUtils.delete(mFile);
         }
-        sFileUtils.mkdir(new File(mActivity.getCacheDir().getPath(), "apk"));
-        Common.setPath(mActivity.getCacheDir().getPath() + "/apk");
+        mFile.deleteOnExit();
+        sFileUtils.mkdir(mFile);
+        Common.setPath(mFile.getAbsolutePath());
     }
 
     @Override
     public void doInBackground() {
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(mPath)) {
-            zipFileUtils.setProgress(mProgressBar);
-            zipFileUtils.unzip(mActivity.getCacheDir().getPath() + "/apk");
+            zipFileUtils.setProgress(mProgressDialog);
+            zipFileUtils.unzip(mFile.getAbsolutePath());
         } catch (IOException ignored) {}
     }
 
     @Override
     public void onPostExecute() {
-        mLinearLayout.setVisibility(View.GONE);
-        mProgressBar.setIndeterminate(true);
+        mProgressDialog.dismiss();
         Intent explorer = new Intent(mActivity, PackageExploreActivity.class);
         mActivity.startActivity(explorer);
     }
