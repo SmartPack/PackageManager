@@ -81,6 +81,18 @@
     <string name="installing_bundle">Installing…</string>
     <string name="language">Language</string>
     <string name="language_default">Default</string>
+    <string name="language_el" translatable="false">Ελληνικά</string>
+    <string name="language_en" translatable="false">English (%s)</string>
+    <string name="language_es" translatable="false">Español (%s)</string>
+    <string name="language_fr" translatable="false">français (%s)</string>
+    <string name="language_hu" translatable="false">Magyar</string>
+    <string name="language_in" translatable="false">bahasa Indonesia</string>
+    <string name="language_ja" translatable="false">日本</string>
+    <string name="language_ko" translatable="false">한국어</string>
+    <string name="language_pl" translatable="false">Polski"</string>
+    <string name="language_pt" translatable="false">Português (%s)</string>
+    <string name="language_ru" translatable="false">русский</string>
+    <string name="language_zh" translatable="false">中文 (%s)</string>
     <string name="manifest">Manifest</string>
     <string name="more">More</string>
     <string name="more_apps">More from Developer</string>

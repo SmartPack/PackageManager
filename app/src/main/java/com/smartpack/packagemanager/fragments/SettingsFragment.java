@@ -81,7 +81,7 @@ public class SettingsFragment extends Fragment {
 
         // User interface
         mData.add(new SettingsItems(getString(R.string.user_interface), null, null, null, true, 15));
-        mData.add(new SettingsItems(getString(R.string.language), AppSettings.getLanguage(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_language, requireActivity()), null, false, 18));
+        mData.add(new SettingsItems(getString(R.string.language), AppSettings.getLanguageDescription(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_language, requireActivity()), null, false, 18));
         mData.add(new SettingsItems(getString(R.string.app_theme), sThemeUtils.getAppTheme(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_theme, requireActivity()), null, false, 18));
 
         // General
