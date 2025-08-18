@@ -6,7 +6,22 @@ permalink: /change-logs/
 
 ## What's New
 
-### 67. [v7.2](https://github.com/SmartPack/PackageManager/releases/tag/v7.1) *(Oct 25, 2024)*
+### 68. [v7.3](https://github.com/SmartPack/PackageManager/releases/tag/v7.3) *(Aug 17, 2025)*
+- Major app overhaul with modernized UI and improved functionality.
+- Exports (APKs, icons, text files, etc.) on newer Android now go to the Downloads folder > Package Manager.
+- App now works with minimum required permissions.
+- Users can now open apps directly from the main UI.
+- Improved and significantly faster batch operations in the main UI (long-press to access).
+- Added batch options for Split APKs, Uninstalled apps, and Exported apps.
+- Simplified Manifest page and text-based views.
+- Updated to target the latest Android version.
+- Major internal cleanup and code refactoring.
+- Numerous under-the-hood improvements and optimizations.
+- Updated build tools and dependencies.
+- Updated translations.
+- Miscellaneous changes.
+
+### 67. [v7.2](https://github.com/SmartPack/PackageManager/releases/tag/v7.2) *(Oct 25, 2024)*
 - Redesigned app UI (now follows more material guidelines)
 - Exporting files (except APK'S) now targets Downloads folder.
 - Removed deprecated code as much as possible
