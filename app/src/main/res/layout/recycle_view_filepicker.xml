@@ -1,19 +1,19 @@
 <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center_vertical"
-    android:layout_margin="10dp" >
+    android:layout_margin="10dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="start|center"
             android:src="@drawable/ic_android"
             android:scaleType="fitCenter"
-            android:background="@null"
-            android:clickable="false" />
+            android:background="@null" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,12 +55,33 @@
                     android:gravity="start" />
         </LinearLayout>
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="35dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:background="@null"
-            android:clickable="false"
-            android:visibility="gone" />
+            android:layout_gravity="center|end"
+            android:orientation="vertical"
+            android:gravity="center" >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/export"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_gravity="center|end"
+                    app:iconTint="?attr/colorPrimary"
+                    app:icon="@drawable/ic_download"
+                    android:visibility="gone"
+                    android:clickable="false"
+                    android:gravity="center" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:visibility="gone"
+                    android:gravity="center" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 </FrameLayout>

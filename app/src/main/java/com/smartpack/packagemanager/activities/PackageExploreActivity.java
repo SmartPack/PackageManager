@@ -51,7 +51,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_packageexplorer);
+        setContentView(R.layout.activity_filepicker);
 
         MaterialButton mBack = findViewById(R.id.back);
         MaterialButton mSortButton = findViewById(R.id.sort);
@@ -148,7 +148,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     }
 
     private void backPressedEvent() {
-        if (Common.getPath().equals(getCacheDir().toString() + "/apk/")) {
+        if (new File(Common.getPath()).equals(new File(getCacheDir().toString(), "apk/"))) {
             sFileUtils.delete(new File(getCacheDir().getPath(),"apk"));
             finish();
         } else {

@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
@@ -22,14 +23,17 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class FilePicker {
 
-    public static List<String> getData(Activity activity, boolean supported) {
+    public static List<String> getData(Activity activity, boolean splits) {
         List<String> mData = new ArrayList<>(), mDir = new ArrayList<>(), mFiles = new ArrayList<>();
         mData.add("");
         try {
-            // Add directories
-            for (File mFile : getFilesList()) {
+            for (File mFile : Objects.requireNonNull(new File(Common.getPath()).listFiles())) {
                 if (mFile.isDirectory()) {
+                    // Add directories
                     mDir.add(mFile.getAbsolutePath());
+                } else if (!splits || mFile.getName().endsWith(".apk")) {
+                    // Add files
+                    mFiles.add(mFile.getAbsolutePath());
                 }
             }
             mDir.sort(String.CASE_INSENSITIVE_ORDER);
@@ -37,15 +41,6 @@ public class FilePicker {
                 Collections.reverse(mDir);
             }
             mData.addAll(mDir);
-            // Add files
-            for (File mFile : getFilesList()) {
-                if (supported && mFile.isFile() && isSupportedFile(mFile.getAbsolutePath())) {
-                    mFiles.add(mFile.getAbsolutePath());
-                }
-                if (!supported && mFile.isFile()) {
-                    mFiles.add(mFile.getAbsolutePath());
-                }
-            }
             mFiles.sort(String.CASE_INSENSITIVE_ORDER);
             if (!sCommonUtils.getBoolean("az_order", true, activity)) {
                 Collections.reverse(mFiles);
@@ -55,17 +50,6 @@ public class FilePicker {
             activity.finish();
         }
         return mData;
-    }
-
-    private static boolean isSupportedFile(String path) {
-        return path.endsWith("apk") || path.endsWith("apks") || path.endsWith("apkm") || path.endsWith("xapk");
-    }
-
-    private static File[] getFilesList() {
-        if (!Common.getPath().endsWith(File.separator)) {
-            Common.setPath(Common.getPath() + File.separator);
-        }
-        return new File(Common.getPath()).listFiles();
     }
 
 }

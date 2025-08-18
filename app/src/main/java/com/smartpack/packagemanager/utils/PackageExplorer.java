@@ -38,7 +38,7 @@ public class PackageExplorer {
     public static boolean isTextFile(String path) {
         return path.endsWith(".txt") || path.endsWith(".xml") || path.endsWith(".json") || path.endsWith(".properties")
                 || path.endsWith(".version") || path.endsWith(".sh") || path.endsWith(".MF") || path.endsWith(".SF")
-                || path.endsWith(".RSA") || path.endsWith(".html") || path.endsWith(".ini");
+                || path.endsWith(".html") || path.endsWith(".ini");
     }
 
     public static boolean isImageFile(String path) {

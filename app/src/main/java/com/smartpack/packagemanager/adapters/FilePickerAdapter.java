@@ -20,12 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.Common;
 
 import java.io.File;
 import java.util.List;
 
-import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
@@ -56,31 +56,23 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
         if (position == 0) {
             holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots_horizontal, holder.mIcon.getContext()));
             holder.mTitle.setText(null);
-            holder.mSize.setText(null);
-        } else if (new File(this.data.get(position)).isDirectory()) {
-            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mIcon.getContext()));
-            if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
-                holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
-            }
             holder.mDescription.setVisibility(View.GONE);
             holder.mSize.setVisibility(View.GONE);
-            holder.mCheckBox.setVisibility(View.GONE);
-        } else if (this.data.get(position).endsWith(".apk")) {
-            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
-            if (sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()) != null) {
-                holder.mDescription.setText(sAPKUtils.getPackageName(data.get(position), holder.mIcon.getContext()));
-                holder.mDescription.setVisibility(View.VISIBLE);
-            }
-            holder.mCheckBox.setChecked(Common.getAppList().contains(this.data.get(position)));
-            holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
-            holder.mSize.setVisibility(View.VISIBLE);
-            holder.mCheckBox.setVisibility(View.VISIBLE);
         } else {
-            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
-            holder.mIcon.setColorFilter(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ? sCommonUtils.getColor(R.color.colorWhite, holder.mIcon.getContext()) :
-                    sCommonUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
-            holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
-            holder.mSize.setVisibility(View.VISIBLE);
+            if (new File(this.data.get(position)).isDirectory()) {
+                holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mIcon.getContext()));
+                if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
+                    holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
+                }
+                holder.mDescription.setVisibility(View.GONE);
+                holder.mSize.setVisibility(View.GONE);
+                holder.mCheckBox.setVisibility(View.GONE);
+            } else {
+                new APKFile(data.get(position)).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
+                holder.mCheckBox.setChecked(Common.getAppList().contains(this.data.get(position)));
+                holder.mSize.setVisibility(View.VISIBLE);
+                holder.mCheckBox.setVisibility(View.VISIBLE);
+            }
         }
         holder.mTitle.setText(new File(this.data.get(position)).getName());
     }
@@ -107,7 +99,7 @@ public class FilePickerAdapter extends RecyclerView.Adapter<FilePickerAdapter.Vi
 
         @Override
         public void onClick(View view) {
-            if (data.get(getAdapterPosition()).endsWith(".apk")) {
+            if (new File(data.get(getAdapterPosition())).isFile()) {
                 if (Common.getAppList().contains(data.get(getAdapterPosition()))) {
                     Common.getAppList().remove(data.get(getAdapterPosition()));
                 } else {

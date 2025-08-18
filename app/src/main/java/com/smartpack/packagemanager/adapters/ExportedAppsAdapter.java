@@ -33,6 +33,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
@@ -65,7 +66,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
     @NonNull
     @Override
     public ExportedAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_apks, parent, false);
+        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_filepicker, parent, false);
         return new ExportedAppsAdapter.ViewHolder(rowItem);
     }
 
@@ -73,22 +74,15 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
     @Override
     public void onBindViewHolder(@NonNull ExportedAppsAdapter.ViewHolder holder, int position) {
         if (data.get(position).endsWith(".apk")) {
-            if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext())) {
-                holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apk", ""), holder.mIcon.getContext()));
-            } else {
-                holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(data.get(position), holder.mIcon.getContext()));
-            }
-            holder.mTitle.setText(new File(data.get(position)).getName().replace(".apk", ""));
+            new APKFile(data.get(position)).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
         } else {
-            if (sPackageUtils.isPackageInstalled(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext())) {
-                holder.mIcon.setImageDrawable(sPackageUtils.getAppIcon(new File(data.get(position)).getName().replace(".apkm", ""), holder.mIcon.getContext()));
-            } else {
-                holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
-            }
-            holder.mTitle.setText(new File(data.get(position)).getName().replace(".apkm", ""));
+            holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
+            holder.mTitle.setText(new File(data.get(position)).getName());
+            holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
+            holder.mDescription.setVisibility(GONE);
         }
         holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
-        holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
+        holder.mSize.setVisibility(VISIBLE);
         holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_menu, holder.mAction.getContext()));
         holder.mAction.setVisibility(batch ? GONE : VISIBLE);
         holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
@@ -154,7 +148,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         private final AppCompatImageButton mIcon;
         private final MaterialButton mAction;
         private final MaterialCheckBox mCheckBox;
-        private final MaterialTextView mTitle, mSize;
+        private final MaterialTextView mTitle, mDescription, mSize;
 
         public ViewHolder(View view) {
             super(view);
@@ -162,7 +156,8 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             this.mAction = view.findViewById(R.id.export);
             this.mIcon = view.findViewById(R.id.icon);
             this.mCheckBox = view.findViewById(R.id.checkbox);
-            this.mTitle = view.findViewById(R.id.name);
+            this.mTitle = view.findViewById(R.id.title);
+            this.mDescription = view.findViewById(R.id.description);
             this.mSize = view.findViewById(R.id.size);
 
             view.setOnLongClickListener(v -> {

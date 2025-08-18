@@ -50,7 +50,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
     @NonNull
     @Override
     public PackageExploreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_apks, parent, false);
+        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_filepicker, parent, false);
         return new PackageExploreAdapter.ViewHolder(rowItem);
     }
 
@@ -108,7 +108,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
             view.setOnClickListener(this);
             this.mIcon = view.findViewById(R.id.icon);
             this.mExport = view.findViewById(R.id.export);
-            this.mTitle = view.findViewById(R.id.name);
+            this.mTitle = view.findViewById(R.id.title);
             this.mSize = view.findViewById(R.id.size);
         }
 

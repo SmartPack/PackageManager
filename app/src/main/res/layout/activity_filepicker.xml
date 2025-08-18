@@ -10,69 +10,73 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_gravity="center" >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_gravity="center|start"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="40sp"
+                app:icon="@drawable/ic_back"
+                android:gravity="center" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    style="?attr/materialIconButtonFilledTonalStyle"
-                    android:layout_marginStart="10dp"
-                    app:icon="@drawable/ic_back" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.Toolbar"
-                    app:layout_constraintTop_toTopOf="@id/back"
-                    app:layout_constraintEnd_toStartOf="@id/sort"
-                    app:layout_constraintStart_toEndOf="@id/back"
-                    android:textColor="?attr/colorPrimary"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginEnd="60dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:maxLines="1" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sort"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="?attr/materialIconButtonFilledTonalStyle"
-                    app:layout_constraintTop_toTopOf="@id/title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="10dp"
-                    app:icon="@drawable/ic_sort" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/progress"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
+                style="@style/Widget.Material3.Toolbar"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginStart="60dp"
                 android:layout_gravity="center"
-                android:indeterminate="true"
-                android:visibility="gone" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:layout_marginEnd="60dp"
+                android:gravity="center|start"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:maxLines="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="10dp"
+                app:icon="@drawable/ic_sort"
+                android:gravity="center" />
+        </FrameLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
 
         <include layout="@layout/layout_recyclerview" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <include layout="@layout/permission_view_layout" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/error_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textIsSelectable="true"
+            android:layout_margin="50dp"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="15sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/select"
