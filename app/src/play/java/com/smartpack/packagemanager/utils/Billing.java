@@ -26,7 +26,7 @@ public class Billing {
     }
 
     public static String getPackageExt() {
-        return null;
+        return "";
     }
 
     public static void showDonateOption(Activity activity) {
