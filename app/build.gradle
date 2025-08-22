@@ -24,8 +24,8 @@ android {
         applicationId "com.smartpack.packagemanager"
         minSdkVersion 24
         targetSdk 35
-        versionCode 73
-        versionName "v7.3"
+        versionCode 74
+        versionName "v7.4"
         vectorDrawables.useSupportLibrary = true
         testFunctionalTest = false
         testHandleProfiling = false

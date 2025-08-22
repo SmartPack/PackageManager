@@ -6,6 +6,10 @@ permalink: /change-logs/
 
 ## What's New
 
+### 69. [v7.4 (Pro)](https://github.com/SmartPack/PackageManager/releases/tag/v7.4) *(Aug 19, 2025)*
+- Improved FilePicker (for split APK's) and Package Explorer.
+- Miscellaneous changes.
+
 ### 68. [v7.3](https://github.com/SmartPack/PackageManager/releases/tag/v7.3) *(Aug 17, 2025)*
 - Major app overhaul with modernized UI and improved functionality.
 - Exports (APKs, icons, text files, etc.) on newer Android now go to the Downloads folder > Package Manager.
