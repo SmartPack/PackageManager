@@ -1,6 +1,6 @@
 [versions]
 core = "6.0.0"
-agp = "8.12.0"
+agp = "8.12.1"
 material = "1.12.0"
 shizuku = "13.1.5"
 scommon = "0a9f4f410f"

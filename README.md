@@ -1,75 +1,97 @@
-# Package Manager
+# 📦 Package Manager
 
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/7.jpg" alt="" width="250" height="450" /></p>
 
-[![](https://img.shields.io/badge/Package%20Manager-v7.4-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
+[![](https://img.shields.io/badge/Package%20Manager-v7.4-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
 ![](https://img.shields.io/github/contributors/smartpack/PackageManager)
 ![](https://img.shields.io/github/license/smartpack/PackageManager)
 
-### Package Manager is a  highly powerful app to manage both system and user apps installed on an android device.
+A simple yet powerful Android app for managing both **system** and **user** applications — free, ad-free, and open source.
 
-## Download
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
-     alt=""
-     height="80">](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-          alt=""
-          height="80">](https://f-droid.org/packages/com.smartpack.packagemanager)
+---
+## 📥 Download
 
-## Requirements
-* ROOT Access required for some advanced features
+| Platform              | Link                                                                                                                    |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------|
+| 🟢 Google Play (Pro)  | [Download Pro version from Google Play](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) |
+| 🟢 Google Play (free) | [Download free version from Google Play](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager)    |
+| 🔵 F-Droid            | [Download from F-Droid](https://f-droid.org/packages/com.smartpack.packagemanager)                                      |
 
-## Features
-Package Manager is a simple, yet powerful application to manage the apps installed on an android phone offering the following features
-* A beautiful list view of System and User applications, together or separately.
-* Show detailed information about each app including, but not limited to,
-  * Application & Package name
-  * APK/Split APK's path
-  * Granted and denied permissions list
-  * List of all the active activities
-  * Data and native library paths
-  * First installed and last updated dates
-  * Certificate details
-  * Manifest details
-  * A lot more
-* Helps to do basic tasks such as Open app, visit PlayStore page, uninstall (User apps), etc.
-* Install Split apk's/app bundles (supported bundle formats: .apks, .apkm, and .xapk) from device storage.
-* Explore and export contents of an installed app (Experimental).
-* Export individual or a batch of apps (including Split apk's) into device storage.
-* Do advanced tasks such as (need Root access).
-  * Uninstall an individual or a batch of system apps (de-bloating).
-  * Disable or Enable an individual or a batch of apps.
+---
 
-## Donations
-If you like to appreciate my efforts to provide this applications entirely free, non-intrusive and without Ads, please consider supporting the development in some way. Maintaining this project takes the most majority of free time in my life. So, each and every support from the android community will be hugely appreciated.
+## 📱 Requirements
+
+- 📲 Android device
+- 🔓 **Root access** or **Shizuku integration** required for some advanced features  
+
+---
+
+## ✨ Features
+
+- 🔹 Clean UI with separate views for **System** and **User** apps
+- 🔹 Rich app details:
+    - 📦 Package & app names
+    - 🗂️ APK path (.apk/.apks/.apkm/.xapk)
+    - 🔐 Permissions (granted/denied)
+    - 📋 App manifest & certificate info
+    - 🕒 Install/update dates
+    - 📁 Data & native library paths
+- 🔹 Common actions:
+    - 🚀 Launch apps
+    - 🛒 Open Play Store links
+    - 🗑️ Uninstall (for user apps)
+- 🔹 Advanced features:
+    - 📦 Install app bundles / split APKs
+    - 🔍 Explore APK contents (experimental)
+    - 📤 Export apps (single or batch)
+    - 🧹 Debloat (uninstall system apps) - requires root or Shizuku
+    - 🚫 Disable/enable any app - requires root or Shizuku
+
+---
+
+## 💖 Support This Project
+Maintaining this project takes time and dedication. If you'd like to help keep it alive:
+
+### ☕ Donate
+
 
 [<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic014.png"
-     alt=""
-     height="50">](https://github.com/sponsors/sunilpaulmathew)
+alt=""
+height="50">](https://github.com/sponsors/sunilpaulmathew)
 [<img src="https://liberapay.com/assets/widgets/donate.svg"
-     alt=""
-     height="50">](https://liberapay.com/sunilpaulmathew/donate)
+alt=""
+height="50">](https://liberapay.com/sunilpaulmathew/donate)
 [<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic005.png"
-     alt=""
-     height="50">](https://www.paypal.me/menacherry/)
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
-     alt=""
-     height="50">](https://play.google.com/store/apps/details?id=com.smartpack.donate)
+alt=""
+height="50">](https://www.paypal.me/menacherry/)
 [<img src="https://raw.githubusercontent.com/SmartPack/SmartPack.github.io/master/assets/pic010.png"
-     alt=""
-     height="50">](https://ko-fi.com/sunilpaulmathew/)
+alt=""
+height="50">](https://ko-fi.com/sunilpaulmathew/)
 
-#### Some other ways to support this project includes, but not limited to
-* Leave a good rating or/and review in [Google Play](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager) (It's free)!
-* Help me to [translate](https://poeditor.com/join/project?hash=0CitpyI1Oc) this application into your local language (or improve existing translations).
-* Share good words about this application with others (family, friends, and other enthusiastic android users).
+---
 
-## Translations
-Please help me to translate this application via [POEditor](https://poeditor.com/join/project?hash=0CitpyI1Oc). You may also translate after downloading the original language string available [here](app/src/main/res/values/strings.xml).
+## 🙌 Other Ways to Support
 
-## Credits
-A list of people who contributed to this project is available [here](Credits.md).
+- ⭐ Leave a review or rating on [Google Play](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager) — it's free and helps visibility!
+- 🌐 Contribute to [translations](https://poeditor.com/join/project?hash=0CitpyI1Oc)
+- 📢 Spread the word — share with friends, forums, or on social media
+
+---
+
+## 🌍 Translations
+
+Help translate the app into more languages:
+
+- 📝 [Join the POEditor project](https://poeditor.com/join/project?hash=0CitpyI1Oc)
+- 📄 Or edit the [strings.xml](app/src/main/res/values/strings.xml) directly
+
+---
+
+## 👥 Contributors
+See all [contributors](https://github.com/SmartPack/PackageManager/graphs/contributors) who helped build this project.
+
+---
 
 ## License
 
@@ -87,3 +109,7 @@ A list of people who contributed to this project is available [here](Credits.md)
 
     You should have received a copy of the GNU General Public License along
     with Package Manager. If not, see <http://www.gnu.org/licenses/>.
+
+---
+
+Thank you for using Package Manager!

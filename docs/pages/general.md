@@ -8,25 +8,56 @@ permalink: /general/
     tab1 { padding-left: 4em; }
 </style>
 
-## Documentation
+<h2>📚 Documentation</h2>
 
-<p style="text-align: justify;"><tab1>Package Manager is a highly powerful application to manage apps installed on an android device. The application is free and opensource, and available to download via <a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" target="_blank">Google Play</a> or <a href="https://f-droid.org/packages/com.smartpack.packagemanager" target="_blank">F-Droid</a>.  The sole purpose of this article is to help the users to do the basic tasks as well as the advanced features offered by this app.</tab1></p>
+<p style="text-align: justify;">
+    <strong>Package Manager</strong> is a powerful, open-source Android app designed to help users manage system and user-installed apps with ease. It’s completely free and available for download via
+    <a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" target="_blank">Google Play</a>
+    or
+    <a href="https://f-droid.org/packages/com.smartpack.packagemanager" target="_blank">F-Droid</a>.
+    <br /><br />
+    This documentation is intended to help users make the most of both the basic features and advanced capabilities offered by the app.
+</p>
 
-<p style="text-align: justify;"><tab1>Before moving to the rest of this article, we would like to mention some important requirements to completely utilize the full potential of Package Manager. Although this application is available for non-rooted android users, please be noted that the restrictions imposed by the Android ecosystem don't allow userspace applications, like Package Manager, to manage many advanced features. As a result, Package Manager has little limited capabilities in a non-rooted environment than its rooted counterpart. Although rooting is considered an illegal activity by most OEM's, the process of rooting offers a user more control over the device. Unfortunately, more detailed information about rooting and its merits/demerits are beyond the scope of this article. Moreover, gaining root access requires different methods on different devices. For those who are interested to know more, we highly recommend checking out <a href="https://smartpack.github.io/android-rooting/" target="_blank">this</a> article as well as many other resources available on the web.</tab1></p>
+<hr />
 
-<p style="text-align: justify;"><tab1>On the other hand, allowing access to <b>Shizuku API</b> will help Package Manager to do much more things that are otherwise possible only with root access. More details about configuring Shizuku can be found <a href="https://shizuku.rikka.app/guide/setup/" target="_blank">here</a>.</tab1></p>
+<h3>⚙️ Requirements</h3>
 
+<p style="text-align: justify;">
+    Before diving into the documentation, please note a few important requirements to fully utilize the features of Package Manager:
+</p>
 
-This article is organized into a few categories and are
+<ul>
+    <li><strong>Root Access:</strong> While Package Manager works without root, certain advanced functions (like uninstalling system apps or enabling/disabling them) require root access. Due to Android's security model, apps without root are limited in their ability to manage system-level features.</li>
+
+    <li><strong>Rooting Notice:</strong> Rooting provides more control over your device, but may void your warranty and is restricted by some OEMs. If you're interested in learning more, check out <a href="https://smartpack.github.io/android-rooting/" target="_blank">this article</a> or other trusted resources online.</li>
+
+    <li><strong>Using Shizuku:</strong> As an alternative to root, enabling the <a href="https://shizuku.rikka.app/guide/setup/" target="_blank">Shizuku API</a> allows Package Manager to access some advanced features that normally require root access. It’s a safe and powerful bridge between system APIs and apps.</li>
+</ul>
+
+<hr />
+
+<h3>📂 Documentation Categories</h3>
+
+<p style="text-align: justify;">
+    The documentation is organized into the following sections:
+</p>
+
 <ol>
-    <li><a href="{{ site.github.url }}/ui/">User Interface</a></li>
-    <li><a href="{{ site.github.url }}/batch/">Batch Options</a></li>
-    <li><a href="{{ site.github.url }}/sai/">Installer</a></li>
-    <li><a href="{{ site.github.url }}/exports/">Exported Apps</a></li>
-    <li><a href="{{ site.github.url }}/settings/">Settings</a></li>
-    <li><a href="{{ site.github.url }}/permissions/">Permissions</a></li>
-    <li><a href="{{ site.github.url }}/privacy-policy/">Privacy Policy</a></li>
-    <li><a href="{{ site.github.url }}/disclaimer/">Disclaimer</a></li>
+    <li><a href="{{ site.github.url }}/ui/">🖥️ User Interface</a></li>
+    <li><a href="{{ site.github.url }}/batch/">🗂️ Batch Options</a></li>
+    <li><a href="{{ site.github.url }}/sai/">📦 Installer (Split APKs)</a></li>
+    <li><a href="{{ site.github.url }}/exports/">📤 Exported Apps</a></li>
+    <li><a href="{{ site.github.url }}/settings/">⚙️ Settings</a></li>
+    <li><a href="{{ site.github.url }}/permissions/">🔐 Permissions</a></li>
+    <li><a href="{{ site.github.url }}/privacy-policy/">🛡️ Privacy Policy</a></li>
+    <li><a href="{{ site.github.url }}/disclaimer/">📜 Disclaimer</a></li>
 </ol>
 
-<p style="text-align: justify;"><tab1>We, the team behind Package Manager (the <a href="https://play.google.com/store/apps/dev?id=5836199813143882901" target="_blank">developer</a>, translators and other contributors) sincerely thank you for using our app!</tab1></p>
+<hr />
+
+<h3>🙏 A Note of Thanks</h3>
+
+<p style="text-align: justify;">
+    We — the <a href="https://play.google.com/store/apps/dev?id=5836199813143882901" target="_blank">developer</a>, translators, and all contributors — sincerely thank you for using <strong>Package Manager</strong>. Your support helps us keep this project alive and evolving!
+</p>

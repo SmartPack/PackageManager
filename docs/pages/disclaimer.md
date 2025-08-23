@@ -8,8 +8,8 @@ permalink: /disclaimer/
     tab1 { padding-left: 4em; }
 </style>
 
-## Disclaimer
+## ⚠️ Disclaimer
 
-<p style="text-align: justify;"><tab1>Package Manager is free and open-source: you can redistribute it and/or modify it under the terms of the <b>GNU General Public License</b> as published by the <i>Free Software Foundation</i>, either version 3 of the License, or (at your option) any later version.</tab1></p>
+<p style="text-align: justify;"><tab1><strong>Package Manager</strong> is free and open-source software: you are welcome to redistribute and/or modify it under the terms of the <strong>GNU General Public License</strong> as published by the <em>Free Software Foundation</em>, either version 3 of the License, or (at your option) any later version.</tab1></p>
 
-<p style="text-align: justify;"><tab1>However, please be noted that Package Manager is distributed in the hope that it will be useful, but <b>WITHOUT ANY WARRANTY</b>; without even the implied warranty of <b>MERCHANTABILITY</b> or <b>FITNESS FOR A PARTICULAR PURPOSE</b>. See the GNU General Public License (<a href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>) for more details.</tab1></p>
+<p style="text-align: justify;"><tab1>However, please note that <strong>Package Manager is distributed in the hope that it will be useful, but <u>WITHOUT ANY WARRANTY</u></strong>; without even the implied warranty of <strong>MERCHANTABILITY</strong> or <strong>FITNESS FOR A PARTICULAR PURPOSE</strong>. For more details, please refer to the full license text available at <a href="http://www.gnu.org/licenses/" target="_blank">gnu.org/licenses</a>.</tab1></p>

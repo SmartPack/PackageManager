@@ -8,18 +8,42 @@ permalink: /donations/
     tab1 { padding-left: 4em; }
 </style>
 
-## Support the development of Package Manager
+<h2>💖 Support the Development of <em>Package Manager</em></h2>
 
-<p style="text-align: justify;"><tab1>If you like to appreciate the efforts of the developer to provide Package Manager entirely free, non-intrusive and without Ads, please consider supporting the development in some way. Maintaining this project takes a lot of time. So, each and every support from the android community will be hugely appreciated.</tab1></p>
-
-<p><a href="https://github.com/sponsors/sunilpaulmathew" target="_blank"><img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic014.png?raw=true" alt="" height="60" /></a> <a href="https://liberapay.com/sunilpaulmathew/donate" target="_blank"><img src="https://liberapay.com/assets/widgets/donate.svg" alt="" height="60" /></a> <a href="https://www.paypal.me/menacherry" target="_blank"><img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic005.png?raw=true" alt="" height="60" /></a> <a href="https://ko-fi.com/sunilpaulmathew" target="_blank"><img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic010.png?raw=true" alt="" height="60" /></a> <a href="https://play.google.com/store/apps/details?id=com.smartpack.donate" target="_blank"><img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic009.png?raw=true" alt="" height="60" /></a></p>
-
-<p><strong>GitHub Sponsors page</strong>: <a href="https://github.com/sponsors/sunilpaulmathew" target="_blank">https://github.com/sponsors/sunilpaulmathew</a><br><strong>Liberapay Donation url</strong>: <a href="https://liberapay.com/sunilpaulmathew/donate" target="_blank">https://liberapay.com/sunilpaulmathew/donate</a><br><strong>PayPal Donation url</strong>: <a href="https://www.paypal.me/menacherry" target="_blank">https://www.paypal.me/menacherry</a><br><strong>PayPal Donation  email</strong>: <a href="mailto:sunil.kde@gmail.com">sunil.kde@gmail.com</a><br><strong>Ko-fi Donation url</strong>: <a href="https://ko-fi.com/sunilpaulmathew" target="_blank">https://ko-fi.com/sunilpaulmathew</a>
+<p style="text-align: justify;">
+    If you appreciate the time and effort I put into making this app <strong>completely free, ad-free, and non-intrusive</strong>, please consider supporting its development. Maintaining and improving this project takes up a significant part of my free time, and every bit of support from the Android community means a lot — whether it's financial or simply spreading the word.
 </p>
-     
-Some other ways to support the development includes, but not limited to
+
+<!-- Donation buttons -->
+<p style="text-align: center;">
+    <a href="https://github.com/sponsors/sunilpaulmathew" target="_blank" title="GitHub Sponsors">
+        <img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic014.png?raw=true" alt="GitHub Sponsors" height="60" />
+    </a>
+    <a href="https://liberapay.com/sunilpaulmathew/donate" target="_blank" title="Liberapay">
+        <img src="https://liberapay.com/assets/widgets/donate.svg" alt="Liberapay" height="60" />
+    </a>
+    <a href="https://www.paypal.me/menacherry" target="_blank" title="PayPal">
+        <img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic005.png?raw=true" alt="PayPal" height="60" />
+    </a>
+    <a href="https://ko-fi.com/sunilpaulmathew" target="_blank" title="Ko-fi">
+        <img src="https://github.com/SmartPack/SmartPack.github.io/blob/master/assets/pic010.png?raw=true" alt="Ko-fi" height="60" />
+    </a>
+</p>
+
+<!-- Donation URLs -->
+<p><strong>Direct donation links:</strong></p>
+<ul>
+    <li><strong>GitHub Sponsors:</strong> <a href="https://github.com/sponsors/sunilpaulmathew" target="_blank">github.com/sponsors/sunilpaulmathew</a></li>
+    <li><strong>Liberapay:</strong> <a href="https://liberapay.com/sunilpaulmathew/donate" target="_blank">liberapay.com/sunilpaulmathew/donate</a></li>
+    <li><strong>PayPal:</strong> <a href="https://www.paypal.me/menacherry" target="_blank">paypal.me/menacherry</a></li>
+    <li><strong>PayPal Email:</strong> <a href="mailto:sunil.kde@gmail.com">sunil.kde@gmail.com</a></li>
+    <li><strong>Ko-fi:</strong> <a href="https://ko-fi.com/sunilpaulmathew" target="_blank">ko-fi.com/sunilpaulmathew</a></li>
+</ul>
+
+<!-- Other ways to support -->
+<h3>🙌 Other Ways to Support</h3>
 <ol>
-    <li>Rate or/and review Package Manager in <a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" target="_blank">Google Play</a> (It's free)!</li>
-    <li>Help to <a href="https://poeditor.com/join/project?hash=0CitpyI1Oc" target="_blank">translate</a> Package Manager into your local language (or improve existing translations).</li>
-    <li>Share good words about Package Manager with others (family, friends, and other enthusiastic android users).</li>
+    <li>⭐ Leave a positive rating or review on <a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro" target="_blank">Google Play</a> — it's free and helps increase visibility!</li>
+    <li>🌍 Help translate the app via <a href="https://poeditor.com/join/project?hash=0CitpyI1Oc" target="_blank">POEditor</a> and make it more accessible around the world.</li>
+    <li>📢 Spread the word — share the app with friends, communities, and other Android users who might find it helpful.</li>
 </ol>

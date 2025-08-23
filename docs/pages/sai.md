@@ -8,17 +8,12 @@ permalink: /sai/
     tab1 { padding-left: 4em; }
 </style>
 
-## Installer
+## ⚙️ Installer
 
-<p style="text-align: justify;"><tab1>Another important feature available in this application is a powerful installer which handles APK's, Split APK's, and app bundles. As the name itself suggests, this feature allows the installation of individual and split APK's (multiple APK's bearing the same package id and signature) as well as app bundles (<b>xapk</b>, <b>apkm</b>, and <b>apks</b> bundles). Since Google promotes the distribution of app bundles than normal APK's via their app store, and not many applications are available to handle the installation of such bundles, this feature will be a good deal for Package Manager users.</tab1></p>
+<p style="text-align: justify;"><tab1>Package Manager includes a powerful installer capable of handling APKs, Split APKs, and app bundles with ease. As the name suggests, this feature enables the installation of individual APKs, split APKs (multiple APKs sharing the same package ID and signature), and popular app bundle formats like <b>xapk</b>, <b>apkm</b>, and <b>apks</b>. Since Google encourages distributing app bundles over traditional APKs through their app store, and few apps support installing these bundles directly, this feature is a significant advantage for Package Manager users.</tab1></p>
 
-<p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/7.jpg" alt="" width="250" height="500" /></p>
-<p style="text-align: center">Screenshot of a Split APK Installation session</p>
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/7.jpg" alt="Split APK Installation session" width="250" height="500" /></p> <p style="text-align: center;"><em>Screenshot of a Split APK installation session</em></p>
 
-In order to install multiple APK's or app bundles, please follow the guidelines
+### 📂 How to Install Multiple APKs or App Bundles
 
-1.  Click the plus button from the main or "<b>Exported Apps</b> page".
-2.  In order to install an app bundle (<b>xapk</b>, <b>apkm</b>, or <b>apks</b> file), simply select the respective file and follow on-screen instructions.
-3.  To install split APK's, please be sure to follow the additional requirements listed below
-    1.   All the necessary split APK's should be placed in a single folder.
-    2.   Upon being prompted to select the installation files, please make sure to select all the necessary split APK's to avoid possible installation failure.
+<ol> <li>Tap the <b>plus (+)</b> button on the main screen or the <b>Exported Apps</b> page.</li> <li>To install an app bundle (<b>xapk</b>, <b>apkm</b>, or <b>apks</b>), simply select the file and follow the on-screen instructions.</li> <li>For split APK installations, please ensure: <ol type="a"> <li>All required split APK files are placed in the same folder.</li> <li>When prompted, select <strong>all</strong> necessary split APKs to prevent installation failures.</li> </ol> </li> </ol>

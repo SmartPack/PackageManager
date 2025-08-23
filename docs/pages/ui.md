@@ -8,7 +8,7 @@ permalink: /ui/
     tab1 { padding-left: 4em; }
 </style>
 
-## User Interface
+## 🧭 User Interface
 
 <p style="text-align: justify;"><tab1>The main user interface of Package Manager includes a simple, but elegant list view of applications showing the individual application's <b>icon</b>, <b>name</b> and <b>package id</b>. The individual items also include a check box on the right side and are used to initialize <a href="{{ site.github.url }}/batch/">batch processing</a> (more details are available in a later stage of this article).</tab1></p>
 
