@@ -46,11 +46,12 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="application/vnd.android.package-archive" />
+                <data android:mimeType="application/xapk-package-archive" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/vnd.apkm" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.FilePickerActivity"
-            android:exported="false" />
         <activity android:name=".activities.ImageViewActivity"
             android:exported="false" />
         <activity android:name=".activities.InstallerActivity"

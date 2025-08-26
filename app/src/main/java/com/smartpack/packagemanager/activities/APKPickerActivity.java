@@ -8,7 +8,6 @@
 
 package com.smartpack.packagemanager.activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,15 +25,25 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.fragments.APKDetailsFragment;
 import com.smartpack.packagemanager.fragments.CertificateFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
+import net.lingala.zip4j.io.inputstream.ZipInputStream;
+import net.lingala.zip4j.model.LocalFileHeader;
+
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
@@ -88,6 +97,7 @@ public class APKPickerActivity extends AppCompatActivity {
 
     private sExecutor manageInstallation(Uri uri, Activity activity) {
         return new sExecutor() {
+            private final List<File> mAPKs = new ArrayList<>();
             private ProgressDialog mProgressDialog;
 
             @Override
@@ -96,19 +106,46 @@ public class APKPickerActivity extends AppCompatActivity {
                 mProgressDialog.setIcon(R.mipmap.ic_launcher);
                 mProgressDialog.setTitle(activity.getString(R.string.initializing));
                 mProgressDialog.show();
+
                 Common.isAPKPicker(true);
             }
 
             @Override
             public void doInBackground() {
                 if (uri != null) {
-                    sFileUtils.delete(getExternalFilesDir("APK"));
                     mFileName = Objects.requireNonNull(DocumentFile.fromSingleUri(activity, uri)).getName();
-                    File tmpFile = new File(getExternalFilesDir("APK"), Objects.requireNonNull(mFileName));
-                    tmpFile.deleteOnExit();
-                    mAPKPath = tmpFile.getAbsolutePath();
-                    sFileUtils.copy(uri, tmpFile, activity);
+                    if (Objects.requireNonNull(mFileName).endsWith(".apk")) {
+                        sFileUtils.delete(getExternalFilesDir("APK"));
+                        File tmpFile = new File(getExternalFilesDir("APK"), Objects.requireNonNull(mFileName));
+                        tmpFile.deleteOnExit();
+                        mAPKPath = tmpFile.getAbsolutePath();
+                        sFileUtils.copy(uri, tmpFile, activity);
+                    } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
+                        for (File files : SplitAPKInstaller.getFilesList(activity.getCacheDir())) {
+                            sFileUtils.delete(files);
+                        }
+                        LocalFileHeader localFileHeader;
+                        int readLen;
+                        byte[] readBuffer = new byte[4096];
+                        try (InputStream inputStream = activity.getContentResolver().openInputStream(uri)) {
+                            ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+                            while ((localFileHeader = zipInputStream.getNextEntry()) != null) {
+                                if (localFileHeader.getFileName().endsWith(".apk")) {
+                                    File apkFile = new File(activity.getCacheDir(), localFileHeader.getFileName());
+                                    mAPKs.add(apkFile);
+
+                                    try (FileOutputStream fileOutputStream = new FileOutputStream(apkFile)) {
+                                        while ((readLen = zipInputStream.read(readBuffer)) != -1) {
+                                            fileOutputStream.write(readBuffer, 0, readLen);
+                                        }
+                                    } catch (IOException ignored) {}
+                                }
+                            }
+                        } catch (IOException ignored) {}
+                        mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getName(), rhs.getName()));
+                    }
                 }
+
                 if (mFileName.endsWith(".apk")) {
                     try {
                         mAPKParser = new APKParser();
@@ -118,14 +155,15 @@ public class APKPickerActivity extends AppCompatActivity {
                 }
             }
 
-            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
                 mProgressDialog.dismiss();
                 if (mAPKParser != null && mAPKParser.isParsed()) {
                     loadAPKDetails(activity);
+                } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
+                    new BundleInstallDialog(mAPKs, true, activity);
                 } else {
-                    sCommonUtils.toast(getString(R.string.wrong_extension, ".apk"), activity).show();
+                    sCommonUtils.toast(getString(R.string.installation_status_bad_apks), activity).show();
                     activity.finish();
                 }
             }
@@ -173,11 +211,9 @@ public class APKPickerActivity extends AppCompatActivity {
 
         mCancel.setOnClickListener(v -> finish());
         mInstall.setOnClickListener(v -> {
-            Common.getAppList().add(mAPKPath);
-            Common.setApplicationID(mAPKParser.getPackageName());
             Common.isUpdating(sPackageUtils.isPackageInstalled(mAPKParser.getPackageName(), activity));
-            if (Common.getApplicationID() != null) {
-                new SplitAPKsInstallationTasks(activity).execute();
+            if (mAPKParser.getPackageName() != null) {
+                new SplitAPKsInstallationTasks(mAPKParser.getApkPath(), activity).execute();
             } else {
                 sCommonUtils.toast(activity.getString(R.string.installation_status_bad_apks), activity).show();
             }

@@ -38,6 +38,10 @@ public class APKFile extends File {
         super(apkPath);
     }
 
+    public APKFile(File apk) {
+        super(apk.getAbsolutePath());
+    }
+
     public void load(AppCompatImageButton icon, MaterialTextView name, MaterialTextView packageName, MaterialTextView size) {
         try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
             Handler handler = new Handler(Looper.getMainLooper());

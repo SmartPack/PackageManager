@@ -51,7 +51,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filepicker);
+        setContentView(R.layout.activity_package_explorer);
 
         MaterialButton mBack = findViewById(R.id.back);
         MaterialButton mSortButton = findViewById(R.id.sort);

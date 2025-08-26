@@ -3,8 +3,8 @@ core = "6.0.0"
 agp = "8.12.1"
 material = "1.12.0"
 shizuku = "13.1.5"
-scommon = "0a9f4f410f"
-axml = "36915c87a0"
+scommon = "554bd101fc"
+axml = "31311d5824"
 zip4j = "2.11.5"
 
 [libraries]

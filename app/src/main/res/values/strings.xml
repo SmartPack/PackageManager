@@ -159,6 +159,7 @@
     <string name="split_apk">Split APKs</string>
     <string name="split_apk_installer">Split APK Installer</string>
     <string name="split_apk_installer_description">Split APK\'s (multiple APK files with the same package name)</string>
+    <string name="split_apk_select">Select split APK\'s to install</string>
     <string name="start">Start</string>
     <string name="status">Status: %s</string>
     <string name="support">Support Group</string>

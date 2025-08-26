@@ -18,10 +18,19 @@ import androidx.documentfile.provider.DocumentFile;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.APKPickerActivity;
+import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.SplitAPKInstaller;
+
+import net.lingala.zip4j.io.inputstream.ZipInputStream;
+import net.lingala.zip4j.model.LocalFileHeader;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
@@ -36,12 +45,12 @@ public class SingleAPKTasks extends sExecutor {
     private static File mAPKFile = null;
     private static String mFileName = null;
     private final Uri mURIFile;
-    private static ProgressDialog mProgressDialog;
+    private final List<File> mAPKs = new ArrayList<>();
+    private ProgressDialog mProgressDialog;
 
     public SingleAPKTasks(Uri uriFile, Activity activity) {
         mURIFile = uriFile;
         mActivity = activity;
-
     }
 
     @Override
@@ -50,15 +59,41 @@ public class SingleAPKTasks extends sExecutor {
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
         mProgressDialog.setTitle(mActivity.getString(R.string.initializing));
         mProgressDialog.show();
-        sFileUtils.delete(mActivity.getExternalFilesDir("APK"));
-        Common.getAppList().clear();
     }
 
     @Override
     public void doInBackground() {
         mFileName = Objects.requireNonNull(DocumentFile.fromSingleUri(mActivity, mURIFile)).getName();
-        mAPKFile = new File(mActivity.getExternalFilesDir("APK"), Objects.requireNonNull(mFileName));
-        sFileUtils.copy(mURIFile, mAPKFile, mActivity);
+        if (Objects.requireNonNull(mFileName).endsWith(".apk")) {
+            sFileUtils.delete(mActivity.getExternalFilesDir("APK"));
+            mAPKFile = new File(mActivity.getExternalFilesDir("APK"), Objects.requireNonNull(mFileName));
+            sFileUtils.copy(mURIFile, mAPKFile, mActivity);
+            mAPKFile.deleteOnExit();
+        } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
+            for (File files : SplitAPKInstaller.getFilesList(mActivity.getCacheDir())) {
+                sFileUtils.delete(files);
+            }
+            LocalFileHeader localFileHeader;
+            int readLen;
+            byte[] readBuffer = new byte[4096];
+            try {
+                InputStream inputStream = mActivity.getContentResolver().openInputStream(mURIFile);
+                ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+                while ((localFileHeader = zipInputStream.getNextEntry()) != null) {
+                    if (localFileHeader.getFileName().endsWith(".apk")) {
+                        File apkFile = new File(mActivity.getCacheDir(), localFileHeader.getFileName());
+                        mAPKs.add(apkFile);
+
+                        try (FileOutputStream fileOutputStream = new FileOutputStream(apkFile)) {
+                            while ((readLen = zipInputStream.read(readBuffer)) != -1) {
+                                fileOutputStream.write(readBuffer, 0, readLen);
+                            }
+                        } catch (IOException ignored) {}
+                    }
+                }
+            } catch (IOException ignored) {}
+            mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getName(), rhs.getName()));
+        }
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -71,16 +106,7 @@ public class SingleAPKTasks extends sExecutor {
             apkDetails.putExtra(APKPickerActivity.NAME_INTENT, mFileName);
             mActivity.startActivity(apkDetails);
         } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
-            new MaterialAlertDialogBuilder(mActivity)
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle(R.string.split_apk_installer)
-                    .setMessage(mActivity.getString(R.string.bundle_install_apks, mFileName))
-                    .setCancelable(false)
-                    .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
-                    })
-                    .setPositiveButton(R.string.install, (dialogInterface, i) ->
-                            new AppBundleTasks(mAPKFile.getAbsolutePath(), false, mActivity).execute()
-                    ).show();
+            new BundleInstallDialog(mAPKs, false, mActivity);
         } else {
             new MaterialAlertDialogBuilder(mActivity)
                     .setIcon(R.mipmap.ic_launcher)

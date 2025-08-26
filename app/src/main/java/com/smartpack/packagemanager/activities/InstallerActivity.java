@@ -30,9 +30,11 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
@@ -45,6 +47,9 @@ public class InstallerActivity extends AppCompatActivity {
     private MaterialTextView mStatus, mTitle;
     private ContentLoadingProgressBar mProgress;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private static ArrayList<String> mAppList = null;
+    private static String mApkPath = null;
+    public static final String APP_LIST_INTENT = "app_list", APK_PATH_INTENT = "app_list";
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -58,6 +63,9 @@ public class InstallerActivity extends AppCompatActivity {
         mClose = findViewById(R.id.close);
         mTitle = findViewById(R.id.title);
         mStatus = findViewById(R.id.status);
+
+        mAppList = getIntent().getStringArrayListExtra(APP_LIST_INTENT);
+        mApkPath = getIntent().getStringExtra(APK_PATH_INTENT);
 
         if (getName() != null) {
             mTitle.setText(getName());
@@ -98,20 +106,28 @@ public class InstallerActivity extends AppCompatActivity {
 
     private CharSequence getName() {
         CharSequence name = null;
-        for (String mAPKs : Common.getAppList()) {
-            if (sAPKUtils.getAPKName(mAPKs, this) != null) {
-                name = sAPKUtils.getAPKName(mAPKs, this);
+        if (mAppList != null) {
+            for (String apkPath : mAppList) {
+                if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKName(apkPath, this) != null) {
+                    name = sAPKUtils.getAPKName(apkPath, this);
+                }
             }
+        } else if (mApkPath != null) {
+            name = sAPKUtils.getAPKName(mApkPath, this);
         }
         return name;
     }
 
     private Drawable getIcon() {
         Drawable icon = null;
-        for (String mAPKs : Common.getAppList()) {
-            if (sAPKUtils.getAPKIcon(mAPKs, this) != null) {
-                icon = sAPKUtils.getAPKIcon(mAPKs, this);
+        if (mAppList != null) {
+            for (String apkPath : mAppList) {
+                if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKIcon(apkPath, this) != null) {
+                    icon = sAPKUtils.getAPKIcon(apkPath, this);
+                }
             }
+        } else if (mApkPath != null) {
+            icon = sAPKUtils.getAPKIcon(mApkPath, this);
         }
         return icon;
     }

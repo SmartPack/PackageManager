@@ -33,19 +33,26 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
-import com.smartpack.packagemanager.utils.tasks.AppBundleTasks;
+import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.model.FileHeader;
+
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
-import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 
 /*
@@ -184,22 +191,56 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                 }
                 notifyItemRangeChanged(0, getItemCount());
             } else {
-                new MaterialAlertDialogBuilder(view.getContext())
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(view.getContext().getString(Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm") ? R.string.bundle_install_apks
-                                : R.string.install_question, new File(Downloads.getData(view.getContext()).get(getAdapterPosition())).getName()))
-                        .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                        })
-                        .setPositiveButton(R.string.install, (dialog, id) -> {
-                            if (Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm")) {
-                                new AppBundleTasks(Downloads.getData(view.getContext()).get(getAdapterPosition()), false, activity).execute();
-                            } else {
-                                Common.getAppList().clear();
-                                Common.getAppList().add(Downloads.getData(view.getContext()).get(getAdapterPosition()));
-                                Common.isUpdating(sPackageUtils.isPackageInstalled(sAPKUtils.getPackageName(Downloads.getData(view.getContext()).get(getAdapterPosition()), view.getContext()), view.getContext()));
-                                new SplitAPKsInstallationTasks(activity).execute();
+                if (Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm")) {
+                    new sExecutor() {
+                        private final List<File> mAPKs = new ArrayList<>();
+                        private ProgressDialog mProgressDialog;
+
+                        @Override
+                        public void onPreExecute() {
+                            mProgressDialog = new ProgressDialog(activity);
+                            mProgressDialog.setIcon(R.mipmap.ic_launcher);
+                            mProgressDialog.setTitle(R.string.initializing);
+                            mProgressDialog.show();
+                        }
+
+                        @Override
+                        public void doInBackground() {
+                            for (File files : SplitAPKInstaller.getFilesList(activity.getCacheDir())) {
+                                sFileUtils.delete(files);
                             }
-                        }).show();
+
+                            try (ZipFile zipFile = new ZipFile(data.get(getAdapterPosition()))) {
+                                mProgressDialog.setMax(zipFile.getFileHeaders().size());
+                                for (FileHeader fileHeaders : zipFile.getFileHeaders()) {
+                                    if (fileHeaders.getFileName().endsWith(".apk")) {
+                                        File apkFile = new File(activity.getCacheDir(), fileHeaders.getFileName());
+                                        zipFile.extractFile(fileHeaders, activity.getCacheDir().getAbsolutePath());
+                                        mAPKs.add(apkFile);
+
+                                        mProgressDialog.updateProgress(1);
+                                    }
+                                }
+                            } catch (IOException ignored) {}
+                            mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getName(), rhs.getName()));
+                        }
+
+                        @Override
+                        public void onPostExecute() {
+                            mProgressDialog.dismiss();
+                            new BundleInstallDialog(mAPKs, false, activity);
+                        }
+                    }.execute();
+                } else {
+                    new MaterialAlertDialogBuilder(view.getContext())
+                            .setIcon(R.mipmap.ic_launcher)
+                            .setTitle(view.getContext().getString(Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm") ? R.string.bundle_install_apks
+                                    : R.string.install_question, new File(Downloads.getData(view.getContext()).get(getAdapterPosition())).getName()))
+                            .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                            })
+                            .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(data.get(getAdapterPosition()), activity).execute()
+                            ).show();
+                }
             }
         }
     }

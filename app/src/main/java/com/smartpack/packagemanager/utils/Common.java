@@ -29,7 +29,7 @@ public class Common {
 
     private static Drawable mApplicationIcon;
 
-    private static final List<String> mAPKList = new ArrayList<>(), mBatchList = new ArrayList<>(), mRestoreList = new ArrayList<>();
+    private static final List<String> mBatchList = new ArrayList<>(), mRestoreList = new ArrayList<>();
 
     private static String mApplicationID, mDirData, mDirNatLib, mDirSource, mPath, mSearchText;
 
@@ -92,10 +92,6 @@ public class Common {
 
     public static String getSearchText() {
         return mSearchText;
-    }
-
-    public static List<String> getAppList() {
-        return mAPKList;
     }
 
     public static List<String> getBatchList() {
