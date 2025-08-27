@@ -27,6 +27,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on August 24, 2025
  */
@@ -43,6 +45,7 @@ public class BundleInstallDialog extends MaterialAlertDialogBuilder {
         recyclerView.setLayoutManager(new GridLayoutManager(activity, PackageExplorer.getSpanCount(activity)));
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(new APKPickerAdapter(data, selectedFiles));
+        recyclerView.post(() -> recyclerView.scrollToPosition(data.size() - 1));
 
         setView(rootView);
         setIcon(R.mipmap.ic_launcher);
@@ -54,7 +57,9 @@ public class BundleInstallDialog extends MaterialAlertDialogBuilder {
             }
         });
         setPositiveButton(R.string.select, (dialogInterface, i) -> {
-            if (selectedFiles.size() == 1) {
+            if (selectedFiles.isEmpty()) {
+                sCommonUtils.toast(R.string.split_apk_list_empty, activity).show();
+            } else if (selectedFiles.size() == 1) {
                 Intent apkDetails = new Intent(activity, APKPickerActivity.class);
                 apkDetails.putExtra(APKPickerActivity.PATH_INTENT, selectedFiles.get(0));
                 apkDetails.putExtra(APKPickerActivity.NAME_INTENT, new File(selectedFiles.get(0)).getName());

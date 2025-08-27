@@ -157,6 +157,7 @@
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">Package Manager is an open-source application which is ready to accept contributions from the development community. Click here to check out the source code</string>
     <string name="split_apk">Split APKs</string>
+    <string name="split_apk_list_empty">No split APK\'s are selected. Aborting…</string>
     <string name="split_apk_installer">Split APK Installer</string>
     <string name="split_apk_installer_description">Split APK\'s (multiple APK files with the same package name)</string>
     <string name="split_apk_select">Select split APK\'s to install</string>

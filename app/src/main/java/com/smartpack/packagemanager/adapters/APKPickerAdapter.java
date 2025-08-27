@@ -8,6 +8,8 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ import com.smartpack.packagemanager.utils.APKFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on August 25, 2025
@@ -31,6 +34,7 @@ import java.util.List;
 public class APKPickerAdapter extends RecyclerView.Adapter<APKPickerAdapter.ViewHolder> {
 
     private final ArrayList<String> selectedFiles;
+    private boolean changed = false;
     private final List<File> data;
 
     public APKPickerAdapter(List<File> data, ArrayList<String> selectedFiles) {
@@ -50,6 +54,31 @@ public class APKPickerAdapter extends RecyclerView.Adapter<APKPickerAdapter.View
         new APKFile(data.get(position)).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
         holder.mSize.setVisibility(View.VISIBLE);
         holder.mCheckBox.setVisibility(View.VISIBLE);
+
+        if (!changed && (data.get(position).getName().contains(Build.SUPPORTED_ABIS[0].replace("-","_"))
+                || data.get(position).getName().contains(Locale.getDefault().getLanguage())
+                || data.get(position).getName().contains(getScreenDensity(holder.mCheckBox.getContext()))
+                || data.get(position).getName().contains("base.apk"))) {
+            selectedFiles.add(data.get(position).getAbsolutePath());
+            holder.mCheckBox.setChecked(true);
+        }
+    }
+
+    private static String getScreenDensity(Context context) {
+        int screenDPI = context.getResources().getDisplayMetrics().densityDpi;
+        if (screenDPI <= 140) {
+            return "ldpi";
+        } else if (screenDPI <= 200) {
+            return "mdpi";
+        } else if (screenDPI <= 280) {
+            return "hdpi";
+        } else if (screenDPI <= 400) {
+            return "xhdpi";
+        } else if (screenDPI <= 560) {
+            return "xxhdpi";
+        } else {
+            return "xxxhdpi";
+        }
     }
 
     @Override
@@ -77,6 +106,7 @@ public class APKPickerAdapter extends RecyclerView.Adapter<APKPickerAdapter.View
                     selectedFiles.add(data.get(getAdapterPosition()).getAbsolutePath());
                 }
                 mCheckBox.setChecked(!mCheckBox.isChecked());
+                changed = true;
             });
         }
     }
