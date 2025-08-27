@@ -9,7 +9,6 @@
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +33,7 @@ import java.util.ArrayList;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
@@ -48,7 +48,9 @@ public class InstallerActivity extends AppCompatActivity {
     private ContentLoadingProgressBar mProgress;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private static ArrayList<String> mAppList = null;
-    private static String mApkPath = null;
+    private static boolean mUpdating = false;
+    private static Drawable mAppIcon;
+    private static String mApkPath = null, mAppName, mPackageName;
     public static final String APP_LIST_INTENT = "app_list", APK_PATH_INTENT = "app_list";
 
     @SuppressLint("StringFormatInvalid")
@@ -64,37 +66,44 @@ public class InstallerActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.title);
         mStatus = findViewById(R.id.status);
 
-        mAppList = getIntent().getStringArrayListExtra(APP_LIST_INTENT);
-        mApkPath = getIntent().getStringExtra(APK_PATH_INTENT);
+        new sExecutor() {
+            @Override
+            public void onPreExecute() {
+            }
 
-        if (getName() != null) {
-            mTitle.setText(getName());
-        } else {
-            mTitle.setVisibility(View.GONE);
-        }
-        if (getIcon() != null) {
-            mIcon.setImageDrawable(getIcon());
-        } else {
-            mIcon.setVisibility(View.GONE);
-        }
+            @Override
+            public void doInBackground() {
+                mAppList = getIntent().getStringArrayListExtra(APP_LIST_INTENT);
+                mApkPath = getIntent().getStringExtra(APK_PATH_INTENT);
+                mAppName = getAppName();
+                mPackageName = getPackageID();
+                mAppIcon = getAppIcon();
+                mUpdating = sPackageUtils.isPackageInstalled(mPackageName, InstallerActivity.this);
+            }
+
+            @Override
+            public void onPostExecute() {
+                if (mAppName != null) {
+                    mTitle.setText(getAppName());
+                } else {
+                    mTitle.setVisibility(View.GONE);
+                }
+                if (mAppIcon != null) {
+                    mIcon.setImageDrawable(getAppIcon());
+                } else {
+                    mIcon.setVisibility(View.GONE);
+                }
+
+                mHandler.post(refreshRunnable);
+            }
+        }.execute();
 
         mOpen.setOnClickListener(v -> {
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(Common.getApplicationID());
-            if (launchIntent != null) {
-                startActivity(launchIntent);
-                finish();
-            } else {
-                sCommonUtils.snackBar(findViewById(android.R.id.content), getString(R.string.open_failed, PackageData.getAppName(Common.getApplicationID(), this))).show();
-            }
-            PackageData.getRawData().add(new PackageItems(Common.getApplicationID(),
-                    sPackageUtils.getAppName(Common.getApplicationID(), this).toString(),
-                    new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).length(), this));
-            Common.reloadPage(true);
+            startActivity(getPackageManager().getLaunchIntentForPackage(mPackageName));
+            finish();
         });
 
         mClose.setOnClickListener(v -> backPressedEvent());
-
-        mHandler.post(refreshRunnable);
 
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
@@ -104,21 +113,35 @@ public class InstallerActivity extends AppCompatActivity {
         });
     }
 
-    private CharSequence getName() {
-        CharSequence name = null;
+    private String getAppName() {
+        String name = null;
         if (mAppList != null) {
             for (String apkPath : mAppList) {
                 if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKName(apkPath, this) != null) {
-                    name = sAPKUtils.getAPKName(apkPath, this);
+                    name = sAPKUtils.getAPKName(apkPath, this).toString();
                 }
             }
         } else if (mApkPath != null) {
-            name = sAPKUtils.getAPKName(mApkPath, this);
+            name = sAPKUtils.getAPKName(mApkPath, this).toString();
         }
         return name;
     }
 
-    private Drawable getIcon() {
+    private String getPackageID() {
+        String name = null;
+        if (mAppList != null) {
+            for (String apkPath : mAppList) {
+                if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKName(apkPath, this) != null) {
+                    name = sAPKUtils.getPackageName(apkPath, this);
+                }
+            }
+        } else if (mApkPath != null) {
+            name = sAPKUtils.getPackageName(mApkPath, this);
+        }
+        return name;
+    }
+
+    private Drawable getAppIcon() {
         Drawable icon = null;
         if (mAppList != null) {
             for (String apkPath : mAppList) {
@@ -135,18 +158,6 @@ public class InstallerActivity extends AppCompatActivity {
     private void backPressedEvent() {
         if (sCommonUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
-        }
-        if (sCommonUtils.getString("installationStatus", "waiting", this).equals(getString(R.string.installation_status_success))) {
-            if (!Common.isUpdating()) {
-                try {
-                    PackageData.getRawData().add(new PackageItems(Common.getApplicationID(),
-                            PackageData.getAppName(Common.getApplicationID(), this),
-                            new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).length(), this));
-                } catch (NullPointerException ignored) {}
-                Common.reloadPage(true);
-            } else {
-                Common.isUpdating(false);
-            }
         }
         finish();
     }
@@ -170,11 +181,17 @@ public class InstallerActivity extends AppCompatActivity {
             } else {
                 mStatus.setText(getString(R.string.result, installationStatus));
                 if (installationStatus.equals(getString(R.string.installation_status_success))) {
-                    try {
-                        mTitle.setText(PackageData.getAppName(Common.getApplicationID(), InstallerActivity.this));
-                        mIcon.setImageDrawable(sPackageUtils.getAppIcon(Common.getApplicationID(), InstallerActivity.this));
+                    mTitle.setText(PackageData.getAppName(mPackageName, InstallerActivity.this));
+                    mIcon.setImageDrawable(sPackageUtils.getAppIcon(mPackageName, InstallerActivity.this));
+                    if (getPackageManager().getLaunchIntentForPackage(mPackageName) != null) {
                         mOpen.setVisibility(View.VISIBLE);
-                    } catch (NullPointerException ignored) {}
+                    }
+
+                    if (!mUpdating) {
+                        PackageData.getRawData().add(new PackageItems(mPackageName, sPackageUtils.getAppName(mPackageName, InstallerActivity.this).toString(),
+                                new File(sPackageUtils.getSourceDir(mPackageName, InstallerActivity.this)).length(), InstallerActivity.this));
+                        Common.reloadPage(true);
+                    }
                 }
                 mProgress.setVisibility(View.GONE);
                 mClose.setVisibility(View.VISIBLE);
