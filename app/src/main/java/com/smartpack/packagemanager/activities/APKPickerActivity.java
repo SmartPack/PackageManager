@@ -32,6 +32,8 @@ import com.smartpack.packagemanager.fragments.CertificateFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
@@ -97,7 +99,7 @@ public class APKPickerActivity extends AppCompatActivity {
 
     private sExecutor manageInstallation(Uri uri, Activity activity) {
         return new sExecutor() {
-            private final List<File> mAPKs = new ArrayList<>();
+            private final List<APKPickerItems> mAPKs = new ArrayList<>();
             private ProgressDialog mProgressDialog;
 
             @Override
@@ -132,7 +134,7 @@ public class APKPickerActivity extends AppCompatActivity {
                             while ((localFileHeader = zipInputStream.getNextEntry()) != null) {
                                 if (localFileHeader.getFileName().endsWith(".apk")) {
                                     File apkFile = new File(activity.getCacheDir(), localFileHeader.getFileName());
-                                    mAPKs.add(apkFile);
+                                    mAPKs.add(new APKPickerItems(apkFile, FilePicker.isSelectedAPK(apkFile, activity)));
 
                                     try (FileOutputStream fileOutputStream = new FileOutputStream(apkFile)) {
                                         while ((readLen = zipInputStream.read(readBuffer)) != -1) {
@@ -142,7 +144,7 @@ public class APKPickerActivity extends AppCompatActivity {
                                 }
                             }
                         } catch (IOException ignored) {}
-                        mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getName(), rhs.getName()));
+                        mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAPKName(), rhs.getAPKName()));
                     }
                 }
 

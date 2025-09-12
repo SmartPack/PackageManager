@@ -13,9 +13,12 @@ import android.content.Intent;
 
 import com.smartpack.packagemanager.activities.InstallerActivity;
 import com.smartpack.packagemanager.services.SplitAPKInstallService;
+import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
@@ -28,12 +31,21 @@ import in.sunilpaulmathew.sCommon.InstallerUtils.sInstallerUtils;
 public class SplitAPKsInstallationTasks extends sExecutor {
 
     private final Activity mActivity;
+    private final List<APKPickerItems> mAPKItems;
     private final ArrayList<String> mAPKList;
     private final String mAPKPath;
+
+    public SplitAPKsInstallationTasks(List<APKPickerItems> apkItems, Activity activity) {
+        this.mActivity = activity;
+        this.mAPKItems = apkItems;
+        this.mAPKList = null;
+        this.mAPKPath = null;
+    }
 
     public SplitAPKsInstallationTasks(ArrayList<String> apkList, Activity activity) {
         this.mActivity = activity;
         this.mAPKList = apkList;
+        this.mAPKItems = null;
         this.mAPKPath = null;
     }
 
@@ -41,12 +53,15 @@ public class SplitAPKsInstallationTasks extends sExecutor {
         this.mActivity = activity;
         this.mAPKList = null;
         this.mAPKPath = apkPath;
+        this.mAPKItems = null;
     }
 
     @Override
     public void onPreExecute() {
         Intent installIntent = new Intent(mActivity, InstallerActivity.class);
-        if (mAPKList != null) {
+        if (mAPKItems != null) {
+            installIntent.putStringArrayListExtra(InstallerActivity.APP_LIST_INTENT, getAPKList());
+        } else if (mAPKList != null) {
             installIntent.putStringArrayListExtra(InstallerActivity.APP_LIST_INTENT, mAPKList);
         } else if (mAPKPath != null) {
             installIntent.putExtra(InstallerActivity.APK_PATH_INTENT, mAPKPath);
@@ -55,9 +70,25 @@ public class SplitAPKsInstallationTasks extends sExecutor {
         mActivity.startActivity(installIntent);
     }
 
+    private ArrayList<String> getAPKList() {
+        ArrayList<String> apkList = new ArrayList<>();
+        for (APKPickerItems items : Objects.requireNonNull(mAPKItems)) {
+            if (items.isSelected()) {
+                apkList.add(items.getAPKPath());
+            }
+        }
+        return apkList;
+    }
+
     private long getTotalSize() {
         long totalSize = 0;
-        if (mAPKList != null) {
+        if (mAPKItems != null) {
+            for (APKPickerItems items : mAPKItems) {
+                if (items.isSelected()) {
+                    totalSize += items.getAPKSize();
+                }
+            }
+        } else if (mAPKList != null) {
             for (String filePath : mAPKList) {
                 File file = new File(filePath);
                 if (sFileUtils.exist(file) && file.getName().endsWith(".apk")) {
@@ -74,7 +105,13 @@ public class SplitAPKsInstallationTasks extends sExecutor {
     public void doInBackground() {
         int sessionId;
         sessionId = sInstallerUtils.runInstallCreate(getTotalSize(), mActivity);
-        if (mAPKList != null) {
+        if (mAPKItems != null) {
+            for (APKPickerItems items : mAPKItems) {
+                if (items.isSelected()) {
+                    sInstallerUtils.runInstallWrite(items.getAPKSize(), sessionId, items.getAPKName(), items.getAPKPath(), mActivity);
+                }
+            }
+        } else if (mAPKList != null) {
             for (String filePath : mAPKList) {
                 File file = new File(filePath);
                 if (file.exists() && file.getName().endsWith(".apk")) {

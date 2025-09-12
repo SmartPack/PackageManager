@@ -70,6 +70,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -87,6 +88,7 @@ public class PackageTasksFragment extends Fragment {
     private MaterialButton mSort, mBatchOptions;
     private boolean mExit;
     private final Handler mHandler = new Handler();
+    private List<PackageItems> mData;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private PackageTasksAdapter mRecycleViewAdapter;
@@ -283,6 +285,8 @@ public class PackageTasksFragment extends Fragment {
                 mBatchOptions.setVisibility(GONE);
                 mRecyclerView.setVisibility(GONE);
 
+                mData = new CopyOnWriteArrayList<>();
+
                 if (Common.getSearchText() != null) {
                     mSearchWord.setText(null);
                     Common.setSearchText(null);
@@ -298,7 +302,8 @@ public class PackageTasksFragment extends Fragment {
             @Override
             public void doInBackground() {
                 PackageData.setRawData(mProgress, requireActivity());
-                mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(requireActivity()), requireActivity());
+                mData = PackageData.getData(requireActivity());
+                mRecycleViewAdapter = new PackageTasksAdapter(mData, requireActivity());
             }
 
             @Override
@@ -417,8 +422,8 @@ public class PackageTasksFragment extends Fragment {
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
         menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.export_details));
         menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.select_all)).setCheckable(true)
-                .setChecked(PackageData.getData(activity).size() == Common.getBatchList().size());
-        if (PackageData.getData(activity).size() != Common.getBatchList().size()) {
+                .setChecked(mData.size() == Common.getBatchList().size());
+        if (mData.size() != Common.getBatchList().size()) {
             menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.batch_list_clear));
         }
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -744,9 +749,9 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 5:
-                    if (PackageData.getData(activity).size() != Common.getBatchList().size()) {
+                    if (mData.size() != Common.getBatchList().size()) {
                         Common.getBatchList().clear();
-                        for (PackageItems mPackage : PackageData.getData(activity)) {
+                        for (PackageItems mPackage : mData) {
                             Common.getBatchList().add(mPackage.getPackageName());
                         }
                     } else {
@@ -771,11 +776,13 @@ public class PackageTasksFragment extends Fragment {
             public void onPreExecute() {
                 mProgress.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(GONE);
+                mData = new CopyOnWriteArrayList<>();
             }
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new PackageTasksAdapter(PackageData.getData(activity), activity);
+                mData = PackageData.getData(activity);
+                mRecycleViewAdapter = new PackageTasksAdapter(mData, activity);
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -803,7 +810,7 @@ public class PackageTasksFragment extends Fragment {
                                 if (!Common.isUninstall()) {
                                     Common.getBatchList().remove(0);
                                 }
-                                if (!Common.reloadPage()) Common.reloadPage(true);
+                                mData.remove(item);
                             }
                         }
                     } catch (ConcurrentModificationException ignored) {}
@@ -831,9 +838,6 @@ public class PackageTasksFragment extends Fragment {
         super.onStart();
         if (Common.isUninstall()) {
             uninstallUserApp(Common.getApplicationID());
-        } else if (Common.reloadPage()) {
-            Common.reloadPage(false);
-            loadUI(requireActivity());
         }
     }
 

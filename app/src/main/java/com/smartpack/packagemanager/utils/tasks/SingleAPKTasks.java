@@ -20,6 +20,8 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.APKPickerActivity;
 import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
+import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
 import net.lingala.zip4j.io.inputstream.ZipInputStream;
@@ -45,7 +47,7 @@ public class SingleAPKTasks extends sExecutor {
     private static File mAPKFile = null;
     private static String mFileName = null;
     private final Uri mURIFile;
-    private final List<File> mAPKs = new ArrayList<>();
+    private final List<APKPickerItems> mAPKs = new ArrayList<>();
     private ProgressDialog mProgressDialog;
 
     public SingleAPKTasks(Uri uriFile, Activity activity) {
@@ -82,7 +84,7 @@ public class SingleAPKTasks extends sExecutor {
                 while ((localFileHeader = zipInputStream.getNextEntry()) != null) {
                     if (localFileHeader.getFileName().endsWith(".apk")) {
                         File apkFile = new File(mActivity.getCacheDir(), localFileHeader.getFileName());
-                        mAPKs.add(apkFile);
+                        mAPKs.add(new APKPickerItems(apkFile, FilePicker.isSelectedAPK(apkFile, mActivity)));
 
                         try (FileOutputStream fileOutputStream = new FileOutputStream(apkFile)) {
                             while ((readLen = zipInputStream.read(readBuffer)) != -1) {
@@ -92,7 +94,7 @@ public class SingleAPKTasks extends sExecutor {
                     }
                 }
             } catch (IOException ignored) {}
-            mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getName(), rhs.getName()));
+            mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAPKName(), rhs.getAPKName()));
         }
     }
 

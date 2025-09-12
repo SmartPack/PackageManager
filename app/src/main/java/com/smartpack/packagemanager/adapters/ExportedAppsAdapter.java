@@ -38,6 +38,8 @@ import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
+import com.smartpack.packagemanager.utils.FilePicker;
+import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
@@ -193,7 +195,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             } else {
                 if (Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm")) {
                     new sExecutor() {
-                        private final List<File> mAPKs = new ArrayList<>();
+                        private final List<APKPickerItems> mAPKs = new ArrayList<>();
                         private ProgressDialog mProgressDialog;
 
                         @Override
@@ -216,13 +218,13 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                                     if (fileHeaders.getFileName().endsWith(".apk")) {
                                         File apkFile = new File(activity.getCacheDir(), fileHeaders.getFileName());
                                         zipFile.extractFile(fileHeaders, activity.getCacheDir().getAbsolutePath());
-                                        mAPKs.add(apkFile);
+                                        mAPKs.add(new APKPickerItems(apkFile, FilePicker.isSelectedAPK(apkFile, activity)));
 
                                         mProgressDialog.updateProgress(1);
                                     }
                                 }
                             } catch (IOException ignored) {}
-                            mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getName(), rhs.getName()));
+                            mAPKs.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAPKName(), rhs.getAPKName()));
                         }
 
                         @Override
