@@ -88,9 +88,10 @@ public class BatchOptionsAdapter extends RecyclerView.Adapter<BatchOptionsAdapte
             this.mAppID = view.findViewById(R.id.description);
 
             view.setOnClickListener(v -> {
-                if (data.get(getAdapterPosition()).getStatus() == Integer.MIN_VALUE) {
-                    data.get(getAdapterPosition()).setChecked(!data.get(getAdapterPosition()).isChecked());
-                    notifyItemChanged(getAdapterPosition());
+                BatchOptionsItems items = data.get(getBindingAdapterPosition());
+                if (items.getStatus() == Integer.MIN_VALUE) {
+                    items.setChecked(!items.isChecked());
+                    notifyItemChanged(getBindingAdapterPosition());
                 }
             });
         }

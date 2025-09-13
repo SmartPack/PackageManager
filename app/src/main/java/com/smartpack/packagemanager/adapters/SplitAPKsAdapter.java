@@ -119,10 +119,11 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
 
             view.setOnClickListener(v -> {
                 if (batch) {
-                    if (Common.getRestoreList().contains(data.get(getAdapterPosition()))) {
-                        Common.getRestoreList().remove(data.get(getAdapterPosition()));
+                    String name = data.get(getBindingAdapterPosition());
+                    if (Common.getRestoreList().contains(name)) {
+                        Common.getRestoreList().remove(name);
                     } else {
-                        Common.getRestoreList().add(data.get(getAdapterPosition()));
+                        Common.getRestoreList().add(name);
                     }
                     notifyItemRangeChanged(0, getItemCount());
                 }
@@ -134,7 +135,7 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getRestoreList().add(data.get(getAdapterPosition()));
+                    Common.getRestoreList().add(data.get(getBindingAdapterPosition()));
                 }
                 activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
                 notifyItemRangeChanged(0, getItemCount());

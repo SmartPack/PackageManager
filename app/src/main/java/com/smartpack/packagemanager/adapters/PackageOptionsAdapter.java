@@ -62,7 +62,7 @@ public class PackageOptionsAdapter extends RecyclerView.Adapter<PackageOptionsAd
 
         @Override
         public void onClick(View view) {
-            mClickListener.onItemClick(getAdapterPosition(), view);
+            mClickListener.onItemClick(getBindingAdapterPosition(), view);
         }
     }
 

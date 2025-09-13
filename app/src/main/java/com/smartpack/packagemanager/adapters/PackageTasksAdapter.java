@@ -169,7 +169,7 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getBatchList().add(data.get(getAdapterPosition()).getPackageName());
+                    Common.getBatchList().add(data.get(getBindingAdapterPosition()).getPackageName());
                 }
                 MaterialButton batchButton = activity.findViewById(R.id.batch);
                 batchButton.setVisibility(!Common.getBatchList().isEmpty() ? View.VISIBLE : View.GONE);
@@ -181,20 +181,21 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
 
         @Override
         public void onClick(View view) {
-            if (!sPackageUtils.isPackageInstalled(data.get(getAdapterPosition()).getPackageName(), view.getContext())) {
+            PackageItems packageItems = data.get(getBindingAdapterPosition());
+            if (!sPackageUtils.isPackageInstalled(packageItems.getPackageName(), view.getContext())) {
                 sCommonUtils.toast(view.getContext().getString(R.string.package_removed), view.getContext()).show();
                 return;
             }
             if (batch) {
-                if (Common.getBatchList().contains(data.get(getAdapterPosition()).getPackageName())) {
-                    Common.getBatchList().remove(data.get(getAdapterPosition()).getPackageName());
+                if (Common.getBatchList().contains(packageItems.getPackageName())) {
+                    Common.getBatchList().remove(packageItems.getPackageName());
                 } else {
-                    Common.getBatchList().add(data.get(getAdapterPosition()).getPackageName());
+                    Common.getBatchList().add(packageItems.getPackageName());
                 }
                 notifyItemRangeChanged(0, getItemCount());
             } else {
-                Common.setApplicationID(data.get(getAdapterPosition()).getPackageName());
-                Common.setApplicationName(data.get(getAdapterPosition()).getAppName());
+                Common.setApplicationID(packageItems.getPackageName());
+                Common.setApplicationName(packageItems.getAppName());
                 Common.setApplicationIcon(appIcon.getDrawable());
                 Common.setSourceDir(sPackageUtils.getSourceDir(Common.getApplicationID(), view.getContext()));
                 Common.setDataDir(sPackageUtils.getDataDir(Common.getApplicationID(), view.getContext()));
@@ -202,7 +203,7 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                 Common.isSystemApp(sPackageUtils.isSystemApp(Common.getApplicationID(), view.getContext()));
                 Common.isAPKPicker(false);
                 Intent details = new Intent(view.getContext(), PackageDetailsActivity.class);
-                details.putExtra(PackageDetailsActivity.LAUNCH_INTENT, data.get(getAdapterPosition()).launchIntent() != null);
+                details.putExtra(PackageDetailsActivity.LAUNCH_INTENT, packageItems.launchIntent() != null);
                 view.getContext().startActivity(details);
             }
         }

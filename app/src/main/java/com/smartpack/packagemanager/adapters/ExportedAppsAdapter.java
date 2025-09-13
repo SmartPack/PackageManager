@@ -174,7 +174,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getRestoreList().add(data.get(getAdapterPosition()));
+                    Common.getRestoreList().add(data.get(getBindingAdapterPosition()));
                 }
                 activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
                 notifyItemRangeChanged(0, getItemCount());
@@ -184,15 +184,16 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
 
         @Override
         public void onClick(View view) {
+            String path = data.get(getBindingAdapterPosition());
             if (batch) {
-                if (Common.getRestoreList().contains(data.get(getAdapterPosition()))) {
-                    Common.getRestoreList().remove(data.get(getAdapterPosition()));
+                if (Common.getRestoreList().contains(path)) {
+                    Common.getRestoreList().remove(path);
                 } else {
-                    Common.getRestoreList().add(data.get(getAdapterPosition()));
+                    Common.getRestoreList().add(path);
                 }
                 notifyItemRangeChanged(0, getItemCount());
             } else {
-                if (data.get(getAdapterPosition()).endsWith(".apkm")) {
+                if (path.endsWith(".apkm")) {
                     new sExecutor() {
                         private final List<APKPickerItems> mAPKs = new ArrayList<>();
                         private ProgressDialog mProgressDialog;
@@ -211,7 +212,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                                 sFileUtils.delete(files);
                             }
 
-                            try (ZipFile zipFile = new ZipFile(data.get(getAdapterPosition()))) {
+                            try (ZipFile zipFile = new ZipFile(path)) {
                                 mProgressDialog.setMax(zipFile.getFileHeaders().size());
                                 for (FileHeader fileHeaders : zipFile.getFileHeaders()) {
                                     if (fileHeaders.getFileName().endsWith(".apk")) {
@@ -235,11 +236,11 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                 } else {
                     new MaterialAlertDialogBuilder(view.getContext())
                             .setIcon(R.mipmap.ic_launcher)
-                            .setTitle(view.getContext().getString(data.get(getAdapterPosition()).endsWith(".apkm") ? R.string.bundle_install_apks
-                                    : R.string.install_question, new File(data.get(getAdapterPosition())).getName()))
+                            .setTitle(view.getContext().getString(path.endsWith(".apkm") ? R.string.bundle_install_apks
+                                    : R.string.install_question, new File(path).getName()))
                             .setNegativeButton(R.string.cancel, (dialog, id) -> {
                             })
-                            .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(data.get(getAdapterPosition()), activity).execute()
+                            .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(path, activity).execute()
                             ).show();
                 }
             }

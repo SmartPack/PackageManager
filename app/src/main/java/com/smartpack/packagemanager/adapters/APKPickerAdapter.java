@@ -69,7 +69,7 @@ public class APKPickerAdapter extends RecyclerView.Adapter<APKPickerAdapter.View
             this.mSize = view.findViewById(R.id.size);
 
             view.setOnClickListener(v -> {
-                int position = getAdapterPosition();
+                int position = getBindingAdapterPosition();
                 data.get(position).isSelected(!data.get(position).isSelected());
                 mCheckBox.setChecked(!mCheckBox.isChecked());
             });

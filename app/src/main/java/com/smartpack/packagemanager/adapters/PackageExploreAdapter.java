@@ -114,7 +114,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
 
         @Override
         public void onClick(View view) {
-            clickListener.onItemClick(getAdapterPosition(), view);
+            clickListener.onItemClick(getBindingAdapterPosition(), view);
         }
     }
 
