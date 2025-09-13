@@ -1,7 +1,8 @@
 [versions]
 core = "6.0.0"
-agp = "8.12.1"
-material = "1.12.0"
+agp = "8.13.0"
+documentfileVersion = "1.1.0"
+material = "1.13.0"
 shizuku = "13.1.5"
 scommon = "554bd101fc"
 axml = "31311d5824"
@@ -12,6 +13,7 @@ axml = { module = "com.github.apk-editor:aXML", version.ref = "axml" }
 adapters = { module = "com.github.sunilpaulmathew.sCommon:adapters", version.ref = "scommon" }
 crashreporter = { module = "com.github.sunilpaulmathew.sCommon:crashreporter", version.ref = "scommon" }
 credits = { module = "com.github.sunilpaulmathew.sCommon:credits", version.ref = "scommon" }
+documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfileVersion" }
 installerutils = { module = "com.github.sunilpaulmathew.sCommon:installerutils", version.ref = "scommon" }
 permissionutils = { module = "com.github.sunilpaulmathew.sCommon:permissionutils", version.ref = "scommon" }
 themeutils = { module = "com.github.sunilpaulmathew.sCommon:themeutils", version.ref = "scommon" }

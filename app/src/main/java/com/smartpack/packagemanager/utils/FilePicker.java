@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.widget.ProgressBar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class FilePicker {
                 || file.getName().contains(FilePicker.getScreenDensity(activity));
     }
 
-    public static List<String> getData(Activity activity, boolean splits) {
+    public static List<String> getData(ProgressBar progressBar, Activity activity, boolean splits) {
         List<String> mData = new ArrayList<>(), mDir = new ArrayList<>(), mFiles = new ArrayList<>();
         mData.add("");
         try {

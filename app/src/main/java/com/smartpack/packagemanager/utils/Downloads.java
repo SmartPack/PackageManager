@@ -9,6 +9,7 @@
 package com.smartpack.packagemanager.utils;
 
 import android.content.Context;
+import android.widget.ProgressBar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,8 +24,14 @@ public class Downloads {
 
     private static String mSearchText;
 
-    public static List<String> getData(Context context) {
+    public static List<String> getData(ProgressBar progressBar, Context context) {
         List<String> mData = new ArrayList<>();
+        if (progressBar != null) {
+            if (progressBar.isIndeterminate()) {
+                progressBar.setIndeterminate(false);
+            }
+            progressBar.setMax(getDownloadList(context).length);
+        }
         for (File mFile : getDownloadList(context)) {
             if (sCommonUtils.getString("downloadTypes", "apks", context).equals("bundles")) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
@@ -41,6 +48,13 @@ public class Downloads {
                     } else if (isTextMatched(mFile.getName())) {
                         mData.add(mFile.getAbsolutePath());
                     }
+                }
+            }
+            if (progressBar != null) {
+                if (progressBar.getProgress() < getDownloadList(context).length) {
+                    progressBar.setProgress(progressBar.getProgress() + 1);
+                } else {
+                    progressBar.setProgress(0);
                 }
             }
         }

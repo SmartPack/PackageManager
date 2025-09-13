@@ -8,6 +8,9 @@
 
 package com.smartpack.packagemanager.activities;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +18,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -44,6 +48,7 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 public class PackageExploreActivity extends AppCompatActivity {
 
     private MaterialTextView mTitle;
+    private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private PackageExploreAdapter mRecycleViewAdapter;
 
@@ -57,6 +62,7 @@ public class PackageExploreActivity extends AppCompatActivity {
         MaterialButton mSortButton = findViewById(R.id.sort);
         mTitle = findViewById(R.id.title);
         MaterialTextView mError = findViewById(R.id.error_status);
+        mProgressBar = findViewById(R.id.progress);
         mRecyclerView = findViewById(R.id.recycler_view);
 
         mTitle.setText(Common.getApplicationName());
@@ -68,16 +74,16 @@ public class PackageExploreActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
         try {
-            mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(this, false), this);
+            mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(mProgressBar, this, false), this);
             mRecyclerView.setAdapter(mRecycleViewAdapter);
         } catch (NullPointerException ignored) {
-            mRecyclerView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(GONE);
             mError.setText(getString(R.string.explore_error_status, Common.getApplicationName()));
-            mError.setVisibility(View.VISIBLE);
+            mError.setVisibility(VISIBLE);
         }
 
         PackageExploreAdapter.setOnItemClickListener((position, v) -> {
-            String mPath = FilePicker.getData(this, false).get(position);
+            String mPath = FilePicker.getData(mProgressBar, this, false).get(position);
             if (position == 0) {
                 backPressedEvent();
             } else if (new File(mPath).isDirectory()) {
@@ -131,11 +137,12 @@ public class PackageExploreActivity extends AppCompatActivity {
 
             @Override
             public void onPreExecute() {
+                mProgressBar.setVisibility(VISIBLE);
             }
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(activity, false), activity);
+                mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(mProgressBar, activity, false), activity);
             }
 
             @Override
@@ -143,6 +150,7 @@ public class PackageExploreActivity extends AppCompatActivity {
                 mTitle.setText(Common.getPath().equals(getCacheDir().toString() + "/apk/") ? Common.getApplicationName()
                         : new File(Common.getPath()).getName());
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
+                mProgressBar.setVisibility(GONE);
             }
         }.execute();
     }

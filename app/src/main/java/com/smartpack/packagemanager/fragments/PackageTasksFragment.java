@@ -302,7 +302,7 @@ public class PackageTasksFragment extends Fragment {
             @Override
             public void doInBackground() {
                 PackageData.setRawData(mProgress, requireActivity());
-                mData = PackageData.getData(requireActivity());
+                mData = PackageData.getData(mProgress, requireActivity());
                 mRecycleViewAdapter = new PackageTasksAdapter(mData, requireActivity());
             }
 
@@ -781,7 +781,7 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                mData = PackageData.getData(activity);
+                mData = PackageData.getData(mProgress, activity);
                 mRecycleViewAdapter = new PackageTasksAdapter(mData, activity);
             }
 

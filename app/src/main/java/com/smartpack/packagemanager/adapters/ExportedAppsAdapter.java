@@ -37,7 +37,6 @@ import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.Common;
-import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
@@ -193,7 +192,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                 }
                 notifyItemRangeChanged(0, getItemCount());
             } else {
-                if (Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm")) {
+                if (data.get(getAdapterPosition()).endsWith(".apkm")) {
                     new sExecutor() {
                         private final List<APKPickerItems> mAPKs = new ArrayList<>();
                         private ProgressDialog mProgressDialog;
@@ -236,8 +235,8 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                 } else {
                     new MaterialAlertDialogBuilder(view.getContext())
                             .setIcon(R.mipmap.ic_launcher)
-                            .setTitle(view.getContext().getString(Downloads.getData(view.getContext()).get(getAdapterPosition()).endsWith(".apkm") ? R.string.bundle_install_apks
-                                    : R.string.install_question, new File(Downloads.getData(view.getContext()).get(getAdapterPosition())).getName()))
+                            .setTitle(view.getContext().getString(data.get(getAdapterPosition()).endsWith(".apkm") ? R.string.bundle_install_apks
+                                    : R.string.install_question, new File(data.get(getAdapterPosition())).getName()))
                             .setNegativeButton(R.string.cancel, (dialog, id) -> {
                             })
                             .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(data.get(getAdapterPosition()), activity).execute()

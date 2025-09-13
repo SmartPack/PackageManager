@@ -57,6 +57,12 @@ public class PackageData {
     private static List<PackageItems> getRawData(ProgressBar progressBar, Context context) {
         List<PackageItems> mRawData = new ArrayList<>();
         List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
+        if (progressBar != null) {
+            if (progressBar.isIndeterminate()) {
+                progressBar.setIndeterminate(false);
+            }
+            progressBar.setMax(packages.size());
+        }
         for (ApplicationInfo packageInfo: packages) {
             mRawData.add(new PackageItems(
                     packageInfo.packageName,
@@ -64,10 +70,6 @@ public class PackageData {
                     new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(), context)
             );
             if (progressBar != null) {
-                if (progressBar.isIndeterminate()) {
-                    progressBar.setIndeterminate(false);
-                }
-                progressBar.setMax(packages.size());
                 if (progressBar.getProgress() < packages.size()) {
                     progressBar.setProgress(progressBar.getProgress() + 1);
                 } else {
@@ -78,9 +80,15 @@ public class PackageData {
         return mRawData;
     }
 
-    public static List<PackageItems> getData(Context context) {
+    public static List<PackageItems> getData(ProgressBar progressBar, Context context) {
         boolean mAppType;
         List<PackageItems> mData = new ArrayList<>();
+        if (progressBar != null) {
+            if (progressBar.isIndeterminate()) {
+                progressBar.setIndeterminate(false);
+            }
+            progressBar.setMax(getRawData().size());
+        }
         for (PackageItems item : getRawData()) {
             if (sCommonUtils.getString("appTypes", "all", context).equals("system")) {
                 mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
@@ -105,6 +113,13 @@ public class PackageData {
                 mData.sort(Comparator.comparingLong(PackageItems::getUpdatedTime));
             } else {
                 mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
+            }
+            if (progressBar != null) {
+                if (progressBar.getProgress() < getRawData().size()) {
+                    progressBar.setProgress(progressBar.getProgress() + 1);
+                } else {
+                    progressBar.setProgress(0);
+                }
             }
         }
         if (sCommonUtils.getBoolean("reverse_order", false, context)) {

@@ -47,7 +47,7 @@
             android:gravity="center" />
     </FrameLayout>
 
-    <androidx.core.widget.ContentLoadingProgressBar
+    <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="20dp"

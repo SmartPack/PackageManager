@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.BatchOptionsAdapter;
 import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
@@ -38,10 +39,12 @@ public abstract class BatchOptionsDialog extends MaterialAlertDialogBuilder {
 
     public BatchOptionsDialog(String title, String actionTitle, List<String> packageNames, Activity activity) {
         super(activity);
-        View rootView = View.inflate(activity, R.layout.layout_recyclerview, null);
+        View rootView = View.inflate(activity, R.layout.layout_batch_options, null);
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        MaterialTextView titleText = rootView.findViewById(R.id.title);
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        titleText.setText(title);
 
         try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
             Handler handler = new Handler(Looper.getMainLooper());
@@ -53,8 +56,6 @@ public abstract class BatchOptionsDialog extends MaterialAlertDialogBuilder {
             });
         }
 
-        setIcon(R.mipmap.ic_launcher);
-        setTitle(title);
         setView(rootView);
         setNeutralButton(R.string.cancel, (dialog, id) -> {
         });

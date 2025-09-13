@@ -185,10 +185,23 @@ public class UninstalledAppsFragment extends Fragment {
     private List<String> getData(Context context) {
         List<String> mData = new ArrayList<>();
         List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
+        if (mProgress != null) {
+            if (mProgress.isIndeterminate()) {
+                mProgress.setIndeterminate(false);
+            }
+            mProgress.setMax(packages.size());
+        }
         for (ApplicationInfo packageInfo : packages) {
             if (!sPackageUtils.isPackageInstalled(packageInfo.packageName, context)) {
                 if (mSearchText == null || packageInfo.packageName.contains(mSearchText)) {
                     mData.add(packageInfo.packageName);
+                }
+            }
+            if (mProgress != null) {
+                if (mProgress.getProgress() < packages.size()) {
+                    mProgress.setProgress(mProgress.getProgress() + 1);
+                } else {
+                    mProgress.setProgress(0);
                 }
             }
         }
