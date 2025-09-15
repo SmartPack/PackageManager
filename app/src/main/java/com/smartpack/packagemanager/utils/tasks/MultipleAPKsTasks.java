@@ -10,7 +10,9 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Intent;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.documentfile.provider.DocumentFile;
 
 import com.smartpack.packagemanager.R;
@@ -33,12 +35,14 @@ public class MultipleAPKsTasks extends sExecutor {
 
     private final Activity mActivity;
     private static ArrayList<String> mAPKs;
+    private final ActivityResultLauncher<Intent> mInstallApp;
     private static ProgressDialog mProgressDialog;
     private final ClipData mURIFiles;
 
-    public MultipleAPKsTasks(ClipData uriFiles, Activity activity) {
-        mURIFiles = uriFiles;
-        mActivity = activity;
+    public MultipleAPKsTasks(ClipData uriFiles, ActivityResultLauncher<Intent> installApp, Activity activity) {
+        this.mURIFiles = uriFiles;
+        this.mInstallApp = installApp;
+        this.mActivity = activity;
 
     }
 
@@ -80,7 +84,7 @@ public class MultipleAPKsTasks extends sExecutor {
     @Override
     public void onPostExecute() {
         mProgressDialog.dismiss();
-        new SplitAPKsInstallationTasks(mAPKs, mActivity).execute();
+        new SplitAPKsInstallationTasks(mAPKs, mInstallApp::launch, mActivity).execute();
     }
 
 }

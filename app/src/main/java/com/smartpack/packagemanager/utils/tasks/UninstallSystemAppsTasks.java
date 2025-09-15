@@ -10,15 +10,14 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 
 /*
@@ -27,12 +26,15 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 public class UninstallSystemAppsTasks extends sExecutor {
 
     private final Activity mActivity;
+    private final String mAppName, mPackageName;
     private static final RootShell mRootShell = new RootShell();
     private static final ShizukuShell mShizukuShell = new ShizukuShell();
     private ProgressDialog mProgressDialog;
 
-    public UninstallSystemAppsTasks(Activity activity) {
-        mActivity = activity;
+    public UninstallSystemAppsTasks(String packageName, String appName, Activity activity) {
+        this.mPackageName = packageName;
+        this.mAppName = appName;
+        this.mActivity = activity;
 
     }
 
@@ -41,17 +43,16 @@ public class UninstallSystemAppsTasks extends sExecutor {
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
-        mProgressDialog.setTitle(mActivity.getString(R.string.uninstall_summary, Common.getApplicationName()));
+        mProgressDialog.setTitle(mActivity.getString(R.string.uninstall_summary, mAppName));
         mProgressDialog.show();
     }
 
     @Override
     public void doInBackground() {
-        sCommonUtils.sleep(1);
         if (mRootShell.rootAccess()) {
-            mRootShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+            mRootShell.runCommand("pm uninstall --user 0 " + mPackageName);
         } else {
-            mShizukuShell.runCommand("pm uninstall --user 0 " + Common.getApplicationID());
+            mShizukuShell.runCommand("pm uninstall --user 0 " + mPackageName);
         }
     }
 
@@ -59,8 +60,10 @@ public class UninstallSystemAppsTasks extends sExecutor {
     public void onPostExecute() {
         PackageData.setRawData(null, mActivity);
         mProgressDialog.dismiss();
+        Intent intent = new Intent();
+        intent.putExtra("packageName", mPackageName);
+        mActivity.setResult(Activity.RESULT_OK, intent);
         mActivity.finish();
-        Common.reloadPage(true);
     }
 
 }

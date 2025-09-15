@@ -33,17 +33,30 @@ public class FilePicker {
                 || file.getName().contains(FilePicker.getScreenDensity(activity));
     }
 
-    public static List<String> getData(ProgressBar progressBar, Activity activity, boolean splits) {
+    public static List<String> getData(String path, ProgressBar progressBar, Activity activity, boolean splits) {
         List<String> mData = new ArrayList<>(), mDir = new ArrayList<>(), mFiles = new ArrayList<>();
         mData.add("");
         try {
-            for (File mFile : Objects.requireNonNull(new File(Common.getPath()).listFiles())) {
+            if (progressBar != null) {
+                if (progressBar.isIndeterminate()) {
+                    progressBar.setIndeterminate(false);
+                }
+                progressBar.setMax(Objects.requireNonNull(new File(path).listFiles()).length);
+            }
+            for (File mFile : Objects.requireNonNull(new File(path).listFiles())) {
                 if (mFile.isDirectory()) {
                     // Add directories
                     mDir.add(mFile.getAbsolutePath());
                 } else if (!splits || mFile.getName().endsWith(".apk")) {
                     // Add files
                     mFiles.add(mFile.getAbsolutePath());
+                }
+                if (progressBar != null) {
+                    if (progressBar.getProgress() < Objects.requireNonNull(new File(path).listFiles()).length) {
+                        progressBar.setProgress(progressBar.getProgress() + 1);
+                    } else {
+                        progressBar.setProgress(0);
+                    }
                 }
             }
             mDir.sort(String.CASE_INSENSITIVE_ORDER);

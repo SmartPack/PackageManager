@@ -27,11 +27,12 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.SplitAPKsAdapter;
 import com.smartpack.packagemanager.dialogs.ExportSuccessDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
@@ -42,6 +43,30 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class SplitApksFragment extends Fragment {
 
+    private final List<String> mBatchList = new ArrayList<>();
+    private String mPackageName;
+
+    public SplitApksFragment() {
+    }
+
+    public static SplitApksFragment newInstance(String packageName) {
+        SplitApksFragment fragment = new SplitApksFragment();
+
+        Bundle args = new Bundle();
+        args.putString("packageNameIntent", packageName);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mPackageName = getArguments().getString("packageNameIntent");
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +76,7 @@ public class SplitApksFragment extends Fragment {
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        SplitAPKsAdapter mRecycleViewAdapter = new SplitAPKsAdapter(SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), requireActivity())), requireActivity());
+        SplitAPKsAdapter mRecycleViewAdapter = new SplitAPKsAdapter(SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(mPackageName, requireActivity())), mBatchList, mPackageName, requireActivity());
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mBatch.setOnClickListener(v ->
@@ -69,15 +94,15 @@ public class SplitApksFragment extends Fragment {
 
                     @Override
                     public void doInBackground() {
-                        mProgressDialog.setMax(Common.getRestoreList().size());
+                        mProgressDialog.setMax(mBatchList.size());
                         PackageData.makePackageFolder(v.getContext());
-                        mParentFile = new File(PackageData.getPackageDir(v.getContext()), Common.getApplicationID());
+                        mParentFile = new File(PackageData.getPackageDir(v.getContext()), mPackageName);
                         if (!mParentFile.exists()) {
                             sFileUtils.mkdir(mParentFile);
                         }
 
-                        for (String apkNAme : Common.getRestoreList()) {
-                            sFileUtils.copy(new File(sPackageUtils.getParentDir(Common.getApplicationID(), v.getContext()), apkNAme), new File(mParentFile, apkNAme));
+                        for (String apkNAme : mBatchList) {
+                            sFileUtils.copy(new File(sPackageUtils.getParentDir(mPackageName, v.getContext()), apkNAme), new File(mParentFile, apkNAme));
                             mProgressDialog.updateProgress(1);
                         }
                     }
@@ -98,7 +123,7 @@ public class SplitApksFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Common.getRestoreList().clear();
+        mBatchList.clear();
     }
 
 }

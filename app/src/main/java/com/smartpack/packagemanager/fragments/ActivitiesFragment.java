@@ -22,13 +22,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ActivitiesAdapter;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2021
  */
 public class ActivitiesFragment extends Fragment {
+
+    private String mPackageName;
+
+    public ActivitiesFragment() {
+    }
+
+    public static ActivitiesFragment newInstance(String packageName) {
+        ActivitiesFragment fragment = new ActivitiesFragment();
+
+        Bundle args = new Bundle();
+        args.putString("packageNameIntent", packageName);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mPackageName = getArguments().getString("packageNameIntent");
+        }
+    }
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -39,7 +61,7 @@ public class ActivitiesFragment extends Fragment {
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        ActivitiesAdapter mRecycleViewAdapter = new ActivitiesAdapter(PackageDetails.getActivities(Common.getApplicationID(), requireActivity()));
+        ActivitiesAdapter mRecycleViewAdapter = new ActivitiesAdapter(PackageDetails.getActivities(mPackageName, requireActivity()));
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;

@@ -26,7 +26,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
@@ -40,14 +39,17 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.ViewHolder> {
 
-    private static List<String> data;
     private final Activity activity;
+    private final List<String> data, batchList;
+    private final String packageName;
     private static boolean batch = false;
 
-    public SplitAPKsAdapter(List<String> data, Activity activity) {
-        SplitAPKsAdapter.data = data;
+    public SplitAPKsAdapter(List<String> data, List<String> batchList, String packageName, Activity activity) {
+        this.data = data;
+        this.batchList = batchList;
+        this.packageName = packageName;
         this.activity = activity;
-        batch = !Common.getRestoreList().isEmpty();
+        batch = !batchList.isEmpty();
     }
 
     @NonNull
@@ -61,26 +63,26 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull SplitAPKsAdapter.ViewHolder holder, int position) {
         holder.mName.setText(data.get(position));
-        holder.mSize.setText(sAPKUtils.getAPKSize(new File(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
+        holder.mSize.setText(sAPKUtils.getAPKSize(new File(sPackageUtils.getParentDir(packageName, holder.mIcon
                 .getContext()) + "/" + data.get(position)).length()));
-        if (sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
+        if (sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(packageName, holder.mIcon
                 .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
-            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
+            holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(packageName, holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         }
 
         holder.mExport.setVisibility(batch ? GONE : VISIBLE);
         holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
 
-        holder.mCheckBox.setChecked(Common.getRestoreList().contains(data.get(position)));
+        holder.mCheckBox.setChecked(batchList.contains(data.get(position)));
 
-        activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+        activity.findViewById(R.id.batch).setVisibility(batchList.isEmpty() ? GONE : VISIBLE);
 
         holder.mCheckBox.setOnClickListener(v -> {
-            if (Common.getRestoreList().contains(data.get(position))) {
-                Common.getRestoreList().remove(data.get(position));
+            if (batchList.contains(data.get(position))) {
+                batchList.remove(data.get(position));
             } else {
-                Common.getRestoreList().add(data.get(position));
+                batchList.add(data.get(position));
             }
             notifyItemChanged(position);
         });
@@ -92,8 +94,8 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
                 })
                 .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
-                        PackageExplorer.copyToStorage(sPackageUtils.getParentDir(Common.getApplicationID(), holder.mIcon
-                                .getContext()) + "/" + data.get(position), Common.getApplicationID(), activity)
+                        PackageExplorer.copyToStorage(sPackageUtils.getParentDir(packageName, holder.mIcon
+                                .getContext()) + "/" + data.get(position), packageName, activity)
                 ).show()
         );
     }
@@ -120,10 +122,10 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
             view.setOnClickListener(v -> {
                 if (batch) {
                     String name = data.get(getBindingAdapterPosition());
-                    if (Common.getRestoreList().contains(name)) {
-                        Common.getRestoreList().remove(name);
+                    if (batchList.contains(name)) {
+                        batchList.remove(name);
                     } else {
-                        Common.getRestoreList().add(name);
+                        batchList.add(name);
                     }
                     notifyItemRangeChanged(0, getItemCount());
                 }
@@ -131,13 +133,13 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
 
             view.setOnLongClickListener(v -> {
                 if (batch) {
-                    Common.getRestoreList().clear();
+                    batchList.clear();
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getRestoreList().add(data.get(getBindingAdapterPosition()));
+                    batchList.add(data.get(getBindingAdapterPosition()));
                 }
-                activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                activity.findViewById(R.id.batch).setVisibility(batchList.isEmpty() ? GONE : VISIBLE);
                 notifyItemRangeChanged(0, getItemCount());
                 return true;
             });

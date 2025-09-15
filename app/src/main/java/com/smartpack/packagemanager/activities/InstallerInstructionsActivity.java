@@ -24,6 +24,8 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
+import java.util.Objects;
+
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
@@ -49,11 +51,23 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
             installer.setType("*/*");
             installer.addCategory(Intent.CATEGORY_OPENABLE);
             installer.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-            installApp.launch(installer);
+            filePickerIntent.launch(installer);
         });
     }
 
-    ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    boolean status = Objects.requireNonNull(data).getBooleanExtra("INSTALL_STATUS_UPDATE", false);
+                    setResult(Activity.RESULT_OK, new Intent().putExtra("INSTALL_STATUS_UPDATE", status));
+                    finish();
+                }
+            }
+    );
+
+    ActivityResultLauncher<Intent> filePickerIntent = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
@@ -61,9 +75,9 @@ public class InstallerInstructionsActivity extends AppCompatActivity {
                     Uri uriFile = data.getData();
 
                     if (data.getClipData() != null) {
-                        new MultipleAPKsTasks(data.getClipData(), this).execute();
+                        new MultipleAPKsTasks(data.getClipData(), installApp, this).execute();
                     } else if (uriFile != null) {
-                        new SingleAPKTasks(uriFile, this).execute();
+                        new SingleAPKTasks(uriFile, installApp::launch, this).execute();
                     }
                 }
             }

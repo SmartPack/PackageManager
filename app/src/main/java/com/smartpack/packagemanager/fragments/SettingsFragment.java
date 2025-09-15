@@ -31,7 +31,6 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.SettingsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.Billing;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.SerializableItems.SettingsItems;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -224,7 +223,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
 
-                Common.navigateToFragment(requireActivity(), 0);
+                Utils.navigateToFragment(requireActivity(), 0);
             }
         });
 

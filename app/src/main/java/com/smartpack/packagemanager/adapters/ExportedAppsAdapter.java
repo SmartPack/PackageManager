@@ -36,7 +36,6 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.APKFile;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
@@ -62,13 +61,16 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapter.ViewHolder> {
 
     private final Activity activity;
-    private final List<String> data;
+    private final List<String> data, batchList;
+    private final OnInstallRequest mCallback;
     private static boolean batch = false;
 
-    public ExportedAppsAdapter(List<String> data, Activity activity) {
+    public ExportedAppsAdapter(List<String> data, List<String> batchList, OnInstallRequest callback, Activity activity) {
         this.data = data;
+        this.mCallback = callback;
+        this.batchList = batchList;
         this.activity = activity;
-        batch = !Common.getRestoreList().isEmpty();
+        batch = !batchList.isEmpty();
     }
 
     @NonNull
@@ -95,15 +97,15 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         holder.mAction.setVisibility(batch ? GONE : VISIBLE);
         holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
 
-        holder.mCheckBox.setChecked(Common.getRestoreList().contains(data.get(position)));
+        holder.mCheckBox.setChecked(batchList.contains(data.get(position)));
 
-        activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+        activity.findViewById(R.id.batch).setVisibility(batchList.isEmpty() ? GONE : VISIBLE);
 
         holder.mCheckBox.setOnClickListener(v -> {
-            if (Common.getRestoreList().contains(data.get(position))) {
-                Common.getRestoreList().remove(data.get(position));
+            if (batchList.contains(data.get(position))) {
+                batchList.remove(data.get(position));
             } else {
-                Common.getRestoreList().add(data.get(position));
+                batchList.add(data.get(position));
             }
             notifyItemChanged(position);
         });
@@ -147,6 +149,10 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         });
     }
 
+    public interface OnInstallRequest {
+        void onInstall(Intent intent);
+    }
+
     @Override
     public int getItemCount() {
         return data.size();
@@ -170,26 +176,27 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
 
             view.setOnLongClickListener(v -> {
                 if (batch) {
-                    Common.getRestoreList().clear();
+                    batchList.clear();
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getRestoreList().add(data.get(getBindingAdapterPosition()));
+                    batchList.add(data.get(getBindingAdapterPosition()));
                 }
-                activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                activity.findViewById(R.id.batch).setVisibility(batchList.isEmpty() ? GONE : VISIBLE);
                 notifyItemRangeChanged(0, getItemCount());
                 return true;
             });
         }
 
+        @SuppressLint("StringFormatInvalid")
         @Override
         public void onClick(View view) {
             String path = data.get(getBindingAdapterPosition());
             if (batch) {
-                if (Common.getRestoreList().contains(path)) {
-                    Common.getRestoreList().remove(path);
+                if (batchList.contains(path)) {
+                    batchList.remove(path);
                 } else {
-                    Common.getRestoreList().add(path);
+                    batchList.add(path);
                 }
                 notifyItemRangeChanged(0, getItemCount());
             } else {
@@ -230,17 +237,16 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                         @Override
                         public void onPostExecute() {
                             mProgressDialog.dismiss();
-                            new BundleInstallDialog(mAPKs, false, activity);
+                            new BundleInstallDialog(mAPKs, false, mCallback::onInstall, activity);
                         }
                     }.execute();
                 } else {
                     new MaterialAlertDialogBuilder(view.getContext())
                             .setIcon(R.mipmap.ic_launcher)
-                            .setTitle(view.getContext().getString(path.endsWith(".apkm") ? R.string.bundle_install_apks
-                                    : R.string.install_question, new File(path).getName()))
+                            .setTitle(view.getContext().getString(R.string.install_question, new File(path).getName()))
                             .setNegativeButton(R.string.cancel, (dialog, id) -> {
                             })
-                            .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(path, activity).execute()
+                            .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(path, mCallback::onInstall, activity).execute()
                             ).show();
                 }
             }

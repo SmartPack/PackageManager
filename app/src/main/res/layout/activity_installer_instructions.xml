@@ -17,7 +17,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exported_apps"
+            android:text="@string/split_apk_installer"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="80dp"
             style="@style/AppTheme.Title" />

@@ -25,7 +25,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
@@ -34,6 +33,8 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 28, 2021
  */
 public class ADBUninstallActivity extends AppCompatActivity {
+
+    public static final String PACKAGE_INTENT = "package";
 
     @SuppressLint({"StringFormatInvalid", "SetTextI18n"})
     @Override
@@ -50,10 +51,12 @@ public class ADBUninstallActivity extends AppCompatActivity {
         MaterialTextView mADBCommand = findViewById(R.id.adb_command);
         MaterialTextView mUninstallUpdates = findViewById(R.id.uninstall_updates);
 
-        mMainMessage.setText(getString(R.string.uninstall_adb_summary, Common.getApplicationName()));
-        mADBCommand.setText("adb shell pm uninstall -k --user 0 " + Common.getApplicationID());
-        if (sPackageUtils.isUpdatedSystemApp(Common.getApplicationID(), this)) {
-            mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, Common.getApplicationName()));
+        String packageName = getIntent().getStringExtra(PACKAGE_INTENT);
+
+        mMainMessage.setText(getString(R.string.uninstall_adb_summary, packageName));
+        mADBCommand.setText("adb shell pm uninstall -k --user 0 " + packageName);
+        if (sPackageUtils.isUpdatedSystemApp(packageName, this)) {
+            mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, packageName));
             mUninstall.setVisibility(View.VISIBLE);
         }
 
@@ -73,7 +76,7 @@ public class ADBUninstallActivity extends AppCompatActivity {
         mUninstallButton.setOnClickListener(v -> {
             Intent remove = new Intent(Intent.ACTION_DELETE);
             remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-            remove.setData(Uri.parse("package:" + Common.getApplicationID()));
+            remove.setData(Uri.parse("package:" + packageName));
             startActivity(remove);
             finish();
         });

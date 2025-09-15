@@ -4,7 +4,6 @@
     <string name="app_info">"О приложении"</string>
     <string name="batch_list_clear">"Очистить список"</string>
     <string name="batch_warning">"Настройки пакетной обработки будут удалены! Вы уверены?"</string>
-    <string name="bundle_install_apks">"Вы точно хотите установить пакетное приложение(split) '%s'?"</string>
     <string name="change_logs">"Список изменений"</string>
     <string name="data_dir">"Каталог данных"</string>
     <string name="date_installation">"Дата установки"</string>

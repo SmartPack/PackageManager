@@ -32,6 +32,8 @@ import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
+import java.util.Objects;
+
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CrashReporter.sCrashReporter;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
@@ -97,10 +99,10 @@ public class MainActivity extends AppCompatActivity {
         mFAB.setOnClickListener(v -> {
             if (sCommonUtils.getBoolean("neverShow", false, this)) {
                 Intent installer = getInstallerIntent();
-                installApp.launch(installer);
+                filePickerIntent.launch(installer);
             } else {
                 Intent installer = new Intent(this, InstallerInstructionsActivity.class);
-                startActivity(installer);
+                installApp.launch(installer);
             }
         });
     }
@@ -126,12 +128,26 @@ public class MainActivity extends AppCompatActivity {
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     Intent data = result.getData();
+                    boolean update = Objects.requireNonNull(data).getBooleanExtra("INSTALL_STATUS_UPDATE", false);
+
+                    if (!update) {
+                        recreate();
+                    }
+                }
+            }
+    );
+
+    private final ActivityResultLauncher<Intent> filePickerIntent = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
                     Uri uriFile = data.getData();
 
                     if (data.getClipData() != null) {
-                        new MultipleAPKsTasks(data.getClipData(), this).execute();
+                        new MultipleAPKsTasks(data.getClipData(), installApp, this).execute();
                     } else if (uriFile != null) {
-                        new SingleAPKTasks(uriFile, this).execute();
+                        new SingleAPKTasks(uriFile, installApp::launch, this).execute();
                     }
                 }
             }

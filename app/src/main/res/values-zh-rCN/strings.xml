@@ -5,7 +5,6 @@
     <string name="app_info">"应用信息"</string>
     <string name="batch_list_clear">"清空列表"</string>
     <string name="batch_warning">"您的批量处理设置将被删除！您确定吗？"</string>
-    <string name="bundle_install_apks">"您确定要安装应用捆绑包 '%s' 吗？"</string>
     <string name="change_logs">"更新日志"</string>
     <string name="data_dir">"数据目录"</string>
     <string name="date_installation">"安装日期"</string>

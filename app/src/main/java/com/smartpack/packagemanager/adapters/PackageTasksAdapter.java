@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +32,7 @@ import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ImageViewActivity;
 import com.smartpack.packagemanager.activities.PackageDetailsActivity;
-import com.smartpack.packagemanager.utils.Common;
+import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -46,13 +47,19 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapter.ViewHolder> {
 
     private final Activity activity;
+    private final ActivityResultLauncher<Intent> uninstallApps;
     private final List<PackageItems> data;
+    private final List<String> batchList;
+    private final String searchText;
     private static boolean batch = false;
 
-    public PackageTasksAdapter(List<PackageItems> data, Activity activity) {
+    public PackageTasksAdapter(List<PackageItems> data, String searchText, List<String> batchList, ActivityResultLauncher<Intent> uninstallApps, Activity activity) {
         this.data = data;
+        this.searchText = searchText;
+        this.uninstallApps = uninstallApps;
         this.activity = activity;
-        batch = !Common.getBatchList().isEmpty();
+        this.batchList = batchList;
+        batch = !batchList.isEmpty();
     }
 
     @NonNull
@@ -70,19 +77,19 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                 return;
             }
             this.data.get(position).loadAppIcon(holder.appIcon);
-            if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getPackageName())) {
+            if (searchText != null && PackageData.isTextMatched(data.get(position).getPackageName(), searchText)) {
                 holder.appID.setTypeface(null, Typeface.BOLD);
-                holder.appID.setText(Utils.fromHtml(data.get(position).getPackageName().replace(Common.getSearchText(), "<b><i><font color=\"" +
-                        Color.RED + "\">" + Common.getSearchText() + "</font></i></b>")));
+                holder.appID.setText(Utils.fromHtml(data.get(position).getPackageName().replace(searchText, "<b><i><font color=\"" +
+                        Color.RED + "\">" + searchText + "</font></i></b>")));
             } else {
                 holder.appID.setText(data.get(position).getPackageName());
             }
-            if (Common.getSearchText() != null && Common.isTextMatched(data.get(position).getAppName())) {
+            if (searchText != null && PackageData.isTextMatched(data.get(position).getAppName(), searchText)) {
                 holder.appName.setTypeface(null, Typeface.BOLD);
             }
 
             holder.checkBox.setVisibility(batch ? VISIBLE : GONE);
-            if (data.get(position).launchIntent() != null && !batch) {
+            if (data.get(position).launchIntent(holder.open.getContext()) != null && !batch) {
                 holder.open.setVisibility(View.VISIBLE);
             } else {
                 holder.open.setVisibility(View.GONE);
@@ -93,17 +100,16 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                     sCommonUtils.toast(v.getContext().getString(R.string.package_removed), v.getContext()).show();
                     return;
                 }
-                Common.setApplicationName(data.get(position).getAppName());
-                Common.setApplicationIcon(holder.appIcon.getDrawable());
                 Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
+                imageView.putExtra(ImageViewActivity.APP_NAME_INTENT, data.get(position).getAppName());
                 imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, data.get(position).getPackageName());
                 holder.appIcon.getContext().startActivity(imageView);
             });
             holder.checkBox.setOnClickListener(v -> {
-                if (Common.getBatchList().contains(data.get(position).getPackageName())) {
-                    Common.getBatchList().remove(data.get(position).getPackageName());
+                if (batchList.contains(data.get(position).getPackageName())) {
+                    batchList.remove(data.get(position).getPackageName());
                 } else {
-                    Common.getBatchList().add(data.get(position).getPackageName());
+                    batchList.add(data.get(position).getPackageName());
                 }
             });
             holder.open.setOnClickListener(v -> {
@@ -114,30 +120,30 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                     if (launchIntent != null) {
                         v.getContext().startActivity(launchIntent);
                     } else {
-                        sCommonUtils.toast(v.getContext().getString(R.string.open_failed, Common.getApplicationName()), v.getContext()).show();
+                        sCommonUtils.toast(v.getContext().getString(R.string.open_failed, data.get(position).getAppName()), v.getContext()).show();
                     }
                 }
             });
-            holder.checkBox.setChecked(Common.getBatchList().contains(data.get(position).getPackageName()));
+            holder.checkBox.setChecked(batchList.contains(data.get(position).getPackageName()));
             holder.checkBox.setOnClickListener(v -> {
                 if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
                     sCommonUtils.toast(v.getContext().getString(R.string.package_removed), v.getContext()).show();
                     holder.checkBox.setChecked(false);
                     return;
                 }
-                if (Common.getBatchList().contains(data.get(position).getPackageName())) {
-                    Common.getBatchList().remove(data.get(position).getPackageName());
+                if (batchList.contains(data.get(position).getPackageName())) {
+                    batchList.remove(data.get(position).getPackageName());
                     sCommonUtils.toast(v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName()), v.getContext()).show();
                 } else {
-                    Common.getBatchList().add(data.get(position).getPackageName());
+                    batchList.add(data.get(position).getPackageName());
                     sCommonUtils.toast(v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName()), v.getContext()).show();
                 }
                 notifyItemChanged(position);
             });
 
             MaterialButton batchButton = activity.findViewById(R.id.batch);
-            batchButton.setVisibility(!Common.getBatchList().isEmpty() ? View.VISIBLE : View.GONE);
-            batchButton.setText(activity.getString(R.string.batch_options, Common.getBatchList().size()));
+            batchButton.setVisibility(!batchList.isEmpty() ? View.VISIBLE : View.GONE);
+            batchButton.setText(activity.getString(R.string.batch_options, batchList.size()));
         } catch (IndexOutOfBoundsException ignored) {}
     }
 
@@ -165,15 +171,15 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
 
             view.setOnLongClickListener(v -> {
                 if (batch) {
-                    Common.getBatchList().clear();
+                    batchList.clear();
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getBatchList().add(data.get(getBindingAdapterPosition()).getPackageName());
+                    batchList.add(data.get(getBindingAdapterPosition()).getPackageName());
                 }
                 MaterialButton batchButton = activity.findViewById(R.id.batch);
-                batchButton.setVisibility(!Common.getBatchList().isEmpty() ? View.VISIBLE : View.GONE);
-                batchButton.setText(activity.getString(R.string.batch_options, Common.getBatchList().size()));
+                batchButton.setVisibility(!batchList.isEmpty() ? View.VISIBLE : View.GONE);
+                batchButton.setText(activity.getString(R.string.batch_options, batchList.size()));
                 notifyItemRangeChanged(0, getItemCount());
                 return true;
             });
@@ -187,24 +193,17 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                 return;
             }
             if (batch) {
-                if (Common.getBatchList().contains(packageItems.getPackageName())) {
-                    Common.getBatchList().remove(packageItems.getPackageName());
+                if (batchList.contains(packageItems.getPackageName())) {
+                    batchList.remove(packageItems.getPackageName());
                 } else {
-                    Common.getBatchList().add(packageItems.getPackageName());
+                    batchList.add(packageItems.getPackageName());
                 }
                 notifyItemRangeChanged(0, getItemCount());
             } else {
-                Common.setApplicationID(packageItems.getPackageName());
-                Common.setApplicationName(packageItems.getAppName());
-                Common.setApplicationIcon(appIcon.getDrawable());
-                Common.setSourceDir(sPackageUtils.getSourceDir(Common.getApplicationID(), view.getContext()));
-                Common.setDataDir(sPackageUtils.getDataDir(Common.getApplicationID(), view.getContext()));
-                Common.setNativeLibsDir(sPackageUtils.getNativeLibDir(Common.getApplicationID(), view.getContext()));
-                Common.isSystemApp(sPackageUtils.isSystemApp(Common.getApplicationID(), view.getContext()));
-                Common.isAPKPicker(false);
                 Intent details = new Intent(view.getContext(), PackageDetailsActivity.class);
-                details.putExtra(PackageDetailsActivity.LAUNCH_INTENT, packageItems.launchIntent() != null);
-                view.getContext().startActivity(details);
+                details.putExtra(PackageDetailsActivity.DATA_INTENT, packageItems);
+                details.putExtra(PackageDetailsActivity.APK_PICKED, false);
+                uninstallApps.launch(details);
             }
         }
     }

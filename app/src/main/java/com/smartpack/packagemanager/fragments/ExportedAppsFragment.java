@@ -13,6 +13,7 @@ import static android.view.View.VISIBLE;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -43,12 +44,13 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.ExportedAppsAdapter;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.Downloads;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -62,6 +64,7 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 public class ExportedAppsFragment extends Fragment {
 
     private boolean mRefresh = false;
+    private List<String> mBatchList = null;
     private MaterialAutoCompleteTextView mSearchWord;
     private MaterialButton mBatch, mSearch, mSort;
     private RecyclerView mRecyclerView;
@@ -202,12 +205,12 @@ public class ExportedAppsFragment extends Fragment {
 
                     @Override
                     public void doInBackground() {
-                        mProgress.setMax(Common.getRestoreList().size());
-                        for (String apkPath : Common.getRestoreList()) {
+                        mProgress.setMax(mBatchList.size());
+                        for (String apkPath : mBatchList) {
                             sFileUtils.delete(apkPath);
                             mProgress.setProgress(mProgress.getProgress() + 1);
                         }
-                        Common.getRestoreList().clear();
+                        mBatchList.clear();
                     }
 
                     @Override
@@ -231,9 +234,9 @@ public class ExportedAppsFragment extends Fragment {
                     return;
                 }
 
-                Common.getRestoreList().clear();
+                mBatchList.clear();
 
-                Common.navigateToFragment(requireActivity(), 0);
+                Utils.navigateToFragment(requireActivity(), 0);
             }
         });
 
@@ -245,6 +248,9 @@ public class ExportedAppsFragment extends Fragment {
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(VISIBLE);
+                if (mBatchList == null) {
+                    mBatchList = new ArrayList<>();
+                }
             }
 
             @Override
@@ -257,14 +263,14 @@ public class ExportedAppsFragment extends Fragment {
                         sFileUtils.delete(files);
                     }
                 }
-                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(mProgress, requireActivity()), requireActivity());
+                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(mProgress, requireActivity()), mBatchList, installApp::launch, requireActivity());
             }
 
             @Override
             public void onPostExecute() {
                 mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
-                mBatch.setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                mBatch.setVisibility(mBatchList.isEmpty() ? GONE : VISIBLE);
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(GONE);
             }
@@ -278,6 +284,12 @@ public class ExportedAppsFragment extends Fragment {
             return 0;
         }
     }
+
+    private final ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+            }
+    );
 
     private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(
             new ActivityResultContracts.RequestPermission(),
@@ -300,7 +312,7 @@ public class ExportedAppsFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Common.getRestoreList().clear();
+        mBatchList.clear();
     }
 
 }

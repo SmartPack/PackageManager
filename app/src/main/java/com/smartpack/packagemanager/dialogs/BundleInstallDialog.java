@@ -22,6 +22,7 @@ import com.smartpack.packagemanager.activities.APKPickerActivity;
 import com.smartpack.packagemanager.adapters.APKPickerAdapter;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
+import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
 import java.util.List;
@@ -34,7 +35,7 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
  */
 public class BundleInstallDialog extends MaterialAlertDialogBuilder {
 
-    public BundleInstallDialog(List<APKPickerItems> data, boolean finish, Activity activity) {
+    public BundleInstallDialog(List<APKPickerItems> data, boolean finish, SingleAPKTasks.OnInstallRequest callback, Activity activity) {
         super(activity);
 
         View rootView = View.inflate(activity, R.layout.layout_recyclerview, null);
@@ -80,7 +81,7 @@ public class BundleInstallDialog extends MaterialAlertDialogBuilder {
                             apkDetails.putExtra(APKPickerActivity.NAME_INTENT, data.get(0).getAPKName());
                             activity.startActivity(apkDetails);
                         } else {
-                            new SplitAPKsInstallationTasks(data, activity).execute();
+                            new SplitAPKsInstallationTasks(data, callback::onInstall, activity).execute();
                         }
                         if (finish) {
                             activity.finish();

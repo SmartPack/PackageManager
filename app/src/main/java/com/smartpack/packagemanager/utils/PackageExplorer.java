@@ -19,13 +19,18 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 
+import com.apk.axml.ResourceTableParser;
 import com.apk.axml.aXMLDecoder;
+import com.apk.axml.serializableItems.ResEntry;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.tasks.SaveIconTasks;
 import com.smartpack.packagemanager.utils.tasks.SaveToDownloadsTasks;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
@@ -53,10 +58,17 @@ public class PackageExplorer {
         return sCommonUtils.getOrientation(activity) == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
     }
 
+    private static List<ResEntry> getResStream(Activity activity) {
+        try (FileInputStream fis = new FileInputStream(new File(activity.getCacheDir().getPath(),"apk/resources.arsc"))) {
+            return new ResourceTableParser(fis).parse();
+        } catch (IOException ignored) {}
+        return null;
+    }
+
     @SuppressLint("StringFormatInvalid")
     public static String readXMLFromAPK(String path, Activity activity) {
         try (FileInputStream inputStream = new FileInputStream(path)) {
-            return new aXMLDecoder(inputStream).decode();
+            return new aXMLDecoder(inputStream, getResStream(activity) != null ? getResStream(activity) : null).decodeAsString();
         } catch (Exception e) {
             sCommonUtils.toast(activity.getString(R.string.failed_decode_xml, new File(path).getName()), activity).show();
         }

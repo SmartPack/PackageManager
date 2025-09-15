@@ -9,6 +9,8 @@
 package com.smartpack.packagemanager.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,12 +26,12 @@ import androidx.core.widget.ContentLoadingProgressBar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -187,11 +189,20 @@ public class InstallerActivity extends AppCompatActivity {
                         mOpen.setVisibility(View.VISIBLE);
                     }
 
+                    Intent result = new Intent();
                     if (!mUpdating) {
-                        PackageData.getRawData().add(new PackageItems(mPackageName, sPackageUtils.getAppName(mPackageName, InstallerActivity.this).toString(),
-                                new File(sPackageUtils.getSourceDir(mPackageName, InstallerActivity.this)).length(), InstallerActivity.this));
-                        Common.reloadPage(true);
+                        PackageData.getRawData().add(new PackageItems(
+                                mPackageName,
+                                sPackageUtils.getAppName(mPackageName, InstallerActivity.this).toString(),
+                                new File(sPackageUtils.getSourceDir(mPackageName, InstallerActivity.this)).length(),
+                                Objects.requireNonNull(PackageData.getPackageInfo(mPackageName, InstallerActivity.this)).firstInstallTime,
+                                Objects.requireNonNull(PackageData.getPackageInfo(mPackageName, InstallerActivity.this)).lastUpdateTime)
+                        );
+                        result.putExtra("INSTALL_STATUS_UPDATE", false);
+                    } else {
+                        result.putExtra("INSTALL_STATUS_UPDATE", true);
                     }
+                    setResult(Activity.RESULT_OK, result);
                 }
                 mProgress.setVisibility(View.GONE);
                 mClose.setVisibility(View.VISIBLE);

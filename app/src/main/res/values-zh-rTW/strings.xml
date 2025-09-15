@@ -5,7 +5,6 @@
     <string name="app_info">"應用信息"</string>
     <string name="batch_list_clear">"清晰的列表"</string>
     <string name="batch_warning">"您的批處理設置將被刪除。 你確定嗎？"</string>
-    <string name="bundle_install_apks">"您確定要安裝應用程序包“%s”嗎？"</string>
     <string name="change_logs">"更改日誌"</string>
     <string name="data_dir">"數據目錄"</string>
     <string name="date_installation">"安裝日期"</string>

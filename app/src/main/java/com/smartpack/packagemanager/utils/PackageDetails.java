@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
@@ -43,30 +44,31 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class PackageDetails {
 
-    public static void exportApp(Activity activity) {
-        if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), activity)).size() > 1) {
-            new ExportBundleTasks(sPackageUtils.getParentDir(Common.getApplicationID(), activity), PackageData.getFileName(Common.getApplicationID(), activity),
-                    Common.getApplicationIcon(), activity).execute();
+    public static void exportApp(String packageName, String sourceDir, Drawable appIcon, Activity activity) {
+        if (new File(sPackageUtils.getSourceDir(packageName, activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageName, activity)).size() > 1) {
+            new ExportBundleTasks(packageName, sPackageUtils.getParentDir(packageName, activity), PackageData.getFileName(packageName, activity),
+                    appIcon, activity).execute();
         } else {
-            new ExportAPKTasks(Common.getSourceDir(), PackageData.getFileName(Common.getApplicationID(), activity), Common.getApplicationIcon(), activity).execute();
+            new ExportAPKTasks(packageName, sourceDir, PackageData.getFileName(packageName, activity), appIcon, activity).execute();
         }
     }
 
     @SuppressLint("StringFormatInvalid")
-    public static void uninstallSystemApp(Activity activity) {
+    public static void uninstallSystemApp(String packageName, String appName, Drawable appIcon, Activity activity) {
         if (new RootShell().rootAccess() || new ShizukuShell().isReady()) {
             new MaterialAlertDialogBuilder(activity)
-                    .setIcon(Common.getApplicationIcon())
-                    .setTitle(activity.getString(R.string.uninstall_title, Common.getApplicationName()))
+                    .setIcon(appIcon)
+                    .setTitle(activity.getString(R.string.uninstall_title, appName))
                     .setMessage(activity.getString(R.string.uninstall_warning))
                     .setCancelable(false)
                     .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
                     })
                     .setPositiveButton(activity.getString(R.string.yes), (dialog, id) ->
-                            new UninstallSystemAppsTasks(activity).execute())
+                            new UninstallSystemAppsTasks(packageName, appName, activity).execute())
                     .show();
         } else {
             Intent details = new Intent(activity, ADBUninstallActivity.class);
+            details.putExtra(ADBUninstallActivity.PACKAGE_INTENT, packageName);
             activity.startActivity(details);
         }
     }

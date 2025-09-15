@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
@@ -35,6 +36,15 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class PackageData {
 
     private static List<PackageItems> mRawData = null;
+
+    public static boolean isTextMatched(String text, String searchText) {
+        for (int a = 0; a < text.length() - searchText.length() + 1; a++) {
+            if (searchText.equalsIgnoreCase(text.substring(a, a + searchText.length()))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static int getSortingType(Context context) {
         return sCommonUtils.getInt("sort_apps", 0, context);
@@ -67,7 +77,9 @@ public class PackageData {
             mRawData.add(new PackageItems(
                     packageInfo.packageName,
                     getAppName(packageInfo.packageName, context),
-                    new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(), context)
+                    new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(),
+                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).firstInstallTime,
+                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime)
             );
             if (progressBar != null) {
                 if (progressBar.getProgress() < packages.size()) {
@@ -80,7 +92,7 @@ public class PackageData {
         return mRawData;
     }
 
-    public static List<PackageItems> getData(ProgressBar progressBar, Context context) {
+    public static List<PackageItems> getData(String searchTxt, ProgressBar progressBar, Context context) {
         boolean mAppType;
         List<PackageItems> mData = new ArrayList<>();
         if (progressBar != null) {
@@ -98,8 +110,8 @@ public class PackageData {
                 mAppType = true;
             }
             if (mAppType && item.getPackageName().contains(".")) {
-                if (Common.getSearchText() == null || (Common.isTextMatched(item.getAppName())
-                        || Common.isTextMatched(item.getPackageName()))) {
+                if (searchTxt == null || (isTextMatched(item.getAppName(), searchTxt)
+                        || isTextMatched(item.getPackageName(), searchTxt))) {
                     mData.add(item);
                 }
             }

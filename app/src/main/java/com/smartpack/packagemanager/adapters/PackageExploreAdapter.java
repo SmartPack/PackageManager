@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
@@ -40,10 +39,12 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
 
     private final Activity activity;
     private final List<String> data;
+    private final String packageName;
     private static ClickListener clickListener;
 
-    public PackageExploreAdapter(List<String> data, Activity activity) {
+    public PackageExploreAdapter(List<String> data, String packageName, Activity activity) {
         this.data = data;
+        this.packageName = packageName;
         this.activity = activity;
     }
 
@@ -90,7 +91,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
             holder.mTitle.setText(new File(data.get(position)).getName());
         }
 
-        holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(data.get(position), Common.getApplicationID(), activity));
+        holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(data.get(position), packageName, activity));
     }
 
     @Override
@@ -118,7 +119,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
         }
     }
 
-    public static void setOnItemClickListener(ClickListener clickListener) {
+    public void setOnItemClickListener(ClickListener clickListener) {
         PackageExploreAdapter.clickListener = clickListener;
     }
 

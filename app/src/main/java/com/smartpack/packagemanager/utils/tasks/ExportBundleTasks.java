@@ -20,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.ZipFileUtils;
@@ -40,15 +39,17 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class ExportBundleTasks extends sExecutor {
 
     private final Activity mActivity;
-    private static Drawable mIcon = null;
-    private static String mAPKPath = null, mName = null;
+    private final String mPackageName;
+    private final Drawable mIcon;
+    private final String mAPKPath, mName;
     private ProgressDialog mProgressDialog;
 
-    public ExportBundleTasks(String path, String name, Drawable icon, Activity activity) {
-        mAPKPath = path;
-        mName = name;
-        mIcon = icon;
-        mActivity = activity;
+    public ExportBundleTasks(String packageName, String path, String name, Drawable icon, Activity activity) {
+        this.mPackageName = packageName;
+        this.mAPKPath = path;
+        this.mName = name;
+        this.mIcon = icon;
+        this.mActivity = activity;
 
     }
 
@@ -70,7 +71,7 @@ public class ExportBundleTasks extends sExecutor {
         }
         PackageData.makePackageFolder(mActivity);
         try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(mActivity) + "/" + mName + "_" + sAPKUtils.getVersionCode(
-                sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apkm")) {
+                sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apkm")) {
             zipFileUtils.setProgress(mProgressDialog);
             zipFileUtils.zip(mFiles);
         } catch (IOException ignored) {}
@@ -89,7 +90,7 @@ public class ExportBundleTasks extends sExecutor {
                 .setPositiveButton(mActivity.getString(R.string.share), (dialog, id) -> {
                     Uri uriFile = FileProvider.getUriForFile(mActivity,
                             BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(mActivity) + "/" + mName + "_" +
-                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apkm"));
+                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apkm"));
                     Intent shareScript = new Intent(Intent.ACTION_SEND);
                     shareScript.setType("application/zip");
                     shareScript.putExtra(Intent.EXTRA_SUBJECT, mActivity.getString(R.string.shared_by, mName));

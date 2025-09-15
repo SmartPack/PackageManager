@@ -4,7 +4,6 @@
     <string name="app_info">"מידע על האפליקציה"</string>
     <string name="batch_list_clear">"נקה רשימה"</string>
     <string name="batch_warning">"הגדרות האצווה שלך יוסרו. האם אתה בטוח?"</string>
-    <string name="bundle_install_apks">"האם אתה בטוח שהתקנת את חבילת האפליקציות '%s'?"</string>
     <string name="change_logs">"יומני שינויים"</string>
     <string name="data_dir">"ספריית נתונים"</string>
     <string name="date_installation">"תאריכי התקנה"</string>

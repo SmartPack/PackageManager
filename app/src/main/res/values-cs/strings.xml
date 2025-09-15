@@ -4,7 +4,6 @@
     <string name="app_info">"Info o aplikaci"</string>
     <string name="batch_list_clear">"Vyčistit seznam"</string>
     <string name="batch_warning">"Váše dávkové nastavení bude odstraněno! Opravdu?"</string>
-    <string name="bundle_install_apks">"Opravdu chcete instalovat apk bundle (.aab) '%s'?"</string>
     <string name="change_logs">"Seznamy změn"</string>
     <string name="data_dir">"Adresář dat"</string>
     <string name="date_installation">"Instalační data"</string>

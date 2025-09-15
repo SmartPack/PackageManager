@@ -4,7 +4,6 @@
     <string name="app_info">"معلومات التطبيق"</string>
     <string name="batch_list_clear">"لائحة خالية"</string>
     <string name="batch_warning">"ستتم إزالة إعدادات الدُفعات الخاصة بك. هل أنت متأكد؟"</string>
-    <string name="bundle_install_apks">"هل أنت متأكد من تثبيت حزمة التطبيقات '٪ s'؟"</string>
     <string name="change_logs">"تغيير السجلات"</string>
     <string name="data_dir">"دليل البيانات"</string>
     <string name="date_installation">"مواعيد التركيب"</string>

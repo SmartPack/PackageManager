@@ -26,9 +26,9 @@ import com.smartpack.packagemanager.fragments.PackageInfoFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.fragments.SplitApksFragment;
 import com.smartpack.packagemanager.utils.AppOps;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.RootShell;
+import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 
@@ -43,7 +43,7 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class PackageDetailsActivity extends AppCompatActivity {
 
-    public static final String LAUNCH_INTENT = "launch";
+    public static final String DATA_INTENT = "data", APK_PICKED = "apk_picked";
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -57,28 +57,28 @@ public class PackageDetailsActivity extends AppCompatActivity {
         TabLayout mTabLayout = findViewById(R.id.tab_Layout);
         ViewPager mViewPager = findViewById(R.id.view_pager);
 
-        boolean launchIntent = getIntent().getBooleanExtra(LAUNCH_INTENT, false);
+        PackageItems packageItems = (PackageItems) getIntent().getSerializableExtra(DATA_INTENT);
+        boolean apkPicked = getIntent().getBooleanExtra(APK_PICKED, false);
 
-        mAppIcon.setImageDrawable(Common.getApplicationIcon());
-        mAppName.setText(Common.getApplicationName());
-        mVersion.setText(getString(R.string.version, sAPKUtils.getVersionName(Common.getSourceDir(), this)));
+        packageItems.loadAppIcon(mAppIcon);
+        mAppName.setText(packageItems.getAppName());
+        mVersion.setText(getString(R.string.version, sAPKUtils.getVersionName(sPackageUtils.getSourceDir(packageItems.getPackageName(), this), this)));
 
         sPagerAdapter adapter = new sPagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(PackageInfoFragment.newInstance(launchIntent), getString(R.string.app_info));
-        if (new File(sPackageUtils.getSourceDir(Common.getApplicationID(), this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(Common.getApplicationID(), this)).size() > 1) {
-            adapter.AddFragment(new SplitApksFragment(), getString(R.string.split_apk));
+        adapter.AddFragment(PackageInfoFragment.newInstance(packageItems), getString(R.string.app_info));
+        if (new File(sPackageUtils.getSourceDir(packageItems.getPackageName(), this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageItems.getPackageName(), this)).size() > 1) {
+            adapter.AddFragment(SplitApksFragment.newInstance(packageItems.getPackageName()), getString(R.string.split_apk));
         }
-        if (!PackageDetails.getPermissions(Common.getApplicationID(), this).isEmpty()) {
-            adapter.AddFragment(new PermissionsFragment(), getString(R.string.permissions));
+        if (!PackageDetails.getPermissions(packageItems.getPackageName(), this).isEmpty()) {
+            adapter.AddFragment(PermissionsFragment.newInstance(packageItems.getPackageName(), apkPicked), getString(R.string.permissions));
         }
-        if ((new RootShell().rootAccess() || new ShizukuShell().isReady()) && !AppOps.getOps(this).isEmpty()) {
-            adapter.AddFragment(new AppOpsFragment(), getString(R.string.operations));
+        if ((new RootShell().rootAccess() || new ShizukuShell().isReady()) && !AppOps.getOps(packageItems.getPackageName(), this).isEmpty()) {
+            adapter.AddFragment(AppOpsFragment.newInstance(packageItems.getPackageName()), getString(R.string.operations));
         }
-        if (!PackageDetails.getActivities(Common.getApplicationID(), this).isEmpty()) {
-            adapter.AddFragment(new ActivitiesFragment(), getString(R.string.activities));
+        if (!PackageDetails.getActivities(packageItems.getPackageName(), this).isEmpty()) {
+            adapter.AddFragment(ActivitiesFragment.newInstance(packageItems.getPackageName()), getString(R.string.activities));
         }
-        adapter.AddFragment(new ManifestFragment(), getString(R.string.manifest));
-
+        adapter.AddFragment(ManifestFragment.newInstance(packageItems.getPackageName(), apkPicked), getString(R.string.manifest));
 
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);

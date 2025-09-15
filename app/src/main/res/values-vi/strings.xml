@@ -4,7 +4,6 @@
     <string name="app_info">"Thông tin ứng dụng"</string>
     <string name="batch_list_clear">"Dọn dẹp danh sách"</string>
     <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa!  Bạn có chắc không?"</string>
-    <string name="bundle_install_apks">"Bạn có chắc chắn cài đặt gói ứng dụng '%s' không?"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
     <string name="data_dir">"Thư mục dữ liệu"</string>
     <string name="date_installation">"Ngày cài đặt"</string>

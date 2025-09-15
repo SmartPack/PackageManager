@@ -16,7 +16,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
@@ -31,11 +30,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PackageExploreAdapter;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
+import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -47,12 +46,14 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
  */
 public class PackageExploreActivity extends AppCompatActivity {
 
-    private MaterialTextView mTitle;
+    private MaterialTextView mError, mTitle;
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private PackageExploreAdapter mRecycleViewAdapter;
+    private List<String> mData;
+    private String mAppName, mPackageName, mRootPath;
+    public static final String PACKAGE_INTENT = "package", APP_NAME_INTENT = "app_name";
 
-    @SuppressLint("StringFormatInvalid")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +62,16 @@ public class PackageExploreActivity extends AppCompatActivity {
         MaterialButton mBack = findViewById(R.id.back);
         MaterialButton mSortButton = findViewById(R.id.sort);
         mTitle = findViewById(R.id.title);
-        MaterialTextView mError = findViewById(R.id.error_status);
+        mError = findViewById(R.id.error_status);
         mProgressBar = findViewById(R.id.progress);
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        mTitle.setText(Common.getApplicationName());
+        mRootPath = new File(getCacheDir().getPath(),"apk").getAbsolutePath();
+
+        mAppName = getIntent().getStringExtra(APP_NAME_INTENT);
+        mPackageName = getIntent().getStringExtra(PACKAGE_INTENT);
+
+        mTitle.setText(mAppName);
 
         mBack.setOnClickListener(v -> {
             sFileUtils.delete(new File(getCacheDir().getPath(), "apk"));
@@ -73,43 +79,8 @@ public class PackageExploreActivity extends AppCompatActivity {
         });
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, PackageExplorer.getSpanCount(this)));
-        try {
-            mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(mProgressBar, this, false), this);
-            mRecyclerView.setAdapter(mRecycleViewAdapter);
-        } catch (NullPointerException ignored) {
-            mRecyclerView.setVisibility(GONE);
-            mError.setText(getString(R.string.explore_error_status, Common.getApplicationName()));
-            mError.setVisibility(VISIBLE);
-        }
 
-        PackageExploreAdapter.setOnItemClickListener((position, v) -> {
-            String mPath = FilePicker.getData(mProgressBar, this, false).get(position);
-            if (position == 0) {
-                backPressedEvent();
-            } else if (new File(mPath).isDirectory()) {
-                Common.setPath(mPath);
-                reload(this);
-            } else if (PackageExplorer.isTextFile(mPath)) {
-                Intent textView = new Intent(this, TextViewActivity.class);
-                textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
-                textView.putExtra(TextViewActivity.PACKAGE_INTENT, Common.getApplicationID());
-                startActivity(textView);
-            } else if (PackageExplorer.isImageFile(mPath)) {
-                Intent imageView = new Intent(this, ImageViewActivity.class);
-                imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
-                imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, Common.getApplicationID());
-                startActivity(imageView);
-            } else {
-                new MaterialAlertDialogBuilder(this)
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(R.string.app_name)
-                        .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
-                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-                        .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
-                                .copyToStorage(mPath, Common.getApplicationID(), this)).show();
-            }
-        });
+        reload(mRootPath, this);
 
         mSortButton.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, mSortButton);
@@ -118,7 +89,7 @@ public class PackageExploreActivity extends AppCompatActivity {
                     .setChecked(sCommonUtils.getBoolean("az_order", true, this));
             popupMenu.setOnMenuItemClickListener(item -> {
                 sCommonUtils.saveBoolean("az_order", !sCommonUtils.getBoolean("az_order", true, this), this);
-                reload(this);
+                reload(mRootPath, this);
                 return false;
             });
             popupMenu.show();
@@ -132,8 +103,9 @@ public class PackageExploreActivity extends AppCompatActivity {
         });
     }
 
-    private void reload(Activity activity) {
+    private void reload(String path, Activity activity) {
         new sExecutor() {
+            private boolean failed = false;
 
             @Override
             public void onPreExecute() {
@@ -142,26 +114,70 @@ public class PackageExploreActivity extends AppCompatActivity {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new PackageExploreAdapter(FilePicker.getData(mProgressBar, activity, false), activity);
+                try {
+                    mData = FilePicker.getData(path, mProgressBar, activity, false);
+                    mRecycleViewAdapter = new PackageExploreAdapter(mData, mPackageName, activity);
+                } catch (NullPointerException ignored) {
+                    failed = true;
+                }
             }
 
+            @SuppressLint("StringFormatInvalid")
+            private void onRecyclerViewClick() {
+                mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
+                    String mPath = mData.get(position);
+                    if (position == 0) {
+                        backPressedEvent();
+                    } else if (new File(mPath).isDirectory()) {
+                        reload(mPath, activity);
+                    } else if (PackageExplorer.isTextFile(mPath)) {
+                        Intent textView = new Intent(activity, TextViewActivity.class);
+                        textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
+                        textView.putExtra(TextViewActivity.PACKAGE_INTENT, mPackageName);
+                        startActivity(textView);
+                    } else if (PackageExplorer.isImageFile(mPath)) {
+                        Intent imageView = new Intent(activity, ImageViewActivity.class);
+                        imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
+                        imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, mPackageName);
+                        startActivity(imageView);
+                    } else {
+                        new MaterialAlertDialogBuilder(activity)
+                                .setIcon(R.mipmap.ic_launcher)
+                                .setTitle(R.string.app_name)
+                                .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
+                                .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                })
+                                .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
+                                        .copyToStorage(mPath, mPackageName, activity)).show();
+                    }
+                });
+            }
+
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
-                mTitle.setText(Common.getPath().equals(getCacheDir().toString() + "/apk/") ? Common.getApplicationName()
-                        : new File(Common.getPath()).getName());
-                mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgressBar.setVisibility(GONE);
+                if (failed) {
+                    mRecyclerView.setVisibility(GONE);
+                    mError.setText(getString(R.string.explore_error_status, mAppName));
+                    mError.setVisibility(VISIBLE);
+                } else {
+                    mRootPath = path;
+                    mTitle.setText(path.equals(new File(getCacheDir(), "apk").getAbsolutePath()) ? mAppName
+                            : new File(path).getName());
+                    mRecyclerView.setAdapter(mRecycleViewAdapter);
+                    onRecyclerViewClick();
+                }
             }
         }.execute();
     }
 
     private void backPressedEvent() {
-        if (new File(Common.getPath()).equals(new File(getCacheDir().toString(), "apk/"))) {
+        if (new File(mRootPath).equals(new File(getCacheDir().toString(), "apk/"))) {
             sFileUtils.delete(new File(getCacheDir().getPath(),"apk"));
             finish();
         } else {
-            Common.setPath(Objects.requireNonNull(new File(Common.getPath()).getParentFile()).getPath());
-            reload(this);
+            reload(Objects.requireNonNull(new File(mRootPath).getParentFile()).getPath(), this);
         }
     }
 

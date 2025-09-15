@@ -26,7 +26,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
@@ -41,13 +40,14 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledAppsAdapter.ViewHolder> {
 
     private final Activity activity;
-    private final List<String> data;
+    private final List<String> data, restoreList;
     private static boolean batch = false;
 
-    public UninstalledAppsAdapter(List<String> data, Activity activity) {
+    public UninstalledAppsAdapter(List<String> data, List<String> restoreList, Activity activity) {
         this.data = data;
+        this.restoreList = restoreList;
         this.activity = activity;
-        batch = !Common.getRestoreList().isEmpty();
+        batch = !restoreList.isEmpty();
     }
 
     @NonNull
@@ -72,15 +72,15 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         );
         holder.mRestore.setVisibility(batch ? GONE : VISIBLE);
         holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
-        holder.mCheckBox.setChecked(Common.getRestoreList().contains(data.get(position)));
+        holder.mCheckBox.setChecked(restoreList.contains(data.get(position)));
 
-        activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+        activity.findViewById(R.id.batch).setVisibility(restoreList.isEmpty() ? GONE : VISIBLE);
 
         holder.mCheckBox.setOnClickListener(v -> {
-            if (Common.getRestoreList().contains(data.get(position))) {
-                Common.getRestoreList().remove(data.get(position));
+            if (restoreList.contains(data.get(position))) {
+                restoreList.remove(data.get(position));
             } else {
-                Common.getRestoreList().add(data.get(position));
+                restoreList.add(data.get(position));
             }
             notifyItemChanged(position);
         });
@@ -144,13 +144,13 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
 
             view.setOnLongClickListener(v -> {
                 if (batch) {
-                    Common.getRestoreList().clear();
+                    restoreList.clear();
                     batch = false;
                 } else {
                     batch = true;
-                    Common.getRestoreList().add(data.get(getBindingAdapterPosition()));
+                    restoreList.add(data.get(getBindingAdapterPosition()));
                 }
-                activity.findViewById(R.id.batch).setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                activity.findViewById(R.id.batch).setVisibility(restoreList.isEmpty() ? GONE : VISIBLE);
                 notifyItemRangeChanged(0, getItemCount());
                 return true;
             });
@@ -160,10 +160,10 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         public void onClick(View view) {
             if (batch) {
                 String packageName = data.get(getBindingAdapterPosition());
-                if (Common.getRestoreList().contains(packageName)) {
-                    Common.getRestoreList().remove(packageName);
+                if (restoreList.contains(packageName)) {
+                    restoreList.remove(packageName);
                 } else {
-                    Common.getRestoreList().add(packageName);
+                    restoreList.add(packageName);
                 }
                 notifyItemRangeChanged(0, getItemCount());
             }

@@ -8,20 +8,25 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.apk.axml.APKParser;
+import com.apk.axml.ResourceTableParser;
 import com.apk.axml.aXMLDecoder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 
 import java.io.InputStream;
 import java.util.zip.ZipFile;
@@ -35,28 +40,56 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class ManifestFragment extends Fragment {
 
+    private boolean mAPKPicked;
+    private String mPackageName;
+
+    public ManifestFragment() {
+    }
+
+    public static ManifestFragment newInstance(String packageName, boolean apkPicked) {
+        ManifestFragment fragment = new ManifestFragment();
+
+        Bundle args = new Bundle();
+        args.putString("packageNameIntent", packageName);
+        args.putBoolean("apkPickedIntent", apkPicked);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mPackageName = getArguments().getString("packageNameIntent");
+            mAPKPicked = getArguments().getBoolean("apkPickedIntent");
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.layout_textview, container, false);
 
         MaterialTextView mText = mRootView.findViewById(R.id.text);
+        ProgressBar mProgress = mRootView.findViewById(R.id.progress);
 
         new sExecutor() {
             private String mManifest = null;
 
             @Override
             public void onPreExecute() {
+                mProgress.setVisibility(VISIBLE);
             }
 
             @Override
             public void doInBackground() {
-                if (Common.isAPKPicker()) {
-                    mManifest = new APKParser().getManifest().trim();
+                if (mAPKPicked) {
+                    mManifest = new APKParser().getManifestAsString();
                 } else {
-                    try (ZipFile zipFile = new ZipFile(sPackageUtils.getSourceDir(Common.getApplicationID(), requireActivity()))) {
+                    try (ZipFile zipFile = new ZipFile(sPackageUtils.getSourceDir(mPackageName, requireActivity()))) {
                         InputStream inputStream = zipFile.getInputStream(zipFile.getEntry("AndroidManifest.xml"));
-                        mManifest = new aXMLDecoder(inputStream).decode().trim();
+                        mManifest = new aXMLDecoder(inputStream, new ResourceTableParser(zipFile.getInputStream(zipFile.getEntry("resources.arsc"))).parse()).decodeAsString();
                     } catch (Exception ignored) {
                     }
                 }
@@ -65,6 +98,7 @@ public class ManifestFragment extends Fragment {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
+                mProgress.setVisibility(GONE);
                 if (mManifest != null && !mManifest.isEmpty()) {
                     mText.setText(mManifest);
                 } else {
@@ -72,6 +106,16 @@ public class ManifestFragment extends Fragment {
                 }
             }
         }.execute();
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mProgress.getVisibility() == VISIBLE) {
+                    return;
+                }
+                requireActivity().finish();
+            }
+        });
 
         return mRootView;
     }

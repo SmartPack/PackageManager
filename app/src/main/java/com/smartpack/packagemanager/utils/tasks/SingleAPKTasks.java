@@ -44,15 +44,17 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 public class SingleAPKTasks extends sExecutor {
 
     private final Activity mActivity;
+    private final List<APKPickerItems> mAPKs = new ArrayList<>();
+    private final OnInstallRequest mCallback;
+    private final Uri mURIFile;
     private static File mAPKFile = null;
     private static String mFileName = null;
-    private final Uri mURIFile;
-    private final List<APKPickerItems> mAPKs = new ArrayList<>();
     private ProgressDialog mProgressDialog;
 
-    public SingleAPKTasks(Uri uriFile, Activity activity) {
-        mURIFile = uriFile;
-        mActivity = activity;
+    public SingleAPKTasks(Uri uriFile, OnInstallRequest callback, Activity activity) {
+        this.mURIFile = uriFile;
+        this.mCallback = callback;
+        this.mActivity = activity;
     }
 
     @Override
@@ -98,17 +100,21 @@ public class SingleAPKTasks extends sExecutor {
         }
     }
 
+    private Intent apkDetailsIntent() {
+        Intent apkDetails = new Intent(mActivity, APKPickerActivity.class);
+        apkDetails.putExtra(APKPickerActivity.PATH_INTENT, mAPKFile.getAbsolutePath());
+        apkDetails.putExtra(APKPickerActivity.NAME_INTENT, mFileName);
+        return apkDetails;
+    }
+
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onPostExecute() {
         mProgressDialog.dismiss();
         if (mFileName.endsWith(".apk")) {
-            Intent apkDetails = new Intent(mActivity, APKPickerActivity.class);
-            apkDetails.putExtra(APKPickerActivity.PATH_INTENT, mAPKFile.getAbsolutePath());
-            apkDetails.putExtra(APKPickerActivity.NAME_INTENT, mFileName);
-            mActivity.startActivity(apkDetails);
+            mCallback.onInstall(apkDetailsIntent());
         } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
-            new BundleInstallDialog(mAPKs, false, mActivity);
+            new BundleInstallDialog(mAPKs, false, mCallback, mActivity);
         } else {
             new MaterialAlertDialogBuilder(mActivity)
                     .setIcon(R.mipmap.ic_launcher)
@@ -118,6 +124,10 @@ public class SingleAPKTasks extends sExecutor {
                     .setPositiveButton(R.string.cancel, (dialogInterface, i) -> {
                     }).show();
         }
+    }
+
+    public interface OnInstallRequest {
+        void onInstall(Intent intent);
     }
 
 }

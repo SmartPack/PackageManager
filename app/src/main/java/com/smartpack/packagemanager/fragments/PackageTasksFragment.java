@@ -49,7 +49,6 @@ import com.smartpack.packagemanager.adapters.PackageTasksAdapter;
 import com.smartpack.packagemanager.dialogs.BatchOptionsDialog;
 import com.smartpack.packagemanager.dialogs.BatchResultsDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
@@ -89,11 +88,13 @@ public class PackageTasksFragment extends Fragment {
     private boolean mExit;
     private final Handler mHandler = new Handler();
     private List<PackageItems> mData;
+    private List<String> mBatchList = null;
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private PackageTasksAdapter mRecycleViewAdapter;
     private RootShell mRootShell = null;
     private ShizukuShell mShizukuShell = null;
+    private String mPackageNameRemoved = null, mSearchText = null;
 
     @Nullable
     @Override
@@ -137,7 +138,7 @@ public class PackageTasksFragment extends Fragment {
             }
         }
 
-        loadUI(requireActivity());
+        loadUI(mSearchText, requireActivity());
 
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_all)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_system)));
@@ -153,19 +154,19 @@ public class PackageTasksFragment extends Fragment {
                     case 0:
                         if (!mStatus.equals("all")) {
                             sCommonUtils.saveString("appTypes", "all", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(mSearchText, requireActivity());
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("system")) {
                             sCommonUtils.saveString("appTypes", "system", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(mSearchText, requireActivity());
                         }
                         break;
                     case 2:
                         if (!mStatus.equals("user")) {
                             sCommonUtils.saveString("appTypes", "user", requireActivity());
-                            loadUI(requireActivity());
+                            loadUI(mSearchText, requireActivity());
                         }
                         break;
                 }
@@ -212,12 +213,49 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Common.setSearchText(s.toString().toLowerCase());
-                loadUI(requireActivity());
+                loadUI(s.toString().toLowerCase(), requireActivity());
             }
         });
 
-        mReload.setOnClickListener(v -> reload().execute());
+        mReload.setOnClickListener(v ->
+                new sExecutor() {
+
+                    @Override
+                    public void onPreExecute() {
+                        mProgress.setVisibility(View.VISIBLE);
+                        mBatchOptions.setVisibility(GONE);
+                        mRecyclerView.setVisibility(GONE);
+
+                        mData = new CopyOnWriteArrayList<>();
+
+                        if (mSearchText != null) {
+                            mSearchWord.setText(null);
+                        }
+                        if (mSearchWord.getVisibility() == View.VISIBLE) {
+                            mSearchWord.setVisibility(GONE);
+                            Utils.toggleKeyboard(0, mSearchWord, requireActivity());
+                        }
+
+                        mBatchList.clear();
+                    }
+
+                    @Override
+                    public void doInBackground() {
+                        PackageData.setRawData(mProgress, requireActivity());
+                        mData = PackageData.getData(mSearchText, mProgress, requireActivity());
+                        mRecycleViewAdapter = new PackageTasksAdapter(mData, mSearchText, mBatchList, uninstallUserApps, requireActivity());
+                    }
+
+                    @Override
+                    public void onPostExecute() {
+                        mBatchOptions.setVisibility(GONE);
+                        mRecyclerView.setAdapter(mRecycleViewAdapter);
+                        mProgress.setVisibility(GONE);
+                        mProgress.setIndeterminate(true);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                }.execute()
+        );
 
         mSort.setOnClickListener(v -> sortMenu(requireActivity()));
 
@@ -238,16 +276,15 @@ public class PackageTasksFragment extends Fragment {
                 if (mProgress.getVisibility() == View.VISIBLE) {
                     return;
                 }
-                if (Common.getSearchText() != null) {
+                if (mSearchText != null) {
                     mSearchWord.setText(null);
-                    Common.setSearchText(null);
                     return;
                 }
                 if (mSearchWord.getVisibility() == View.VISIBLE) {
                     mSearchWord.setVisibility(GONE);
                     return;
                 }
-                if (!Common.getBatchList().isEmpty()) {
+                if (!mBatchList.isEmpty()) {
                     new MaterialAlertDialogBuilder(requireActivity())
                             .setIcon(R.mipmap.ic_launcher)
                             .setTitle(R.string.batch_warning)
@@ -255,8 +292,8 @@ public class PackageTasksFragment extends Fragment {
                             .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                             })
                             .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                                Common.getBatchList().clear();
-                                loadUI(requireActivity());
+                                mBatchList.clear();
+                                loadUI(mSearchText, requireActivity());
                             }).show();
                 } else if (sCommonUtils.getBoolean("exit_confirmation", true, requireActivity())) {
                     if (mExit) {
@@ -274,47 +311,6 @@ public class PackageTasksFragment extends Fragment {
         });
 
         return mRootView;
-    }
-
-    private sExecutor reload() {
-        return new sExecutor() {
-
-            @Override
-            public void onPreExecute() {
-                mProgress.setVisibility(View.VISIBLE);
-                mBatchOptions.setVisibility(GONE);
-                mRecyclerView.setVisibility(GONE);
-
-                mData = new CopyOnWriteArrayList<>();
-
-                if (Common.getSearchText() != null) {
-                    mSearchWord.setText(null);
-                    Common.setSearchText(null);
-                }
-                if (mSearchWord.getVisibility() == View.VISIBLE) {
-                    mSearchWord.setVisibility(GONE);
-                    Utils.toggleKeyboard(0, mSearchWord, requireActivity());
-                }
-
-                Common.getBatchList().clear();
-            }
-
-            @Override
-            public void doInBackground() {
-                PackageData.setRawData(mProgress, requireActivity());
-                mData = PackageData.getData(mProgress, requireActivity());
-                mRecycleViewAdapter = new PackageTasksAdapter(mData, requireActivity());
-            }
-
-            @Override
-            public void onPostExecute() {
-                mBatchOptions.setVisibility(GONE);
-                mRecyclerView.setAdapter(mRecycleViewAdapter);
-                mProgress.setVisibility(GONE);
-                mProgress.setIndeterminate(true);
-                mRecyclerView.setVisibility(View.VISIBLE);
-            }
-        };
     }
 
     private int getTabPosition(Activity activity) {
@@ -336,14 +332,19 @@ public class PackageTasksFragment extends Fragment {
     private void uninstallUserApp(String packageName) {
         Intent remove = new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + packageName));
         remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-        uninstallApps.launch(remove);
+        if (mBatchList.isEmpty()) {
+            mPackageNameRemoved = packageName;
+            uninstallUserApps.launch(remove);
+        } else {
+            uninstallApps.launch(remove);
+        }
     }
 
     private void handleUninstallEvent() {
-        if (!Common.getBatchList().isEmpty()) {
-            uninstallUserApp(Common.getBatchList().get(0));
+        if (!mBatchList.isEmpty()) {
+            uninstallUserApp(mBatchList.get(0));
         } else {
-            loadUI(requireActivity());
+            loadUI(mSearchText, requireActivity());
         }
     }
 
@@ -371,36 +372,36 @@ public class PackageTasksFragment extends Fragment {
                 case 1:
                     if (PackageData.getSortingType(activity) != 0) {
                         PackageData.setSortingType(0, activity);
-                        loadUI(activity);
+                        loadUI(mSearchText, activity);
                     }
                     break;
                 case 2:
                     if (PackageData.getSortingType(activity) != 1) {
                         PackageData.setSortingType(1, activity);
-                        loadUI(activity);
+                        loadUI(mSearchText, activity);
                     }
                     break;
                 case 3:
                     if (PackageData.getSortingType(activity) != 2) {
                         PackageData.setSortingType(2, activity);
-                        loadUI(activity);
+                        loadUI(mSearchText, activity);
                     }
                     break;
                 case 4:
                     if (PackageData.getSortingType(activity) != 3) {
                         PackageData.setSortingType(3, activity);
-                        loadUI(activity);
+                        loadUI(mSearchText, activity);
                     }
                     break;
                 case 5:
                     if (PackageData.getSortingType(activity) != 4) {
                         PackageData.setSortingType(4, activity);
-                        loadUI(activity);
+                        loadUI(mSearchText, activity);
                     }
                     break;
                 case 6:
                     sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, activity), activity);
-                    loadUI(activity);
+                    loadUI(mSearchText, activity);
                     break;
             }
             return false;
@@ -422,19 +423,18 @@ public class PackageTasksFragment extends Fragment {
         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.export));
         menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.export_details));
         menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.select_all)).setCheckable(true)
-                .setChecked(mData.size() == Common.getBatchList().size());
-        if (mData.size() != Common.getBatchList().size()) {
+                .setChecked(mData.size() == mBatchList.size());
+        if (mData.size() != mBatchList.size()) {
             menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.batch_list_clear));
         }
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 0:
-                    new BatchOptionsDialog(getString(R.string.turn_on_off_selected_question), getString(R.string.turn_on_off), Common.getBatchList(), requireActivity()) {
+                    new BatchOptionsDialog(getString(R.string.turn_on_off_selected_question), getString(R.string.turn_on_off), mBatchList, requireActivity()) {
                         @Override
                         public void apply(List<BatchOptionsItems> data) {
                             new sExecutor() {
-                                private boolean mEmpty = true;
-                                private final List<BatchOptionsItems> newData = new ArrayList<>();
+                                private final List<BatchOptionsItems> newData = new CopyOnWriteArrayList<>();
                                 private ProgressDialog mProgressDialog;
                                 @Override
                                 public void onPreExecute() {
@@ -453,7 +453,6 @@ public class PackageTasksFragment extends Fragment {
 
                                 @Override
                                 public void doInBackground() {
-                                    PackageData.makePackageFolder(activity);
                                     mProgressDialog.setMax(data.size());
                                     for (BatchOptionsItems batchOptionsItems : data) {
                                         if (batchOptionsItems.isChecked()) {
@@ -466,11 +465,27 @@ public class PackageTasksFragment extends Fragment {
                                                 } else {
                                                     result = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), activity) ? "pm disable " : "pm enable ") + batchOptionsItems.getPackageName());
                                                 }
-                                                if (result != null && !result.contains("new state: disabled") || result != null && !result.contains("new state: enabled")) {
+                                                if (result != null && (!result.contains("new state: disabled") && !result.contains("new state: enabled"))) {
                                                     newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
                                                 }
+                                                for (int i = 0; i < PackageData.getRawData().size(); i++) {
+                                                    if (PackageData.getRawData().get(i).getPackageName().equals(batchOptionsItems.getPackageName())) {
+                                                        PackageItems itemOld = PackageData.getRawData().get(i);
+                                                        PackageItems itemNew = new PackageItems(
+                                                                itemOld.getPackageName(),
+                                                                sPackageUtils.getAppName(batchOptionsItems.getPackageName(), requireActivity()).toString() + (sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), requireActivity()) ? "" : " (Disabled)"),
+                                                                itemOld.getAPKSize(),
+                                                                itemOld.getInstalledTime(),
+                                                                itemOld.getUpdatedTime()
+                                                        );
+                                                        PackageData.getRawData().set(i, itemNew);
+                                                        int index = mData.indexOf(itemOld);
+                                                        if (index != -1) {
+                                                            mData.set(index, itemNew);
+                                                        }
+                                                    }
+                                                }
                                             }
-                                            mEmpty = false;
                                         }
                                         mProgressDialog.updateProgress(1);
                                     }
@@ -479,14 +494,11 @@ public class PackageTasksFragment extends Fragment {
                                 @Override
                                 public void onPostExecute() {
                                     mProgressDialog.dismiss();
+                                    mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
                                     if (!newData.isEmpty()) {
                                         new BatchResultsDialog(newData, activity);
-                                    }
-                                    if (!mEmpty) {
-                                        reload().execute();
-                                        if (newData.isEmpty()) {
-                                            sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
-                                        }
+                                    } else {
+                                        sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
                                     }
                                 }
                             }.execute();
@@ -495,12 +507,12 @@ public class PackageTasksFragment extends Fragment {
                     break;
                 case 1:
                     if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
-                        new BatchOptionsDialog(getString(R.string.uninstall_selected_question), getString(R.string.uninstall), Common.getBatchList(), requireActivity()) {
+                        new BatchOptionsDialog(getString(R.string.uninstall_selected_question), getString(R.string.uninstall), mBatchList, requireActivity()) {
                             @Override
                             public void apply(List<BatchOptionsItems> data) {
                                 new sExecutor() {
-                                    private boolean mEmpty = true;
-                                    private final List<BatchOptionsItems> newData = new ArrayList<>();
+                                    private final List<Integer> mPositionsRemoved = new CopyOnWriteArrayList<>();
+                                    private final List<BatchOptionsItems> mNewData = new CopyOnWriteArrayList<>();
                                     private ProgressDialog mProgressDialog;
                                     @Override
                                     public void onPreExecute() {
@@ -519,22 +531,33 @@ public class PackageTasksFragment extends Fragment {
 
                                     @Override
                                     public void doInBackground() {
-                                        PackageData.makePackageFolder(activity);
                                         mProgressDialog.setMax(data.size());
                                         for (BatchOptionsItems batchOptionsItems : data) {
                                             if (batchOptionsItems.isChecked()) {
                                                 if (batchOptionsItems.getPackageName().equals(activity.getPackageName())) {
-                                                    newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 0));
+                                                    mNewData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 0));
                                                 } else {
+                                                    String result;
                                                     if (mRootShell.rootAccess()) {
-                                                        mRootShell.runCommand("pm uninstall --user 0 " + batchOptionsItems.getPackageName());
+                                                        result = mRootShell.runAndGetError("pm uninstall --user 0 " + batchOptionsItems.getPackageName());
                                                     } else {
-                                                        mShizukuShell.runCommand("pm uninstall --user 0 " + batchOptionsItems.getPackageName());
+                                                        result = mShizukuShell.runAndGetOutput("pm uninstall --user 0 " + batchOptionsItems.getPackageName());
                                                     }
-                                                    if (sPackageUtils.isPackageInstalled(batchOptionsItems.getPackageName(), activity)) {
-                                                        newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
+                                                    if (result != null && result.trim().equals("Success")) {
+                                                        for (int i = 0; i < PackageData.getRawData().size(); i++) {
+                                                            if (PackageData.getRawData().get(i).getPackageName().equals(batchOptionsItems.getPackageName())) {
+                                                                PackageItems packageItems = PackageData.getRawData().get(i);
+                                                                PackageData.getRawData().remove(packageItems);
+                                                                int index = mData.indexOf(packageItems);
+                                                                if (index != -1) {
+                                                                    mData.remove(packageItems);
+                                                                    mPositionsRemoved.add(index);
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        mNewData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
                                                     }
-                                                    mEmpty = false;
                                                 }
                                             }
                                             mProgressDialog.updateProgress(1);
@@ -543,15 +566,19 @@ public class PackageTasksFragment extends Fragment {
 
                                     @Override
                                     public void onPostExecute() {
-                                        mProgressDialog.dismiss();
-                                        if (!newData.isEmpty()) {
-                                            new BatchResultsDialog(newData, activity);
+                                        for (Integer positions : mPositionsRemoved) {
+                                            mRecycleViewAdapter.notifyItemRemoved(positions);
                                         }
-                                        if (!mEmpty) {
-                                            reload().execute();
-                                            if (newData.isEmpty()) {
-                                                sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
-                                            }
+                                        mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                                        mBatchList.clear();
+                                        mBatchOptions.setVisibility(GONE);
+                                        if (mProgressDialog.isShowing()) {
+                                            mProgressDialog.dismiss();
+                                        }
+                                        if (!mNewData.isEmpty()) {
+                                            new BatchResultsDialog(mNewData, activity);
+                                        } else {
+                                            sCommonUtils.toast(R.string.batch_processing_success_message, activity).show();
                                         }
                                     }
                                 }.execute();
@@ -559,16 +586,16 @@ public class PackageTasksFragment extends Fragment {
                         };
                         break;
                     } else {
-                        uninstallUserApp(Common.getBatchList().get(0));
+                        uninstallUserApp(mBatchList.get(0));
                     }
                     break;
                 case 2:
-                    new BatchOptionsDialog(getString(R.string.reset_selected_question), getString(R.string.reset), Common.getBatchList(), requireActivity()) {
+                    new BatchOptionsDialog(getString(R.string.reset_selected_question), getString(R.string.reset), mBatchList, requireActivity()) {
                         @Override
                         public void apply(List<BatchOptionsItems> data) {
                             new sExecutor() {
                                 private boolean mEmpty = true;
-                                private final List<BatchOptionsItems> newData = new ArrayList<>();
+                                private final List<BatchOptionsItems> newData = new CopyOnWriteArrayList<>();
                                 private ProgressDialog mProgressDialog;
                                 @Override
                                 public void onPreExecute() {
@@ -587,7 +614,6 @@ public class PackageTasksFragment extends Fragment {
 
                                 @Override
                                 public void doInBackground() {
-                                    PackageData.makePackageFolder(activity);
                                     mProgressDialog.setMax(data.size());
                                     for (BatchOptionsItems batchOptionsItems : data) {
                                         if (batchOptionsItems.isChecked()) {
@@ -630,7 +656,7 @@ public class PackageTasksFragment extends Fragment {
                                 activity);
                         sCommonUtils.toast(activity.getString(R.string.permission_denied_write_storage), requireActivity()).show();
                     } else {
-                        new BatchOptionsDialog(getString(R.string.export_selected_question), getString(R.string.export), Common.getBatchList(), requireActivity()) {
+                        new BatchOptionsDialog(getString(R.string.export_selected_question), getString(R.string.export), mBatchList, requireActivity()) {
                             @Override
                             public void apply(List<BatchOptionsItems> data) {
                                 new sExecutor() {
@@ -694,7 +720,7 @@ public class PackageTasksFragment extends Fragment {
                                 activity);
                         sCommonUtils.toast(getString(R.string.permission_denied_write_storage), activity).show();
                     } else {
-                        new BatchOptionsDialog(getString(R.string.export_details_selected_question), getString(R.string.export), Common.getBatchList(), requireActivity()) {
+                        new BatchOptionsDialog(getString(R.string.export_details_selected_question), getString(R.string.export), mBatchList, requireActivity()) {
                             @Override
                             public void apply(List<BatchOptionsItems> data) {
                                 new sExecutor() {
@@ -749,19 +775,19 @@ public class PackageTasksFragment extends Fragment {
                     }
                     break;
                 case 5:
-                    if (mData.size() != Common.getBatchList().size()) {
-                        Common.getBatchList().clear();
+                    if (mData.size() != mBatchList.size()) {
+                        mBatchList.clear();
                         for (PackageItems mPackage : mData) {
-                            Common.getBatchList().add(mPackage.getPackageName());
+                            mBatchList.add(mPackage.getPackageName());
                         }
                     } else {
-                        Common.getBatchList().clear();
+                        mBatchList.clear();
                     }
-                    loadUI(activity);
+                    loadUI(mSearchText, activity);
                     break;
                 case 6:
-                    Common.getBatchList().clear();
-                    loadUI(activity);
+                    mBatchList.clear();
+                    loadUI(mSearchText, activity);
                     break;
             }
             return false;
@@ -769,33 +795,131 @@ public class PackageTasksFragment extends Fragment {
         popupMenu.show();
     }
 
-    private void loadUI(Activity activity) {
+    private void loadUI(String searchTxt, Activity activity) {
         new sExecutor() {
 
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(GONE);
-                mData = new CopyOnWriteArrayList<>();
+                //mData = new CopyOnWriteArrayList<>();
+                if (mBatchList == null) {
+                    mBatchList = new ArrayList<>();
+                }
             }
 
             @Override
             public void doInBackground() {
-                mData = PackageData.getData(mProgress, activity);
-                mRecycleViewAdapter = new PackageTasksAdapter(mData, activity);
+                mData = PackageData.getData(searchTxt, mProgress, activity);
+                mRecycleViewAdapter = new PackageTasksAdapter(mData, searchTxt, mBatchList, uninstallUserApps, activity);
             }
 
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
-                mBatchOptions.setVisibility(!Common.getBatchList().isEmpty() ? View.VISIBLE : GONE);
-                mBatchOptions.setText(activity.getString(R.string.batch_options, Common.getBatchList().size()));
+                mSearchText = searchTxt;
+                mBatchOptions.setVisibility(!mBatchList.isEmpty() ? View.VISIBLE : GONE);
+                mBatchOptions.setText(activity.getString(R.string.batch_options, mBatchList.size()));
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
         }.execute();
     }
+
+    private sExecutor removeItem(String packageName) {
+        return new sExecutor() {
+            private int position;
+
+            @Override
+            public void onPreExecute() {
+                mProgress.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void doInBackground() {
+                for (int i=0; i<mData.size(); i++) {
+                    if (mData.get(i).getPackageName().equals(packageName)) {
+                        PackageData.getRawData().remove(mData.get(i));
+                        mData.remove(i);
+                        position = i;
+                        return;
+                    }
+                }
+            }
+
+            @SuppressLint("StringFormatInvalid")
+            @Override
+            public void onPostExecute() {
+                if (mPackageNameRemoved != null) {
+                    mPackageNameRemoved = null;
+                }
+                mRecycleViewAdapter.notifyItemRemoved(position);
+                mRecycleViewAdapter.notifyItemRangeChanged(position, mRecycleViewAdapter.getItemCount());
+                mProgress.setVisibility(GONE);
+            }
+        };
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private final ActivityResultLauncher<Intent> uninstallUserApps = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    String packageName = Objects.requireNonNull(data).getStringExtra("packageName");
+                    String packageNameDisabled = Objects.requireNonNull(data).getStringExtra("packageNameDisabled");
+                    if (packageName != null) {
+                        if (sPackageUtils.isPackageInstalled(packageName, requireActivity())) {
+                            uninstallUserApp(packageName);
+                        } else {
+                            removeItem(packageName).execute();
+                        }
+                    } else if (packageNameDisabled != null) {
+                        new sExecutor() {
+                            private int position;
+
+                            @Override
+                            public void onPreExecute() {
+                                mProgress.setVisibility(View.VISIBLE);
+                            }
+
+                            @Override
+                            public void doInBackground() {
+                                for (int i=0; i<mData.size(); i++) {
+                                    if (mData.get(i).getPackageName().equals(packageNameDisabled)) {
+                                        PackageItems itemOld = mData.get(i);
+                                        PackageItems itemNew = new PackageItems(
+                                                itemOld.getPackageName(),
+                                                sPackageUtils.getAppName(itemOld.getPackageName(), requireActivity()).toString() + (sPackageUtils.isEnabled(itemOld.getPackageName(), requireActivity()) ? "" : " (Disabled)"),
+                                                itemOld.getAPKSize(),
+                                                itemOld.getInstalledTime(),
+                                                itemOld.getUpdatedTime()
+                                        );
+                                        int index = PackageData.getRawData().indexOf(itemOld);
+                                        if (index != -1) {
+                                            PackageData.getRawData().set(index, itemNew);
+                                        }
+                                        mData.set(i, itemNew);
+                                        position = i;
+                                        return;
+                                    }
+                                }
+                            }
+
+                            @SuppressLint("StringFormatInvalid")
+                            @Override
+                            public void onPostExecute() {
+                                mRecycleViewAdapter.notifyItemChanged(position);
+                                mProgress.setVisibility(GONE);
+                            }
+                        }.execute();
+                    } else {
+                        removeItem(mPackageNameRemoved).execute();
+                    }
+                }
+            }
+    );
 
     @SuppressLint("StringFormatInvalid")
     private final ActivityResultLauncher<Intent> uninstallApps = registerForActivityResult(
@@ -805,50 +929,29 @@ public class PackageTasksFragment extends Fragment {
                     // If uninstallation succeed
                     try {
                         for (PackageItems item : PackageData.getRawData()) {
-                            if (item.getPackageName().equals(Common.isUninstall() ? Common.getApplicationID() : Common.getBatchList().get(0))) {
+                            if (item.getPackageName().equals(mBatchList.get(0))) {
                                 PackageData.getRawData().remove(item);
-                                if (!Common.isUninstall()) {
-                                    Common.getBatchList().remove(0);
-                                }
+                                mBatchList.remove(0);
                                 mData.remove(item);
                             }
                         }
                     } catch (ConcurrentModificationException ignored) {}
-                    if (Common.isUninstall()) {
-                        Common.isUninstall(false);
-                        loadUI(requireActivity());
-                    } else {
-                        handleUninstallEvent();
-                    }
+                    handleUninstallEvent();
                 } else {
-                    if (Common.isUninstall()) {
-                        Common.isUninstall(false);
-                    } else {
-                        // If uninstallation cancelled or failed
-                        sCommonUtils.toast(getString(R.string.uninstall_status_failed, PackageData.getAppName(Common.getBatchList().get(0), requireActivity())), requireActivity()).show();
-                        Common.getBatchList().remove(0);
-                        handleUninstallEvent();
-                    }
+                    sCommonUtils.toast(getString(R.string.uninstall_status_failed, PackageData.getAppName(mBatchList.get(0), requireActivity())), requireActivity()).show();
+                    mBatchList.remove(0);
+                    handleUninstallEvent();
                 }
             }
     );
 
     @Override
-    public void onStart() {
-        super.onStart();
-        if (Common.isUninstall()) {
-            uninstallUserApp(Common.getApplicationID());
-        }
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
-        if (Common.getSearchText() != null) {
+        if (mSearchText != null) {
             mSearchWord.setText(null);
-            Common.setSearchText(null);
         }
-        Common.getBatchList().clear();
+        mBatchList.clear();
         if (mRootShell.rootAccess() && mRootShell != null) mRootShell.closeSU();
     }
 

@@ -4,7 +4,6 @@
     <string name="app_info">"Informacje"</string>
     <string name="batch_list_clear">"Wyczyść listę"</string>
     <string name="batch_warning">"Twoje ustawienia wsadu zostaną usunięte. Czy na pewno?"</string>
-    <string name="bundle_install_apks">"Czy na pewno zainstalować paczkę aplikacji „%s”?"</string>
     <string name="change_logs">"Lista zmian"</string>
     <string name="data_dir">"Katalog danych"</string>
     <string name="date_installation">"Daty instalacji"</string>

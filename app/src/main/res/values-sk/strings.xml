@@ -4,7 +4,6 @@
     <string name="app_info">"Informácie o aplikácii"</string>
     <string name="batch_list_clear">"Prehľadný zoznam"</string>
     <string name="batch_warning">"Vase nastavenia skriptu budu odstranene. Skutocne to chcete vykonat?"</string>
-    <string name="bundle_install_apks">"Skutocne si prajete nainstalovat balik '%s'?"</string>
     <string name="change_logs">"Zaznam zmien"</string>
     <string name="data_dir">"Data priecinok"</string>
     <string name="date_installation">"Datum instalacie"</string>

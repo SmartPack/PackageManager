@@ -4,8 +4,8 @@ agp = "8.13.0"
 documentfileVersion = "1.1.0"
 material = "1.13.0"
 shizuku = "13.1.5"
-scommon = "554bd101fc"
-axml = "31311d5824"
+scommon = "030d96e4f8"
+axml = "51db0eecad"
 zip4j = "2.11.5"
 
 [libraries]

@@ -20,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FileUtils;
 import com.smartpack.packagemanager.utils.PackageData;
 
@@ -38,15 +37,17 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class ExportAPKTasks extends sExecutor {
 
     private final Activity mActivity;
-    private static Drawable mIcon = null;
-    private static String mAPKPath = null, mName = null;
+    private final String mPackageName;
+    private final Drawable mIcon;
+    private final String mAPKPath, mName;
     private ProgressDialog mProgressDialog;
 
-    public ExportAPKTasks(String path, String name, Drawable icon, Activity activity) {
-        mAPKPath = path;
-        mName = name;
-        mIcon = icon;
-        mActivity = activity;
+    public ExportAPKTasks(String packageName, String path, String name, Drawable icon, Activity activity) {
+        this.mPackageName = packageName;
+        this.mAPKPath = path;
+        this.mName = name;
+        this.mIcon = icon;
+        this.mActivity = activity;
 
     }
 
@@ -65,7 +66,7 @@ public class ExportAPKTasks extends sExecutor {
         PackageData.makePackageFolder(mActivity);
         try {
             FileUtils FileUtils = new FileUtils(new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
-                    sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"), mProgressDialog);
+                    sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apk"), mProgressDialog);
             FileUtils.copy(mAPKPath);
         } catch (IOException ignored) {}
     }
@@ -83,7 +84,7 @@ public class ExportAPKTasks extends sExecutor {
                 .setPositiveButton(mActivity.getString(R.string.share), (dialog, id) -> {
                     Uri uriFile = FileProvider.getUriForFile(mActivity,
                             BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(mActivity), mName + "_" +
-                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(Common.getApplicationID(), mActivity), mActivity) + ".apk"));
+                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apk"));
                     Intent shareScript = new Intent(Intent.ACTION_SEND);
                     shareScript.setType("application/java-archive");
                     shareScript.putExtra(Intent.EXTRA_SUBJECT, mActivity.getString(R.string.shared_by, mName));

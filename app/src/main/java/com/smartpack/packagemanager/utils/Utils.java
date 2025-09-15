@@ -18,7 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.smartpack.packagemanager.MainActivity;
+import com.smartpack.packagemanager.R;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
@@ -33,6 +35,11 @@ public class Utils {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(resID, typedValue, true);
         return ContextCompat.getColor(context, typedValue.resourceId);
+    }
+
+    public static void navigateToFragment(Activity activity, int position) {
+        BottomNavigationView bottomNavigationView = activity.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(position);
     }
 
     public static void restartApp(Activity activity) {

@@ -19,7 +19,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
@@ -36,10 +35,12 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder> {
 
-    private static ArrayList<PermissionsItems> data;
+    private final ArrayList<PermissionsItems> data;
+    private final String packageName;
 
-    public AppOpsAdapter(ArrayList<PermissionsItems> data) {
-        AppOpsAdapter.data = data;
+    public AppOpsAdapter(ArrayList<PermissionsItems> data, String packageName) {
+        this.data = data;
+        this.packageName = packageName;
     }
 
     @NonNull
@@ -67,10 +68,10 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
                         }).show();
             } else {
                 if (new RootShell().rootAccess()) {
-                    new RootShell().runCommand("cmd appops set " + Common.getApplicationID() + " " +
+                    new RootShell().runCommand("cmd appops set " + packageName + " " +
                             data.get(position).getTitle() + (data.get(position).isGranted() ? " deny" : " allow"));
                 } else {
-                    new ShizukuShell().runCommand("cmd appops set " + Common.getApplicationID() + " " +
+                    new ShizukuShell().runCommand("cmd appops set " + packageName + " " +
                             data.get(position).getTitle() + (data.get(position).isGranted() ? " deny" : " allow"));
                 }
             }

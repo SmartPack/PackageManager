@@ -37,6 +37,10 @@ public class ProgressDialog {
                 .setCancelable(false);
     }
 
+    public boolean isShowing() {
+        return mAlertDialog.isShowing();
+    }
+
     public int getProgress() {
         return mProgressBar.getProgress();
     }

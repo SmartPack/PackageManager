@@ -4,7 +4,6 @@
     <string name="app_info">"App infó"</string>
     <string name="batch_list_clear">"Lista törlése"</string>
     <string name="batch_warning">"A kötegelés beállításai el lesznek távolítva. Biztos vagy ebben?"</string>
-    <string name="bundle_install_apks">"Biztos, hogy telepíted a(z) '%s' alkalmazáscsomagot?"</string>
     <string name="change_logs">"Változáslista"</string>
     <string name="data_dir">"Adatkönyvtár"</string>
     <string name="date_installation">"Telepítési dátumok"</string>

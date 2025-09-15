@@ -10,16 +10,12 @@ package com.smartpack.packagemanager.utils.SerializableItems;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
-
-import androidx.appcompat.widget.AppCompatImageButton;
+import android.widget.ImageView;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,19 +26,19 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class PackageItems implements Serializable {
 
-    private final long mAPKSize;
+    private final long mAPKSize, mInstalledTime, mUpdatedTime;
     private final String mPackageName, mAppName;
-    private final Context mContext;
 
-    public PackageItems(String packageName, String appName, long apkSize, Context context) {
+    public PackageItems(String packageName, String appName, long apkSize, long installedTime, long updatedTime) {
         this.mPackageName = packageName;
         this.mAppName = appName;
         this.mAPKSize = apkSize;
-        this.mContext = context;
+        this.mInstalledTime = installedTime;
+        this.mUpdatedTime = updatedTime;
     }
 
-    public Intent launchIntent() {
-        return mContext.getPackageManager().getLaunchIntentForPackage(mPackageName);
+    public Intent launchIntent(Context context) {
+        return context.getPackageManager().getLaunchIntentForPackage(mPackageName);
     }
 
     public String getPackageName() {
@@ -58,27 +54,23 @@ public class PackageItems implements Serializable {
     }
 
     public long getInstalledTime() {
-        return Objects.requireNonNull(getPackageInfo(getPackageName(), mContext)).firstInstallTime;
+        return mInstalledTime;
     }
 
     public long getUpdatedTime() {
-        return Objects.requireNonNull(getPackageInfo(getPackageName(), mContext)).firstInstallTime;
+        return mUpdatedTime;
     }
 
-    private static PackageInfo getPackageInfo(String packageName, Context context) {
-        try {
-            return context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
-        } catch (Exception ignored) {
-        }
-        return null;
+    private Drawable getAppIcon(Context context) {
+        return sPackageUtils.getAppIcon(mPackageName, context);
     }
 
-    public void loadAppIcon(AppCompatImageButton view) {
+    public void loadAppIcon(ImageView view) {
         try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
             Handler handler = new Handler(Looper.getMainLooper());
 
             executor.execute(() -> {
-                Drawable drawable = sPackageUtils.getAppIcon(mPackageName, view.getContext());
+                Drawable drawable = getAppIcon(view.getContext());
 
                 handler.post(() -> view.setImageDrawable(drawable));
             });

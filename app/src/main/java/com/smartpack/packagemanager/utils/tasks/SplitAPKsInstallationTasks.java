@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.utils.tasks;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.smartpack.packagemanager.activities.APKPickerActivity;
 import com.smartpack.packagemanager.activities.InstallerActivity;
 import com.smartpack.packagemanager.services.SplitAPKInstallService;
 import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
@@ -31,33 +32,42 @@ import in.sunilpaulmathew.sCommon.InstallerUtils.sInstallerUtils;
 public class SplitAPKsInstallationTasks extends sExecutor {
 
     private final Activity mActivity;
-    private final List<APKPickerItems> mAPKItems;
     private final ArrayList<String> mAPKList;
+    private final List<APKPickerItems> mAPKItems;
+    private final OnInstallRequest mCallback;
     private final String mAPKPath;
 
-    public SplitAPKsInstallationTasks(List<APKPickerItems> apkItems, Activity activity) {
-        this.mActivity = activity;
+    public SplitAPKsInstallationTasks(List<APKPickerItems> apkItems, OnInstallRequest callback, Activity activity) {
         this.mAPKItems = apkItems;
+        this.mCallback = callback;
+        this.mActivity = activity;
         this.mAPKList = null;
         this.mAPKPath = null;
     }
 
-    public SplitAPKsInstallationTasks(ArrayList<String> apkList, Activity activity) {
-        this.mActivity = activity;
+    public SplitAPKsInstallationTasks(ArrayList<String> apkList, OnInstallRequest callback, Activity activity) {
         this.mAPKList = apkList;
+        this.mCallback = callback;
+        this.mActivity = activity;
         this.mAPKItems = null;
         this.mAPKPath = null;
     }
 
-    public SplitAPKsInstallationTasks(String apkPath, Activity activity) {
+    public SplitAPKsInstallationTasks(String apkPath, OnInstallRequest callback, Activity activity) {
+        this.mCallback = callback;
+        this.mAPKPath = apkPath;
         this.mActivity = activity;
         this.mAPKList = null;
-        this.mAPKPath = apkPath;
         this.mAPKItems = null;
     }
 
     @Override
     public void onPreExecute() {
+        sCommonUtils.saveString("installationStatus", "waiting", mActivity);
+        mCallback.onInstall(installerIntent());
+    }
+
+    private Intent installerIntent() {
         Intent installIntent = new Intent(mActivity, InstallerActivity.class);
         if (mAPKItems != null) {
             installIntent.putStringArrayListExtra(InstallerActivity.APP_LIST_INTENT, getAPKList());
@@ -66,8 +76,7 @@ public class SplitAPKsInstallationTasks extends sExecutor {
         } else if (mAPKPath != null) {
             installIntent.putExtra(InstallerActivity.APK_PATH_INTENT, mAPKPath);
         }
-        sCommonUtils.saveString("installationStatus", "waiting", mActivity);
-        mActivity.startActivity(installIntent);
+        return installIntent;
     }
 
     private ArrayList<String> getAPKList() {
@@ -127,6 +136,10 @@ public class SplitAPKsInstallationTasks extends sExecutor {
 
     @Override
     public void onPostExecute() {
+    }
+
+    public interface OnInstallRequest {
+        void onInstall(Intent intent);
     }
 
 }

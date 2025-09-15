@@ -9,10 +9,13 @@
 package com.smartpack.packagemanager.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -31,7 +34,6 @@ import com.smartpack.packagemanager.fragments.APKDetailsFragment;
 import com.smartpack.packagemanager.fragments.CertificateFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
@@ -108,8 +110,6 @@ public class APKPickerActivity extends AppCompatActivity {
                 mProgressDialog.setIcon(R.mipmap.ic_launcher);
                 mProgressDialog.setTitle(activity.getString(R.string.initializing));
                 mProgressDialog.show();
-
-                Common.isAPKPicker(true);
             }
 
             @Override
@@ -163,7 +163,7 @@ public class APKPickerActivity extends AppCompatActivity {
                 if (mAPKParser != null && mAPKParser.isParsed()) {
                     loadAPKDetails(activity);
                 } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
-                    new BundleInstallDialog(mAPKs, true, activity);
+                    new BundleInstallDialog(mAPKs, true, installApp::launch, activity);
                 } else {
                     sCommonUtils.toast(getString(R.string.installation_status_bad_apks), activity).show();
                     activity.finish();
@@ -197,10 +197,10 @@ public class APKPickerActivity extends AppCompatActivity {
 
         adapter.AddFragment(new APKDetailsFragment(), getString(R.string.app_info));
         if (mAPKParser.getPermissions() != null) {
-            adapter.AddFragment(new PermissionsFragment(), getString(R.string.permissions));
+            adapter.AddFragment(PermissionsFragment.newInstance(mAPKParser.getPackageName(), true), getString(R.string.permissions));
         }
         if (mAPKParser.getManifest() != null) {
-            adapter.AddFragment(new ManifestFragment(), getString(R.string.manifest));
+            adapter.AddFragment(ManifestFragment.newInstance(mAPKParser.getPackageName(), true), getString(R.string.manifest));
         }
         if (mAPKParser.getCertificate() != null) {
             adapter.AddFragment(new CertificateFragment(), getString(R.string.certificate));
@@ -213,14 +213,25 @@ public class APKPickerActivity extends AppCompatActivity {
 
         mCancel.setOnClickListener(v -> finish());
         mInstall.setOnClickListener(v -> {
-            Common.isUpdating(sPackageUtils.isPackageInstalled(mAPKParser.getPackageName(), activity));
             if (mAPKParser.getPackageName() != null) {
-                new SplitAPKsInstallationTasks(mAPKParser.getApkPath(), activity).execute();
+                new SplitAPKsInstallationTasks(mAPKParser.getApkPath(), installApp::launch, activity).execute();
             } else {
                 sCommonUtils.toast(activity.getString(R.string.installation_status_bad_apks), activity).show();
+                finish();
             }
-            finish();
         });
     }
+
+    private final ActivityResultLauncher<Intent> installApp = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    boolean status = Objects.requireNonNull(data).getBooleanExtra("INSTALL_STATUS_UPDATE", false);
+                    setResult(Activity.RESULT_OK, new Intent().putExtra("INSTALL_STATUS_UPDATE", status));
+                    finish();
+                }
+            }
+    );
 
 }

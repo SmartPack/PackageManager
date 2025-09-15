@@ -37,7 +37,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.UninstalledAppsAdapter;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
@@ -61,6 +60,7 @@ public class UninstalledAppsFragment extends Fragment {
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
     private UninstalledAppsAdapter mRecycleViewAdapter;
+    private List<String> mRestoreList = null;
     private String mSearchText = null;
 
     @SuppressLint("StringFormatInvalid")
@@ -149,9 +149,9 @@ public class UninstalledAppsFragment extends Fragment {
                 if (mProgress.getVisibility() == View.VISIBLE) {
                     return;
                 }
-                Common.getRestoreList().clear();
+                mRestoreList.clear();
 
-                Common.navigateToFragment(requireActivity(), 0);
+                Utils.navigateToFragment(requireActivity(), 0);
             }
         });
 
@@ -164,18 +164,21 @@ public class UninstalledAppsFragment extends Fragment {
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(VISIBLE);
+                if (mRestoreList == null) {
+                    mRestoreList = new ArrayList<>();
+                }
             }
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(requireActivity()), requireActivity());
+                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(requireActivity()), mRestoreList, requireActivity());
             }
 
             @Override
             public void onPostExecute() {
                 mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
-                mBatch.setVisibility(Common.getRestoreList().isEmpty() ? GONE : VISIBLE);
+                mBatch.setVisibility(mRestoreList.isEmpty() ? GONE : VISIBLE);
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(GONE);
             }
@@ -225,7 +228,7 @@ public class UninstalledAppsFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                for (String packageName : Common.getRestoreList()) {
+                for (String packageName : mRestoreList) {
                     if (mRootShell.rootAccess()) {
                         mRootShell.runCommand("cmd package install-existing " + packageName);
                     } else {
@@ -237,7 +240,7 @@ public class UninstalledAppsFragment extends Fragment {
             @Override
             public void onPostExecute() {
                 PackageData.setRawData(null, context);
-                Common.getRestoreList().clear();
+                mRestoreList.clear();
                 new MaterialAlertDialogBuilder(context)
                         .setIcon(R.mipmap.ic_launcher)
                         .setTitle(getString(R.string.restore_success_message))
@@ -251,7 +254,7 @@ public class UninstalledAppsFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Common.getRestoreList().clear();
+        mRestoreList.clear();
     }
 
 }

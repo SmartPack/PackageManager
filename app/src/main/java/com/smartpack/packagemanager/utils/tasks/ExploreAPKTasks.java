@@ -14,7 +14,6 @@ import android.content.Intent;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.PackageExploreActivity;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.ZipFileUtils;
 
 import java.io.File;
@@ -30,12 +29,14 @@ public class ExploreAPKTasks extends sExecutor {
 
     private final Activity mActivity;
     private static File mFile;
-    private final String mPath;
+    private final String mAppName, mPath, mPackageName;
     private ProgressDialog mProgressDialog;
 
-    public ExploreAPKTasks(String path, Activity activity) {
-        mPath = path;
-        mActivity = activity;
+    public ExploreAPKTasks(String appName, String packageName, String path, Activity activity) {
+        this.mAppName = appName;
+        this.mPackageName = packageName;
+        this.mPath = path;
+        this.mActivity = activity;
 
     }
 
@@ -51,7 +52,6 @@ public class ExploreAPKTasks extends sExecutor {
         }
         mFile.deleteOnExit();
         sFileUtils.mkdir(mFile);
-        Common.setPath(mFile.getAbsolutePath());
     }
 
     @Override
@@ -66,6 +66,8 @@ public class ExploreAPKTasks extends sExecutor {
     public void onPostExecute() {
         mProgressDialog.dismiss();
         Intent explorer = new Intent(mActivity, PackageExploreActivity.class);
+        explorer.putExtra(PackageExploreActivity.APP_NAME_INTENT, mAppName);
+        explorer.putExtra(PackageExploreActivity.PACKAGE_INTENT, mPackageName);
         mActivity.startActivity(explorer);
     }
 

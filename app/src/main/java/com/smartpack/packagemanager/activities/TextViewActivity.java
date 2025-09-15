@@ -21,7 +21,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ExportSuccessDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
@@ -37,7 +36,7 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 public class TextViewActivity extends AppCompatActivity {
 
     public static final String PACKAGE_INTENT = "package", PATH_INTENT = "path";
-    private String mPath;
+    private String mPackageName, mPath;
 
     @SuppressLint("StringFormatInvalid")
     @Override
@@ -49,7 +48,7 @@ public class TextViewActivity extends AppCompatActivity {
         MaterialTextView mTitle = findViewById(R.id.title);
         MaterialTextView mText = findViewById(R.id.text);
 
-        String packageName = getIntent().getStringExtra(PACKAGE_INTENT);
+        mPackageName = getIntent().getStringExtra(PACKAGE_INTENT);
         mPath = getIntent().getStringExtra(PATH_INTENT);
 
         if (mPath != null) {
@@ -72,7 +71,7 @@ public class TextViewActivity extends AppCompatActivity {
                         return;
                     }
                     PackageData.makePackageFolder(this);
-                    File parentFile = new File(PackageData.getPackageDir(this), packageName);
+                    File parentFile = new File(PackageData.getPackageDir(this), mPackageName);
                     if (!parentFile.exists()) {
                         sFileUtils.mkdir(parentFile);
                     }
@@ -84,7 +83,7 @@ public class TextViewActivity extends AppCompatActivity {
 
     private String getText() {
         String text;
-        if (Common.getApplicationID() != null && PackageExplorer.isBinaryXML(mPath)) {
+        if (mPackageName != null && PackageExplorer.isBinaryXML(mPath)) {
             text = PackageExplorer.readXMLFromAPK(mPath, this);
         } else {
             text = sFileUtils.read(new File(mPath));

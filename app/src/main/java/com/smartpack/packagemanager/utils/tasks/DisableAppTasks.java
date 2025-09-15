@@ -10,10 +10,10 @@ package com.smartpack.packagemanager.utils.tasks;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
@@ -27,14 +27,16 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 public class DisableAppTasks extends sExecutor {
 
     private final Activity mActivity;
+    private final String mAppName, mPackageName;
     private static final RootShell mRootShell = new RootShell();
     private static final ShizukuShell mShizukuShell = new ShizukuShell();
     private static String mResult = null;
     private ProgressDialog mProgressDialog;
 
-    public DisableAppTasks(Activity activity) {
-        mActivity = activity;
-
+    public DisableAppTasks(String appName, String packageName, Activity activity) {
+        this.mAppName = appName;
+        this.mPackageName = packageName;
+        this.mActivity = activity;
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -42,9 +44,9 @@ public class DisableAppTasks extends sExecutor {
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
-        mProgressDialog.setTitle(sPackageUtils.isEnabled(Common.getApplicationID(), mActivity) ?
-                mActivity.getString(R.string.disabling, Common.getApplicationName()) + "..." :
-                mActivity.getString(R.string.enabling, Common.getApplicationName()) + "...");
+        mProgressDialog.setTitle(sPackageUtils.isEnabled(mPackageName, mActivity) ?
+                mActivity.getString(R.string.disabling, mAppName) + "..." :
+                mActivity.getString(R.string.enabling, mAppName) + "...");
         mProgressDialog.show();
     }
 
@@ -52,9 +54,9 @@ public class DisableAppTasks extends sExecutor {
     public void doInBackground() {
         sCommonUtils.sleep(1);
         if (mRootShell.rootAccess()) {
-            mResult = mRootShell.runAndGetError((sPackageUtils.isEnabled(Common.getApplicationID(), mActivity) ? "pm disable " : "pm enable ") + Common.getApplicationID());
+            mResult = mRootShell.runAndGetError((sPackageUtils.isEnabled(mPackageName, mActivity) ? "pm disable " : "pm enable ") + mPackageName);
         } else {
-            mResult = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(Common.getApplicationID(), mActivity) ? "pm disable " : "pm enable ") + Common.getApplicationID());
+            mResult = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(mPackageName, mActivity) ? "pm disable " : "pm enable ") + mPackageName);
         }
     }
 
@@ -63,10 +65,12 @@ public class DisableAppTasks extends sExecutor {
     public void onPostExecute() {
         mProgressDialog.dismiss();
         if (mResult != null && (mResult.contains("new state: disabled") || mResult.contains("new state: enabled"))) {
-            Common.reloadPage(true);
-            mActivity.recreate();
+            Intent intent = new Intent();
+            intent.putExtra("packageNameDisabled", mPackageName);
+            mActivity.setResult(Activity.RESULT_OK, intent);
+            mActivity.finish();
         } else {
-            sCommonUtils.snackBar(mActivity.findViewById(android.R.id.content), mActivity.getString(R.string.disable_failed_message, Common.getApplicationName())).show();
+            sCommonUtils.snackBar(mActivity.findViewById(android.R.id.content), mActivity.getString(R.string.disable_failed_message, mAppName)).show();
         }
     }
 

@@ -4,7 +4,6 @@
     <string name="app_info">"Info de l'Appli"</string>
     <string name="batch_list_clear">"Vider la liste"</string>
     <string name="batch_warning">"Vos paramètres de traitement par lot seront supprimés. Êtes-vous sûr ?"</string>
-    <string name="bundle_install_apks">"Êtes-vous sûr d'installer le paquet '%s' ?"</string>
     <string name="change_logs">"Notes de version"</string>
     <string name="data_dir">"Dossier des données"</string>
     <string name="date_installation">"Dates d'installation"</string>

@@ -22,14 +22,14 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class AppOps {
 
-    public static ArrayList<PermissionsItems> getOps(Context context) {
+    public static ArrayList<PermissionsItems> getOps(String packageName, Context context) {
         ArrayList<PermissionsItems> mData = new ArrayList<>();
         String[] appOpsList;
         if (new RootShell().rootAccess()) {
-            appOpsList = new RootShell().runAndGetOutput("cmd appops get " + Common.getApplicationID())
+            appOpsList = new RootShell().runAndGetOutput("cmd appops get " + packageName)
                     .trim().split("\\r?\\n");
         } else {
-            appOpsList = new ShizukuShell().runAndGetOutput("cmd appops get " + Common.getApplicationID())
+            appOpsList = new ShizukuShell().runAndGetOutput("cmd appops get " + packageName)
                     .trim().split("\\r?\\n");
         }
         for (String line : appOpsList) {

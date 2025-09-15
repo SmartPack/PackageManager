@@ -4,7 +4,6 @@
     <string name="app_info">"Información de la App"</string>
     <string name="batch_list_clear">"Vaciar la lista"</string>
     <string name="batch_warning">"¡Tu configuración de cola por lotes va a ser eliminado!, ¿estás seguro?"</string>
-    <string name="bundle_install_apks">"¿Estás seguro de instalar el paquete de aplicaciones '%s'?"</string>
     <string name="change_logs">"Registro de cambios"</string>
     <string name="data_dir">"Directorio de datos"</string>
     <string name="date_installation">"Fecha de instalación"</string>

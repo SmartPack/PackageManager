@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apk.axml.APKParser;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PermissionsAdapter;
-import com.smartpack.packagemanager.utils.Common;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 
@@ -39,6 +38,31 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 public class PermissionsFragment extends Fragment {
 
     private static final APKParser mAPKParser = new APKParser();
+    private boolean mAPKPicked;
+    private String mPackageName;
+
+    public PermissionsFragment() {
+    }
+
+    public static PermissionsFragment newInstance(String packageName, boolean apkPicked) {
+        PermissionsFragment fragment = new PermissionsFragment();
+
+        Bundle args = new Bundle();
+        args.putString("packageNameIntent", packageName);
+        args.putBoolean("apkPickedIntent", apkPicked);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mPackageName = getArguments().getString("packageNameIntent");
+            mAPKPicked = getArguments().getBoolean("apkPickedIntent");
+        }
+    }
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -50,7 +74,7 @@ public class PermissionsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
         PermissionsAdapter mRecycleViewAdapter = new PermissionsAdapter(mAPKParser.getPermissions()
-                != null ? getPermissions(requireActivity()) : PackageDetails.getPermissions(Common.getApplicationID(), requireActivity()));
+                != null ? getPermissions(requireActivity()) : PackageDetails.getPermissions(mPackageName, requireActivity()), mPackageName, mAPKPicked);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;

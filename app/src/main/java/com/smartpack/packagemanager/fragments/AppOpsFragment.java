@@ -30,6 +30,29 @@ import com.smartpack.packagemanager.utils.AppOps;
  */
 public class AppOpsFragment extends Fragment {
 
+    private String mPackageName;
+
+    public AppOpsFragment() {
+    }
+
+    public static AppOpsFragment newInstance(String packageName) {
+        AppOpsFragment fragment = new AppOpsFragment();
+
+        Bundle args = new Bundle();
+        args.putString("packageNameIntent", packageName);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mPackageName = getArguments().getString("packageNameIntent");
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
@@ -39,7 +62,7 @@ public class AppOpsFragment extends Fragment {
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        AppOpsAdapter mRecycleViewAdapter = new AppOpsAdapter(AppOps.getOps(requireActivity()));
+        AppOpsAdapter mRecycleViewAdapter = new AppOpsAdapter(AppOps.getOps(mPackageName, requireActivity()), mPackageName);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         return mRootView;

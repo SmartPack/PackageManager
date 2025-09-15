@@ -14,7 +14,6 @@
     <string name="batch_processing_failed_title">This process has failed for:</string>
     <string name="batch_processing_success_message">The selected process has been completed successfully…</string>
     <string name="batch_warning">Your batch settings will be removed. Are you sure?</string>
-    <string name="bundle_install_apks">Are you sure to install app bundle \'%s\'?</string>
     <string name="bundle_installer_description">App bundles of \'apkm\', \'apks\', and \'xapk\' format</string>
     <string name="bundle_path">Bundle Path</string>
     <string name="bundles">Bundles</string>
