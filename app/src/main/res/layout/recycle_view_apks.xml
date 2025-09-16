@@ -11,7 +11,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="start|center"
-            android:src="@drawable/ic_android"
+            android:src="@drawable/ic_apks"
             android:scaleType="fitCenter"
             android:background="@null" />
 

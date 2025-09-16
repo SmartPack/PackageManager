@@ -81,7 +81,7 @@ public class UninstalledAppsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
-        loadUI();
+        loadUI(mSearchText);
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -110,22 +110,21 @@ public class UninstalledAppsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mSearchText = s.toString();
-                loadUI();
+                loadUI(s.toString().trim());
             }
         });
 
         mSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
             Menu menu = popupMenu.getMenu();
-            if (!getData(requireActivity()).isEmpty()) {
+            if (!getData(mSearchText, requireActivity()).isEmpty()) {
                 menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                         .setChecked(sCommonUtils.getBoolean("reverse_order", false, requireActivity()));
             }
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
                     sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, requireActivity()), requireActivity());
-                    loadUI();
+                    loadUI(mSearchText);
                 }
                 return false;
             });
@@ -137,19 +136,17 @@ public class UninstalledAppsFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (mSearchText != null) {
-                    mSearchWord.setText(null);
-                    mSearchText = null;
-                    return;
-                }
-                if (mSearchWord.getVisibility() == View.VISIBLE) {
-                    mSearchWord.setVisibility(View.GONE);
-                    return;
-                }
                 if (mProgress.getVisibility() == View.VISIBLE) {
                     return;
                 }
-                mRestoreList.clear();
+                if (mSearchWord.getVisibility() == View.VISIBLE) {
+                    if (mSearchText != null) {
+                        mSearchText = null;
+                        mSearchWord.setText(null);
+                    }
+                    mSearchWord.setVisibility(View.GONE);
+                    return;
+                }
 
                 Utils.navigateToFragment(requireActivity(), 0);
             }
@@ -158,7 +155,7 @@ public class UninstalledAppsFragment extends Fragment {
         return mRootView;
     }
 
-    private void loadUI() {
+    private void loadUI(String searchTxt) {
         new sExecutor() {
 
             @Override
@@ -171,11 +168,17 @@ public class UninstalledAppsFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(requireActivity()), mRestoreList, requireActivity());
+                mRecycleViewAdapter = new UninstalledAppsAdapter(getData(mSearchText, requireActivity()), mRestoreList, requireActivity());
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
+                if (!isAdded()) {
+                    return;
+                }
+                mSearchText = searchTxt;
+                mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.uninstalled_apps)));
                 mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mBatch.setVisibility(mRestoreList.isEmpty() ? GONE : VISIBLE);
@@ -185,7 +188,7 @@ public class UninstalledAppsFragment extends Fragment {
         }.execute();
     }
 
-    private List<String> getData(Context context) {
+    private List<String> getData(String searchTxt, Context context) {
         List<String> mData = new ArrayList<>();
         List<ApplicationInfo> packages = context.getPackageManager().getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
         if (mProgress != null) {
@@ -196,7 +199,7 @@ public class UninstalledAppsFragment extends Fragment {
         }
         for (ApplicationInfo packageInfo : packages) {
             if (!sPackageUtils.isPackageInstalled(packageInfo.packageName, context)) {
-                if (mSearchText == null || packageInfo.packageName.contains(mSearchText)) {
+                if (searchTxt == null || packageInfo.packageName.contains(searchTxt)) {
                     mData.add(packageInfo.packageName);
                 }
             }
@@ -246,7 +249,7 @@ public class UninstalledAppsFragment extends Fragment {
                         .setTitle(getString(R.string.restore_success_message))
                         .setPositiveButton(R.string.cancel, (dialog, id) -> {
                         }).show();
-                loadUI();
+                loadUI(mSearchText);
             }
         };
     }

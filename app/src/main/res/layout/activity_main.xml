@@ -1,8 +1,8 @@
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent" >
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -20,10 +20,8 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
+        android:layout_gravity="bottom|center"
         android:contentDescription="@null"
-        android:layout_gravity="bottom"
         android:src="@drawable/ic_add"
         android:layout_margin="55dp"
         android:visibility="gone" />
@@ -35,4 +33,4 @@
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
         android:layout_gravity="bottom" />
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

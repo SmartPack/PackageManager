@@ -1,8 +1,8 @@
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent" >
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -21,7 +21,6 @@
             android:paddingTop="5dp" >
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/exported_apps"
@@ -43,7 +42,8 @@
                     android:layout_width="wrap_content"
                     style="?attr/materialIconButtonFilledTonalStyle"
                     app:iconTint="?attr/colorPrimary"
-                    app:icon="@drawable/ic_search" />
+                    app:icon="@drawable/ic_search"
+                    android:enabled="false" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/sort_icon"
@@ -51,28 +51,12 @@
                     android:layout_width="wrap_content"
                     style="?attr/materialIconButtonFilledTonalStyle"
                     app:iconTint="?attr/colorPrimary"
-                    app:icon="@drawable/ic_sort" />
+                    app:icon="@drawable/ic_sort"
+                    android:enabled="false" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </FrameLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            app:strokeColor="?attr/colorPrimary"
-            app:cardCornerRadius="45dp"
-            android:layout_margin="5dp" >
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/search_word"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:drawableStart="@drawable/ic_search"
-                android:layout_gravity="center"
-                android:gravity="start|center"
-                android:layout_margin="5dp"
-                android:background="@null"
-                android:visibility="gone" />
-        </com.google.android.material.card.MaterialCardView>
+        <include layout="@layout/layout_search" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -93,25 +77,24 @@
             android:visibility="gone" />
 
         <include layout="@layout/layout_recyclerview" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <include layout="@layout/permission_view_layout" />
+        <include layout="@layout/permission_view_layout" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/batch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="?attr/materialIconButtonFilledTonalStyle"
-        android:layout_alignParentBottom="true"
         android:textColor="?attr/colorPrimary"
         android:text="@string/delete_selected"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="end|center"
+        android:layout_gravity="bottom|end"
         android:layout_marginBottom="75dp"
         app:iconTint="?attr/colorPrimary"
         android:layout_marginEnd="50dp"
         app:icon="@drawable/ic_select"
         android:visibility="gone"
+        android:gravity="center"
         android:textSize="17sp"
         app:iconPadding="10sp" />
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

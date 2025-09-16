@@ -98,6 +98,9 @@ public class ManifestFragment extends Fragment {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
+                if (!isAdded()) {
+                    return;
+                }
                 mProgress.setVisibility(GONE);
                 if (mManifest != null && !mManifest.isEmpty()) {
                     mText.setText(mManifest);

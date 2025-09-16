@@ -5,6 +5,7 @@
     <string name="apk_installer_description">An individual APK file</string>
     <string name="apk_path">APK Path</string>
     <string name="app_info">App info</string>
+    <string name="applications">Applications</string>
     <string name="apks">APK\'s</string>
     <string name="android_version">Android %s</string>
     <string name="batch_options">Batch Options (%s)</string>

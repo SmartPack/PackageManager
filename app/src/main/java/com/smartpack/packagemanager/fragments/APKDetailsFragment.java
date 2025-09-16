@@ -50,6 +50,9 @@ public class APKDetailsFragment extends Fragment {
 
             @Override
             public void onPostExecute() {
+                if (!isAdded()) {
+                    return;
+                }
                 mRecyclerView.setAdapter(mAdapter);
 
             }

@@ -12,6 +12,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
@@ -70,6 +71,7 @@ public class ExportedAppsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ProgressBar mProgress;
     private ExportedAppsAdapter mRecycleViewAdapter;
+    private String mSearchText = null;
 
     @Nullable
     @Override
@@ -93,14 +95,14 @@ public class ExportedAppsFragment extends Fragment {
         mSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
             Menu menu = popupMenu.getMenu();
-            if (!Downloads.getData(mProgress, requireActivity()).isEmpty()) {
+            if (!Downloads.getData(mSearchText, mProgress, requireActivity()).isEmpty()) {
                 menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                         .setChecked(sCommonUtils.getBoolean("reverse_order_exports", false, requireActivity()));
             }
             popupMenu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == 0) {
                     sCommonUtils.saveBoolean("reverse_order_exports", !sCommonUtils.getBoolean("reverse_order_exports", false, requireActivity()), requireActivity());
-                    loadUI().execute();
+                    loadUI(mSearchText).execute();
                 }
                 return false;
             });
@@ -130,7 +132,7 @@ public class ExportedAppsFragment extends Fragment {
             }
         });
 
-        loadUI().execute();
+        loadUI(mSearchText).execute();
 
         Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
 
@@ -142,13 +144,13 @@ public class ExportedAppsFragment extends Fragment {
                     case 0:
                         if (!mStatus.equals("apks")) {
                             sCommonUtils.saveString("downloadTypes", "apks", requireActivity());
-                            loadUI().execute();
+                            loadUI(mSearchText).execute();
                         }
                         break;
                     case 1:
                         if (!mStatus.equals("bundles")) {
                             sCommonUtils.saveString("downloadTypes", "bundles", requireActivity());
-                            loadUI().execute();
+                            loadUI(mSearchText).execute();
                         }
                         break;
                 }
@@ -190,8 +192,7 @@ public class ExportedAppsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Downloads.setSearchText(s.toString());
-                loadUI().execute();
+                loadUI(s.toString().trim()).execute();
             }
         });
 
@@ -216,7 +217,7 @@ public class ExportedAppsFragment extends Fragment {
                     @Override
                     public void onPostExecute() {
                         mProgress.setVisibility(GONE);
-                        loadUI().execute();
+                        loadUI(mSearchText).execute();
                     }
                 }.execute()
         );
@@ -224,17 +225,17 @@ public class ExportedAppsFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (Downloads.getSearchText() != null) {
-                    mSearchWord.setText(null);
-                    Downloads.setSearchText(null);
+                if (mProgress.getVisibility() == View.VISIBLE) {
                     return;
                 }
-                if (mSearchWord.getVisibility() == VISIBLE) {
-                    mSearchWord.setVisibility(GONE);
+                if (mSearchWord.getVisibility() == View.VISIBLE) {
+                    if (mSearchText != null) {
+                        mSearchText = null;
+                        mSearchWord.setText(null);
+                    }
+                    mSearchWord.setVisibility(View.GONE);
                     return;
                 }
-
-                mBatchList.clear();
 
                 Utils.navigateToFragment(requireActivity(), 0);
             }
@@ -243,7 +244,7 @@ public class ExportedAppsFragment extends Fragment {
         return mRootView;
     }
 
-    private sExecutor loadUI() {
+    private sExecutor loadUI(String searchTxt) {
         return new sExecutor() {
             @Override
             public void onPreExecute() {
@@ -263,11 +264,17 @@ public class ExportedAppsFragment extends Fragment {
                         sFileUtils.delete(files);
                     }
                 }
-                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(mProgress, requireActivity()), mBatchList, installApp::launch, requireActivity());
+                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(searchTxt, mProgress, requireActivity()), mBatchList, installApp::launch, requireActivity());
             }
 
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
+                if (!isAdded()) {
+                    return;
+                }
+                mSearchText =searchTxt;
+                mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.exported_apps)));
                 mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mBatch.setVisibility(mBatchList.isEmpty() ? GONE : VISIBLE);

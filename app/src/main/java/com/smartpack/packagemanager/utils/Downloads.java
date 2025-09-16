@@ -22,9 +22,7 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class Downloads {
 
-    private static String mSearchText;
-
-    public static List<String> getData(ProgressBar progressBar, Context context) {
+    public static List<String> getData(String searchText, ProgressBar progressBar, Context context) {
         List<String> mData = new ArrayList<>();
         if (progressBar != null) {
             if (progressBar.isIndeterminate()) {
@@ -35,17 +33,13 @@ public class Downloads {
         for (File mFile : getDownloadList(context)) {
             if (sCommonUtils.getString("downloadTypes", "apks", context).equals("bundles")) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
-                    if (mSearchText == null) {
-                        mData.add(mFile.getAbsolutePath());
-                    } else if (isTextMatched(mFile.getName())) {
+                    if (searchText == null || PackageData.isTextMatched(mFile.getName(), searchText)) {
                         mData.add(mFile.getAbsolutePath());
                     }
                 }
             } else {
                 if (mFile.exists() && mFile.getName().endsWith(".apk")) {
-                    if (mSearchText == null) {
-                        mData.add(mFile.getAbsolutePath());
-                    } else if (isTextMatched(mFile.getName())) {
+                    if (searchText == null || PackageData.isTextMatched(mFile.getName(), searchText)) {
                         mData.add(mFile.getAbsolutePath());
                     }
                 }
@@ -66,26 +60,9 @@ public class Downloads {
         return mData;
     }
 
-    private static boolean isTextMatched(String searchText) {
-        for (int a = 0; a < searchText.length() - mSearchText.length() + 1; a++) {
-            if (mSearchText.equalsIgnoreCase(searchText.substring(a, a + mSearchText.length()))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static File[] getDownloadList(Context context) {
         PackageData.makePackageFolder(context);
         return PackageData.getPackageDir(context).listFiles();
-    }
-
-    public static String getSearchText() {
-        return mSearchText;
-    }
-
-    public static void setSearchText(String searchText) {
-        mSearchText = searchText;
     }
 
 }

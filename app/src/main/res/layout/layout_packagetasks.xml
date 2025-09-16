@@ -1,9 +1,8 @@
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="end|center_vertical">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,10 +42,8 @@
         android:id="@+id/close_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
         android:layout_margin="40dp"
-        android:layout_gravity="end"
         app:cardCornerRadius="15dp"
         android:visibility="gone" >
 
@@ -60,4 +57,4 @@
             android:textSize="20sp"
             android:padding="10dp" />
     </com.google.android.material.card.MaterialCardView>
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

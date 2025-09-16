@@ -183,16 +183,16 @@ public class PackageTasksFragment extends Fragment {
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
-                mSearchWord.setVisibility(GONE);
-                Utils.toggleKeyboard(1, mSearchWord, requireActivity());
-                return;
-            }
-            if (mSearchWord.getVisibility() == View.VISIBLE) {
-                mSearchWord.setVisibility(GONE);
+                mSearchWord.setVisibility(View.GONE);
                 Utils.toggleKeyboard(0, mSearchWord, requireActivity());
             } else {
                 mSearchWord.setVisibility(View.VISIBLE);
+                mSearchWord.requestFocus();
                 Utils.toggleKeyboard(1, mSearchWord, requireActivity());
+            }
+            if (mSearchText != null) {
+                mSearchText = null;
+                mSearchWord.setText(null);
             }
         });
 
@@ -213,7 +213,7 @@ public class PackageTasksFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                loadUI(s.toString().toLowerCase(), requireActivity());
+                loadUI(s.toString().trim().toLowerCase(), requireActivity());
             }
         });
 
@@ -243,7 +243,7 @@ public class PackageTasksFragment extends Fragment {
                     public void doInBackground() {
                         PackageData.setRawData(mProgress, requireActivity());
                         mData = PackageData.getData(mSearchText, mProgress, requireActivity());
-                        mRecycleViewAdapter = new PackageTasksAdapter(mData, mSearchText, mBatchList, uninstallUserApps, requireActivity());
+                        mRecycleViewAdapter = new PackageTasksAdapter(mData, mSearchText, mBatchList, diableOrUninstall, requireActivity());
                     }
 
                     @Override
@@ -276,12 +276,12 @@ public class PackageTasksFragment extends Fragment {
                 if (mProgress.getVisibility() == View.VISIBLE) {
                     return;
                 }
-                if (mSearchText != null) {
-                    mSearchWord.setText(null);
-                    return;
-                }
                 if (mSearchWord.getVisibility() == View.VISIBLE) {
-                    mSearchWord.setVisibility(GONE);
+                    if (mSearchText != null) {
+                        mSearchText = null;
+                        mSearchWord.setText(null);
+                    }
+                    mSearchWord.setVisibility(View.GONE);
                     return;
                 }
                 if (!mBatchList.isEmpty()) {
@@ -334,7 +334,7 @@ public class PackageTasksFragment extends Fragment {
         remove.putExtra(Intent.EXTRA_RETURN_RESULT, true);
         if (mBatchList.isEmpty()) {
             mPackageNameRemoved = packageName;
-            uninstallUserApps.launch(remove);
+            diableOrUninstall.launch(remove);
         } else {
             uninstallApps.launch(remove);
         }
@@ -344,7 +344,7 @@ public class PackageTasksFragment extends Fragment {
         if (!mBatchList.isEmpty()) {
             uninstallUserApp(mBatchList.get(0));
         } else {
-            loadUI(mSearchText, requireActivity());
+            mBatchOptions.setVisibility(GONE);
         }
     }
 
@@ -811,13 +811,17 @@ public class PackageTasksFragment extends Fragment {
             @Override
             public void doInBackground() {
                 mData = PackageData.getData(searchTxt, mProgress, activity);
-                mRecycleViewAdapter = new PackageTasksAdapter(mData, searchTxt, mBatchList, uninstallUserApps, activity);
+                mRecycleViewAdapter = new PackageTasksAdapter(mData, searchTxt, mBatchList, diableOrUninstall, activity);
             }
 
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
+                if (!isAdded()) {
+                    return;
+                }
                 mSearchText = searchTxt;
+                mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.applications)));
                 mBatchOptions.setVisibility(!mBatchList.isEmpty() ? View.VISIBLE : GONE);
                 mBatchOptions.setText(activity.getString(R.string.batch_options, mBatchList.size()));
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
@@ -862,7 +866,7 @@ public class PackageTasksFragment extends Fragment {
     }
 
     @SuppressLint("StringFormatInvalid")
-    private final ActivityResultLauncher<Intent> uninstallUserApps = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> diableOrUninstall = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
@@ -932,7 +936,12 @@ public class PackageTasksFragment extends Fragment {
                             if (item.getPackageName().equals(mBatchList.get(0))) {
                                 PackageData.getRawData().remove(item);
                                 mBatchList.remove(0);
-                                mData.remove(item);
+
+                                int index = mData.indexOf(item);
+                                if (index != -1) {
+                                    mData.remove(index);
+                                    mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                                }
                             }
                         }
                     } catch (ConcurrentModificationException ignored) {}
@@ -940,6 +949,7 @@ public class PackageTasksFragment extends Fragment {
                 } else {
                     sCommonUtils.toast(getString(R.string.uninstall_status_failed, PackageData.getAppName(mBatchList.get(0), requireActivity())), requireActivity()).show();
                     mBatchList.remove(0);
+                    mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
                     handleUninstallEvent();
                 }
             }
