@@ -7,7 +7,7 @@ title: General
     tab1 { padding-left: 4em; }
 </style>
 
-<h2>📚 Documentation</h2>
+<h2>📚 General</h2>
 
 <p style="text-align: justify;">
     <strong>Package Manager</strong> is a powerful, open-source Android app designed to help users manage system and user-installed apps with ease. It’s completely free and available for download via
@@ -43,11 +43,11 @@ title: General
 </p>
 
 <ol>
-    <li><a href="{{ site.github.url }}/ui/">🖥️ User Interface</a></li>
-    <li><a href="{{ site.github.url }}/batch/">🗂️ Batch Options</a></li>
-    <li><a href="{{ site.github.url }}/sai/">📦 Installer (Split APKs)</a></li>
-    <li><a href="{{ site.github.url }}/exports/">📤 Exported Apps</a></li>
-    <li><a href="{{ site.github.url }}/settings/">⚙️ Settings</a></li>
+    <li><a href="{{ site.github.url }}/ui/" target="_self">🖥️ User Interface</a></li>
+    <li><a href="{{ site.github.url }}/batch/" target="_self">🗂️ Batch Options</a></li>
+    <li><a href="{{ site.github.url }}/sai/" target="_self">📦 Installer (Split APKs)</a></li>
+    <li><a href="{{ site.github.url }}/exports/" target="_self">📤 Exported Apps</a></li>
+    <li><a href="{{ site.github.url }}/settings/" target="_self">⚙️ Settings</a></li>
 </ol>
 
 <hr />
