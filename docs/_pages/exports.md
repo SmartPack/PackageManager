@@ -1,14 +1,13 @@
 ---
-layout: default
+layout: page
 title: Exported Apps
-permalink: /exports/
 ---
 
 <style>
     tab1 { padding-left: 4em; }
 </style>
 
-## 📦 Exported Apps
+<h2 style="color: blue">📦 Exported Apps</h2>
 
 <p style="text-align: justify;"><tab1>The <strong>Exported Apps</strong> page, accessible from the main menu, allows users to easily manage (install, share, and delete) their already exported APKs and app bundles.</tab1></p>
 

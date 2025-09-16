@@ -1,4 +1,92 @@
-title: Package Manager
-description: The homepage of Package Manager
-show_downloads: false
-theme: jekyll-theme-hacker
+# Title
+page_title                                : Package Manager
+
+fdroid_link                               : https://f-droid.org/packages/com.smartpack.packagemanager
+playstore_free_link                       : https://play.google.com/store/apps/details?id=com.smartpack.packagemanager
+playstore_link                            : https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro
+app_icon                                  : assets/appicon.png
+app_name                                  : Package Manager
+app_price                                 : Paid
+app_description                           : Effortlessly manage your apps with a powerful, intuitive tool
+
+enable_smart_app_banner                   : true
+
+# Features
+features                                  :
+
+  - title                                 : Material Design UI
+    description                           : Beautiful and intuitive UI that clearly distinguishes user and system apps
+    fontawesome_icon_name                 : magic
+
+  - title                                 : App Installer
+    description                           : Effortlessly install APKs, split APKs, and app bundles (.apks, .apkm, .xapk)
+    fontawesome_icon_name                 : android
+
+  - title                                 : Privacy-friendly
+    description                           : Package Manager respects your privacy (no data collection, storing, or sharing)
+    fontawesome_icon_name                 : user-secret
+
+  - title                                 : Compatibility
+    description                           : Supports Android 7 (Nougat) and above, compatible with dark and light modes, etc.
+    fontawesome_icon_name                 : mobile-alt
+
+  - title                                 : Multilingual
+    description                           : Thanks to the community contributions, Package Manager is available in many languages
+    fontawesome_icon_name                 : globe
+
+  - title                                 : Open-Source
+    description                           : Up-to-date source code, which is always open for suggestions or/and contributions
+    fontawesome_icon_name                 : code-branch
+
+# Theme Settings
+topbar_color                              : "#000000"
+topbar_transparency                       : 0.1
+topbar_title_color                        : "#ffffff"
+
+cover_image                               : assets/headerimage.png
+cover_overlay_color                       : "#363b3d"
+cover_overlay_transparency                : 0.8
+
+device_color                              : blue
+
+body_background_color                     : "#ffffff"
+
+link_color                                : "#1d63ea"
+
+app_title_color                           : "#ffffff"
+app_price_color                           : "#ffffff"
+app_description_color                     : "#ffffff"
+
+feature_title_color                       : "#000000"
+feature_text_color                        : "#666666"
+
+feature_icons_foreground_color            : "#1d63ea"
+feature_icons_background_color            : "#e6e6e6"
+
+social_icons_foreground_color             : "#666666"
+social_icons_background_color             : "#e6e6e6"
+
+footer_text_color                         : "#666666"
+
+
+####################################################
+### Jekyll Configuration. No need to touch this. ###
+####################################################
+
+# Set the Sass partials directory, as we're using @imports
+sass:
+  style: :compressed # You might prefer to minify using :compressed
+
+# Exclude these files from your production _site
+exclude:
+  - LICENSE
+  - README.md
+  - CNAME
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+# Markdown rendering
+markdown: kramdown

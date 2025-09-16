@@ -1,0 +1,52 @@
+<footer>
+	<div class="footerIcons">
+		<a href="https://github.com/SmartPack/PackageManager">
+			<span class="fa-stack fa-1x">
+				<i class="iconBack fas fa-circle fa-stack-2x"></i>
+				<i class="iconTop fab fa-github fa-stack-1x"></i>
+			</span>
+		</a>
+
+		<a href="https://poeditor.com/join/project?hash=0CitpyI1Oc">
+			<span class="fa-stack fa-1x">
+				<i class="iconBack fas fa-circle fa-stack-2x"></i>
+				<i class="iconTop fas fa-globe fa-stack-1x"></i>
+			</span>
+		</a>
+
+		<a href="https://t.me/smartpack_kmanager">
+			<span class="fa-stack fa-1x">
+				<i class="iconBack fas fa-circle fa-stack-2x"></i>
+				<i class="iconTop fab fa-telegram fa-stack-1x"></i>
+			</span>
+		</a>
+
+		<a href="https://play.google.com/store/apps/dev?id=5836199813143882901">
+			<span class="fa-stack fa-1x">
+				<i class="iconBack fas fa-circle fa-stack-2x"></i>
+				<i class="iconTop fab fa-google-play fa-stack-1x"></i>
+			</span>
+		</a>
+
+		<a href="https://www.paypal.me/menacherry">
+			<span class="fa-stack fa-1x">
+				<i class="iconBack fas fa-circle fa-stack-2x"></i>
+				<i class="iconTop fab fa-paypal fa-stack-1x"></i>
+			</span>
+		</a>
+
+		<a href="mailto:smartpack.org@gmail.com">
+			<span class="fa-stack fa-1x">
+				<i class="iconBack fas fa-circle fa-stack-2x"></i>
+				<i class="iconTop fas fa-envelope fa-stack-1x"></i>
+			</span>
+		</a>
+	</div>
+	<div class="footerLinks">
+		{% for page in site.pages %}
+			{% if page.include_in_footer == true %}
+				<a href="{{ page.url | relative_url }}" target="_self">{{ page.title }}</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+</footer>

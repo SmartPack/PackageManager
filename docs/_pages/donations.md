@@ -1,7 +1,6 @@
 ---
-layout: default
+layout: page
 title: Donations
-permalink: /donations/
 ---
 
 <style>

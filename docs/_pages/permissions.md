@@ -1,14 +1,14 @@
 ---
-layout: default
+layout: page
 title: Permissions
-permalink: /permissions/
+include_in_footer: true
 ---
 
 <style>
     tab1 { padding-left: 4em; }
 </style>
 
-## 🔐 Permissions Explained
+<h2 style="color: blue">🔐 Permissions Explained</h2>
 
 <p style="text-align: justify;"><tab1>As a privacy-friendly application, Package Manager only demands the very necessary permissions required to offer the promised features, and are</tab1></p>
 

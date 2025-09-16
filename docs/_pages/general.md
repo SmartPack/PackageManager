@@ -1,7 +1,6 @@
 ---
-layout: default
-title: Documentation
-permalink: /general/
+layout: page
+title: General
 ---
 
 <style>
@@ -49,9 +48,6 @@ permalink: /general/
     <li><a href="{{ site.github.url }}/sai/">📦 Installer (Split APKs)</a></li>
     <li><a href="{{ site.github.url }}/exports/">📤 Exported Apps</a></li>
     <li><a href="{{ site.github.url }}/settings/">⚙️ Settings</a></li>
-    <li><a href="{{ site.github.url }}/permissions/">🔐 Permissions</a></li>
-    <li><a href="{{ site.github.url }}/privacy-policy/">🛡️ Privacy Policy</a></li>
-    <li><a href="{{ site.github.url }}/disclaimer/">📜 Disclaimer</a></li>
 </ol>
 
 <hr />

@@ -1,10 +1,10 @@
 ---
-layout: default
+layout: page
 title: What's New
-permalink: /change-logs/
+include_in_footer: true
 ---
 
-## 🆕 What's New
+<h2 style="color: blue">🆕 What's New</h2>
 
 ### ✨ 69. [v7.4 (Pro)](https://github.com/SmartPack/PackageManager/releases/tag/v7.4) *(Aug 19, 2025)*
 - Improved FilePicker (for split APK's) and Package Explorer.
