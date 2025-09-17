@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ADBUninstallActivity;
+import com.smartpack.packagemanager.utils.SerializableItems.ActivityItems;
 import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 import com.smartpack.packagemanager.utils.tasks.ExportAPKTasks;
 import com.smartpack.packagemanager.utils.tasks.ExportBundleTasks;
@@ -87,14 +88,30 @@ public class PackageDetails {
         return perms;
     }
 
-    public static List<ActivityInfo> getActivities(String packageName, Context context) {
-        List<ActivityInfo> activities = new ArrayList<>();
+    public static List<ActivityItems> getActivities(String packageName, Context context) {
+        List<ActivityItems> activities = new ArrayList<>();
+
         try {
-            ActivityInfo[] list = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
-            activities.addAll(Arrays.asList(list));
+            ActivityInfo[] list = context.getPackageManager()
+                    .getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities;
+            if (list != null) {
+                for (ActivityInfo info : list) {
+                    activities.add(new ActivityItems(info.name, info.labelRes == 0 ? getAdjustedLabel(info.name) : info.loadLabel(context.getPackageManager()), info.loadIcon(context.getPackageManager()), info.exported));
+                }
+            }
         } catch (PackageManager.NameNotFoundException | NullPointerException ignored) {
         }
+
         return activities;
+    }
+
+    private static String getAdjustedLabel(String label) {
+        int lastDot = label.lastIndexOf(".");
+        if (lastDot != -1) {
+            return label.substring(lastDot + 1);
+        } else {
+            return null;
+        }
     }
 
     public static JSONObject getPackageDetails(String packageName, Context context) {

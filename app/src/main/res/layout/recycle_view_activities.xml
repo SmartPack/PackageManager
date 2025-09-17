@@ -1,29 +1,58 @@
-<androidx.appcompat.widget.LinearLayoutCompat
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="start|center_vertical"
     android:orientation="horizontal"
-    android:layout_gravity="center"
-    android:gravity="start"
-    android:padding="10dp" >
+    android:padding="5dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center|start"
-            android:src="@drawable/ic_circle"
-            android:tint="?attr/colorPrimary"
-            android:scaleType="fitCenter"
-            android:background="@null" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5sp"
+            android:id="@+id/icon"
+            android:layout_width="24sp"
+            android:layout_height="24sp"
             android:layout_gravity="center"
-            android:focusable="false"
-            android:gravity="start"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
-</androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_marginEnd="5dp"
+            android:scaleType="fitCenter"
+            android:background="@null"  />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="end|center" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50sp"
+                    android:orientation="vertical" >
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:textStyle="bold"
+                            android:textSize="17sp"
+                            android:maxLines="1" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:focusable="false" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    app:iconTint="?attr/colorPrimary"
+                    android:layout_gravity="center|end"
+                    app:icon="@drawable/ic_open"
+                    android:visibility="gone"
+                    android:gravity="center" />
+        </FrameLayout>
+</LinearLayout>
