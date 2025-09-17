@@ -11,10 +11,10 @@ title: General
 
 <p style="text-align: justify;">
     <strong>Package Manager</strong> is a powerful, open-source Android app designed to help users manage system and user-installed apps with ease. It’s completely free and available for download via
-    <a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" target="_blank">Google Play</a>
+    Google Play (<a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" target="_blank">Free</a> and <a href="https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro" target="_blank">Pro</a>)
     or
     <a href="https://f-droid.org/packages/com.smartpack.packagemanager" target="_blank">F-Droid</a>.
-    <br /><br />
+    <br/><br/>
     This documentation is intended to help users make the most of both the basic features and advanced capabilities offered by the app.
 </p>
 

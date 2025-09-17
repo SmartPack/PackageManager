@@ -20,7 +20,7 @@ features                                  :
 
   - title                                 : App Installer
     description                           : Effortlessly install APKs, split APKs, and app bundles (.apks, .apkm, .xapk)
-    fontawesome_icon_name                 : android
+    fontawesome_icon_name                 : download
 
   - title                                 : Privacy-friendly
     description                           : Package Manager respects your privacy (no data collection, storing, or sharing)

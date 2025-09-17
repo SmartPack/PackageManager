@@ -23,9 +23,9 @@ title: Batch Options
 <h3>Available Batch Operations:</h3>
 
 <ol>
-    <li><strong>🟢 Turn On/Off:</strong> Enable or disable the selected apps. <em>(Root required)</em></li>
-    <li><strong>🗑️ Uninstall:</strong> Remove the selected apps from your device. <em>(Root required)</em></li>
-    <li><strong>♻️ Reset:</strong> Clear the data folder of the selected apps, effectively resetting them. <em>(Root required)</em></li>
+    <li><strong>🔘 Turn On/Off:</strong> Enable or disable the selected apps. <em>(Root or Shizuku required)</em></li>
+    <li><strong>🗑️ Uninstall:</strong> Remove the selected apps from your device. <em>(Root or Shizuku is required to remove system apps)</em></li>
+    <li><strong>♻️ Reset:</strong> Clear the data folder of the selected apps, effectively resetting them. <em>(Root or Shizuku required)</em></li>
     <li><strong>📤 Export:</strong> Save the APK or Split APK files of the selected apps for backup or sharing.</li>
     <li><strong>📋 Export Details:</strong> Generate and export detailed information about the selected apps, including package names, permissions, installation dates, and more.</li>
 </ol>

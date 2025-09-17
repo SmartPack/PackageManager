@@ -48,12 +48,19 @@
                             </p>
                         </div>
                         <div class="downloadButtonsContainer">
-                            {% if site.playstore_link %}
-                                <a class="playStoreLink" href="{{site.playstore_link}}"><img class="playStore" src="assets/playstore.png"></a>
-                            {% endif %}
-                            {% if site.playstore_free_link %}
-                                <a class="playStoreLinkFree" href="{{site.playstore_free_link}}"><img class="playStore" src="assets/playstore.png"></a>
-                            {% endif %}
+                            <div class="dropdown">
+  				<button class="dropbtn">
+					<img class="playStore" src="assets/playstore.png" alt="Play Store">
+				</button>
+				<div class="dropdown-content">
+					{% if site.playstore_link %}
+						<a href="{{ site.playstore_link }}">Pro Version</a>
+					{% endif %}
+					{% if site.playstore_free_link %}
+						<a href="{{ site.playstore_free_link }}">Free Version</a>
+					{% endif %}
+				</div>
+                            </div>
                             <a class="fDroidLink" href="{{site.fdroid_link}}"><img class="appStore" src="assets/fdroid.png"></a>
                         </div>
                     </div>
