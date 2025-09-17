@@ -85,6 +85,9 @@ public class ActivitiesFragment extends Fragment {
             @SuppressLint("StringFormatInvalid")
             @Override
             public void onPostExecute() {
+                if (!isAdded()) {
+                    return;
+                }
                 mProgressBar.setVisibility(GONE);
                 mRecyclerView.setAdapter(mRecycleViewAdapter);
             }

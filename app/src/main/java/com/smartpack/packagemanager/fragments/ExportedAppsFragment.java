@@ -95,7 +95,7 @@ public class ExportedAppsFragment extends Fragment {
         mSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
             Menu menu = popupMenu.getMenu();
-            if (!Downloads.getData(mSearchText, mProgress, requireActivity()).isEmpty()) {
+            if (!Downloads.getData(mSearchText, requireActivity()).isEmpty()) {
                 menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
                         .setChecked(sCommonUtils.getBoolean("reverse_order_exports", false, requireActivity()));
             }
@@ -264,7 +264,7 @@ public class ExportedAppsFragment extends Fragment {
                         sFileUtils.delete(files);
                     }
                 }
-                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(searchTxt, mProgress, requireActivity()), mBatchList, installApp::launch, requireActivity());
+                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(searchTxt, requireActivity()), mBatchList, installApp::launch, requireActivity());
             }
 
             @SuppressLint("StringFormatInvalid")

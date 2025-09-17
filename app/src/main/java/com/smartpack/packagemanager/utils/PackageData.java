@@ -92,50 +92,39 @@ public class PackageData {
         return mRawData;
     }
 
-    public static List<PackageItems> getData(String searchTxt, ProgressBar progressBar, Context context) {
-        boolean mAppType;
+    public static List<PackageItems> getData(String searchTxt, Context context) {
         List<PackageItems> mData = new ArrayList<>();
-        if (progressBar != null) {
-            if (progressBar.isIndeterminate()) {
-                progressBar.setIndeterminate(false);
-            }
-            progressBar.setMax(getRawData().size());
-        }
-        for (PackageItems item : getRawData()) {
-            if (sCommonUtils.getString("appTypes", "all", context).equals("system")) {
-                mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
-            } else if (sCommonUtils.getString("appTypes", "all", context).equals("user")) {
-                mAppType = (!sPackageUtils.isSystemApp(item.getPackageName(), context));
-            } else {
-                mAppType = true;
-            }
-            if (mAppType && item.getPackageName().contains(".")) {
-                if (searchTxt == null || (isTextMatched(item.getAppName(), searchTxt)
-                        || isTextMatched(item.getPackageName(), searchTxt))) {
-                    mData.add(item);
-                }
-            }
-            if (PackageData.getSortingType(context) == 0) {
-                mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
-            } else if (PackageData.getSortingType(context) == 4) {
-                mData.sort(Comparator.comparingLong(PackageItems::getAPKSize));
-            } else if (PackageData.getSortingType(context) == 2) {
-                mData.sort(Comparator.comparingLong(PackageItems::getInstalledTime));
-            } else if (PackageData.getSortingType(context) == 3) {
-                mData.sort(Comparator.comparingLong(PackageItems::getUpdatedTime));
-            } else {
-                mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
-            }
-            if (progressBar != null) {
-                if (progressBar.getProgress() < getRawData().size()) {
-                    progressBar.setProgress(progressBar.getProgress() + 1);
+        if (getRawData() != null) {
+            boolean mAppType;
+            for (PackageItems item : getRawData()) {
+                if (sCommonUtils.getString("appTypes", "all", context).equals("system")) {
+                    mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
+                } else if (sCommonUtils.getString("appTypes", "all", context).equals("user")) {
+                    mAppType = (!sPackageUtils.isSystemApp(item.getPackageName(), context));
                 } else {
-                    progressBar.setProgress(0);
+                    mAppType = true;
+                }
+                if (mAppType && item.getPackageName().contains(".")) {
+                    if (searchTxt == null || (isTextMatched(item.getAppName(), searchTxt)
+                            || isTextMatched(item.getPackageName(), searchTxt))) {
+                        mData.add(item);
+                    }
+                }
+                if (PackageData.getSortingType(context) == 0) {
+                    mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
+                } else if (PackageData.getSortingType(context) == 4) {
+                    mData.sort(Comparator.comparingLong(PackageItems::getAPKSize));
+                } else if (PackageData.getSortingType(context) == 2) {
+                    mData.sort(Comparator.comparingLong(PackageItems::getInstalledTime));
+                } else if (PackageData.getSortingType(context) == 3) {
+                    mData.sort(Comparator.comparingLong(PackageItems::getUpdatedTime));
+                } else {
+                    mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
                 }
             }
-        }
-        if (sCommonUtils.getBoolean("reverse_order", false, context)) {
-            Collections.reverse(mData);
+            if (sCommonUtils.getBoolean("reverse_order", false, context)) {
+                Collections.reverse(mData);
+            }
         }
         return mData;
     }

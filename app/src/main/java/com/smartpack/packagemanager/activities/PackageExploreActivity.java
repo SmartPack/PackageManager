@@ -115,7 +115,7 @@ public class PackageExploreActivity extends AppCompatActivity {
             @Override
             public void doInBackground() {
                 try {
-                    mData = FilePicker.getData(path, mProgressBar, activity, false);
+                    mData = FilePicker.getData(path, activity, false);
                     mRecycleViewAdapter = new PackageExploreAdapter(mData, mPackageName, activity);
                 } catch (NullPointerException ignored) {
                     failed = true;
