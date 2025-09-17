@@ -64,7 +64,7 @@
 
 	.container {
 		grid-column-gap: 0px;
-		grid-template-columns: 1;
+		grid-template-columns: 1fr;
 		grid-template-rows: 115px auto auto auto auto;
 		grid-template-areas: 
 			"h h h h h h h h h h h h"
@@ -283,6 +283,11 @@ nav > ul li a:active {
 	background-color: #3e8e41;
 }
 
+.playStore {
+	width: auto;
+	height: 75px;
+}
+
 @media only screen and (max-width: 992px) {
 
 	.appInfo {
@@ -378,11 +383,6 @@ nav > ul li a:active {
 		text-align: center;
 	}
 	
-} 
-
-.playStore {
-	height: 75px;
-	margin-right: 24px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -401,10 +401,6 @@ nav > ul li a:active {
 		margin-bottom: 24px;
 	}
 	
-} 
-
-.appStore {
-	height: 75px;
 }
 
 .iphonePreview {

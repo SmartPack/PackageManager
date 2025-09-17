@@ -50,18 +50,18 @@
                         <div class="downloadButtonsContainer">
                             <div class="dropdown">
   				<button class="dropbtn">
-					<img class="playStore" src="assets/playstore.png" alt="Play Store">
+					<img class="playStore" src="assets/downloads.png" alt="Play Store">
 				</button>
 				<div class="dropdown-content">
 					{% if site.playstore_link %}
-						<a href="{{ site.playstore_link }}">Pro Version</a>
+						<a href="{{ site.playstore_link }}">Google Play (Pro)</a>
 					{% endif %}
 					{% if site.playstore_free_link %}
-						<a href="{{ site.playstore_free_link }}">Free Version</a>
+						<a href="{{ site.playstore_free_link }}">Google Play (Free)</a>
 					{% endif %}
+					<a href="{{ site.fdroid_link }}">F-Droid (Free)</a>
 				</div>
                             </div>
-                            <a class="fDroidLink" href="{{site.fdroid_link}}"><img class="appStore" src="assets/fdroid.png"></a>
                         </div>
                     </div>
                     {% include features.html %}
