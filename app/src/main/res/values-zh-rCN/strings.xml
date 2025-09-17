@@ -159,4 +159,24 @@
     <string name="shizuku_integration_message">"Package Manager 现在可以与 Shizuku API 集成以执行高级任务。如果您想使用 Shizuku 集成，请点击下面的按钮授予权限（一次性）。"</string>
     <string name="feature_unavailable_message">"此功能需要 Root 或 Shizuku 支持"</string>
     <string name="failed_decode_xml">"解码 %s 失败"</string>
+    <string name="batch_processing_failed_title">"此过程已失败，原因是："</string>
+    <string name="batch_processing_success_message">"所选过程已成功完成 …"</string>
+    <string name="delete_selected">"删除所选"</string>
+    <string name="exploring">"探索中 …"</string>
+    <string name="export_details_selected_question">"导出所选应用的详情？"</string>
+    <string name="export_message_summary">"所选应用被导出至 '%s'"</string>
+    <string name="export_selected">"导出所选"</string>
+    <string name="export_selected_question">"导出所选应用？"</string>
+    <string name="export_success_message">"所选项目已导出。
+
+        路径：%s"</string>
+    <string name="ignored">"已忽略"</string>
+    <string name="permission_granted_write_storage">"已授予存储权限！再次轻按按钮已开始。"</string>
+    <string name="purchase_pro">"购买专业版"</string>
+    <string name="purchase_pro_acknowledgement">"谢谢 \u2665 通过使用专业版你已经在支持我们。"</string>
+    <string name="reset_selected_question">"重置所选应用？"</string>
+    <string name="restore_selected">"恢复所选吗？"</string>
+    <string name="status">"状态：%s"</string>
+    <string name="turn_on_off_selected_question">"开/关所选应用？"</string>
+    <string name="uninstall_selected_question">"卸载所选应用？"</string>
 </resources>
