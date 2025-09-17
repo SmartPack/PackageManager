@@ -146,7 +146,9 @@ public class APKPickerActivity extends AppCompatActivity {
                 mPackageID.setText(mAPKParser.getPackageName());
                 mPackageID.setVisibility(View.VISIBLE);
             }
-            mAppIcon.setImageDrawable(mAPKParser.getAppIcon());
+            if (mAPKParser.getAppIcon() != null) {
+                mAppIcon.setImageDrawable(mAPKParser.getAppIcon());
+            }
             mAppName.setVisibility(View.VISIBLE);
         }
         if (sPackageUtils.isPackageInstalled(mAPKParser.getPackageName(), activity)) {

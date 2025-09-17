@@ -22,6 +22,7 @@
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
+                android:src="@drawable/ic_apks"
                 android:padding="10dp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
