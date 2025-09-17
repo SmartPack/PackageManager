@@ -475,8 +475,7 @@ public class PackageTasksFragment extends Fragment {
                                                                 itemOld.getPackageName(),
                                                                 sPackageUtils.getAppName(batchOptionsItems.getPackageName(), requireActivity()).toString() + (sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), requireActivity()) ? "" : " (Disabled)"),
                                                                 itemOld.getAPKSize(),
-                                                                itemOld.getInstalledTime(),
-                                                                itemOld.getUpdatedTime()
+                                                                requireActivity()
                                                         );
                                                         PackageData.getRawData().set(i, itemNew);
                                                         int index = mData.indexOf(itemOld);
@@ -897,8 +896,7 @@ public class PackageTasksFragment extends Fragment {
                                                 itemOld.getPackageName(),
                                                 sPackageUtils.getAppName(itemOld.getPackageName(), requireActivity()).toString() + (sPackageUtils.isEnabled(itemOld.getPackageName(), requireActivity()) ? "" : " (Disabled)"),
                                                 itemOld.getAPKSize(),
-                                                itemOld.getInstalledTime(),
-                                                itemOld.getUpdatedTime()
+                                                requireActivity()
                                         );
                                         int index = PackageData.getRawData().indexOf(itemOld);
                                         if (index != -1) {

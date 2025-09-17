@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
@@ -78,8 +77,7 @@ public class PackageData {
                     packageInfo.packageName,
                     getAppName(packageInfo.packageName, context),
                     new File(sPackageUtils.getSourceDir(packageInfo.packageName, context)).length(),
-                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).firstInstallTime,
-                    Objects.requireNonNull(getPackageInfo(packageInfo.packageName, context)).lastUpdateTime)
+                    context)
             );
             if (progressBar != null) {
                 if (progressBar.getProgress() < packages.size()) {

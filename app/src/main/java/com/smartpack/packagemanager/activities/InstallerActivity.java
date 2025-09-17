@@ -31,7 +31,6 @@ import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -195,8 +194,7 @@ public class InstallerActivity extends AppCompatActivity {
                                 mPackageName,
                                 sPackageUtils.getAppName(mPackageName, InstallerActivity.this).toString(),
                                 new File(sPackageUtils.getSourceDir(mPackageName, InstallerActivity.this)).length(),
-                                Objects.requireNonNull(PackageData.getPackageInfo(mPackageName, InstallerActivity.this)).firstInstallTime,
-                                Objects.requireNonNull(PackageData.getPackageInfo(mPackageName, InstallerActivity.this)).lastUpdateTime)
+                                InstallerActivity.this)
                         );
                         result.putExtra("INSTALL_STATUS_UPDATE", false);
                     } else {

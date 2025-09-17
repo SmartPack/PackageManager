@@ -89,7 +89,7 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
             }
 
             holder.checkBox.setVisibility(batch ? VISIBLE : GONE);
-            if (data.get(position).launchIntent(holder.open.getContext()) != null && !batch) {
+            if (data.get(position).launchIntent() != null && !batch) {
                 holder.open.setVisibility(View.VISIBLE);
             } else {
                 holder.open.setVisibility(View.GONE);
@@ -201,7 +201,9 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                 notifyItemRangeChanged(0, getItemCount());
             } else {
                 Intent details = new Intent(view.getContext(), PackageDetailsActivity.class);
-                details.putExtra(PackageDetailsActivity.DATA_INTENT, packageItems);
+                details.putExtra(PackageDetailsActivity.APP_NAME_INTENT, packageItems.getAppName());
+                details.putExtra(PackageDetailsActivity.PACKAGE_NAME_INTENT, packageItems.getPackageName());
+                details.putExtra(PackageDetailsActivity.LAUNCHER_INTENT, packageItems.launchIntent() != null);
                 details.putExtra(PackageDetailsActivity.APK_PICKED, false);
                 uninstallApps.launch(details);
             }
