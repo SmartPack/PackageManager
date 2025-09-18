@@ -6,6 +6,16 @@ include_in_footer: true
 
 <h2 style="color: blue">🆕 What's New</h2>
 
+### ✨ 70. [v7.5](https://github.com/SmartPack/PackageManager/releases/tag/v7.5) *(Sept 17, 2025)*
+- Further modernized the app UI for a cleaner, more intuitive experience.
+- Improved app startup performance and overall code quality.
+- Enhanced batch operation handling for better efficiency.
+- Upgraded split APK/App Bundle installation — the app now automatically selects only the required APKs.
+- Refined Activities, Operations, Permissions, and Manifest pages for improved usability.
+- Updated aXML, sCommon, and other library dependencies to their latest versions.
+- Updated and improved translations across the app.
+- Various other minor improvements and bug fixes.
+
 ### ✨ 69. [v7.4 (Pro)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(Aug 19, 2025)*
 - Improved FilePicker (for split APK's) and Package Explorer.
 - Miscellaneous changes.

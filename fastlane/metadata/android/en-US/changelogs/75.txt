@@ -1,0 +1,8 @@
+* Further modernized the app UI for a cleaner, more intuitive experience.
+* Improved app startup performance and overall code quality.
+* Enhanced batch operation handling for better efficiency.
+* Upgraded split APK/App Bundle installation — the app now automatically selects only the required APKs.
+* Refined Activities, Operations, Permissions, and Manifest pages for improved usability.
+* Updated aXML, sCommon, and other library dependencies to their latest versions.
+* Updated and improved translations across the app.
+* Various other minor improvements and bug fixes.

@@ -72,7 +72,7 @@ title: User Interface
     <li><b>Open</b> – Launch the selected application</li>
     <li><b>Explore</b> – Extract and browse the contents of the selected APK. Users can inspect resources and other important files that determine the app’s behavior. It is also possible to export resources (e.g., app icon) to device storage with a few clicks</li>
     <li><b>Disable/Enable</b> – Disable an enabled app or enable a disabled app (Root or Shizuku-dependent feature)</li>
-    <li><b>Uninstall</b> – Uninstall applications, including system apps with root or Shizuku permissions. On non-rooted/Shizuku supported devices, only user apps can be removed. Guidance is provided to remove system apps on non-rooted devices/Shizuku via ADB</li>
+    <li><b>Uninstall</b> – Uninstall applications, including system apps, with root or Shizuku permissions. On devices without root or Shizuku support, only user apps can be removed. For such devices, guidance is provided on removing system apps via ADB.</li>
     <li><b>App Info</b> – Open the native Android settings page for the selected app</li>
     <li><b>Google Play</b> – Open the app’s page on Google Play (works only if the app is published there)</li>
     <li><b>Export</b> – Export individual APK files or app bundles to device storage. Exported files can also be shared via third-party apps</li>
