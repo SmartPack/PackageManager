@@ -29,15 +29,17 @@ public class AppOps {
                     .trim().split("\\r?\\n");
         }
         for (String line : appOpsList) {
-            String[] splitOp = line.split(":");
-            String name = splitOp[0].trim();
-            String status = splitOp[1].trim();
-            /*
-             * We don't need a single "No operations." item if operations are empty.
-             * Also, "Uid mode" needs more work (and likely never work)
-             */
-            if (line.contains("time=") && !line.equals("No operations.") && !name.equals("Uid mode")) {
-                mData.add(new PermissionsItems(line.contains("allow"), name, status));
+            if (line.contains(":")) {
+                String[] splitOp = line.split(":");
+                String name = splitOp[0].trim();
+                String status = splitOp[1].trim();
+                /*
+                 * We don't need a single "No operations." item if operations are empty.
+                 * Also, "Uid mode" needs more work (and likely never work)
+                 */
+                if (line.contains("time=") && !line.equals("No operations.") && !name.equals("Uid mode")) {
+                    mData.add(new PermissionsItems(line.contains("allow"), name, status));
+                }
             }
         }
         return mData;
