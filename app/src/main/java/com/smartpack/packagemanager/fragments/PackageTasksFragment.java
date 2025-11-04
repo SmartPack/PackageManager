@@ -915,7 +915,7 @@ public class PackageTasksFragment extends Fragment {
                                         PackageItems itemOld = mData.get(i);
                                         PackageItems itemNew = new PackageItems(
                                                 itemOld.getPackageName(),
-                                                sPackageUtils.getAppName(itemOld.getPackageName(), requireActivity()).toString(),
+                                                sPackageUtils.getAppName(itemOld.getPackageName(), requireActivity()).toString() + (sPackageUtils.isEnabled(itemOld.getPackageName(), requireActivity()) ? "" : " (Disabled)"),
                                                 itemOld.getSourceDir(),
                                                 itemOld.isRemoved(),
                                                 requireActivity()
@@ -967,7 +967,7 @@ public class PackageTasksFragment extends Fragment {
                     } catch (ConcurrentModificationException ignored) {}
                     handleUninstallEvent();
                 } else {
-                    sCommonUtils.toast(getString(R.string.uninstall_status_failed, PackageData.getAppName(mBatchList.get(0), requireActivity())), requireActivity()).show();
+                    sCommonUtils.toast(getString(R.string.uninstall_status_failed, sPackageUtils.getAppName(mBatchList.get(0), requireActivity())), requireActivity()).show();
                     mBatchList.remove(0);
                     mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
                     handleUninstallEvent();

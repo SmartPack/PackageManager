@@ -108,13 +108,9 @@ public class PackageData {
         return null;
     }
 
-    public static String getAppName(String packageName, Context context) {
-        return sPackageUtils.getAppName(packageName, context) + (sPackageUtils.isEnabled(packageName, context) ? "" : " (Disabled)");
-    }
-
     public static String getFileName(String packageName, Context context) {
         if (sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
-            return getAppName(packageName, context);
+            return sPackageUtils.getAppName(packageName, context).toString();
         } else {
             return packageName;
         }
@@ -172,7 +168,7 @@ public class PackageData {
             if (removed) {
                 mRemovedData.add(new PackageItems(
                         packageInfo.packageName,
-                        appName + (disabled ? " (Disabled)" : ""),
+                        appName,
                         apkPath,
                         true,
                         context)
@@ -180,7 +176,7 @@ public class PackageData {
             } else {
                 mRawData.add(new PackageItems(
                         packageInfo.packageName,
-                        appName,
+                        appName + (disabled ? " (Disabled)" : ""),
                         apkPath,
                         false,
                         context)

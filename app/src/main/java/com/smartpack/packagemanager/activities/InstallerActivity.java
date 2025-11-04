@@ -29,7 +29,6 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
@@ -182,7 +181,7 @@ public class InstallerActivity extends AppCompatActivity {
             } else {
                 mStatus.setText(getString(R.string.result, installationStatus));
                 if (installationStatus.equals(getString(R.string.installation_status_success))) {
-                    mTitle.setText(PackageData.getAppName(mPackageName, InstallerActivity.this));
+                    mTitle.setText(sPackageUtils.getAppName(mPackageName, InstallerActivity.this));
                     mIcon.setImageDrawable(sPackageUtils.getAppIcon(mPackageName, InstallerActivity.this));
                     if (getPackageManager().getLaunchIntentForPackage(mPackageName) != null) {
                         mOpen.setVisibility(View.VISIBLE);

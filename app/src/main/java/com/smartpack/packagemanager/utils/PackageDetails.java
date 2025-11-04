@@ -116,7 +116,7 @@ public class PackageDetails {
     public static JSONObject getPackageDetails(String packageName, Context context) {
         try {
             JSONObject obj = new JSONObject();
-            obj.put("Name", PackageData.getAppName(packageName, context));
+            obj.put("Name", sPackageUtils.getAppName(packageName, context));
             obj.put("Package Name", packageName);
             obj.put("Version", sAPKUtils.getVersionName(sPackageUtils.getSourceDir(packageName, context), context));
             obj.put("Google Play", "https://play.google.com/store/apps/details?id=" + packageName);
