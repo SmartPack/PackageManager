@@ -1,16 +1,15 @@
 [versions]
 core = "6.0.0"
-agp = "8.13.0"
+agp = "9.1.0"
 documentfileVersion = "1.1.0"
 material = "1.13.0"
 shizuku = "13.1.5"
 scommon = "d91cc0e601"
 axml = "51db0eecad"
-zip4j = "2.11.5"
+zip4j = "2.11.6"
 
 [libraries]
 axml = { module = "com.github.apk-editor:aXML", version.ref = "axml" }
-adapters = { module = "com.github.sunilpaulmathew.sCommon:adapters", version.ref = "scommon" }
 crashreporter = { module = "com.github.sunilpaulmathew.sCommon:crashreporter", version.ref = "scommon" }
 credits = { module = "com.github.sunilpaulmathew.sCommon:credits", version.ref = "scommon" }
 documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfileVersion" }

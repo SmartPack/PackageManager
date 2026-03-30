@@ -73,7 +73,6 @@ android {
 dependencies {
     implementation libs.axml
 
-    implementation libs.adapters
     implementation libs.crashreporter
     implementation libs.credits
     implementation libs.documentfile
