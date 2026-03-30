@@ -16,6 +16,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
+import com.smartpack.packagemanager.utils.Utils;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
@@ -54,9 +55,9 @@ public class DisableAppTasks extends sExecutor {
     public void doInBackground() {
         sCommonUtils.sleep(1);
         if (mRootShell.rootAccess()) {
-            mResult = mRootShell.runAndGetError((sPackageUtils.isEnabled(mPackageName, mActivity) ? "pm disable " : "pm enable ") + mPackageName);
+            mResult = mRootShell.runAndGetError((sPackageUtils.isEnabled(mPackageName, mActivity) ? "pm disable-user --user " : "pm enable --user ") + Utils.getUserID() + " " + mPackageName);
         } else {
-            mResult = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(mPackageName, mActivity) ? "pm disable " : "pm enable ") + mPackageName);
+            mResult = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(mPackageName, mActivity) ? "pm disable-user --user " : "pm enable --user ") + Utils.getUserID() + " " + mPackageName);
         }
     }
 

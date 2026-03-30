@@ -467,9 +467,9 @@ public class PackageTasksFragment extends Fragment {
                                                 } else {
                                                     String result;
                                                     if (mRootShell.rootAccess()) {
-                                                        result = mRootShell.runAndGetError((sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), activity) ? "pm disable " : "pm enable ") + batchOptionsItems.getPackageName());
+                                                        result = mRootShell.runAndGetError((sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), activity) ? "pm disable-user --user " : "pm enable --user ") + Utils.getUserID() + " " + batchOptionsItems.getPackageName());
                                                     } else {
-                                                        result = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), activity) ? "pm disable " : "pm enable ") + batchOptionsItems.getPackageName());
+                                                        result = mShizukuShell.runAndGetOutput((sPackageUtils.isEnabled(batchOptionsItems.getPackageName(), activity) ? "pm disable-user --user " : "pm enable --user ") + Utils.getUserID() + " " + batchOptionsItems.getPackageName());
                                                     }
                                                     if (result != null && (!result.contains("new state: disabled") && !result.contains("new state: enabled"))) {
                                                         newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
