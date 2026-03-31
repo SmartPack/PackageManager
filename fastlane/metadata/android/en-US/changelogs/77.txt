@@ -1,0 +1,6 @@
+* Fixed enable/disabe apps.
+* Fixed sorting apps by update time.
+* Improved layouts and UI for latest android.
+* Updated build tools and dependencies.
+* Updated Chinese(s) and Polish translations.
+* Miscellaneous changes.

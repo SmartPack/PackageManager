@@ -2,7 +2,7 @@
 
 <p style="text-align: center"><img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg" alt="" width="250" height="450" /> <img src="https://raw.githubusercontent.com/SmartPack/PackageManager/master/fastlane/metadata/android/en-US/images/phoneScreenshots/7.jpg" alt="" width="250" height="450" /></p>
 
-[![](https://img.shields.io/badge/Package%20Manager-v7.6-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro)
+[![](https://img.shields.io/badge/Package%20Manager-v7.7-green)](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro)
 ![](https://img.shields.io/github/languages/top/SmartPack/PackageManager)
 ![](https://img.shields.io/github/contributors/smartpack/PackageManager)
 ![](https://img.shields.io/github/license/smartpack/PackageManager)
@@ -95,7 +95,7 @@ See all [contributors](https://github.com/SmartPack/PackageManager/graphs/contri
 
 ## License
 
-    Copyright (C) 2020-2025 sunilpaulmathew <sunil.kde@gmail.com>
+    Copyright (C) 2020-2026 sunilpaulmathew <sunil.kde@gmail.com>
 
     Package Manager is a free softwares: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published

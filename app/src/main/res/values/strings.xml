@@ -22,7 +22,7 @@
     <string name="change_logs">Change-logs</string>
     <string name="close">Close</string>
     <string name="copyright">Copyright: © %s</string>
-    <string name="copyright_text" translatable="false">2020–2025 sunilpaulmathew</string>
+    <string name="copyright_text" translatable="false">2020–2026 sunilpaulmathew</string>
     <string name="data_dir">Data Directory</string>
     <string name="date_installation">Installation Dates</string>
     <string name="date_installed">First Installed: %s</string>

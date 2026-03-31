@@ -6,6 +6,14 @@ include_in_footer: true
 
 <h2 style="color: blue">🆕 What's New</h2>
 
+### ✨ 72. [v7.7](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(Mar 31, 2026)*
+- Fixed enable/disabe apps.
+- Fixed sorting apps by update time.
+- Improved layouts and UI for latest android.
+- Updated build tools and dependencies.
+- Updated Chinese(s) and Polish translations.
+- Miscellaneous changes.
+
 ### ✨ 71. [v7.6](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(Oct 28, 2025)*
 - You can now create desktop shortcuts for other apps’ exported activities.
 - Improved Settings screen to better reflect the current status of items after changes.
