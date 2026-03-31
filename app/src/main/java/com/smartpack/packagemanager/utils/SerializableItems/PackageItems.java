@@ -80,7 +80,7 @@ public class PackageItems implements Serializable {
     }
 
     public long getUpdatedTime() {
-        return Objects.requireNonNull(getPackageInfo(getPackageName(), mContext)).firstInstallTime;
+        return Objects.requireNonNull(getPackageInfo(getPackageName(), mContext)).lastUpdateTime;
     }
 
     private static PackageInfo getPackageInfo(String packageName, Context context) {
