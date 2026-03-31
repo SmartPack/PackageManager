@@ -46,7 +46,8 @@
     <string name="result">"结果：%s"</string>
     <string name="share">"分享"</string>
     <string name="shared_by">"%s/自 Package Manager 分享"</string>
-    <string name="share_message">"Package Manager %s 可以前往 Google Play 获取：https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
+    <string name="share_message">"Package Manager %s 可以前往 Google Play 获取：
+        https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
     <string name="share_with">"分享到"</string>
     <string name="sort_by">"排序应用"</string>
     <string name="source_code">"源代码"</string>
@@ -179,4 +180,20 @@
     <string name="status">"状态：%s"</string>
     <string name="turn_on_off_selected_question">"开/关所选应用？"</string>
     <string name="uninstall_selected_question">"卸载所选应用？"</string>
+    <string name="applications">"应用"</string>
+    <string name="split_apk_list_empty">"未选中分割 APK. 正在终止…"</string>
+    <string name="split_apk_select">"选择要安装的分割 APK"</string>
+    <string name="operations_allow_title">"允许"</string>
+    <string name="operations_allow_description">"始终允许此操作"</string>
+    <string name="operations_failed_toast">"未能更改 %s 的状态"</string>
+    <string name="operations_ignore_title">"忽略"</string>
+    <string name="operations_ignore_description">"始终拦截/静默终止操作"</string>
+    <string name="operations_deny_title">"拒绝"</string>
+    <string name="operations_deny_description">"明确拒绝（类似忽略，但可能返回错误）"</string>
+    <string name="operations_default_title">"默认"</string>
+    <string name="operations_default_description">"使用系统的默认行为（基于应用声明的权限和用户授权状态）"</string>
+    <string name="operations_foreground_title">"前台"</string>
+    <string name="operations_foreground_description">"仅当应用在前台时允许（对于定位、麦克风、相机等操作）"</string>
+    <string name="shortcut_create">"创建快捷方式"</string>
+    <string name="shortcut_create_failed_toast">"未能创建快捷方式：%s"</string>
 </resources>

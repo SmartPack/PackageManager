@@ -24,7 +24,7 @@
     <string name="failed">"失敗的"</string>
     <string name="got_it">"知道了"</string>
     <string name="install">"安裝"</string>
-    <string name="installing_bundle">"安裝App Bundle！"</string>
+    <string name="installing_bundle">"安裝中…"</string>
     <string name="language">"語言"</string>
     <string name="language_default">"預設"</string>
     <string name="more_apps">"開發人員提供的更多內容"</string>
@@ -46,7 +46,8 @@
     <string name="result">"結果：％s"</string>
     <string name="share">"分享"</string>
     <string name="shared_by">"％s /透過Package Manager共享"</string>
-    <string name="share_message">"Package Manager ％s 可以從 Google Play 取得： https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
+    <string name="share_message">"Package Manager ％s 可以從 Google Play 取得：
+        https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
     <string name="share_with">"與某人分享"</string>
     <string name="sort_by">"排序應用程式"</string>
     <string name="source_code">"原始碼"</string>
@@ -62,6 +63,7 @@
     <string name="uninstall_warning">"請注意：刪除系統應用程式有時會很危險！
 
         *** <b>自行承擔使用風險</b> ***
+
         "</string>
     <string name="welcome_message">"歡迎使用Package Manager，這是一個簡單但功能強大的應用程式，用於管理您的應用程式。"</string>
     <string name="wrong_extension">"請選擇一個文件％s 副檔名。"</string>
@@ -104,7 +106,7 @@
     <string name="show_apps_all">"全部"</string>
     <string name="show_apps_system">"系統"</string>
     <string name="show_apps_user">"使用者"</string>
-    <string name="exported_apps">"導出的應用"</string>
+    <string name="exported_apps">"匯出的應用"</string>
     <string name="operations">"運作"</string>
     <string name="operations_warning">"更改某些操作將是危險的。請僅在您知道自己在做什麼的情況下才這樣做。此外，請注意某些操作是無法更改的（關閉並返回此頁面以了解新狀態）。"</string>
     <string name="bundle_path">"捆綁路徑"</string>
@@ -113,16 +115,16 @@
     <string name="grant">"給予"</string>
     <string name="select_all">"全選"</string>
     <string name="uninstall_status_failed">"卸載 %s 失敗或被用戶取消"</string>
-    <string name="export_apk_summary">"選定的 APK 導出到“%s”"</string>
+    <string name="export_apk_summary">"選定的 APK 匯出到“%s”"</string>
     <string name="initializing">"正在初始化…"</string>
     <string name="start">"開始"</string>
-    <string name="size">"尺寸"</string>
+    <string name="size">"大小"</string>
     <string name="time_installed">"安裝時間"</string>
     <string name="time_updated">"更新時間"</string>
     <string name="copyright">"版權所有：© %s"</string>
-    <string name="export_details">"出口詳情"</string>
-    <string name="export_details_message">"應用詳細信息導出為 %s"</string>
-    <string name="fdroid">"F-機器人"</string>
+    <string name="export_details">"匯出詳情"</string>
+    <string name="export_details_message">"應用詳細信息匯出為 %s"</string>
+    <string name="fdroid">"F-Droid"</string>
     <string name="more">"更多的"</string>
     <string name="search_market_message">"在 %s 中搜索"</string>
     <string name="apk_installer_description">"單個 APK 文件"</string>
@@ -130,7 +132,7 @@
     <string name="exit_confirmation">"顯示確認"</string>
     <string name="exit_simple">"簡單退出"</string>
     <string name="exiting_app">"在退出應用程序時"</string>
-    <string name="exported_apps_name">"導出的 APK 名稱"</string>
+    <string name="exported_apps_name">"匯出的 APK 名稱"</string>
     <string name="general">"一般的"</string>
     <string name="installer">"安裝程序"</string>
     <string name="installer_clicking">"單擊安裝程序時"</string>
@@ -152,4 +154,46 @@
     <string name="sdk_compile">"編譯 SDK: %s"</string>
     <string name="sdk_minimum">"最低 SDK：%s"</string>
     <string name="update">"更新"</string>
+    <string name="disable_failed_message">"更改組件 %s 的狀態失敗。"</string>
+    <string name="never_show">"永遠不要出現"</string>
+    <string name="request">"要求"</string>
+    <string name="shizuku_integration_message">"Package Manager现在可以与 Shizuku 执行高级任务。 如果您想要继续进行 Shizuku 集成，请通过点击以下提供的按钮（一次性）授予许可。"</string>
+    <string name="feature_unavailable_message">"此功能需要 Root 權限或 Shizuku 支援。"</string>
+    <string name="failed_decode_xml">"解碼 %s 失敗"</string>
+    <string name="batch_processing_failed_title">"此過程失敗，原因是："</string>
+    <string name="batch_processing_success_message">"所選流程已成功完成…"</string>
+    <string name="delete_selected">"删除所选内容"</string>
+    <string name="exploring">"搜索中…"</string>
+    <string name="export_details_selected_question">"导出所选应用程序的详细信息？"</string>
+    <string name="export_message_summary">"选定的应用程序被导出为 “%s”。"</string>
+    <string name="export_selected">"导出所选"</string>
+    <string name="export_selected_question">"导出选定的应用程序"</string>
+    <string name="export_success_message">"所选项目已导出。
+
+        路径: %s"</string>
+    <string name="ignored">"被忽视"</string>
+    <string name="permission_granted_write_storage">"已授予存储访问权限！ 再次点击按钮即可开始。"</string>
+    <string name="purchase_pro">"购买专业版"</string>
+    <string name="purchase_pro_acknowledgement">"谢谢 \u2665 您已经通过使用专业版来支持我们了。"</string>
+    <string name="reset_selected_question">"重置选定的应用程序？"</string>
+    <string name="restore_selected">"恢復所選內容"</string>
+    <string name="status">"狀態：%s"</string>
+    <string name="turn_on_off_selected_question">"開啟/關閉選定的應用程式？"</string>
+    <string name="uninstall_selected_question">"卸載選定的應用程式？"</string>
+    <string name="applications">"應用程式"</string>
+    <string name="split_apk_list_empty">"未選擇任何拆分 APK。正在中止…"</string>
+    <string name="split_apk_select">"選擇要安裝的分割 APK 文件"</string>
+    <string name="operations_allow_title">"允許"</string>
+    <string name="operations_allow_description">"始終允許此操作"</string>
+    <string name="operations_failed_toast">"更改 %s 的狀態失敗"</string>
+    <string name="operations_ignore_title">"忽略"</string>
+    <string name="operations_ignore_description">"始終阻止/靜默放棄操作"</string>
+    <string name="operations_deny_title">"否定"</string>
+    <string name="operations_deny_description">"明確拒絕（類似於忽略，但可能會回傳錯誤）"</string>
+    <string name="operations_default_title">"預設"</string>
+    <string name="operations_default_description">"使用系統預設行為（基於應用程式聲明的權限和使用者授權狀態）"</string>
+    <string name="operations_foreground_title">"前景"</string>
+    <string name="operations_foreground_description">"僅當應用程式在前台運行時才允許（用於位置、麥克風、攝影機等操作）"</string>
+    <string name="shortcut_create">"建立快捷方式"</string>
+    <string name="shortcut_create_failed_toast">"建立快捷方式失敗：%s"</string>
 </resources>

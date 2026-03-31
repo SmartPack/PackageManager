@@ -60,8 +60,8 @@
     <string name="uninstall_title">"Czy na pewno odinstalować %s?"</string>
     <string name="uninstall_warning">"Uwaga: Odinstalowywanie aplikacji systemowych może być czasami niebezpieczne
 
-        *** <b>ROBISZ TO NA WŁASNE RYZYKO</b> ***"
-    </string>
+        *** <b>ROBISZ TO NA WŁASNE RYZYKO</b> ***
+        "</string>
     <string name="welcome_message">"Witaj w Package Manager, prostej, ale potężnej aplikacji do zarządzania Twoimi aplikacjami."</string>
     <string name="wrong_extension">"Wybierz plik z rozszerzeniem %s."</string>
     <string name="yes">"Tak"</string>
@@ -157,4 +157,40 @@
     <string name="shizuku_integration_message">"Menedżer pakietów może teraz integrować się z interfejsem API Shizuku w celu wykonywania zaawansowanych zadań. Jeśli chcesz skorzystać z integracji z Shizuku, przyznaj uprawnienie (jednorazowo), naciskając poniższy przycisk."</string>
     <string name="feature_unavailable_message">"Ta funkcja wymaga dostępu do roota lub Shizuku"</string>
     <string name="failed_decode_xml">"Nie udało się zdekodować %s"</string>
+    <string name="batch_processing_failed_title">"Ten proces nie powiódł się dla:"</string>
+    <string name="batch_processing_success_message">"Wybrany proces został ukończony…"</string>
+    <string name="delete_selected">"Usuń wybrane"</string>
+    <string name="exploring">"Odkrywanie…"</string>
+    <string name="export_details_selected_question">"Czy wyeksportować szczegóły wybranych aplikacji?"</string>
+    <string name="export_message_summary">"Wybrane aplikacje są eksportowane do „%s”"</string>
+    <string name="export_selected">"Eksportuj wybrane"</string>
+    <string name="export_selected_question">"Czy wyeksportować wybrane aplikacje?"</string>
+    <string name="export_success_message">"Wybrane elementy zostały wyeksportowane.
+
+        Ścieżka: %s"</string>
+    <string name="ignored">"Zignorowane"</string>
+    <string name="permission_granted_write_storage">"Przyznano dostęp do pamięci! Naciśnij przycisk ponownie, aby rozpocząć."</string>
+    <string name="purchase_pro">"Kup Pro"</string>
+    <string name="purchase_pro_acknowledgement">"Dziękujemy \u2665 Już nas wspierasz, używając wersji Pro."</string>
+    <string name="reset_selected_question">"Czy zresetować wybrane aplikacje?"</string>
+    <string name="restore_selected">"Przywróć wybrane"</string>
+    <string name="status">"Status: %s"</string>
+    <string name="turn_on_off_selected_question">"Czy włączyć/wyłączyć wybrane aplikacje?"</string>
+    <string name="uninstall_selected_question">"Czy odinstalować wybrane aplikacje?"</string>
+    <string name="applications">"Aplikacje"</string>
+    <string name="split_apk_list_empty">"Nie wybrano podzielonych APK. Przerywanie…"</string>
+    <string name="split_apk_select">"Wybierz podzielone APK do zainstalowania"</string>
+    <string name="operations_allow_title">"Zezwalaj"</string>
+    <string name="operations_allow_description">"Zawsze zezwalaj na tę operację"</string>
+    <string name="operations_failed_toast">"Nie udało się zmienić statusu %s"</string>
+    <string name="operations_ignore_title">"Ignoruj"</string>
+    <string name="operations_ignore_description">"Zawsze blokuj/po cichu porzucaj operację"</string>
+    <string name="operations_deny_title">"Odrzucaj"</string>
+    <string name="operations_deny_description">"Jawnie odrzucaj (jak ignoruj, ale może zwrócić błąd)"</string>
+    <string name="operations_default_title">"Domyślne"</string>
+    <string name="operations_default_description">"Używaj domyślnego zachowania systemu (na podstawie zadeklarowanego uprawnienia aplikacji i stanu przyznania uprawnień przez użytkownika)"</string>
+    <string name="operations_foreground_title">"Na pierwszym planie"</string>
+    <string name="operations_foreground_description">"Zezwalaj tylko wtedy, gdy aplikacja jest na pierwszym planie (dla operacji takich, jak lokalizacja, mikrofon, aparat)"</string>
+    <string name="shortcut_create">"Utwórz skrót"</string>
+    <string name="shortcut_create_failed_toast">"Nie udało się utworzyć skrótu: %s"</string>
 </resources>
