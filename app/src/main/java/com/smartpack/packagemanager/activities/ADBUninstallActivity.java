@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -32,7 +31,7 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 28, 2021
  */
-public class ADBUninstallActivity extends AppCompatActivity {
+public class ADBUninstallActivity extends BaseActivity {
 
     public static final String PACKAGE_INTENT = "package";
 
@@ -40,7 +39,7 @@ public class ADBUninstallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adb_uninstall);
+        setContentViewWithInsets(R.layout.activity_adb_uninstall, R.id.layout_root);
 
         MaterialButton mUninstallButton = findViewById(R.id.uninstall_button);
         MaterialButton mDocumentation = findViewById(R.id.documentation);

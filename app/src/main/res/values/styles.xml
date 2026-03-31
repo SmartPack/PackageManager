@@ -1,5 +1,5 @@
 <resources>
-    <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/colorBlack</item>
     </style>

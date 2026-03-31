@@ -15,7 +15,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.android.material.button.MaterialButton;
@@ -33,7 +32,7 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-public class ImageViewActivity extends AppCompatActivity {
+public class ImageViewActivity extends BaseActivity {
 
     public static final String APP_NAME_INTENT = "app_name", PACKAGE_INTENT = "package", PATH_INTENT = "path";
 
@@ -41,7 +40,7 @@ public class ImageViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imageview);
+        setContentViewWithInsets(R.layout.activity_imageview, R.id.layout_root);
 
         AppCompatImageView mImage = findViewById(R.id.image);
         MaterialButton mExport = findViewById(R.id.export);

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -48,4 +50,4 @@
             android:layout_gravity="center"
             android:padding="10dp" />
     </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

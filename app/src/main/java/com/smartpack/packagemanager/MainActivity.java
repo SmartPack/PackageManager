@@ -13,11 +13,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -50,8 +54,23 @@ public class MainActivity extends AppCompatActivity {
         sThemeUtils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
+        View mRootView = findViewById(R.id.layout_root);
+        View mLayoutContainer = findViewById(R.id.layout_container);
         BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
         FloatingActionButton mFAB = findViewById(R.id.fab);
+
+        ViewCompat.setOnApplyWindowInsetsListener(mRootView, (view, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            view.setPadding(
+                    0,
+                    systemBars.top,
+                    0,
+                    0
+            );
+
+            return insets;
+        });
 
         // Record crashes
         sCrashReporter crashReporter = new sCrashReporter(this);
@@ -86,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
         );
+
+        mBottomNav.post(() -> mLayoutContainer.setPadding(0, 0, 0, mBottomNav.getHeight()));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

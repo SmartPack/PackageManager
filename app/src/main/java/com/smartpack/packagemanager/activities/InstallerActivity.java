@@ -19,7 +19,6 @@ import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.widget.ContentLoadingProgressBar;
 
@@ -40,7 +39,7 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 06, 2021
  */
-public class InstallerActivity extends AppCompatActivity {
+public class InstallerActivity extends BaseActivity {
 
     private AppCompatImageButton mIcon;
     private MaterialButton mClose, mOpen;
@@ -57,7 +56,7 @@ public class InstallerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_installer);
+        setContentViewWithInsets(R.layout.activity_installer, R.id.layout_root);
 
         mIcon = findViewById(R.id.icon);
         mProgress = findViewById(R.id.progress);

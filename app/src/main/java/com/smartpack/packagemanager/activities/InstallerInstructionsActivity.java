@@ -16,7 +16,6 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -31,12 +30,12 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 12, 2021
  */
-public class InstallerInstructionsActivity extends AppCompatActivity {
+public class InstallerInstructionsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_installer_instructions);
+        setContentViewWithInsets(R.layout.activity_installer_instructions, R.id.layout_root);
 
         MaterialButton mAdd = findViewById(R.id.add_button);
         SwitchMaterial mHideSwitch = findViewById(R.id.hide_switch);

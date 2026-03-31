@@ -12,7 +12,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -41,7 +40,7 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on September 22, 2020
  */
-public class PackageDetailsActivity extends AppCompatActivity {
+public class PackageDetailsActivity extends BaseActivity {
 
     public static final String APP_NAME_INTENT = "app_name", SYSTEM_APP = "systemApp", LAUNCHER_INTENT = "launcher", PACKAGE_NAME_INTENT = "package_name", APK_PICKED = "apk_picked";
 
@@ -49,7 +48,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_packagedetails);
+        setContentViewWithInsets(R.layout.activity_packagedetails, R.id.layout_root);
 
         AppCompatImageView mAppIcon = findViewById(R.id.app_image);
         MaterialTextView mAppName = findViewById(R.id.app_title);

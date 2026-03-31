@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,7 +43,7 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 16, 2020
  */
-public class PackageExploreActivity extends AppCompatActivity {
+public class PackageExploreActivity extends BaseActivity {
 
     private MaterialTextView mError, mTitle;
     private ProgressBar mProgressBar;
@@ -57,7 +56,7 @@ public class PackageExploreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_package_explorer);
+        setContentViewWithInsets(R.layout.activity_package_explorer, R.id.layout_root);
 
         MaterialButton mBack = findViewById(R.id.back);
         MaterialButton mSortButton = findViewById(R.id.sort);

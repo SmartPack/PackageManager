@@ -17,7 +17,6 @@ import android.view.View;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.documentfile.provider.DocumentFile;
@@ -57,7 +56,7 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 26, 2022
  */
-public class APKPickerActivity extends AppCompatActivity {
+public class APKPickerActivity extends BaseActivity {
 
     private APKParser mAPKParser;
     private AppCompatImageView mAppIcon;
@@ -74,7 +73,7 @@ public class APKPickerActivity extends AppCompatActivity {
         // Initialize App Theme
         sThemeUtils.initializeAppTheme(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apkpicker);
+        setContentViewWithInsets(R.layout.activity_apkpicker, R.id.layout_root);
 
         mAppIcon = findViewById(R.id.app_image);
         mAppName = findViewById(R.id.app_title);

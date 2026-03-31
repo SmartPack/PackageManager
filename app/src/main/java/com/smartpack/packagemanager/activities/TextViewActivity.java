@@ -14,7 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,7 +32,7 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
-public class TextViewActivity extends AppCompatActivity {
+public class TextViewActivity extends BaseActivity {
 
     public static final String PACKAGE_INTENT = "package", PATH_INTENT = "path";
     private String mPackageName, mPath;
@@ -42,7 +41,7 @@ public class TextViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_textview);
+        setContentViewWithInsets(R.layout.activity_textview, R.id.layout_root);
 
         MaterialButton mExport = findViewById(R.id.export);
         MaterialTextView mTitle = findViewById(R.id.title);
