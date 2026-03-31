@@ -14,11 +14,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.fragments.ActivitiesFragment;
 import com.smartpack.packagemanager.fragments.AppOpsFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
@@ -34,7 +36,6 @@ import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import java.io.File;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
 /*
@@ -54,7 +55,7 @@ public class PackageDetailsActivity extends AppCompatActivity {
         MaterialTextView mAppName = findViewById(R.id.app_title);
         MaterialTextView mVersion = findViewById(R.id.version_text);
         TabLayout mTabLayout = findViewById(R.id.tab_Layout);
-        ViewPager mViewPager = findViewById(R.id.view_pager);
+        ViewPager2 mViewPager = findViewById(R.id.view_pager);
 
         String packageName = getIntent().getStringExtra(PACKAGE_NAME_INTENT);
         String appName = getIntent().getStringExtra(APP_NAME_INTENT);
@@ -66,24 +67,26 @@ public class PackageDetailsActivity extends AppCompatActivity {
         mAppName.setText(appName);
         mVersion.setText(getString(R.string.version, sAPKUtils.getVersionName(sPackageUtils.getSourceDir(packageName, this), this)));
 
-        sPagerAdapter adapter = new sPagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(PackageInfoFragment.newInstance(appName, packageName, systemApp, launchable), getString(R.string.app_info));
+        PagerAdapter adapter = new PagerAdapter(this);
+        adapter.addFragment(PackageInfoFragment.newInstance(appName, packageName, systemApp, launchable), getString(R.string.app_info));
         if (new File(sPackageUtils.getSourceDir(packageName, this)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageName, this)).size() > 1) {
-            adapter.AddFragment(SplitApksFragment.newInstance(packageName), getString(R.string.split_apk));
+            adapter.addFragment(SplitApksFragment.newInstance(packageName), getString(R.string.split_apk));
         }
         if (!PackageDetails.getPermissions(packageName, this).isEmpty()) {
-            adapter.AddFragment(PermissionsFragment.newInstance(packageName, apkPicked), getString(R.string.permissions));
+            adapter.addFragment(PermissionsFragment.newInstance(packageName, apkPicked), getString(R.string.permissions));
         }
         if ((new RootShell().rootAccess() || new ShizukuShell().isReady()) && !AppOps.getOps(packageName).isEmpty()) {
-            adapter.AddFragment(AppOpsFragment.newInstance(packageName), getString(R.string.operations));
+            adapter.addFragment(AppOpsFragment.newInstance(packageName), getString(R.string.operations));
         }
         if (!PackageDetails.getActivities(packageName, this).isEmpty()) {
-            adapter.AddFragment(ActivitiesFragment.newInstance(packageName), getString(R.string.activities));
+            adapter.addFragment(ActivitiesFragment.newInstance(packageName), getString(R.string.activities));
         }
-        adapter.AddFragment(ManifestFragment.newInstance(packageName, apkPicked), getString(R.string.manifest));
+        adapter.addFragment(ManifestFragment.newInstance(packageName, apkPicked), getString(R.string.manifest));
 
         mViewPager.setAdapter(adapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+        new TabLayoutMediator(mTabLayout, mViewPager,
+                (tab, position) -> tab.setText(adapter.getPageTitle(position))
+        ).attach();
     }
 
 }

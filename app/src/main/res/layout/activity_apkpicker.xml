@@ -7,7 +7,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone" >
 
@@ -62,9 +62,9 @@
             android:textAlignment="center"
             android:id="@+id/tab_Layout" />
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/view_pager" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 

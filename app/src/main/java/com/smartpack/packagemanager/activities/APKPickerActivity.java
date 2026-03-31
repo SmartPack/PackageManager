@@ -21,13 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.documentfile.provider.DocumentFile;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.apk.axml.APKParser;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.fragments.APKDetailsFragment;
@@ -46,7 +48,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.Adapters.sPagerAdapter;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
@@ -65,7 +66,7 @@ public class APKPickerActivity extends AppCompatActivity {
     private MaterialTextView mAppName, mPackageID;
     private String mAPKPath = null, mFileName = null;
     private TabLayout mTabLayout;
-    private ViewPager mViewPager;
+    private ViewPager2 mViewPager;
     public static final String NAME_INTENT = "name", PATH_INTENT = "path";
 
     @Override
@@ -123,7 +124,7 @@ public class APKPickerActivity extends AppCompatActivity {
                 if (uri != null) {
                     mFileName = Objects.requireNonNull(DocumentFile.fromSingleUri(activity, uri)).getName();
                     if (Objects.requireNonNull(mFileName).endsWith(".apk")) {
-                        sFileUtils.delete(getExternalFilesDir("APK"));
+                        sFileUtils.delete(Objects.requireNonNull(getExternalFilesDir("APK")));
                         File tmpFile = new File(getExternalFilesDir("APK"), Objects.requireNonNull(mFileName));
                         tmpFile.deleteOnExit();
                         mAPKPath = tmpFile.getAbsolutePath();
@@ -169,7 +170,7 @@ public class APKPickerActivity extends AppCompatActivity {
     }
 
     private void loadAPKDetails(Activity activity) {
-        sPagerAdapter adapter = new sPagerAdapter(getSupportFragmentManager());
+        PagerAdapter adapter = new PagerAdapter(this);
         if (sPackageUtils.isPackageInstalled(mAPKParser.getPackageName(), activity)) {
             mAppIcon.setImageDrawable(sPackageUtils.getAppIcon(mAPKParser.getPackageName(), activity));
             mAppName.setText(sPackageUtils.getAppName(mAPKParser.getPackageName(), activity));
@@ -191,19 +192,22 @@ public class APKPickerActivity extends AppCompatActivity {
             mInstall.setText(getString(R.string.update));
         }
 
-        adapter.AddFragment(new APKDetailsFragment(), getString(R.string.app_info));
+        adapter.addFragment(new APKDetailsFragment(), getString(R.string.app_info));
         if (mAPKParser.getPermissions() != null) {
-            adapter.AddFragment(PermissionsFragment.newInstance(mAPKParser.getPackageName(), true), getString(R.string.permissions));
+            adapter.addFragment(PermissionsFragment.newInstance(mAPKParser.getPackageName(), true), getString(R.string.permissions));
         }
         if (mAPKParser.getManifest() != null) {
-            adapter.AddFragment(ManifestFragment.newInstance(mAPKParser.getPackageName(), true), getString(R.string.manifest));
+            adapter.addFragment(ManifestFragment.newInstance(mAPKParser.getPackageName(), true), getString(R.string.manifest));
         }
         if (mAPKParser.getCertificate() != null) {
-            adapter.AddFragment(new CertificateFragment(), getString(R.string.certificate));
+            adapter.addFragment(new CertificateFragment(), getString(R.string.certificate));
         }
 
         mViewPager.setAdapter(adapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+        new TabLayoutMediator(mTabLayout, mViewPager,
+                (tab, position) -> tab.setText(adapter.getPageTitle(position))
+        ).attach();
+
         mMainLayout.setVisibility(View.VISIBLE);
         mIconsLayout.setVisibility(View.VISIBLE);
 
