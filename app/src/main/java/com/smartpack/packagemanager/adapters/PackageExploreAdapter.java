@@ -60,6 +60,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
     public void onBindViewHolder(@NonNull PackageExploreAdapter.ViewHolder holder, int position) {
         if (position == 0) {
             holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_dots_horizontal, holder.mIcon.getContext()));
+            holder.mIcon.setBackground(null);
             holder.mTitle.setText(null);
             holder.mSize.setVisibility(GONE);
             holder.mExport.setVisibility(GONE);

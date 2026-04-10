@@ -77,7 +77,7 @@ public class SplitApksFragment extends Fragment {
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        SplitAPKsAdapter mRecycleViewAdapter = new SplitAPKsAdapter(SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(mPackageName, requireActivity())), mBatchList, mPackageName, requireActivity());
+        SplitAPKsAdapter mRecycleViewAdapter = new SplitAPKsAdapter(SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(mPackageName, requireActivity())), mBatchList, mPackageName, mBatch, requireActivity());
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mBatch.setOnClickListener(v ->

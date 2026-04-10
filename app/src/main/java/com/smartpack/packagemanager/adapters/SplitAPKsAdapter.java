@@ -42,15 +42,15 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
 
     private final Activity activity;
     private final List<String> data, batchList;
+    private final MaterialButton batchButton;
     private final String packageName;
-    private static boolean batch = false;
 
-    public SplitAPKsAdapter(List<String> data, List<String> batchList, String packageName, Activity activity) {
+    public SplitAPKsAdapter(List<String> data, List<String> batchList, String packageName, MaterialButton batchButton, Activity activity) {
         this.data = data;
         this.batchList = batchList;
         this.packageName = packageName;
+        this.batchButton = batchButton;
         this.activity = activity;
-        batch = !batchList.isEmpty();
     }
 
     @NonNull
@@ -71,22 +71,30 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(packageName, holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         }
-
-        holder.mExport.setVisibility(batch ? GONE : VISIBLE);
-        holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
-
         holder.mCheckBox.setChecked(batchList.contains(data.get(position)));
 
-        activity.findViewById(R.id.batch).setVisibility(batchList.isEmpty() ? GONE : VISIBLE);
-
-        holder.mCheckBox.setOnClickListener(v -> {
-            if (batchList.contains(data.get(position))) {
-                batchList.remove(data.get(position));
+        if (batchList.isEmpty()) {
+            batchButton.setVisibility(GONE);
+        } else {
+            if (batchList.contains(this.data.get(position))) {
+                holder.mCheckBox.setVisibility(VISIBLE);
+                holder.mIcon.setVisibility(GONE);
             } else {
-                batchList.add(data.get(position));
+                holder.mCheckBox.setVisibility(GONE);
+                holder.mIcon.setVisibility(VISIBLE);
             }
+            batchButton.setVisibility(VISIBLE);
+        }
+
+        holder.mIcon.setOnClickListener(v -> v.post(() -> {
+            batchList.add(this.data.get(position));
             notifyItemChanged(position);
-        });
+        }));
+
+        holder.mCheckBox.setOnClickListener(v -> v.post(() -> {
+            batchList.remove(this.data.get(position));
+            notifyItemChanged(position);
+        }));
 
         holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
                 .setIcon(R.mipmap.ic_launcher)
@@ -123,28 +131,13 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
             this.mSize = view.findViewById(R.id.size);
 
             view.setOnClickListener(v -> {
-                if (batch) {
-                    String name = data.get(getBindingAdapterPosition());
-                    if (batchList.contains(name)) {
+                String name = data.get(getBindingAdapterPosition());
+                if (batchList.contains(name)) {
+                    view.post(() -> {
                         batchList.remove(name);
-                    } else {
-                        batchList.add(name);
-                    }
-                    notifyItemRangeChanged(0, getItemCount());
+                        notifyItemChanged(getBindingAdapterPosition());
+                    });
                 }
-            });
-
-            view.setOnLongClickListener(v -> {
-                if (batch) {
-                    batchList.clear();
-                    batch = false;
-                } else {
-                    batch = true;
-                    batchList.add(data.get(getBindingAdapterPosition()));
-                }
-                activity.findViewById(R.id.batch).setVisibility(batchList.isEmpty() ? GONE : VISIBLE);
-                notifyItemRangeChanged(0, getItemCount());
-                return true;
             });
         }
     }

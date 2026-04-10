@@ -257,7 +257,7 @@ public class ExportedAppsFragment extends Fragment {
 
             @Override
             public void doInBackground() {
-                File[] oldList = requireActivity().getExternalFilesDir("").listFiles();
+                File[] oldList = Objects.requireNonNull(requireActivity().getExternalFilesDir("")).listFiles();
                 PackageData.makePackageFolder(requireActivity());
                 for (File files : Objects.requireNonNull(oldList)) {
                     if (files.isFile() && (files.getName().endsWith(".apk") || files.getName().endsWith(".apkm"))) {
@@ -265,7 +265,7 @@ public class ExportedAppsFragment extends Fragment {
                         sFileUtils.delete(files);
                     }
                 }
-                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(searchTxt, requireActivity()), mBatchList, installApp::launch, requireActivity());
+                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(searchTxt, requireActivity()), mBatchList, mBatch, installApp::launch, requireActivity());
             }
 
             @SuppressLint("StringFormatInvalid")

@@ -170,7 +170,7 @@ public class UninstalledAppsFragment extends Fragment {
             @Override
             public void doInBackground() {
                 mData = getData(searchTxt, requireActivity());
-                mRecycleViewAdapter = new UninstalledAppsAdapter(mData, mRestoreList, requireActivity());
+                mRecycleViewAdapter = new UninstalledAppsAdapter(mData, mRestoreList, mBatch);
             }
 
             @SuppressLint("StringFormatInvalid")

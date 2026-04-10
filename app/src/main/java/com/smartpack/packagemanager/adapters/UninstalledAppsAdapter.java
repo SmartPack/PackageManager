@@ -12,7 +12,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,18 +42,16 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
  */
 public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledAppsAdapter.ViewHolder> {
 
-    private final Activity activity;
     private final List<PackageItems> data;
     private final List<String> restoreList;
-    private static boolean batch = false;
+    private final MaterialButton batchButton;
     private static final RootShell mRootShell = new RootShell();
     private static final ShizukuShell mShizukuShell = new ShizukuShell();
 
-    public UninstalledAppsAdapter(List<PackageItems> data, List<String> restoreList, Activity activity) {
+    public UninstalledAppsAdapter(List<PackageItems> data, List<String> restoreList, MaterialButton batchButton) {
         this.data = data;
         this.restoreList = restoreList;
-        this.activity = activity;
-        batch = !restoreList.isEmpty();
+        this.batchButton = batchButton;
     }
 
     @NonNull
@@ -71,6 +68,27 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         holder.mAppName.setText(data.get(position).getAppName());
         holder.mAppID.setText(data.get(position).getPackageName());
         holder.mRestore.setIcon(sCommonUtils.getDrawable(R.drawable.ic_restore, holder.mRestore.getContext()));
+        holder.mRestore.setVisibility(VISIBLE);
+        holder.mCheckBox.setChecked(restoreList.contains(data.get(position).getPackageName()));
+
+        if (restoreList.isEmpty()) {
+            batchButton.setVisibility(GONE);
+        } else {
+            if (restoreList.contains(this.data.get(position).getPackageName())) {
+                holder.mCheckBox.setVisibility(VISIBLE);
+                holder.mAppIcon.setVisibility(GONE);
+            } else {
+                holder.mCheckBox.setVisibility(GONE);
+                holder.mAppIcon.setVisibility(VISIBLE);
+            }
+            batchButton.setVisibility(VISIBLE);
+        }
+
+        holder.mAppIcon.setOnClickListener(v -> v.post(() -> {
+            restoreList.add(this.data.get(position).getPackageName());
+            notifyItemChanged(position);
+        }));
+
         holder.mRestore.setOnClickListener(v -> {
             if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
                 sCommonUtils.toast(v.getContext().getString(R.string.feature_unavailable_message), v.getContext()).show();
@@ -85,20 +103,11 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
                                     restore(position, holder.mRestore.getContext()).execute()).show();
                 }
         );
-        holder.mRestore.setVisibility(batch ? GONE : VISIBLE);
-        holder.mCheckBox.setVisibility(batch ? VISIBLE : GONE);
-        holder.mCheckBox.setChecked(restoreList.contains(data.get(position).getPackageName()));
 
-        activity.findViewById(R.id.batch).setVisibility(restoreList.isEmpty() ? GONE : VISIBLE);
-
-        holder.mCheckBox.setOnClickListener(v -> {
-            if (restoreList.contains(data.get(position).getPackageName())) {
-                restoreList.remove(data.get(position).getPackageName());
-            } else {
-                restoreList.add(data.get(position).getPackageName());
-            }
+        holder.mCheckBox.setOnClickListener(v -> v.post(() -> {
+            restoreList.remove(this.data.get(position).getPackageName());
             notifyItemChanged(position);
-        });
+        }));
 
         AppSettings.setSlideInAnimation(holder.mAppIcon, position);
     }
@@ -161,34 +170,19 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
             this.mAppName = view.findViewById(R.id.title);
             this.mAppID = view.findViewById(R.id.description);
             this.mCheckBox = view.findViewById(R.id.checkbox);
-
-            view.setOnLongClickListener(v -> {
-                if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
-                    return true;
-                }
-                if (batch) {
-                    restoreList.clear();
-                    batch = false;
-                } else {
-                    batch = true;
-                    restoreList.add(data.get(getBindingAdapterPosition()).getPackageName());
-                }
-                activity.findViewById(R.id.batch).setVisibility(restoreList.isEmpty() ? GONE : VISIBLE);
-                notifyItemRangeChanged(0, getItemCount());
-                return true;
-            });
         }
 
         @Override
         public void onClick(View view) {
-            if (batch) {
-                String packageName = data.get(getBindingAdapterPosition()).getPackageName();
-                if (restoreList.contains(packageName)) {
-                    restoreList.remove(packageName);
-                } else {
-                    restoreList.add(packageName);
-                }
-                notifyItemRangeChanged(0, getItemCount());
+            if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
+                return;
+            }
+
+            if (restoreList.contains(data.get(getBindingAdapterPosition()).getPackageName())) {
+                view.post(() -> {
+                    restoreList.remove(data.get(getBindingAdapterPosition()).getPackageName());
+                    notifyItemChanged(getBindingAdapterPosition());
+                });
             }
         }
     }
