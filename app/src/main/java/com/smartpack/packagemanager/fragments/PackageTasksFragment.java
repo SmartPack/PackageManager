@@ -644,7 +644,6 @@ public class PackageTasksFragment extends Fragment {
                                                     } else {
                                                         mShizukuShell.runCommand("pm clear " + batchOptionsItems.getPackageName());
                                                     }
-                                                    newData.add(new BatchOptionsItems(batchOptionsItems.getName(), batchOptionsItems.getPackageName(), batchOptionsItems.getIcon(), false, 1));
                                                 }
                                                 mEmpty = false;
                                             }
