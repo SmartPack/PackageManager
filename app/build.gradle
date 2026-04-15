@@ -73,9 +73,10 @@ android {
 dependencies {
     implementation libs.axml
 
+    implementation libs.documentfile
+
     implementation libs.crashreporter
     implementation libs.credits
-    implementation libs.documentfile
     implementation libs.installerutils
     implementation libs.permissionutils
     implementation libs.themeutils
