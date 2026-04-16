@@ -6,6 +6,13 @@ include_in_footer: true
 
 <h2 style="color: blue">🆕 What's New</h2>
 
+### ✨ 73. [v7.8](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(April 16, 2026)*
+- Enhanced Batch Reset logic.
+- New modern Dashboard UI design.
+- Improved batch options, now initiated by taping icons.
+- Dependency updates and miscellaneous performance tweaks.
+- Miscellaneous changes.
+
 ### ✨ 72. [v7.7](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(Mar 31, 2026)*
 - Fixed enable/disabe apps.
 - Fixed sorting apps by update time.

@@ -1,0 +1,5 @@
+* Enhanced Batch Reset logic.
+* New modern Dashboard UI design.
+* Improved batch options, now initiated by taping icons.
+* Dependency updates and miscellaneous performance tweaks.
+* Miscellaneous changes.
