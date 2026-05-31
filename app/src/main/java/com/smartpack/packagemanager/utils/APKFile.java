@@ -23,6 +23,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -53,7 +54,7 @@ public class APKFile extends File {
                 fileSize = sAPKUtils.getAPKSize(length());
                 if (packageInfo != null) {
                     ApplicationInfo ai = packageInfo.applicationInfo;
-                    ai.sourceDir = getAbsolutePath();
+                    Objects.requireNonNull(ai).sourceDir = getAbsolutePath();
                     ai.publicSourceDir = getAbsolutePath();
                     drawable = packageInfo.applicationInfo.loadIcon(pm);
                     pkgName = packageInfo.applicationInfo.packageName;

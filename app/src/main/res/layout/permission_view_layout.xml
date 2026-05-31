@@ -12,32 +12,23 @@
         android:id="@+id/permission_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:textColor="?attr/colorPrimary"
+        android:layout_marginHorizontal="10dp"
         android:gravity="center_vertical"
-        android:layout_marginEnd="10dp"
+        android:textStyle="bold|italic"
         android:clickable="false"
-        android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:padding="15dp" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/grant_card"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/grant"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:strokeColor="?attr/colorPrimary"
+        app:icon="@drawable/ic_select"
         android:layout_margin="15dp"
         android:layout_gravity="end"
-        app:cardCornerRadius="15dp" >
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimary"
-            android:text="@string/grant"
-            android:clickable="false"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:padding="10dp" />
-    </com.google.android.material.card.MaterialCardView>
+        android:text="@string/grant"
+        android:textStyle="bold"
+        android:textSize="20sp" />
 </LinearLayout>

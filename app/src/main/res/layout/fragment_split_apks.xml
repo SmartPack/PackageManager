@@ -8,17 +8,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/batch"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?attr/materialIconButtonFilledTonalStyle"
-        android:textColor="?attr/colorPrimary"
-        android:text="@string/export_selected"
         android:layout_gravity="bottom|end"
+        android:text="@string/export_selected"
         android:layout_marginBottom="50dp"
-        app:iconTint="?attr/colorPrimary"
         android:layout_marginEnd="50dp"
         app:icon="@drawable/ic_select"
         android:visibility="gone"
-        android:textSize="17sp"
-        app:iconPadding="10sp" />
+        android:textSize="17sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

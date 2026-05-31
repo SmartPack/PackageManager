@@ -33,7 +33,7 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class ADBUninstallActivity extends BaseActivity {
 
-    public static final String PACKAGE_INTENT = "package";
+    public static final String NAME_INTENT = "name", PACKAGE_INTENT = "package";
 
     @SuppressLint({"StringFormatInvalid", "SetTextI18n"})
     @Override
@@ -50,12 +50,13 @@ public class ADBUninstallActivity extends BaseActivity {
         MaterialTextView mADBCommand = findViewById(R.id.adb_command);
         MaterialTextView mUninstallUpdates = findViewById(R.id.uninstall_updates);
 
+        String appName = getIntent().getStringExtra(NAME_INTENT);
         String packageName = getIntent().getStringExtra(PACKAGE_INTENT);
 
-        mMainMessage.setText(getString(R.string.uninstall_adb_summary, packageName));
+        mMainMessage.setText(getString(R.string.uninstall_adb_summary, appName));
         mADBCommand.setText("adb shell pm uninstall -k --user 0 " + packageName);
         if (sPackageUtils.isUpdatedSystemApp(packageName, this)) {
-            mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, packageName));
+            mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, appName));
             mUninstall.setVisibility(View.VISIBLE);
         }
 

@@ -38,7 +38,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
@@ -112,7 +111,7 @@ public class ExportedAppsFragment extends Fragment {
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
             LinearLayout mPermissionLayout = mRootView.findViewById(R.id.permission_layout);
-            MaterialCardView mPermissionGrant = mRootView.findViewById(R.id.grant_card);
+            MaterialButton mPermissionGrant = mRootView.findViewById(R.id.grant);
             MaterialTextView mPermissionText = mRootView.findViewById(R.id.permission_text);
             mPermissionText.setText(getString(R.string.permission_denied_write_storage));
             mPermissionLayout.setVisibility(VISIBLE);

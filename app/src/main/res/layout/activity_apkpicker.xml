@@ -74,34 +74,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
+        android:paddingHorizontal="15dp"
         android:orientation="horizontal"
-        android:layout_margin="15sp"
+        android:paddingVertical="10dp"
         android:visibility="gone"
         android:gravity="center" >
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?attr/materialIconButtonFilledTonalStyle"
             android:text="@string/cancel"
-            android:layout_marginEnd="10dp"
             app:icon="@drawable/ic_cancel"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            app:iconPadding="10sp"/>
+            android:alpha="0.75" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/install"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?attr/materialIconButtonFilledTonalStyle"
-            android:layout_marginStart="10dp"
             app:icon="@drawable/ic_install"
-            android:text="@string/install"
-            app:iconGravity="textEnd"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            app:iconPadding="10sp" />
+            android:text="@string/install" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -68,6 +68,7 @@ public class PackageDetails {
                     .show();
         } else {
             Intent details = new Intent(activity, ADBUninstallActivity.class);
+            details.putExtra(ADBUninstallActivity.NAME_INTENT, appName);
             details.putExtra(ADBUninstallActivity.PACKAGE_INTENT, packageName);
             activity.startActivity(details);
         }
