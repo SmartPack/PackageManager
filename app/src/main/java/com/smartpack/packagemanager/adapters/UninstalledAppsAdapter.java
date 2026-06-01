@@ -69,47 +69,64 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         holder.mAppID.setText(data.get(position).getPackageName());
         holder.mRestore.setIcon(sCommonUtils.getDrawable(R.drawable.ic_restore, holder.mRestore.getContext()));
         holder.mRestore.setVisibility(VISIBLE);
-        holder.mCheckBox.setChecked(restoreList.contains(data.get(position).getPackageName()));
 
-        if (restoreList.isEmpty()) {
-            batchButton.setVisibility(GONE);
+        if (restoreList.contains(this.data.get(position).getPackageName())) {
+            holder.mCheckBox.setVisibility(VISIBLE);
+            holder.mAppIcon.setVisibility(GONE);
+            holder.mCheckBox.setChecked(true);
         } else {
-            if (restoreList.contains(this.data.get(position).getPackageName())) {
-                holder.mCheckBox.setVisibility(VISIBLE);
-                holder.mAppIcon.setVisibility(GONE);
-            } else {
-                holder.mCheckBox.setVisibility(GONE);
-                holder.mAppIcon.setVisibility(VISIBLE);
-            }
-            batchButton.setVisibility(VISIBLE);
+            holder.mCheckBox.setVisibility(GONE);
+            holder.mAppIcon.setVisibility(VISIBLE);
+            holder.mCheckBox.setChecked(false);
         }
 
-        holder.mAppIcon.setOnClickListener(v -> v.post(() -> {
-            restoreList.add(this.data.get(position).getPackageName());
-            notifyItemChanged(position);
-        }));
+        toggleBatchMenu();
+
+        holder.mAppIcon.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                restoreList.add(this.data.get(position).getPackageName());
+                notifyItemChanged(currentPos);
+                toggleBatchMenu();
+            }
+        });
+
+        holder.mCheckBox.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                restoreList.remove(this.data.get(currentPos).getPackageName());
+                notifyItemChanged(currentPos);
+                toggleBatchMenu();
+            }
+        });
 
         holder.mRestore.setOnClickListener(v -> {
-            if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
-                sCommonUtils.toast(v.getContext().getString(R.string.feature_unavailable_message), v.getContext()).show();
-                return;
-            }
-            new MaterialAlertDialogBuilder(v.getContext())
-                            .setIcon(R.mipmap.ic_launcher)
-                            .setTitle(v.getContext().getString(R.string.restore_message, data.get(position).getAppName()))
-                            .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                            })
-                            .setPositiveButton(R.string.restore, (dialog, id) ->
-                                    restore(position, holder.mRestore.getContext()).execute()).show();
+                    if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
+                        sCommonUtils.toast(v.getContext().getString(R.string.feature_unavailable_message), v.getContext()).show();
+                        return;
+                    }
+                    int currentPos = holder.getBindingAdapterPosition();
+                    if (currentPos != RecyclerView.NO_POSITION) {
+                        new MaterialAlertDialogBuilder(v.getContext())
+                                .setIcon(R.mipmap.ic_launcher)
+                                .setTitle(v.getContext().getString(R.string.restore_message, data.get(currentPos).getAppName()))
+                                .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                                })
+                                .setPositiveButton(R.string.restore, (dialog, id) ->
+                                        restore(currentPos, holder.mRestore.getContext()).execute()).show();
+                    }
                 }
         );
 
-        holder.mCheckBox.setOnClickListener(v -> v.post(() -> {
-            restoreList.remove(this.data.get(position).getPackageName());
-            notifyItemChanged(position);
-        }));
-
         AppSettings.setSlideInAnimation(holder.mAppIcon, position);
+    }
+
+    private void toggleBatchMenu() {
+        if (restoreList.isEmpty()) {
+            batchButton.setVisibility(GONE);
+        } else {
+            batchButton.setVisibility(VISIBLE);
+        }
     }
 
     private sExecutor restore(int position, Context context) {
@@ -131,6 +148,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
 
                 PackageData.getRemovedPackagesData().remove(packageItems);
                 PackageData.getRawData().add(new PackageItems(packageItems.getPackageName(), packageItems.getAppName(), packageItems.getSourceDir(), false, context));
+                restoreList.remove(packageItems.getPackageName());
             }
 
             @Override
@@ -144,6 +162,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
                     data.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, getItemCount());
+                    toggleBatchMenu();
                 }
             }
         };
@@ -177,11 +196,13 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
             if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
                 return;
             }
+            int currentPos = getBindingAdapterPosition();
+            if (currentPos == RecyclerView.NO_POSITION) return;
 
-            if (restoreList.contains(data.get(getBindingAdapterPosition()).getPackageName())) {
+            if (restoreList.contains(data.get(currentPos).getPackageName())) {
                 view.post(() -> {
-                    restoreList.remove(data.get(getBindingAdapterPosition()).getPackageName());
-                    notifyItemChanged(getBindingAdapterPosition());
+                    restoreList.remove(data.get(currentPos).getPackageName());
+                    notifyItemChanged(currentPos);
                 });
             }
         }

@@ -96,32 +96,41 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
         holder.mSize.setVisibility(VISIBLE);
         holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_menu, holder.mAction.getContext()));
-        holder.mCheckBox.setChecked(batchList.contains(data.get(position)));
 
-        if (batchList.isEmpty()) {
-            batchButton.setVisibility(GONE);
+        if (batchList.contains(this.data.get(position))) {
+            holder.mCheckBox.setVisibility(VISIBLE);
+            holder.mIcon.setVisibility(GONE);
+            holder.mCheckBox.setChecked(true);
         } else {
-            if (batchList.contains(this.data.get(position))) {
-                holder.mCheckBox.setVisibility(VISIBLE);
-                holder.mIcon.setVisibility(GONE);
-            } else {
-                holder.mCheckBox.setVisibility(GONE);
-                holder.mIcon.setVisibility(VISIBLE);
-            }
-            batchButton.setVisibility(VISIBLE);
+            holder.mCheckBox.setVisibility(GONE);
+            holder.mIcon.setVisibility(VISIBLE);
+            holder.mCheckBox.setChecked(false);
         }
 
-        holder.mIcon.setOnClickListener(v -> v.post(() -> {
-            batchList.add(this.data.get(position));
-            notifyItemChanged(position);
-        }));
+        toggleBatchMenu();
 
-        holder.mCheckBox.setOnClickListener(v -> v.post(() -> {
-            batchList.remove(this.data.get(position));
-            notifyItemChanged(position);
-        }));
+        holder.mIcon.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                batchList.add(this.data.get(position));
+                notifyItemChanged(currentPos);
+                toggleBatchMenu();
+            }
+        });
+
+        holder.mCheckBox.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                batchList.remove(this.data.get(currentPos));
+                notifyItemChanged(currentPos);
+                toggleBatchMenu();
+            }
+        });
 
         holder.mAction.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos == RecyclerView.NO_POSITION) return;
+
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             Menu menu = popupMenu.getMenu();
             menu.add(Menu.NONE, 0, Menu.NONE, v.getContext().getString(R.string.share)).setIcon(R.drawable.ic_share);
@@ -131,10 +140,10 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                 switch (item.getItemId()) {
                     case 0:
                         Uri uriFile = FileProvider.getUriForFile(v.getContext(), BuildConfig.APPLICATION_ID + ".provider",
-                                new File(data.get(position)));
+                                new File(data.get(currentPos)));
                         Intent shareScript = new Intent(Intent.ACTION_SEND);
-                        shareScript.setType(data.get(position).endsWith(".apkm") ? "application/zip" : "application/java-archive");
-                        shareScript.putExtra(Intent.EXTRA_SUBJECT, v.getContext().getString(R.string.shared_by, new File(data.get(position)).getName()));
+                        shareScript.setType(data.get(currentPos).endsWith(".apkm") ? "application/zip" : "application/java-archive");
+                        shareScript.putExtra(Intent.EXTRA_SUBJECT, v.getContext().getString(R.string.shared_by, new File(data.get(currentPos)).getName()));
                         shareScript.putExtra(Intent.EXTRA_TEXT, v.getContext().getString(R.string.share_message, BuildConfig.VERSION_NAME));
                         shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
                         shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -143,15 +152,16 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
                     case 1:
                         new MaterialAlertDialogBuilder(v.getContext())
                                 .setIcon(R.mipmap.ic_launcher)
-                                .setTitle(v.getContext().getString(R.string.delete_question, new File(data.get(position)).getName()))
+                                .setTitle(v.getContext().getString(R.string.delete_question, new File(data.get(currentPos)).getName()))
                                 .setNegativeButton(v.getContext().getString(R.string.cancel), (dialog, id) -> {
                                 })
                                 .setPositiveButton(v.getContext().getString(R.string.delete), (dialog, id) -> v.post(() -> {
-                                    sFileUtils.delete(new File(data.get(position)));
-                                    batchList.remove(this.data.get(position));
-                                    this.data.remove(position);
-                                    notifyItemRemoved(position);
+                                    sFileUtils.delete(new File(data.get(currentPos)));
+                                    batchList.remove(this.data.get(currentPos));
+                                    this.data.remove(currentPos);
+                                    notifyItemRemoved(currentPos);
                                     notifyItemRangeChanged(0, this.data.size());
+                                    toggleBatchMenu();
                                 })).show();
                         break;
                 }
@@ -161,6 +171,14 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         });
 
         AppSettings.setSlideInAnimation(holder.mIcon, position);
+    }
+
+    private void toggleBatchMenu() {
+        if (batchList.isEmpty()) {
+            batchButton.setVisibility(GONE);
+        } else {
+            batchButton.setVisibility(VISIBLE);
+        }
     }
 
     public interface OnInstallRequest {
@@ -192,11 +210,14 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         @SuppressLint("StringFormatInvalid")
         @Override
         public void onClick(View view) {
-            String path = data.get(getBindingAdapterPosition());
+            int currentPos = getBindingAdapterPosition();
+            if (currentPos == RecyclerView.NO_POSITION) return;
+            String path = data.get(currentPos);
             if (batchList.contains(path)) {
                 view.post(() -> {
                     batchList.remove(path);
-                    notifyItemChanged(getBindingAdapterPosition());
+                    notifyItemChanged(currentPos);
+                    toggleBatchMenu();
                 });
                 return;
             }

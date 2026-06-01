@@ -12,7 +12,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -47,20 +46,18 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
  */
 public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapter.ViewHolder> {
 
-    private final Activity activity;
     private final ActivityResultLauncher<Intent> uninstallApps;
     private final List<PackageItems> data;
     private final List<String> batchList;
     private final MaterialButton batchButton;
     private final String searchText;
 
-    public PackageTasksAdapter(List<PackageItems> data, String searchText, List<String> batchList, MaterialButton batchButton, ActivityResultLauncher<Intent> uninstallApps, Activity activity) {
+    public PackageTasksAdapter(List<PackageItems> data, String searchText, List<String> batchList, MaterialButton batchButton, ActivityResultLauncher<Intent> uninstallApps) {
         this.data = data;
         this.searchText = searchText;
         this.batchList = batchList;
         this.batchButton = batchButton;
         this.uninstallApps = uninstallApps;
-        this.activity = activity;
     }
 
     @NonNull
@@ -79,21 +76,17 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
             }
             this.data.get(position).loadAppIcon(holder.appIcon);
 
-            holder.checkBox.setChecked(batchList.contains(data.get(position).getPackageName()));
-
-            if (batchList.isEmpty()) {
-                batchButton.setVisibility(GONE);
+            if (batchList.contains(this.data.get(position).getPackageName())) {
+                holder.checkBox.setVisibility(VISIBLE);
+                holder.appIcon.setVisibility(GONE);
+                holder.checkBox.setChecked(true);
             } else {
-                if (batchList.contains(this.data.get(position).getPackageName())) {
-                    holder.checkBox.setVisibility(VISIBLE);
-                    holder.appIcon.setVisibility(GONE);
-                } else {
-                    holder.checkBox.setVisibility(GONE);
-                    holder.appIcon.setVisibility(VISIBLE);
-                }
-                batchButton.setText(activity.getString(R.string.batch_options, batchList.size()));
-                batchButton.setVisibility(VISIBLE);
+                holder.checkBox.setVisibility(GONE);
+                holder.appIcon.setVisibility(VISIBLE);
+                holder.checkBox.setChecked(false);
             }
+
+            toggleBatchMenu();
 
             if (searchText != null && PackageData.isTextMatched(data.get(position).getPackageName(), searchText)) {
                 holder.appID.setTypeface(null, Typeface.BOLD);
@@ -116,53 +109,73 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
             holder.appName.setText(data.get(position).getAppName());
 
             holder.appIcon.setOnClickListener(v -> {
-                sCommonUtils.toast(v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName()), v.getContext()).show();
-                v.post(() -> {
+                int currentPos = holder.getBindingAdapterPosition();
+                if (currentPos != RecyclerView.NO_POSITION) {
+                    sCommonUtils.toast(v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName()), v.getContext()).show();
                     batchList.add(this.data.get(position).getPackageName());
-                    notifyItemChanged(position);
-                });
-            });
-
-            holder.appIcon.setOnLongClickListener(v -> {
-                if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                    sCommonUtils.toast(v.getContext().getString(R.string.package_removed), v.getContext()).show();
-                    return true;
-                }
-                Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
-                imageView.putExtra(ImageViewActivity.APP_NAME_INTENT, data.get(position).getAppName());
-                imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, data.get(position).getPackageName());
-                holder.appIcon.getContext().startActivity(imageView);
-                return true;
-            });
-
-            holder.open.setOnClickListener(v -> {
-                if (holder.appID.getText().toString().trim().equals(BuildConfig.APPLICATION_ID)) {
-                    sCommonUtils.toast(v.getContext().getString(R.string.open_message), v.getContext()).show();
-                } else {
-                    Intent launchIntent = v.getContext().getPackageManager().getLaunchIntentForPackage(holder.appID.getText().toString().trim());
-                    if (launchIntent != null) {
-                        v.getContext().startActivity(launchIntent);
-                    } else {
-                        sCommonUtils.toast(v.getContext().getString(R.string.open_failed, data.get(position).getAppName()), v.getContext()).show();
-                    }
+                    notifyItemChanged(currentPos);
+                    toggleBatchMenu();
                 }
             });
 
             holder.checkBox.setOnClickListener(v -> {
-                if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), v.getContext())) {
-                    sCommonUtils.toast(v.getContext().getString(R.string.package_removed), v.getContext()).show();
-                    holder.checkBox.setChecked(false);
-                    return;
+                int currentPos = holder.getBindingAdapterPosition();
+                if (currentPos != RecyclerView.NO_POSITION) {
+                    if (!sPackageUtils.isPackageInstalled(data.get(currentPos).getPackageName(), v.getContext())) {
+                        sCommonUtils.toast(v.getContext().getString(R.string.package_removed), v.getContext()).show();
+                        return;
+                    }
+                    sCommonUtils.toast(v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName()), v.getContext()).show();
+
+                    batchList.remove(this.data.get(currentPos).getPackageName());
+                    notifyItemChanged(currentPos);
+                    toggleBatchMenu();
                 }
-                sCommonUtils.toast(v.getContext().getString(R.string.batch_list_removed, data.get(position).getAppName()), v.getContext()).show();
-                v.post(() -> {
-                    batchList.remove(this.data.get(position).getPackageName());
-                    notifyItemChanged(position);
-                });
+            });
+
+            holder.appIcon.setOnLongClickListener(v -> {
+                int currentPos = holder.getBindingAdapterPosition();
+                if (currentPos != RecyclerView.NO_POSITION) {
+                    if (!sPackageUtils.isPackageInstalled(data.get(currentPos).getPackageName(), v.getContext())) {
+                        sCommonUtils.toast(v.getContext().getString(R.string.package_removed), v.getContext()).show();
+                        return true;
+                    }
+                    Intent imageView = new Intent(holder.appIcon.getContext(), ImageViewActivity.class);
+                    imageView.putExtra(ImageViewActivity.APP_NAME_INTENT, data.get(currentPos).getAppName());
+                    imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, data.get(currentPos).getPackageName());
+                    holder.appIcon.getContext().startActivity(imageView);
+                }
+                return true;
+            });
+
+            holder.open.setOnClickListener(v -> {
+                int currentPos = holder.getBindingAdapterPosition();
+                if (currentPos != RecyclerView.NO_POSITION) {
+                    if (this.data.get(currentPos).getPackageName().equals(BuildConfig.APPLICATION_ID)) {
+                        sCommonUtils.toast(v.getContext().getString(R.string.open_message), v.getContext()).show();
+                    } else {
+                        Intent launchIntent = v.getContext().getPackageManager().getLaunchIntentForPackage(holder.appID.getText().toString().trim());
+                        if (launchIntent != null) {
+                            v.getContext().startActivity(launchIntent);
+                        } else {
+                            sCommonUtils.toast(v.getContext().getString(R.string.open_failed, data.get(currentPos).getAppName()), v.getContext()).show();
+                        }
+                    }
+                }
             });
 
             AppSettings.setSlideInAnimation(holder.appIcon, position);
         } catch (IndexOutOfBoundsException ignored) {}
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private void toggleBatchMenu() {
+        if (batchList.isEmpty()) {
+            batchButton.setVisibility(GONE);
+        } else {
+            batchButton.setText(batchButton.getContext().getString(R.string.batch_options, batchList.size()));
+            batchButton.setVisibility(VISIBLE);
+        }
     }
 
     @Override
@@ -191,17 +204,20 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
         @SuppressLint("StringFormatInvalid")
         @Override
         public void onClick(View view) {
-            PackageItems packageItems = data.get(getBindingAdapterPosition());
+            int currentPos = getBindingAdapterPosition();
+            if (currentPos == RecyclerView.NO_POSITION) return;
+            PackageItems packageItems = data.get(currentPos);
             if (!sPackageUtils.isPackageInstalled(packageItems.getPackageName(), view.getContext())) {
                 sCommonUtils.toast(view.getContext().getString(R.string.package_removed), view.getContext()).show();
                 return;
             }
 
             if (batchList.contains(packageItems.getPackageName())) {
-                sCommonUtils.toast(view.getContext().getString(R.string.batch_list_removed, data.get(getBindingAdapterPosition()).getAppName()), view.getContext()).show();
+                sCommonUtils.toast(view.getContext().getString(R.string.batch_list_removed, data.get(currentPos).getAppName()), view.getContext()).show();
                 view.post(() -> {
                     batchList.remove(packageItems.getPackageName());
-                    notifyItemChanged(getBindingAdapterPosition());
+                    notifyItemChanged(currentPos);
+                    toggleBatchMenu();
                 });
                 return;
             }

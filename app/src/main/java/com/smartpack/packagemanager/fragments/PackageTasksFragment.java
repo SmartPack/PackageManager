@@ -245,7 +245,7 @@ public class PackageTasksFragment extends Fragment {
                     public void doInBackground() {
                         PackageData.generateData(mProgress, requireActivity());
                         mData = PackageData.getData(mSearchText, requireActivity());
-                        mRecycleViewAdapter = new PackageTasksAdapter(mData, mSearchText, mBatchList, mBatchOptions, diableOrUninstall, requireActivity());
+                        mRecycleViewAdapter = new PackageTasksAdapter(mData, mSearchText, mBatchList, mBatchOptions, diableOrUninstall);
                     }
 
                     @Override
@@ -830,7 +830,7 @@ public class PackageTasksFragment extends Fragment {
             @Override
             public void doInBackground() {
                 mData = PackageData.getData(searchTxt, activity);
-                mRecycleViewAdapter = new PackageTasksAdapter(mData, searchTxt, mBatchList, mBatchOptions, diableOrUninstall, activity);
+                mRecycleViewAdapter = new PackageTasksAdapter(mData, searchTxt, mBatchList, mBatchOptions, diableOrUninstall);
             }
 
             @SuppressLint("StringFormatInvalid")

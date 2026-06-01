@@ -71,44 +71,62 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(packageName, holder.mIcon
                     .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
         }
-        holder.mCheckBox.setChecked(batchList.contains(data.get(position)));
 
+        if (batchList.contains(this.data.get(position))) {
+            holder.mCheckBox.setVisibility(VISIBLE);
+            holder.mIcon.setVisibility(GONE);
+            holder.mCheckBox.setChecked(true);
+        } else {
+            holder.mCheckBox.setVisibility(GONE);
+            holder.mIcon.setVisibility(VISIBLE);
+            holder.mCheckBox.setChecked(false);
+        }
+
+        toggleBatchMenu();
+
+        holder.mIcon.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                batchList.add(this.data.get(position));
+                notifyItemChanged(currentPos);
+                toggleBatchMenu();
+            }
+        });
+
+        holder.mCheckBox.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                batchList.remove(this.data.get(currentPos));
+                notifyItemChanged(currentPos);
+                toggleBatchMenu();
+            }
+        });
+
+        holder.mExport.setOnClickListener(v -> {
+            int currentPos = holder.getBindingAdapterPosition();
+            if (currentPos != RecyclerView.NO_POSITION) {
+                new MaterialAlertDialogBuilder(v.getContext())
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(R.string.app_name)
+                        .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(currentPos)).getName()))
+                        .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+                        .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
+                                PackageExplorer.copyToStorage(sPackageUtils.getParentDir(packageName, holder.mIcon
+                                        .getContext()) + "/" + data.get(currentPos), packageName, activity)
+                        ).show();
+            }
+        });
+
+        AppSettings.setSlideInAnimation(holder.mIcon, position);
+    }
+
+    private void toggleBatchMenu() {
         if (batchList.isEmpty()) {
             batchButton.setVisibility(GONE);
         } else {
-            if (batchList.contains(this.data.get(position))) {
-                holder.mCheckBox.setVisibility(VISIBLE);
-                holder.mIcon.setVisibility(GONE);
-            } else {
-                holder.mCheckBox.setVisibility(GONE);
-                holder.mIcon.setVisibility(VISIBLE);
-            }
             batchButton.setVisibility(VISIBLE);
         }
-
-        holder.mIcon.setOnClickListener(v -> v.post(() -> {
-            batchList.add(this.data.get(position));
-            notifyItemChanged(position);
-        }));
-
-        holder.mCheckBox.setOnClickListener(v -> v.post(() -> {
-            batchList.remove(this.data.get(position));
-            notifyItemChanged(position);
-        }));
-
-        holder.mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(R.string.app_name)
-                .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(position)).getName()))
-                .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
-                })
-                .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
-                        PackageExplorer.copyToStorage(sPackageUtils.getParentDir(packageName, holder.mIcon
-                                .getContext()) + "/" + data.get(position), packageName, activity)
-                ).show()
-        );
-
-        AppSettings.setSlideInAnimation(holder.mIcon, position);
     }
 
     @Override
@@ -131,11 +149,14 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
             this.mSize = view.findViewById(R.id.size);
 
             view.setOnClickListener(v -> {
-                String name = data.get(getBindingAdapterPosition());
+                int currentPos = getBindingAdapterPosition();
+                if (currentPos == RecyclerView.NO_POSITION) return;
+                String name = data.get(currentPos);
                 if (batchList.contains(name)) {
                     view.post(() -> {
                         batchList.remove(name);
-                        notifyItemChanged(getBindingAdapterPosition());
+                        notifyItemChanged(currentPos);
+                        toggleBatchMenu();
                     });
                 }
             });

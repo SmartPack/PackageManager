@@ -77,7 +77,7 @@
     <string name="share_app_Summary">"ادعُ أصدقائك لاستخدام مدير الحزم"</string>
     <string name="source_code_summary">"Package Manager هو تطبيق مفتوح المصدر جاهز لقبول المساهمات من مجتمع التطوير. انقر هنا للتحقق من شفرة المصدر"</string>
     <string name="support_summary">"انضم إلى مجموعة دعم Telegram"</string>
-    <string name="batch_options">"خيارات الدفعة (٪ s)"</string>
+    <string name="batch_options">"خيارات الدفعة (٪s)"</string>
     <string name="batch_list_added">"تمت إضافة٪ s إلى قائمة الدُفعات"</string>
     <string name="batch_list_removed">"تمت إزالة٪ s من قائمة الدُفعات"</string>
     <string name="explore_error_status">"فشل استكشاف٪ s"</string>

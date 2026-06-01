@@ -78,7 +78,7 @@
     <string name="share_app_Summary">"Invita i tuoi amici a usare Package Manager"</string>
     <string name="source_code_summary">"Package Manager è un'applicazione open-source che è pronta ad accettare contributi dalla community di sviluppo. Premi qui per controllare il codice sorgente"</string>
     <string name="support_summary">"Visita il gruppo di supporto Telegram"</string>
-    <string name="batch_options">"Opzioni di gruppo"</string>
+    <string name="batch_options">"Opzioni di gruppo (%s)"</string>
     <string name="batch_list_added">"%s è aggiunta alla lista"</string>
     <string name="batch_list_removed">"%s è rimossa dalla lista"</string>
     <string name="explore_error_status">"Errore nell'esplorare %s"</string>

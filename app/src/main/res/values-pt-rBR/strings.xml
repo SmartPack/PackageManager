@@ -78,7 +78,7 @@
     <string name="share_app_Summary">"Convide seus amigos para usar o Gerenciador de Pacotes"</string>
     <string name="source_code_summary">"O Gerenciador de Pacotes é um aplicativo de código aberto que está pronto para aceitar contribuições da comunidade de desenvolvimento. Clique aqui para verificar o código-fonte!"</string>
     <string name="support_summary">"Junte-se ao grupo de suporte do Telegram"</string>
-    <string name="batch_options">"Operações em lote"</string>
+    <string name="batch_options">"Operações em lote (%s)"</string>
     <string name="batch_list_added">"%s foi adicionado ao lote"</string>
     <string name="batch_list_removed">"%s foi removido do lote"</string>
     <string name="explore_error_status">"Falha ao explorar '%s'!"</string>
