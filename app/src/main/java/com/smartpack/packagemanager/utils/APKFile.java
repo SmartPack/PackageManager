@@ -50,16 +50,18 @@ public class APKFile extends File {
             Handler handler = new Handler(Looper.getMainLooper());
             executor.execute(() -> {
                 PackageManager pm = icon.getContext().getPackageManager();
-                PackageInfo packageInfo = pm.getPackageArchiveInfo(getAbsolutePath(), 0);
-                fileSize = sAPKUtils.getAPKSize(length());
-                if (packageInfo != null) {
-                    ApplicationInfo ai = packageInfo.applicationInfo;
+                PackageInfo pi = pm.getPackageArchiveInfo(getAbsolutePath(), 0);
+                if (pi != null) {
+                    ApplicationInfo ai = pi.applicationInfo;
                     Objects.requireNonNull(ai).sourceDir = getAbsolutePath();
                     ai.publicSourceDir = getAbsolutePath();
-                    drawable = packageInfo.applicationInfo.loadIcon(pm);
-                    pkgName = packageInfo.applicationInfo.packageName;
-                    appName =  pm.getApplicationLabel(ai).toString();
+
+                    fileSize = sAPKUtils.getAPKSize(length());
+                    appName = pm.getApplicationLabel(ai).toString();
+                    drawable = pm.getApplicationIcon(ai);
+                    pkgName = ai.packageName;
                 }
+
                 handler.post(() -> {
                     if (drawable != null) {
                         icon.setImageDrawable(drawable);
