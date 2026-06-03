@@ -12,6 +12,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
             holder.mExport.setVisibility(GONE);
         } else {
             if (new File(data.get(position)).isDirectory()) {
+                holder.mTitle.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
                 holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
                 if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
                     holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
@@ -73,6 +75,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
                 holder.mSize.setVisibility(GONE);
                 holder.mExport.setVisibility(GONE);
             } else {
+                holder.mTitle.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
                 if (PackageExplorer.isImageFile(data.get(position))) {
                     if (PackageExplorer.getIconFromPath(data.get(position)) != null) {
                         holder.mIcon.setImageURI(PackageExplorer.getIconFromPath(data.get(position)));
