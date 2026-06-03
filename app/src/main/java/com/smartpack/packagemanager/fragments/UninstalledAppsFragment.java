@@ -62,6 +62,9 @@ public class UninstalledAppsFragment extends Fragment {
     private UninstalledAppsAdapter mRecycleViewAdapter;
     private List<PackageItems> mData;
     private List<String> mRestoreList = null;
+
+    private RootShell mRootShell = null;
+    private ShizukuShell mShizukuShell = null;
     private String mSearchText = null;
 
     @SuppressLint("StringFormatInvalid")
@@ -81,6 +84,9 @@ public class UninstalledAppsFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+
+        mRootShell = new RootShell();
+        mShizukuShell = new ShizukuShell();
 
         loadUI(mSearchText);
 
@@ -132,7 +138,13 @@ public class UninstalledAppsFragment extends Fragment {
             popupMenu.show();
         });
 
-        mBatch.setOnClickListener(v -> restore(v.getContext()).execute());
+        mBatch.setOnClickListener(v -> {
+            if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
+                sCommonUtils.toast(v.getContext().getString(R.string.feature_unavailable_message), v.getContext()).show();
+                return;
+            }
+            restore(v.getContext()).execute();
+        });
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
@@ -206,14 +218,10 @@ public class UninstalledAppsFragment extends Fragment {
     private sExecutor restore(Context context) {
         return new sExecutor() {
             private final List<Integer> positions = new ArrayList<>();
-            private RootShell mRootShell = null;
-            private ShizukuShell mShizukuShell = null;
 
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(View.VISIBLE);
-                mRootShell = new RootShell();
-                mShizukuShell = new ShizukuShell();
             }
 
             @Override
