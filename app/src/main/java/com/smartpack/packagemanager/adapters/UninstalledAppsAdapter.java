@@ -108,7 +108,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
                     int currentPos = holder.getBindingAdapterPosition();
                     if (currentPos != RecyclerView.NO_POSITION) {
                         new MaterialAlertDialogBuilder(v.getContext())
-                                .setIcon(R.mipmap.ic_launcher)
+                                .setIcon(holder.mAppIcon.getDrawable())
                                 .setTitle(v.getContext().getString(R.string.restore_message, data.get(currentPos).getAppName()))
                                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                                 })

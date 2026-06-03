@@ -17,9 +17,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ADBUninstallActivity;
+import com.smartpack.packagemanager.dialogs.UninstallerDialog;
 import com.smartpack.packagemanager.utils.SerializableItems.ActivityItems;
 import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
 import com.smartpack.packagemanager.utils.tasks.ExportAPKTasks;
@@ -56,16 +56,12 @@ public class PackageDetails {
     @SuppressLint("StringFormatInvalid")
     public static void uninstallSystemApp(String packageName, String appName, Drawable appIcon, Activity activity) {
         if (new RootShell().rootAccess() || new ShizukuShell().isReady()) {
-            new MaterialAlertDialogBuilder(activity)
-                    .setIcon(appIcon)
-                    .setTitle(activity.getString(R.string.uninstall_title, appName))
-                    .setMessage(activity.getString(R.string.uninstall_warning))
-                    .setCancelable(false)
-                    .setNegativeButton(activity.getString(R.string.cancel), (dialog, id) -> {
-                    })
-                    .setPositiveButton(activity.getString(R.string.yes), (dialog, id) ->
-                            new UninstallSystemAppsTasks(packageName, appName, activity).execute())
-                    .show();
+            new UninstallerDialog(appIcon, appName, packageName, activity.getString(R.string.uninstall_title, appName), activity) {
+                @Override
+                public void onUninstall() {
+                    new UninstallSystemAppsTasks(packageName, appName, activity).execute();
+                }
+            };
         } else {
             Intent details = new Intent(activity, ADBUninstallActivity.class);
             details.putExtra(ADBUninstallActivity.NAME_INTENT, appName);
@@ -77,10 +73,10 @@ public class PackageDetails {
     public static List<PermissionsItems> getPermissions(String packageName, Context context) {
         List<PermissionsItems> perms = new ArrayList<>();
         try {
-            for (int i = 0; i < Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions.length; i++) {
+            for (int i = 0; i < Objects.requireNonNull(Objects.requireNonNull(PackageData.getPackageInfo(packageName, context)).requestedPermissions).length; i++) {
                 PackageInfo perm = Objects.requireNonNull(PackageData.getPackageInfo(packageName, context));
-                perms.add(new PermissionsItems((perm.requestedPermissionsFlags[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0,
-                        perm.requestedPermissions[i], sPermissionUtils.getDescription(perm.requestedPermissions[i]
+                perms.add(new PermissionsItems((Objects.requireNonNull(perm.requestedPermissionsFlags)[i] & PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0,
+                        Objects.requireNonNull(perm.requestedPermissions)[i], sPermissionUtils.getDescription(perm.requestedPermissions[i]
                         .replace("android.permission.",""), context)));
             }
         } catch (NullPointerException ignored) {

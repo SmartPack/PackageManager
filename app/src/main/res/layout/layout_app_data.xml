@@ -1,45 +1,44 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="start|center_vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:gravity="center" >
+    android:layout_margin="10sp" >
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/app_image"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/app_icon"
+        android:layout_width="36sp"
+        android:layout_height="36sp"
         android:layout_gravity="center"
-        android:padding="10dp" />
+        android:layout_marginEnd="10dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:clickable="false"  />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical" >
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/app_title"
+            android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/colorPrimary"
-            android:layout_gravity="start"
+            android:clickable="false"
             android:textStyle="bold"
-            android:gravity="start"
             android:ellipsize="end"
-            android:textSize="23sp"
+            android:textSize="17sp"
             android:maxLines="1" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/version_text"
+            android:id="@+id/package_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold|italic"
-            android:textIsSelectable="true"
-            android:layout_gravity="start"
+            android:clickable="false"
             android:ellipsize="end"
-            android:gravity="start"
-            android:textSize="15sp"
             android:maxLines="1" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>
