@@ -10,6 +10,7 @@ package com.smartpack.packagemanager.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -20,12 +21,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ExportSuccessDialog;
+import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
@@ -50,10 +53,36 @@ public class TextViewActivity extends BaseActivity {
         mPackageName = getIntent().getStringExtra(PACKAGE_INTENT);
         mPath = getIntent().getStringExtra(PATH_INTENT);
 
-        if (mPath != null) {
-            mTitle.setText(new File(mPath).getName());
-            mText.setText(getText());
-        }
+        new sExecutor() {
+            private final Activity activity = TextViewActivity.this;
+            private String text = null;
+            private ProgressDialog mProgressDialog;
+            @Override
+            public void onPreExecute() {
+                mProgressDialog = new ProgressDialog(activity);
+                mProgressDialog.setIcon(R.mipmap.ic_launcher);
+                mProgressDialog.setTitle(R.string.preparing_message);
+                mProgressDialog.show();
+            }
+
+            @Override
+            public void doInBackground() {
+                if (mPath != null) {
+                    text = getText();
+                }
+            }
+
+            @Override
+            public void onPostExecute() {
+                mProgressDialog.dismiss();
+                if (mPath != null) {
+                    mTitle.setText(new File(mPath).getName());
+                }
+                if (text != null) {
+                    mText.setText(text);
+                }
+            }
+        }.execute();
 
         mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
                 .setIcon(R.mipmap.ic_launcher)
