@@ -131,7 +131,7 @@ public class PackageInfoFragment extends Fragment {
                     }
                     break;
                 case 1:
-                    new ExploreAPKTasks(mAppName, mPackageName, sPackageUtils.getSourceDir(mPackageName, requireActivity()), requireActivity()).execute();
+                    new ExploreAPKTasks(mPackageName, sPackageUtils.getSourceDir(mPackageName, requireActivity()), requireActivity()).execute();
                     break;
                 case 2:
                     new MaterialAlertDialogBuilder(requireActivity())

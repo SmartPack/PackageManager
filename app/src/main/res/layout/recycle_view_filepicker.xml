@@ -35,11 +35,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start|center"
-                            android:gravity="start"
                             android:focusable="false"
                             android:clickable="false"
                             android:textStyle="bold"
-                            android:textSize="17sp" />
+                            android:gravity="start"
+                            android:ellipsize="end"
+                            android:textSize="15sp"
+                            android:maxLines="1" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/description"
@@ -49,7 +51,8 @@
                             android:textStyle="bold|italic"
                             android:visibility="gone"
                             android:clickable="false"
-                            android:gravity="start" />
+                            android:gravity="start"
+                            android:maxLines="1" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/size"
@@ -59,7 +62,8 @@
                             android:textStyle="italic"
                             android:clickable="false"
                             android:visibility="gone"
-                            android:gravity="start" />
+                            android:gravity="start"
+                            android:maxLines="1" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat

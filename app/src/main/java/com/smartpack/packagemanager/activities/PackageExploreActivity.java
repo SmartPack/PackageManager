@@ -14,6 +14,9 @@ import static android.view.View.VISIBLE;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.PopupMenu;
@@ -21,6 +24,7 @@ import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,21 +49,25 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
  */
 public class PackageExploreActivity extends BaseActivity {
 
-    private MaterialTextView mError, mTitle;
+    private AppCompatImageView mAppIcon;
+    private MaterialTextView mAppNameTxt, mError, mPackageNameTxt, mTitle;
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private PackageExploreAdapter mRecycleViewAdapter;
     private List<String> mData;
-    private String mAppName, mPackageName, mRootPath;
-    public static final String PACKAGE_INTENT = "package", APP_NAME_INTENT = "app_name";
+    private String mPackageName, mRootPath;
+    public static final String PACKAGE_INTENT = "package";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentViewWithInsets(R.layout.activity_package_explorer, R.id.layout_root);
 
+        mAppIcon = findViewById(R.id.app_image);
         MaterialButton mBack = findViewById(R.id.back);
         MaterialButton mSortButton = findViewById(R.id.sort);
+        mAppNameTxt = findViewById(R.id.app_title);
+        mPackageNameTxt = findViewById(R.id.version_text);
         mTitle = findViewById(R.id.title);
         mError = findViewById(R.id.error_status);
         mProgressBar = findViewById(R.id.progress);
@@ -67,10 +75,9 @@ public class PackageExploreActivity extends BaseActivity {
 
         mRootPath = new File(getCacheDir().getPath(),"apk").getAbsolutePath();
 
-        mAppName = getIntent().getStringExtra(APP_NAME_INTENT);
         mPackageName = getIntent().getStringExtra(PACKAGE_INTENT);
 
-        mTitle.setText(mAppName);
+        mTitle.setText("Root");
 
         mBack.setOnClickListener(v -> {
             sFileUtils.delete(new File(getCacheDir().getPath(), "apk"));
@@ -105,6 +112,8 @@ public class PackageExploreActivity extends BaseActivity {
     private void reload(String path, Activity activity) {
         new sExecutor() {
             private boolean failed = false;
+            private Drawable appIcon = null;
+            private String appName = null;
 
             @Override
             public void onPreExecute() {
@@ -114,9 +123,17 @@ public class PackageExploreActivity extends BaseActivity {
             @Override
             public void doInBackground() {
                 try {
+                    if (appIcon == null && appName == null) {
+                        PackageManager pm = activity.getPackageManager();
+                        ApplicationInfo ai = pm.getApplicationInfo(mPackageName, 0);
+
+                        appIcon = pm.getApplicationIcon(ai);
+                        appName = pm.getApplicationLabel(ai).toString();
+                    }
+
                     mData = FilePicker.getData(path, activity, false);
                     mRecycleViewAdapter = new PackageExploreAdapter(mData, mPackageName, activity);
-                } catch (NullPointerException ignored) {
+                } catch (Exception ignored) {
                     failed = true;
                 }
             }
@@ -158,11 +175,18 @@ public class PackageExploreActivity extends BaseActivity {
                 mProgressBar.setVisibility(GONE);
                 if (failed) {
                     mRecyclerView.setVisibility(GONE);
-                    mError.setText(getString(R.string.explore_error_status, mAppName));
+                    mError.setText(getString(R.string.explore_error_status, appName));
                     mError.setVisibility(VISIBLE);
                 } else {
                     mRootPath = path;
-                    mTitle.setText(path.equals(new File(getCacheDir(), "apk").getAbsolutePath()) ? mAppName
+                    if (appIcon != null) {
+                        mAppIcon.setImageDrawable(appIcon);
+                    }
+                    if (mAppNameTxt != null) {
+                        mAppNameTxt.setText(appName);
+                    }
+                    mPackageNameTxt.setText(mPackageName);
+                    mTitle.setText(path.equals(new File(getCacheDir(), "apk").getAbsolutePath()) ? "Root"
                             : new File(path).getName());
                     mRecyclerView.setAdapter(mRecycleViewAdapter);
                     onRecyclerViewClick();

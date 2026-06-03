@@ -29,11 +29,10 @@ public class ExploreAPKTasks extends sExecutor {
 
     private final Activity mActivity;
     private static File mFile;
-    private final String mAppName, mPath, mPackageName;
+    private final String mPath, mPackageName;
     private ProgressDialog mProgressDialog;
 
-    public ExploreAPKTasks(String appName, String packageName, String path, Activity activity) {
-        this.mAppName = appName;
+    public ExploreAPKTasks(String packageName, String path, Activity activity) {
         this.mPackageName = packageName;
         this.mPath = path;
         this.mActivity = activity;
@@ -66,7 +65,6 @@ public class ExploreAPKTasks extends sExecutor {
     public void onPostExecute() {
         mProgressDialog.dismiss();
         Intent explorer = new Intent(mActivity, PackageExploreActivity.class);
-        explorer.putExtra(PackageExploreActivity.APP_NAME_INTENT, mAppName);
         explorer.putExtra(PackageExploreActivity.PACKAGE_INTENT, mPackageName);
         mActivity.startActivity(explorer);
     }
