@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -16,6 +17,8 @@ import java.util.List;
 
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
+
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 25, 2025
@@ -45,9 +48,16 @@ public class BottomMenuAdapter extends RecyclerView.Adapter<BottomMenuAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MenuItems item = this.data.get(position);
         holder.title.setText(item.getTile());
-        holder.description.setText(item.getDescription());
+
+        if (this.data.get(position).getDrawable() != Integer.MIN_VALUE) {
+            holder.icon.setImageDrawable(sCommonUtils.getDrawable(this.data.get(position).getDrawable(), holder.icon.getContext()));
+            holder.icon.setVisibility(VISIBLE);
+        } else {
+            holder.icon.setVisibility(GONE);
+        }
 
         if (this.data.get(position).getDescription() != null) {
+            holder.description.setText(item.getDescription());
             holder.description.setVisibility(VISIBLE);
         } else {
             holder.description.setVisibility(GONE);
@@ -68,9 +78,11 @@ public class BottomMenuAdapter extends RecyclerView.Adapter<BottomMenuAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatImageButton icon;
         private final MaterialTextView title, description;
         ViewHolder(@NonNull View view) {
             super(view);
+            icon = view.findViewById(R.id.icon);
             title = view.findViewById(R.id.title);
             description = view.findViewById(R.id.description);
 

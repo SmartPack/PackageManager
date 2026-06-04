@@ -2,23 +2,45 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="16dp" >
+    android:orientation="horizontal"
+    android:paddingHorizontal="5dp"
+    android:layout_gravity="center"
+    android:paddingVertical="15dp"
+    android:gravity="center" >
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimary"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="17sp" />
+            android:layout_gravity="center|start"
+            android:layout_marginHorizontal="5dp"
+            android:src="@drawable/ic_shield"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:clickable="false" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:layout_weight="1"/>
+            android:layout_gravity="center|start"
+            android:layout_marginHorizontal="5dp"
+            android:orientation="vertical"
+            android:gravity="center|start" >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textSize="17sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:layout_weight="1"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

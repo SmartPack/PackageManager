@@ -172,10 +172,10 @@ public class PackageInfoFragment extends Fragment {
         mPackageInfoAdapter.setOnItemClickListener((position, v) -> {
             if (position == 0) {
                 List<MenuItems> menuItems = new ArrayList<>();
-                menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.playstore)), null, 0));
-                menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.fdroid)), null, 1));
-                menuItems.add(new MenuItems(v.getContext().getString(R.string.export_details), null, 2));
-                menuItems.add(new MenuItems(v.getContext().getString(R.string.share), null, 3));
+                menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.playstore)), R.drawable.ic_playstore, 0));
+                menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.fdroid)), R.drawable.ic_fdroid,1));
+                menuItems.add(new MenuItems(v.getContext().getString(R.string.export_details), R.drawable.ic_rate, 2));
+                menuItems.add(new MenuItems(v.getContext().getString(R.string.share), R.drawable.ic_share, 3));
 
                 new BottomMenuDialog(menuItems, appIcon, null, mAppName, mPackageName, v.getContext()) {
                     @Override

@@ -415,20 +415,15 @@ public class PackageTasksFragment extends Fragment {
     private void batchOptionsMenu(Activity activity) {
         List<MenuItems> menuItems = new ArrayList<>();
         if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
-            menuItems.add(new MenuItems(getString(R.string.turn_on_off), null, 0));
+            menuItems.add(new MenuItems(getString(R.string.turn_on_off), R.drawable.ic_disable, 0));
         }
-        menuItems.add(new MenuItems(getString(R.string.uninstall), null, 1));
+        menuItems.add(new MenuItems(getString(R.string.uninstall), R.drawable.ic_delete, 1));
         if (mRootShell.rootAccess() || mShizukuShell.isReady()) {
-            menuItems.add(new MenuItems(getString(R.string.reset), null, 2));
+            menuItems.add(new MenuItems(getString(R.string.reset), R.drawable.ic_reset, 2));
         }
-        menuItems.add(new MenuItems(getString(R.string.export), null, 3));
-        menuItems.add(new MenuItems(getString(R.string.export_details), null, 4));
-        if (mData.size() != mBatchList.size()) {
-            menuItems.add(new MenuItems(getString(R.string.select_all), null, 5));
-        }
-        if (!mBatchList.isEmpty()) {
-            menuItems.add(new MenuItems(getString(R.string.batch_list_clear), null, 6));
-        }
+        menuItems.add(new MenuItems(getString(R.string.export), R.drawable.ic_download, 3));
+        menuItems.add(new MenuItems(getString(R.string.export_details), R.drawable.ic_rate,  4));
+        menuItems.add(new MenuItems(getString(R.string.select_all), mData.size() != mBatchList.size() ? R.drawable.ic_select_unchecked : R.drawable.ic_select, 5));
 
         new BottomMenuDialog(menuItems, sCommonUtils.getDrawable(R.mipmap.ic_launcher, activity), null, getString(R.string.app_name), getString(R.string.batch_options, mBatchList.size()), activity) {
             @Override
@@ -797,17 +792,14 @@ public class PackageTasksFragment extends Fragment {
                         break;
                     case 5:
                         if (mData.size() != mBatchList.size()) {
-                            mBatchList.clear();
                             for (PackageItems mPackage : mData) {
-                                mBatchList.add(mPackage.getPackageName());
+                                if (!mBatchList.contains(mPackage.getPackageName())) {
+                                    mBatchList.add(mPackage.getPackageName());
+                                }
                             }
                         } else {
                             mBatchList.clear();
                         }
-                        loadUI(mSearchText, activity);
-                        break;
-                    case 6:
-                        mBatchList.clear();
                         loadUI(mSearchText, activity);
                         break;
                 }
