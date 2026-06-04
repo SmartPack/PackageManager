@@ -1,0 +1,5 @@
+* Brand-new app icon and refreshed visual design.
+* Improved UI consistency across dialogues, buttons, and Package Explorer.
+* Enhanced stability & fixed crashes during Batch Restore and when viewing large files.
+* Package Explorer now displays folder names in bold for better readability.
+* Upgraded batch options and minor layout tweaks for an improved user experience.

@@ -6,6 +6,13 @@ include_in_footer: true
 
 <h2 style="color: blue">🆕 What's New</h2>
 
+### ✨ 74. [v7.9](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(June 04, 2026)*
+- Brand-new app icon and refreshed visual design.
+- Improved UI consistency across dialogues, buttons, and Package Explorer.
+- Enhanced stability & fixed crashes during Batch Restore and when viewing large files.
+- Package Explorer now displays folder names in bold for better readability.
+- Upgraded batch options and minor layout tweaks for an improved user experience.
+
 ### ✨ 73. [v7.8](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(April 16, 2026)*
 - Enhanced Batch Reset logic.
 - New modern Dashboard UI design.
