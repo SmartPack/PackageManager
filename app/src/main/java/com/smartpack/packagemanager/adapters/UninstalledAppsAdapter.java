@@ -64,13 +64,14 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull UninstalledAppsAdapter.ViewHolder holder, int position) {
-        this.data.get(position).loadAppIcon(holder.mAppIcon);
-        holder.mAppName.setText(data.get(position).getAppName());
-        holder.mAppID.setText(data.get(position).getPackageName());
+        PackageItems packageItems = this.data.get(position);
+        packageItems.loadAppIcon(holder.mAppIcon);
+        holder.mAppName.setText(packageItems.getAppName());
+        holder.mAppID.setText(packageItems.getPackageName());
         holder.mRestore.setIcon(sCommonUtils.getDrawable(R.drawable.ic_restore, holder.mRestore.getContext()));
         holder.mRestore.setVisibility(VISIBLE);
 
-        if (restoreList.contains(this.data.get(position).getPackageName())) {
+        if (restoreList.contains(packageItems.getPackageName())) {
             holder.mCheckBox.setVisibility(VISIBLE);
             holder.mAppIcon.setVisibility(GONE);
             holder.mCheckBox.setChecked(true);
@@ -85,7 +86,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         holder.mAppIcon.setOnClickListener(v -> {
             int currentPos = holder.getBindingAdapterPosition();
             if (currentPos != RecyclerView.NO_POSITION) {
-                restoreList.add(this.data.get(position).getPackageName());
+                restoreList.add(this.data.get(currentPos).getPackageName());
                 notifyItemChanged(currentPos);
                 toggleBatchMenu();
             }
@@ -170,7 +171,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

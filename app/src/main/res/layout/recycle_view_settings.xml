@@ -1,25 +1,27 @@
-<LinearLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="5dp"
     android:orientation="horizontal"
+    android:layout_gravity="center"
     android:gravity="center" >
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="start|center"
             android:scaleType="fitCenter"
-            android:background="@null" />
+            android:background="@null"
+            android:clickable="false" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="5dp" >
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/title"
@@ -34,5 +36,5 @@
                     android:layout_height="wrap_content"
                     android:textStyle="italic"
                     android:visibility="gone" />
-        </LinearLayout>
-</LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

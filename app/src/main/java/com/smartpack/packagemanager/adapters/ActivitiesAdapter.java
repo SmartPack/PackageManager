@@ -67,25 +67,26 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ViewHolder holder, int position) {
-        if (data.get(position).getLabel() != null) {
-            holder.mLabel.setText(data.get(position).getLabel());
+        ActivityItems activityItems = this.data.get(position);
+        if (activityItems.getLabel() != null) {
+            holder.mLabel.setText(activityItems.getLabel());
             holder.mLabel.setVisibility(VISIBLE);
         } else {
             holder.mLabel.setVisibility(GONE);
         }
-        holder.mName.setText(data.get(position).getName());
-        holder.mIcon.setImageDrawable(data.get(position).getIcon());
-        holder.mLaunch.setVisibility(data.get(position).exported() ? VISIBLE : GONE);
-        holder.mShortcut.setVisibility(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && data.get(position).exported() ? VISIBLE : GONE);
+        holder.mName.setText(activityItems.getName());
+        holder.mIcon.setImageDrawable(activityItems.getIcon());
+        holder.mLaunch.setVisibility(activityItems.exported() ? VISIBLE : GONE);
+        holder.mShortcut.setVisibility(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && activityItems.exported() ? VISIBLE : GONE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            holder.mShortcut.setOnClickListener(v -> createShortcut(data.get(position).getName(), data.get(position).getLabel() != null ?
-                    data.get(position).getLabel().toString() : data.get(position).getName(), data.get(position).getIcon(), v.getContext()));
+            holder.mShortcut.setOnClickListener(v -> createShortcut(activityItems.getName(), activityItems.getLabel() != null ?
+                    activityItems.getLabel().toString() : activityItems.getName(), activityItems.getIcon(), v.getContext()));
         }
 
         holder.mLaunch.setOnClickListener(v -> {
             PackageManager pm = v.getContext().getPackageManager();
-            ComponentName component = new ComponentName(packageName, data.get(position).getName());
+            ComponentName component = new ComponentName(packageName, this.data.get(holder.getBindingAdapterPosition()).getName());
 
             try {
                 ActivityInfo info = pm.getActivityInfo(component, PackageManager.GET_META_DATA);
@@ -103,6 +104,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
         AppSettings.setSlideInAnimation(holder.mIconsLayout, position);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createShortcut(String activityName, String label, Drawable drawable, Context context) {
         ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
@@ -135,7 +137,7 @@ public class ActivitiesAdapter extends RecyclerView.Adapter<ActivitiesAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

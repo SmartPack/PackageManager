@@ -111,12 +111,7 @@ public class PackageInfoFragment extends Fragment {
 
         mRootOrShizuku = new RootShell().rootAccess() || new ShizukuShell().isReady();
 
-        mPackageOptionsAdapter = new PackageOptionsAdapter(getPackageOptionsData());
-        mPackageInfoAdapter = new PackageInfoAdapter(getPackageInfoData());
-        mPackageOptions.setAdapter(mPackageOptionsAdapter);
-        mPackageInfo.setAdapter(mPackageInfoAdapter);
-
-        mPackageOptionsAdapter.setOnItemClickListener((position, v) -> {
+        mPackageOptionsAdapter = new PackageOptionsAdapter(getPackageOptionsData(), (position, v) -> {
             switch (getPackageOptionsData().get(position).getPosition()) {
                 case 0:
                     if (mPackageName.equals(BuildConfig.APPLICATION_ID)) {
@@ -169,7 +164,7 @@ public class PackageInfoFragment extends Fragment {
             }
         });
 
-        mPackageInfoAdapter.setOnItemClickListener((position, v) -> {
+        mPackageInfoAdapter = new PackageInfoAdapter(getPackageInfoData(), (position, v) -> {
             if (position == 0) {
                 List<MenuItems> menuItems = new ArrayList<>();
                 menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.playstore)), R.drawable.ic_playstore, 0));
@@ -235,6 +230,9 @@ public class PackageInfoFragment extends Fragment {
                         ).show();
             }
         });
+
+        mPackageOptions.setAdapter(mPackageOptionsAdapter);
+        mPackageInfo.setAdapter(mPackageInfoAdapter);
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override

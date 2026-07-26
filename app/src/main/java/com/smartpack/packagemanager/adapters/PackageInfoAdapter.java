@@ -28,11 +28,12 @@ import java.util.List;
  */
 public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.ViewHolder> {
 
-    private static ClickListener mClickListener;
-    private static List<PackageInfoItems> data;
+    private final List<PackageInfoItems> data;
+    private final OnItemClickListener clickListener;
 
-    public PackageInfoAdapter(List<PackageInfoItems> data) {
-        PackageInfoAdapter.data = data;
+    public PackageInfoAdapter(List<PackageInfoItems> data, OnItemClickListener clickListener) {
+        this.data = data;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -44,34 +45,35 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PackageInfoAdapter.ViewHolder holder, int position) {
-        holder.mTitle.setText(data.get(position).getTitle());
+        PackageInfoItems packageInfoItems = this.data.get(position);
+        holder.mTitle.setText(packageInfoItems.getTitle());
 
-        if (data.get(position).getDescription() != null) {
-            holder.mDescription.setText(data.get(position).getDescription());
+        if (packageInfoItems.getDescription() != null) {
+            holder.mDescription.setText(packageInfoItems.getDescription());
             holder.mDescription.setVisibility(View.VISIBLE);
         } else {
             holder.mDescription.setVisibility(View.GONE);
         }
 
-        if (data.get(position).getDescriptionOne() != null) {
-            holder.mDescriptionOne.setText(data.get(position).getDescriptionOne());
+        if (packageInfoItems.getDescriptionOne() != null) {
+            holder.mDescriptionOne.setText(packageInfoItems.getDescriptionOne());
             holder.mDescriptionOne.setVisibility(View.VISIBLE);
         } else {
             holder.mDescriptionOne.setVisibility(View.GONE);
         }
 
-        if (data.get(position).getDescriptionTwo() != null) {
-            holder.mDescriptionTwo.setText(data.get(position).getDescriptionTwo());
+        if (packageInfoItems.getDescriptionTwo() != null) {
+            holder.mDescriptionTwo.setText(packageInfoItems.getDescriptionTwo());
             holder.mDescriptionTwo.setVisibility(View.VISIBLE);
         } else {
             holder.mDescriptionTwo.setVisibility(View.GONE);
         }
 
-        if (data.get(position).getActionIcon() != null && data.get(position).getActionText() != null) {
-            holder.mIcon.setIcon(data.get(position).getActionIcon());
-            holder.mIcon.setText(data.get(position).getActionText());
+        if (packageInfoItems.getActionIcon() != null && packageInfoItems.getActionText() != null) {
+            holder.mIcon.setIcon(packageInfoItems.getActionIcon());
+            holder.mIcon.setText(packageInfoItems.getActionText());
             holder.mIcon.setVisibility(View.VISIBLE);
-            holder.mIcon.setOnClickListener(v -> mClickListener.onItemClick(position, v));
+            holder.mIcon.setOnClickListener(v -> clickListener.onItemClick(holder.getBindingAdapterPosition(), v));
         } else {
             holder.mIcon.setVisibility(View.GONE);
         }
@@ -81,7 +83,7 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -98,11 +100,7 @@ public class PackageInfoAdapter extends RecyclerView.Adapter<PackageInfoAdapter.
         }
     }
 
-    public void setOnItemClickListener(ClickListener clickListener) {
-        PackageInfoAdapter.mClickListener = clickListener;
-    }
-
-    public interface ClickListener {
+    public interface OnItemClickListener {
         void onItemClick(int position, View v);
     }
 

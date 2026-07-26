@@ -63,16 +63,17 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
     @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull SplitAPKsAdapter.ViewHolder holder, int position) {
-        holder.mName.setText(data.get(position));
+        String splitAPKItem = this.data.get(position);
+        holder.mName.setText(splitAPKItem);
         holder.mSize.setText(sAPKUtils.getAPKSize(new File(sPackageUtils.getParentDir(packageName, holder.mIcon
-                .getContext()) + "/" + data.get(position)).length()));
+                .getContext()) + "/" + splitAPKItem).length()));
         if (sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(packageName, holder.mIcon
-                .getContext()) + "/" + data.get(position), holder.mIcon.getContext()) != null) {
+                .getContext()) + "/" + splitAPKItem, holder.mIcon.getContext()) != null) {
             holder.mIcon.setImageDrawable(sAPKUtils.getAPKIcon(sPackageUtils.getParentDir(packageName, holder.mIcon
-                    .getContext()) + "/" + data.get(position), holder.mIcon.getContext()));
+                    .getContext()) + "/" +splitAPKItem, holder.mIcon.getContext()));
         }
 
-        if (batchList.contains(this.data.get(position))) {
+        if (batchList.contains(splitAPKItem)) {
             holder.mCheckBox.setVisibility(VISIBLE);
             holder.mIcon.setVisibility(GONE);
             holder.mCheckBox.setChecked(true);
@@ -87,7 +88,7 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
         holder.mIcon.setOnClickListener(v -> {
             int currentPos = holder.getBindingAdapterPosition();
             if (currentPos != RecyclerView.NO_POSITION) {
-                batchList.add(this.data.get(position));
+                batchList.add(this.data.get(currentPos));
                 notifyItemChanged(currentPos);
                 toggleBatchMenu();
             }
@@ -131,7 +132,7 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

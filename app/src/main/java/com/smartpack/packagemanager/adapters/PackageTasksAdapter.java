@@ -71,12 +71,14 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
     @Override
     public void onBindViewHolder(@NonNull PackageTasksAdapter.ViewHolder holder, int position) {
         try {
-            if (!sPackageUtils.isPackageInstalled(data.get(position).getPackageName(), holder.appID.getContext())) {
+            PackageItems packageItems = this.data.get(position);
+
+            if (!sPackageUtils.isPackageInstalled(packageItems.getPackageName(), holder.appID.getContext())) {
                 return;
             }
-            this.data.get(position).loadAppIcon(holder.appIcon);
+            packageItems.loadAppIcon(holder.appIcon);
 
-            if (batchList.contains(this.data.get(position).getPackageName())) {
+            if (batchList.contains(packageItems.getPackageName())) {
                 holder.checkBox.setVisibility(VISIBLE);
                 holder.appIcon.setVisibility(GONE);
                 holder.checkBox.setChecked(true);
@@ -88,31 +90,31 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
 
             toggleBatchMenu();
 
-            if (searchText != null && PackageData.isTextMatched(data.get(position).getPackageName(), searchText)) {
+            if (searchText != null && PackageData.isTextMatched(packageItems.getPackageName(), searchText)) {
                 holder.appID.setTypeface(null, Typeface.BOLD);
-                holder.appID.setText(Utils.fromHtml(data.get(position).getPackageName().replace(searchText, "<b><i><font color=\"" +
+                holder.appID.setText(Utils.fromHtml(packageItems.getPackageName().replace(searchText, "<b><i><font color=\"" +
                         Color.RED + "\">" + searchText + "</font></i></b>")));
             } else {
-                holder.appID.setText(data.get(position).getPackageName());
+                holder.appID.setText(packageItems.getPackageName());
             }
 
-            if (searchText != null && PackageData.isTextMatched(data.get(position).getAppName(), searchText)) {
+            if (searchText != null && PackageData.isTextMatched(packageItems.getAppName(), searchText)) {
                 holder.appName.setTypeface(null, Typeface.BOLD);
             }
 
-            if (data.get(position).launchIntent() != null) {
+            if (packageItems.launchIntent() != null) {
                 holder.open.setVisibility(View.VISIBLE);
             } else {
                 holder.open.setVisibility(View.GONE);
             }
 
-            holder.appName.setText(data.get(position).getAppName());
+            holder.appName.setText(packageItems.getAppName());
 
             holder.appIcon.setOnClickListener(v -> {
                 int currentPos = holder.getBindingAdapterPosition();
                 if (currentPos != RecyclerView.NO_POSITION) {
-                    sCommonUtils.toast(v.getContext().getString(R.string.batch_list_added, data.get(position).getAppName()), v.getContext()).show();
-                    batchList.add(this.data.get(position).getPackageName());
+                    sCommonUtils.toast(v.getContext().getString(R.string.batch_list_added, data.get(currentPos).getAppName()), v.getContext()).show();
+                    batchList.add(this.data.get(currentPos).getPackageName());
                     notifyItemChanged(currentPos);
                     toggleBatchMenu();
                 }
@@ -180,7 +182,7 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -132,41 +132,9 @@ public class PackageExploreActivity extends BaseActivity {
                     }
 
                     mData = FilePicker.getData(path, activity, false);
-                    mRecycleViewAdapter = new PackageExploreAdapter(mData, mPackageName, activity);
                 } catch (Exception ignored) {
                     failed = true;
                 }
-            }
-
-            @SuppressLint("StringFormatInvalid")
-            private void onRecyclerViewClick() {
-                mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
-                    String mPath = mData.get(position);
-                    if (position == 0) {
-                        backPressedEvent();
-                    } else if (new File(mPath).isDirectory()) {
-                        reload(mPath, activity);
-                    } else if (PackageExplorer.isTextFile(mPath)) {
-                        Intent textView = new Intent(activity, TextViewActivity.class);
-                        textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
-                        textView.putExtra(TextViewActivity.PACKAGE_INTENT, mPackageName);
-                        startActivity(textView);
-                    } else if (PackageExplorer.isImageFile(mPath)) {
-                        Intent imageView = new Intent(activity, ImageViewActivity.class);
-                        imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
-                        imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, mPackageName);
-                        startActivity(imageView);
-                    } else {
-                        new MaterialAlertDialogBuilder(activity)
-                                .setIcon(R.mipmap.ic_launcher)
-                                .setTitle(R.string.app_name)
-                                .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
-                                .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                })
-                                .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
-                                        .copyToStorage(mPath, mPackageName, activity)).show();
-                    }
-                });
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -178,6 +146,34 @@ public class PackageExploreActivity extends BaseActivity {
                     mError.setText(getString(R.string.explore_error_status, appName));
                     mError.setVisibility(VISIBLE);
                 } else {
+                    mRecycleViewAdapter = new PackageExploreAdapter(mData, mPackageName, (position, v) -> {
+                        String mPath = mData.get(position);
+                        if (position == 0) {
+                            backPressedEvent();
+                        } else if (new File(mPath).isDirectory()) {
+                            reload(mPath, activity);
+                        } else if (PackageExplorer.isTextFile(mPath)) {
+                            Intent textView = new Intent(activity, TextViewActivity.class);
+                            textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
+                            textView.putExtra(TextViewActivity.PACKAGE_INTENT, mPackageName);
+                            startActivity(textView);
+                        } else if (PackageExplorer.isImageFile(mPath)) {
+                            Intent imageView = new Intent(activity, ImageViewActivity.class);
+                            imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
+                            imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, mPackageName);
+                            startActivity(imageView);
+                        } else {
+                            new MaterialAlertDialogBuilder(activity)
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
+                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                    })
+                                    .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
+                                            .copyToStorage(mPath, mPackageName, activity)).show();
+                        }
+                    }, activity);
+
                     mRootPath = path;
                     if (appIcon != null) {
                         mAppIcon.setImageDrawable(appIcon);
@@ -189,7 +185,6 @@ public class PackageExploreActivity extends BaseActivity {
                     mTitle.setText(path.equals(new File(getCacheDir(), "apk").getAbsolutePath()) ? "Root"
                             : new File(path).getName());
                     mRecyclerView.setAdapter(mRecycleViewAdapter);
-                    onRecyclerViewClick();
                 }
             }
         }.execute();

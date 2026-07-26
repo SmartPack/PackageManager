@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,18 +56,19 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
         return new AppOpsAdapter.ViewHolder(rowItem);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull AppOpsAdapter.ViewHolder holder, int position) {
-        holder.mTitle.setText(data.get(position).getTitle().toUpperCase(Locale.getDefault()));
-        holder.mDescription.setText(sPermissionUtils.getDescription(data.get(position).getTitle(), holder.mDescription.getContext()));
-        holder.mStatus.setText(holder.mStatus.getContext().getString(R.string.status, data.get(position).getDescription().toUpperCase(Locale.getDefault())));
+        holder.mTitle.setText(this.data.get(position).getTitle().toUpperCase(Locale.getDefault()));
+        holder.mDescription.setText(sPermissionUtils.getDescription(this.data.get(position).getTitle(), holder.mDescription.getContext()));
+        holder.mStatus.setText(holder.mStatus.getContext().getString(R.string.status, this.data.get(position).getDescription().toUpperCase(Locale.getDefault())));
 
         AppSettings.setSlideInAnimation(holder.mStatus, position);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

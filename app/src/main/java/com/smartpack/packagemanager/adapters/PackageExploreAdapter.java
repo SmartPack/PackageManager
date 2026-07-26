@@ -42,11 +42,12 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
     private final Activity activity;
     private final List<String> data;
     private final String packageName;
-    private static ClickListener clickListener;
+    private final OnItemClickListener clickListener;
 
-    public PackageExploreAdapter(List<String> data, String packageName, Activity activity) {
+    public PackageExploreAdapter(List<String> data, String packageName, OnItemClickListener clickListener, Activity activity) {
         this.data = data;
         this.packageName = packageName;
+        this.clickListener = clickListener;
         this.activity = activity;
     }
 
@@ -66,7 +67,7 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
             holder.mSize.setVisibility(GONE);
             holder.mExport.setVisibility(GONE);
         } else {
-            if (new File(data.get(position)).isDirectory()) {
+            if (new File(this.data.get(position)).isDirectory()) {
                 holder.mTitle.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
                 holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
                 if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
@@ -93,20 +94,20 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
                 holder.mSize.setVisibility(VISIBLE);
                 holder.mExport.setVisibility(VISIBLE);
             }
-            holder.mTitle.setText(new File(data.get(position)).getName());
+            holder.mTitle.setText(new File(this.data.get(position)).getName());
         }
 
-        holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(data.get(position), packageName, activity));
+        holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(this.data.get(position), packageName, activity));
 
         AppSettings.setSlideInAnimation(holder.itemView, position);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final AppCompatImageButton mIcon;
         private final MaterialButton mExport;
         private final MaterialTextView mTitle, mSize;
@@ -122,15 +123,13 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
 
         @Override
         public void onClick(View view) {
-            clickListener.onItemClick(getBindingAdapterPosition(), view);
+            if (clickListener != null) {
+                clickListener.onItemClick(getBindingAdapterPosition(), view);
+            }
         }
     }
 
-    public void setOnItemClickListener(ClickListener clickListener) {
-        PackageExploreAdapter.clickListener = clickListener;
-    }
-
-    public interface ClickListener {
+    public interface OnItemClickListener {
         void onItemClick(int position, View v);
     }
 

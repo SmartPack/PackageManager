@@ -26,10 +26,10 @@ import java.util.List;
  */
 public class APKDetailsAdapter extends RecyclerView.Adapter<APKDetailsAdapter.ViewHolder> {
 
-    private static List<String> data;
+    private final List<String> data;
 
     public APKDetailsAdapter(List<String> data) {
-        APKDetailsAdapter.data = data;
+        this.data = data;
     }
 
     @NonNull
@@ -41,14 +41,14 @@ public class APKDetailsAdapter extends RecyclerView.Adapter<APKDetailsAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull APKDetailsAdapter.ViewHolder holder, int position) {
-        holder.mText.setText(data.get(position));
+        holder.mText.setText(this.data.get(position));
 
         AppSettings.setSlideInAnimation(holder.itemView, position);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

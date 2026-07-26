@@ -45,9 +45,9 @@ public class APKPickerAdapter extends RecyclerView.Adapter<APKPickerAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull APKPickerAdapter.ViewHolder holder, int position) {
-        new APKFile(data.get(position).getAPKFile()).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
+        new APKFile(this.data.get(position).getAPKFile()).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
         holder.mSize.setVisibility(View.VISIBLE);
-        holder.mCheckBox.setChecked(data.get(position).isSelected());
+        holder.mCheckBox.setChecked(this.data.get(position).isSelected());
         holder.mCheckBox.setVisibility(View.VISIBLE);
 
         AppSettings.setSlideInAnimation(holder.mCheckBox, position);

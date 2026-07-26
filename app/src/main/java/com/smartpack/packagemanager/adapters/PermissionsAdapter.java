@@ -57,16 +57,17 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PermissionsAdapter.ViewHolder holder, int position) {
-        holder.mTitle.setText(data.get(position).getTitle().replace("android.permission.",""));
-        holder.mDescription.setText(data.get(position).getDescription());
-        holder.mGranted.setChecked(data.get(position).isGranted());
+        PermissionsItems permissionsItems = this.data.get(position);
+        holder.mTitle.setText(permissionsItems.getTitle().replace("android.permission.",""));
+        holder.mDescription.setText(permissionsItems.getDescription());
+        holder.mGranted.setChecked(permissionsItems.isGranted());
         holder.mGranted.setOnClickListener(v -> {
             if (mRootShell.rootAccess()) {
-                mRootShell.runCommand("pm " + (data.get(position).isGranted() ? "revoke " : "grant ") +
-                        packageName + " " + data.get(position).getTitle());
+                mRootShell.runCommand("pm " + (permissionsItems.isGranted() ? "revoke " : "grant ") +
+                        packageName + " " + permissionsItems.getTitle());
             } else {
-                mShizukuShell.runCommand("pm " + (data.get(position).isGranted() ? "revoke " : "grant ") +
-                        packageName + " " + data.get(position).getTitle());
+                mShizukuShell.runCommand("pm " + (permissionsItems.isGranted() ? "revoke " : "grant ") +
+                        packageName + " " + permissionsItems.getTitle());
             }
         });
         if (!apkPicked && (mRootShell.rootAccess() || mShizukuShell.isReady())) {
@@ -81,7 +82,7 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

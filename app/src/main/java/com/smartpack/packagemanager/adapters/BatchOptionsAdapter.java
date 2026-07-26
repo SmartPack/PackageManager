@@ -11,6 +11,7 @@ package com.smartpack.packagemanager.adapters;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,16 +48,18 @@ public class BatchOptionsAdapter extends RecyclerView.Adapter<BatchOptionsAdapte
         return new ViewHolder(rowItem);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull BatchOptionsAdapter.ViewHolder holder, int position) {
-        holder.mAppIcon.setImageDrawable(data.get(position).getIcon());
-        holder.mAppID.setText(data.get(position).getPackageName());
-        holder.mAppName.setText(data.get(position).getName());
-        holder.mCheckBox.setChecked(data.get(position).isChecked());
+        BatchOptionsItems batchOptionsItems = this.data.get(position);
+        holder.mAppIcon.setImageDrawable(batchOptionsItems.getIcon());
+        holder.mAppID.setText(batchOptionsItems.getPackageName());
+        holder.mAppName.setText(batchOptionsItems.getName());
+        holder.mCheckBox.setChecked(batchOptionsItems.isChecked());
 
-        if (data.get(position).getStatus() != Integer.MIN_VALUE) {
+        if (batchOptionsItems.getStatus() != Integer.MIN_VALUE) {
             holder.mInfoButton.setVisibility(VISIBLE);
-            holder.mInfoButton.setImageDrawable(sCommonUtils.getDrawable(data.get(position).getStatus() == 0 ? R.drawable.ic_info
+            holder.mInfoButton.setImageDrawable(sCommonUtils.getDrawable(batchOptionsItems.getStatus() == 0 ? R.drawable.ic_info
                     : R.drawable.ic_cancel, holder.mInfoButton.getContext()));
             holder.mCheckBox.setVisibility(GONE);
         } else {
@@ -64,16 +67,16 @@ public class BatchOptionsAdapter extends RecyclerView.Adapter<BatchOptionsAdapte
             holder.mCheckBox.setVisibility(VISIBLE);
         }
         holder.mInfoButton.setOnClickListener(v -> sCommonUtils.toast(holder.mInfoButton.getContext().getString(R.string.status,
-                data.get(position).getStatus() == 0 ? holder.mInfoButton.getContext().getString(R.string.ignored) : holder.mInfoButton.getContext()
+                batchOptionsItems.getStatus() == 0 ? holder.mInfoButton.getContext().getString(R.string.ignored) : holder.mInfoButton.getContext()
                         .getString(R.string.failed)), holder.mInfoButton.getContext()).show());
-        holder.mCheckBox.setOnClickListener(v -> data.get(position).setChecked(holder.mCheckBox.isChecked()));
+        holder.mCheckBox.setOnClickListener(v -> batchOptionsItems.setChecked(holder.mCheckBox.isChecked()));
 
         AppSettings.setSlideInAnimation(holder.mAppIcon, position);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return this.data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
