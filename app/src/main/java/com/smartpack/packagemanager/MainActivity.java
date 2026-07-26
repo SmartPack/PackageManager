@@ -12,20 +12,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.smartpack.packagemanager.activities.BaseActivity;
 import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
 import com.smartpack.packagemanager.fragments.ExportedAppsFragment;
 import com.smartpack.packagemanager.fragments.PackageTasksFragment;
@@ -34,43 +28,31 @@ import com.smartpack.packagemanager.fragments.UninstalledAppsFragment;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CrashReporter.sCrashReporter;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
+import navView.NavView;
+import navView.serializableItems.NavViewEntry;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
  */
-public class MainActivity extends AppCompatActivity {
-
-    private Fragment mFragment;
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Set App Language
         sThemeUtils.setLanguage(this);
-        setContentView(R.layout.activity_main);
+        setContentViewWithInsets(R.layout.activity_main, R.id.layout_root);
 
-        View mRootView = findViewById(R.id.layout_root);
         View mLayoutContainer = findViewById(R.id.layout_container);
-        BottomNavigationView mBottomNav = findViewById(R.id.bottom_navigation);
+        NavView mNavView = findViewById(R.id.nav_view);
         FloatingActionButton mFAB = findViewById(R.id.fab);
-
-        ViewCompat.setOnApplyWindowInsetsListener(mRootView, (view, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            view.setPadding(
-                    0,
-                    systemBars.top,
-                    0,
-                    0
-            );
-
-            return insets;
-        });
 
         // Record crashes
         sCrashReporter crashReporter = new sCrashReporter(this);
@@ -78,35 +60,21 @@ public class MainActivity extends AppCompatActivity {
         crashReporter.setTitleSize(20);
         crashReporter.initialize();
 
-        Menu menu = mBottomNav.getMenu();
-        menu.add(Menu.NONE, 0, Menu.NONE, null).setIcon(R.drawable.ic_apps);
-        menu.add(Menu.NONE, 1, Menu.NONE, null).setIcon(R.drawable.ic_apks);
-        menu.add(Menu.NONE, 2, Menu.NONE, null).setIcon(R.drawable.ic_delete);
-        menu.add(Menu.NONE, 3, Menu.NONE, null).setIcon(R.drawable.ic_settings);
+        List<NavViewEntry> data = new CopyOnWriteArrayList<>();
+        data.add(new NavViewEntry(PackageTasksFragment::new, R.drawable.ic_apps, getString(R.string.installed)));
+        data.add(new NavViewEntry(ExportedAppsFragment::new, R.drawable.ic_apks, getString(R.string.exported)));
+        data.add(new NavViewEntry(UninstalledAppsFragment::new, R.drawable.ic_delete, getString(R.string.uninstalled)));
+        data.add(new NavViewEntry(SettingsFragment::new, R.drawable.ic_settings, getString(R.string.settings)));
 
-        mBottomNav.setOnItemSelectedListener(
-                menuItem -> {
-                    switch (menuItem.getItemId()) {
-                        case 0:
-                            mFragment = new PackageTasksFragment();
-                            break;
-                        case 1:
-                            mFragment = new ExportedAppsFragment();
-                            break;
-                        case 2:
-                            mFragment = new UninstalledAppsFragment();
-                            break;
-                        case 3:
-                            mFragment = new SettingsFragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            mFragment).commit();
-                    return true;
-                }
+        mNavView.setNavigationItems(data);
+
+        mNavView.setOnItemSelectedListener((fragment, position) -> getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
         );
 
-        mBottomNav.post(() -> mLayoutContainer.setPadding(0, 0, 0, mBottomNav.getHeight()));
+        mNavView.post(() -> mLayoutContainer.setPadding(0, 0, 0, mNavView.getHeight()));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

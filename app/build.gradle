@@ -71,6 +71,8 @@ android {
 }
 
 dependencies {
+    api(project(":navView"))
+
     implementation libs.axml
 
     implementation libs.documentfile

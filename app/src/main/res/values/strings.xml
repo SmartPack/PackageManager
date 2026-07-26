@@ -57,6 +57,7 @@
     <string name="export_selected_question">Export selected apps?</string>
     <string name="export_storage_message">Export %s into device storage?</string>
     <string name="export_success_message">The selected item(s) has been exported.\n\nPath:  %s</string>
+    <string name="exported">Exported</string>
     <string name="exported_apps">Exported Apps</string>
     <string name="exported_apps_name">Exported APK Name</string>
     <string name="exporting">Exporting %s</string>
@@ -72,6 +73,8 @@
     <string name="initializing">Initializing…</string>
     <string name="install">Install</string>
     <string name="install_question">Install \'%s\'?</string>
+    <string name="installed">Installed</string>
+    <string name="installed_apps">Installed Apps</string>
     <string name="installation_cancel_message">Are you sure to cancel the installation?</string>
     <string name="installer">Installer</string>
     <string name="installer_clicking">On Clicking Installer</string>
@@ -195,6 +198,7 @@
     <string name="uninstall_title">Are you sure to uninstall %s?</string>
     <string name="uninstall_updates_message">A local update of \'%s\' is, however, installed, which can be freely removed by clicking the \"Uninstall\" button.</string>
     <string name="uninstall_warning">Important: Uninstalling system apps can sometimes lead to unexpected issues or reduced device functionality.\n\n *** <b>USE AT YOUR OWN RISK</b> ***\n</string>
+    <string name="uninstalled">Uninstalled</string>
     <string name="uninstalled_apps">Uninstalled Apps</string>
     <string name="update">Update</string>
     <string name="user_interface">User Interface</string>

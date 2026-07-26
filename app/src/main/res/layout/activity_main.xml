@@ -30,11 +30,9 @@
         android:src="@drawable/ic_add"
         android:visibility="gone" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <navView.NavView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="?android:attr/windowBackground"
-        app:labelVisibilityMode="unlabeled"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

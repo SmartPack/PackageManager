@@ -13,7 +13,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.smartpack.packagemanager.R;
 
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ import java.util.Objects;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sSerializableItems;
 import in.sunilpaulmathew.sCommon.Dialog.sSingleChoiceDialog;
+import navView.NavView;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
@@ -276,8 +276,8 @@ public class AppSettings {
     }
 
     public static void navigateToFragment(Activity activity, int position) {
-        BottomNavigationView bottomNavigationView = activity.findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(position);
+        NavView navView = activity.findViewById(R.id.nav_view);
+        navView.setSelectedPosition(position);
     }
 
     public static void setLanguage(Activity activity) {

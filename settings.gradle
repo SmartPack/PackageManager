@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-include ':app'
+include(":app", ":navView")
 rootProject.name = "Package Manager"
