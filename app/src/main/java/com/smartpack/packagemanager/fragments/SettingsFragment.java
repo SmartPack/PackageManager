@@ -10,14 +10,12 @@ package com.smartpack.packagemanager.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -26,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.SettingsAdapter;
@@ -35,7 +32,8 @@ import com.smartpack.packagemanager.utils.Billing;
 import com.smartpack.packagemanager.utils.SerializableItems.SettingsItems;
 import com.smartpack.packagemanager.utils.Utils;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.Credits.sCreditsUtils;
@@ -48,76 +46,31 @@ import in.sunilpaulmathew.sCommon.TranslatorUtils.sTranslatorUtils;
  */
 public class SettingsFragment extends Fragment {
 
-    private final ArrayList <SettingsItems> mData = new ArrayList<>();
+    private SettingsAdapter mRecycleViewAdapter;
 
-    @SuppressLint({"StringFormatInvalid", "SetTextI18n"})
+    @SuppressLint("StringFormatInvalid")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mRootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        LinearLayout mAppInfo = mRootView.findViewById(R.id.app_info);
-        MaterialTextView mAppTitle = mRootView.findViewById(R.id.title);
-        MaterialTextView mCopyright = mRootView.findViewById(R.id.copyright);
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
 
         requireActivity().findViewById(R.id.fab).setVisibility(View.GONE);
 
-        mAppTitle.setText(getString(R.string.version, Billing.getAppVersion()));
-        mAppTitle.setTextColor(sThemeUtils.isDarkTheme(requireActivity()) ? Color.WHITE : Color.BLACK);
-        mCopyright.setText(getString(R.string.copyright, getString(R.string.copyright_text)));
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        SettingsAdapter mRecycleViewAdapter = new SettingsAdapter(mData);
-        mRecyclerView.setAdapter(mRecycleViewAdapter);
-
-        mAppInfo.setOnClickListener(v -> {
-            Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Uri uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null);
-            settings.setData(uri);
-            startActivity(settings);
-        });
-
-        // User interface
-        mData.add(new SettingsItems(getString(R.string.user_interface), null, null, null, true, 15));
-        mData.add(new SettingsItems(getString(R.string.language), AppSettings.getLanguageDescription(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_language, requireActivity()), null, false, 18));
-        mData.add(new SettingsItems(getString(R.string.app_theme), sThemeUtils.getAppTheme(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_theme, requireActivity()), null, false, 18));
-
-        // General
-        mData.add(new SettingsItems(getString(R.string.general), null, null, null, true, 15));
-        mData.add(new SettingsItems(getString(R.string.exported_apps_name), AppSettings.getExportedAPKName(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_pencil, requireActivity()), null, false, 18));
-        mData.add(new SettingsItems(getString(R.string.installer_clicking), AppSettings.getInstallerStatus(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_install, requireActivity()), null, false, 18));
-        mData.add(new SettingsItems(getString(R.string.exiting_app), AppSettings.getExitingStatus(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_exit, requireActivity()), null, false, 18));
-
-        // Other
-        mData.add(new SettingsItems(getString(R.string.other), null, null, null, true, 15));
-        mData.add(new SettingsItems(getString(R.string.source_code), getString(R.string.source_code_summary), sCommonUtils.getDrawable(
-                R.drawable.ic_github, requireActivity()), "https://github.com/SmartPack/PackageManager", false, 18));
-        mData.add(new SettingsItems(getString(R.string.support), getString(R.string.support_summary), sCommonUtils.getDrawable(R.drawable.ic_support, requireActivity()),
-                "https://t.me/smartpack_kmanager", false, 18));
-        mData.add(new SettingsItems(getString(R.string.report_issue), getString(R.string.report_issue_summary), sCommonUtils.getDrawable(R.drawable.ic_issue, requireActivity()),
-                "https://github.com/SmartPack/PackageManager/issues/new/choose", false, 18));
-        mData.add(new SettingsItems(getString(R.string.support_development), null, sCommonUtils.getDrawable(R.drawable.ic_donate, requireActivity()), null, false, 18));
-        mData.add(new SettingsItems(getString(R.string.more_apps), getString(R.string.more_apps_summary), sCommonUtils.getDrawable(
-                R.drawable.ic_playstore, requireActivity()), "https://play.google.com/store/apps/dev?id=5836199813143882901", false, 18));
-        mData.add(new SettingsItems(getString(R.string.documentation), getString(R.string.documentation_summary), sCommonUtils.getDrawable(
-                R.drawable.ic_book, requireActivity()), "https://smartpack.github.io/PackageManager/general/", false, 18));
-        mData.add(new SettingsItems(getString(R.string.translations), getString(R.string.translations_summary), sCommonUtils.getDrawable(
-                R.drawable.ic_translate, requireActivity()), null, false, 18));
-        mData.add(new SettingsItems(getString(R.string.change_logs), null, sCommonUtils.getDrawable(R.drawable.ic_change_logs, requireActivity()),
-                "https://smartpack.github.io/PackageManager/changelog/", false, 18));
-        mData.add(new SettingsItems(getString(R.string.share_app), getString(R.string.share_app_Summary), sCommonUtils.getDrawable(R.drawable.ic_share, requireActivity()), null, false, 18));
-        mData.add(new SettingsItems(getString(R.string.rate_us), getString(R.string.rate_us_Summary), sCommonUtils.getDrawable(R.drawable.ic_rate, requireActivity()),
-                "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" + Billing.getPackageExt(), false, 18));
-        mData.add(new SettingsItems(getString(R.string.credits), getString(R.string.credits_summary), sCommonUtils.getDrawable(R.drawable.ic_credits, requireActivity()),null, false, 18));
-
-        mRecycleViewAdapter.setOnItemClickListener((position, v) -> {
-            if (mData.get(position).getUrl() != null) {
-                sCommonUtils.launchUrl(mData.get(position).getUrl(), requireActivity());
+        mRecyclerView.setAdapter(mRecycleViewAdapter = new SettingsAdapter(getData(), (settingsItems, position) -> {
+            if (settingsItems.isWebLink()) {
+                sCommonUtils.launchUrl(settingsItems.getUrl(), requireActivity());
             } else if (position == 1) {
-                AppSettings.setLanguage(requireActivity());
+                Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Uri uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null);
+                settings.setData(uri);
+                startActivity(settings);
             } else if (position == 2) {
+                AppSettings.setLanguage(requireActivity());
+            } else if (position == 3) {
                 new sSingleChoiceDialog(R.drawable.ic_theme, getString(R.string.app_theme),
                         new String[] {
                                 getString(R.string.app_theme_auto),
@@ -144,7 +97,7 @@ public class SettingsFragment extends Fragment {
                                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                                 break;
                         }
-                        mData.get(position).setDescription(sThemeUtils.getAppTheme(requireActivity()));
+                        settingsItems.setDescription(sThemeUtils.getAppTheme(requireActivity()));
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
@@ -166,7 +119,7 @@ public class SettingsFragment extends Fragment {
                                 }
                                 break;
                         }
-                        mData.get(position).setDescription(AppSettings.getExportedAPKName(requireActivity()));
+                        settingsItems.setDescription(AppSettings.getExportedAPKName(requireActivity()));
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
@@ -188,7 +141,7 @@ public class SettingsFragment extends Fragment {
                                 }
                                 break;
                         }
-                        mData.get(position).setDescription(AppSettings.getInstallerStatus(requireActivity()));
+                        settingsItems.setDescription(AppSettings.getInstallerStatus(requireActivity()));
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
@@ -210,15 +163,15 @@ public class SettingsFragment extends Fragment {
                                 }
                                 break;
                         }
-                        mData.get(position).setDescription(AppSettings.getExitingStatus(requireActivity()));
+                        settingsItems.setDescription(AppSettings.getExitingStatus(requireActivity()));
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
-            } else if (position == 11) {
+            } else if (position == 7) {
                 Billing.showDonateOption(requireActivity());
-            } else if (position == 14) {
+            } else if (position == 8) {
                 new sTranslatorUtils(getString(R.string.app_name), "https://poeditor.com/join/project?hash=0CitpyI1Oc", requireActivity()).show();
-            } else if (position == 16) {
+            } else if (position == 9) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
@@ -226,16 +179,16 @@ public class SettingsFragment extends Fragment {
                 share_app.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(share_app, getString(R.string.share_with));
                 startActivity(shareIntent);
-            } else if (position == 18) {
+            } else if (position == 10) {
                 new sCreditsUtils(AppSettings.getCredits(),
                         sCommonUtils.getDrawable(R.mipmap.ic_launcher, requireActivity()),
                         sCommonUtils.getDrawable(R.drawable.ic_back, requireActivity()),
                         Utils.getColor(R.attr.colorPrimary, requireActivity()),
                         25, getString(R.string.app_name), getString(R.string.copyright_text),
-                        Billing.getAppVersion()).launchCredits(v.getContext()
+                        Billing.getAppVersion()).launchCredits(requireActivity()
                 );
             }
-        });
+        }));
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
@@ -246,6 +199,47 @@ public class SettingsFragment extends Fragment {
         });
 
         return mRootView;
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private List<SettingsItems> getData() {
+        List <SettingsItems> mData = new CopyOnWriteArrayList<>();
+        mData.add(new SettingsItems(getString(R.string.app_name) + " " + Billing.getAppVersion(), getString(R.string.copyright, getString(R.string.copyright_text)), sCommonUtils.getDrawable(R.mipmap.ic_launcher_round, requireActivity()), 1));
+
+        // User interface
+        mData.add(new SettingsItems(getString(R.string.user_interface)));
+        mData.add(new SettingsItems(getString(R.string.language), AppSettings.getLanguageDescription(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_language, requireActivity()), 2));
+        mData.add(new SettingsItems(getString(R.string.app_theme), sThemeUtils.getAppTheme(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_theme, requireActivity()), 3));
+
+        // General
+        mData.add(new SettingsItems(getString(R.string.general)));
+        mData.add(new SettingsItems(getString(R.string.exported_apps_name), AppSettings.getExportedAPKName(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_pencil, requireActivity()), 4));
+        mData.add(new SettingsItems(getString(R.string.installer_clicking), AppSettings.getInstallerStatus(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_install, requireActivity()), 5));
+        mData.add(new SettingsItems(getString(R.string.exiting_app), AppSettings.getExitingStatus(requireActivity()), sCommonUtils.getDrawable(R.drawable.ic_exit, requireActivity()), 6));
+
+        // Other
+        mData.add(new SettingsItems(getString(R.string.other)));
+        mData.add(new SettingsItems(getString(R.string.source_code), getString(R.string.source_code_summary), sCommonUtils.getDrawable(
+                R.drawable.ic_github, requireActivity()), "https://github.com/SmartPack/PackageManager"));
+        mData.add(new SettingsItems(getString(R.string.support), getString(R.string.support_summary), sCommonUtils.getDrawable(R.drawable.ic_support, requireActivity()),
+                "https://t.me/smartpack_kmanager"));
+        mData.add(new SettingsItems(getString(R.string.report_issue), getString(R.string.report_issue_summary), sCommonUtils.getDrawable(R.drawable.ic_issue, requireActivity()),
+                "https://github.com/SmartPack/PackageManager/issues/new/choose"));
+        mData.add(new SettingsItems(getString(R.string.support_development), "", sCommonUtils.getDrawable(R.drawable.ic_donate, requireActivity()), 7));
+        mData.add(new SettingsItems(getString(R.string.more_apps), getString(R.string.more_apps_summary), sCommonUtils.getDrawable(
+                R.drawable.ic_playstore, requireActivity()), "https://play.google.com/store/apps/dev?id=5836199813143882901"));
+        mData.add(new SettingsItems(getString(R.string.documentation), getString(R.string.documentation_summary), sCommonUtils.getDrawable(
+                R.drawable.ic_book, requireActivity()), "https://smartpack.github.io/PackageManager/general/"));
+        mData.add(new SettingsItems(getString(R.string.translations), getString(R.string.translations_summary), sCommonUtils.getDrawable(
+                R.drawable.ic_translate, requireActivity()), 8));
+        mData.add(new SettingsItems(getString(R.string.change_logs), "", sCommonUtils.getDrawable(R.drawable.ic_change_logs, requireActivity()),
+                "https://smartpack.github.io/PackageManager/changelog/"));
+        mData.add(new SettingsItems(getString(R.string.share_app), getString(R.string.share_app_Summary), sCommonUtils.getDrawable(R.drawable.ic_share, requireActivity()), 9));
+        mData.add(new SettingsItems(getString(R.string.rate_us), getString(R.string.rate_us_Summary), sCommonUtils.getDrawable(R.drawable.ic_rate, requireActivity()),
+                "https://play.google.com/store/apps/details?id=com.smartpack.packagemanager" + Billing.getPackageExt()));
+        mData.add(new SettingsItems(getString(R.string.credits), getString(R.string.credits_summary), sCommonUtils.getDrawable(R.drawable.ic_credits, requireActivity()), 10));
+
+        return mData;
     }
 
 }

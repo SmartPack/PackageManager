@@ -20,40 +20,66 @@ public class SettingsItems implements Serializable {
     private String mDescription;
     private final String mTitle, mUrl;
     private final Drawable mIcon;
-    private final boolean mSectionHeading;
-    private final int mSize;
+    private final int mID;
 
-    public SettingsItems(String title, String description, Drawable icon, String url, boolean sectionHeading, int size) {
+    public SettingsItems(String title, String description, Drawable icon, String url, int id) {
         this.mTitle = title;
         this.mDescription = description;
         this.mIcon = icon;
         this.mUrl = url;
-        this.mSectionHeading = sectionHeading;
-        this.mSize = size;
+        this.mID = id;
+    }
+
+    public SettingsItems(String title, String description, Drawable icon, int id) {
+        this.mTitle = title;
+        this.mDescription = description;
+        this.mIcon = icon;
+        this.mUrl = null;
+        this.mID = id;
+    }
+
+    public SettingsItems(String title, String description, Drawable icon, String url) {
+        this.mTitle = title;
+        this.mDescription = description;
+        this.mIcon = icon;
+        this.mUrl = url;
+        this.mID = 0;
+    }
+
+    public SettingsItems(String title) {
+        this.mTitle = title;
+        this.mDescription = null;
+        this.mIcon = null;
+        this.mUrl = null;
+        this.mID = 0;
     }
 
     public String getTitle() {
-        return mTitle;
+        return this.mTitle;
     }
 
     public String getDescription() {
-        return mDescription;
+        return this.mDescription;
     }
 
     public Drawable getIcon() {
-        return mIcon;
+        return this.mIcon;
     }
 
     public String getUrl() {
-        return mUrl;
+        return this.mUrl;
     }
 
     public boolean isSectionHeading() {
-        return mSectionHeading;
+        return this.mID == 0 && this.mTitle != null && this.mUrl != null && this.mDescription == null;
     }
 
-    public int getSize() {
-        return mSize;
+    public boolean isWebLink() {
+        return this.mID == 0 && this.mUrl != null;
+    }
+
+    public int getId() {
+        return this.mID;
     }
 
     public void setDescription(String description) {

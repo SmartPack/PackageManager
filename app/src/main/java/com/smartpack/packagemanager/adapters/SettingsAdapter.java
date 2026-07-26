@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.adapters;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +23,20 @@ import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.SerializableItems.SettingsItems;
 import com.smartpack.packagemanager.utils.Utils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 10, 2020
  */
 public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHolder> {
 
-    private static ArrayList<SettingsItems> data;
+    private final List<SettingsItems> data;
 
-    private static ClickListener mClickListener;
+    private final OnItemClickListener clickListener;
 
-    public SettingsAdapter(ArrayList<SettingsItems> data) {
-        SettingsAdapter.data = data;
+    public SettingsAdapter(List<SettingsItems> data, OnItemClickListener clickListener) {
+        this.data = data;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -46,30 +48,30 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull SettingsAdapter.ViewHolder holder, int position) {
-        if (data.get(position).getTitle() != null) {
-            holder.mTitle.setText(data.get(position).getTitle());
-        }
-        if (data.get(position).isSectionHeading()) {
-            holder.mDivider.setVisibility(View.VISIBLE);
-        } else {
-            holder.mDivider.setVisibility(View.GONE);
-        }
-        holder.mTitle.setTextSize(data.get(position).getSize());
-        if (data.get(position).getDescription() == null && data.get(position).getIcon() == null) {
-            holder.mTitle.setTextColor(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
-        } else {
+        SettingsItems items = this.data.get(position);
+
+        if (items.getTitle() != null) {
             holder.mTitle.setTextColor(Utils.getColor(R.attr.colorPrimary, holder.mTitle.getContext()));
+            holder.mTitle.setText(items.getTitle());
+        } else {
+            holder.mTitle.setTextColor(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
         }
-        if (data.get(position).getDescription() != null) {
-            holder.mDescription.setText(data.get(position).getDescription());
+
+        if (items.isSectionHeading()) {
+            holder.mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        } else {
+            holder.mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+        }
+
+        if (items.getDescription() != null && !items.getDescription().trim().isEmpty()) {
+            holder.mDescription.setText(items.getDescription());
             holder.mDescription.setVisibility(View.VISIBLE);
-            holder.mDescription.setTextColor(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
         } else {
             holder.mDescription.setVisibility(View.GONE);
         }
-        if (data.get(position).getIcon() != null) {
-            holder.mIcon.setImageDrawable(data.get(position).getIcon());
-            holder.mIcon.setColorFilter(Utils.getColor(R.attr.editTextColor, holder.mTitle.getContext()));
+
+        if (items.getIcon() != null) {
+            holder.mIcon.setImageDrawable(items.getIcon());
             holder.mIcon.setVisibility(View.VISIBLE);
         } else {
             holder.mIcon.setVisibility(View.GONE);
@@ -83,10 +85,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         return data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final AppCompatImageView mIcon;
         private final MaterialTextView mDescription, mTitle;
-        private final View mDivider;
 
         public ViewHolder(View view) {
             super(view);
@@ -94,21 +95,17 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             this.mIcon = view.findViewById(R.id.icon);
             this.mTitle = view.findViewById(R.id.title);
             this.mDescription = view.findViewById(R.id.description);
-            this.mDivider = view.findViewById(R.id.divider);
         }
 
         @Override
         public void onClick(View view) {
-            mClickListener.onItemClick(getBindingAdapterPosition(), view);
+            SettingsItems items = data.get(getBindingAdapterPosition());
+            clickListener.onItemClick(items, items.getId());
         }
     }
 
-    public void setOnItemClickListener(ClickListener clickListener) {
-        SettingsAdapter.mClickListener = clickListener;
-    }
-
-    public interface ClickListener {
-        void onItemClick(int position, View v);
+    public interface OnItemClickListener {
+        void onItemClick(SettingsItems items, int position);
     }
 
 }

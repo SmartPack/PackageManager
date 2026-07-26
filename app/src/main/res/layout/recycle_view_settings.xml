@@ -2,47 +2,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="10dp" >
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
+    android:orientation="horizontal"
+    android:gravity="center" >
 
-        <FrameLayout
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start|center"
+            android:scaleType="fitCenter"
+            android:background="@null" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" >
+            android:layout_marginHorizontal="5dp"
+            android:orientation="vertical" >
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="start|center"
-                    android:background="@null" />
-
-                <LinearLayout
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp"
-                    android:orientation="vertical" >
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="?attr/colorPrimary"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textStyle="italic"
-                            android:visibility="gone" />
-                </LinearLayout>
-        </FrameLayout>
-
-        <View
-            android:id="@+id/divider"
-            android:layout_marginTop="5dp"
-            android:visibility="gone"
-            style="@style/Divider"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+        </LinearLayout>
 </LinearLayout>
