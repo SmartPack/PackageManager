@@ -13,17 +13,17 @@ import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,12 +33,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.BottomMenuDialog;
 import com.smartpack.packagemanager.dialogs.BundleInstallDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.FilePicker;
 import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
+import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
@@ -81,15 +83,15 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         return new ExportedAppsAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull ExportedAppsAdapter.ViewHolder holder, int position) {
-        if (data.get(position).endsWith(".apk")) {
-            new APKFile(data.get(position)).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
+        String item = this.data.get(position);
+        if (item.endsWith(".apk")) {
+            new APKFile(item).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);
         } else {
             holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_bundle, holder.mIcon.getContext()));
-            holder.mTitle.setText(new File(data.get(position)).getName());
-            holder.mSize.setText(sAPKUtils.getAPKSize(new File(data.get(position)).length()));
+            holder.mTitle.setText(new File(item).getName());
+            holder.mSize.setText(sAPKUtils.getAPKSize(new File(item).length()));
             holder.mDescription.setVisibility(GONE);
         }
 
@@ -97,7 +99,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         holder.mSize.setVisibility(VISIBLE);
         holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_menu, holder.mAction.getContext()));
 
-        if (batchList.contains(this.data.get(position))) {
+        if (batchList.contains(item)) {
             holder.mCheckBox.setVisibility(VISIBLE);
             holder.mIcon.setVisibility(GONE);
             holder.mCheckBox.setChecked(true);
@@ -112,7 +114,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         holder.mIcon.setOnClickListener(v -> {
             int currentPos = holder.getBindingAdapterPosition();
             if (currentPos != RecyclerView.NO_POSITION) {
-                batchList.add(this.data.get(position));
+                batchList.add(this.data.get(currentPos));
                 notifyItemChanged(currentPos);
                 toggleBatchMenu();
             }
@@ -127,50 +129,46 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
             }
         });
 
-        holder.mAction.setOnClickListener(v -> {
-            int currentPos = holder.getBindingAdapterPosition();
-            if (currentPos == RecyclerView.NO_POSITION) return;
-
-            PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
-            Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 0, Menu.NONE, v.getContext().getString(R.string.share)).setIcon(R.drawable.ic_share);
-            menu.add(Menu.NONE, 1, Menu.NONE, v.getContext().getString(R.string.delete)).setIcon(R.drawable.ic_delete);
-            popupMenu.setForceShowIcon(true);
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 0:
-                        Uri uriFile = FileProvider.getUriForFile(v.getContext(), BuildConfig.APPLICATION_ID + ".provider",
-                                new File(data.get(currentPos)));
-                        Intent shareScript = new Intent(Intent.ACTION_SEND);
-                        shareScript.setType(data.get(currentPos).endsWith(".apkm") ? "application/zip" : "application/java-archive");
-                        shareScript.putExtra(Intent.EXTRA_SUBJECT, v.getContext().getString(R.string.shared_by, new File(data.get(currentPos)).getName()));
-                        shareScript.putExtra(Intent.EXTRA_TEXT, v.getContext().getString(R.string.share_message, BuildConfig.VERSION_NAME));
-                        shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
-                        shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        v.getContext().startActivity(Intent.createChooser(shareScript, v.getContext().getString(R.string.share_with)));
-                        break;
-                    case 1:
-                        new MaterialAlertDialogBuilder(v.getContext())
-                                .setIcon(R.mipmap.ic_launcher)
-                                .setTitle(v.getContext().getString(R.string.delete_question, new File(data.get(currentPos)).getName()))
-                                .setNegativeButton(v.getContext().getString(R.string.cancel), (dialog, id) -> {
-                                })
-                                .setPositiveButton(v.getContext().getString(R.string.delete), (dialog, id) -> v.post(() -> {
-                                    sFileUtils.delete(new File(data.get(currentPos)));
-                                    batchList.remove(this.data.get(currentPos));
-                                    this.data.remove(currentPos);
-                                    notifyItemRemoved(currentPos);
-                                    notifyItemRangeChanged(0, this.data.size());
-                                    toggleBatchMenu();
-                                })).show();
-                        break;
-                }
-                return false;
-            });
-            popupMenu.show();
-        });
+        holder.mAction.setOnClickListener(v -> showActionsMenu(holder.getBindingAdapterPosition(), holder.mIcon.getDrawable(), holder.mTitle.getText().toString().trim(), holder.mDescription.getText().toString().trim(), v.getContext()));
 
         AppSettings.setSlideInAnimation(holder.mIcon, position);
+    }
+
+    private void showActionsMenu(int currentPos, Drawable icon, String title, String description, Context context) {
+        if (currentPos == RecyclerView.NO_POSITION) return;
+        String currentItem = this.data.get(currentPos);
+
+        List<MenuItems> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItems(context.getString(R.string.share), R.drawable.ic_share, 0));
+        menuItems.add(new MenuItems(context.getString(R.string.delete), R.drawable.ic_delete, 1));
+
+        new BottomMenuDialog(menuItems, icon, null, title, description, context) {
+            @SuppressLint("StringFormatInvalid")
+            @Override
+            public void onMenuItemClicked(int menuID) {
+                switch (menuID) {
+                    case 0:
+                        Uri uriFile = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider",
+                                new File(currentItem));
+                        Intent shareScript = new Intent(Intent.ACTION_SEND);
+                        shareScript.setType(currentItem.endsWith(".apkm") ? "application/zip" : "application/java-archive");
+                        shareScript.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.shared_by, new File(currentItem).getName()));
+                        shareScript.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.share_message, BuildConfig.VERSION_NAME));
+                        shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
+                        shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        context.startActivity(Intent.createChooser(shareScript, context.getString(R.string.share_with)));
+                        break;
+                    case 1:
+                        sFileUtils.delete(new File(currentItem));
+                        batchList.remove(currentItem);
+                        data.remove(currentPos);
+                        notifyItemRemoved(currentPos);
+                        notifyItemRangeChanged(currentPos, getItemCount());
+                        toggleBatchMenu();
+                        break;
+                }
+            }
+        };
     }
 
     private void toggleBatchMenu() {
