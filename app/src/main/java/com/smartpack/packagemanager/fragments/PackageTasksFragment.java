@@ -22,8 +22,6 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -33,7 +31,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +47,7 @@ import com.smartpack.packagemanager.dialogs.BatchOptionsDialog;
 import com.smartpack.packagemanager.dialogs.BatchResultsDialog;
 import com.smartpack.packagemanager.dialogs.BottomMenuDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
+import com.smartpack.packagemanager.dialogs.SortOptionsDialog;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
@@ -86,7 +84,7 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 public class PackageTasksFragment extends Fragment {
 
     private MaterialAutoCompleteTextView mSearchWord;
-    private MaterialButton mSort, mBatchOptions;
+    private MaterialButton mBatchOptions;
     private boolean mExit;
     private final Handler mHandler = new Handler();
     private List<PackageItems> mData;
@@ -109,7 +107,7 @@ public class PackageTasksFragment extends Fragment {
         mSearchWord = mRootView.findViewById(R.id.search_word);
         MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
-        mSort = mRootView.findViewById(R.id.sort_icon);
+        MaterialButton mSort = mRootView.findViewById(R.id.sort_icon);
         MaterialButton mReload = mRootView.findViewById(R.id.reload_icon);
         FloatingActionButton mFAB = requireActivity().findViewById(R.id.fab);
 
@@ -259,7 +257,12 @@ public class PackageTasksFragment extends Fragment {
                 }.execute()
         );
 
-        mSort.setOnClickListener(v -> sortMenu(requireActivity()));
+        mSort.setOnClickListener(v -> new SortOptionsDialog(requireActivity()) {
+            @Override
+            public void onItemClicked() {
+                loadUI(mSearchText, requireActivity());
+            }
+        });
 
         mBatchOptions.setOnClickListener(v -> batchOptionsMenu(requireActivity()));
 
@@ -348,67 +351,6 @@ public class PackageTasksFragment extends Fragment {
         } else {
             mBatchOptions.setVisibility(GONE);
         }
-    }
-
-    private void sortMenu(Activity activity) {
-        PopupMenu popupMenu = new PopupMenu(activity, mSort);
-        Menu menu = popupMenu.getMenu();
-        SubMenu sort = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.sort_by));
-        sort.add(0, 1, Menu.NONE, getString(R.string.name)).setCheckable(true)
-                .setChecked(PackageData.getSortingType(activity) == 0);
-        sort.add(0, 2, Menu.NONE, getString(R.string.package_id)).setCheckable(true)
-                .setChecked(PackageData.getSortingType(activity) == 1);
-        sort.add(0, 3, Menu.NONE, getString(R.string.time_installed)).setCheckable(true)
-                .setChecked(PackageData.getSortingType(activity) == 2);
-        sort.add(0, 4, Menu.NONE, getString(R.string.time_updated)).setCheckable(true)
-                .setChecked(PackageData.getSortingType(activity) == 3);
-        sort.add(0, 5, Menu.NONE, getString(R.string.size)).setCheckable(true)
-                .setChecked(PackageData.getSortingType(activity) == 4);
-        menu.add(Menu.NONE, 6, Menu.NONE, getString(R.string.reverse_order)).setCheckable(true)
-                .setChecked(sCommonUtils.getBoolean("reverse_order", false, activity));
-        sort.setGroupCheckable(0, true, true);
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 0:
-                    break;
-                case 1:
-                    if (PackageData.getSortingType(activity) != 0) {
-                        PackageData.setSortingType(0, activity);
-                        loadUI(mSearchText, activity);
-                    }
-                    break;
-                case 2:
-                    if (PackageData.getSortingType(activity) != 1) {
-                        PackageData.setSortingType(1, activity);
-                        loadUI(mSearchText, activity);
-                    }
-                    break;
-                case 3:
-                    if (PackageData.getSortingType(activity) != 2) {
-                        PackageData.setSortingType(2, activity);
-                        loadUI(mSearchText, activity);
-                    }
-                    break;
-                case 4:
-                    if (PackageData.getSortingType(activity) != 3) {
-                        PackageData.setSortingType(3, activity);
-                        loadUI(mSearchText, activity);
-                    }
-                    break;
-                case 5:
-                    if (PackageData.getSortingType(activity) != 4) {
-                        PackageData.setSortingType(4, activity);
-                        loadUI(mSearchText, activity);
-                    }
-                    break;
-                case 6:
-                    sCommonUtils.saveBoolean("reverse_order", !sCommonUtils.getBoolean("reverse_order", false, activity), activity);
-                    loadUI(mSearchText, activity);
-                    break;
-            }
-            return false;
-        });
-        popupMenu.show();
     }
 
     @SuppressLint("StringFormatInvalid")

@@ -81,16 +81,16 @@ public class PackageData {
                         mData.add(item);
                     }
                 }
-                if (PackageData.getSortingType(context) == 0) {
-                    mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
-                } else if (PackageData.getSortingType(context) == 4) {
+                if (PackageData.getSortingType(context) == 4) {
                     mData.sort(Comparator.comparingLong(PackageItems::getAPKSize));
-                } else if (PackageData.getSortingType(context) == 2) {
-                    mData.sort(Comparator.comparingLong(PackageItems::getInstalledTime));
                 } else if (PackageData.getSortingType(context) == 3) {
                     mData.sort(Comparator.comparingLong(PackageItems::getUpdatedTime));
-                } else {
+                } else if (PackageData.getSortingType(context) == 2) {
+                    mData.sort(Comparator.comparingLong(PackageItems::getInstalledTime));
+                } else if (PackageData.getSortingType(context) == 1) {
                     mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getPackageName(), rhs.getPackageName()));
+                } else {
+                    mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(lhs.getAppName(), rhs.getAppName()));
                 }
             }
             if (sCommonUtils.getBoolean("reverse_order", false, context)) {
