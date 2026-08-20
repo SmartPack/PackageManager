@@ -19,7 +19,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
-import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
+import com.smartpack.packagemanager.utils.Serializables.PermissionsItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 

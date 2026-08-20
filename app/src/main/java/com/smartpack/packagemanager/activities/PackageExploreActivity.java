@@ -26,6 +26,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -39,6 +40,7 @@ import com.smartpack.packagemanager.utils.PackageExplorer;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
@@ -72,6 +74,11 @@ public class PackageExploreActivity extends BaseActivity {
         mError = findViewById(R.id.error_status);
         mProgressBar = findViewById(R.id.progress);
         mRecyclerView = findViewById(R.id.recycler_view);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(true);
+        mRecycleViewAdapter = new PackageExploreAdapter(new CopyOnWriteArrayList<>(), mPackageName, clickListener(), this);
+        mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mRootPath = new File(getCacheDir().getPath(),"apk").getAbsolutePath();
 
@@ -107,6 +114,37 @@ public class PackageExploreActivity extends BaseActivity {
                 backPressedEvent();
             }
         });
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private PackageExploreAdapter.OnItemClickListener clickListener() {
+        return (position, view) -> {
+            String mPath = mData.get(position);
+            if (position == 0) {
+                backPressedEvent();
+            } else if (new File(mPath).isDirectory()) {
+                reload(mPath, this);
+            } else if (PackageExplorer.isTextFile(mPath)) {
+                Intent textView = new Intent(this, TextViewActivity.class);
+                textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
+                textView.putExtra(TextViewActivity.PACKAGE_INTENT, mPackageName);
+                startActivity(textView);
+            } else if (PackageExplorer.isImageFile(mPath)) {
+                Intent imageView = new Intent(this, ImageViewActivity.class);
+                imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
+                imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, mPackageName);
+                startActivity(imageView);
+            } else {
+                new MaterialAlertDialogBuilder(this)
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(R.string.app_name)
+                        .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
+                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+                        .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
+                                .copyToStorage(mPath, mPackageName, this)).show();
+            }
+        };
     }
 
     private void reload(String path, Activity activity) {
@@ -146,33 +184,7 @@ public class PackageExploreActivity extends BaseActivity {
                     mError.setText(getString(R.string.explore_error_status, appName));
                     mError.setVisibility(VISIBLE);
                 } else {
-                    mRecycleViewAdapter = new PackageExploreAdapter(mData, mPackageName, (position, v) -> {
-                        String mPath = mData.get(position);
-                        if (position == 0) {
-                            backPressedEvent();
-                        } else if (new File(mPath).isDirectory()) {
-                            reload(mPath, activity);
-                        } else if (PackageExplorer.isTextFile(mPath)) {
-                            Intent textView = new Intent(activity, TextViewActivity.class);
-                            textView.putExtra(TextViewActivity.PATH_INTENT, mPath);
-                            textView.putExtra(TextViewActivity.PACKAGE_INTENT, mPackageName);
-                            startActivity(textView);
-                        } else if (PackageExplorer.isImageFile(mPath)) {
-                            Intent imageView = new Intent(activity, ImageViewActivity.class);
-                            imageView.putExtra(ImageViewActivity.PATH_INTENT, mPath);
-                            imageView.putExtra(ImageViewActivity.PACKAGE_INTENT, mPackageName);
-                            startActivity(imageView);
-                        } else {
-                            new MaterialAlertDialogBuilder(activity)
-                                    .setIcon(R.mipmap.ic_launcher)
-                                    .setTitle(R.string.app_name)
-                                    .setMessage(getString(R.string.open_failed_export_message, new File(mPath).getName()))
-                                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                    })
-                                    .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> PackageExplorer
-                                            .copyToStorage(mPath, mPackageName, activity)).show();
-                        }
-                    }, activity);
+                    mRecycleViewAdapter.updateData(mData);
 
                     mRootPath = path;
                     if (appIcon != null) {
@@ -184,7 +196,6 @@ public class PackageExploreActivity extends BaseActivity {
                     mPackageNameTxt.setText(mPackageName);
                     mTitle.setText(path.equals(new File(getCacheDir(), "apk").getAbsolutePath()) ? "Root"
                             : new File(path).getName());
-                    mRecyclerView.setAdapter(mRecycleViewAdapter);
                 }
             }
         }.execute();

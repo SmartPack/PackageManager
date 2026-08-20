@@ -19,24 +19,23 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top|center_vertical"
-                android:padding="5dp" >
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:layout_gravity="top|center" >
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/uninstalled_apps"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="125dp"
+                    android:layout_marginEnd="100dp"
                     style="@style/AppTheme.Title" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center|end"
-                    android:layout_marginStart="125dp"
-                    android:orientation="horizontal"
-                    android:layout_marginEnd="5dp" >
+                    android:layout_marginStart="100dp"
+                    android:orientation="horizontal" >
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/search_icon"
@@ -79,11 +78,12 @@
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_marginHorizontal="25dp"
+        android:layout_gravity="bottom|center"
         android:text="@string/restore_selected"
         android:layout_marginBottom="75dp"
-        android:layout_marginEnd="50dp"
         app:icon="@drawable/ic_select"
         android:visibility="gone"
+        android:gravity="center"
         android:textSize="17sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

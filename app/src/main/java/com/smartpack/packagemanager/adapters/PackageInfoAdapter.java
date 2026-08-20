@@ -19,7 +19,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageInfoItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageInfoItems;
 
 import java.util.List;
 

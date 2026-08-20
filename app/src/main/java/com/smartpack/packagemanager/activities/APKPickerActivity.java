@@ -36,7 +36,7 @@ import com.smartpack.packagemanager.fragments.CertificateFragment;
 import com.smartpack.packagemanager.fragments.ManifestFragment;
 import com.smartpack.packagemanager.fragments.PermissionsFragment;
 import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
+import com.smartpack.packagemanager.utils.Serializables.APKPickerItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.ZipFileUtils;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;

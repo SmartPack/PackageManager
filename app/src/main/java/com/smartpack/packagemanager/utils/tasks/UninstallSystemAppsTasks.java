@@ -16,7 +16,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.Utils;
 

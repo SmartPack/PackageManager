@@ -38,7 +38,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageExplorer;
-import com.smartpack.packagemanager.utils.SerializableItems.ActivityItems;
+import com.smartpack.packagemanager.utils.Serializables.ActivityItems;
 
 import java.util.List;
 

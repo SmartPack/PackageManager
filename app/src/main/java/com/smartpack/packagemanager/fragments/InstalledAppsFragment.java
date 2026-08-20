@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -32,27 +33,27 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.adapters.PackageTasksAdapter;
+import com.smartpack.packagemanager.activities.PackageDetailsActivity;
+import com.smartpack.packagemanager.adapters.InstalledAppsAdapter;
 import com.smartpack.packagemanager.dialogs.BatchOptionsDialog;
 import com.smartpack.packagemanager.dialogs.BatchResultsDialog;
 import com.smartpack.packagemanager.dialogs.BottomMenuDialog;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.dialogs.SortOptionsDialog;
+import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
-import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
+import com.smartpack.packagemanager.utils.Serializables.BatchOptionsItems;
+import com.smartpack.packagemanager.utils.Serializables.MenuItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
@@ -81,17 +82,16 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
  */
-public class PackageTasksFragment extends Fragment {
+public class InstalledAppsFragment extends Fragment {
 
     private MaterialAutoCompleteTextView mSearchWord;
     private MaterialButton mBatchOptions;
     private boolean mExit;
-    private final Handler mHandler = new Handler();
     private List<PackageItems> mData;
-    private List<String> mBatchList = null;
+    private final List<String> mBatchList = new CopyOnWriteArrayList<>();
     private ProgressBar mProgress;
     private RecyclerView mRecyclerView;
-    private PackageTasksAdapter mRecycleViewAdapter;
+    private InstalledAppsAdapter mRecycleViewAdapter;
     private RootShell mRootShell = null;
     private ShizukuShell mShizukuShell = null;
     private String mPackageNameRemoved = null, mSearchText = null;
@@ -99,24 +99,30 @@ public class PackageTasksFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_packagetasks, container, false);
+        View mRootView = inflater.inflate(R.layout.fragment_installed_apps, container, false);
 
         mProgress = mRootView.findViewById(R.id.progress);
         mBatchOptions = mRootView.findViewById(R.id.batch);
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         mSearchWord = mRootView.findViewById(R.id.search_word);
+        MaterialButton mFAB = mRootView.findViewById(R.id.fab);
         MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
         MaterialButton mSort = mRootView.findViewById(R.id.sort_icon);
         MaterialButton mReload = mRootView.findViewById(R.id.reload_icon);
-        FloatingActionButton mFAB = requireActivity().findViewById(R.id.fab);
-
-        mFAB.setVisibility(View.VISIBLE);
 
         mSearchWord.setHintTextColor(Color.GRAY);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        mRecyclerView.setHasFixedSize(true);
+
+        mRecycleViewAdapter = new InstalledAppsAdapter(
+                new CopyOnWriteArrayList<>(),
+                mBatchList,
+                mBatchOptions,
+                clickListener()
+        );
+        mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mRootShell = new RootShell();
         mShizukuShell = new ShizukuShell();
@@ -139,6 +145,8 @@ public class PackageTasksFragment extends Fragment {
         }
 
         loadUI(mSearchText, requireActivity());
+
+        AppSettings.applyMargin(mRecyclerView, requireActivity());
 
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_all)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.show_apps_system)));
@@ -180,6 +188,8 @@ public class PackageTasksFragment extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        mFAB.setOnClickListener(v -> AppSettings.launchInstaller(requireActivity()));
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -243,13 +253,12 @@ public class PackageTasksFragment extends Fragment {
                     public void doInBackground() {
                         PackageData.generateData(mProgress, requireActivity());
                         mData = PackageData.getData(mSearchText, requireActivity());
-                        mRecycleViewAdapter = new PackageTasksAdapter(mData, mSearchText, mBatchList, mBatchOptions, diableOrUninstall);
                     }
 
                     @Override
                     public void onPostExecute() {
                         mBatchOptions.setVisibility(GONE);
-                        mRecyclerView.setAdapter(mRecycleViewAdapter);
+                        mRecycleViewAdapter.updateData(mData);
                         mProgress.setVisibility(GONE);
                         mProgress.setIndeterminate(true);
                         mRecyclerView.setVisibility(View.VISIBLE);
@@ -307,7 +316,7 @@ public class PackageTasksFragment extends Fragment {
                     } else {
                         sCommonUtils.toast(getString(R.string.press_back), requireActivity()).show();
                         mExit = true;
-                        mHandler.postDelayed(() -> mExit = false, 2000);
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> mExit = false, 2000);
                     }
                 } else {
                     exit(requireActivity());
@@ -316,6 +325,18 @@ public class PackageTasksFragment extends Fragment {
         });
 
         return mRootView;
+    }
+
+    private InstalledAppsAdapter.OnItemClickListener clickListener() {
+        return item -> {
+            Intent details = new Intent(requireActivity(), PackageDetailsActivity.class);
+            details.putExtra(PackageDetailsActivity.APP_NAME_INTENT, item.getAppName());
+            details.putExtra(PackageDetailsActivity.PACKAGE_NAME_INTENT, item.getPackageName());
+            details.putExtra(PackageDetailsActivity.SYSTEM_APP, item.isSystemApp());
+            details.putExtra(PackageDetailsActivity.LAUNCHER_INTENT, item.launchIntent() != null);
+            details.putExtra(PackageDetailsActivity.APK_PICKED, false);
+            diableOrUninstall.launch(details);
+        };
     }
 
     private int getTabPosition(Activity activity) {
@@ -441,7 +462,7 @@ public class PackageTasksFragment extends Fragment {
                                             mProgressDialog.dismiss();
                                         }
                                         if (!mEmpty) {
-                                            mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                                            mRecycleViewAdapter.updateData(mData);
                                             if (!newData.isEmpty()) {
                                                 new BatchResultsDialog(newData, activity);
                                             } else {
@@ -460,7 +481,6 @@ public class PackageTasksFragment extends Fragment {
                                 public void apply(List<BatchOptionsItems> data) {
                                     new sExecutor() {
                                         private boolean mEmpty = true;
-                                        private final List<Integer> mPositionsRemoved = new CopyOnWriteArrayList<>();
                                         private final List<BatchOptionsItems> mNewData = new CopyOnWriteArrayList<>();
                                         private ProgressDialog mProgressDialog;
                                         @Override
@@ -504,7 +524,6 @@ public class PackageTasksFragment extends Fragment {
                                                                     int index = mData.indexOf(packageItems);
                                                                     if (index != -1) {
                                                                         mData.remove(packageItems);
-                                                                        mPositionsRemoved.add(index);
                                                                     }
                                                                 }
                                                             }
@@ -524,10 +543,7 @@ public class PackageTasksFragment extends Fragment {
                                                 mProgressDialog.dismiss();
                                             }
                                             if (!mEmpty) {
-                                                for (Integer positions : mPositionsRemoved) {
-                                                    mRecycleViewAdapter.notifyItemRemoved(positions);
-                                                }
-                                                mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                                                mRecycleViewAdapter.updateData(mData);
                                                 mBatchList.clear();
                                                 mBatchOptions.setVisibility(GONE);
                                                 if (!mNewData.isEmpty()) {
@@ -756,15 +772,11 @@ public class PackageTasksFragment extends Fragment {
             public void onPreExecute() {
                 mProgress.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(GONE);
-                if (mBatchList == null) {
-                    mBatchList = new ArrayList<>();
-                }
             }
 
             @Override
             public void doInBackground() {
                 mData = PackageData.getData(searchTxt, activity);
-                mRecycleViewAdapter = new PackageTasksAdapter(mData, searchTxt, mBatchList, mBatchOptions, diableOrUninstall);
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -773,11 +785,13 @@ public class PackageTasksFragment extends Fragment {
                 if (!isAdded()) {
                     return;
                 }
+
+                mRecycleViewAdapter.updateData(mData);
+
                 mSearchText = searchTxt;
                 mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.applications)));
                 mBatchOptions.setVisibility(!mBatchList.isEmpty() ? View.VISIBLE : GONE);
                 mBatchOptions.setText(activity.getString(R.string.batch_options, mBatchList.size()));
-                mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
             }
@@ -786,7 +800,6 @@ public class PackageTasksFragment extends Fragment {
 
     private sExecutor removeItem(String packageName) {
         return new sExecutor() {
-            private int position;
 
             @Override
             public void onPreExecute() {
@@ -799,7 +812,6 @@ public class PackageTasksFragment extends Fragment {
                     if (mData.get(i).getPackageName().equals(packageName)) {
                         PackageData.getRawData().remove(mData.get(i));
                         mData.remove(i);
-                        position = i;
                         return;
                     }
                 }
@@ -811,8 +823,7 @@ public class PackageTasksFragment extends Fragment {
                 if (mPackageNameRemoved != null) {
                     mPackageNameRemoved = null;
                 }
-                mRecycleViewAdapter.notifyItemRemoved(position);
-                mRecycleViewAdapter.notifyItemRangeChanged(position, mRecycleViewAdapter.getItemCount());
+                mRecycleViewAdapter.updateData(mData);
                 mProgress.setVisibility(GONE);
             }
         };
@@ -834,7 +845,6 @@ public class PackageTasksFragment extends Fragment {
                         }
                     } else if (packageNameDisabled != null) {
                         new sExecutor() {
-                            private int position;
 
                             @Override
                             public void onPreExecute() {
@@ -858,7 +868,6 @@ public class PackageTasksFragment extends Fragment {
                                             PackageData.getRawData().set(index, itemNew);
                                         }
                                         mData.set(i, itemNew);
-                                        position = i;
                                         return;
                                     }
                                 }
@@ -867,7 +876,7 @@ public class PackageTasksFragment extends Fragment {
                             @SuppressLint("StringFormatInvalid")
                             @Override
                             public void onPostExecute() {
-                                mRecycleViewAdapter.notifyItemChanged(position);
+                                mRecycleViewAdapter.updateData(mData);
                                 mProgress.setVisibility(GONE);
                             }
                         }.execute();
@@ -893,7 +902,7 @@ public class PackageTasksFragment extends Fragment {
                                 int index = mData.indexOf(item);
                                 if (index != -1) {
                                     mData.remove(index);
-                                    mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                                    mRecycleViewAdapter.updateData(mData);
                                 }
                             }
                         }
@@ -902,7 +911,7 @@ public class PackageTasksFragment extends Fragment {
                 } else {
                     sCommonUtils.toast(getString(R.string.uninstall_status_failed, sPackageUtils.getAppName(mBatchList.get(0), requireActivity())), requireActivity()).show();
                     mBatchList.remove(0);
-                    mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                    mRecycleViewAdapter.updateData(mData);
                     handleUninstallEvent();
                 }
             }

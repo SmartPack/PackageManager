@@ -17,10 +17,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.BatchOptionsAdapter;
-import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
+import com.smartpack.packagemanager.utils.Serializables.BatchOptionsItems;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -29,11 +30,12 @@ import java.util.concurrent.Executors;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on August 13, 2025
  */
-public class BatchResultsDialog extends MaterialAlertDialogBuilder {
+public class BatchResultsDialog extends BottomSheetDialog {
 
     public BatchResultsDialog(List<BatchOptionsItems> data, Activity activity) {
         super(activity);
-        View rootView = View.inflate(activity, R.layout.layout_recyclerview, null);
+        View rootView = View.inflate(activity, R.layout.layout_batch_results, null);
+        MaterialButton cancel = rootView.findViewById(R.id.cancel);
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -48,11 +50,10 @@ public class BatchResultsDialog extends MaterialAlertDialogBuilder {
             });
         }
 
-        setIcon(R.mipmap.ic_launcher);
-        setTitle(R.string.batch_processing_failed_title);
-        setView(rootView);
-        setPositiveButton(R.string.cancel, (dialog, i) -> {
-        });
+        setContentView(rootView);
+
+        cancel.setOnClickListener(v -> dismiss());
+
         show();
     }
 

@@ -16,7 +16,7 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.List;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
+import com.smartpack.packagemanager.utils.Serializables.MenuItems;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 

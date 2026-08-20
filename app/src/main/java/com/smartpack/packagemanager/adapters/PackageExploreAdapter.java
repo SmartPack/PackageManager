@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -29,6 +30,7 @@ import com.smartpack.packagemanager.utils.PackageExplorer;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -99,7 +101,41 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
 
         holder.mExport.setOnClickListener(v -> PackageExplorer.copyToStorage(this.data.get(position), packageName, activity));
 
-        AppSettings.setSlideInAnimation(holder.itemView, position);
+        AppSettings.setSlideInAnimation(holder.mTitle, position);
+    }
+
+    public void updateData(List<String> newData) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return data.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newData != null ? newData.size() : 0;
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return Objects.equals(data.get(oldItemPosition), newData.get(newItemPosition));
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                String oldItem = data.get(oldItemPosition);
+                String newItem = newData.get(newItemPosition);
+
+                return Objects.equals(oldItem, newItem);
+            }
+        });
+
+        this.data.clear();
+        if (newData != null) {
+            this.data.addAll(newData);
+        }
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @Override

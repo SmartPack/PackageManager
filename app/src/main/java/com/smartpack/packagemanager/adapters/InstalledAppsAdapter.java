@@ -13,15 +13,13 @@ import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -30,13 +28,11 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.activities.ImageViewActivity;
-import com.smartpack.packagemanager.activities.PackageDetailsActivity;
 import com.smartpack.packagemanager.utils.AppSettings;
-import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
-import com.smartpack.packagemanager.utils.Utils;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
@@ -44,32 +40,30 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
  */
-public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapter.ViewHolder> {
+public class InstalledAppsAdapter extends RecyclerView.Adapter<InstalledAppsAdapter.ViewHolder> {
 
-    private final ActivityResultLauncher<Intent> uninstallApps;
     private final List<PackageItems> data;
     private final List<String> batchList;
     private final MaterialButton batchButton;
-    private final String searchText;
+    private final OnItemClickListener clickListener;
 
-    public PackageTasksAdapter(List<PackageItems> data, String searchText, List<String> batchList, MaterialButton batchButton, ActivityResultLauncher<Intent> uninstallApps) {
+    public InstalledAppsAdapter(@NonNull List<PackageItems> data, @NonNull List<String> batchList, @NonNull MaterialButton batchButton, @NonNull OnItemClickListener clickListener) {
         this.data = data;
-        this.searchText = searchText;
         this.batchList = batchList;
         this.batchButton = batchButton;
-        this.uninstallApps = uninstallApps;
+        this.clickListener = clickListener;
     }
 
     @NonNull
     @Override
-    public PackageTasksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public InstalledAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view, parent, false);
         return new ViewHolder(rowItem);
     }
 
     @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     @Override
-    public void onBindViewHolder(@NonNull PackageTasksAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InstalledAppsAdapter.ViewHolder holder, int position) {
         try {
             PackageItems packageItems = this.data.get(position);
 
@@ -90,20 +84,12 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
 
             toggleBatchMenu();
 
-            if (searchText != null && PackageData.isTextMatched(packageItems.getPackageName(), searchText)) {
-                holder.appID.setTypeface(null, Typeface.BOLD);
-                holder.appID.setText(Utils.fromHtml(packageItems.getPackageName().replace(searchText, "<b><i><font color=\"" +
-                        Color.RED + "\">" + searchText + "</font></i></b>")));
-            } else {
-                holder.appID.setText(packageItems.getPackageName());
-            }
-
-            if (searchText != null && PackageData.isTextMatched(packageItems.getAppName(), searchText)) {
-                holder.appName.setTypeface(null, Typeface.BOLD);
-            }
+            holder.appID.setText(packageItems.getPackageName());
+            holder.appName.setText(packageItems.getAppName());
 
             if (packageItems.launchIntent() != null) {
                 holder.open.setVisibility(View.VISIBLE);
+                holder.open.setIconResource(R.drawable.ic_open);
             } else {
                 holder.open.setVisibility(View.GONE);
             }
@@ -180,6 +166,40 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
         }
     }
 
+    public void updateData(@NonNull List<PackageItems> newData) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return data.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newData.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                PackageItems oldItem = data.get(oldItemPosition);
+                PackageItems newItem = newData.get(newItemPosition);
+                return Objects.equals(oldItem.getPackageName(), newItem.getPackageName());
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                PackageItems oldItem = data.get(oldItemPosition);
+                PackageItems newItem = newData.get(newItemPosition);
+
+                return oldItem == newItem;
+            }
+        });
+
+        this.data.clear();
+        this.data.addAll(newData);
+
+        diffResult.dispatchUpdatesTo(this);
+    }
+
     @Override
     public int getItemCount() {
         return this.data.size();
@@ -224,14 +244,12 @@ public class PackageTasksAdapter extends RecyclerView.Adapter<PackageTasksAdapte
                 return;
             }
 
-            Intent details = new Intent(view.getContext(), PackageDetailsActivity.class);
-            details.putExtra(PackageDetailsActivity.APP_NAME_INTENT, packageItems.getAppName());
-            details.putExtra(PackageDetailsActivity.PACKAGE_NAME_INTENT, packageItems.getPackageName());
-            details.putExtra(PackageDetailsActivity.SYSTEM_APP, packageItems.isSystemApp());
-            details.putExtra(PackageDetailsActivity.LAUNCHER_INTENT, packageItems.launchIntent() != null);
-            details.putExtra(PackageDetailsActivity.APK_PICKED, false);
-            uninstallApps.launch(details);
+            clickListener.onItemClick(packageItems);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(PackageItems packageItems);
     }
 
 }

@@ -17,7 +17,7 @@ import android.os.Environment;
 import android.widget.ProgressBar;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 
 import java.io.File;
 import java.util.Collections;

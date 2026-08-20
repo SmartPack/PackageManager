@@ -1,6 +1,6 @@
 [versions]
 core = "6.0.0"
-agp = "9.2.1"
+agp = "9.3.1"
 documentfileVersion = "1.1.0"
 material = "1.14.0"
 shizuku = "13.1.5"

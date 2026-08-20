@@ -8,7 +8,7 @@
 
 package com.smartpack.packagemanager.utils;
 
-import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
+import com.smartpack.packagemanager.utils.Serializables.PermissionsItems;
 
 import java.util.ArrayList;
 

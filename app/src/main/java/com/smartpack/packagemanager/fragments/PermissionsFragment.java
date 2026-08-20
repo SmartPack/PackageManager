@@ -26,7 +26,7 @@ import com.apk.axml.APKParser;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PermissionsAdapter;
 import com.smartpack.packagemanager.utils.PackageDetails;
-import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
+import com.smartpack.packagemanager.utils.Serializables.PermissionsItems;
 
 import java.util.ArrayList;
 import java.util.List;

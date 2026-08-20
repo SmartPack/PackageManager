@@ -13,11 +13,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.BottomMenuAdapter;
-import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
+import com.smartpack.packagemanager.utils.Serializables.MenuItems;
 
 import java.util.List;
-
-import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 25, 2025

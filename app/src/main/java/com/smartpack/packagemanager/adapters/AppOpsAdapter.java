@@ -22,8 +22,8 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.BottomMenuDialog;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.RootShell;
-import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
-import com.smartpack.packagemanager.utils.SerializableItems.PermissionsItems;
+import com.smartpack.packagemanager.utils.Serializables.MenuItems;
+import com.smartpack.packagemanager.utils.Serializables.PermissionsItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
 import java.util.ArrayList;

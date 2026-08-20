@@ -12,18 +12,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.packagemanager.activities.BaseActivity;
 import com.smartpack.packagemanager.activities.InstallerInstructionsActivity;
+import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.fragments.ExportedAppsFragment;
-import com.smartpack.packagemanager.fragments.PackageTasksFragment;
-import com.smartpack.packagemanager.fragments.SettingsFragment;
+import com.smartpack.packagemanager.fragments.InstalledAppsFragment;
 import com.smartpack.packagemanager.fragments.UninstalledAppsFragment;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
@@ -36,7 +34,7 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CrashReporter.sCrashReporter;
 import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 import navView.NavView;
-import navView.serializableItems.NavViewEntry;
+import navView.serializables.NavViewEntry;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on February 11, 2020
@@ -50,9 +48,7 @@ public class MainActivity extends BaseActivity {
         sThemeUtils.setLanguage(this);
         setContentViewWithInsets(R.layout.activity_main, R.id.layout_root);
 
-        View mLayoutContainer = findViewById(R.id.layout_container);
         NavView mNavView = findViewById(R.id.nav_view);
-        FloatingActionButton mFAB = findViewById(R.id.fab);
 
         // Record crashes
         sCrashReporter crashReporter = new sCrashReporter(this);
@@ -61,10 +57,9 @@ public class MainActivity extends BaseActivity {
         crashReporter.initialize();
 
         List<NavViewEntry> data = new CopyOnWriteArrayList<>();
-        data.add(new NavViewEntry(PackageTasksFragment::new, R.drawable.ic_apps, getString(R.string.installed)));
-        data.add(new NavViewEntry(ExportedAppsFragment::new, R.drawable.ic_apks, getString(R.string.exported)));
-        data.add(new NavViewEntry(UninstalledAppsFragment::new, R.drawable.ic_delete, getString(R.string.uninstalled)));
-        data.add(new NavViewEntry(SettingsFragment::new, R.drawable.ic_settings, getString(R.string.settings)));
+        data.add(new NavViewEntry(InstalledAppsFragment::new, R.drawable.ic_apps));
+        data.add(new NavViewEntry(ExportedAppsFragment::new, R.drawable.ic_apks));
+        data.add(new NavViewEntry(UninstalledAppsFragment::new, R.drawable.ic_delete));
 
         mNavView.setNavigationItems(data);
 
@@ -74,22 +69,22 @@ public class MainActivity extends BaseActivity {
                 .commit()
         );
 
-        mNavView.post(() -> mLayoutContainer.setPadding(0, 0, 0, mNavView.getHeight()));
+        mNavView.setOnMenuButtonClicked(R.drawable.ic_settings, () -> startActivity(new Intent(this, SettingsActivity.class)));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new PackageTasksFragment()).commit();
+                    new InstalledAppsFragment()).commit();
         }
+    }
 
-        mFAB.setOnClickListener(v -> {
-            if (sCommonUtils.getBoolean("neverShow", false, this)) {
-                Intent installer = getInstallerIntent();
-                filePickerIntent.launch(installer);
-            } else {
-                Intent installer = new Intent(this, InstallerInstructionsActivity.class);
-                installApp.launch(installer);
-            }
-        });
+    public void launchInstaller() {
+        if (sCommonUtils.getBoolean("neverShow", false, this)) {
+            Intent installer = getInstallerIntent();
+            filePickerIntent.launch(installer);
+        } else {
+            Intent installer = new Intent(this, InstallerInstructionsActivity.class);
+            installApp.launch(installer);
+        }
     }
 
     @NonNull

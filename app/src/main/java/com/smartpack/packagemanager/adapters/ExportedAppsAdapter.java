@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -39,8 +40,8 @@ import com.smartpack.packagemanager.dialogs.ProgressDialog;
 import com.smartpack.packagemanager.utils.APKFile;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.FilePicker;
-import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
-import com.smartpack.packagemanager.utils.SerializableItems.MenuItems;
+import com.smartpack.packagemanager.utils.Serializables.APKPickerItems;
+import com.smartpack.packagemanager.utils.Serializables.MenuItems;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.tasks.SplitAPKsInstallationTasks;
 
@@ -51,6 +52,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -79,7 +81,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
     @NonNull
     @Override
     public ExportedAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_exported_apps, parent, false);
+        View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view, parent, false);
         return new ExportedAppsAdapter.ViewHolder(rowItem);
     }
 
@@ -96,8 +98,9 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         }
 
         holder.mTitle.setTextColor(sThemeUtils.isDarkTheme(holder.mTitle.getContext()) ? Color.WHITE : Color.BLACK);
+        holder.mAction.setIconResource(R.drawable.ic_menu);
+        holder.mAction.setVisibility(VISIBLE);
         holder.mSize.setVisibility(VISIBLE);
-        holder.mAction.setIcon(sCommonUtils.getDrawable(R.drawable.ic_menu, holder.mAction.getContext()));
 
         if (batchList.contains(item)) {
             holder.mCheckBox.setVisibility(VISIBLE);
@@ -132,6 +135,40 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         holder.mAction.setOnClickListener(v -> showActionsMenu(holder.getBindingAdapterPosition(), holder.mIcon.getDrawable(), holder.mTitle.getText().toString().trim(), holder.mDescription.getText().toString().trim(), v.getContext()));
 
         AppSettings.setSlideInAnimation(holder.mIcon, position);
+    }
+
+    public void updateData(List<String> newData) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return data.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newData != null ? newData.size() : 0;
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return Objects.equals(data.get(oldItemPosition), newData.get(newItemPosition));
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                String oldItem = data.get(oldItemPosition);
+                String newItem = newData.get(newItemPosition);
+
+                return Objects.equals(oldItem, newItem);
+            }
+        });
+
+        this.data.clear();
+        if (newData != null) {
+            this.data.addAll(newData);
+        }
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     private void showActionsMenu(int currentPos, Drawable icon, String title, String description, Context context) {
@@ -197,7 +234,7 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
         public ViewHolder(View view) {
             super(view);
             view.setOnClickListener(this);
-            this.mAction = view.findViewById(R.id.export);
+            this.mAction = view.findViewById(R.id.open);
             this.mIcon = view.findViewById(R.id.icon);
             this.mCheckBox = view.findViewById(R.id.checkbox);
             this.mTitle = view.findViewById(R.id.title);

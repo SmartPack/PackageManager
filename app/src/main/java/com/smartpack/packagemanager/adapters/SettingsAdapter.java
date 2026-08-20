@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
-import com.smartpack.packagemanager.utils.SerializableItems.SettingsItems;
+import com.smartpack.packagemanager.utils.Serializables.SettingsItems;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.List;

@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Html;
 import android.util.TypedValue;
 import android.view.inputmethod.InputMethodManager;
 
@@ -24,10 +23,6 @@ import com.smartpack.packagemanager.MainActivity;
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 07, 2020
  */
 public class Utils {
-
-    public static CharSequence fromHtml(String text) {
-        return Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
-    }
 
     public static int getColor(int resID, Context context) {
         TypedValue typedValue = new TypedValue();

@@ -26,7 +26,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,13 +37,14 @@ import com.smartpack.packagemanager.adapters.UninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.IntStream;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -58,10 +58,9 @@ public class UninstalledAppsFragment extends Fragment {
     private MaterialAutoCompleteTextView mSearchWord;
     private MaterialButton mBatch, mSearch, mSort;
     private ProgressBar mProgress;
-    private RecyclerView mRecyclerView;
     private UninstalledAppsAdapter mRecycleViewAdapter;
     private List<PackageItems> mData;
-    private List<String> mRestoreList = null;
+    private final List<String> mRestoreList = new CopyOnWriteArrayList<>();
 
     private RootShell mRootShell = null;
     private ShizukuShell mShizukuShell = null;
@@ -78,17 +77,24 @@ public class UninstalledAppsFragment extends Fragment {
         mSearch = mRootView.findViewById(R.id.search_icon);
         mSort = mRootView.findViewById(R.id.sort_icon);
         mProgress = mRootView.findViewById(R.id.progress);
-        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
 
-        requireActivity().findViewById(R.id.fab).setVisibility(View.GONE);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        mRecyclerView.setHasFixedSize(true);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+        mRecycleViewAdapter = new UninstalledAppsAdapter(
+                new CopyOnWriteArrayList<>(),
+                mRestoreList,
+                mBatch
+        );
+        mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mRootShell = new RootShell();
         mShizukuShell = new ShizukuShell();
 
         loadUI(mSearchText);
+
+        AppSettings.applyMargin(mRecyclerView, requireActivity());
 
         mSearch.setOnClickListener(v -> {
             if (mSearchWord.getVisibility() == View.VISIBLE) {
@@ -174,15 +180,11 @@ public class UninstalledAppsFragment extends Fragment {
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(VISIBLE);
-                if (mRestoreList == null) {
-                    mRestoreList = new ArrayList<>();
-                }
             }
 
             @Override
             public void doInBackground() {
                 mData = getData(searchTxt, requireActivity());
-                mRecycleViewAdapter = new UninstalledAppsAdapter(mData, mRestoreList, mBatch);
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -191,12 +193,14 @@ public class UninstalledAppsFragment extends Fragment {
                 if (!isAdded()) {
                     return;
                 }
+
+                mRecycleViewAdapter.updateData(mData);
+
                 mSearchText = searchTxt;
                 mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.uninstalled_apps)));
                 mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mBatch.setVisibility(mRestoreList.isEmpty() ? GONE : VISIBLE);
-                mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(GONE);
             }
         }.execute();
@@ -217,7 +221,6 @@ public class UninstalledAppsFragment extends Fragment {
 
     private sExecutor restore(Context context) {
         return new sExecutor() {
-            private final List<Integer> positions = new ArrayList<>();
 
             @Override
             public void onPreExecute() {
@@ -236,7 +239,6 @@ public class UninstalledAppsFragment extends Fragment {
                             .findFirst()
                             .orElse(-1);
                     if (index != -1) {
-                        positions.add(index);
                         mData.remove(packageItems);
                     }
                     if (mRootShell.rootAccess()) {
@@ -254,10 +256,7 @@ public class UninstalledAppsFragment extends Fragment {
             @Override
             public void onPostExecute() {
                 mRestoreList.clear();
-                for (int position : positions) {
-                    mRecycleViewAdapter.notifyItemRemoved(position);
-                }
-                mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
+                mRecycleViewAdapter.updateData(mData);
                 mProgress.setVisibility(GONE);
                 new MaterialAlertDialogBuilder(context)
                         .setIcon(R.mipmap.ic_launcher)

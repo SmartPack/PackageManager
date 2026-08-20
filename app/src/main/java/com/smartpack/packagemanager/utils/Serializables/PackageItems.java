@@ -6,7 +6,7 @@
  *
  */
 
-package com.smartpack.packagemanager.utils.SerializableItems;
+package com.smartpack.packagemanager.utils.Serializables;
 
 import android.content.Context;
 import android.content.Intent;

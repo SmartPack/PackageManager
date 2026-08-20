@@ -17,11 +17,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.BatchOptionsAdapter;
-import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
+import com.smartpack.packagemanager.utils.Serializables.BatchOptionsItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,18 +34,22 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on August 13, 2025
  */
-public abstract class BatchOptionsDialog extends MaterialAlertDialogBuilder {
+public abstract class BatchOptionsDialog extends BottomSheetDialog {
 
     private List<BatchOptionsItems> mBatchOptionsItems;
 
     public BatchOptionsDialog(String title, String actionTitle, List<String> packageNames, Activity activity) {
         super(activity);
         View rootView = View.inflate(activity, R.layout.layout_batch_options, null);
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        MaterialButton action = rootView.findViewById(R.id.action);
+        MaterialButton cancel = rootView.findViewById(R.id.cancel);
         MaterialTextView titleText = rootView.findViewById(R.id.title);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         titleText.setText(title);
+        action.setText(actionTitle);
 
         try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
             Handler handler = new Handler(Looper.getMainLooper());
@@ -56,11 +61,15 @@ public abstract class BatchOptionsDialog extends MaterialAlertDialogBuilder {
             });
         }
 
-        setView(rootView);
-        setNeutralButton(R.string.cancel, (dialog, id) -> {
+        cancel.setOnClickListener(v -> dismiss());
+
+        action.setOnClickListener(v -> {
+            apply(mBatchOptionsItems);
+            dismiss();
         });
-        setPositiveButton(actionTitle, (dialog, id) ->
-                apply(mBatchOptionsItems));
+
+        setContentView(rootView);
+
         show();
     }
 

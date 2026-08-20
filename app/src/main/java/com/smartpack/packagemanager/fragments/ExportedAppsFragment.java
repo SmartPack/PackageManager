@@ -33,12 +33,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textview.MaterialTextView;
@@ -50,9 +48,9 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
@@ -65,10 +63,10 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 public class ExportedAppsFragment extends Fragment {
 
     private boolean mRefresh = false;
-    private List<String> mBatchList = null;
+    private List<String> mData;
+    private final List<String> mBatchList = new CopyOnWriteArrayList<>();
     private MaterialAutoCompleteTextView mSearchWord;
     private MaterialButton mBatch, mSearch, mSort;
-    private RecyclerView mRecyclerView;
     private ProgressBar mProgress;
     private ExportedAppsAdapter mRecycleViewAdapter;
     private String mSearchText = null;
@@ -82,15 +80,27 @@ public class ExportedAppsFragment extends Fragment {
         mBatch = mRootView.findViewById(R.id.batch);
         mSearch = mRootView.findViewById(R.id.search_icon);
         mSort = mRootView.findViewById(R.id.sort_icon);
+        MaterialButton mFAB = mRootView.findViewById(R.id.fab);
         mProgress = mRootView.findViewById(R.id.progress);
-        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         TabLayout mTabLayout = mRootView.findViewById(R.id.tab_layout);
-        FloatingActionButton mFAB = requireActivity().findViewById(R.id.fab);
 
-        mFAB.setVisibility(VISIBLE);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        mRecyclerView.setHasFixedSize(true);
+
+        mRecycleViewAdapter = new ExportedAppsAdapter(
+                new CopyOnWriteArrayList<>(),
+                mBatchList,
+                mBatch,
+                callback(),
+                requireActivity()
+        );
+        mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.apks)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.bundles)));
+
+        mFAB.setOnClickListener(v -> AppSettings.launchInstaller(requireActivity()));
 
         mSort.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(requireActivity(), mSort);
@@ -120,9 +130,6 @@ public class ExportedAppsFragment extends Fragment {
             mPermissionGrant.setOnClickListener(v -> requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE));
         }
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -133,6 +140,8 @@ public class ExportedAppsFragment extends Fragment {
         });
 
         loadUI(mSearchText).execute();
+
+        AppSettings.applyMargin(mRecyclerView, requireActivity());
 
         Objects.requireNonNull(mTabLayout.getTabAt(getTabPosition(requireActivity()))).select();
 
@@ -244,14 +253,15 @@ public class ExportedAppsFragment extends Fragment {
         return mRootView;
     }
 
+    private ExportedAppsAdapter.OnInstallRequest callback() {
+        return installApp::launch;
+    }
+
     private sExecutor loadUI(String searchTxt) {
         return new sExecutor() {
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(VISIBLE);
-                if (mBatchList == null) {
-                    mBatchList = new ArrayList<>();
-                }
             }
 
             @Override
@@ -264,7 +274,7 @@ public class ExportedAppsFragment extends Fragment {
                         sFileUtils.delete(files);
                     }
                 }
-                mRecycleViewAdapter = new ExportedAppsAdapter(Downloads.getData(searchTxt, requireActivity()), mBatchList, mBatch, installApp::launch, requireActivity());
+                mData = Downloads.getData(searchTxt, requireActivity());
             }
 
             @SuppressLint("StringFormatInvalid")
@@ -273,12 +283,14 @@ public class ExportedAppsFragment extends Fragment {
                 if (!isAdded()) {
                     return;
                 }
+
+                mRecycleViewAdapter.updateData(mData);
+
                 mSearchText =searchTxt;
                 mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.exported_apps)));
                 mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mBatch.setVisibility(mBatchList.isEmpty() ? GONE : VISIBLE);
-                mRecyclerView.setAdapter(mRecycleViewAdapter);
                 mProgress.setVisibility(GONE);
             }
         };

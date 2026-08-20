@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageOptionsItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageOptionsItems;
 
 import java.util.List;
 

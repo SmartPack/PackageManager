@@ -14,12 +14,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+
 import bottomNavView.R;
 import navView.adapters.NavViewAdapter;
-import navView.serializableItems.NavViewEntry;
+import navView.serializables.NavViewEntry;
 import navView.utils.NavViewUtils;
-
-import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class NavView extends FrameLayout {
 
-    private final Context context;
     private final MaterialButton extraButton;
     private final RecyclerView recyclerView;
     private NavViewAdapter adapter;
@@ -36,9 +35,8 @@ public class NavView extends FrameLayout {
 
     public NavView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
 
-        View view = inflate(context, R.layout.layout_bottomnav, this);
+        View view = inflate(context, R.layout.layout_navview, this);
         recyclerView = view.findViewById(R.id.recycler_view);
         extraButton = view.findViewById(R.id.button);
 
@@ -75,12 +73,12 @@ public class NavView extends FrameLayout {
         recyclerView.setAdapter(adapter);
     }
 
-    public interface OnMenuButtonClickedListener {
-        void onMenuClicked();
-    }
-
     public interface OnItemSelectedListener {
         void onItemSelected(Fragment fragment, int position);
+    }
+
+    public interface OnMenuButtonClickedListener {
+        void onMenuClicked();
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
@@ -94,7 +92,7 @@ public class NavView extends FrameLayout {
                 listener.onMenuClicked();
             }
         });
-        extraButton.setIconTint(ColorStateList.valueOf(NavViewUtils.getMaterialColorInactive(context)));
+        extraButton.setIconTint(ColorStateList.valueOf(NavViewUtils.getMaterialColorInactive(extraButton.getContext())));
         extraButton.setVisibility(VISIBLE);
         extraButton.setCheckable(false);
     }

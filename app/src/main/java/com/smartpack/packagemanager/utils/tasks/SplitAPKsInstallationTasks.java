@@ -11,10 +11,9 @@ package com.smartpack.packagemanager.utils.tasks;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.smartpack.packagemanager.activities.APKPickerActivity;
 import com.smartpack.packagemanager.activities.InstallerActivity;
 import com.smartpack.packagemanager.services.SplitAPKInstallService;
-import com.smartpack.packagemanager.utils.SerializableItems.APKPickerItems;
+import com.smartpack.packagemanager.utils.Serializables.APKPickerItems;
 
 import java.io.File;
 import java.util.ArrayList;

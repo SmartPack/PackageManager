@@ -26,7 +26,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageData;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 
 import java.util.ArrayList;
 

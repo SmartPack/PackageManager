@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -29,10 +30,11 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
-import com.smartpack.packagemanager.utils.SerializableItems.PackageItems;
+import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
@@ -68,7 +70,7 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         packageItems.loadAppIcon(holder.mAppIcon);
         holder.mAppName.setText(packageItems.getAppName());
         holder.mAppID.setText(packageItems.getPackageName());
-        holder.mRestore.setIcon(sCommonUtils.getDrawable(R.drawable.ic_restore, holder.mRestore.getContext()));
+        holder.mRestore.setIconResource(R.drawable.ic_restore);
         holder.mRestore.setVisibility(VISIBLE);
 
         if (restoreList.contains(packageItems.getPackageName())) {
@@ -120,6 +122,40 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         );
 
         AppSettings.setSlideInAnimation(holder.mAppIcon, position);
+    }
+
+    public void updateData(@NonNull List<PackageItems> newData) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return data.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newData.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                PackageItems oldItem = data.get(oldItemPosition);
+                PackageItems newItem = newData.get(newItemPosition);
+                return Objects.equals(oldItem.getPackageName(), newItem.getPackageName());
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                PackageItems oldItem = data.get(oldItemPosition);
+                PackageItems newItem = newData.get(newItemPosition);
+
+                return oldItem == newItem;
+            }
+        });
+
+        this.data.clear();
+        this.data.addAll(newData);
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     private void toggleBatchMenu() {

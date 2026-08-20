@@ -24,7 +24,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
-import com.smartpack.packagemanager.utils.SerializableItems.BatchOptionsItems;
+import com.smartpack.packagemanager.utils.Serializables.BatchOptionsItems;
 
 import java.util.List;
 

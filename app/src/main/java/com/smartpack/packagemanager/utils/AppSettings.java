@@ -10,9 +10,14 @@ package com.smartpack.packagemanager.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.smartpack.packagemanager.MainActivity;
 import com.smartpack.packagemanager.R;
 
 import java.util.ArrayList;
@@ -142,23 +147,27 @@ public class AppSettings {
         return mData;
     }
 
-    public static String getExportedAPKName(Activity activity) {
-        return sCommonUtils.getString("exportedAPKName", activity.getString(R.string.package_id), activity);
+    private static NavView getNavView(Activity activity) {
+        return activity.findViewById(R.id.nav_view);
     }
 
-    public static String getExitingStatus(Activity activity) {
-        if (sCommonUtils.getBoolean("exit_confirmation", true, activity)) {
-            return activity.getString(R.string.exit_confirmation);
+    public static String getExportedAPKName(Context context) {
+        return sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context);
+    }
+
+    public static String getExitingStatus(Context context) {
+        if (sCommonUtils.getBoolean("exit_confirmation", true, context)) {
+            return context.getString(R.string.exit_confirmation);
         } else {
-            return activity.getString(R.string.exit_simple);
+            return context.getString(R.string.exit_simple);
         }
     }
 
-    public static String getInstallerStatus(Activity activity) {
-        if (sCommonUtils.getBoolean("neverShow", false, activity)) {
-            return activity.getString(R.string.installer_file_picker);
+    public static String getInstallerStatus(Context context) {
+        if (sCommonUtils.getBoolean("neverShow", false, context)) {
+            return context.getString(R.string.installer_file_picker);
         } else {
-            return activity.getString(R.string.installer_instructions);
+            return context.getString(R.string.installer_instructions);
         }
     }
 
@@ -275,9 +284,28 @@ public class AppSettings {
         };
     }
 
+    public static void applyMargin(RecyclerView recyclerView, Activity activity) {
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                                       @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                if (parent.getChildAdapterPosition(view) == state.getItemCount() - 1) {
+                    outRect.bottom = getNavView(activity).getHeight();
+                } else {
+                    outRect.bottom = 0;
+                }
+            }
+        });
+    }
+
+    public static void launchInstaller(Activity activity) {
+        if (activity instanceof MainActivity) {
+            ((MainActivity) activity).launchInstaller();
+        }
+    }
+
     public static void navigateToFragment(Activity activity, int position) {
-        NavView navView = activity.findViewById(R.id.nav_view);
-        navView.setSelectedPosition(position);
+        getNavView(activity).setSelectedPosition(position);
     }
 
     public static void setLanguage(Activity activity) {
