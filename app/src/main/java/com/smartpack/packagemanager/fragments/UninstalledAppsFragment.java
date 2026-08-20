@@ -56,7 +56,7 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 public class UninstalledAppsFragment extends Fragment {
 
     private MaterialAutoCompleteTextView mSearchWord;
-    private MaterialButton mBatch, mSearch, mSort;
+    private MaterialButton mBatch, mSort;
     private ProgressBar mProgress;
     private UninstalledAppsAdapter mRecycleViewAdapter;
     private List<PackageItems> mData;
@@ -74,7 +74,7 @@ public class UninstalledAppsFragment extends Fragment {
 
         mSearchWord = mRootView.findViewById(R.id.search_word);
         mBatch = mRootView.findViewById(R.id.batch);
-        mSearch = mRootView.findViewById(R.id.search_icon);
+        MaterialButton mSearch = mRootView.findViewById(R.id.search_icon);
         mSort = mRootView.findViewById(R.id.sort_icon);
         mProgress = mRootView.findViewById(R.id.progress);
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
@@ -198,8 +198,6 @@ public class UninstalledAppsFragment extends Fragment {
 
                 mSearchText = searchTxt;
                 mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.uninstalled_apps)));
-                mSearch.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
-                mSort.setEnabled(mRecycleViewAdapter.getItemCount() >= 5);
                 mBatch.setVisibility(mRestoreList.isEmpty() ? GONE : VISIBLE);
                 mProgress.setVisibility(GONE);
             }

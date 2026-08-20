@@ -63,14 +63,14 @@ import in.sunilpaulmathew.sCommon.ThemeUtils.sThemeUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on March 14, 2021
  */
-public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapter.ViewHolder> {
+public class ApksAdapter extends RecyclerView.Adapter<ApksAdapter.ViewHolder> {
 
     private final Activity activity;
     private final List<String> data, batchList;
     private final MaterialButton batchButton;
     private final OnInstallRequest mCallback;
 
-    public ExportedAppsAdapter(List<String> data, List<String> batchList, MaterialButton batchButton, OnInstallRequest callback, Activity activity) {
+    public ApksAdapter(List<String> data, List<String> batchList, MaterialButton batchButton, OnInstallRequest callback, Activity activity) {
         this.data = data;
         this.batchList = batchList;
         this.batchButton = batchButton;
@@ -80,13 +80,13 @@ public class ExportedAppsAdapter extends RecyclerView.Adapter<ExportedAppsAdapte
 
     @NonNull
     @Override
-    public ExportedAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ApksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view, parent, false);
-        return new ExportedAppsAdapter.ViewHolder(rowItem);
+        return new ApksAdapter.ViewHolder(rowItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExportedAppsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ApksAdapter.ViewHolder holder, int position) {
         String item = this.data.get(position);
         if (item.endsWith(".apk")) {
             new APKFile(item).load(holder.mIcon, holder.mTitle, holder.mDescription, holder.mSize);

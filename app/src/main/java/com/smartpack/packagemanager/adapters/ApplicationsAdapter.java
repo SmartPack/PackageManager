@@ -40,14 +40,14 @@ import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on October 08, 2020
  */
-public class InstalledAppsAdapter extends RecyclerView.Adapter<InstalledAppsAdapter.ViewHolder> {
+public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapter.ViewHolder> {
 
     private final List<PackageItems> data;
     private final List<String> batchList;
     private final MaterialButton batchButton;
     private final OnItemClickListener clickListener;
 
-    public InstalledAppsAdapter(@NonNull List<PackageItems> data, @NonNull List<String> batchList, @NonNull MaterialButton batchButton, @NonNull OnItemClickListener clickListener) {
+    public ApplicationsAdapter(@NonNull List<PackageItems> data, @NonNull List<String> batchList, @NonNull MaterialButton batchButton, @NonNull OnItemClickListener clickListener) {
         this.data = data;
         this.batchList = batchList;
         this.batchButton = batchButton;
@@ -56,14 +56,14 @@ public class InstalledAppsAdapter extends RecyclerView.Adapter<InstalledAppsAdap
 
     @NonNull
     @Override
-    public InstalledAppsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ApplicationsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view, parent, false);
         return new ViewHolder(rowItem);
     }
 
     @SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
     @Override
-    public void onBindViewHolder(@NonNull InstalledAppsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ApplicationsAdapter.ViewHolder holder, int position) {
         try {
             PackageItems packageItems = this.data.get(position);
 
@@ -182,6 +182,7 @@ public class InstalledAppsAdapter extends RecyclerView.Adapter<InstalledAppsAdap
             public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
                 PackageItems oldItem = data.get(oldItemPosition);
                 PackageItems newItem = newData.get(newItemPosition);
+
                 return Objects.equals(oldItem.getPackageName(), newItem.getPackageName());
             }
 

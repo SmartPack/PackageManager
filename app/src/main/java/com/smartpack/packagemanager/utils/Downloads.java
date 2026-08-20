@@ -21,10 +21,10 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
  */
 public class Downloads {
 
-    public static List<String> getData(String searchText, Context context) {
+    public static List<String> getData(String searchText, int tabPosition, Context context) {
         List<String> mData = new ArrayList<>();
         for (File mFile : getDownloadList(context)) {
-            if (sCommonUtils.getString("downloadTypes", "apks", context).equals("bundles")) {
+            if (tabPosition == 1) {
                 if (mFile.exists() && mFile.getName().endsWith(".apkm")) {
                     if (searchText == null || PackageData.isTextMatched(mFile.getName(), searchText)) {
                         mData.add(mFile.getAbsolutePath());
@@ -37,6 +37,8 @@ public class Downloads {
                     }
                 }
             }
+
+            sCommonUtils.saveInt("exportedTypes", tabPosition, context);
         }
         if (sCommonUtils.getBoolean("reverse_order_exports", false, context)) {
             mData.sort((lhs, rhs) -> String.CASE_INSENSITIVE_ORDER.compare(rhs, lhs));

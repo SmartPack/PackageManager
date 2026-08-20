@@ -63,18 +63,21 @@ public class PackageData {
 
     }
 
-    public static List<PackageItems> getData(String searchTxt, Context context) {
+    public static List<PackageItems> getData(String searchTxt, int tabPosition, Context context) {
         List<PackageItems> mData = new CopyOnWriteArrayList<>();
         if (getRawData() != null) {
             boolean mAppType;
             for (PackageItems item : getRawData()) {
-                if (sCommonUtils.getString("appTypes", "all", context).equals("system")) {
+                if (tabPosition == 1) {
                     mAppType = (sPackageUtils.isSystemApp(item.getPackageName(), context));
-                } else if (sCommonUtils.getString("appTypes", "all", context).equals("user")) {
+                } else if (tabPosition == 2) {
                     mAppType = (!sPackageUtils.isSystemApp(item.getPackageName(), context));
                 } else {
                     mAppType = true;
                 }
+
+                sCommonUtils.saveInt("showAppType", tabPosition, context);
+
                 if (mAppType && item.getPackageName().contains(".")) {
                     if (searchTxt == null || (isTextMatched(item.getAppName(), searchTxt)
                             || isTextMatched(item.getPackageName(), searchTxt))) {

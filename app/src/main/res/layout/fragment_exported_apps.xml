@@ -1,114 +1,60 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_width="match_parent" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="start"
+    android:orientation="vertical"
+    android:gravity="start" >
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:orientation="vertical"
-        android:gravity="start">
-
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="5dp"
-            android:layout_gravity="top|center" >
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/exported_apps"
-                android:layout_marginEnd="100dp"
-                style="@style/AppTheme.Title" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center|end"
-                android:layout_marginStart="100dp"
-                android:orientation="horizontal" >
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/search_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    style="?attr/materialIconButtonFilledTonalStyle"
-                    app:iconTint="?attr/colorPrimary"
-                    app:icon="@drawable/ic_search"
-                    android:enabled="false" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/sort_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    style="?attr/materialIconButtonFilledTonalStyle"
-                    app:iconTint="?attr/colorPrimary"
-                    app:icon="@drawable/ic_sort"
-                    android:enabled="false" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </FrameLayout>
-
-        <include layout="@layout/layout_search" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
-
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:indeterminateTint="?attr/colorPrimary"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="gone" />
-
-        <include layout="@layout/layout_recyclerview" />
-
-        <include layout="@layout/permission_view_layout" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="75dp"
-        android:orientation="vertical"
-        android:gravity="center" >
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_gravity="top|center" >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/fab"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            style="?attr/materialIconButtonFilledTonalStyle"
-            app:iconTint="?attr/colorPrimary"
-            app:icon="@drawable/ic_add"
-            android:padding="15dp"
-            app:iconSize="24dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/batch"
-            style="@style/Widget.Material3.Button.TonalButton"
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete_selected"
-            android:layout_gravity="center"
-            app:icon="@drawable/ic_select"
-            android:visibility="gone"
-            android:gravity="center"
-            android:textSize="17sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:text="@string/exported_apps"
+            android:layout_marginEnd="100dp"
+            style="@style/AppTheme.Title" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_marginStart="100dp"
+            android:orientation="horizontal" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/search_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                app:iconTint="?attr/colorPrimary"
+                app:icon="@drawable/ic_search" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sort_icon"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                app:iconTint="?attr/colorPrimary"
+                app:icon="@drawable/ic_sort" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</androidx.appcompat.widget.LinearLayoutCompat>
