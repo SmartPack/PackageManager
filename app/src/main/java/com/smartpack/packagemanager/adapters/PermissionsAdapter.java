@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -24,6 +25,7 @@ import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.ShizukuShell;
 
 import java.util.List;
+import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 
@@ -83,6 +85,40 @@ public class PermissionsAdapter extends RecyclerView.Adapter<PermissionsAdapter.
     @Override
     public int getItemCount() {
         return this.data.size();
+    }
+
+    public void updateData(@NonNull List<PermissionsItems> newData) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return data.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newData.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                PermissionsItems oldItem = data.get(oldItemPosition);
+                PermissionsItems newItem = newData.get(newItemPosition);
+                return Objects.equals(oldItem.getTitle(), newItem.getTitle());
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                PermissionsItems oldItem = data.get(oldItemPosition);
+                PermissionsItems newItem = newData.get(newItemPosition);
+
+                return oldItem == newItem;
+            }
+        });
+
+        this.data.clear();
+        this.data.addAll(newData);
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

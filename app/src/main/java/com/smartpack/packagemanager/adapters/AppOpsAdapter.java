@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -69,6 +70,40 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return this.data.size();
+    }
+
+    public void updateData(@NonNull List<PermissionsItems> newData) {
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return data.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newData.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                PermissionsItems oldItem = data.get(oldItemPosition);
+                PermissionsItems newItem = newData.get(newItemPosition);
+                return Objects.equals(oldItem.getTitle(), newItem.getTitle());
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                PermissionsItems oldItem = data.get(oldItemPosition);
+                PermissionsItems newItem = newData.get(newItemPosition);
+
+                return oldItem == newItem;
+            }
+        });
+
+        this.data.clear();
+        this.data.addAll(newData);
+
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -131,6 +166,7 @@ public class AppOpsAdapter extends RecyclerView.Adapter<AppOpsAdapter.ViewHolder
                                     success = newStatus.contains(options[menuID]);
                                 }
 
+                                @SuppressLint("StringFormatInvalid")
                                 @Override
                                 public void onPostExecute() {
                                     if (success) {

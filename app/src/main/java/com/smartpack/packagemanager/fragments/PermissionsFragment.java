@@ -8,9 +8,12 @@
 
 package com.smartpack.packagemanager.fragments;
 
+import static com.smartpack.packagemanager.R.layout.fragment_permissions;
+
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +26,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apk.axml.APKParser;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PermissionsAdapter;
 import com.smartpack.packagemanager.utils.PackageDetails;
 import com.smartpack.packagemanager.utils.Serializables.PermissionsItems;
+import com.smartpack.packagemanager.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
 /*
@@ -38,9 +44,10 @@ import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
  */
 public class PermissionsFragment extends Fragment {
 
-    private static final APKParser mAPKParser = new APKParser();
     private boolean mAPKPicked;
-    private String mPackageName;
+    private PermissionsAdapter mRecycleViewAdapter;
+    private String mPackageName, mSearchTxt = null;
+    private static final APKParser mAPKParser = new APKParser();
 
     public PermissionsFragment() {
     }
@@ -69,19 +76,50 @@ public class PermissionsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.layout_recyclerview, container, false);
+        View mRootView = inflater.inflate(fragment_permissions, container, false);
 
+        MaterialAutoCompleteTextView mSearchWord = mRootView.findViewById(R.id.search_word);
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
-        PermissionsAdapter mRecycleViewAdapter = new PermissionsAdapter(mAPKParser.getPermissions()
-                != null ? getPermissions(requireActivity()) : PackageDetails.getPermissions(mPackageName, requireActivity()), mPackageName, mAPKPicked);
+        mRecycleViewAdapter = new PermissionsAdapter(new CopyOnWriteArrayList<>(), mPackageName, mAPKPicked);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
+
+        loadUI(mSearchTxt);
+
+        mSearchWord.setOnEditorActionListener((v, actionId, event) -> {
+            Utils.toggleKeyboard(0, mSearchWord, requireActivity());
+            mSearchWord.clearFocus();
+            return true;
+        });
+
+        mSearchWord.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                loadUI(s.toString().trim().toLowerCase());
+            }
+        });
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 if (!isAdded()) return;
+
+                if (mSearchTxt != null && !mSearchTxt.trim().isEmpty()) {
+                    mSearchTxt = null;
+                    mSearchWord.setText(null);
+                    return;
+                }
+
                 requireActivity().finish();
             }
         });
@@ -89,16 +127,50 @@ public class PermissionsFragment extends Fragment {
         return mRootView;
     }
 
-    private List<PermissionsItems> getPermissions(Context context) {
-        List<PermissionsItems> perms = new ArrayList<>();
-        try {
-            for (String permissions : mAPKParser.getPermissions()) {
-                perms.add(new PermissionsItems(false, permissions, sPermissionUtils.getDescription(permissions
-                        .replace("android.permission.",""), context)));
+    private void loadUI(String searchTxt) {
+        new sExecutor() {
+            private List<PermissionsItems> data;
+            @Override
+            public void onPreExecute() {
             }
-        } catch (NullPointerException ignored) {
-        }
-        return perms;
+
+            private List<PermissionsItems> getData() {
+                List<PermissionsItems> perms = new CopyOnWriteArrayList<>();
+                for (PermissionsItems permissions : PackageDetails.getPermissions(mPackageName, requireActivity())) {
+                    if (searchTxt == null || permissions.getTitle().toLowerCase().contains(searchTxt.toLowerCase())) {
+                        perms.add(permissions);
+                    }
+                }
+                return perms;
+            }
+
+            private List<PermissionsItems> getPermissions() {
+                List<PermissionsItems> perms = new CopyOnWriteArrayList<>();
+                try {
+                    for (String permissions : mAPKParser.getPermissions()) {
+                        if (searchTxt == null || permissions.toLowerCase().contains(searchTxt.toLowerCase())) {
+                            perms.add(new PermissionsItems(false, permissions, sPermissionUtils.getDescription(permissions
+                                    .replace("android.permission.", ""), requireActivity())));
+                        }
+                    }
+                } catch (NullPointerException ignored) {
+                }
+                return perms;
+            }
+
+            @Override
+            public void doInBackground() {
+                data = mAPKParser.getPermissions() != null ? getPermissions()
+                        : getData();
+            }
+
+            @Override
+            public void onPostExecute() {
+                if (!isAdded()) return;
+                mRecycleViewAdapter.updateData(data);
+                mSearchTxt = searchTxt;
+            }
+        }.execute();
     }
 
 }
