@@ -35,9 +35,6 @@
         <activity android:name=".MainActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false" />
-        <activity android:name=".activities.ADBUninstallActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-            android:exported="false" />
 
         <activity android:name=".activities.APKPickerActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"

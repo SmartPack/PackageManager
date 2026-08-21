@@ -11,14 +11,13 @@ package com.smartpack.packagemanager.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
 import com.smartpack.packagemanager.R;
-import com.smartpack.packagemanager.activities.ADBUninstallActivity;
+import com.smartpack.packagemanager.dialogs.ADBUninstallDialog;
 import com.smartpack.packagemanager.dialogs.UninstallerDialog;
 import com.smartpack.packagemanager.utils.Serializables.ActivityItems;
 import com.smartpack.packagemanager.utils.Serializables.PermissionsItems;
@@ -36,6 +35,7 @@ import java.util.List;
 import java.util.Objects;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
+import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 import in.sunilpaulmathew.sCommon.PermissionUtils.sPermissionUtils;
 
@@ -63,10 +63,12 @@ public class PackageDetails {
                 }
             };
         } else {
-            Intent details = new Intent(activity, ADBUninstallActivity.class);
-            details.putExtra(ADBUninstallActivity.NAME_INTENT, appName);
-            details.putExtra(ADBUninstallActivity.PACKAGE_INTENT, packageName);
-            activity.startActivity(details);
+            new ADBUninstallDialog(appName, packageName, activity) {
+                @Override
+                public void onButtonClicked() {
+                    sCommonUtils.launchUrl("https://smartpack.github.io/adb-debloating/", activity);
+                }
+            };
         }
     }
 
