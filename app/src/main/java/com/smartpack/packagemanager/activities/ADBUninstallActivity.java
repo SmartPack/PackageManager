@@ -14,7 +14,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.text.LineBreaker;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -24,6 +26,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.utils.Utils;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
@@ -54,7 +57,7 @@ public class ADBUninstallActivity extends BaseActivity {
         String packageName = getIntent().getStringExtra(PACKAGE_INTENT);
 
         mMainMessage.setText(getString(R.string.uninstall_adb_summary, appName));
-        mADBCommand.setText("adb shell pm uninstall -k --user 0 " + packageName);
+        mADBCommand.setText("adb shell pm uninstall --user " + Utils.getUserID() + " " + packageName);
         if (sPackageUtils.isUpdatedSystemApp(packageName, this)) {
             mUninstallUpdates.setText(getString(R.string.uninstall_updates_message, appName));
             mUninstall.setVisibility(View.VISIBLE);
@@ -66,6 +69,11 @@ public class ADBUninstallActivity extends BaseActivity {
             clipboard.setPrimaryClip(clip);
             sCommonUtils.toast("Copied to clipboard", this).show();
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            mMainMessage.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+            mUninstallUpdates.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+        }
 
         mADBCommand.setTextColor(Color.MAGENTA);
 
