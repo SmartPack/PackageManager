@@ -4,13 +4,17 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" >
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:gravity="center" >
 
     <include layout="@layout/layout_package_header" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_gravity="center" >
 
         <com.google.android.material.button.MaterialButton
@@ -19,8 +23,6 @@
             android:layout_height="wrap_content"
             style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_gravity="center|start"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="40sp"
             app:icon="@drawable/ic_back"
             android:gravity="center" />
 
@@ -44,7 +46,6 @@
             android:layout_height="wrap_content"
             style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_gravity="center|end"
-            android:layout_marginEnd="10dp"
             app:icon="@drawable/ic_sort"
             android:gravity="center" />
     </FrameLayout>

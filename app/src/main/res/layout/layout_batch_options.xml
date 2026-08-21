@@ -5,15 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="start"
     android:orientation="vertical"
-    android:gravity="start">
+    android:gravity="start"
+    android:padding="10dp" >
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:gravity="center|start"
-        android:layout_margin="10sp" >
+        android:gravity="center|start" >
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="24sp"
@@ -36,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:nestedScrollingEnabled="true"
+        android:paddingVertical="10dp"
         android:layout_weight="1" />
 
     <androidx.appcompat.widget.LinearLayoutCompat

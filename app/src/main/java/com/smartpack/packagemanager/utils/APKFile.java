@@ -73,7 +73,10 @@ public class APKFile extends File {
                     } else {
                         packageName.setVisibility(GONE);
                     }
-                    size.setText(fileSize);
+                    size.setText(fileSize != null ? fileSize : (length() + " bytes"));
+                    if (size.getVisibility() != VISIBLE) {
+                        size.setVisibility(VISIBLE);
+                    }
                 });
             });
         }

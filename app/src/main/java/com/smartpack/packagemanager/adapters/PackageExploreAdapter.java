@@ -12,7 +12,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,24 +69,22 @@ public class PackageExploreAdapter extends RecyclerView.Adapter<PackageExploreAd
             holder.mExport.setVisibility(GONE);
         } else {
             if (new File(this.data.get(position)).isDirectory()) {
-                holder.mTitle.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-                holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_folder, holder.mTitle.getContext()));
+                holder.mIcon.setImageResource(R.drawable.ic_folder);
                 if (sThemeUtils.isDarkTheme(holder.mIcon.getContext())) {
-                    holder.mIcon.setBackground(sCommonUtils.getDrawable(R.drawable.ic_background_circle, holder.mIcon.getContext()));
+                    holder.mIcon.setBackgroundResource(R.drawable.ic_background_circle);
                 }
                 holder.mSize.setVisibility(GONE);
                 holder.mExport.setVisibility(GONE);
             } else {
-                holder.mTitle.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
                 if (PackageExplorer.isImageFile(data.get(position))) {
                     if (PackageExplorer.getIconFromPath(data.get(position)) != null) {
                         holder.mIcon.setImageURI(PackageExplorer.getIconFromPath(data.get(position)));
                     } else {
-                        holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
+                        holder.mIcon.setImageResource(R.drawable.ic_file);
                     }
                     holder.mIcon.setBackground(null);
                 } else {
-                    holder.mIcon.setImageDrawable(sCommonUtils.getDrawable(R.drawable.ic_file, holder.mIcon.getContext()));
+                    holder.mIcon.setImageResource(R.drawable.ic_file);
                     holder.mIcon.setColorFilter(sThemeUtils.isDarkTheme(holder.mIcon.getContext()) ? sCommonUtils.getColor(R.color.colorWhite,
                             holder.mIcon.getContext()) : sCommonUtils.getColor(R.color.colorBlack, holder.mIcon.getContext()));
                     holder.mIcon.setBackground(null);

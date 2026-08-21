@@ -55,28 +55,30 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/documentation"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?attr/materialIconButtonFilledTonalStyle"
                 android:text="@string/documentation"
-                android:layout_marginEnd="10dp"
                 app:icon="@drawable/ic_book"
                 android:textStyle="bold"
                 android:textSize="15sp"
-                app:iconPadding="10sp"/>
+                android:alpha="0.75" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/start"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_marginStart="10dp"
                 app:icon="@drawable/ic_start"
                 android:text="@string/start"
                 app:iconGravity="textEnd"
                 android:textStyle="bold"
-                android:textSize="15sp"
-                app:iconPadding="10sp" />
+                android:textSize="15sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/uninstall_adb"
-        android:layout_marginStart="10dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_gravity="center"
         style="@style/AppTheme.Title"
         android:padding="5dp" />
@@ -74,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:strokeColor="?attr/colorPrimary"
-                android:layout_margin="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
                 app:cardCornerRadius="10dp"
                 android:visibility="gone" >
 
@@ -86,7 +87,7 @@
                         android:id="@+id/uninstall_updates"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="40dp"
+                        android:layout_marginEnd="50dp"
                         android:textStyle="bold"
                         android:gravity="start"
                         android:padding="10dp" />
