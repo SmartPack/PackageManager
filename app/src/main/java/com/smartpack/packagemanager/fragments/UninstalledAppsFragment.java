@@ -13,6 +13,7 @@ import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,9 +34,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.adapters.UninstalledAppsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.RecyclerViewSwipeListener;
 import com.smartpack.packagemanager.utils.RootShell;
 import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 import com.smartpack.packagemanager.utils.ShizukuShell;
@@ -61,7 +64,7 @@ public class UninstalledAppsFragment extends Fragment {
     private UninstalledAppsAdapter mRecycleViewAdapter;
     private List<PackageItems> mData;
     private final List<String> mRestoreList = new CopyOnWriteArrayList<>();
-
+    private RecyclerViewSwipeListener mRecyclerViewSwipeListener;
     private RootShell mRootShell = null;
     private ShizukuShell mShizukuShell = null;
     private String mSearchText = null;
@@ -151,6 +154,18 @@ public class UninstalledAppsFragment extends Fragment {
             }
             restore(v.getContext()).execute();
         });
+
+        mRecyclerViewSwipeListener = new RecyclerViewSwipeListener(mRecyclerView) {
+            @Override
+            public void onSwipeLeft() {
+                AppSettings.navigateToFragment(requireActivity(), 1);
+            }
+
+            @Override
+            public void onSwipeRight() {
+                startActivity(new Intent(requireActivity(), SettingsActivity.class));
+            }
+        };
 
         requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
@@ -266,9 +281,15 @@ public class UninstalledAppsFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+
         mRestoreList.clear();
+
+        if (mRecyclerViewSwipeListener != null) {
+            mRecyclerViewSwipeListener.detach();
+            mRecyclerViewSwipeListener = null;
+        }
     }
 
 }

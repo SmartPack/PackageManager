@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.button.MaterialButton;
@@ -24,7 +25,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PagerAdapter;
 import com.smartpack.packagemanager.dialogs.SortOptionsDialog;
+import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
+import com.smartpack.packagemanager.utils.RecyclerViewSwipeListener;
 import com.smartpack.packagemanager.viewModels.ApplicationsViewModel;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -36,6 +39,7 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 public class InstalledAppsFragment extends Fragment {
 
     private ApplicationsViewModel mViewModel;
+    private RecyclerViewSwipeListener mRecyclerViewSwipeListener;
 
     @Nullable
     @Override
@@ -87,11 +91,37 @@ public class InstalledAppsFragment extends Fragment {
             }
         });
 
+        View child = mViewPager.getChildAt(0);
+        if (child instanceof RecyclerView) {
+            mRecyclerViewSwipeListener = new RecyclerViewSwipeListener((RecyclerView) child) {
+                @Override
+                public void onSwipeLeft() {
+                }
+
+                @Override
+                public void onSwipeRight() {
+                    if (mViewPager.getCurrentItem() == 2) {
+                        AppSettings.navigateToFragment(requireActivity(), 1);
+                    }
+                }
+            };
+        }
+
         return mRootView;
     }
 
     private int getTabPosition() {
         return sCommonUtils.getInt("showAppType", 2, requireActivity());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mRecyclerViewSwipeListener != null) {
+            mRecyclerViewSwipeListener.detach();
+            mRecyclerViewSwipeListener = null;
+        }
     }
 
     @Override

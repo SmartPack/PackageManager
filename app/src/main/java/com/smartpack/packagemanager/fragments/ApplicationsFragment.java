@@ -270,7 +270,17 @@ public class ApplicationsFragment extends Fragment {
                     mSearchWord.setVisibility(View.GONE);
                     return;
                 }
-                if (sCommonUtils.getBoolean("exit_confirmation", true, requireActivity())) {
+                if (!mBatchList.isEmpty()) {
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setIcon(R.mipmap.ic_launcher)
+                            .setTitle(R.string.batch_warning)
+                            .setCancelable(false)
+                            .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                            })
+                            .setPositiveButton(getString(R.string.yes), (dialogInterface, i) ->
+                                    AppSettings.navigateToFragment(requireActivity(), 0)
+                            ).show();
+                } else if (sCommonUtils.getBoolean("exit_confirmation", true, requireActivity())) {
                     if (mExit) {
                         mExit = false;
                         exit(requireActivity());

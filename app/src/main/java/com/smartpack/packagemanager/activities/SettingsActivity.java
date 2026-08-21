@@ -25,6 +25,7 @@ import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.SettingsAdapter;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.Billing;
+import com.smartpack.packagemanager.utils.RecyclerViewSwipeListener;
 import com.smartpack.packagemanager.utils.Serializables.SettingsItems;
 import com.smartpack.packagemanager.utils.Utils;
 
@@ -42,6 +43,7 @@ import in.sunilpaulmathew.sCommon.TranslatorUtils.sTranslatorUtils;
  */
 public class SettingsActivity extends BaseActivity {
 
+    private RecyclerViewSwipeListener mRecyclerViewSwipeListener;
     private SettingsAdapter mRecycleViewAdapter;
 
     @SuppressLint("StringFormatInvalid")
@@ -182,6 +184,17 @@ public class SettingsActivity extends BaseActivity {
                 );
             }
         }));
+
+        mRecyclerViewSwipeListener = new RecyclerViewSwipeListener(mRecyclerView) {
+            @Override
+            public void onSwipeLeft() {
+                finish();
+            }
+
+            @Override
+            public void onSwipeRight() {
+            }
+        };
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -223,6 +236,16 @@ public class SettingsActivity extends BaseActivity {
         mData.add(new SettingsItems(getString(R.string.credits), getString(R.string.credits_summary), sCommonUtils.getDrawable(R.drawable.ic_credits, this), 10));
 
         return mData;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (mRecyclerViewSwipeListener != null) {
+            mRecyclerViewSwipeListener.detach();
+            mRecyclerViewSwipeListener = null;
+        }
     }
 
 }

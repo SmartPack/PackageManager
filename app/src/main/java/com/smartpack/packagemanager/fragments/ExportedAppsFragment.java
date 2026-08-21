@@ -18,6 +18,7 @@ import android.widget.PopupMenu;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.button.MaterialButton;
@@ -25,6 +26,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.adapters.PagerAdapter;
+import com.smartpack.packagemanager.utils.AppSettings;
+import com.smartpack.packagemanager.utils.RecyclerViewSwipeListener;
 import com.smartpack.packagemanager.viewModels.ApplicationsViewModel;
 
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
@@ -35,6 +38,7 @@ import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 public class ExportedAppsFragment extends Fragment {
 
     private ApplicationsViewModel mViewModel;
+    private RecyclerViewSwipeListener mRecyclerViewSwipeListener;
 
     @Nullable
     @Override
@@ -81,11 +85,40 @@ public class ExportedAppsFragment extends Fragment {
             popupMenu.show();
         });
 
+        View child = mViewPager.getChildAt(0);
+        if (child instanceof RecyclerView) {
+            mRecyclerViewSwipeListener = new RecyclerViewSwipeListener((RecyclerView) child) {
+                @Override
+                public void onSwipeLeft() {
+                    if (mViewPager.getCurrentItem() == 0) {
+                        AppSettings.navigateToFragment(requireActivity(), 0);
+                    }
+                }
+
+                @Override
+                public void onSwipeRight() {
+                    if (mViewPager.getCurrentItem() == 1) {
+                        AppSettings.navigateToFragment(requireActivity(), 2);
+                    }
+                }
+            };
+        }
+
         return mRootView;
     }
 
     private int getTabPosition() {
         return sCommonUtils.getInt("exportedTypes", 0, requireActivity());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mRecyclerViewSwipeListener != null) {
+            mRecyclerViewSwipeListener.detach();
+            mRecyclerViewSwipeListener = null;
+        }
     }
 
     @Override

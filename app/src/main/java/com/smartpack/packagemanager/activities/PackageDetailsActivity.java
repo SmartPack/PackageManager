@@ -48,7 +48,7 @@ public class PackageDetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentViewWithInsets(R.layout.activity_packagedetails, R.id.layout_root);
+        setContentViewWithInsets(R.layout.activity_package_details, R.id.layout_root);
 
         AppCompatImageView mAppIcon = findViewById(R.id.app_image);
         MaterialTextView mAppName = findViewById(R.id.app_title);
