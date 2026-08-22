@@ -41,10 +41,11 @@ public class ExportBundleTasks extends sExecutor {
     private final Activity mActivity;
     private final String mPackageName;
     private final Drawable mIcon;
-    private final String mAPKPath, mName;
+    private final String mAppName, mAPKPath, mName;
     private ProgressDialog mProgressDialog;
 
-    public ExportBundleTasks(String packageName, String path, String name, Drawable icon, Activity activity) {
+    public ExportBundleTasks(String appName, String packageName, String path, String name, Drawable icon, Activity activity) {
+        this.mAppName = appName;
         this.mPackageName = packageName;
         this.mAPKPath = path;
         this.mName = name;
@@ -58,7 +59,7 @@ public class ExportBundleTasks extends sExecutor {
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
-        mProgressDialog.setTitle(mActivity.getString(R.string.exporting_bundle, mName) + "...");
+        mProgressDialog.setTitle(mActivity.getString(R.string.exporting_bundle, mAppName) + "...");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.show();
     }
@@ -83,7 +84,7 @@ public class ExportBundleTasks extends sExecutor {
         mProgressDialog.dismiss();
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
-                .setTitle(mName)
+                .setTitle(mAppName)
                 .setMessage(mActivity.getString(R.string.export_bundle_summary, PackageData.getPackageDir(mActivity) + "/" + mName + ".apkm"))
                 .setNegativeButton(mActivity.getString(R.string.cancel), (dialog, id) -> {
                 })

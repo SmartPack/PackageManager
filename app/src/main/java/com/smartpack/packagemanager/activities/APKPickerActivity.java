@@ -92,19 +92,24 @@ public class APKPickerActivity extends BaseActivity {
         mFileName = getIntent().getStringExtra(NAME_INTENT);
 
         if (mAPKPath != null) {
-            manageInstallation(null, this).execute();
+            manageInstallation(null).execute();
         } else if (getIntent().getData() != null) {
-            manageInstallation(getIntent().getData(), this).execute();
+            manageInstallation(getIntent().getData()).execute();
         }
     }
 
-    private sExecutor manageInstallation(Uri uri, Activity activity) {
+    private sExecutor manageInstallation(Uri uri) {
         return new sExecutor() {
+            private final Activity activity = APKPickerActivity.this;
             private final List<APKPickerItems> mAPKs = new ArrayList<>();
             private ProgressDialog mProgressDialog;
 
             @Override
             public void onPreExecute() {
+                if (activity.isFinishing() || activity.isDestroyed()) {
+                    return;
+                }
+
                 mProgressDialog = new ProgressDialog(activity);
                 mProgressDialog.setIcon(R.mipmap.ic_launcher);
                 mProgressDialog.setTitle(activity.getString(R.string.initializing));
@@ -158,7 +163,17 @@ public class APKPickerActivity extends BaseActivity {
 
             @Override
             public void onPostExecute() {
-                mProgressDialog.dismiss();
+                if (mProgressDialog != null && mProgressDialog.isShowing()) {
+                    try {
+                        mProgressDialog.dismiss();
+                    } catch (Exception ignored) {}
+                    mProgressDialog = null;
+                }
+
+                if (activity.isFinishing() || activity.isDestroyed()) {
+                    return;
+                }
+
                 if (mAPKParser != null && mAPKParser.isParsed()) {
                     loadAPKDetails(activity);
                 } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
@@ -239,8 +254,9 @@ public class APKPickerActivity extends BaseActivity {
                     Intent data = result.getData();
                     boolean status = Objects.requireNonNull(data).getBooleanExtra("INSTALL_STATUS_UPDATE", false);
                     setResult(Activity.RESULT_OK, new Intent().putExtra("INSTALL_STATUS_UPDATE", status));
-                    finish();
+
                 }
+                finish();
             }
     );
 

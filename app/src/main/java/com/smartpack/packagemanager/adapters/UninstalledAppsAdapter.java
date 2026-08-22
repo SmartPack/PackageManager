@@ -11,7 +11,6 @@ package com.smartpack.packagemanager.adapters;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +26,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
+import com.smartpack.packagemanager.dialogs.RestoreAppDialog;
 import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.RootShell;
@@ -63,7 +63,6 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
         return new UninstalledAppsAdapter.ViewHolder(rowItem);
     }
 
-    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(@NonNull UninstalledAppsAdapter.ViewHolder holder, int position) {
         PackageItems packageItems = this.data.get(position);
@@ -102,24 +101,6 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
                 toggleBatchMenu();
             }
         });
-
-        holder.mRestore.setOnClickListener(v -> {
-                    if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
-                        sCommonUtils.toast(v.getContext().getString(R.string.feature_unavailable_message), v.getContext()).show();
-                        return;
-                    }
-                    int currentPos = holder.getBindingAdapterPosition();
-                    if (currentPos != RecyclerView.NO_POSITION) {
-                        new MaterialAlertDialogBuilder(v.getContext())
-                                .setIcon(holder.mAppIcon.getDrawable())
-                                .setTitle(v.getContext().getString(R.string.restore_message, data.get(currentPos).getAppName()))
-                                .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                                })
-                                .setPositiveButton(R.string.restore, (dialog, id) ->
-                                        restore(currentPos, holder.mRestore.getContext()).execute()).show();
-                    }
-                }
-        );
 
         AppSettings.setSlideInAnimation(holder.mAppIcon, position);
     }
@@ -226,6 +207,9 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
             this.mAppName = view.findViewById(R.id.title);
             this.mAppID = view.findViewById(R.id.description);
             this.mCheckBox = view.findViewById(R.id.checkbox);
+
+            this.mRestore.setClickable(false);
+            this.mRestore.setFocusable(false);
         }
 
         @Override
@@ -241,7 +225,20 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
                     restoreList.remove(data.get(currentPos).getPackageName());
                     notifyItemChanged(currentPos);
                 });
+                return;
             }
+
+            if (!mRootShell.rootAccess() && !mShizukuShell.isReady()) {
+                sCommonUtils.toast(view.getContext().getString(R.string.feature_unavailable_message), view.getContext()).show();
+                return;
+            }
+
+            new RestoreAppDialog(this.mAppIcon.getDrawable(), this.mAppName.getText().toString().trim(), view.getContext()) {
+                @Override
+                public void onRestoring() {
+                    restore(currentPos, view.getContext()).execute();
+                }
+            };
         }
     }
 

@@ -75,7 +75,7 @@ public class SingleAPKTasks extends sExecutor {
     public void doInBackground() {
         mFileName = Objects.requireNonNull(DocumentFile.fromSingleUri(mActivity, mURIFile)).getName();
         if (Objects.requireNonNull(mFileName).endsWith(".apk")) {
-            sFileUtils.delete(mActivity.getExternalFilesDir("APK"));
+            sFileUtils.delete(Objects.requireNonNull(mActivity.getExternalFilesDir("APK")));
             mAPKFile = new File(mActivity.getExternalFilesDir("APK"), Objects.requireNonNull(mFileName));
             sFileUtils.copy(mURIFile, mAPKFile, mActivity);
             mAPKFile.deleteOnExit();

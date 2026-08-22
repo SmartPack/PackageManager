@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
@@ -298,13 +297,7 @@ public class ApksAdapter extends RecyclerView.Adapter<ApksAdapter.ViewHolder> {
                     }
                 }.execute();
             } else {
-                new MaterialAlertDialogBuilder(view.getContext())
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(view.getContext().getString(R.string.install_question, new File(path).getName()))
-                        .setNegativeButton(R.string.cancel, (dialog, id) -> {
-                        })
-                        .setPositiveButton(R.string.install, (dialog, id) -> new SplitAPKsInstallationTasks(path, mCallback::onInstall, activity).execute()
-                        ).show();
+                new SplitAPKsInstallationTasks(path, mCallback::onInstall, activity).execute();
             }
         }
     }

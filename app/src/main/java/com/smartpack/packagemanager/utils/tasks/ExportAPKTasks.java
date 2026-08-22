@@ -39,10 +39,11 @@ public class ExportAPKTasks extends sExecutor {
     private final Activity mActivity;
     private final String mPackageName;
     private final Drawable mIcon;
-    private final String mAPKPath, mName;
+    private final String mAppName, mAPKPath, mName;
     private ProgressDialog mProgressDialog;
 
-    public ExportAPKTasks(String packageName, String path, String name, Drawable icon, Activity activity) {
+    public ExportAPKTasks(String appName, String packageName, String path, String name, Drawable icon, Activity activity) {
+        this.mAppName = appName;
         this.mPackageName = packageName;
         this.mAPKPath = path;
         this.mName = name;
@@ -56,7 +57,7 @@ public class ExportAPKTasks extends sExecutor {
     public void onPreExecute() {
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setIcon(R.mipmap.ic_launcher);
-        mProgressDialog.setTitle(mActivity.getString(R.string.exporting, mName) + "...");
+        mProgressDialog.setTitle(mActivity.getString(R.string.exporting, mAppName) + "...");
         mProgressDialog.show();
     }
 
@@ -77,7 +78,7 @@ public class ExportAPKTasks extends sExecutor {
         mProgressDialog.dismiss();
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
-                .setTitle(mName)
+                .setTitle(mAppName)
                 .setMessage(mActivity.getString(R.string.export_apk_summary, PackageData.getPackageDir(mActivity)))
                 .setNegativeButton(mActivity.getString(R.string.cancel), (dialog, id) -> {
                 })

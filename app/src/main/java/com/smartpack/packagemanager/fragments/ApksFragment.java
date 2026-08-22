@@ -61,7 +61,7 @@ public class ApksFragment extends Fragment {
     private List<String> mData;
     private final List<String> mBatchList = new CopyOnWriteArrayList<>();
     private MaterialAutoCompleteTextView mSearchWord;
-    private MaterialButton mBatch;
+    private MaterialButton mBatch, mFAB;
     private ProgressBar mProgress;
     private String mSearchText = null;
 
@@ -93,7 +93,7 @@ public class ApksFragment extends Fragment {
 
         mSearchWord = mRootView.findViewById(R.id.search_word);
         mBatch = mRootView.findViewById(R.id.batch);
-        MaterialButton mFAB = mRootView.findViewById(R.id.fab);
+        mFAB = mRootView.findViewById(R.id.fab);
         mProgress = mRootView.findViewById(R.id.progress);
         RecyclerView mRecyclerView = mRootView.findViewById(R.id.recycler_view);
 
@@ -228,6 +228,7 @@ public class ApksFragment extends Fragment {
         return new sExecutor() {
             @Override
             public void onPreExecute() {
+                mFAB.setVisibility(GONE);
                 mProgress.setVisibility(VISIBLE);
             }
 
@@ -249,6 +250,7 @@ public class ApksFragment extends Fragment {
                 mSearchWord.setHint(getString(R.string.search_market_message, mRecycleViewAdapter.getItemCount() + " " + getString(R.string.exported_apps)));
                 mBatch.setVisibility(mBatchList.isEmpty() ? GONE : VISIBLE);
                 mProgress.setVisibility(GONE);
+                mFAB.setVisibility(VISIBLE);
             }
         };
     }

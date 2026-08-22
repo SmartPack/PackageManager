@@ -99,6 +99,7 @@ public class InstallerActivity extends BaseActivity {
 
         mOpen.setOnClickListener(v -> {
             startActivity(getPackageManager().getLaunchIntentForPackage(mPackageName));
+            setResult();
             finish();
         });
 
@@ -158,6 +159,7 @@ public class InstallerActivity extends BaseActivity {
         if (sCommonUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
         }
+        setResult();
         finish();
     }
 
@@ -172,7 +174,7 @@ public class InstallerActivity extends BaseActivity {
         @SuppressLint("StringFormatInvalid")
         @Override
         public void run() {
-            String installationStatus = sCommonUtils.getString("installationStatus", "waiting", InstallerActivity.this);
+            String installationStatus = getInstallationStatus();
 
             if (installationStatus.equals("waiting")) {
                 mStatus.setText(getString(R.string.installing_bundle));
@@ -185,26 +187,35 @@ public class InstallerActivity extends BaseActivity {
                     if (getPackageManager().getLaunchIntentForPackage(mPackageName) != null) {
                         mOpen.setVisibility(View.VISIBLE);
                     }
-
-                    Intent result = new Intent();
-                    if (!mUpdating) {
-                        PackageData.getRawData().add(new PackageItems(
-                                mPackageName,
-                                sPackageUtils.getAppName(mPackageName, InstallerActivity.this).toString(),
-                                sPackageUtils.getSourceDir(mPackageName, InstallerActivity.this),
-                                false,
-                                InstallerActivity.this)
-                        );
-                        result.putExtra("INSTALL_STATUS_UPDATE", false);
-                    } else {
-                        result.putExtra("INSTALL_STATUS_UPDATE", true);
-                    }
-                    setResult(Activity.RESULT_OK, result);
                 }
                 mProgress.setVisibility(View.GONE);
                 mClose.setVisibility(View.VISIBLE);
             }
         }
     };
+
+    private String getInstallationStatus() {
+        return sCommonUtils.getString("installationStatus", "waiting", this);
+    }
+
+    private void setResult() {
+        try {
+            Intent result = new Intent();
+            if (getInstallationStatus().equals(getString(R.string.installation_status_success)) && !mUpdating) {
+                PackageData.getRawData().add(new PackageItems(
+                        mPackageName,
+                        sPackageUtils.getAppName(mPackageName, InstallerActivity.this).toString(),
+                        sPackageUtils.getSourceDir(mPackageName, InstallerActivity.this),
+                        false,
+                        InstallerActivity.this)
+                );
+                result.putExtra("INSTALL_STATUS_UPDATE", false);
+            } else {
+                result.putExtra("INSTALL_STATUS_UPDATE", true);
+            }
+            setResult(Activity.RESULT_OK, result);
+        } catch (Exception ignored) {
+        }
+    }
 
 }

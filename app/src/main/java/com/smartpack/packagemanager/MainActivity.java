@@ -23,6 +23,7 @@ import com.smartpack.packagemanager.activities.SettingsActivity;
 import com.smartpack.packagemanager.fragments.ExportedAppsFragment;
 import com.smartpack.packagemanager.fragments.InstalledAppsFragment;
 import com.smartpack.packagemanager.fragments.UninstalledAppsFragment;
+import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.tasks.MultipleAPKsTasks;
 import com.smartpack.packagemanager.utils.tasks.SingleAPKTasks;
 
@@ -111,7 +112,7 @@ public class MainActivity extends BaseActivity {
                     boolean update = Objects.requireNonNull(data).getBooleanExtra("INSTALL_STATUS_UPDATE", false);
 
                     if (!update) {
-                        recreate();
+                        AppSettings.navigateToFragment(this, 0);
                     }
                 }
             }

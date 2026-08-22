@@ -87,13 +87,11 @@ public class BundleInstallDialog extends BottomSheetDialog {
                 } else {
                     new SplitAPKsInstallationTasks(data, callback::onInstall, activity).execute();
                 }
-                if (finish) {
-                    activity.finish();
-                }
                 dismiss();
             }
         }.execute());
 
         show();
     }
+
 }

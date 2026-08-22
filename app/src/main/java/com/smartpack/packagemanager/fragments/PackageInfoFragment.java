@@ -216,7 +216,7 @@ public class PackageInfoFragment extends Fragment {
                 if (Build.VERSION.SDK_INT < 29 && sPermissionUtils.isPermissionDenied(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, requireActivity())) {
                     requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 } else {
-                    PackageDetails.exportApp(mPackageName, sPackageUtils.getSourceDir(mPackageName, requireActivity()), appIcon, requireActivity());
+                    PackageDetails.exportApp(mAppName, mPackageName, sPackageUtils.getSourceDir(mPackageName, requireActivity()), appIcon, requireActivity());
                 }
             } else if (position == 2) {
                 new MaterialAlertDialogBuilder(requireActivity())

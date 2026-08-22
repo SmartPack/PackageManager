@@ -1,5 +1,8 @@
 package com.smartpack.packagemanager.dialogs;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -32,7 +35,12 @@ public abstract class BottomMenuDialog extends BottomSheetDialog {
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
         title.setText(headerTitle);
-        description.setText(headerDescription);
+        if (headerDescription != null && !headerDescription.isEmpty()) {
+            description.setText(headerDescription);
+            description.setVisibility(VISIBLE);
+        } else {
+            description.setVisibility(GONE);
+        }
         icon.setImageDrawable(headerIcon);
 
         recyclerView.setItemAnimator(null);
