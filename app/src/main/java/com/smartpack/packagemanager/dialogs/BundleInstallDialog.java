@@ -51,7 +51,6 @@ public class BundleInstallDialog extends BottomSheetDialog {
 
         setContentView(rootView);
         setTitle(R.string.split_apk_select);
-        setCancelable(false);
 
         cancel.setOnClickListener(v -> {
             if (finish) {

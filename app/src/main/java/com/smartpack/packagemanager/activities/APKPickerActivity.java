@@ -9,7 +9,10 @@
 package com.smartpack.packagemanager.activities;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -159,6 +162,14 @@ public class APKPickerActivity extends BaseActivity {
                 if (mAPKParser != null && mAPKParser.isParsed()) {
                     loadAPKDetails(activity);
                 } else if (mFileName.endsWith(".apkm") || mFileName.endsWith(".apks") || mFileName.endsWith(".xapk")) {
+                    // Apply transparent background
+                    activity.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    try {
+                        java.lang.reflect.Method method = Activity.class.getDeclaredMethod("convertToTranslucent",
+                                Class.forName("android.app.Activity$TranslucentConversionListener"), ActivityOptions.class);
+                        method.setAccessible(true);
+                        method.invoke(activity, null, null);
+                    } catch (Throwable ignored) {}
                     new BundleInstallDialog(mAPKs, true, installApp::launch, activity);
                 } else {
                     sCommonUtils.toast(getString(R.string.installation_status_bad_apks), activity).show();

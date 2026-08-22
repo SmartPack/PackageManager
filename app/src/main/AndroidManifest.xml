@@ -39,7 +39,6 @@
         <activity android:name=".activities.APKPickerActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:label="@string/split_apk_installer"
-            tools:ignore="AppLinkUrlError"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
