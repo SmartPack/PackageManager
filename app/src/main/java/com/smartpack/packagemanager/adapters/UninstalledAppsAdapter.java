@@ -129,7 +129,8 @@ public class UninstalledAppsAdapter extends RecyclerView.Adapter<UninstalledApps
                 PackageItems oldItem = data.get(oldItemPosition);
                 PackageItems newItem = newData.get(newItemPosition);
 
-                return oldItem == newItem;
+                return Objects.equals(oldItem.getPackageName(), newItem.getPackageName())
+                        && Objects.equals(oldItem.isRemoved(), newItem.isRemoved());
             }
         });
 

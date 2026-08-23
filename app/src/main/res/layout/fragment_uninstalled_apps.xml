@@ -70,7 +70,12 @@
                 android:visibility="gone" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <include layout="@layout/layout_recyclerview" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <include layout="@layout/layout_recyclerview" />
+        </FrameLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.button.MaterialButton
@@ -81,7 +86,7 @@
         android:layout_marginHorizontal="25dp"
         android:layout_gravity="bottom|center"
         android:text="@string/restore_selected"
-        android:layout_marginBottom="75dp"
+        android:layout_marginVertical="75dp"
         app:icon="@drawable/ic_select"
         android:visibility="gone"
         android:gravity="center"

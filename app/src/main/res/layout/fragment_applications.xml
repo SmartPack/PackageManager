@@ -6,7 +6,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <include layout="@layout/layout_search" />
@@ -23,7 +23,12 @@
             android:indeterminate="true"
             android:visibility="gone" />
 
-        <include layout="@layout/layout_recyclerview" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <include layout="@layout/layout_recyclerview" />
+        </FrameLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -31,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="75dp"
+        android:layout_marginVertical="75dp"
         android:gravity="center|bottom"
         android:orientation="vertical" >
 

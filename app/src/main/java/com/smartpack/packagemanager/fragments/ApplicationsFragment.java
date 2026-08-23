@@ -398,7 +398,7 @@ public class ApplicationsFragment extends Fragment {
                                                         PackageItems itemOld = PackageData.getRawData().get(i);
                                                         PackageItems itemNew = new PackageItems(
                                                                 itemOld.getPackageName(),
-                                                                sPackageUtils.getAppName(batchOptionsItems.getPackageName(), requireActivity()).toString(),
+                                                                sPackageUtils.getAppName(batchOptionsItems.getPackageName(), requireActivity()).toString() + (sPackageUtils.isEnabled(itemOld.getPackageName(), requireActivity()) ? "" : " (Disabled)"),
                                                                 itemOld.getSourceDir(),
                                                                 itemOld.isRemoved(),
                                                                 requireActivity()
@@ -425,6 +425,7 @@ public class ApplicationsFragment extends Fragment {
                                         }
                                         if (!mEmpty) {
                                             mRecycleViewAdapter.updateData(mData);
+                                            mRecycleViewAdapter.refreshData();
                                             if (!newData.isEmpty()) {
                                                 new BatchResultsDialog(newData, activity);
                                             } else {
@@ -714,7 +715,6 @@ public class ApplicationsFragment extends Fragment {
             @Override
             public void onPreExecute() {
                 mProgress.setVisibility(VISIBLE);
-                mRecyclerView.setVisibility(GONE);
                 mFAB.setVisibility(GONE);
             }
 
@@ -736,7 +736,6 @@ public class ApplicationsFragment extends Fragment {
                 mBatchOptions.setText(activity.getString(R.string.batch_options, mBatchList.size()));
                 mFAB.setVisibility(VISIBLE);
                 mProgress.setVisibility(GONE);
-                mRecyclerView.setVisibility(VISIBLE);
             }
         }.execute();
     }
@@ -823,8 +822,10 @@ public class ApplicationsFragment extends Fragment {
                             public void onPostExecute() {
                                 if (!isAdded() || getActivity() == null) return;
 
-                                mRecycleViewAdapter.updateData(mData);
                                 mProgress.setVisibility(GONE);
+
+                                mRecycleViewAdapter.updateData(mData);
+                                mRecycleViewAdapter.refreshData();
                             }
                         }.execute();
                     } else {

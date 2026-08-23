@@ -191,7 +191,8 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
                 PackageItems oldItem = data.get(oldItemPosition);
                 PackageItems newItem = newData.get(newItemPosition);
 
-                return oldItem == newItem;
+                return Objects.equals(oldItem.getPackageName(), newItem.getPackageName())
+                        && Objects.equals(oldItem.getUpdatedTime(), newItem.getUpdatedTime());
             }
         });
 
