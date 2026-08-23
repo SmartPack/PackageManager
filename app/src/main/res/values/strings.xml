@@ -9,6 +9,7 @@
     <string name="apks">APK\'s</string>
     <string name="android_version">Android %s</string>
     <string name="batch_options">Batch Options (%s)</string>
+    <string name="batch_options_show">Show Options</string>
     <string name="batch_list_added">%s is added to the batch list</string>
     <string name="batch_list_clear">Clear list</string>
     <string name="batch_list_removed">%s is removed from batch list</string>

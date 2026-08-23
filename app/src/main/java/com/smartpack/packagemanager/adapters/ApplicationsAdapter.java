@@ -201,6 +201,12 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
         diffResult.dispatchUpdatesTo(this);
     }
 
+    public void refreshData() {
+        if (!this.data.isEmpty()) {
+            notifyItemRangeChanged(0, getItemCount());
+        }
+    }
+
     @Override
     public int getItemCount() {
         return this.data.size();
