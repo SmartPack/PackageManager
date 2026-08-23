@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Pfad zur APK"</string>
     <string name="app_info">"Appinformationen"</string>
-    <string name="batch_list_clear">"Liste löschen"</string>
     <string name="batch_warning">"Ihre Stapeleinstellungen werden entfernt! Fortfahren?"</string>
     <string name="change_logs">"Änderungsprotokolle"</string>
     <string name="data_dir">"Verzeichnis"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Installieren"</string>
     <string name="installing_bundle">"Installiere App-Bundle!"</string>
     <string name="language">"Sprache"</string>
-    <string name="language_default">"Standard"</string>
     <string name="more_apps">"Weitere Apps des Entwicklers"</string>
     <string name="name">"Name"</string>
     <string name="native_lib">"systemeigene Bibliothek"</string>
@@ -40,9 +38,8 @@
     <string name="press_back">"erneut \"zurück\" tippen um zu beenden"</string>
     <string name="report_issue">"Fehler melden"</string>
     <string name="reset">"Zurücksetzen"</string>
-    <string name="reset_message">"&amp;s zurücksetzen?"</string>
+    <string name="reset_message">"'%s' zurücksetzen?"</string>
     <string name="reset_summary">"Setze %s zurück"</string>
-    <string name="result">"Ergebnis: %s"</string>
     <string name="share">"Teilen"</string>
     <string name="shared_by">"%s/geteilt durch Package Manager"</string>
     <string name="share_message">"Package Manager %s kann von Google Play bezogen werden: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,16 +49,11 @@
     <string name="support">"Supportgruppe"</string>
     <string name="support_development">"Entwicklung unterstützen"</string>
     <string name="support_development_summary">"Wenn Sie die Bemühungen des Entwicklers zu schätzen wissen, dieses Tool völlig kostenlos zur Verfügung zu stellen, ziehen Sie bitte eine kleine Spende in Betracht, indem Sie auf eine der unten angebotenen Optionen klicken! Wenn Sie eines dieser Produkte kaufen, erhalten Sie hier ein Unterstützer-Abzeichen!"</string>
-    <string name="sure_question">"Sind Sie sicher?"</string>
-    <string name="turn_on_off">"An-/Ausschalten"</string>
     <string name="uninstall">"Deinstallieren"</string>
     <string name="uninstall_nope">"Entschuldigung! Sie können dies nicht von hier aus tun!"</string>
     <string name="uninstall_summary">"Entferne %s"</string>
     <string name="uninstall_title">"Sind Sie sich sicher, dass sie %s deinstallieren wollen?"</string>
-    <string name="uninstall_warning">"Bitte beachten Sie: Das Entfernen von System-Apps ist manchmal gefährlich!
-
-        *** <b>VERWENDEN AUF EIGENES RISIKO</b> ***
-        "</string>
+    <string name="uninstall_warning">"Bitte beachten Sie: Das Entfernen von System-Apps ist manchmal gefährlich!\n\n*** &lt;b&gt;VERWENDEN AUF EIGENES RISIKO&lt;/b&gt; ***"</string>
     <string name="welcome_message">"Willkommen bei Package Manager, einer einfachen, aber leistungsstarken Anwendung zur Verwaltung Ihrer Apps."</string>
     <string name="wrong_extension">"Bitte wählen Sie eine Datei mit der Erweiterung %s."</string>
     <string name="yes">"Ja"</string>
@@ -77,7 +69,7 @@
     <string name="share_app_Summary">"Laden Sie Ihre Freunde zur Verwendung von Package Manager ein"</string>
     <string name="source_code_summary">"Package Manager ist eine Open-Source-Anwendung, die bereit ist, Beiträge aus der Entwicklergemeinschaft anzunehmen. Klicken Sie hier, um sich den Quellcode anzusehen!"</string>
     <string name="support_summary">"Telegram-Supportgruppe beitreten"</string>
-    <string name="batch_options">"Stapeloptionen (%s)"</string>
+    <string name="batch_options">"Stapeloptionen"</string>
     <string name="batch_list_added">"%s wurde zum Stapel hinzugefügt"</string>
     <string name="batch_list_removed">"%s wurde vom Stapel entfernt"</string>
     <string name="explore_error_status">"Prüfung von %s fehlgeschlagen!"</string>
@@ -85,8 +77,6 @@
     <string name="activities">"Aktivitäten"</string>
     <string name="documentation">"Dokumentation"</string>
     <string name="documentation_summary">"Schau Dir die Detaillierten Dokumente an wie man Package Manager benutzt"</string>
-    <string name="installation_cancel_message">"Willst Du die Installation abbrechen?"</string>
-    <string name="sdcard">"SD Karte"</string>
     <string name="select">"Wählen"</string>
     <string name="uninstall_adb">"Mit ADB entfernen"</string>
     <string name="uninstall_adb_summary">"Deine Auswahl ist eine System App. Unglücklicherweise, erlaubt das Android Ökosystem keine Fremden Apps wie Package Manager das löschen auf Geräten ohne Root Rechten. Keine Panik deswegen! Package Manager führt Dich durch eine Anleitung um diese Applikation mit der Android Debug Bridge (ADB) zu entfernen. Wenn ADB Funktioniert, führe den folgenden Befehl aus und ADB löscht diese Applikation. Im Fall das ADB noch nicht eingerichtet ist, schau Dir die verlinkte Dokumentationen an"</string>
@@ -97,8 +87,6 @@
     <string name="apks">"APKs"</string>
     <string name="bundles">"Bündel"</string>
     <string name="delete">"Löschen"</string>
-    <string name="delete_question">"Lösche '%s'?"</string>
-    <string name="install_question">"Installiere '%s'?"</string>
     <string name="reverse_order">"Reihenfolge umkehren"</string>
     <string name="show_apps_all">"Alle"</string>
     <string name="show_apps_system">"System"</string>
@@ -131,7 +119,6 @@
     <string name="exiting_app">"Beim Verlassen der App"</string>
     <string name="exported_apps_name">"Exportierte APK Name"</string>
     <string name="general">"Allgemein"</string>
-    <string name="installer">"Installer"</string>
     <string name="installer_clicking">"Bei Klick auf Installer"</string>
     <string name="installer_file_picker">"Start Dateiauswahl"</string>
     <string name="installer_instructions">"Anleitung anzeigen"</string>
@@ -155,4 +142,40 @@
     <string name="never_show">"Nie anzeigen"</string>
     <string name="request">"Anfrage"</string>
     <string name="shizuku_integration_message">"Der Paketmanager kann jetzt mit der Shizuku-API integriert werden, um erweiterte Aufgaben durchzuführen. Wenn Sie mit der Shizuku-Integration fortfahren möchten, erteilen Sie bitte die Erlaubnis (einmalig), indem Sie auf die unten angegebene Schaltfläche klicken."</string>
+    <string name="feature_unavailable_message">"Diese Funktion erfordert Root- oder Shizuku-Unterstützung."</string>
+    <string name="failed_decode_xml">"%s konnte nicht dekodiert werden"</string>
+    <string name="batch_processing_failed_title">"Dieser Vorgang ist fehlgeschlagen aus folgenden Gründen:"</string>
+    <string name="batch_processing_success_message">"Der ausgewählte Prozess wurde erfolgreich abgeschlossen…"</string>
+    <string name="delete_selected">"Ausgewählte löschen"</string>
+    <string name="exploring">"Erkundung…"</string>
+    <string name="export_details_selected_question">"Details ausgewählter Apps exportieren?"</string>
+    <string name="export_message_summary">"Ausgewählte Anwendungen werden in \'%s\' exportiert."</string>
+    <string name="export_selected">"Exportieren ausgewählt"</string>
+    <string name="export_selected_question">"Ausgewählte Apps exportieren?"</string>
+    <string name="export_success_message">"Die ausgewählten Elemente wurden exportiert. Pfad: %s"</string>
+    <string name="ignored">"Ignoriert"</string>
+    <string name="permission_granted_write_storage">"Speicherzugriff gewährt! Tippen Sie erneut auf die Schaltfläche, um zu beginnen."</string>
+    <string name="purchase_pro">"Kaufprofi"</string>
+    <string name="purchase_pro_acknowledgement">"Vielen Dank → Sie unterstützen uns bereits durch die Nutzung der Pro-Version."</string>
+    <string name="reset_selected_question">"Ausgewählte Apps zurücksetzen?"</string>
+    <string name="restore_selected">"Ausgewählte wiederherstellen"</string>
+    <string name="status">"Status: %s"</string>
+    <string name="turn_on_off_selected_question">"Ausgewählte Apps ein-/ausschalten?"</string>
+    <string name="uninstall_selected_question">"Ausgewählte Apps deinstallieren?"</string>
+    <string name="applications">"Anwendungen"</string>
+    <string name="split_apk_list_empty">"Es wurden keine Split-APKs ausgewählt. Abbruch…"</string>
+    <string name="split_apk_select">"Wählen Sie die zu installierenden Split-APKs aus."</string>
+    <string name="operations_allow_title">"Erlauben"</string>
+    <string name="operations_allow_description">"Diese Operation immer zulassen."</string>
+    <string name="operations_failed_toast">"Statusänderung von %s fehlgeschlagen"</string>
+    <string name="operations_ignore_title">"Ignorieren"</string>
+    <string name="operations_ignore_description">"Die Operation immer blockieren/stillschweigend abbrechen"</string>
+    <string name="operations_deny_title">"Leugnen"</string>
+    <string name="operations_deny_description">"Explizit ablehnen (ähnlich wie ignorieren, kann aber einen Fehler zurückgeben)"</string>
+    <string name="operations_default_title">"Standard"</string>
+    <string name="operations_default_description">"Das Standardverhalten des Systems verwenden (basierend auf den deklarierten Berechtigungen der App und dem Benutzerberechtigungsstatus)"</string>
+    <string name="operations_foreground_title">"Vordergrund"</string>
+    <string name="operations_foreground_description">"Zugriff nur erlauben, wenn die App im Vordergrund läuft (für Operationen wie Standort, Mikrofon, Kamera)."</string>
+    <string name="shortcut_create">"Verknüpfung erstellen"</string>
+    <string name="shortcut_create_failed_toast">"Verknüpfung konnte nicht erstellt werden: %s"</string>
 </resources>

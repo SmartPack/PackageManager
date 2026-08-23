@@ -30,7 +30,7 @@ public class ProgressDialog {
 
     public ProgressDialog(Context context) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View progressLayout = layoutInflater.inflate(R.layout.progress_view_layout, null);
+        View progressLayout = layoutInflater.inflate(R.layout.layout_progress_view, null);
         mProgressBar = progressLayout.findViewById(R.id.progress);
         mDialogBuilder = new MaterialAlertDialogBuilder(context)
                 .setView(progressLayout)

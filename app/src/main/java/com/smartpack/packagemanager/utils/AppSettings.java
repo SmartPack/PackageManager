@@ -77,34 +77,40 @@ public class AppSettings {
                 return country.equalsIgnoreCase("us") ? 6 : 0;
             case "es":
                 return 7;
-            case "fr":
+            case "fa":
                 return 8;
-            case "he":
+            case "fr":
                 return 9;
-            case "hu":
+            case "he":
                 return 10;
-            case "it":
+            case "hu":
                 return 11;
-            case "ko":
+            case "in":
                 return 12;
-            case "ml":
+            case "it":
                 return 13;
-            case "pl":
+            case "ko":
                 return 14;
-            case "pt":
-                return country.equalsIgnoreCase("BR") ? 15 : 16;
-            case "ru":
+            case "lv":
+                return 15;
+            case "ml":
+                return 16;
+            case "pl":
                 return 17;
-            case "sk":
-                return 18;
-            case "tr":
-                return 19;
-            case "uk":
+            case "pt":
+                return country.equalsIgnoreCase("BR") ? 18 : 19;
+            case "ru":
                 return 20;
-            case "vi":
+            case "sk":
                 return 21;
+            case "tr":
+                return 22;
+            case "uk":
+                return 23;
+            case "vi":
+                return 24;
             case "zh":
-                return country.equalsIgnoreCase("HK") ? 24 : country.equalsIgnoreCase("CN") ? 23 : 22;
+                return country.equalsIgnoreCase("HK") ? 27 : country.equalsIgnoreCase("CN") ? 26 : 25;
             default:
                 return 0;
         }
@@ -218,16 +224,22 @@ public class AppSettings {
                         : context.getString(R.string.app_theme_auto);
             case "es":
                 return context.getString(R.string.language_es, country.equalsIgnoreCase("MX") ? "MX" : "ES");
+            case "fa":
+                return context.getString(R.string.language_fa);
             case "fr":
                 return context.getString(R.string.language_fr, "FR");
             case "he":
                 return context.getString(R.string.language_he);
             case "hu":
                 return context.getString(R.string.language_hu);
+            case "in":
+                return context.getString(R.string.language_in);
             case "it":
                 return context.getString(R.string.language_it);
             case "ko":
                 return context.getString(R.string.language_ko);
+            case "lv":
+                return context.getString(R.string.language_lv);
             case "ml":
                 return context.getString(R.string.language_ml);
             case "pl":
@@ -264,11 +276,14 @@ public class AppSettings {
                 context.getString(R.string.language_el),
                 context.getString(R.string.language_en, "US"),
                 context.getString(R.string.language_es, "ES"),
+                context.getString(R.string.language_fa),
                 context.getString(R.string.language_fr, "FR"),
                 context.getString(R.string.language_he),
                 context.getString(R.string.language_hu),
+                context.getString(R.string.language_in),
                 context.getString(R.string.language_it),
                 context.getString(R.string.language_ko),
+                context.getString(R.string.language_lv),
                 context.getString(R.string.language_ml),
                 context.getString(R.string.language_pl),
                 context.getString(R.string.language_pt, "BR"),
@@ -372,118 +387,139 @@ public class AppSettings {
                         sCommonUtils.saveString("country", "ES", activity);
                         break;
                     case 8:
+                        if (Objects.equals(getLanguage(activity), "fa") && Objects.equals(getCountry(activity), null)) {
+                            return;
+                        }
+                        sCommonUtils.saveString("appLanguage", "fa", activity);
+                        sCommonUtils.saveString("country", null, activity);
+                        break;
+                    case 9:
                         if (Objects.equals(getLanguage(activity), "fr") && Objects.equals(getCountry(activity), "FR")) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "fr", activity);
                         sCommonUtils.saveString("country", "FR", activity);
                         break;
-                    case 9:
+                    case 10:
                         if (Objects.equals(getLanguage(activity), "he") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "he", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 10:
+                    case 11:
                         if (Objects.equals(getLanguage(activity), "hu") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "hu", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 11:
+                    case 12:
+                        if (Objects.equals(getLanguage(activity), "in") && Objects.equals(getCountry(activity), null)) {
+                            return;
+                        }
+                        sCommonUtils.saveString("appLanguage", "in", activity);
+                        sCommonUtils.saveString("country", null, activity);
+                        break;
+                    case 13:
                         if (Objects.equals(getLanguage(activity), "it") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "it", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 12:
+                    case 14:
                         if (Objects.equals(getLanguage(activity), "ko") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "ko", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 13:
+                    case 15:
+                        if (Objects.equals(getLanguage(activity), "lv") && Objects.equals(getCountry(activity), null)) {
+                            return;
+                        }
+                        sCommonUtils.saveString("appLanguage", "lv", activity);
+                        sCommonUtils.saveString("country", null, activity);
+                        break;
+                    case 16:
                         if (Objects.equals(getLanguage(activity), "ml") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "ml", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 14:
+                    case 17:
                         if (Objects.equals(getLanguage(activity), "pl") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "pl", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 15:
+                    case 18:
                         if (Objects.equals(getLanguage(activity), "pt") && Objects.equals(getCountry(activity), "BR")) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "pt", activity);
                         sCommonUtils.saveString("country", "BR", activity);
                         break;
-                    case 16:
+                    case 19:
                         if (Objects.equals(getLanguage(activity), "pt") && Objects.equals(getCountry(activity), "PT")) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "pt", activity);
                         sCommonUtils.saveString("country", "PT", activity);
                         break;
-                    case 17:
+                    case 20:
                         if (Objects.equals(getLanguage(activity), "ru") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "ru", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 18:
+                    case 21:
                         if (Objects.equals(getLanguage(activity), "sk") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "sk", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 19:
+                    case 22:
                         if (Objects.equals(getLanguage(activity), "tr") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "tr", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 20:
+                    case 23:
                         if (Objects.equals(getLanguage(activity), "uk") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "uk", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 21:
+                    case 24:
                         if (Objects.equals(getLanguage(activity), "vi") && Objects.equals(getCountry(activity), null)) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "vi", activity);
                         sCommonUtils.saveString("country", null, activity);
                         break;
-                    case 22:
+                    case 25:
                         if (Objects.equals(getLanguage(activity), "zh") && Objects.equals(getCountry(activity), "TW")) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "zh", activity);
                         sCommonUtils.saveString("country", "TW", activity);
                         break;
-                    case 23:
+                    case 26:
                         if (Objects.equals(getLanguage(activity), "zh") && Objects.equals(getCountry(activity), "CN")) {
                             return;
                         }
                         sCommonUtils.saveString("appLanguage", "zh", activity);
                         sCommonUtils.saveString("country", "CN", activity);
                         break;
-                    case 24:
+                    case 27:
                         if (Objects.equals(getLanguage(activity), "zh") && Objects.equals(getCountry(activity), "HK")) {
                             return;
                         }

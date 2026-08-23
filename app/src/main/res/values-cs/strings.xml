@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Cesta k apk souboru"</string>
     <string name="app_info">"Info o aplikaci"</string>
-    <string name="batch_list_clear">"Vyčistit seznam"</string>
     <string name="batch_warning">"Váše dávkové nastavení bude odstraněno! Opravdu?"</string>
     <string name="change_logs">"Seznamy změn"</string>
     <string name="data_dir">"Adresář dat"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Instalovat"</string>
     <string name="installing_bundle">"Instalování App Budle!"</string>
     <string name="language">"Jazyk"</string>
-    <string name="language_default">"Výchozí (default)"</string>
     <string name="more_apps">"Více od vývojáře"</string>
     <string name="name">"Jméno"</string>
     <string name="native_lib">"Název knihovny"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Reset"</string>
     <string name="reset_message">"Reset %"</string>
     <string name="reset_summary">"Resetuji %s"</string>
-    <string name="result">"Vysledek6: %s"</string>
     <string name="share">"Sdílet"</string>
     <string name="shared_by">"%s/sdíleno Package Manager-em"</string>
     <string name="share_message">"Package Manager je k získání na Google Play obchodě: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Skupina podpory"</string>
     <string name="support_development">"Podpořit vývoj"</string>
     <string name="support_development_summary">"Pokud chcete ocenit snahu vývojáře poskytnout tento nástroj zcela zdarma, zvažte odeslání malého daru kliknutím na některou z níže uvedených možností!  Zakoupením některého z těchto produktů zde získáte odznak podporovatele!"</string>
-    <string name="sure_question">"Opravdu?"</string>
-    <string name="turn_on_off">"Přepnout Zap/ Vyp"</string>
     <string name="uninstall">"Odinstalovat"</string>
     <string name="uninstall_nope">"Omlouvám se! Toto nelze provést odtud!"</string>
     <string name="uninstall_summary">"Odstraňování%s"</string>
@@ -82,8 +77,6 @@
     <string name="activities">"Aktivity"</string>
     <string name="documentation">"Dokumentace"</string>
     <string name="documentation_summary">"Prohlédněte si dokumentaci pro použití Package Manager"</string>
-    <string name="installation_cancel_message">"Opravdu chcete stornovat instalaci?"</string>
-    <string name="sdcard">"SD karta"</string>
     <string name="select">"Vybrat"</string>
     <string name="uninstall_adb">"Odinstalovat pomocí ADB"</string>
     <string name="uninstall_adb_summary">"Vybrali jste '%s', což je systémová aplikace.  Ekosystém Android bohužel neumožňuje aplikacím třetích stran, například Správci balíčků, odebírat systémové aplikace v jiných než rootovaných prostředích.  Nebojte se!  Správce balíčků vás provede odebráním této aplikace pomocí metody Android Debug Bridge (ADB).  Pokud již máte plně funkční ADB, provedením následujícího příkazu z ADB tuto aplikaci odinstalujete.  Chcete-li nakonfigurovat fungující prostředí ADB, podívejte se na propojenou stránku Dokumentace"</string>
@@ -94,8 +87,6 @@
     <string name="apks">"APK soubory"</string>
     <string name="bundles">"Balíčky"</string>
     <string name="delete">"Odstranit"</string>
-    <string name="delete_question">"Odstranit '%s'?"</string>
-    <string name="install_question">"Instalovat '%s'?"</string>
     <string name="reverse_order">"Převrátit příkaz"</string>
     <string name="show_apps_all">"Vše"</string>
     <string name="show_apps_system">"Systém"</string>

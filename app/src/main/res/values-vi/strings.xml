@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Đường dẫn APK"</string>
     <string name="app_info">"Thông tin ứng dụng"</string>
-    <string name="batch_list_clear">"Dọn dẹp danh sách"</string>
     <string name="batch_warning">"Cài đặt hàng loạt của bạn sẽ bị xóa!  Bạn có chắc không?"</string>
     <string name="change_logs">"Nhật ký thay đổi"</string>
     <string name="data_dir">"Thư mục dữ liệu"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Cài đặt"</string>
     <string name="installing_bundle">"Cài đặt Gói ứng dụng!"</string>
     <string name="language">"Ngôn ngữ"</string>
-    <string name="language_default">"Mặc định"</string>
     <string name="more_apps">"Thêm từ Nhà phát triển"</string>
     <string name="name">"Tên"</string>
     <string name="native_lib">"Thư viện gốc"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Cài lại"</string>
     <string name="reset_message">"Đặt lại '%s'?"</string>
     <string name="reset_summary">"Đang đặt lại %s"</string>
-    <string name="result">"Kết quả: %s"</string>
     <string name="share">"Chia sẻ"</string>
     <string name="shared_by">"%s/được chia sẻ bởi Package Manager"</string>
     <string name="share_message">"Package Manager %s có thể được lấy từ\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Nhóm hỗ trợ"</string>
     <string name="support_development">"Hỗ trợ phát triển"</string>
     <string name="support_development_summary">"Nếu bạn muốn đánh giá cao nỗ lực của nhà phát triển trong việc cung cấp công cụ này hoàn toàn miễn phí, vui lòng cân nhắc gửi một khoản đóng góp nhỏ bằng cách nhấp vào một trong số các tùy chọn được cung cấp bên dưới!  Mua bất kỳ sản phẩm nào trong số này bạn sẽ nhận được huy hiệu ủng hộ tại đây!"</string>
-    <string name="sure_question">"Bạn có chắc không?"</string>
-    <string name="turn_on_off">"Bật/Tắt"</string>
     <string name="uninstall">"Gỡ cài đặt"</string>
     <string name="uninstall_nope">"Lấy làm tiếc! Bạn không thể làm điều này từ đây!"</string>
     <string name="uninstall_summary">"Đang xóa %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Hoạt động"</string>
     <string name="documentation">"Tài liệu"</string>
     <string name="documentation_summary">"Kiểm tra tài liệu chi tiết để sử dụng Package Manager"</string>
-    <string name="installation_cancel_message">"Bạn có chắc chắn hủy cài đặt không?"</string>
-    <string name="sdcard">"Thẻ SD"</string>
     <string name="select">"Chọn"</string>
     <string name="uninstall_adb">"Gỡ cài đặt bằng ADB"</string>
     <string name="uninstall_adb_summary">"Bạn đã chọn '%s', là một ứng dụng hệ thống. Thật không may, hệ sinh thái Android không cho phép các ứng dụng người dùng bên thứ ba, chẳng hạn như Package Manager, xóa các ứng dụng hệ thống trong môi trường không root. Đừng lo lắng! Package Manager sẽ hướng dẫn bạn gỡ bỏ ứng dụng này bằng phương pháp Android Debug Bridge (ADB). Nếu bạn đã có một ADB hoạt động đầy đủ, việc thực thi lệnh sau từ một ADB sẽ gỡ cài đặt ứng dụng này. Để định cấu hình môi trường ADB đang hoạt động, vui lòng xem trang Tài liệu được liên kết."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APK"</string>
     <string name="bundles">"Gói"</string>
     <string name="delete">"Xóa"</string>
-    <string name="delete_question">"Xóa '%s'?"</string>
-    <string name="install_question">"Cài đặt '%s'?"</string>
     <string name="reverse_order">"Đảo ngược thứ tự"</string>
     <string name="show_apps_all">"Tất cả"</string>
     <string name="show_apps_system">"Hệ thống"</string>
@@ -118,7 +109,6 @@
     <string name="export_details">"Xuất chi tiết"</string>
     <string name="more">"Thêm"</string>
     <string name="apk_installer_description">"Một tệp APK riêng lẻ"</string>
-    <string name="installer">"Trình cài đặt"</string>
     <string name="other">"Khác"</string>
     <string name="restore">"Khôi phục"</string>
     <string name="update">"Cập nhật"</string>

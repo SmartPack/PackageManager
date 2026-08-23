@@ -11,6 +11,9 @@ package com.smartpack.packagemanager.activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,8 +32,8 @@ import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.Serializables.PackageItems;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
@@ -74,21 +77,54 @@ public class InstallerActivity extends BaseActivity {
             public void doInBackground() {
                 mAppList = getIntent().getStringArrayListExtra(APP_LIST_INTENT);
                 mApkPath = getIntent().getStringExtra(APK_PATH_INTENT);
-                mAppName = getAppName();
-                mPackageName = getPackageID();
-                mAppIcon = getAppIcon();
+
+                loadPackageDetails();
+
                 mUpdating = sPackageUtils.isPackageInstalled(mPackageName, InstallerActivity.this);
+            }
+
+            private void loadPackageDetails() {
+                PackageManager pm = getPackageManager();
+
+                if (mAppList != null) {
+                    for (String apkPath : mAppList) {
+                        if (sFileUtils.exist(apkPath)) {
+                            PackageInfo pi = pm.getPackageArchiveInfo(apkPath, 0);
+                            if (pi != null) {
+                                ApplicationInfo ai = pi.applicationInfo;
+                                Objects.requireNonNull(ai).sourceDir = apkPath;
+                                ai.publicSourceDir = apkPath;
+
+                                mAppName = pm.getApplicationLabel(ai).toString();
+                                mAppIcon = pm.getApplicationIcon(ai);
+                                mPackageName = ai.packageName;
+                                return;
+                            }
+                        }
+                    }
+                } else if (mApkPath != null) {
+                    PackageInfo pi = pm.getPackageArchiveInfo(mApkPath, 0);
+                    if (pi != null) {
+                        ApplicationInfo ai = pi.applicationInfo;
+                        Objects.requireNonNull(ai).sourceDir = mApkPath;
+                        ai.publicSourceDir = mApkPath;
+
+                        mAppName = pm.getApplicationLabel(ai).toString();
+                        mAppIcon = pm.getApplicationIcon(ai);
+                        mPackageName = ai.packageName;
+                    }
+                }
             }
 
             @Override
             public void onPostExecute() {
                 if (mAppName != null) {
-                    mTitle.setText(getAppName());
+                    mTitle.setText(mAppName);
                 } else {
                     mTitle.setVisibility(View.GONE);
                 }
                 if (mAppIcon != null) {
-                    mIcon.setImageDrawable(getAppIcon());
+                    mIcon.setImageDrawable(mAppIcon);
                 } else {
                     mIcon.setVisibility(View.GONE);
                 }
@@ -113,48 +149,6 @@ public class InstallerActivity extends BaseActivity {
         });
     }
 
-    private String getAppName() {
-        String name = null;
-        if (mAppList != null) {
-            for (String apkPath : mAppList) {
-                if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKName(apkPath, this) != null) {
-                    name = sAPKUtils.getAPKName(apkPath, this).toString();
-                }
-            }
-        } else if (mApkPath != null) {
-            name = sAPKUtils.getAPKName(mApkPath, this).toString();
-        }
-        return name;
-    }
-
-    private String getPackageID() {
-        String name = null;
-        if (mAppList != null) {
-            for (String apkPath : mAppList) {
-                if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKName(apkPath, this) != null) {
-                    name = sAPKUtils.getPackageName(apkPath, this);
-                }
-            }
-        } else if (mApkPath != null) {
-            name = sAPKUtils.getPackageName(mApkPath, this);
-        }
-        return name;
-    }
-
-    private Drawable getAppIcon() {
-        Drawable icon = null;
-        if (mAppList != null) {
-            for (String apkPath : mAppList) {
-                if (sFileUtils.exist(apkPath) && sAPKUtils.getAPKIcon(apkPath, this) != null) {
-                    icon = sAPKUtils.getAPKIcon(apkPath, this);
-                }
-            }
-        } else if (mApkPath != null) {
-            icon = sAPKUtils.getAPKIcon(mApkPath, this);
-        }
-        return icon;
-    }
-
     private void backPressedEvent() {
         if (sCommonUtils.getString("installationStatus", "waiting", this).equals("waiting")) {
             return;
@@ -177,13 +171,13 @@ public class InstallerActivity extends BaseActivity {
             String installationStatus = getInstallationStatus();
 
             if (installationStatus.equals("waiting")) {
-                mStatus.setText(getString(R.string.installing_bundle));
+                mStatus.setText(getString(R.string.installing_bundle, mAppName));
                 mHandler.postDelayed(this, 500);
             } else {
-                mStatus.setText(getString(R.string.result, installationStatus));
+                mStatus.setText(installationStatus);
                 if (installationStatus.equals(getString(R.string.installation_status_success))) {
-                    mTitle.setText(sPackageUtils.getAppName(mPackageName, InstallerActivity.this));
-                    mIcon.setImageDrawable(sPackageUtils.getAppIcon(mPackageName, InstallerActivity.this));
+                    mTitle.setText(mAppName);
+                    mIcon.setImageDrawable(mAppIcon);
                     if (getPackageManager().getLaunchIntentForPackage(mPackageName) != null) {
                         mOpen.setVisibility(View.VISIBLE);
                     }

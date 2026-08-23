@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Ruta del APK"</string>
     <string name="app_info">"Información de la App"</string>
-    <string name="batch_list_clear">"Vaciar la lista"</string>
     <string name="batch_warning">"¡Tu configuración de cola por lotes va a ser eliminado!, ¿estás seguro?"</string>
     <string name="change_logs">"Registro de cambios"</string>
     <string name="data_dir">"Directorio de datos"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Instalar"</string>
     <string name="installing_bundle">"Instalando paquete de aplicaciones"</string>
     <string name="language">"Idioma"</string>
-    <string name="language_default">"Por defecto"</string>
     <string name="more_apps">"Más del desarrollador"</string>
     <string name="name">"Nombre"</string>
     <string name="native_lib">"Librería nativa"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Reiniciar"</string>
     <string name="reset_message">"Reiniciar '%s'?"</string>
     <string name="reset_summary">"Reiniciando %s"</string>
-    <string name="result">"Resultado: %s"</string>
     <string name="share">"Compartir"</string>
     <string name="shared_by">"%s/compartido por Package Manager"</string>
     <string name="share_message">"Package Manager %s se puede descargar de Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Grupo de soporte"</string>
     <string name="support_development">"Soporte de desarrollo"</string>
     <string name="support_development_summary">"Si desea apreciar los esfuerzos del desarrollador para proporcionar esta herramienta completamente gratis, considere enviar una pequeña donación haciendo clic en una de las opciones que se proporcionan a continuación.  ¡La compra de cualquiera de estos productos le otorgará una insignia de patrocinador aquí!"</string>
-    <string name="sure_question">"¿Estás seguro?"</string>
-    <string name="turn_on_off">"Encender/Apagar"</string>
     <string name="uninstall">"Desinstalar"</string>
     <string name="uninstall_nope">"¡Lo siento!, no se puede hacer desde aquí"</string>
     <string name="uninstall_summary">"Eliminando %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Actividades"</string>
     <string name="documentation">"Documentación"</string>
     <string name="documentation_summary">"Consulte la documentación detallada para usar el Administrador de paquetes"</string>
-    <string name="installation_cancel_message">"¿Estás seguro de cancelar la instalación?"</string>
-    <string name="sdcard">"SDCard"</string>
     <string name="select">"Seleccionar"</string>
     <string name="uninstall_adb">"Desinstalar por ADB"</string>
     <string name="uninstall_adb_summary">"Está seleccionado '% s', que es una aplicación del sistema.  Desafortunadamente, el ecosistema de Android no permite que las aplicaciones de usuarios de terceros, como Package Manager, eliminen aplicaciones del sistema en entornos no rooteados.  ¡Pero no te preocupes!  El Administrador de paquetes lo guiará para eliminar esta aplicación mediante el método de Android Debug Bridge (ADB).  Si ya tiene un ADB en pleno funcionamiento, la ejecución del siguiente comando desde un ADB desinstalará esta aplicación.  Para configurar un entorno ADB que funcione, consulte la página de documentación vinculada."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APKs"</string>
     <string name="bundles">"Paquetes"</string>
     <string name="delete">"Borrar"</string>
-    <string name="delete_question">"Borrar '%s'?"</string>
-    <string name="install_question">"Instalar '%s'?"</string>
     <string name="reverse_order">"Invertir orden"</string>
     <string name="show_apps_all">"Todas"</string>
     <string name="show_apps_system">"Sistema"</string>

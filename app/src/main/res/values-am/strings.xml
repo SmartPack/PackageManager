@@ -17,7 +17,6 @@
     <string name="install">ጫን</string>
     <string name="installing_bundle">ክፍልፍል መተግበሪያ በመጫን ላይ</string>
     <string name="language">ቋንቋ</string>
-    <string name="language_default">ነባር</string>
     <string name="more_apps">ከ አበልፃጊዉ ተጨማሪ መተግበሪያ</string>
     <string name="open">ክፈት</string>
     <string name="open_message">ይህን መተግበሪያ በአሁኑ ሰዐት እየተጠቀሙበት ይገኛሉ!</string>
@@ -31,8 +30,6 @@
     <string name="share_message">ፖኬጅ ማኔጀር %s ማዉረድ ከፈለጉ\ፕሌይስቶር: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager</string>
     <string name="share_with">በዚህ አጋራ</string>
     <string name="support">የቴሌግራም ቤተሰብ</string>
-    <string name="sure_question">እርግጠኛ ኖት?</string>
-    <string name="turn_on_off">አብራ/አጥፋ</string>
     <string name="uninstall">መተግበሪያውን ሰርዝ</string>
     <string name="uninstall_nope">ይቅርታ! ይሄንን እዚህ ጋር ሆነዉ ማድረግ አይችሉም!</string>
     <string name="uninstall_summary">%s በማስወገድ ላይ</string>

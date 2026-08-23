@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Chemin de l'APK"</string>
     <string name="app_info">"Info de l'Appli"</string>
-    <string name="batch_list_clear">"Vider la liste"</string>
     <string name="batch_warning">"Vos paramètres de traitement par lot seront supprimés. Êtes-vous sûr ?"</string>
     <string name="change_logs">"Notes de version"</string>
     <string name="data_dir">"Dossier des données"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Installer"</string>
     <string name="installing_bundle">"Installation du paquet"</string>
     <string name="language">"Langue"</string>
-    <string name="language_default">"Défaut"</string>
     <string name="more_apps">"Plus de la part du développeur"</string>
     <string name="name">"Nom"</string>
     <string name="native_lib">"Librairie native"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Réinitialiser"</string>
     <string name="reset_message">"Réinitialiser %s ?"</string>
     <string name="reset_summary">"Réinitialisation de %s"</string>
-    <string name="result">"Résultat : %s"</string>
     <string name="share">"Partager"</string>
     <string name="shared_by">"%s/partagé par Package Manager"</string>
     <string name="share_message">"Package Manager %s peut être obtenu en passant par Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Groupe de Support"</string>
     <string name="support_development">"Support de développement"</string>
     <string name="support_development_summary">"Si vous appréciez les efforts du développeur pour fournir cet outil entièrement gratuit, pensez à envoyer un petit don en cliquant sur l'une des options ci-dessous. En achetant l'un de ces produits, vous obtiendrez ici un badge de supporter."</string>
-    <string name="sure_question">"Êtes-vous sûr ?"</string>
-    <string name="turn_on_off">"Allumer/Éteindre"</string>
     <string name="uninstall">"Désinstaller"</string>
     <string name="uninstall_nope">"Désolé ! Cela ne peut être fait d'ici."</string>
     <string name="uninstall_summary">"Suppression de %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Activités"</string>
     <string name="documentation">"Documentation"</string>
     <string name="documentation_summary">"Consultez la documentation détaillée pour utiliser Package Manager"</string>
-    <string name="installation_cancel_message">"Êtes-vous sûr d'annuler l'installation ?"</string>
-    <string name="sdcard">"Carte SD"</string>
     <string name="select">"Sélectionner"</string>
     <string name="uninstall_adb">"Désinstaller avec ADB"</string>
     <string name="uninstall_adb_summary">"Vous avez sélectionné '% s', qui est une application système. Malheureusement, l'écosystème Android n'autorise pas les applications utilisateur tierces, telles que Package Manager, à supprimer des applications système dans des environnements non rootés. Ne vous inquiétez pas ! Package Manager vous guidera pour supprimer cette application à l'aide de la méthode Android Debug Bridge (ADB). Si vous disposez déjà d'un ADB pleinement opérationnel, l'exécution de la commande suivante à partir d'un ADB désinstallera cette application. Afin de configurer un environnement ADB de travail, veuillez consulter la page de documentation liée."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APK"</string>
     <string name="bundles">"Paquets"</string>
     <string name="delete">"Supprimer"</string>
-    <string name="delete_question">"Supprimer '%s' ?"</string>
-    <string name="install_question">"Installer '%s' ?"</string>
     <string name="reverse_order">"Inverser l'ordre"</string>
     <string name="show_apps_all">"Tout"</string>
     <string name="show_apps_system">"Système"</string>
@@ -131,7 +122,6 @@
     <string name="exiting_app">"En quittant l'application"</string>
     <string name="exported_apps_name">"Nom de l'APK exporté"</string>
     <string name="general">"Général"</string>
-    <string name="installer">"Installateur"</string>
     <string name="installer_clicking">"En cliquant sur le programme d'installation"</string>
     <string name="installer_file_picker">"Lancer le sélecteur de fichiers"</string>
     <string name="installer_instructions">"Afficher les instructions"</string>

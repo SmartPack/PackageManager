@@ -11,7 +11,6 @@
     <string name="batch_options">Batch Options (%s)</string>
     <string name="batch_options_show">Show Options</string>
     <string name="batch_list_added">%s is added to the batch list</string>
-    <string name="batch_list_clear">Clear list</string>
     <string name="batch_list_removed">%s is removed from batch list</string>
     <string name="batch_processing_failed_title">This process has failed for:</string>
     <string name="batch_processing_success_message">The selected process has been completed successfully…</string>
@@ -29,7 +28,6 @@
     <string name="date_installed">First Installed: %s</string>
     <string name="date_updated">Last Updated: %s</string>
     <string name="delete">Delete</string>
-    <string name="delete_question">Delete \'%s\'?</string>
     <string name="delete_selected">Delete selected</string>
     <string name="disable_failed_message">Failed to change the component state of %s.</string>
     <string name="disable_message">will be %s. Are you sure?</string>
@@ -72,25 +70,22 @@
     <string name="ignored">Ignored</string>
     <string name="initializing">Initializing…</string>
     <string name="install">Install</string>
-    <string name="install_question">Install \'%s\'?</string>
     <string name="installed_apps">Installed Apps</string>
-    <string name="installation_cancel_message">Are you sure to cancel the installation?</string>
-    <string name="installer">Installer</string>
     <string name="installer_clicking">On Clicking Installer</string>
     <string name="installer_file_picker">Launch File Picker</string>
     <string name="installer_instructions">Show Instructions</string>
     <string name="installer_summary">You can select installation file(s) by clicking the plus button at the top of this page. The installer supports the following packages:</string>
-    <string name="installing_bundle">Installing…</string>
+    <string name="installing_bundle">Installing %s…</string>
     <string name="language">Language</string>
-    <string name="language_default">Default</string>
     <string name="language_el" translatable="false">Ελληνικά</string>
     <string name="language_en" translatable="false">English (%s)</string>
     <string name="language_es" translatable="false">Español (%s)</string>
+    <string name="language_fa" translatable="false">فارسی</string>
     <string name="language_fr" translatable="false">français (%s)</string>
     <string name="language_hu" translatable="false">Magyar</string>
     <string name="language_in" translatable="false">bahasa Indonesia</string>
-    <string name="language_ja" translatable="false">日本</string>
     <string name="language_ko" translatable="false">한국어</string>
+    <string name="language_lv" translatable="false">latviešu</string>
     <string name="language_pl" translatable="false">Polski"</string>
     <string name="language_pt" translatable="false">Português (%s)</string>
     <string name="language_ru" translatable="false">русский</string>
@@ -144,10 +139,8 @@
     <string name="restore_message">Restore factory version of \'%s\'?</string>
     <string name="restore_selected">Restore selected</string>
     <string name="restore_success_message">Factory version of the selected app(s) restored successfully</string>
-    <string name="result">Result: %s</string>
     <string name="reverse_order">Reverse Order</string>
     <string name="search_market_message">Search in %s</string>
-    <string name="sdcard">SDCard</string>
     <string name="sdk_compile">Compile SDK: %s</string>
     <string name="sdk_minimum">Minimum SDK: %s</string>
     <string name="select">Select</string>
@@ -182,10 +175,8 @@
     <string name="support_development">Support Development</string>
     <string name="support_development_summary">Help keep this project alive by purchasing the Pro version of Package Manager.\n\nBoth versions are open source, ad-free, and offer the same features — but Pro users may receive updates a little sooner. Your support directly helps with maintenance and future development.</string>
     <string name="support_summary">Join Telegram support group</string>
-    <string name="sure_question">Are you sure?</string>
     <string name="time_installed">Installed Time</string>
     <string name="time_updated">Updated Time</string>
-    <string name="turn_on_off">Turn-On/Off</string>
     <string name="turn_on_off_selected_question">Turn-On/Off selected apps?</string>
     <string name="uninstall">Uninstall</string>
     <string name="uninstall_adb">Uninstall with ADB</string>

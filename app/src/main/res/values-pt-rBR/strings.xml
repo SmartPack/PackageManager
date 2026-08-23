@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Caminho do APK"</string>
     <string name="app_info">"Informações do app"</string>
-    <string name="batch_list_clear">"Limpar lista"</string>
     <string name="batch_warning">"Suas configurações em lote serão removidas! Você tem certeza?"</string>
     <string name="change_logs">"Mudanças"</string>
     <string name="data_dir">"Diretório de dados"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Instalar"</string>
     <string name="installing_bundle">"Instalando App Bundle!"</string>
     <string name="language">"Idioma"</string>
-    <string name="language_default">"Padrão"</string>
     <string name="more_apps">"Mais do desenvolvedor"</string>
     <string name="name">"Nome"</string>
     <string name="native_lib">"Biblioteca nativa"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Redefinir"</string>
     <string name="reset_message">"Redefinir '%s'?"</string>
     <string name="reset_summary">"Redefinindo '%s'"</string>
-    <string name="result">"Resultado: %s"</string>
     <string name="share">"Compartilhar"</string>
     <string name="shared_by">"%s/compartilhado pelo Package Manager"</string>
     <string name="share_message">"Package Manager %s pode ser obitido em
@@ -53,8 +50,6 @@
     <string name="support">"Grupo de suporte"</string>
     <string name="support_development">"Apioar o desenvolvimento"</string>
     <string name="support_development_summary">"Se você quiser recompensar os esforços do desenvolvedor em fornecer esta ferramenta totalmente gratuita, considere enviar uma pequena doação clicando em uma das opções abaixo! A compra de qualquer um deste produto lhe dará um emblema de apoiador aqui!"</string>
-    <string name="sure_question">"Tem certeza?"</string>
-    <string name="turn_on_off">"Ligar/Desligar"</string>
     <string name="uninstall">"Desinstalar"</string>
     <string name="uninstall_nope">"Desculpe! Você não pode fazer isso por aqui!"</string>
     <string name="uninstall_summary">"Removendo %s"</string>
@@ -86,8 +81,6 @@
     <string name="activities">"Atividades"</string>
     <string name="documentation">"Documentação"</string>
     <string name="documentation_summary">"Confira a documentação detalhada para usar o Gerenciador de Pacotes"</string>
-    <string name="installation_cancel_message">"Tem certeza de que deseja cancelar a instalação?"</string>
-    <string name="sdcard">"SDCard"</string>
     <string name="select">"Selecionar"</string>
     <string name="uninstall_adb">"Desinstalar com o ADB"</string>
     <string name="uninstall_adb_summary">"Você selecionou '%s', que é um app de sistema. Infelizmente, o ecossistema Android não permite que aplicativos de terceiros, como o Gerenciador de pacotes, removam aplicativos do sistema em um ambiente sem root. Não se preocupe! O Gerenciador de pacotes irá guiá-lo para remover este aplicativo usando o método Android Debug Bridge (ADB). Se você já tem um ADB totalmente funcional, a execução do seguinte comando em um shell ADB desinstalará este aplicativo. Para configurar um ambiente ADB funcional, verifique a página linkada de cocumentação."</string>
@@ -98,8 +91,6 @@
     <string name="apks">"APKs"</string>
     <string name="bundles">"Bundles"</string>
     <string name="delete">"Excluir"</string>
-    <string name="delete_question">"Excluir '%s'?"</string>
-    <string name="install_question">"Instalar '%s'?"</string>
     <string name="reverse_order">"Ordem reversa"</string>
     <string name="show_apps_all">"Todos"</string>
     <string name="show_apps_system">"Sistema"</string>

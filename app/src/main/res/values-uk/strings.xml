@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Шлях до APK"</string>
     <string name="app_info">"Інфо"</string>
-    <string name="batch_list_clear">"Очистити список"</string>
     <string name="batch_warning">"Ваші пакетні налаштування  буде видалено! Ви впевнені?"</string>
     <string name="change_logs">"Зміни"</string>
     <string name="data_dir">"Каталог даних"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Встановити"</string>
     <string name="installing_bundle">"Встановлення пакету додатків!"</string>
     <string name="language">"Мова"</string>
-    <string name="language_default">"За замовчуванням"</string>
     <string name="more_apps">"Більше від розробника"</string>
     <string name="name">"Ім'я"</string>
     <string name="native_lib">"Внутрішня бібліотека"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Скинути"</string>
     <string name="reset_message">"Скинути %s?"</string>
     <string name="reset_summary">"Скидання %s"</string>
-    <string name="result">"Результат: %s"</string>
     <string name="share">"Поділитися"</string>
     <string name="shared_by">"%s/поділився Package Manager"</string>
     <string name="share_message">"Package Manager %s можна отримати з\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Група підтримки"</string>
     <string name="support_development">"Підтримка розвитку"</string>
     <string name="support_development_summary">"Якщо ви хочете оцінити зусилля розробника, щоб надати цей інструмент абсолютно безкоштовно, надішліть невелику пожертву, натиснувши одну із запропонованих нижче опцій!"</string>
-    <string name="sure_question">"Ви впевнені?"</string>
-    <string name="turn_on_off">"Увімкнення/вимкнення"</string>
     <string name="uninstall">"Видалити"</string>
     <string name="uninstall_nope">"Вибачте! Ви не можете зробити це звідси!"</string>
     <string name="uninstall_summary">"Видалення %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Актівіті"</string>
     <string name="documentation">"Документація"</string>
     <string name="documentation_summary">"Щоб використовувати Package Manager, ознайомтесь з детальною документацією"</string>
-    <string name="installation_cancel_message">"Ви впевнені що хочете відмінити встановлення?"</string>
-    <string name="sdcard">"SD карта"</string>
     <string name="select">"Обрати"</string>
     <string name="uninstall_adb">"Видалили з ADB"</string>
     <string name="uninstall_adb_summary">"Ви вибрали '%s', що є системним додатком. На жаль, Android не дозволяє стороннім користувацьким програмам, таким як Package Manager, видаляти системні програми в некореневих середовищах. Не хвилюйся! Package Manager допоможе вам видалити цю програму за допомогою методу Android Debug Bridge (ADB). Якщо у вас вже є повністю робочий ADB, виконавши наступну команду з ADB, ви видалите цю програму. Для того, щоб налаштувати робоче середовище ADB, перегляньте пов'язану сторінку Документація."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"АРК файли"</string>
     <string name="bundles">"Пакети"</string>
     <string name="delete">"Видалення"</string>
-    <string name="delete_question">"Видалити '%s'?"</string>
-    <string name="install_question">"Встановити '%s'?"</string>
     <string name="reverse_order">"Зворотній порядок"</string>
     <string name="show_apps_all">"Усі"</string>
     <string name="show_apps_system">"Системні"</string>

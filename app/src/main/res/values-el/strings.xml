@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Τοποθεσία αρχείου APK"</string>
     <string name="app_info">"Πληροφορίες εφαρμογής"</string>
-    <string name="batch_list_clear">"Διαγραφή λίστας"</string>
     <string name="batch_warning">"Οι ρυθμίσεις ομάδας σας θα αφαιρεθούν! Είστε σίγουρος;"</string>
     <string name="change_logs">"Λίστα αλλαγών"</string>
     <string name="data_dir">"Φάκελος Δεδομένων"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Εγκατάσταση"</string>
     <string name="installing_bundle">"Εγκατάσταση Δέσμης Εφαρμογών"</string>
     <string name="language">"Γλώσσα"</string>
-    <string name="language_default">"Προεπιλογή"</string>
     <string name="more_apps">"Περισσότερα από τον Προγραμματιστή"</string>
     <string name="name">"Όνομα"</string>
     <string name="native_lib">"Εγγενής Βιβλιοθήκη"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Επαναφορά"</string>
     <string name="reset_message">"Επαναφορά '%s';"</string>
     <string name="reset_summary">"Επαναφορά %s"</string>
-    <string name="result">"Αποτέλεσμα: %s"</string>
     <string name="share">"Κοινοποίηση"</string>
     <string name="shared_by">"%s/κοινοποιημένο από το Package Manager"</string>
     <string name="share_message">"το Package Manager %s μπορεί να αποκτηθεί από
@@ -53,8 +50,6 @@
     <string name="support">"Ομάδα υποστήριξης"</string>
     <string name="support_development">"Υποστηρίξτε την ανάπτυξη της εφαρμογής"</string>
     <string name="support_development_summary">"Αν θέλετε να εκφράσετε την εκτίμησή σας στον κόπο του προγραμματιστή ώστε να παρέχει αυτό το εργαλείο εντελώς δωρεάν, παρακαλώ σκεφτείτε το ενδεχόμενο να στείλετε μία μικρή δωρεά χρησιμοποιόντας μία απο τις παρακάτω επιλογές. Αγοράζοντας κάποιο από τα προϊόντα θα λάβετε εδώ το παράσημο του υποστηρικτή."</string>
-    <string name="sure_question">"Είστε σίγουρος;"</string>
-    <string name="turn_on_off">"Ενεργοποίηση/απενεργοποίηση"</string>
     <string name="uninstall">"Απεγκατάσταση"</string>
     <string name="uninstall_nope">"Συγγνώμη! Δεν μπορείτε να κάνετε αυτό από εδώ!"</string>
     <string name="uninstall_summary">"Αφαίρεση %s"</string>
@@ -86,8 +81,6 @@
     <string name="activities">"Δραστηριότητες"</string>
     <string name="documentation">"Εγχειρίδιο"</string>
     <string name="documentation_summary">"Για να χρησιμοποιήσετε τον Package Manager δείτε το λεπτομερές εγχειρίδιο χρήστης"</string>
-    <string name="installation_cancel_message">"Είστε σίγουρος για την ακύρωση της εγκατάστασης;"</string>
-    <string name="sdcard">"Μνήμη SDCard"</string>
     <string name="select">"Επιλογή"</string>
     <string name="uninstall_adb">"Απεγκατάσταση με χρήση του ADB"</string>
     <string name="warning">"Προειδοποίηση"</string>
@@ -97,8 +90,6 @@
     <string name="apks">"Αρχείο APK"</string>
     <string name="bundles">"Δέσμες"</string>
     <string name="delete">"Διαγραφή"</string>
-    <string name="delete_question">"Διαγραφή '%s';"</string>
-    <string name="install_question">"Εγκατάσταση '%s';"</string>
     <string name="reverse_order">"Ανάστροφη σειρά"</string>
     <string name="show_apps_all">"Όλα"</string>
     <string name="show_apps_system">"Σύστημα"</string>
@@ -130,7 +121,6 @@
     <string name="exiting_app">"Σε υπάρχουσα εφαρμογή"</string>
     <string name="exported_apps_name">"Εξαγόμενο όνομα αρχείου APK"</string>
     <string name="general">"Γενικά"</string>
-    <string name="installer">"Εγκαταστάτης"</string>
     <string name="installer_clicking">"Εγκαταστάτης ενός κλικ"</string>
     <string name="installer_file_picker">"Εκίνηση του επιλογέα αρχείων"</string>
     <string name="installer_instructions">"Εμφάνισε τις οδηγίες"</string>

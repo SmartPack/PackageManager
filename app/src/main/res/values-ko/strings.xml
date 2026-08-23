@@ -3,7 +3,6 @@
 
     <string name="apk_path">APK 경로</string>
     <string name="app_info">앱 정보</string>
-    <string name="batch_list_clear">목록 지우기</string>
     <string name="batch_warning">모음집 목록을 지울까요?</string>
     <string name="change_logs">변경사항</string>
     <string name="data_dir">데이터 경로</string>
@@ -27,7 +26,6 @@
     <string name="install">설치</string>
     <string name="installing_bundle">Split Apks를 설치하는 중…</string>
     <string name="language">언어</string>
-    <string name="language_default">시스템 언어</string>
     <string name="more_apps">개발자의 다른 앱들</string>
     <string name="more_apps_summary">Google Play에서 이 개발자가 개발한 또다른 앱들을 확인해보세요.</string>
     <string name="name">이름</string>
@@ -48,7 +46,6 @@
     <string name="reset">초기화</string>
     <string name="reset_message">%s을(를) 초기화할까요?</string>
     <string name="reset_summary">%s을(를) 초기화하는 중…</string>
-    <string name="result">결과: %s</string>
     <string name="settings">설정</string>
     <string name="share">공유</string>
     <string name="share_app">앱 공유</string>
@@ -61,8 +58,6 @@
     <string name="source_code_summary">Package Manager은(는) GPL3을(를) 따르는 오픈 소스 프로젝트로서, 언제든 누구나 기여할 수 있습니다. 여기를 눌러 소스 코드를 확인하세요!</string>
     <string name="support">지원 그룹</string>
     <string name="support_summary">텔레그램 지원 그룹에 참여하세요.</string>
-    <string name="sure_question">계속하시겠어요?</string>
-    <string name="turn_on_off">활성화/비활성화</string>
     <string name="uninstall">제거</string>
     <string name="uninstall_nope">이 앱은 제거할 수 없어요!</string>
     <string name="uninstall_summary">%s을(를) 제거하는 중…</string>

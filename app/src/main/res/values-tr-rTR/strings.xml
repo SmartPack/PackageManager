@@ -15,7 +15,6 @@
     <string name="install">"Yükle"</string>
     <string name="installing_bundle">"Toplu Uygulama Paketi yükleniyor!"</string>
     <string name="language">"Dil"</string>
-    <string name="language_default">"Varsayılan"</string>
     <string name="more_apps">"Geliştiriciden Daha Fazlası"</string>
     <string name="name">"İsim"</string>
     <string name="native_lib">"Native Kütüphane"</string>
@@ -32,7 +31,6 @@
     <string name="reset">"Sıfırla"</string>
     <string name="reset_message">"'%s' sıfırlansın mı?"</string>
     <string name="reset_summary">"%s sıfırlanıyor"</string>
-    <string name="result">"Sonuç: %s"</string>
     <string name="share">"Paylaş"</string>
     <string name="shared_by">"%s/Package Manager tarafından paylaşıldı"</string>
     <string name="share_message">"Package Manager %s Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -41,9 +39,7 @@
     <string name="source_code">"Kaynak Kodu"</string>
     <string name="support">"Destek Grubu"</string>
     <string name="support_development">"Geliştirmeye Destek Olun"</string>
-    <string name="support_development_summary">"Geliştiricinin bu aracı ücretsiz bir şekilde sunmak için gösterdiği bu çabasını takdir etmek isterseniz, aşağıdaki butonlardan birine tıklayarak küçük bir bağışta bulunabilirsiniz! Bu ürünlerden herhangi birini satın aldığınızda destekçi rozetiyle ödüllendirileceksiniz!"</string>
-    <string name="sure_question">"Emin misin?"</string>
-    <string name="turn_on_off">"Aç/Kapat"</string>
+    <string name="support_development_summary">"Geliştiricinin bu aracı ücretsiz bir şekilde sunmak için gösterdiği bu çabasını takdir etmek isterseniz, aşağıdaki butonlardan birine tıklayarak küçük bir bağışta bulunabilirsiniz! Bu ürünlerden herhangi birini satın aldığınızda destekçi rozetiyle ödüllendirileceksiniz!"</string>>
     <string name="uninstall">"Kaldır"</string>
     <string name="uninstall_nope">"Üzgünüm! Bunu buradan yapamazsınız!"</string>
     <string name="uninstall_summary">"%s kaldırılıyor"</string>
@@ -75,8 +71,6 @@
     <string name="activities">"AKTİVİTELER"</string>
     <string name="documentation">"Dokümantasyon"</string>
     <string name="documentation_summary">"Package Manager'ı kullanmak için detaylı dokümantasyona bakınız"</string>
-    <string name="installation_cancel_message">"Yüklemeyi iptal etmek istediğinize emin misiniz?"</string>
-    <string name="sdcard">"SD Kart"</string>
     <string name="select">"Seç"</string>
     <string name="uninstall_adb">"ADB ile Kaldır"</string>
     <string name="uninstall_adb_summary">"Bir sistem uygulaması olan '%s' seçtiniz. Ne yazık ki, Android ekosistemi, Package Manager gibi üçüncü taraf kullanıcı uygulamalarının root'suz ortamlarda sistem uygulamalarını kaldırmasına izin vermiyor. Yine de endişelenmeyin! Package Manager, Android Debug Bridge (ADB) yöntemini kullanarak bu uygulamayı kaldırmanız için size rehberlik edecek. Hali hazırda çalışan bir ADB varsa, aşağıdaki komutu ADB üzerinden çalıştırarak bu uygulamayı kaldırabilirsiniz. Çalışan bir ADB ortamı hazırlamak için lütfen linkteki dokümantasyon sayfasına bakınız."</string>
@@ -87,8 +81,6 @@
     <string name="apks">"APK'ler"</string>
     <string name="bundles">"Toplu Paketler"</string>
     <string name="delete">"Sil"</string>
-    <string name="delete_question">"'%s' silinsin mi?"</string>
-    <string name="install_question">"'%s' yüklensin mi?"</string>
     <string name="reverse_order">"Sıralamayı Ters Çevir"</string>
     <string name="show_apps_all">"HEPSİ"</string>
     <string name="show_apps_system">"SİSTEM"</string>
@@ -121,7 +113,6 @@
     <string name="exiting_app">"Uygulamadan Çıkarken"</string>
     <string name="exported_apps_name">"Dışa Aktarılan APK Adı"</string>
     <string name="general">"Genel"</string>
-    <string name="installer">"Yükleyici"</string>
     <string name="installer_clicking">"Yükleyiciye Tıklayınca"</string>
     <string name="installer_file_picker">"Dosya Seçiciyi Başlat"</string>
     <string name="installer_instructions">"Talimatları Göster"</string>

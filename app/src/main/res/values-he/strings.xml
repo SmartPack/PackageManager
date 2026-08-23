@@ -2,7 +2,6 @@
 
     <string name="apk_path">"נתיב APK"</string>
     <string name="app_info">"מידע על האפליקציה"</string>
-    <string name="batch_list_clear">"נקה רשימה"</string>
     <string name="batch_warning">"הגדרות האצווה שלך יוסרו. האם אתה בטוח?"</string>
     <string name="change_logs">"יומני שינויים"</string>
     <string name="data_dir">"ספריית נתונים"</string>
@@ -25,7 +24,6 @@
     <string name="install">"להתקין"</string>
     <string name="installing_bundle">"התקנת App Bundle"</string>
     <string name="language">"שפה"</string>
-    <string name="language_default">"בְּרִירַת מֶחדָל"</string>
     <string name="more_apps">"עוד ממפתחים"</string>
     <string name="name">"שֵׁם"</string>
     <string name="native_lib">"ספריית ילידים"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"אִתחוּל"</string>
     <string name="reset_message">"לאפס את '%s'?"</string>
     <string name="reset_summary">"מאפס את %s"</string>
-    <string name="result">"תוצאות"</string>
     <string name="share">"לַחֲלוֹק"</string>
     <string name="shared_by">"%s/משותף על ידי מנהל החבילות"</string>
     <string name="share_message">"ניתן להשיג את מנהל החבילות %s
@@ -53,8 +50,6 @@
     <string name="support">"קבוצת תמיכה"</string>
     <string name="support_development">"תמיכה בפיתוח"</string>
     <string name="support_development_summary">"אם אתה רוצה להעריך את המאמצים של המפתח לספק את הכלי הזה בחינם לחלוטין, אנא שקול לשלוח תרומה קטנה על ידי לחיצה על אחת מהאפשרויות המפורטות להלן. רכישת כל אחד מהמוצרים הזה תעניק לך תג תומך כאן."</string>
-    <string name="sure_question">"האם אתה בטוח?"</string>
-    <string name="turn_on_off">"הדלק / כבה"</string>
     <string name="uninstall">"הסר את ההתקנה"</string>
     <string name="uninstall_nope">"מצטער. אתה לא יכול לעשות את זה מכאן"</string>
     <string name="uninstall_summary">"מסיר את %s"</string>
@@ -86,8 +81,6 @@
     <string name="activities">"פעילויות"</string>
     <string name="documentation">"תיעוד"</string>
     <string name="documentation_summary">"עיין בתיעוד מפורט כדי להשתמש במנהל החבילות"</string>
-    <string name="installation_cancel_message">"האם אתה בטוח שאתה מבטל את ההתקנה?"</string>
-    <string name="sdcard">"כרטיס זיכרון"</string>
     <string name="select">"בחר"</string>
     <string name="uninstall_adb">"הסר את ההתקנה עם ADB"</string>
     <string name="uninstall_adb_summary">"בחרת '%s', שהוא יישום מערכת. למרבה הצער, המערכת האקולוגית של אנדרואיד אינה מאפשרת ליישומי משתמש של צד שלישי, כגון מנהל החבילות, להסיר יישומי מערכת בסביבה ללא שורש. אל תדאג בכל זאת. מנהל החבילות ינחה אותך להסיר את היישום הזה בשיטת Android Debug Bridge (ADB). אם כבר יש לך ADB עובד במלואו, ביצוע הפקודה הבאה ממעטפת ADB תסיר את ההתקנה של יישום זה. כדי להגדיר סביבת ADB עובדת, עיין בדף התיעוד המקושר."</string>
@@ -98,8 +91,6 @@
     <string name="apks">"של APK"</string>
     <string name="bundles">"חבילות"</string>
     <string name="delete">"לִמְחוֹק"</string>
-    <string name="delete_question">"למחוק את '%s'?"</string>
-    <string name="install_question">"להתקין את '%s'?"</string>
     <string name="reverse_order">"בסדר הפוך"</string>
     <string name="show_apps_all">"את כל"</string>
     <string name="show_apps_system">"מערכת"</string>
@@ -132,7 +123,6 @@
     <string name="exiting_app">"ביציאה מהאפליקציה"</string>
     <string name="exported_apps_name">"שם APK מיוצא"</string>
     <string name="general">"כללי"</string>
-    <string name="installer">"מתקין"</string>
     <string name="installer_clicking">"בלחיצה על Installer"</string>
     <string name="installer_file_picker">"הפעל את בוחר הקבצים"</string>
     <string name="installer_instructions">"הצג הוראות"</string>

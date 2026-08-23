@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Percorso APK"</string>
     <string name="app_info">"Informazioni App"</string>
-    <string name="batch_list_clear">"Pulisci lista"</string>
     <string name="batch_warning">"Le tue impostazioni della lista saranno rimosse. Sei sicuro?"</string>
     <string name="change_logs">"Change-logs"</string>
     <string name="data_dir">"Cartella Data"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Installa"</string>
     <string name="installing_bundle">"Installando Pacchetto di App"</string>
     <string name="language">"Lingua"</string>
-    <string name="language_default">"Predefinito"</string>
     <string name="more_apps">"Altro dallo Sviluppatore"</string>
     <string name="name">"Nome"</string>
     <string name="native_lib">"Libreria Nativa"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Reset"</string>
     <string name="reset_message">"Resettare '%s'?"</string>
     <string name="reset_summary">"Resettando %s"</string>
-    <string name="result">"Risultato: %s"</string>
     <string name="share">"Condividi"</string>
     <string name="shared_by">"%s/condiviso da Package Manager"</string>
     <string name="share_message">"Package Manager %s può essere scaricato da
@@ -53,8 +50,6 @@
     <string name="support">"Gruppo di Supporto"</string>
     <string name="support_development">"Supporta lo Sviluppo"</string>
     <string name="support_development_summary">"Se apprezzi gli sforzi dello sviluppatore per offrire questo strumento interamente gratis, prendi in considerazione di effettuare una piccola donazione cliccando una delle opzioni fornite qui sotto per favore. Comprando uno di questi prodotti sarai ricompensato qui con un badge da supporter."</string>
-    <string name="sure_question">"Sei sicuro?"</string>
-    <string name="turn_on_off">"Attiva/Disattiva"</string>
     <string name="uninstall">"Disinstalla"</string>
     <string name="uninstall_nope">"Mi dispiace. Non puoi fare questo da qui"</string>
     <string name="uninstall_summary">"Rimuovendo %s"</string>
@@ -86,8 +81,6 @@
     <string name="activities">"Attività"</string>
     <string name="documentation">"Documentazione"</string>
     <string name="documentation_summary">"Guarda la documentazione dettagliata per usare Package Manager"</string>
-    <string name="installation_cancel_message">"Sei sicuro di cancellare l'installazione?"</string>
-    <string name="sdcard">"SDCard"</string>
     <string name="select">"Seleziona"</string>
     <string name="uninstall_adb">"Disinstalla con ADB"</string>
     <string name="uninstall_adb_summary">"Hai selezionato '%s', che è un'applicazione di sistema. Purtroppo, l'ecosistema Android non permette applicazioni utente di terze parti, come Package Manager, di rimuovere applicazionit di sistema in un'ambiente senza permessi di root. Non preoccuparti però. Package Manager ti guiderà a rimuovere questa applicazione usando il metodo Android Debug Bridge (ADB). Se hai già un'ADB completamente funzionante, eseguire il seguente comando da una shell ADB disinstallerà questa applicazione. In modo da configurare un'ambiente ADB funzionante, controlla la pagina di Documentazione linkata per favore."</string>
@@ -98,8 +91,6 @@
     <string name="apks">"APK's"</string>
     <string name="bundles">"Pacchetti"</string>
     <string name="delete">"Elimina"</string>
-    <string name="delete_question">"Eliminare '%s'?"</string>
-    <string name="install_question">"Installare '%s'?"</string>
     <string name="reverse_order">"Ordine Inverso"</string>
     <string name="show_apps_all">"Tutte"</string>
     <string name="show_apps_system">"Sistema"</string>
@@ -132,7 +123,6 @@
     <string name="exiting_app">"Uscendo dall'app"</string>
     <string name="exported_apps_name">"Nome APK Esportato"</string>
     <string name="general">"Generale"</string>
-    <string name="installer">"Installer"</string>
     <string name="installer_clicking">"Cliccando Installer"</string>
     <string name="installer_file_picker">"Lancia Selezione File"</string>
     <string name="installer_instructions">"Mostra Istruzioni"</string>

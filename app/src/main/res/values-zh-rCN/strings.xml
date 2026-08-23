@@ -3,7 +3,6 @@
 
     <string name="apk_path">"APK 路径"</string>
     <string name="app_info">"应用信息"</string>
-    <string name="batch_list_clear">"清空列表"</string>
     <string name="batch_warning">"您的批量处理设置将被删除！您确定吗？"</string>
     <string name="change_logs">"更新日志"</string>
     <string name="data_dir">"数据目录"</string>
@@ -26,7 +25,6 @@
     <string name="install">"安装"</string>
     <string name="installing_bundle">"安装应用捆绑包！"</string>
     <string name="language">"语言"</string>
-    <string name="language_default">"默认"</string>
     <string name="more_apps">"来自开发者的其他作品"</string>
     <string name="name">"名称"</string>
     <string name="native_lib">"本机库文件"</string>
@@ -43,7 +41,6 @@
     <string name="reset">"重置"</string>
     <string name="reset_message">"重置 '%s' 吗？"</string>
     <string name="reset_summary">"正在重置 %s"</string>
-    <string name="result">"结果：%s"</string>
     <string name="share">"分享"</string>
     <string name="shared_by">"%s/自 Package Manager 分享"</string>
     <string name="share_message">"Package Manager %s 可以前往 Google Play 获取：
@@ -54,8 +51,6 @@
     <string name="support">"反馈群组"</string>
     <string name="support_development">"支持开发"</string>
     <string name="support_development_summary">"如果您想感谢开发者为完全免费提供此工具所做的努力，请考虑点击以下任意一个选项来发送少量捐款！任意捐款都会在此奖励您一枚支持者徽章！"</string>
-    <string name="sure_question">"您确定吗？"</string>
-    <string name="turn_on_off">"开启/关闭"</string>
     <string name="uninstall">"卸载"</string>
     <string name="uninstall_nope">"抱歉！您无法进行此操作！"</string>
     <string name="uninstall_summary">"正在删除 %s"</string>
@@ -88,8 +83,6 @@
     <string name="activities">"Activity"</string>
     <string name="documentation">"文档"</string>
     <string name="documentation_summary">"查看 Package Manager 的详细使用文档"</string>
-    <string name="installation_cancel_message">"您确定要取消安装吗？"</string>
-    <string name="sdcard">"SD 卡"</string>
     <string name="select">"选择"</string>
     <string name="uninstall_adb">"使用 ADB 卸载"</string>
     <string name="uninstall_adb_summary">"您选择了 '%s'，它是一个系统应用。不幸的是，Android 生态系统不允许第三方用户应用（例如 Package Manager）在非 Root 环境中删除系统应用。不过不必担心！Package Manager 将引导您使用 Android Debug Bridge（ADB）删除此应用。如果您已经有可以正常运行的 ADB，则在 ADB Shell 中执行以下命令将卸载此应用。要配置有效的 ADB 环境，请查看链接的文档页面。"</string>
@@ -100,8 +93,6 @@
     <string name="apks">"APK"</string>
     <string name="bundles">"捆绑包"</string>
     <string name="delete">"删除"</string>
-    <string name="delete_question">"删除 '%s' 吗？"</string>
-    <string name="install_question">"安装 '%s' 吗"</string>
     <string name="reverse_order">"逆序"</string>
     <string name="show_apps_all">"所有"</string>
     <string name="show_apps_system">"系统"</string>
@@ -134,7 +125,6 @@
     <string name="exiting_app">"退出应用时"</string>
     <string name="exported_apps_name">"导出的 APK 名称"</string>
     <string name="general">"常规"</string>
-    <string name="installer">"安装器"</string>
     <string name="installer_clicking">"点击安装器时"</string>
     <string name="installer_file_picker">"启动文件选择器"</string>
     <string name="installer_instructions">"显示说明"</string>

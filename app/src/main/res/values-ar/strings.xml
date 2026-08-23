@@ -2,7 +2,6 @@
 
     <string name="apk_path">"مسار APK"</string>
     <string name="app_info">"معلومات التطبيق"</string>
-    <string name="batch_list_clear">"لائحة خالية"</string>
     <string name="batch_warning">"ستتم إزالة إعدادات الدُفعات الخاصة بك. هل أنت متأكد؟"</string>
     <string name="change_logs">"تغيير السجلات"</string>
     <string name="data_dir">"دليل البيانات"</string>
@@ -25,7 +24,6 @@
     <string name="install">"تثبيت"</string>
     <string name="installing_bundle">"تثبيت حزمة التطبيقات"</string>
     <string name="language">"لغة"</string>
-    <string name="language_default">"تقصير"</string>
     <string name="more_apps">"المزيد من المطور"</string>
     <string name="name">"اسم"</string>
     <string name="native_lib">"المكتبة الأصلية"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"إعادة ضبط"</string>
     <string name="reset_message">"إعادة تعيين '٪ s'؟"</string>
     <string name="reset_summary">"إعادة تعيين٪ s"</string>
-    <string name="result">"نتائج"</string>
     <string name="share">"يشارك"</string>
     <string name="shared_by">"٪ s / مشترك بواسطة إدارة الحزم"</string>
     <string name="share_message">"يمكن الحصول على إدارة الحزم٪ s من
@@ -53,8 +50,6 @@
     <string name="support">"مجموعة الدعم"</string>
     <string name="support_development">"تطوير الدعم"</string>
     <string name="support_development_summary">"إذا كنت ترغب في تقدير جهود المطور لتوفير هذه الأداة مجانًا تمامًا ، فيرجى التفكير في إرسال تبرع صغير من خلال النقر فوق واحد من بين الخيارات المتوفرة أدناه. شراء أي من هذا المنتج يمنحك شارة الداعم هنا."</string>
-    <string name="sure_question">"هل أنت واثق؟"</string>
-    <string name="turn_on_off">"تشغيل / ايقاف"</string>
     <string name="uninstall">"الغاء التثبيت"</string>
     <string name="uninstall_nope">"آسف. لا يمكنك فعل هذا من هنا"</string>
     <string name="uninstall_summary">"إزالة٪ s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"أنشطة"</string>
     <string name="documentation">"توثيق"</string>
     <string name="documentation_summary">"تحقق من الوثائق التفصيلية لاستخدام مدير الحزم"</string>
-    <string name="installation_cancel_message">"هل أنت متأكد من إلغاء التثبيت؟"</string>
-    <string name="sdcard">"بطاقة الذاكرة"</string>
     <string name="select">"يختار"</string>
     <string name="uninstall_adb">"إلغاء التثبيت مع ADB"</string>
     <string name="uninstall_adb_summary">"لقد حددت '٪ s' ، وهو أحد تطبيقات النظام. لسوء الحظ ، لا يسمح نظام Android البيئي لتطبيقات المستخدم التابعة لجهات خارجية ، مثل Package Manager ، بإزالة تطبيقات النظام في بيئة لا تحتوي على جذر. لا تقلق رغم ذلك. سيرشدك مدير الحزم إلى إزالة هذا التطبيق باستخدام طريقة Android Debug Bridge (ADB). إذا كان لديك بالفعل ADB يعمل بكامل طاقته ، فسيؤدي تنفيذ الأمر التالي من غلاف ADB إلى إلغاء تثبيت هذا التطبيق. لتهيئة بيئة عمل ADB ، يرجى مراجعة صفحة الوثائق المرتبطة."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"ملفات APK"</string>
     <string name="bundles">"حزم"</string>
     <string name="delete">"حذف"</string>
-    <string name="delete_question">"هل تريد حذف \"٪ s\"؟"</string>
-    <string name="install_question">"هل تريد تثبيت '٪ s'؟"</string>
     <string name="reverse_order">"ترتيب عكسي"</string>
     <string name="show_apps_all">"الجميع"</string>
     <string name="show_apps_system">"نظام"</string>
@@ -131,7 +122,6 @@
     <string name="exiting_app">"عند الخروج من التطبيق"</string>
     <string name="exported_apps_name">"اسم APK الذي تم تصديره"</string>
     <string name="general">"عام"</string>
-    <string name="installer">"المثبت"</string>
     <string name="installer_clicking">"عند النقر فوق المثبت"</string>
     <string name="installer_file_picker">"قم بتشغيل منتقي الملفات"</string>
     <string name="installer_instructions">"إظهار التعليمات"</string>

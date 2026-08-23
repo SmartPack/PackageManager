@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Путь к APK"</string>
     <string name="app_info">"О приложении"</string>
-    <string name="batch_list_clear">"Очистить список"</string>
     <string name="batch_warning">"Настройки пакетной обработки будут удалены! Вы уверены?"</string>
     <string name="change_logs">"Список изменений"</string>
     <string name="data_dir">"Каталог данных"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Установка"</string>
     <string name="installing_bundle">"Установка пакетного приложения!"</string>
     <string name="language">"Язык"</string>
-    <string name="language_default">"По умолчанию"</string>
     <string name="more_apps">"Больше от разработчика"</string>
     <string name="name">"Имя"</string>
     <string name="native_lib">"Внутренняя библиотека"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Сбросить"</string>
     <string name="reset_message">"Сбросить %s?"</string>
     <string name="reset_summary">"Сброс %s"</string>
-    <string name="result">"Результат: %s"</string>
     <string name="share">"Поделиться"</string>
     <string name="shared_by">"%s/поделиться Package Manager"</string>
     <string name="share_message">"Package Manager %s можно получить в\nPlay Маркет: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Группа поддержки"</string>
     <string name="support_development">"Поддержка развития"</string>
     <string name="support_development_summary">"Если вы хотите оценить усилия разработчика по предоставлению этого инструмента совершенно бесплатно, рассмотрите возможность отправки небольшого пожертвования, выбрав один из вариантов ниже!"</string>
-    <string name="sure_question">"Вы уверены?"</string>
-    <string name="turn_on_off">"Включение/выключение"</string>
     <string name="uninstall">"Удалить"</string>
     <string name="uninstall_nope">"Сожалею! Вы не можете сделать это отсюда!"</string>
     <string name="uninstall_summary">"Удаление %s"</string>
@@ -82,8 +77,6 @@
     <string name="activities">"Активити"</string>
     <string name="documentation">"Документация"</string>
     <string name="documentation_summary">"Ознакомьтесь с подробной документацией по использованию Package Manager"</string>
-    <string name="installation_cancel_message">"Вы точно хотите отменить установку?"</string>
-    <string name="sdcard">"SD карта"</string>
     <string name="select">"Выбор"</string>
     <string name="uninstall_adb">"Удалить через ADB"</string>
     <string name="uninstall_adb_summary">"Вы выбрали %s, это системное приложение. К сожалению Android не позволяет сторонним пользовательским приложениям, таким как Package Manager, удалять системные приложения ,без рут.  Но не волнуйтесь! Package Manager поможет вам удалить это приложение с помощью метода Android Debug Bridge (ADB). Если у вас уже есть полностью рабочий ADB, выполнение следующей команды из ADB приведет к удалению этого приложения. Чтобы настроить ADB, посетите страницу документации по ссылке."</string>
@@ -94,8 +87,6 @@
     <string name="apks">"Файлы АРК"</string>
     <string name="bundles">"Пакеты"</string>
     <string name="delete">"Удаление"</string>
-    <string name="delete_question">"Удалить '%s'?"</string>
-    <string name="install_question">"Установить '%s'?"</string>
     <string name="reverse_order">"Обратный порядок"</string>
     <string name="show_apps_all">"Все"</string>
     <string name="show_apps_system">"Системные"</string>
@@ -128,7 +119,6 @@
     <string name="exiting_app">"При выходе из приложения"</string>
     <string name="exported_apps_name">"Имя экспортированного APK"</string>
     <string name="general">"Общий"</string>
-    <string name="installer">"Установщик"</string>
     <string name="installer_clicking">"При нажатии на установщик"</string>
     <string name="installer_file_picker">"Запустить средство выбора файлов"</string>
     <string name="installer_instructions">"Показать инструкции"</string>

@@ -14,10 +14,4 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
-
-    <style name="Divider" >
-        <item name="android:background">?android:attr/listDivider</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-    </style>
 </resources>

@@ -2,7 +2,6 @@
 
     <string name="apk_path">"APK Cesta"</string>
     <string name="app_info">"Informácie o aplikácii"</string>
-    <string name="batch_list_clear">"Prehľadný zoznam"</string>
     <string name="batch_warning">"Vase nastavenia skriptu budu odstranene. Skutocne to chcete vykonat?"</string>
     <string name="change_logs">"Zaznam zmien"</string>
     <string name="data_dir">"Data priecinok"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Install"</string>
     <string name="installing_bundle">"Instalovanie balika"</string>
     <string name="language">"Jazyk"</string>
-    <string name="language_default">"Default"</string>
     <string name="more_apps">"Viac od vyvojara"</string>
     <string name="name">"Meno"</string>
     <string name="native_lib">"Nativ_kniznica"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Reset"</string>
     <string name="reset_message">"Reset %s'?"</string>
     <string name="reset_summary">"Resetovanie %s"</string>
-    <string name="result">"Výsledok: %s"</string>
     <string name="share">"Zdieľať"</string>
     <string name="shared_by">"%s/zdieľané Správcom balíkov"</string>
     <string name="share_message">"Správcu balíkov %s je možné získať z Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Podpora"</string>
     <string name="support_development">"Podpora rozvoja"</string>
     <string name="support_development_summary">"Ak chcete ocenit usilie vyvojara a poskytnut tento nastroj uplne zadarmo, zvazte odoslanie maleho daru kliknutim na jednu z moznosti uvedenych nizsie. Kupou ktorehokolvek z tohto produktu ziskate uznanie podporovatela."</string>
-    <string name="sure_question">"Naozaj?"</string>
-    <string name="turn_on_off">"Zap/Vyp"</string>
     <string name="uninstall">"Odinštalovať"</string>
     <string name="uninstall_nope">"Prepáč. Odtiaľto to nemôžeš urobiť."</string>
     <string name="uninstall_summary">"Odstraňuje sa %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Aktivity"</string>
     <string name="documentation">"Dokumentacia"</string>
     <string name="documentation_summary">"Pozrite si podrobnú dokumentáciu k používaniu Správcu balíkov"</string>
-    <string name="installation_cancel_message">"Zastavit instalaciu?"</string>
-    <string name="sdcard">"SDkart"</string>
     <string name="select">"Vyber"</string>
     <string name="uninstall_adb">"Odinštalovanie pomocou ADB"</string>
     <string name="uninstall_adb_summary">"Vybrali ste „%s“, čo je systémová aplikácia. Ekosystém Android bohužiaľ neumožňuje aplikáciám tretích strán, ako napríklad Správcovi balíkov, odstraňovať systémové aplikácie v prostredí bez rootovaného prístupu. Nebojte sa však. Správca balíkov vás prevedie odstránením tejto aplikácie pomocou metódy Android Debug Bridge (ADB). Ak už máte plne funkčný ADB, vykonaním nasledujúceho príkazu z prostredia ADB sa táto aplikácia odinštaluje. Ak chcete nakonfigurovať funkčné prostredie ADB, pozrite si prepojenú stránku s dokumentáciou."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APKs"</string>
     <string name="bundles">"Baliky"</string>
     <string name="delete">"Zmazat"</string>
-    <string name="delete_question">"Zmazat '%s'?"</string>
-    <string name="install_question">"Instalovat '%s'?"</string>
     <string name="reverse_order">"Opačné poradie"</string>
     <string name="show_apps_all">"Všetky"</string>
     <string name="show_apps_system">"Systém"</string>
@@ -131,7 +122,6 @@
     <string name="exiting_app">"Pri ukončení aplikácie"</string>
     <string name="exported_apps_name">"Názov exportovaného súboru APK"</string>
     <string name="general">"Všeobecné"</string>
-    <string name="installer">"Inštalatér"</string>
     <string name="installer_clicking">"Po kliknutí na inštalátor"</string>
     <string name="installer_file_picker">"Spustiť výber súborov"</string>
     <string name="installer_instructions">"Zobraziť pokyny"</string>

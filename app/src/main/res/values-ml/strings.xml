@@ -2,7 +2,6 @@
 
     <string name="apk_path">"APK-യുടെ പാത"</string>
     <string name="app_info">"വിശദാംശങ്ങൾ"</string>
-    <string name="batch_list_clear">"മായ്‌ക്കുക"</string>
     <string name="batch_warning">"നിങ്ങളുടെ ബാച്ച് ക്രമീകരണങ്ങൾ നീക്കംചെയ്യും! നിങ്ങള്ക്ക് ഉറപ്പാണോ?"</string>
     <string name="data_dir">"ഡാറ്റ ഡയറക്ടറി"</string>
     <string name="date_installation">"ഇൻസ്റ്റാളേഷൻ തീയതികൾ"</string>
@@ -36,7 +35,6 @@
     <string name="playstore">"ഗൂഗിൾ പ്ലേ"</string>
     <string name="press_back">"ബാക് ബട്ടൺ ഒന്നുകൂടി അമർത്തുക"</string>
     <string name="report_issue">"ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക"</string>
-    <string name="result">"ഫലം: %s"</string>
     <string name="share">"പങ്കുവെക്കുക"</string>
     <string name="shared_by">"%s/പാക്കേജ് മാനേജർ പങ്കുവെച്ചത്"</string>
     <string name="share_message">"Package Manager %s താഴെ ലഭിക്കുന്നതിനായി കാണുന്ന എതെകിലും ലിങ്കിൽ ക്ലിക്ക് ചെയ്യ്യുക\nGoogle Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -44,8 +42,6 @@
     <string name="sort_by">"അടുക്കുക"</string>
     <string name="support_development">"വികസനത്തിന് പിന്തുണ നൽകുക"</string>
     <string name="support_development_summary">"ഈ ആപ്പ്ളിക്കേഷൻ പൂർണ്ണമായും സജന്യമായി നൽകാനുള്ള ഡവലപ്പറുടെ ശ്രമങ്ങളെ അഭിനന്ദിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെങ്കിൽ, ചുവടെ നൽകിയിരിക്കുന്ന ഓപ്ഷനുകളിൽ ഒന്ന് ക്ലിക്കുചെയ്ത് ഒരു ചെറിയ സംഭാവന അയയ്ക്കുന്നത് പരിഗണിക്കുക! ഈ ഉൽപ്പന്നത്തിൽ ഏതെങ്കിലും വാങ്ങിയാൽ നിങ്ങൾക്ക് ഇവിടെ ഒരു പിന്തുണാ ബാഡ്ജ് നൽകും!"</string>
-    <string name="sure_question">"ഉറപ്പാണോ?"</string>
-    <string name="turn_on_off">"പ്രവർത്തനരഹിതം/ക്ഷമം ആക്കുക"</string>
     <string name="uninstall">"അൺ‌ഇൻ‌സ്റ്റാൾ‌"</string>
     <string name="uninstall_nope">"ക്ഷമിക്കണം! നിങ്ങൾക്ക് ഇവിടെ നിന്ന് ഇത് ചെയ്യാൻ കഴിയില്ല!"</string>
     <string name="uninstall_summary">"%s നീക്കംചെയ്യുന്നു"</string>
@@ -69,8 +65,6 @@
     <string name="batch_list_removed">"%s നെ ബാച്ച് പട്ടികയിൽ നിന്ന് നീക്കം ചെയ്തു"</string>
     <string name="activities">"Activities"</string>
     <string name="documentation_summary">"പാക്കേജ് മാനേജർ ഉപയോഗിക്കുന്നതിന് ആവശ്യമായ വിശദമായ ഡോക്യുമെന്റേഷൻ പരിശോധിക്കുക"</string>
-    <string name="installation_cancel_message">"ഇൻസ്റ്റാളേഷൻ റദ്ദാക്കണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"</string>
-    <string name="sdcard">"SD കാർഡ്"</string>
     <string name="select">"തിരഞ്ഞെടുക്കുക"</string>
     <string name="uninstall_adb">"ADB ഉപയോഗിച്ച് അൺ‌ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
     <string name="uninstall_adb_summary">"നിങ്ങൾ തിരഞ്ഞെടുത്ത '%s', ഒരു സിസ്റ്റം ആപ്ലിക്കേഷനാണ്. നിർഭാഗ്യവശാൽ, സിസ്റ്റം അപ്ലിക്കേഷനുകൾ നീക്കംചെയ്യാൻ പാക്കേജ് മാനേജർ പോലുള്ള ഉപയോക്തൃ അപ്ലിക്കേഷനുകളെ Android ഇക്കോസിസ്റ്റം അനുവദിക്കുന്നില്ല. എന്നിരുന്നാലും Android Debug Bridge (ADB) ഉപയോഗിച്ച് ഈ അപ്ലിക്കേഷൻ നീക്കംചെയ്യാൻ പാക്കേജ് മാനേജർ നിങ്ങളെ സഹായിക്കുന്നതാണ്. നിങ്ങൾക്ക് ഇതിനകം പൂർണ്ണമായി പ്രവർത്തിക്കുന്ന ADB കണക്ഷൻ ഉണ്ടെങ്കിൽ, ഒരു ADB ഷെല്ലിൽ നിന്ന് താഴെപ്പറയുന്ന കമാൻഡ് ഉപയോഗിച്ചു ഈ അപ്ലിക്കേഷൻ അൺ‌ഇൻസ്റ്റാൾ ചെയ്യാവുന്നതാണ്. പ്രവർത്തിക്കുന്ന ADB എൻ‌വയോൺ‌മെൻറ് ക്രമീകരിക്കുന്നതിന്, ദയവായി ലിങ്കുചെയ്‌ത ഡോക്യുമെന്റേഷൻ പേജ് പരിശോധിക്കുക"</string>
@@ -79,7 +73,6 @@
     <string name="manifest">"മാനിഫെസ്റ്റ്"</string>
     <string name="apks">"APK-കൾ"</string>
     <string name="bundles">"ബണ്ടിലുകൾ"</string>>
-    <string name="install_question">"%s ഇൻസ്റ്റാൾ ചെയ്യണോ?"</string>
     <string name="show_apps_all">"എല്ലാം"</string>
     <string name="show_apps_system">"സിസ്റ്റം"</string>
     <string name="show_apps_user">"ഉപയോക്താവ്"</string>

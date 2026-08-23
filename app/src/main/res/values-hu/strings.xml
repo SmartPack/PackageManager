@@ -2,7 +2,6 @@
 
     <string name="apk_path">"APK útvonal"</string>
     <string name="app_info">"App infó"</string>
-    <string name="batch_list_clear">"Lista törlése"</string>
     <string name="batch_warning">"A kötegelés beállításai el lesznek távolítva. Biztos vagy ebben?"</string>
     <string name="change_logs">"Változáslista"</string>
     <string name="data_dir">"Adatkönyvtár"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Telepít"</string>
     <string name="installing_bundle">"Alkalmazáscsomag telepítése"</string>
     <string name="language">"Nyelv"</string>
-    <string name="language_default">"Alap"</string>
     <string name="more_apps">"Továbbiak a fejlesztőtől"</string>
     <string name="name">"Név"</string>
     <string name="native_lib">"Natív Könyvtár"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Visszaállítás"</string>
     <string name="reset_message">"Visszaállítod ezt: '%s'?"</string>
     <string name="reset_summary">"Visszaállítva %s"</string>
-    <string name="result">"Eredmény: %s"</string>
     <string name="share">"Megoszt"</string>
     <string name="shared_by">"%s/ megosztva a Package Managerrel"</string>
     <string name="share_message">"A Package Manager %s a Google Play-ről tölthető le: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Támogatócsoport"</string>
     <string name="support_development">"Fejlesztői Támogatás"</string>
     <string name="support_development_summary">"Ha értékeled a fejlesztő erőfeszítéseit, hogy ingyen biztosítja ezt az eszközt, kérlek fontold meg, egy kis adomány elküldését az alább megadott lehetőségek egyikére kattintva. Ha megvásárolod ezt a terméket itt, támogatói jelvényt kapsz."</string>
-    <string name="sure_question">"Biztos vagy benne?"</string>
-    <string name="turn_on_off">"Ki/Be-kapcsolás"</string>
     <string name="uninstall">"Eltávolítás"</string>
     <string name="uninstall_nope">"Sajnálom. Innen nem lehet ezt megtenni"</string>
     <string name="uninstall_summary">"%s eltávolítása"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Aktivitások"</string>
     <string name="documentation">"Dokumentáció"</string>
     <string name="documentation_summary">"A Package Manager használatához olvasd el a részletes dokumentációt"</string>
-    <string name="installation_cancel_message">"Biztos, hogy megszakítod a telepítést?"</string>
-    <string name="sdcard">"SD Kártya"</string>
     <string name="select">"Kiválaszt"</string>
     <string name="uninstall_adb">"Távolítsa el az ADB-vel"</string>
     <string name="uninstall_adb_summary">"Kiválasztottad a(z) '%s'-t, amely egy rendszeralkalmazás. Sajnos az Android ökoszisztéma nem engedi, hogy harmadik féltől származó felhasználói alkalmazások, például a Package Manager eltávolítsák a rendszeralkalmazásokat gyökér nélküli környezetben. Ne aggódj, a Package Manager végigvezet az alkalmazás eltávolításán az Android Debug Bridge (ADB) módszerrel. Ha már rendelkezel egy teljesen működő ADB-vel, akkor a következő parancs végrehajtása az ADB shellből eltávolítja ezt az alkalmazást. Működő ADB környezet konfigurálásához kérlek, nézd meg a hivatkozott dokumentációt."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APK'-k"</string>
     <string name="bundles">"Kötegek"</string>
     <string name="delete">"Töröl"</string>
-    <string name="delete_question">"Törlöd a(z) '%s' -t?"</string>
-    <string name="install_question">"Telepíted a(z) '%s' -t?"</string>
     <string name="reverse_order">"Fordított sorrend"</string>
     <string name="show_apps_all">"Összes"</string>
     <string name="show_apps_system">"Rendszer"</string>
@@ -131,7 +122,6 @@
     <string name="exiting_app">"Az alkalmazásból való kilépéskor"</string>
     <string name="exported_apps_name">"Exportált APK neve"</string>
     <string name="general">"Általános"</string>
-    <string name="installer">"Telepítő"</string>
     <string name="installer_clicking">"A telepítőre kattintáskor"</string>
     <string name="installer_file_picker">"A fájlválasztó indítása"</string>
     <string name="installer_instructions">"Utasítások megjelenítése"</string>

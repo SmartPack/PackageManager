@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Diretório de APK"</string>
     <string name="app_info">"Informação da aplicação"</string>
-    <string name="batch_list_clear">"Eliminar lista"</string>
     <string name="batch_warning">"As suas definições de lote vão ser eliminadas! Tem a certeza?"</string>
     <string name="change_logs">"Registo de alterações"</string>
     <string name="data_dir">"Diretório de dados"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Instalar"</string>
     <string name="installing_bundle">"A instalar o pacote de aplicação"</string>
     <string name="language">"Idioma"</string>
-    <string name="language_default">"Predefinido"</string>
     <string name="more_apps">"Mais sobre o criador"</string>
     <string name="name">"Nome"</string>
     <string name="native_lib">"Biblioteca nativa"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Repor"</string>
     <string name="reset_message">"Repor '%s'?"</string>
     <string name="reset_summary">"A repor %s"</string>
-    <string name="result">"Resultado: %s"</string>
     <string name="share">"Partilhar"</string>
     <string name="shared_by">"%s/partilhado pelo Gestor de Pacotes"</string>
     <string name="share_message">"Obtenha o Gestor de Pacotes %s no Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Grupo de apoio"</string>
     <string name="support_development">"Apoio à programação"</string>
     <string name="support_development_summary">"Se gosta desta aplicação gratuita, por favor considere fazer um pequeno donativo ao criador ao clicar numa das opções abaixo! Se o fizer, vai receber uma medalha de apoiante!"</string>
-    <string name="sure_question">"Tem a certeza?"</string>
-    <string name="turn_on_off">"Ligar/desligar"</string>
     <string name="uninstall">"Desinstalar"</string>
     <string name="uninstall_nope">"Não pode fazer isso daqui!"</string>
     <string name="uninstall_summary">"A remover %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Atividades"</string>
     <string name="documentation">"Documentação"</string>
     <string name="documentation_summary">"Veja a documentação detalhada para utilizar o Gestor de Pacotes"</string>
-    <string name="installation_cancel_message">"Tem a certeza que deseja cancelar a instalação?"</string>
-    <string name="sdcard">"Cartão SD"</string>
     <string name="select">"Selecionar"</string>
     <string name="uninstall_adb">"Desinstalar com Depuração com USB"</string>
     <string name="uninstall_adb_summary">"Selecionou '%s', uma aplicação do sistema. Infelizmente, o Android não permite a aplicações de terceiros, como o Gestor de Pacotes, remover aplicações de sistema sem root. Não se preocupe! O Gestor de Pacotes vai fornecer um guia para saber como desinstalar esta aplicação utilizando o método de Depuração com USB (ADB - Android Debug Bridge). Se já souber trabalhar com ADB, execute o seguinte comando a partir de uma shell ADB, o que irá desinstalar a aplicação. Para configurar o ADB, veja a página de Documentação no link. "</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APKs"</string>
     <string name="bundles">"Pacotes"</string>
     <string name="delete">"Eliminar"</string>
-    <string name="delete_question">"Eliminar '%s'?"</string>
-    <string name="install_question">"Instalar '%s'?"</string>
     <string name="reverse_order">"Ordem inversa"</string>
     <string name="show_apps_all">"Tudo"</string>
     <string name="show_apps_system">"Sistema"</string>
@@ -131,7 +122,6 @@
     <string name="exiting_app">"Ao sair da aplicação"</string>
     <string name="exported_apps_name">"Nome da APK exportada"</string>
     <string name="general">"Geral"</string>
-    <string name="installer">"Instalador"</string>
     <string name="installer_clicking">"Ao clicar no instalador"</string>
     <string name="installer_file_picker">"Executar o selecionador de ficheiro"</string>
     <string name="installer_instructions">"Mostrar instruções"</string>

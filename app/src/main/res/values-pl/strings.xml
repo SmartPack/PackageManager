@@ -2,7 +2,6 @@
 
     <string name="apk_path">"Ścieżka APK"</string>
     <string name="app_info">"Informacje"</string>
-    <string name="batch_list_clear">"Wyczyść listę"</string>
     <string name="batch_warning">"Twoje ustawienia wsadu zostaną usunięte. Czy na pewno?"</string>
     <string name="change_logs">"Lista zmian"</string>
     <string name="data_dir">"Katalog danych"</string>
@@ -25,7 +24,6 @@
     <string name="install">"Zainstaluj"</string>
     <string name="installing_bundle">"Instalowanie paczki aplikacji"</string>
     <string name="language">"Język"</string>
-    <string name="language_default">"Domyślny"</string>
     <string name="more_apps">"Więcej od programisty"</string>
     <string name="name">"Nazwa"</string>
     <string name="native_lib">"Biblioteka natywna"</string>
@@ -42,7 +40,6 @@
     <string name="reset">"Resetuj"</string>
     <string name="reset_message">"Czy zresetować „%s”?"</string>
     <string name="reset_summary">"Resetowanie %s"</string>
-    <string name="result">"Rezultat: %s"</string>
     <string name="share">"Udostępnij"</string>
     <string name="shared_by">"%s/udostępniony przez Package Manager"</string>
     <string name="share_message">"Package Manager %s można pobrać z Google Play: https://play.google.com/store/apps/details?id=com.smartpack.packagemanager"</string>
@@ -52,8 +49,6 @@
     <string name="support">"Grupa wsparcia"</string>
     <string name="support_development">"Wesprzyj rozwój"</string>
     <string name="support_development_summary">"Jeśli chcesz docenić wkład programisty w stworzenie tego narzędzia całkowicie za darmo, rozważ małe wsparcie przez naciśnięcie jednej z poniżej dostępnych opcji. Za zakup któregokolwiek z tych produktów otrzymasz tutaj odznakę wspierającego."</string>
-    <string name="sure_question">"Czy na pewno?"</string>
-    <string name="turn_on_off">"Włącz/Wyłącz"</string>
     <string name="uninstall">"Odinstaluj"</string>
     <string name="uninstall_nope">"Niestety, ale nie możesz zrobić tego tutaj"</string>
     <string name="uninstall_summary">"Odinstalowywanie %s"</string>
@@ -85,8 +80,6 @@
     <string name="activities">"Aktywności"</string>
     <string name="documentation">"Dokumentacja"</string>
     <string name="documentation_summary">"Sprawdź szczegółową dokumentację korzystania z Package Manager"</string>
-    <string name="installation_cancel_message">"Czy na pewno anulować instalację?"</string>
-    <string name="sdcard">"Karta SD"</string>
     <string name="select">"Wybierz"</string>
     <string name="uninstall_adb">"Odinstaluj za pomocą ADB"</string>
     <string name="uninstall_adb_summary">"Wybrałeś(-aś) „%s”, który jest aplikacją systemową. Niestety, ekosystem Androida nie zezwala aplikacjom trzecim, takim jak Package Manager, na odinstalowywanie aplikacji systemowych w środowisku niezrootowanym. Jednak nie martw się. Package Manager poinstruuje Cię w odinstalowaniu tej aplikacji za pomocą metody Android Debug Bridge (ADB). Jeśli masz już w pełni działające ADB, wykonanie następujących poleceń z powłoki ADB odinstaluje tę aplikację. W celu skonfigurowania działającego środowiska ADB sprawdź dołączoną stronę dokumentacji."</string>
@@ -97,8 +90,6 @@
     <string name="apks">"APK"</string>
     <string name="bundles">"Paczki"</string>
     <string name="delete">"Usuń"</string>
-    <string name="delete_question">"Czy usunąć „%s”?"</string>
-    <string name="install_question">"Czy zainstalować „%s”?"</string>
     <string name="reverse_order">"Odwróć kolejność"</string>
     <string name="show_apps_all">"Wszystkie"</string>
     <string name="show_apps_system">"Systemowe"</string>
@@ -131,7 +122,6 @@
     <string name="exiting_app">"Przy wychodzeniu z aplikacji"</string>
     <string name="exported_apps_name">"Nazwa wyeksportowanego APK"</string>
     <string name="general">"Ogólne"</string>
-    <string name="installer">"Instalator"</string>
     <string name="installer_clicking">"Przy włączaniu instalatora"</string>
     <string name="installer_file_picker">"Uruchom selektor plików"</string>
     <string name="installer_instructions">"Pokaż instrukcję"</string>
