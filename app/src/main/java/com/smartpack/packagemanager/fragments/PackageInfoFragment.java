@@ -170,7 +170,6 @@ public class PackageInfoFragment extends Fragment {
                 menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.playstore)), R.drawable.ic_playstore, 0));
                 menuItems.add(new MenuItems(v.getContext().getString(R.string.search_market_message, v.getContext().getString(R.string.fdroid)), R.drawable.ic_fdroid,1));
                 menuItems.add(new MenuItems(v.getContext().getString(R.string.export_details), R.drawable.ic_rate, 2));
-                menuItems.add(new MenuItems(v.getContext().getString(R.string.share), R.drawable.ic_share, 3));
 
                 new BottomMenuDialog(menuItems, appIcon, null, mAppName, mPackageName, v.getContext()) {
                     @Override
@@ -198,16 +197,6 @@ public class PackageInfoFragment extends Fragment {
                                             .setPositiveButton(R.string.cancel, (dialog, i) -> {
                                             }).show();
                                 }
-                                break;
-                            case 3:
-                                Intent shareLink = new Intent();
-                                shareLink.setAction(Intent.ACTION_SEND);
-                                shareLink.putExtra(Intent.EXTRA_SUBJECT, mAppName);
-                                shareLink.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + mPackageName
-                                        + "\n\n" + getString(R.string.share_message, BuildConfig.VERSION_NAME));
-                                shareLink.setType("text/plain");
-                                Intent shareIntent = Intent.createChooser(shareLink, getString(R.string.share_with));
-                                startActivity(shareIntent);
                                 break;
                         }
                     }
