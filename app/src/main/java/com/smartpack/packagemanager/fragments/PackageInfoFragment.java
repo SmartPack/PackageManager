@@ -194,7 +194,7 @@ public class PackageInfoFragment extends Fragment {
                                     new MaterialAlertDialogBuilder(requireActivity())
                                             .setIcon(R.mipmap.ic_launcher)
                                             .setTitle(R.string.app_name)
-                                            .setMessage(getString(R.string.export_details_message, mJSON.getAbsolutePath()))
+                                            .setMessage(getString(R.string.export_details_message, "Downloads -> " + getString(R.string.app_name) + " -> " + mJSON.getName()))
                                             .setPositiveButton(R.string.cancel, (dialog, i) -> {
                                             }).show();
                                 }

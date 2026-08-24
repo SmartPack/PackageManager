@@ -105,7 +105,7 @@ public class TextViewActivity extends BaseActivity {
                     }
                     sFileUtils.create(mText.getText().toString().trim(), new File(parentFile, new File(mPath).getName()));
 
-                    new ExportSuccessDialog(new File(parentFile, new File(mPath).getName()).getAbsolutePath(), this);
+                    new ExportSuccessDialog("Downloads -> " + getString(R.string.app_name) + " -> " + mPackageName, this);
                 }).show());
     }
 

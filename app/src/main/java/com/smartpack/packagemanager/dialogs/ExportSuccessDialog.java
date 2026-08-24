@@ -8,6 +8,7 @@
 
 package com.smartpack.packagemanager.dialogs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -18,6 +19,7 @@ import com.smartpack.packagemanager.R;
  */
 public class ExportSuccessDialog extends MaterialAlertDialogBuilder {
 
+    @SuppressLint("StringFormatInvalid")
     public ExportSuccessDialog(String path, Context context) {
         super(context);
 

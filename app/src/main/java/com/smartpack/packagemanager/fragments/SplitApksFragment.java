@@ -82,7 +82,6 @@ public class SplitApksFragment extends Fragment {
 
         mBatch.setOnClickListener(v ->
                 new sExecutor() {
-                    private File mParentFile;
                     private ProgressDialog mProgressDialog;
                     @SuppressLint("StringFormatInvalid")
                     @Override
@@ -97,7 +96,7 @@ public class SplitApksFragment extends Fragment {
                     public void doInBackground() {
                         mProgressDialog.setMax(mBatchList.size());
                         PackageData.makePackageFolder(v.getContext());
-                        mParentFile = new File(PackageData.getPackageDir(v.getContext()), mPackageName);
+                        File mParentFile = new File(PackageData.getPackageDir(v.getContext()), mPackageName);
                         if (!mParentFile.exists()) {
                             sFileUtils.mkdir(mParentFile);
                         }
@@ -113,7 +112,7 @@ public class SplitApksFragment extends Fragment {
                         mProgressDialog.dismiss();
                         mBatch.setVisibility(GONE);
                         mRecycleViewAdapter.notifyItemRangeChanged(0, mRecycleViewAdapter.getItemCount());
-                        new ExportSuccessDialog(mParentFile.getAbsolutePath(), requireActivity());
+                        new ExportSuccessDialog("Downloads -> " + getString(R.string.app_name) + " -> " + mPackageName, requireActivity());
                     }
                 }.execute()
         );

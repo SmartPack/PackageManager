@@ -28,7 +28,6 @@ import in.sunilpaulmathew.sCommon.FileUtils.sFileUtils;
 public class SaveToDownloadsTasks extends sExecutor {
 
     private final Context mContext;
-    private File mParentFile;
     private final File mSource;
     private final String mPackageName;
     private static ProgressDialog mProgressDialog;
@@ -51,7 +50,7 @@ public class SaveToDownloadsTasks extends sExecutor {
     @Override
     public void doInBackground() {
         PackageData.makePackageFolder(mContext);
-        mParentFile = new File(PackageData.getPackageDir(mContext), mPackageName);
+        File mParentFile = new File(PackageData.getPackageDir(mContext), mPackageName);
         if (!mParentFile.exists()) {
             sFileUtils.mkdir(mParentFile);
         }
@@ -64,7 +63,7 @@ public class SaveToDownloadsTasks extends sExecutor {
     @Override
     public void onPostExecute() {
         mProgressDialog.dismiss();
-        new ExportSuccessDialog(new File(mParentFile, mSource.getName()).getAbsolutePath(), mContext);
+        new ExportSuccessDialog("Downloads -> " + mContext.getString(R.string.app_name) + " -> " + mPackageName, mContext);
     }
 
 }

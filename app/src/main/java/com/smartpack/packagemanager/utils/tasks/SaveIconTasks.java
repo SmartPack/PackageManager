@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ExportSuccessDialog;
 import com.smartpack.packagemanager.utils.PackageData;
 
@@ -29,7 +30,6 @@ public class SaveIconTasks extends sExecutor {
 
     private final Context mActivity;
     private final Bitmap mBitmap;
-    private File mParentFile;
     private final String mName, mPackageName;
 
     public SaveIconTasks(String name, String packageName, Bitmap bitmap, Activity activity) {
@@ -47,7 +47,7 @@ public class SaveIconTasks extends sExecutor {
     @Override
     public void doInBackground() {
         PackageData.makePackageFolder(mActivity);
-        mParentFile = new File(PackageData.getPackageDir(mActivity), mPackageName);
+        File mParentFile = new File(PackageData.getPackageDir(mActivity), mPackageName);
         if (!mParentFile.exists()) {
             sFileUtils.mkdir(mParentFile);
         }
@@ -61,7 +61,7 @@ public class SaveIconTasks extends sExecutor {
 
     @Override
     public void onPostExecute() {
-        new ExportSuccessDialog(new File(mParentFile, mName).getAbsolutePath(), mActivity);
+        new ExportSuccessDialog("Downloads -> " + mActivity.getString(R.string.app_name) + " -> " + mPackageName, mActivity);
     }
 
 }

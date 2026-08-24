@@ -629,7 +629,7 @@ public class ApplicationsFragment extends Fragment {
                                                 new MaterialAlertDialogBuilder(activity)
                                                         .setIcon(R.mipmap.ic_launcher)
                                                         .setTitle(R.string.app_name)
-                                                        .setMessage(getString(R.string.export_message_summary, PackageData.getPackageDir(activity)))
+                                                        .setMessage(getString(R.string.export_message_summary, "Downloads -> " + getString(R.string.app_name)))
                                                         .setPositiveButton(R.string.cancel, (dialog, id) -> {
                                                         }).show();
                                             }
@@ -687,7 +687,7 @@ public class ApplicationsFragment extends Fragment {
                                                 new MaterialAlertDialogBuilder(requireActivity())
                                                         .setIcon(R.mipmap.ic_launcher)
                                                         .setTitle(R.string.app_name)
-                                                        .setMessage(getString(R.string.export_details_message, mJSON.getAbsolutePath()))
+                                                        .setMessage(getString(R.string.export_details_message, "Downloads -> " + getString(R.string.app_name) + " -> " + mJSON.getName()))
                                                         .setPositiveButton(R.string.cancel, (dialog, i) -> {
                                                         }).show();
                                             }
