@@ -75,14 +75,14 @@ public class PackageExploreActivity extends BaseActivity {
         mProgressBar = findViewById(R.id.progress);
         mRecyclerView = findViewById(R.id.recycler_view);
 
+        mPackageName = getIntent().getStringExtra(PACKAGE_INTENT);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
         mRecycleViewAdapter = new PackageExploreAdapter(new CopyOnWriteArrayList<>(), mPackageName, clickListener(), this);
         mRecyclerView.setAdapter(mRecycleViewAdapter);
 
         mRootPath = new File(getCacheDir().getPath(),"apk").getAbsolutePath();
-
-        mPackageName = getIntent().getStringExtra(PACKAGE_INTENT);
 
         mTitle.setText("Root");
 
