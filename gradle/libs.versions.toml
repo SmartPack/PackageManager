@@ -1,11 +1,11 @@
 [versions]
 core = "6.0.0"
-agp = "9.3.1"
+agp = "9.3.2"
 documentfileVersion = "1.1.0"
 material = "1.14.0"
 shizuku = "13.1.5"
-scommon = "d532608ca4"
-axml = "51db0eecad"
+scommon = "d532608ca4b15c4935ca33b66d7770f632febed4"
+axml = "001c28e4c2344d8bf6664cd9cd3dd0c50f908996"
 zip4j = "2.11.6"
 
 [libraries]
