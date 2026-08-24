@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.AppSettings;
@@ -106,16 +105,8 @@ public class SplitAPKsAdapter extends RecyclerView.Adapter<SplitAPKsAdapter.View
         holder.mExport.setOnClickListener(v -> {
             int currentPos = holder.getBindingAdapterPosition();
             if (currentPos != RecyclerView.NO_POSITION) {
-                new MaterialAlertDialogBuilder(v.getContext())
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(R.string.app_name)
-                        .setMessage(v.getContext().getString(R.string.export_storage_message, new File(data.get(currentPos)).getName()))
-                        .setNegativeButton(v.getContext().getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-                        .setPositiveButton(v.getContext().getString(R.string.export), (dialogInterface, i) ->
-                                PackageExplorer.copyToStorage(sPackageUtils.getParentDir(packageName, holder.mIcon
-                                        .getContext()) + "/" + data.get(currentPos), packageName, activity)
-                        ).show();
+                PackageExplorer.copyToStorage(sPackageUtils.getParentDir(packageName, holder.mIcon
+                        .getContext()) + "/" + data.get(currentPos), packageName, activity);
             }
         });
 

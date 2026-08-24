@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.utils.PackageExplorer;
@@ -66,19 +65,13 @@ public class ImageViewActivity extends BaseActivity {
             }
         }
 
-        mExport.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(R.string.app_name)
-                .setMessage(getString(R.string.export_storage_message, path != null ? new File(path).getName() : appName + " icon"))
-                .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                })
-                .setPositiveButton(getString(R.string.export), (dialogInterface, i) -> {
-                    if (path != null) {
-                        PackageExplorer.copyToStorage(path, packageName, this);
-                    } else {
-                        PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), appName + "_icon.png", packageName, this);
-                    }
-                }).show());
+        mExport.setOnClickListener(v -> {
+            if (path != null) {
+                PackageExplorer.copyToStorage(path, packageName, this);
+            } else {
+                PackageExplorer.saveIcon(PackageExplorer.drawableToBitmap(mImage.getDrawable()), appName + "_icon.png", packageName, this);
+            }
+        });
     }
 
 }
