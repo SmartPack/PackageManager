@@ -20,6 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
+import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.PackageData;
 import com.smartpack.packagemanager.utils.SplitAPKInstaller;
 import com.smartpack.packagemanager.utils.ZipFileUtils;
@@ -41,14 +42,14 @@ public class ExportBundleTasks extends sExecutor {
     private final Activity mActivity;
     private final String mPackageName;
     private final Drawable mIcon;
-    private final String mAppName, mAPKPath, mName;
+    private final String mAppName, mAPKPath;
+    private File mBundleFile;
     private ProgressDialog mProgressDialog;
 
-    public ExportBundleTasks(String appName, String packageName, String path, String name, Drawable icon, Activity activity) {
+    public ExportBundleTasks(String appName, String packageName, String path, Drawable icon, Activity activity) {
         this.mAppName = appName;
         this.mPackageName = packageName;
         this.mAPKPath = path;
-        this.mName = name;
         this.mIcon = icon;
         this.mActivity = activity;
 
@@ -71,8 +72,9 @@ public class ExportBundleTasks extends sExecutor {
             mFiles.add(new File(mAPKPath, splitApps));
         }
         PackageData.makePackageFolder(mActivity);
-        try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(mActivity) + "/" + mName + "_" + sAPKUtils.getVersionCode(
-                sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apkm")) {
+        mBundleFile = new File(PackageData.getPackageDir(mActivity), AppSettings.generateExportedAPKName(mAppName, mPackageName,
+                sAPKUtils.getVersionName(sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity), ".apkm", mActivity));
+        try (ZipFileUtils zipFileUtils = new ZipFileUtils(mBundleFile.getAbsolutePath())) {
             zipFileUtils.setProgress(mProgressDialog);
             zipFileUtils.zip(mFiles);
         } catch (IOException ignored) {}
@@ -85,16 +87,15 @@ public class ExportBundleTasks extends sExecutor {
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
                 .setTitle(mAppName)
-                .setMessage(mActivity.getString(R.string.export_bundle_summary, PackageData.getPackageDir(mActivity) + "/" + mName + ".apkm"))
+                .setMessage(mActivity.getString(R.string.export_bundle_summary, "Downloads -> " + mActivity.getString(R.string.app_name)))
                 .setNegativeButton(mActivity.getString(R.string.cancel), (dialog, id) -> {
                 })
                 .setPositiveButton(mActivity.getString(R.string.share), (dialog, id) -> {
                     Uri uriFile = FileProvider.getUriForFile(mActivity,
-                            BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(mActivity) + "/" + mName + "_" +
-                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apkm"));
+                            BuildConfig.APPLICATION_ID + ".provider", mBundleFile);
                     Intent shareScript = new Intent(Intent.ACTION_SEND);
                     shareScript.setType("application/zip");
-                    shareScript.putExtra(Intent.EXTRA_SUBJECT, mActivity.getString(R.string.shared_by, mName));
+                    shareScript.putExtra(Intent.EXTRA_SUBJECT, mActivity.getString(R.string.shared_by, mBundleFile.getName()));
                     shareScript.putExtra(Intent.EXTRA_TEXT, mActivity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
                     shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
                     shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

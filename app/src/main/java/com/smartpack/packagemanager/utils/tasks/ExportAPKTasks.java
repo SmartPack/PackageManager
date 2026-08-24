@@ -20,6 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.smartpack.packagemanager.BuildConfig;
 import com.smartpack.packagemanager.R;
 import com.smartpack.packagemanager.dialogs.ProgressDialog;
+import com.smartpack.packagemanager.utils.AppSettings;
 import com.smartpack.packagemanager.utils.FileUtils;
 import com.smartpack.packagemanager.utils.PackageData;
 
@@ -27,7 +28,6 @@ import java.io.File;
 import java.io.IOException;
 
 import in.sunilpaulmathew.sCommon.APKUtils.sAPKUtils;
-import in.sunilpaulmathew.sCommon.CommonUtils.sCommonUtils;
 import in.sunilpaulmathew.sCommon.CommonUtils.sExecutor;
 import in.sunilpaulmathew.sCommon.PackageUtils.sPackageUtils;
 
@@ -39,14 +39,14 @@ public class ExportAPKTasks extends sExecutor {
     private final Activity mActivity;
     private final String mPackageName;
     private final Drawable mIcon;
-    private final String mAppName, mAPKPath, mName;
+    private final String mAppName, mAPKPath;
+    private File mAPKFile;
     private ProgressDialog mProgressDialog;
 
-    public ExportAPKTasks(String appName, String packageName, String path, String name, Drawable icon, Activity activity) {
+    public ExportAPKTasks(String appName, String packageName, String path, Drawable icon, Activity activity) {
         this.mAppName = appName;
         this.mPackageName = packageName;
         this.mAPKPath = path;
-        this.mName = name;
         this.mIcon = icon;
         this.mActivity = activity;
 
@@ -63,11 +63,11 @@ public class ExportAPKTasks extends sExecutor {
 
     @Override
     public void doInBackground() {
-        sCommonUtils.sleep(1);
         PackageData.makePackageFolder(mActivity);
+        mAPKFile = new File(PackageData.getPackageDir(mActivity), AppSettings.generateExportedAPKName(mAppName, mPackageName,
+                sAPKUtils.getVersionName(sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity), ".apk", mActivity));
         try {
-            FileUtils FileUtils = new FileUtils(new File(PackageData.getPackageDir(mActivity), mName + "_" + sAPKUtils.getVersionCode(
-                    sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apk"), mProgressDialog);
+            FileUtils FileUtils = new FileUtils(mAPKFile, mProgressDialog);
             FileUtils.copy(mAPKPath);
         } catch (IOException ignored) {}
     }
@@ -79,16 +79,15 @@ public class ExportAPKTasks extends sExecutor {
         new MaterialAlertDialogBuilder(mActivity)
                 .setIcon(mIcon)
                 .setTitle(mAppName)
-                .setMessage(mActivity.getString(R.string.export_apk_summary, PackageData.getPackageDir(mActivity)))
+                .setMessage(mActivity.getString(R.string.export_apk_summary, "Downloads -> " + mActivity.getString(R.string.app_name)))
                 .setNegativeButton(mActivity.getString(R.string.cancel), (dialog, id) -> {
                 })
                 .setPositiveButton(mActivity.getString(R.string.share), (dialog, id) -> {
                     Uri uriFile = FileProvider.getUriForFile(mActivity,
-                            BuildConfig.APPLICATION_ID + ".provider", new File(PackageData.getPackageDir(mActivity), mName + "_" +
-                                    sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(mPackageName, mActivity), mActivity) + ".apk"));
+                            BuildConfig.APPLICATION_ID + ".provider", mAPKFile);
                     Intent shareScript = new Intent(Intent.ACTION_SEND);
                     shareScript.setType("application/java-archive");
-                    shareScript.putExtra(Intent.EXTRA_SUBJECT, mActivity.getString(R.string.shared_by, mName));
+                    shareScript.putExtra(Intent.EXTRA_SUBJECT, mActivity.getString(R.string.shared_by, mAPKFile.getName()));
                     shareScript.putExtra(Intent.EXTRA_TEXT, mActivity.getString(R.string.share_message, BuildConfig.VERSION_NAME));
                     shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
                     shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

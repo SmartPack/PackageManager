@@ -593,20 +593,25 @@ public class ApplicationsFragment extends Fragment {
                                         public void doInBackground() {
                                             PackageData.makePackageFolder(activity);
                                             mProgressDialog.setMax(data.size());
+                                            File outputFile;
                                             for (BatchOptionsItems batchOptionsItems : data) {
                                                 if (SplitAPKInstaller.isAppBundle(sPackageUtils.getParentDir(batchOptionsItems.getPackageName(), activity))) {
                                                     List<File> mFiles = new ArrayList<>();
                                                     for (final String splitApps : SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(batchOptionsItems.getPackageName(), activity))) {
                                                         mFiles.add(new File(sPackageUtils.getParentDir(batchOptionsItems.getPackageName(), activity) + "/" + splitApps));
                                                     }
-                                                    try (ZipFileUtils zipFileUtils = new ZipFileUtils(PackageData.getPackageDir(activity) + "/" + PackageData.getFileName(batchOptionsItems.getPackageName(), activity) + "_" +
-                                                            sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(), activity), activity) + ".apkm")) {
+                                                    outputFile = new File(PackageData.getPackageDir(activity), AppSettings.generateExportedAPKName(batchOptionsItems.getName(),
+                                                            batchOptionsItems.getPackageName(), sAPKUtils.getVersionName(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(),
+                                                                    activity), activity), ".apkm", activity));
+                                                    try (ZipFileUtils zipFileUtils = new ZipFileUtils(outputFile.getAbsolutePath())) {
                                                         zipFileUtils.zip(mFiles);
                                                     } catch (IOException ignored) {
                                                     }
                                                 } else {
-                                                    sFileUtils.copy(new File(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(), activity)), new File(PackageData.getPackageDir(activity), PackageData.getFileName(batchOptionsItems.getPackageName(), activity) + "_" +
-                                                            sAPKUtils.getVersionCode(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(), activity), activity) + ".apk"));
+                                                    outputFile = new File(PackageData.getPackageDir(activity), AppSettings.generateExportedAPKName(batchOptionsItems.getName(),
+                                                            batchOptionsItems.getPackageName(), sAPKUtils.getVersionName(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(),
+                                                                    activity), activity), ".apk", activity));
+                                                    sFileUtils.copy(new File(sPackageUtils.getSourceDir(batchOptionsItems.getPackageName(), activity)), outputFile);
                                                 }
                                                 mEmpty = false;
                                                 mProgressDialog.updateProgress(1);

@@ -46,10 +46,10 @@ public class PackageDetails {
 
     public static void exportApp(String appName, String packageName, String sourceDir, Drawable appIcon, Activity activity) {
         if (new File(sPackageUtils.getSourceDir(packageName, activity)).getName().equals("base.apk") && SplitAPKInstaller.splitApks(sPackageUtils.getParentDir(packageName, activity)).size() > 1) {
-            new ExportBundleTasks(appName, packageName, sPackageUtils.getParentDir(packageName, activity), PackageData.getFileName(packageName, activity),
+            new ExportBundleTasks(appName, packageName, sPackageUtils.getParentDir(packageName, activity),
                     appIcon, activity).execute();
         } else {
-            new ExportAPKTasks(appName, packageName, sourceDir, PackageData.getFileName(packageName, activity), appIcon, activity).execute();
+            new ExportAPKTasks(appName, packageName, sourceDir, appIcon, activity).execute();
         }
     }
 

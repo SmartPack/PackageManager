@@ -36,12 +36,7 @@ import navView.NavView;
 public class AppSettings {
 
     public static int getAPKNameOptionsPosition(Context context) {
-        if (sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context)
-                .equals(context.getString(R.string.name))) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return sCommonUtils.getInt("exportedAppName", 2, context);
     }
 
     public static int getExitMenuPosition(Context context) {
@@ -153,12 +148,35 @@ public class AppSettings {
         return mData;
     }
 
+    public static String generateExportedAPKName(String appName, String packageName, String versionName, String ext, Context context) {
+        int position = getAPKNameOptionsPosition(context);
+
+        switch (position) {
+            case 4:
+                return appName + "_" + packageName + "_" + versionName + ext;
+            case 3:
+                return packageName + "_" + versionName + ext;
+            case 2:
+                return appName + "_" + versionName + ext;
+            case 1:
+                return packageName + ext;
+            default:
+                return appName + ext;
+        }
+    }
+
     private static NavView getNavView(Activity activity) {
         return activity.findViewById(R.id.nav_view);
     }
 
     public static String getExportedAPKName(Context context) {
-        return sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context);
+        String[] options = getAPKNameOptionsMenu(context);
+        int pos = getAPKNameOptionsPosition(context);
+
+        if (pos < 0 || pos >= options.length) {
+            pos = 2;
+        }
+        return options[pos];
     }
 
     public static String getExitingStatus(Context context) {
@@ -178,9 +196,13 @@ public class AppSettings {
     }
 
     public static String[] getAPKNameOptionsMenu(Context context) {
+        String version = context.getString(R.string.version, "").trim().replace(":", "");
         return new String[] {
+                context.getString(R.string.name),
                 context.getString(R.string.package_id),
-                context.getString(R.string.name)
+                context.getString(R.string.name) + "_" + version,
+                context.getString(R.string.package_id) + "_" + version,
+                context.getString(R.string.name) + "_" + context.getString(R.string.package_id) + "_" + version
         };
     }
 

@@ -111,14 +111,6 @@ public class PackageData {
         return null;
     }
 
-    public static String getFileName(String packageName, Context context) {
-        if (sCommonUtils.getString("exportedAPKName", context.getString(R.string.package_id), context).equals(context.getString(R.string.name))) {
-            return sPackageUtils.getAppName(packageName, context).toString();
-        } else {
-            return packageName;
-        }
-    }
-
     public static File getPackageDir(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),

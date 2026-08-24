@@ -59,15 +59,15 @@ public class SettingsActivity extends BaseActivity {
             Context context = getApplicationContext();
             if (settingsItems.isWebLink()) {
                 sCommonUtils.launchUrl(settingsItems.getUrl(), this);
-            } else if (position == 1) {
+            } else if (settingsItems.getId() == 1) {
                 Intent settings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Uri uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null);
                 settings.setData(uri);
                 startActivity(settings);
-            } else if (position == 2) {
+            } else if (settingsItems.getId() == 2) {
                 AppSettings.setLanguage(this);
-            } else if (position == 3) {
+            } else if (settingsItems.getId() == 3) {
                 new sSingleChoiceDialog(R.drawable.ic_theme, getString(R.string.app_theme),
                         new String[] {
                                 getString(R.string.app_theme_auto),
@@ -96,29 +96,21 @@ public class SettingsActivity extends BaseActivity {
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
-            } else if (position == 4) {
+            } else if (settingsItems.getId() == 4) {
                 new sSingleChoiceDialog(R.drawable.ic_pencil, getString(R.string.exported_apps_name),
                         AppSettings.getAPKNameOptionsMenu(this), AppSettings.getAPKNameOptionsPosition(this), this) {
 
                     @Override
                     public void onItemSelected(int itemPosition) {
-                        switch (itemPosition) {
-                            case 0:
-                                if (!sCommonUtils.getString("exportedAPKName", getString(R.string.package_id), context).equals(getString(R.string.package_id))) {
-                                    sCommonUtils.saveString("exportedAPKName", getString(R.string.package_id), context);
-                                }
-                                break;
-                            case 1:
-                                if (!sCommonUtils.getString("exportedAPKName", getString(R.string.package_id), context).equals(getString(R.string.name))) {
-                                    sCommonUtils.saveString("exportedAPKName", getString(R.string.name), context);
-                                }
-                                break;
+                        if (itemPosition == AppSettings.getAPKNameOptionsPosition(context)) {
+                            return;
                         }
+                        sCommonUtils.saveInt("exportedAppName", itemPosition, context);
                         settingsItems.setDescription(AppSettings.getExportedAPKName(context));
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
-            } else if (position == 5) {
+            } else if (settingsItems.getId() == 5) {
                 new sSingleChoiceDialog(R.drawable.ic_install, getString(R.string.installer_clicking),
                         AppSettings.getInstallerOptionsMenu(this), AppSettings.getInstallerOptionsPosition(this), this) {
 
@@ -140,7 +132,7 @@ public class SettingsActivity extends BaseActivity {
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
-            } else if (position == 6) {
+            } else if (settingsItems.getId() == 6) {
                 new sSingleChoiceDialog(R.drawable.ic_exit, getString(R.string.exiting_app),
                         AppSettings.getExitOptionsMenu(this), AppSettings.getExitMenuPosition(this), this) {
 
@@ -162,11 +154,11 @@ public class SettingsActivity extends BaseActivity {
                         mRecycleViewAdapter.notifyItemChanged(position);
                     }
                 }.show();
-            } else if (position == 7) {
+            } else if (settingsItems.getId() == 7) {
                 Billing.showDonateOption(this);
-            } else if (position == 8) {
+            } else if (settingsItems.getId() == 8) {
                 new sTranslatorUtils(getString(R.string.app_name), "https://poeditor.com/join/project?hash=0CitpyI1Oc", this).show();
-            } else if (position == 9) {
+            } else if (settingsItems.getId() == 9) {
                 Intent share_app = new Intent();
                 share_app.setAction(Intent.ACTION_SEND);
                 share_app.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
@@ -174,7 +166,7 @@ public class SettingsActivity extends BaseActivity {
                 share_app.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(share_app, getString(R.string.share_with));
                 startActivity(shareIntent);
-            } else if (position == 10) {
+            } else if (settingsItems.getId() == 10) {
                 new sCreditsUtils(AppSettings.getCredits(),
                         sCommonUtils.getDrawable(R.mipmap.ic_launcher, this),
                         sCommonUtils.getDrawable(R.drawable.ic_back, this),
