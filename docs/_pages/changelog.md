@@ -6,6 +6,16 @@ include_in_footer: true
 
 <h2 style="color: blue">🆕 What's New</h2>
 
+### ✨ 75. [v8.0](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(August 24, 2026)*
+- Modernized UI with bottom sheet dialogs, a custom navigation view, and a redesigned sorting menu.
+- Implemented swipe gestures to navigate between pages.
+- Polished layouts across dialogs, headers, and app lists for better visual consistency.
+- Added search functionality in Permissions and AppOps.
+- Added new naming options for exported APKs and simplified export messages.
+- Fixed APK Picker button overlap issue on viewpager screens.
+- Cleaned up unused resources, strings, and dead share links.
+- Added Latvian, Persian, and Indonesian (& updated other) translations.
+
 ### ✨ 74. [v7.9](https://play.google.com/store/apps/details?id=com.smartpack.packagemanager.pro) *(June 04, 2026)*
 - Brand-new app icon and refreshed visual design.
 - Improved UI consistency across dialogues, buttons, and Package Explorer.

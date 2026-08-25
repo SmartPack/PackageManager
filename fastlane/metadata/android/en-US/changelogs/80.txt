@@ -1,0 +1,8 @@
+- Modernized UI with bottom sheet dialogs, a custom navigation view, and a redesigned sorting menu.
+- Implemented swipe gestures to navigate between pages.
+- Polished layouts across dialogs, headers, and app lists for better visual consistency.
+- Added search functionality in Permissions and AppOps.
+- Added new naming options for exported APKs and simplified export messages.
+- Fixed APK Picker button overlap issue on viewpager screens.
+- Cleaned up unused resources, strings, and dead share links.
+- Added Latvian, Persian, and Indonesian (& updated other) translations.
